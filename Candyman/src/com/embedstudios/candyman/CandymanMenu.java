@@ -24,7 +24,7 @@ public class CandymanMenu extends Activity implements OnClickListener {
 	      // Set up click listeners for all the buttons
 	      View playButton = findViewById(R.id.play_button);
 	      playButton.setOnClickListener(this);
-	      View openButton = findViewById(R.id.open_button);
+	      View openButton = findViewById(R.id.feint_button);
 	      openButton.setOnClickListener(this);
 
 	   }
@@ -34,7 +34,7 @@ public class CandymanMenu extends Activity implements OnClickListener {
 	      switch (v.getId()) {
 	      case R.id.play_button:
 	         break;
-	      case R.id.open_button:
+	      case R.id.feint_button:
 	         break;
 	      }
 	   }
