@@ -1,6 +1,6 @@
-package com.embedstudios.candyman;
+package com.embedstudios.candycat;
 
-import android.graphics.Bitmap;
+import android.graphics.Picture;
 
 /*
  * Class created by Prem.
@@ -11,15 +11,15 @@ import android.graphics.Bitmap;
  * It will require different attributes that describe the game objects, like gravity;
  */
 public class CandyObject {
-	
+
 	private boolean isSubjectToGravity; // Prem
 	private int rowPos,columnPos; // Prem
-	private Bitmap image; // Prem
-	
+	private Picture picture; // Prem
+
 	public CandyObject () {
 		isSubjectToGravity = false; // Prem
 		rowPos=0; // Prem
 		columnPos=0; // Prem
-		image=null; // Prem
+		picture=null; // Prem
 	}
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Mr. Candy</string>
+	<string name="app_name">Candy Cat</string>
+	
 	<string name="play_button">Play</string>
-	<string name="open_button">Open Feint</string>
-	<string name="settings_button">Settings</string>
-	<string name="exit_button">Exit</string>
-	<string name="settings_label">Preferences</string>
+	
+	<string name="preferences_label">Preferences</string>
 	<string name="about_label">About</string>
-	<string name="settings_title">Preferences Menu</string>
+	<string name="exit_label">Exit</string>
+	
+	<string name="preferences_title">Preferences Menu</string>
 	<string name="music_title">Music</string>
 	<string name="music_summary">Play background music</string>
 	<string name="sound_title">Sound</string>
