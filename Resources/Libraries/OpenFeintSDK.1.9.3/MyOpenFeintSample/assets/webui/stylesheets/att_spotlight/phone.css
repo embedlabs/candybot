@@ -1,0 +1,89 @@
+/* --- att_spotlight/android/home --- */
+body.mdpi #spotlight .cell#launch_feint .leaf {
+  background-image: url(images/logo_icon.mdpi.png); }
+body.mdpi #spotlight .header {
+  height: 12px;
+  padding: 4px 10px; }
+  body.mdpi #spotlight .header h2 {
+    line-height: 12px; }
+
+body.hdpi #spotlight .cell#launch_feint .leaf {
+  background-image: url(images/logo_icon.hdpi.png); }
+body.hdpi #spotlight .header {
+  padding: 6px 10px; }
+
+#spotlight .cell#launch_feint.touched {
+  background: #d9d9d9; }
+#spotlight .cell#launch_feint .leaf {
+  height: 40px;
+  margin-top: -20px;
+  width: 40px;
+  -webkit-background-size: 40px 40px; }
+#spotlight .cell#launch_feint h3 {
+  color: #067ab4;
+  margin-left: 50px; }
+#spotlight .cell#launch_feint p {
+  margin-left: 50px; }
+#spotlight .header {
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#62ab1b), to(#589b0e));
+  border: none; }
+  #spotlight .header h2 {
+    color: white;
+    text-shadow: 0 1px 2px #599b16; }
+#spotlight .article h3, #spotlight .article h4 {
+  color: #067ab4; }
+#spotlight .article img {
+  visibility: hidden;
+  width: 100%; }
+#spotlight .article .frame {
+  background: transparent no-repeat top left;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 5;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; }
+#spotlight .article .content_holder, #spotlight .article .banner_holder {
+  position: relative; }
+#spotlight .article#featured_game span.small_button {
+  left: auto;
+  right: 0;
+  top: 0; }
+#spotlight .special_msg {
+  color: #067ab4; }
+#spotlight .special_msg.touched {
+  background: #d9d9d9;
+  border-bottom-color: #c2c2c2; }
+
+#spotlight .carrot {
+  display: none; }
+#spotlight .line {
+  display: none; }
+
+#spotlight #game_details #buy {
+  height: auto;
+  padding: 13px 0; }
+  #spotlight #game_details #buy div {
+    display: inline; }
+#spotlight #game_details .game_description {
+  color: #777777;
+  font-size: 12px; }
+#spotlight #game_details #game_info .title {
+  color: #067ab4;
+  font-size: 15px; }
+#spotlight #game_details #game_info .subtitle {
+  font-size: 14px; }
+
+#spotlight #games_list .article img {
+  visibility: visible;
+  border-radius: 0; }
+
+
+/*
+ *    1.5x pixel scale
+ */
+
+
+/*
+ *    2x pixel scale
+ */

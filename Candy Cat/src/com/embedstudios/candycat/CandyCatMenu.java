@@ -2,7 +2,6 @@ package com.embedstudios.candycat;
 
 import android.app.*;
 import android.content.*;
-import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,6 @@ public class CandyCatMenu extends Activity implements View.OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
 		// Set up click listeners for all the buttons
 		View playButton = findViewById(R.id.play_button);
@@ -29,6 +27,7 @@ public class CandyCatMenu extends Activity implements View.OnClickListener {
 		switch (v.getId()) {
 		case R.id.play_button:
 			Log.i(TAG,"onClick(): Play button clicked.");
+			startActivity(new Intent(this,CandyCatSelect.class)); // starting level select screen
 			break;
 		}
 	}

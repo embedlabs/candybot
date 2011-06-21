@@ -1,0 +1,18 @@
+
+(function(){var actionArgsToJSON;OF.action=function(actionName,options,callback,immediate){var actionObj,isStalled,key,spec,uri,value,_ref;uri=""+actionName+"?";if(OF.supports.actionJSON){uri+=encodeURIComponent(actionArgsToJSON(options));}else{for(key in options){value=options[key];if($.isFunction(value)){options[key]=OF.page.saveFunction(value);}}
+uri+=$.urlEncode(options);}
+actionObj={name:actionName,options:options,uri:uri,callback:callback,immediate:immediate,ignore:OF.action.willIgnoreNext};OF.action.queue.push(actionObj);OF.action.willIgnoreNext=false;isStalled=OF.action.queue.length>1&&new Date().getTime()-OF.action.lastActionSentAt>5000;if(OF.action.queue.length===1||isStalled){U.defer(OF.action.send);}
+if(OF.isBrowser&&actionObj.callback){U.defer(actionObj.callback);}
+if(OF.isBrowser&&actionObj.name!=='log'){console.log('ACTION:',actionObj.name,options);}
+if(spec=typeof jasmine!="undefined"&&jasmine!==null?jasmine.getEnv().currentSpec:void 0){(_ref=spec.sentActions)!=null?_ref:spec.sentActions=[];return spec.sentActions.push({name:actionName,options:options});}};OF.action.now=function(actionName,options,callback){return OF.action(actionName,options,callback,true);};OF.action.isSupported=function(actionName){return OF.actions.indexOf(actionName)>-1;};OF.action.ignoreNext=function(){return OF.action.willIgnoreNext=true;};OF.action.queue=[];OF.action.delay=75;OF.action.lastActionSentAt=0;actionArgsToJSON=function(object){if(object==null){object={};}
+return JSON.stringify(object,function(key,value){if($.isFunction(value)){return OF.page.saveFunction(value);}else{return value;}});};OF.action.send=(function(){var sendBatch,sendNative,sendSingle;sendNative=function(){var actionObj,uri;if(OF.action.queue.length===0){return;}
+actionObj=OF.action.queue.shift();if(actionObj.ignore){return;}
+uri="openfeint://action/"+actionObj.uri;NativeInterface.action(uri);if(actionObj.callback){U.defer(actionObj.callback);}
+return setTimeout(OF.action.send,OF.action.delay);};sendSingle=function(){var actionObj,uri;if(OF.action.queue.length===0){return;}
+actionObj=OF.action.queue.shift();if(actionObj.ignore){return;}
+uri="openfeint://action/"+actionObj.uri;U.defer(function(){$('#action_frame').attr('src',uri);if(actionObj.callback){return U.defer(actionObj.callback);}});if(OF.platform==='ios'){if(uri.match(/contentLoaded/)){setTimeout(function(){return $('#action_frame').attr('src',uri);},250);}}
+OF.action.lastActionSentAt=new Date().getTime();return setTimeout(OF.action.send,OF.action.delay);};sendBatch=function(){var actionObj,actions,json,uri,_i,_len,_ref;if(OF.action.queue.length===1){sendSingle();return;}else if(OF.action.queue.length===0){return;}
+actions=(function(){var _i,_len,_ref,_results;_ref=OF.action.queue;_results=[];for(_i=0,_len=_ref.length;_i<_len;_i++){actionObj=_ref[_i];if(!actionObj.ignore){_results.push({name:actionObj.name,options:actionObj.options||{}});}}
+return _results;})();json=actionArgsToJSON({actions:actions});uri="openfeint://action/batch?"+(encodeURIComponent(json));U.defer(function(){return $('#action_frame').attr('src',uri);});_ref=OF.action.queue;for(_i=0,_len=_ref.length;_i<_len;_i++){actionObj=_ref[_i];if(actionObj.callback){U.defer(actionObj.callback);}}
+return OF.action.queue=[];};sendBatch=U.debounce(sendBatch,250);return function(){var _ref;if(!OF.isDevice){return;}
+if(OF.hasNativeInterface){return sendNative();}else if(OF.action.isSupported('batch')){if((_ref=OF.action.queue[0])!=null?_ref.immediate:void 0){return sendSingle();}else{return sendBatch();}}else{return sendSingle();}};})();OF.sendAction=OF.action;OF.actionIsSupported=$.deprecate(OF.action.isSupported,'OF.actionIsSupported()','OF.action.isSupported()');}).call(this);
