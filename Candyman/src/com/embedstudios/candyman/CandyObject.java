@@ -17,6 +17,9 @@ public class CandyObject {
 	private Bitmap image; // Prem
 	
 	public CandyObject () {
-		
+		isSubjectToGravity = false; // Prem
+		rowPos=0; // Prem
+		columnPos=0; // Prem
+		image=null; // Prem
 	}
 }
