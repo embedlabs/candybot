@@ -1,1 +1,0 @@
-Inkscape SVGs go here. -Prem
