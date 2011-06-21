@@ -17,7 +17,11 @@ public class CandyCatMenu extends Activity implements View.OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+<<<<<<< HEAD
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+=======
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+>>>>>>> 57783bbf8886b7f55db7f00402bb0e59f6547aa3
 		
 		// Set up click listeners for all the buttons
 		View playButton = findViewById(R.id.play_button);

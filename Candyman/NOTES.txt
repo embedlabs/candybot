@@ -1,3 +1,0 @@
-NOTES
-- Test and do stuff on android:minSdkVersion="3" but eventually change project properties build target to 8 and add:
-	- android:installLocation="auto" or "preferExternal" in the manifest tag
