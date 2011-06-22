@@ -16,18 +16,19 @@ public class CandyCatMenu extends Activity implements View.OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		// Set up click listeners for all the buttons
 		View playButton = findViewById(R.id.play_button);
 		playButton.setOnClickListener(this);
-		Log.i(TAG,"onCreate(): Finished.");
+		Log.i(TAG, "onCreate(): Finished.");
 	}
 
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.play_button:
-			Log.i(TAG,"onClick(): Play button clicked.");
-			startActivity(new Intent(this,CandyCatSelect.class)); // starting level select screen
+			Log.i(TAG, "onClick(): Play button clicked.");
+			startActivity(new Intent(this, CandyCatSelect.class)); // starting level select screen
 			break;
 		}
 	}
@@ -54,33 +55,42 @@ public class CandyCatMenu extends Activity implements View.OnClickListener {
 		}
 		return false;
 	}
-	
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		switch (id) {
 		case ABOUT_DIALOG: // TODO add an icon to the about dialog
 			String vers;
-    		try {
-    			vers = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
-    			//version obtained via PackageInfo
-    		}
-    		catch (Exception e) {
-    			vers = getString(R.string.error_version_unobtainable);
-    			Log.e(TAG,"onCreateDialog(): Failed to obtain version.",e);
-    		}
-    		builder.setTitle(R.string.dialog_about_title)
-    			.setMessage(getString(R.string.dialog_about_message,vers))
-//    			.setIcon(R.drawable.icon_dialog)
-    			.setPositiveButton(R.string.dialog_button_website, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.website))));
-					}
-				}).setNeutralButton(R.string.dialog_button_return, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {dialog.dismiss();}
-				});
+			try {
+				vers = this.getPackageManager().getPackageInfo(
+						this.getPackageName(), 0).versionName;
+				// version obtained via PackageInfo
+			} catch (Exception e) {
+				vers = getString(R.string.error_version_unobtainable);
+				Log.e(TAG, "onCreateDialog(): Failed to obtain version.", e);
+			}
+			builder.setTitle(R.string.dialog_about_title)
+					.setMessage(getString(R.string.dialog_about_message, vers))
+					// .setIcon(R.drawable.icon_dialog)
+					.setPositiveButton(R.string.dialog_button_website,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									startActivity(new Intent(
+											Intent.ACTION_VIEW,
+											Uri.parse(getString(R.string.website))));
+								}
+							})
+					.setNeutralButton(R.string.dialog_button_return,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									dialog.dismiss();
+								}
+							});
 		}
 		return builder.create();
 	}

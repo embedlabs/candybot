@@ -13,25 +13,37 @@ import android.graphics.Picture;
 public class CandyObject {
 
 	private boolean isSubjectToGravity;
-	private int rowPos,columnPos;
+	private int rowPos, columnPos;
 	private Picture picture;
 
-	public CandyObject () {
+	public CandyObject() {
 		isSubjectToGravity = false;
-		rowPos=0;
-		columnPos=0;
-		picture=null;
+		rowPos = 0;
+		columnPos = 0;
+		picture = null;
 	}
-	
-	public CandyObject(int inputRow,int inputColumn,boolean inputGravity,Picture inputPicture) {
-		isSubjectToGravity=inputGravity;
-		rowPos=inputRow;
-		columnPos=inputColumn;
-		picture=inputPicture;
+
+	public CandyObject(int inputRow, int inputColumn, boolean inputGravity,
+			Picture inputPicture) {
+		isSubjectToGravity = inputGravity;
+		rowPos = inputRow;
+		columnPos = inputColumn;
+		picture = inputPicture;
 	}
-	
-	public int getRow() {return rowPos;}
-	public int getColumn() {return columnPos;}
-	public void setRow(int inputRow) {rowPos=inputRow;}
-	public void setColumn(int inputColumn) {rowPos=inputColumn;}
+
+	public int getRow() {
+		return rowPos;
+	}
+
+	public int getColumn() {
+		return columnPos;
+	}
+
+	public void setRow(int inputRow) {
+		rowPos = inputRow;
+	}
+
+	public void setColumn(int inputColumn) {
+		rowPos = inputColumn;
+	}
 }
