@@ -14,6 +14,7 @@ import android.os.Bundle;
  */
 
 public class CandyCatSelect extends Activity {
+	private static final String TAG = "Candy Cat Select";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.*;
 
 public class CandyCatMenu extends Activity implements View.OnClickListener {
-	private static final String TAG = "Candy Cat";
+	private static final String TAG = "Candy Cat Menu";
 	static final int ABOUT_DIALOG = 0;
 
 	/** Called when the activity is first created. */
