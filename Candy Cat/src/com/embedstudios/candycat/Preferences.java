@@ -8,7 +8,7 @@ import android.preference.PreferenceActivity;
  * -Prem
  */
 
-public class Prefs extends PreferenceActivity {
+public class Preferences extends PreferenceActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

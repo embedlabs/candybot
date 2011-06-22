@@ -45,7 +45,7 @@ public class CandyCatMenu extends Activity implements View.OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_preferences:
-			startActivity(new Intent(this, Prefs.class));
+			startActivity(new Intent(this, Preferences.class));
 			return true;
 		case R.id.menu_about:
 			showDialog(ABOUT_DIALOG);

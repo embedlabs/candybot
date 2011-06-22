@@ -14,7 +14,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".Prefs"
+		<activity android:name=".Preferences"
 			android:label="@string/preferences_title"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 		</activity>
