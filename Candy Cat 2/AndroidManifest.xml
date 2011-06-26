@@ -17,8 +17,8 @@
         </activity>
  <activity android:name=".CandyCatMenuActivity"
            android:label="Candy Cat Menu"
-            android:screenOrientation="landscape"
-                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:configChanges="keyboard|keyboardHidden|screenLayout">
+            android:screenOrientation="landscape" android:noHistory="true"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:configChanges="keyboard|keyboardHidden|navigation|screenLayout">
                   </activity>
     </application>
 </manifest>

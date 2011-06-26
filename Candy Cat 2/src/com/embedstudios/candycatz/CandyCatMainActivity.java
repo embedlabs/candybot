@@ -6,6 +6,8 @@ package com.embedstudios.candycatz;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 
 public class CandyCatMainActivity extends Activity {
     /** Called when the activity is first created. */
@@ -26,27 +28,12 @@ public class CandyCatMainActivity extends Activity {
               
                       Intent intent = new Intent (CandyCatMainActivity.this, CandyCatMenuActivity.class);
                       startActivity(intent);
+                      finish();
                }
         };
         toRun.start();
-
-
-
-	/*	thread = new Thread()
-		{
-		    @Override
-		    public void run() {
-		        try {
-		            while(true) {
-		                
-		            }
-		        } catch (InterruptedException e) {
-		            e.printStackTrace();
-		        }
-		    }
-		};
-*/
         
+       
         
     }
 }
