@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, CandyCatMainActivity!</string>
-    <string name="app_name">CandyCat</string>
+    <string name="app_name">Candy Cat</string>   
+    <string name="load">Loading...</string>   
 </resources>
