@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Candy Cat</string>   
-    <string name="load">Loading...</string>   
+    <string name="load">Loading...</string> 
+    <string name="play">Play</string>   
 </resources>
