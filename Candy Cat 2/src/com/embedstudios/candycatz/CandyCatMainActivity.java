@@ -1,8 +1,5 @@
 package com.embedstudios.candycatz;
 
-
-
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
