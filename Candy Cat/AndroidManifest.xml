@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.embedstudios.candycat"
-	android:versionCode="1"
-	android:versionName="1.0.0">
-	<uses-sdk android:minSdkVersion="4" />
-	<application android:icon="@drawable/icon"
-		android:label="@string/app_name">
-		<activity android:name=".CandyCatMenu"
-			android:label="@string/app_name"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity android:name=".Preferences"
-			android:label="@string/preferences_title"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-		</activity>
-		<activity android:name=".CandyCatGame"
-			android:label="@string/app_name"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-		</activity>
-		<activity android:name=".CandyCatSelect"
-			android:label="@string/app_name"
-			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-		</activity>
-	</application>
+      package="com.embedstudios.candycat"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="7" />
+
+    <application android:icon="@drawable/icon"
+    	android:label="@string/app_name"
+    	android:debuggable="true">
+        <activity android:name=".MainMenu"
+        	android:label="@string/app_name"
+        	android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+        	android:screenOrientation="landscape"
+        	android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
 </manifest>

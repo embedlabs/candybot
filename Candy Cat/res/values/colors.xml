@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_start">#0B154F</color>
+    <color name="bg_center">#1A5BB3</color>
+    
+    <color name="normal_text">#FFFFFF</color>
+    
+    <color name="button_normal_start">#EEE000</color>
+    <color name="button_normal_center">#CC4400</color>
+    <color name="button_normal_end">#992222</color>
+    <color name="button_normal_stroke">#88FFFFFF</color>
+    
+    <color name="button_pressed_start">#CC4400</color>
+    <color name="button_pressed_center">#EEE000</color>
+    <color name="button_pressed_end">#aaa022</color>
+    <color name="button_pressed_stroke">#88FFFFFF</color>
+</resources>

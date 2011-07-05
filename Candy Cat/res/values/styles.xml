@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="candyButton" parent="android:Widget.Button">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:textColor">@color/normal_text</item>
+    </style>
+    <style name="menuButton" parent="@style/candyButton">
+        <item name="android:paddingBottom">10dip</item>
+        <item name="android:paddingLeft">30dip</item>
+        <item name="android:paddingRight">30dip</item>
+        <item name="android:paddingTop">10dip</item>
+        <item name="android:textSize">30dip</item>
+    </style>
+</resources>
