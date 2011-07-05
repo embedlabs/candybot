@@ -1,11 +1,14 @@
 package com.embedstudios.candycat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -13,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
-public class MainMenu extends Activity {
+public class MainMenu extends Activity implements OnClickListener {
 	ViewAnimator enclosing_va;
 	TextView loading_tv,mainmenu_tv;
 	ImageView loading_iv;
@@ -48,6 +51,7 @@ public class MainMenu extends Activity {
 		button_achievements = (Button)findViewById(R.id.button_achievements);
 		
 		setKomika(loading_tv,mainmenu_tv,button_play,button_gallery,button_achievements); // changes font
+		setClick(button_play,button_gallery,button_achievements);
 
 		enclosing_va = (ViewAnimator)findViewById(R.id.enclosing_vf); //identifies parts
 		loading_iv = (ImageView)findViewById(R.id.loading_iv);
@@ -154,6 +158,21 @@ public class MainMenu extends Activity {
 	public void setKomika(TextView... views) { // changes font
 		for (TextView tv:views) {
 			tv.setTypeface(komika);
+		}
+	}
+	
+	public void setClick(Button... buttons) {
+		for (Button button:buttons) {
+			button.setOnClickListener(this);
+		}
+	}
+
+	@Override
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.button_play:
+			startActivity(new Intent(this,CandyLevel.class).putExtra("com.embedstudios.candycat.level", 0));
+			break;
 		}
 	}
 }
