@@ -173,6 +173,9 @@ public class MainMenu extends Activity implements OnClickListener {
 		case R.id.button_play:
 			startActivity(new Intent(this,CandyLevel.class).putExtra("com.embedstudios.candycat.level", 0));
 			break;
+		case R.id.button_gallery:
+			startActivity(new Intent(this,CandyGallery.class));
+			break;
 		}
 	}
 }
