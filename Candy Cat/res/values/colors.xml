@@ -8,10 +8,12 @@
     <color name="button_normal_start">#EEE000</color>
     <color name="button_normal_center">#CC4400</color>
     <color name="button_normal_end">#992222</color>
-    <color name="button_normal_stroke">#88FFFFFF</color>
+    <color name="button_normal_stroke">#FFFFFF</color>
     
     <color name="button_pressed_start">#CC4400</color>
     <color name="button_pressed_center">#EEE000</color>
-    <color name="button_pressed_end">#aaa022</color>
-    <color name="button_pressed_stroke">#88FFFFFF</color>
+    <color name="button_pressed_end">#AAA022</color>
+    <color name="button_pressed_stroke">#FF6633</color>
+    
+    <color name="button_focused_stroke">#FFFF9999</color>
 </resources>

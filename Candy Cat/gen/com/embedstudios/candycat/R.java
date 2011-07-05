@@ -18,6 +18,7 @@ public final class R {
     public static final class color {
         public static final int bg_center=0x7f050001;
         public static final int bg_start=0x7f050000;
+        public static final int button_focused_stroke=0x7f05000b;
         public static final int button_normal_center=0x7f050004;
         public static final int button_normal_end=0x7f050005;
         public static final int button_normal_start=0x7f050003;
@@ -31,11 +32,12 @@ public final class R {
     public static final class drawable {
         public static final int background_linear=0x7f020000;
         public static final int button=0x7f020001;
-        public static final int button_normal=0x7f020002;
-        public static final int button_pressed=0x7f020003;
-        public static final int icon=0x7f020004;
-        public static final int loading_candy=0x7f020005;
-        public static final int logotrans=0x7f020006;
+        public static final int button_focused=0x7f020002;
+        public static final int button_normal=0x7f020003;
+        public static final int button_pressed=0x7f020004;
+        public static final int icon=0x7f020005;
+        public static final int loading_candy=0x7f020006;
+        public static final int logotrans=0x7f020007;
     }
     public static final class id {
         public static final int button_achievements=0x7f08000a;

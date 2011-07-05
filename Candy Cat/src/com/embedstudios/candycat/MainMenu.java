@@ -1,13 +1,11 @@
 package com.embedstudios.candycat;
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -37,6 +35,7 @@ public class MainMenu extends Activity {
 		Log.i(TAG,"MainMenu onCreate() started.");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		getWindow().setFormat(PixelFormat.RGBA_8888);
 
 		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
 		rotateindefinitely = AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely); // load loading animation :D
@@ -126,18 +125,6 @@ public class MainMenu extends Activity {
 		}
 	}
 	
-	public void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		Window window = getWindow();
-		window.setFormat(PixelFormat.RGBA_8888);
-		Log.v(TAG,"Set pixel format from onAttachedToWindow().");
-	}
-	
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig); // do nothing on keyboard open/close or orientation change
-	}
-	
 	@Override
 	public void onDestroy() {
 		while (true) {
@@ -149,8 +136,6 @@ public class MainMenu extends Activity {
 			}
 		}
 		Log.i(TAG,"Destroyed LoadThread in onDestroy. Starting super.onDestroy()...");
-//		mainmenu_ll.setBackgroundResource(0);
-//		mainmenu_ll=null;
 		super.onDestroy();
 	}
 	
