@@ -10,16 +10,16 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100"
-   height="100"
+   width="64"
+   height="64"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
    sodipodi:docname="01_candy.svg"
-   enable-background="new"
    inkscape:export-filename="C:\Users\Prem\Candy Cat Graphics\candy.png"
    inkscape:export-xdpi="64.800003"
-   inkscape:export-ydpi="64.800003">
+   inkscape:export-ydpi="64.800003"
+   style="enable-background:new">
   <defs
      id="defs4">
     <linearGradient
@@ -95,7 +95,8 @@
        y2="144.67061" />
     <filter
        inkscape:collect="always"
-       id="filter3856">
+       id="filter3856"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="1.2338621"
@@ -104,10 +105,11 @@
     <filter
        inkscape:collect="always"
        id="filter3860"
-       x="-0.036030517"
-       width="1.072061"
-       y="-0.14643147"
-       height="1.2928629">
+       x="-0.036030516"
+       width="1.0720609"
+       y="-0.14643148"
+       height="1.2928629"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="1.2338621"
@@ -115,7 +117,8 @@
     </filter>
     <filter
        inkscape:collect="always"
-       id="filter3864">
+       id="filter3864"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="1.2338621"
@@ -124,10 +127,11 @@
     <filter
        inkscape:collect="always"
        id="filter3868"
-       x="-0.1364784"
+       x="-0.13647839"
        width="1.2729568"
-       y="-0.035969535"
-       height="1.0719391">
+       y="-0.035969537"
+       height="1.0719391"
+       color-interpolation-filters="sRGB">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="1.2338621"
@@ -152,10 +156,11 @@
        y1="961.27521"
        x2="75.867661"
        y2="73.010544"
-       gradientTransform="matrix(0.09569378,0,0,0.09569034,0.23923451,952.87681)" />
+       gradientTransform="matrix(0.06124402,0,0,0.06124182,0.15311009,988.69154)" />
     <filter
        inkscape:collect="always"
-       id="filter3941">
+       id="filter3941"
+       color-interpolation-filters="sRGB">
       <feBlend
          inkscape:collect="always"
          mode="lighten"
@@ -183,7 +188,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="5.2700001"
      inkscape:cx="50"
-     inkscape:cy="50"
+     inkscape:cy="35.067453"
      inkscape:document-units="px"
      inkscape:current-layer="g3908"
      showgrid="false"
@@ -226,7 +231,7 @@
      inkscape:label="Candy Base"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-952.36218)"
+     transform="translate(0,-988.36218)"
      style="display:inline">
     <path
        sodipodi:type="arc"
@@ -236,11 +241,11 @@
        sodipodi:rx="431.42856"
        sodipodi:ry="431.42856"
        d="M 951.42856,517.14288 C 951.42856,755.4143 758.27141,948.57144 520,948.57144 281.72859,948.57144 88.571442,755.4143 88.571442,517.14288 88.571442,278.87147 281.72859,85.714325 520,85.714325 c 238.27141,0 431.42856,193.157145 431.42856,431.428555 z"
-       transform="matrix(0.0956922,0,0,0.0956922,0.24005666,952.87564)"
+       transform="matrix(0.06124301,0,0,0.06124301,0.15363626,988.6908)"
        id="path3111" />
   </g>
   <g
-     transform="translate(0,-900)"
+     transform="translate(0,-936)"
      style="display:inline"
      inkscape:label="Stripes 2"
      id="g3016"
@@ -250,38 +255,43 @@
        id="path3018"
        d="m 15.879267,926.75129 -4.265657,8.02399 64.466206,47.23014 9.005064,-10.23586 z"
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:url(#linearGradient4360);fill-opacity:1;stroke:none;stroke-width:100;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter3856);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccc"
+       transform="matrix(0.64,0,0,0.64,0,360)" />
     <path
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:url(#linearGradient4362);fill-opacity:1;stroke:none;stroke-width:100;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter3864);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        d="m 78.942402,920.55963 -48.130517,66.00408 6.741585,2.81135 49.613156,-57.37 z"
        id="path3020"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccc"
+       transform="matrix(0.64,0,0,0.64,0,360)" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Stripes"
      style="display:inline;filter:url(#filter3941)"
-     transform="translate(0,-900)">
+     transform="translate(0,-936)">
     <path
        sodipodi:nodetypes="ccccc"
        inkscape:connector-curvature="0"
        id="path4492"
        d="m 9.2409958,956.60391 2.6455172,9.291 75.668672,1.27584 3.628817,-20.07179 z"
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:url(#linearGradient3880);fill-opacity:1;stroke:none;stroke-width:100;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter3860);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:url(#linearGradient3880);fill-opacity:1;stroke:none;stroke-width:100;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter3860);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       transform="matrix(0.64,0,0,0.64,0,360)" />
     <path
        sodipodi:nodetypes="ccccc"
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:url(#linearGradient4504);fill-opacity:1;stroke:none;stroke-width:100;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter3868);enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        d="m 45.507972,908.95721 4.492029,82.32714 13.84985,-2.38052 3.355832,-76.443 z"
        id="path4494"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       transform="matrix(0.64,0,0,0.64,0,360)" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Overlay"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(0,-36)">
     <path
        sodipodi:type="arc"
        style="fill:url(#radialGradient3954);fill-opacity:1;stroke:none"
@@ -290,18 +300,18 @@
        sodipodi:cy="68"
        sodipodi:rx="19.75"
        sodipodi:ry="18.75"
-       d="M 68,68 A 19.75,18.75 0 1 1 28.5,68 19.75,18.75 0 1 1 68,68 z"
-       transform="matrix(2.1518987,0,0,2.2666667,-53.829113,-104.13333)" />
+       d="M 68,68 C 68,78.355339 59.157624,86.75 48.25,86.75 37.342376,86.75 28.5,78.355339 28.5,68 28.5,57.644661 37.342376,49.25 48.25,49.25 59.157624,49.25 68,57.644661 68,68 z"
+       transform="matrix(1.3772152,0,0,1.4506667,-34.450632,-30.64533)" />
   </g>
   <g
      style="display:inline"
-     transform="translate(0,-952.36218)"
+     transform="translate(0,-988.36218)"
      id="g3908"
      inkscape:groupmode="layer"
      inkscape:label="Border Rim">
     <path
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:url(#linearGradient3927);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:25.40756226;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
-       d="M 50.000001,959.8622 C 26.541909,959.8622 7.5,978.90642 7.5,1002.3637 c 0,23.4573 19.041909,42.4985 42.500001,42.4985 23.45809,0 42.499999,-19.0412 42.499999,-42.4985 0,-23.45728 -19.041909,-42.5015 -42.499999,-42.5015 z m 0,2.43113 c 22.144093,0 40.068779,17.92703 40.068779,40.07037 0,22.1433 -17.924686,40.0673 -40.068779,40.0673 -22.144095,0 -40.0687809,-17.924 -40.0687809,-40.0673 0,-22.14334 17.9246859,-40.07037 40.0687809,-40.07037 z"
+       d="M 32.000001,993.16219 C 16.986822,993.16219 4.8,1005.3505 4.8,1020.3632 c 0,15.0126 12.186822,27.199 27.200001,27.199 15.013177,0 27.199999,-12.1864 27.199999,-27.199 0,-15.0127 -12.186822,-27.20101 -27.199999,-27.20101 z m 0,1.55593 c 14.172219,0 25.644018,11.47328 25.644018,25.64508 0,14.1717 -11.471799,25.643 -25.644018,25.643 -14.172221,0 -25.6440201,-11.4713 -25.6440201,-25.643 0,-14.1718 11.4717991,-25.64508 25.6440201,-25.64508 z"
        id="path2987"
        inkscape:connector-curvature="0" />
   </g>

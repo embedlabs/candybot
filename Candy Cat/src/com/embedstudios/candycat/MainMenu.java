@@ -176,6 +176,8 @@ public class MainMenu extends Activity implements OnClickListener {
 		case R.id.button_gallery:
 			startActivity(new Intent(this,CandyGallery.class));
 			break;
+		case R.id.button_achievements:
+			break;
 		}
 	}
 }
