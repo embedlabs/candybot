@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="candy_prem3.svg"
+   sodipodi:docname="01_candy.svg"
    enable-background="new"
    inkscape:export-filename="C:\Users\Prem\Candy Cat Graphics\candy.png"
    inkscape:export-xdpi="64.800003"
@@ -38,17 +38,6 @@
          id="stop3952" />
     </linearGradient>
     <linearGradient
-       id="linearGradient4496">
-      <stop
-         id="stop4500"
-         offset="0"
-         style="stop-color:#ee8c00;stop-opacity:1;" />
-      <stop
-         style="stop-color:#eee000;stop-opacity:1;"
-         offset="1"
-         id="stop4502" />
-    </linearGradient>
-    <linearGradient
        id="linearGradient3785">
       <stop
          id="stop3787"
@@ -64,32 +53,6 @@
          style="stop-color:#eea800;stop-opacity:1;" />
     </linearGradient>
     <linearGradient
-       id="linearGradient3775">
-      <stop
-         style="stop-color:#000000;stop-opacity:1;"
-         offset="0"
-         id="stop3777" />
-      <stop
-         id="stop3783"
-         offset="0.5"
-         style="stop-color:#000000;stop-opacity:0.49803922;" />
-      <stop
-         style="stop-color:#000000;stop-opacity:0;"
-         offset="1"
-         id="stop3779" />
-    </linearGradient>
-    <linearGradient
-       id="linearGradient3772">
-      <stop
-         style="stop-color:#ff9a5c;stop-opacity:1"
-         offset="0"
-         id="stop3774" />
-      <stop
-         style="stop-color:#ee5900;stop-opacity:1;"
-         offset="1"
-         id="stop3776" />
-    </linearGradient>
-    <linearGradient
        id="linearGradient3764">
       <stop
          style="stop-color:#9f3729;stop-opacity:1;"
@@ -100,67 +63,6 @@
          offset="1"
          id="stop3768" />
     </linearGradient>
-    <linearGradient
-       id="linearGradient3777">
-      <stop
-         id="stop3785"
-         offset="0"
-         style="stop-color:#000000;stop-opacity:0;" />
-      <stop
-         style="stop-color:#000000;stop-opacity:0.51785713;"
-         offset="1"
-         id="stop3781" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3764"
-       id="linearGradient3770"
-       x1="964.13232"
-       y1="961.27521"
-       x2="75.867661"
-       y2="73.010544"
-       gradientUnits="userSpaceOnUse" />
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3772"
-       id="radialGradient3778"
-       cx="343.8721"
-       cy="376.24179"
-       fx="343.8721"
-       fy="376.24179"
-       r="444.13235"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.73873723,-0.73873723,0.59459348,0.59459348,-111.61557,387.78864)" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3785"
-       id="linearGradient3781"
-       x1="0"
-       y1="6.3327121e-013"
-       x2="0"
-       y2="289.76599"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(2.7314648,0,0,0.04141273,54.999995,953)" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3785"
-       id="linearGradient3797"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(2.7314648,0,0,0.03451061,49.999995,950)"
-       x1="0"
-       y1="6.3327121e-013"
-       x2="0"
-       y2="289.76599" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3785"
-       id="linearGradient3819"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.27314648,0,0,0.3451061,55,900)"
-       x1="-18.305197"
-       y1="144.88298"
-       x2="18.305197"
-       y2="144.88298" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3785"
@@ -191,16 +93,6 @@
        y1="144.88298"
        x2="40.088558"
        y2="144.67061" />
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4496"
-       id="radialGradient3827"
-       cx="50.860752"
-       cy="56.110752"
-       fx="50.860752"
-       fy="56.110752"
-       r="6.1107521"
-       gradientUnits="userSpaceOnUse" />
     <filter
        inkscape:collect="always"
        id="filter3856">
@@ -289,7 +181,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8632264"
+     inkscape:zoom="5.2700001"
      inkscape:cx="50"
      inkscape:cy="50"
      inkscape:document-units="px"
@@ -326,7 +218,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>

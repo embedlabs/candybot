@@ -15,23 +15,12 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="cat.svg"
+   sodipodi:docname="02_cat.svg"
    inkscape:export-filename="C:\Users\Prem\Candy Cat Graphics\cat.png"
    inkscape:export-xdpi="64.800003"
    inkscape:export-ydpi="64.800003">
   <defs
      id="defs4">
-    <linearGradient
-       id="linearGradient3847">
-      <stop
-         style="stop-color:#000000;stop-opacity:1;"
-         offset="0"
-         id="stop3849" />
-      <stop
-         style="stop-color:#000000;stop-opacity:0;"
-         offset="1"
-         id="stop3851" />
-    </linearGradient>
     <linearGradient
        id="linearGradient4101">
       <stop
@@ -206,33 +195,6 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient4081"
-       id="linearGradient3853"
-       x1="50"
-       y1="40.000004"
-       x2="50"
-       y2="90"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4081"
-       id="linearGradient3972"
-       gradientUnits="userSpaceOnUse"
-       x1="50"
-       y1="40.000004"
-       x2="50"
-       y2="90" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4081"
-       id="linearGradient3975"
-       gradientUnits="userSpaceOnUse"
-       x1="50"
-       y1="40.000004"
-       x2="50"
-       y2="90" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4081"
        id="linearGradient4003"
        gradientUnits="userSpaceOnUse"
        x1="50"
@@ -281,7 +243,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -305,7 +267,7 @@
      style="display:inline">
     <path
        transform="matrix(0.65056355,0,0,1.3779298,12.364635,959.18403)"
-       d="m 79.296976,44.694149 a 30.809652,18.182745 0 1 1 -61.619305,0 30.809652,18.182745 0 1 1 61.619305,0 z"
+       d="m 79.296976,44.694149 c 0,10.042053 -13.793951,18.182745 -30.809652,18.182745 -17.015701,0 -30.809653,-8.140692 -30.809653,-18.182745 0,-10.042053 13.793952,-18.182745 30.809653,-18.182745 17.015701,0 30.809652,8.140692 30.809652,18.182745 z"
        sodipodi:ry="18.182745"
        sodipodi:rx="30.809652"
        sodipodi:cy="44.694149"

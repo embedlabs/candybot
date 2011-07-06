@@ -101,26 +101,6 @@
        y2="558.07642"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.09883722,0,0,0.09883721,0.86377618,947.20343)" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3763-2"
-       id="linearGradient3769-5"
-       x1="67.142853"
-       y1="558.07642"
-       x2="927.14282"
-       y2="558.07642"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       id="linearGradient3763-2">
-      <stop
-         style="stop-color:#803300;stop-opacity:1;"
-         offset="0"
-         id="stop3765-3" />
-      <stop
-         style="stop-color:#803300;stop-opacity:1;"
-         offset="1"
-         id="stop3767-1" />
-    </linearGradient>
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3805"
@@ -203,7 +183,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
