@@ -37,22 +37,20 @@ public final class R {
         public static final int button_focused=0x7f020002;
         public static final int button_normal=0x7f020003;
         public static final int button_pressed=0x7f020004;
-        public static final int full_candy=0x7f020005;
-        public static final int icon=0x7f020006;
-        public static final int logotrans=0x7f020007;
+        public static final int icon=0x7f020005;
+        public static final int splash=0x7f020006;
     }
     public static final class id {
-        public static final int button_achievements=0x7f08000a;
-        public static final int button_gallery=0x7f080009;
-        public static final int button_play=0x7f080008;
-        public static final int enclosing_vf=0x7f080001;
+        public static final int button_achievements=0x7f080009;
+        public static final int button_gallery=0x7f080008;
+        public static final int button_play=0x7f080007;
+        public static final int enclosing_rl=0x7f080001;
+        public static final int enclosing_vf=0x7f080003;
         public static final int gallery_ll=0x7f080000;
-        public static final int logo_iv=0x7f080003;
-        public static final int logo_rl=0x7f080002;
-        public static final int mainmenu_ll=0x7f080006;
-        public static final int mainmenu_rl=0x7f080004;
-        public static final int mainmenu_tv=0x7f080007;
-        public static final int rsv=0x7f080005;
+        public static final int logo_iv=0x7f080004;
+        public static final int mainmenu_ll=0x7f080005;
+        public static final int mainmenu_tv=0x7f080006;
+        public static final int rsv=0x7f080002;
     }
     public static final class layout {
         public static final int gallery=0x7f030000;

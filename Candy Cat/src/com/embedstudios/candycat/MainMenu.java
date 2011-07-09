@@ -7,12 +7,8 @@ import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
-import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
-import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.shape.Shape;
-import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.physics.box2d.FixedStepPhysicsWorld;
@@ -20,7 +16,6 @@ import org.anddev.andengine.extension.physics.box2d.PhysicsConnector;
 import org.anddev.andengine.extension.physics.box2d.PhysicsFactory;
 import org.anddev.andengine.extension.physics.box2d.PhysicsWorld;
 import org.anddev.andengine.extension.physics.box2d.util.Vector2Pool;
-import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -34,14 +29,13 @@ import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.ViewAnimator;
+import android.widget.ViewFlipper;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -49,7 +43,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public class MainMenu extends LayoutGameActivity implements OnClickListener, IAccelerometerListener {
-	ViewAnimator enclosing_va;
+	ViewFlipper enclosing_vf;
 	TextView mainmenu_tv;
 	Button button_play,button_gallery,button_achievements;
 
@@ -77,7 +71,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		
 		@Override
 		protected void onPostExecute(Void blah) { // switches to main menu
-			enclosing_va.setDisplayedChild(1);
+			enclosing_vf.showNext();
 			Log.v(TAG,"Loading animation stopped.");
 		}
 	}
@@ -122,7 +116,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public void onLoadResources() {
-		mTexture = new Texture(64,64, TextureOptions.NEAREST);
+		mTexture = new Texture(64,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mCircleFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "gfx/full_candy.png",0,0);
 		mEngine.getTextureManager().loadTexture(mTexture);
 		Log.i(TAG,"onLoadResources()");
@@ -134,8 +128,9 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		mEngine.registerUpdateHandler(new FPSLogger());
 
 		mScene = new Scene();
+		mScene.setBackground(new ColorBackground(0.07f,0.22f,0.51f));
 		
-		this.mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*1.5f), false, 3, 2);
+		mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*1.5f), false, 3, 2);
 		Log.i(TAG,"onLoadScene()");
 
 		final Shape ground = new Rectangle(0, HEIGHT, WIDTH, 2);
@@ -173,7 +168,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		setKomika(mainmenu_tv,button_play,button_gallery,button_achievements); // changes font
 		setClick(button_play,button_gallery,button_achievements);
 
-		enclosing_va = (ViewAnimator)findViewById(R.id.enclosing_vf); //identifies parts
+		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies parts
+//		enclosing_vf.setBackgroundColor(0x00000000);
 		
 		Log.v(TAG,"Starting LoadTask...");
 		new LoadTask().execute();
