@@ -5,15 +5,15 @@
     
     <color name="normal_text">#FFFFFF</color>
     
-    <color name="button_normal_start">#EEE000</color>
-    <color name="button_normal_center">#CC4400</color>
-    <color name="button_normal_end">#992222</color>
+    <color name="button_normal_start">#DDEEE000</color>
+    <color name="button_normal_center">#DDCC4400</color>
+    <color name="button_normal_end">#DD992222</color>
     <color name="button_normal_stroke">#FFFFFF</color>
     
-    <color name="button_pressed_start">#CC4400</color>
-    <color name="button_pressed_center">#EEE000</color>
-    <color name="button_pressed_end">#AAA022</color>
+    <color name="button_pressed_start">#DDCC4400</color>
+    <color name="button_pressed_center">#DDEEE000</color>
+    <color name="button_pressed_end">#DDAAA022</color>
     <color name="button_pressed_stroke">#FF6633</color>
     
-    <color name="button_focused_stroke">#FFFF9999</color>
+    <color name="button_focused_stroke">#FF9999</color>
 </resources>
