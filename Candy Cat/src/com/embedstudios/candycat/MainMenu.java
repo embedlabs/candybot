@@ -1,5 +1,7 @@
 package com.embedstudios.candycat;
 
+import java.util.Random;
+
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.options.EngineOptions;
@@ -53,41 +55,48 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	private static int WIDTH,HEIGHT;
 	private Texture mTexture;
-	private TextureRegion mCircleFaceTextureRegion;
+	private TextureRegion mCandyFaceTextureRegion,mWallFaceTextureRegion,mBoxFaceTextureRegion;
 	private Scene mScene;
 	private PhysicsWorld mPhysicsWorld;
 	
-	public class LoadTask extends AsyncTask<Void,Void,Void> { // handles loading/menu opening process
-
+	public class LoadTask extends AsyncTask<Void,Integer,Void> {
 		@Override
-		protected Void doInBackground(Void... arg0) {
-			try {
-				Thread.sleep(LOGO_DURATION);
-			} catch (InterruptedException e) {
-				Log.e(TAG,"Failed to show logo for a while.",e);
+		protected Void doInBackground(Void... blah) {
+			pause(LOGO_DURATION);
+			publishProgress(0);
+			pause(1000);
+			for (int i=1;i<=9;i++) {
+				publishProgress(1);
+				pause(100);
+				if (i<=3) {
+					publishProgress(2);
+					pause(100);
+					publishProgress(3);
+					pause(100);
+				}
 			}
 			return null;
 		}
 		
 		@Override
-		protected void onPostExecute(Void blah) { // switches to main menu
-			enclosing_vf.showNext();
-			Log.v(TAG,"Loading animation stopped.");
+		protected void onProgressUpdate(Integer...integers) {
+			switch (integers[0]) {
+			case 0: enclosing_vf.showNext(); break;
+			case 1: addFace(0); break;
+			case 2: addFace(1); break;
+			default: addFace(2); break;
+			}
+		}
+		
+		private void pause(int milliseconds) {
+			try {
+				Thread.sleep(milliseconds);
+			} catch (InterruptedException e) {
+				Log.e(TAG,"Thread.sleep() failed.",e);
+			}
 		}
 	}
 	
-	public void setKomika(TextView... views) { // changes font
-		for (TextView tv:views) {
-			tv.setTypeface(komika);
-		}
-	}
-	
-	public void setClick(Button... buttons) {
-		for (Button button:buttons) {
-			button.setOnClickListener(this);
-		}
-	}
-
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
@@ -116,8 +125,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public void onLoadResources() {
-		mTexture = new Texture(64,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		mCircleFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "gfx/full_candy.png",0,0);
+		mTexture = new Texture(256,64, TextureOptions.NEAREST);
+		TextureRegionFactory.setAssetBasePath("gfx/");
+		mCandyFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
+		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_movable_wall.png",64,0);
+		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_box.png",128,0);
 		mEngine.getTextureManager().loadTexture(mTexture);
 		Log.i(TAG,"onLoadResources()");
 	}
@@ -130,7 +142,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		mScene = new Scene();
 		mScene.setBackground(new ColorBackground(0.07f,0.22f,0.51f));
 		
-		mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*1.5f), false, 3, 2);
+		mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*2f), false, 3, 2);
 		Log.i(TAG,"onLoadScene()");
 
 		final Shape ground = new Rectangle(0, HEIGHT, WIDTH, 2);
@@ -169,23 +181,50 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		setClick(button_play,button_gallery,button_achievements);
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies parts
-//		enclosing_vf.setBackgroundColor(0x00000000);
 		
 		Log.v(TAG,"Starting LoadTask...");
 		new LoadTask().execute();
 		Log.i(TAG,"MainMenu onCreate() ended");
-		
-		addFace(WIDTH/4-32,HEIGHT/4-32);
-		addFace(WIDTH/2-32,HEIGHT/4-32);
-		addFace(WIDTH/4*3-32,HEIGHT/4-32);
-		addFace(WIDTH/4-32,HEIGHT/2-32);
-		addFace(WIDTH/2-32,HEIGHT/2-32);
-		addFace(WIDTH/4*3-32,HEIGHT/2-32);
-		addFace(WIDTH/4-32,HEIGHT/4*3-32);
-		addFace(WIDTH/2-32,HEIGHT/4*3-32);
-		addFace(WIDTH/4*3-32,HEIGHT/4*3-32);
 	}
 	
+	private void addFace(final float pX, final float pY,final int type) {
+		final Sprite face;
+		final Body body;
+		final FixtureDef objectFixtureDef = PhysicsFactory.createFixtureDef(1, 0.5f, 0.5f);
+		
+		switch (type) {
+		case 0:
+			face = new Sprite(pX, pY,mCandyFaceTextureRegion);
+			body = PhysicsFactory.createCircleBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
+			break;
+		case 1:
+			face = new Sprite(pX,pY,mWallFaceTextureRegion);
+			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
+			break;
+		default:
+			face = new Sprite(pX,pY,mBoxFaceTextureRegion);
+			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
+			break;
+		}
+		
+		mScene.attachChild(face);
+		mPhysicsWorld.registerPhysicsConnector(new PhysicsConnector(face, body, true, true));
+	}
+	
+	private void addFace(final int type) {
+		final Random randGen = new Random();
+		final int x = randGen.nextInt(WIDTH-65)+32;
+		final int y = randGen.nextInt(HEIGHT-65)+32;
+		addFace(x,y,type);
+	}
+	
+	@Override
+	public void onAccelerometerChanged(AccelerometerData pAccelerometerData) {
+		final Vector2 gravity = Vector2Pool.obtain(pAccelerometerData.getX(), pAccelerometerData.getY());
+		mPhysicsWorld.setGravity(gravity);
+		Vector2Pool.recycle(gravity);
+	}
+
 	@Override
 	public void onResumeGame() {
 		super.onResumeGame();
@@ -199,23 +238,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	}
 
 	@Override
-	public void onAccelerometerChanged(AccelerometerData pAccelerometerData) {
-		final Vector2 gravity = Vector2Pool.obtain(pAccelerometerData.getX(), pAccelerometerData.getY());
-		mPhysicsWorld.setGravity(gravity);
-		Vector2Pool.recycle(gravity);
-	}
-	
-	private void addFace(final float pX, final float pY) {
-		final Sprite face;
-		final Body body;
-		final FixtureDef objectFixtureDef = PhysicsFactory.createFixtureDef(1, 0.5f, 0.5f);
-		face = new Sprite(pX, pY,mCircleFaceTextureRegion);
-		body = PhysicsFactory.createCircleBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
-		mScene.attachChild(face);
-		mPhysicsWorld.registerPhysicsConnector(new PhysicsConnector(face, body, true, true));
-	}
-	
-	@Override
 	protected int getLayoutID() {
 		return R.layout.main;
 	}
@@ -223,5 +245,17 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	@Override
 	protected int getRenderSurfaceViewID() {
 		return R.id.rsv;
+	}
+
+	public void setKomika(TextView... views) { // changes font
+		for (TextView tv:views) {
+			tv.setTypeface(komika);
+		}
+	}
+
+	public void setClick(Button... buttons) {
+		for (Button button:buttons) {
+			button.setOnClickListener(this);
+		}
 	}
 }

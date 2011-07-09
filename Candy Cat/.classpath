@@ -5,6 +5,5 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="lib/andengine.jar"/>
 	<classpathentry kind="lib" path="lib/andenginephysicsbox2dextension.jar"/>
-	<classpathentry kind="lib" path="lib/andenginesvgtextureregionextension.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
