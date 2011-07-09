@@ -23,7 +23,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:scaleType="center"
-			android:src="@drawable/loading_candy"
+			android:src="@drawable/full_candy"
 			android:layout_centerInParent="true" />
 		<TextView android:id="@+id/loading_tv"
 			android:layout_width="wrap_content"
@@ -39,7 +39,6 @@
 		android:layout_width="wrap_content"
 		android:layout_height="fill_parent"
 		android:orientation="vertical"
-		android:gravity="center_horizontal"
 		android:layout_gravity="center_horizontal">
 		<TextView android:id="@+id/mainmenu_tv"
 			android:layout_width="wrap_content"

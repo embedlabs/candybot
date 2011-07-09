@@ -9,9 +9,11 @@ package com.embedstudios.candycat;
 
 public final class R {
     public static final class anim {
-        public static final int rotate_infinitely=0x7f040000;
-        public static final int slide_in_right=0x7f040001;
-        public static final int slide_out_left=0x7f040002;
+        public static final int rotate_in=0x7f040000;
+        public static final int rotate_infinitely=0x7f040001;
+        public static final int rotate_out=0x7f040002;
+        public static final int slide_in_right=0x7f040003;
+        public static final int slide_out_left=0x7f040004;
     }
     public static final class attr {
     }
@@ -35,8 +37,8 @@ public final class R {
         public static final int button_focused=0x7f020002;
         public static final int button_normal=0x7f020003;
         public static final int button_pressed=0x7f020004;
-        public static final int icon=0x7f020005;
-        public static final int loading_candy=0x7f020006;
+        public static final int full_candy=0x7f020005;
+        public static final int icon=0x7f020006;
         public static final int logotrans=0x7f020007;
     }
     public static final class id {
