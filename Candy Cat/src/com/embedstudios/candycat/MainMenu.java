@@ -112,7 +112,9 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	}
 
 	@Override
-	public Engine onLoadEngine() {		
+	public Engine onLoadEngine() {
+		Log.i(TAG,"onLoadEngine()");
+		
 		Display display = getWindowManager().getDefaultDisplay(); 
 		WIDTH = display.getWidth();
 		HEIGHT = display.getHeight();
@@ -125,13 +127,13 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public void onLoadResources() {
+		Log.i(TAG,"onLoadResources()");
 		mTexture = new Texture(256,64, TextureOptions.NEAREST);
 		TextureRegionFactory.setAssetBasePath("gfx/");
 		mCandyFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
 		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_movable_wall.png",64,0);
 		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_box.png",128,0);
 		mEngine.getTextureManager().loadTexture(mTexture);
-		Log.i(TAG,"onLoadResources()");
 	}
 
 	@Override
@@ -142,8 +144,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		mScene = new Scene();
 		mScene.setBackground(new ColorBackground(0.07f,0.22f,0.51f));
 		
-		mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*2f), false, 3, 2);
-		Log.i(TAG,"onLoadScene()");
+		mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*2), false, 3, 2);
 
 		final Shape ground = new Rectangle(0, HEIGHT, WIDTH, 2);
 		final Shape roof = new Rectangle(0, -2, WIDTH, 2);
@@ -170,7 +171,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 
 		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
-		Log.v(TAG,"Font loaded.");
 
 		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
 		button_play = (Button)findViewById(R.id.button_play);
@@ -182,15 +182,14 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies parts
 		
-		Log.v(TAG,"Starting LoadTask...");
 		new LoadTask().execute();
-		Log.i(TAG,"MainMenu onCreate() ended");
 	}
 	
 	private void addFace(final float pX, final float pY,final int type) {
 		final Sprite face;
 		final Body body;
-		final FixtureDef objectFixtureDef = PhysicsFactory.createFixtureDef(1, 0.5f, 0.5f);
+		final FixtureDef objectFixtureDef = PhysicsFactory.createFixtureDef(1, 0.85f, 0.5f);
+		final FixtureDef objectFixtureDef2 = PhysicsFactory.createFixtureDef(2, 0.5f, 0.5f);
 		
 		switch (type) {
 		case 0:
@@ -199,11 +198,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			break;
 		case 1:
 			face = new Sprite(pX,pY,mWallFaceTextureRegion);
-			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
+			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef2);
 			break;
 		default:
 			face = new Sprite(pX,pY,mBoxFaceTextureRegion);
-			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
+			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef2);
 			break;
 		}
 		
