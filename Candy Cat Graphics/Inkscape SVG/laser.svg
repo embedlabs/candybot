@@ -15,35 +15,25 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="00_wall.svg"
-   inkscape:export-filename="C:\Users\Prem\embed-studios\Candy Cat Graphics\64x64 PNG\00_wall.png"
+   enable-background="new"
+   inkscape:export-filename="C:\Users\Prem\embed-studios\Candy Cat Graphics\64x64 PNG\laser3.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   sodipodi:docname="New document 1">
   <defs
      id="defs4">
     <linearGradient
-       id="linearGradient3767">
-      <stop
-         id="stop3769"
-         offset="0"
-         style="stop-color:#ffffff;stop-opacity:0;" />
-      <stop
-         id="stop3773"
-         offset="1"
-         style="stop-color:#000000;stop-opacity:0.66666669;" />
-    </linearGradient>
-    <linearGradient
        id="linearGradient3755">
       <stop
-         style="stop-color:#3448f2;stop-opacity:1;"
+         style="stop-color:#ff0000;stop-opacity:1;"
          offset="0"
          id="stop3757" />
       <stop
          id="stop3763"
-         offset="0.64999998"
-         style="stop-color:#a7b0f2;stop-opacity:1;" />
+         offset="0.5"
+         style="stop-color:#ff8135;stop-opacity:1;" />
       <stop
-         style="stop-color:#3448f2;stop-opacity:1;"
+         style="stop-color:#ff0000;stop-opacity:1;"
          offset="1"
          id="stop3759" />
     </linearGradient>
@@ -51,23 +41,39 @@
        inkscape:collect="always"
        xlink:href="#linearGradient3755"
        id="linearGradient3761"
-       x1="50"
-       y1="-7.7382814e-005"
-       x2="50"
-       y2="99.999924"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.64,0,0,0.64,6.6134765e-8,988.36223)" />
-    <radialGradient
+       x1="32"
+       y1="1010.3622"
+       x2="32"
+       y2="1030.3622"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient3767"
-       id="radialGradient3779"
-       cx="-50"
-       cy="1002.3622"
-       fx="-50"
-       fy="1002.3622"
-       r="50"
+       xlink:href="#linearGradient3755"
+       id="linearGradient3767"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.61500006,-0.61500006,0.61499994,0.61499994,-553.70267,373.15952)" />
+       x1="32"
+       y1="1010.3622"
+       x2="32"
+       y2="1030.3622"
+       gradientTransform="translate(988.36218,-1052.3622)" />
+    <filter
+       inkscape:collect="always"
+       id="filter3787">
+      <feBlend
+         inkscape:collect="always"
+         mode="lighten"
+         in2="BackgroundImage"
+         id="feBlend3789" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3791">
+      <feBlend
+         inkscape:collect="always"
+         mode="lighten"
+         in2="BackgroundImage"
+         id="feBlend3793" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -76,11 +82,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="-24.100826"
-     inkscape:cy="47.830177"
+     inkscape:zoom="5.6"
+     inkscape:cx="6.1785716"
+     inkscape:cy="39.587102"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
@@ -89,10 +95,10 @@
      inkscape:snap-bbox-midpoints="true"
      inkscape:object-paths="true"
      inkscape:snap-intersection-paths="true"
+     inkscape:object-nodes="true"
      inkscape:snap-smooth-nodes="true"
      inkscape:snap-midpoints="true"
      inkscape:snap-object-midpoints="true"
-     inkscape:object-nodes="true"
      inkscape:snap-center="true"
      inkscape:snap-page="true"
      inkscape:window-width="1366"
@@ -116,20 +122,28 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-988.36218)">
+     transform="translate(0,-988.36218)"
+     style="display:inline;filter:url(#filter3791)">
     <rect
-       style="fill:url(#linearGradient3761);fill-opacity:1;stroke:none"
+       style="fill:url(#linearGradient3761);fill-opacity:1;stroke:#bb0000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2985"
-       width="64"
-       height="64"
-       x="0"
-       y="988.36218" />
+       width="70"
+       height="20"
+       x="-3"
+       y="1010.3622" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer"
+     style="display:inline;filter:url(#filter3787)">
     <rect
-       y="989.61218"
-       x="1.25"
-       height="61.5"
-       width="61.5"
+       y="-42"
+       x="985.36218"
+       height="20"
+       width="70"
        id="rect3765"
-       style="fill:url(#radialGradient3779);fill-opacity:1;stroke:#000000;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.50196078;stroke-dasharray:none" />
+       style="fill:url(#linearGradient3767);fill-opacity:1;stroke:#bb0000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       transform="matrix(0,1,-1,0,0,-988.36218)" />
   </g>
 </svg>

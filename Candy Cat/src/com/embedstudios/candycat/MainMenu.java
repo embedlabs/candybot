@@ -8,6 +8,8 @@ import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.modifier.AlphaModifier;
+import org.anddev.andengine.entity.modifier.ParallelEntityModifier;
+import org.anddev.andengine.entity.modifier.ScaleModifier;
 import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
@@ -207,7 +209,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			break;
 		}
 		face.setAlpha(0);
-		face.registerEntityModifier(new AlphaModifier(1,0,1));
+		face.setScale(0);
+		face.registerEntityModifier(new ParallelEntityModifier(new AlphaModifier(1,0,1),new ScaleModifier(1,0,1)));
 		mScene.attachChild(face);
 		mPhysicsWorld.registerPhysicsConnector(new PhysicsConnector(face, body, true, true));
 	}

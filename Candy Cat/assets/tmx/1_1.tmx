@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="24" height="18" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="Background" tilewidth="64" tileheight="64">
+  <image source="../gfx/bg_tileset.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="9" name="Moving Objects" tilewidth="64" tileheight="64">
+  <image source="../gfx/obj_tileset.png" width="256" height="128"/>
+ </tileset>
+ <layer name="Level Background" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQxphUYauYP1fDB5WZyzSdWDyXmExO+gzn8iUkrg8H9pKTpoZb+CblzoN1PSl7E5g9S3U+qX2HmMwExMwPu+KcEAwCOowB+
+  </data>
+ </layer>
+ <layer name="Objects" width="24" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyIATiLkG2hGjYBSMglEwCggCAHKoABQ=
+  </data>
+ </layer>
+</map>
