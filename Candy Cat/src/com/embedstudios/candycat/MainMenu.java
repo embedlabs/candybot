@@ -7,6 +7,7 @@ import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.anddev.andengine.entity.modifier.AlphaModifier;
 import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
@@ -205,7 +206,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef2);
 			break;
 		}
-		
+		face.setAlpha(0);
+		face.registerEntityModifier(new AlphaModifier(1,0,1));
 		mScene.attachChild(face);
 		mPhysicsWorld.registerPhysicsConnector(new PhysicsConnector(face, body, true, true));
 	}

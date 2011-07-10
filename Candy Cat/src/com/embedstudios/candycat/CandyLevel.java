@@ -35,13 +35,13 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-public class CandyLevel extends BaseGameActivity implements IAccelerometerListener,IOnSceneTouchListener {
+public class CandyLevel extends BaseGameActivity {
 	private static int WIDTH,HEIGHT;
 	private int level;
-	private Texture mTexture;
-	private TextureRegion mCircleFaceTextureRegion;
+//	private Texture mTexture;
+//	private TextureRegion mCircleFaceTextureRegion;
 	private Scene mScene;
-	private PhysicsWorld mPhysicsWorld;
+//	private PhysicsWorld mPhysicsWorld;
 	public static final String TAG = CandyUtils.TAG;
 
 	@Override
@@ -54,16 +54,16 @@ public class CandyLevel extends BaseGameActivity implements IAccelerometerListen
 		
 		final Camera camera = new Camera(0,0,WIDTH,HEIGHT);
 		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), camera);
-		engineOptions.getTouchOptions().setRunOnUpdateThread(true);
+//		engineOptions.getTouchOptions().setRunOnUpdateThread(true);
 		return new Engine(engineOptions);
 	}
 
 	@Override
 	public void onLoadResources() {
-		mTexture = new Texture(64,64, TextureOptions.NEAREST);
-		mCircleFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "gfx/full_candy.png",0,0);
-		mEngine.getTextureManager().loadTexture(mTexture);
-		Log.i(TAG,"onLoadResources()");
+//		mTexture = new Texture(64,64, TextureOptions.NEAREST);
+//		mCircleFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "gfx/full_candy.png",0,0);
+//		mEngine.getTextureManager().loadTexture(mTexture);
+//		Log.i(TAG,"onLoadResources()");
 	}
 
 	@Override
@@ -71,76 +71,76 @@ public class CandyLevel extends BaseGameActivity implements IAccelerometerListen
 		mEngine.registerUpdateHandler(new FPSLogger());
 
 		mScene = new Scene();
-		mScene.setBackground(new ColorBackground(0,0,0));
-		mScene.setOnSceneTouchListener(this);
-		
-		this.mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*1.5f), false, 3, 2);
-		Log.i(TAG,"onLoadScene()");
-
-		final Shape ground = new Rectangle(0, HEIGHT, WIDTH, 2);
-		final Shape roof = new Rectangle(0, -2, WIDTH, 2);
-		final Shape left = new Rectangle(-2, 0, 2, HEIGHT);
-		final Shape right = new Rectangle(WIDTH, 0, 2, HEIGHT);
-
-		final FixtureDef wallFixtureDef = PhysicsFactory.createFixtureDef(0, 0.5f, 0.5f);
-		PhysicsFactory.createBoxBody(mPhysicsWorld, ground, BodyType.StaticBody, wallFixtureDef);
-		PhysicsFactory.createBoxBody(mPhysicsWorld, roof, BodyType.StaticBody, wallFixtureDef);
-		PhysicsFactory.createBoxBody(mPhysicsWorld, left, BodyType.StaticBody, wallFixtureDef);
-		PhysicsFactory.createBoxBody(mPhysicsWorld, right, BodyType.StaticBody, wallFixtureDef);
-
-		mScene.attachChild(ground);
-		mScene.attachChild(roof);
-		mScene.attachChild(left);
-		mScene.attachChild(right);
-
-		mScene.registerUpdateHandler(mPhysicsWorld);
+//		mScene.setBackground(new ColorBackground(0,0,0));
+//		mScene.setOnSceneTouchListener(this);
+//		
+//		this.mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*1.5f), false, 3, 2);
+//		Log.i(TAG,"onLoadScene()");
+//
+//		final Shape ground = new Rectangle(0, HEIGHT, WIDTH, 2);
+//		final Shape roof = new Rectangle(0, -2, WIDTH, 2);
+//		final Shape left = new Rectangle(-2, 0, 2, HEIGHT);
+//		final Shape right = new Rectangle(WIDTH, 0, 2, HEIGHT);
+//
+//		final FixtureDef wallFixtureDef = PhysicsFactory.createFixtureDef(0, 0.5f, 0.5f);
+//		PhysicsFactory.createBoxBody(mPhysicsWorld, ground, BodyType.StaticBody, wallFixtureDef);
+//		PhysicsFactory.createBoxBody(mPhysicsWorld, roof, BodyType.StaticBody, wallFixtureDef);
+//		PhysicsFactory.createBoxBody(mPhysicsWorld, left, BodyType.StaticBody, wallFixtureDef);
+//		PhysicsFactory.createBoxBody(mPhysicsWorld, right, BodyType.StaticBody, wallFixtureDef);
+//
+//		mScene.attachChild(ground);
+//		mScene.attachChild(roof);
+//		mScene.attachChild(left);
+//		mScene.attachChild(right);
+//
+//		mScene.registerUpdateHandler(mPhysicsWorld);
 		return mScene;
 	}
 
 	@Override
 	public void onLoadComplete() {}
 
-	@Override
-	public void onResumeGame() {
-		super.onResumeGame();
-		enableAccelerometerSensor(this);
-	}
-
-	@Override
-	public void onPauseGame() {
-		super.onPauseGame();
-		disableAccelerometerSensor();
-	}
-
-	@Override
-	public void onAccelerometerChanged(AccelerometerData pAccelerometerData) {
-		final Vector2 gravity = Vector2Pool.obtain(pAccelerometerData.getX(), pAccelerometerData.getY());
-		mPhysicsWorld.setGravity(gravity);
-		Vector2Pool.recycle(gravity);
-	}
-	
-	private void addFace(final float pX, final float pY) {
-
-		final Sprite face;
-		final Body body;
-
-		final FixtureDef objectFixtureDef = PhysicsFactory.createFixtureDef(1, 0.5f, 0.5f);
-
-		face = new Sprite(pX, pY,mCircleFaceTextureRegion);
-		body = PhysicsFactory.createCircleBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
-
-		mScene.attachChild(face);
-		mPhysicsWorld.registerPhysicsConnector(new PhysicsConnector(face, body, true, true));
-	}
-
-	@Override
-	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
-		if(this.mPhysicsWorld != null) {
-			if(pSceneTouchEvent.isActionDown()) {
-				addFace(pSceneTouchEvent.getX(), pSceneTouchEvent.getY());
-				return true;
-			}
-		}
-		return false;
-	}
+//	@Override
+//	public void onResumeGame() {
+//		super.onResumeGame();
+//		enableAccelerometerSensor(this);
+//	}
+//
+//	@Override
+//	public void onPauseGame() {
+//		super.onPauseGame();
+//		disableAccelerometerSensor();
+//	}
+//
+//	@Override
+//	public void onAccelerometerChanged(AccelerometerData pAccelerometerData) {
+//		final Vector2 gravity = Vector2Pool.obtain(pAccelerometerData.getX(), pAccelerometerData.getY());
+//		mPhysicsWorld.setGravity(gravity);
+//		Vector2Pool.recycle(gravity);
+//	}
+//	
+//	private void addFace(final float pX, final float pY) {
+//
+//		final Sprite face;
+//		final Body body;
+//
+//		final FixtureDef objectFixtureDef = PhysicsFactory.createFixtureDef(1, 0.5f, 0.5f);
+//
+//		face = new Sprite(pX, pY,mCircleFaceTextureRegion);
+//		body = PhysicsFactory.createCircleBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
+//
+//		mScene.attachChild(face);
+//		mPhysicsWorld.registerPhysicsConnector(new PhysicsConnector(face, body, true, true));
+//	}
+//
+//	@Override
+//	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
+//		if(this.mPhysicsWorld != null) {
+//			if(pSceneTouchEvent.isActionDown()) {
+//				addFace(pSceneTouchEvent.getX(), pSceneTouchEvent.getY());
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 }
