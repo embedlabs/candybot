@@ -2,6 +2,7 @@ package com.embedstudios.candycat;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.BoundCamera;
+import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -26,7 +27,9 @@ public class CandyLevel extends BaseGameActivity {
 	private int level,world;
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
-	private BoundCamera mBoundChaseCamera;
+	private Camera mCamera;
+	private TMXLayer tmxBackground,tmxObjects;
+	
 	public static final String TAG = CandyUtils.TAG;
 
 	@Override
@@ -41,14 +44,14 @@ public class CandyLevel extends BaseGameActivity {
 		/**
 		 * If you want to see actual size.
 		 */
-		mBoundChaseCamera = new BoundCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,0,WIDTH,0,HEIGHT);
-		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mBoundChaseCamera);
+//		mCamera = new Camera(0,0,PHONE_WIDTH,PHONE_HEIGHT);
+//		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mCamera);
 
 		/**
 		 * If you want to see the whole level.
 		 */
-//		mBoundChaseCamera = new BoundCamera(0,0,WIDTH,HEIGHT);
-//		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), mBoundChaseCamera);
+		mCamera = new Camera(0,0,WIDTH,HEIGHT);
+		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), mCamera);
 		
 		return new Engine(engineOptions);
 	}
@@ -61,7 +64,7 @@ public class CandyLevel extends BaseGameActivity {
 		mEngine.registerUpdateHandler(new FPSLogger());
 
 		mScene = new Scene();
-		mScene.setBackground(new ColorBackground(1,1,1));
+		mScene.setBackground(new ColorBackground(0.07f,0.22f,0.51f));
 		
 		try {
 			final TMXLoader tmxLoader = new TMXLoader(this, this.mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA);
@@ -70,15 +73,11 @@ public class CandyLevel extends BaseGameActivity {
 			Debug.e(tmxle);
 		}
 		
-		final TMXLayer tmxLayer = this.mTMXTiledMap.getTMXLayers().get(0);
-		mScene.attachChild(tmxLayer); //background layer
-		
+		tmxBackground = this.mTMXTiledMap.getTMXLayers().get(0);
+		mScene.attachChild(tmxBackground); //background layer
 
-		final TMXLayer tmxLayer2 = this.mTMXTiledMap.getTMXLayers().get(1);
-		mScene.attachChild(tmxLayer2); //object layer
-		
-		mBoundChaseCamera.setBounds(0, tmxLayer.getWidth(), 0, tmxLayer.getHeight());
-		mBoundChaseCamera.setBoundsEnabled(true);
+		tmxObjects = this.mTMXTiledMap.getTMXLayers().get(1);
+		mScene.attachChild(tmxObjects); //object layer
 		
 		return mScene;
 	}
