@@ -17,13 +17,12 @@ import org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap;
 import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadException;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
-import org.anddev.andengine.entity.sprite.AnimatedSprite;
+import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
-import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.util.Debug;
 
@@ -36,13 +35,12 @@ public class CandyLevel extends BaseGameActivity {
 	
 	private int level,world;
 	private Scene mScene;
-	private Texture mTexture;
 	private TMXTiledMap mTMXTiledMap;
 	private BoundCamera mBoundChaseCamera;
 	public static final String TAG = CandyUtils.TAG;
 	private Texture mOnScreenControlTexture;
 	private Texture mTexturePlayer;
-	private TiledTextureRegion mPlayerTextureRegion;
+	private TextureRegion mPlayerTextureRegion;
 	private TextureRegion mOnScreenControlBaseTextureRegion;
 	private TextureRegion mOnScreenControlKnobTextureRegion;
 
@@ -86,17 +84,16 @@ public class CandyLevel extends BaseGameActivity {
 	public void onLoadResources() {
 		TextureRegionFactory.setAssetBasePath("gfx/");
 
-		this.mTexture = new Texture(32, 32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		new Texture(32, 32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mTexturePlayer = new Texture(128, 128, TextureOptions.DEFAULT);
 
 		this.mOnScreenControlTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mOnScreenControlBaseTextureRegion = TextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
 		this.mOnScreenControlKnobTextureRegion = TextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_knob.png", 128, 0);
 
-		this.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexturePlayer, this, "full_candy.png", 0, 0, 3, 4);
+		this.mPlayerTextureRegion = TextureRegionFactory.createFromAsset(this.mTexturePlayer, this, "full_candy.png",0,0);
 
-		this.mEngine.getTextureManager().loadTextures(this.mTexture, this.mOnScreenControlTexture);
-		this.mEngine.getTextureManager().loadTexture(this.mTexturePlayer);
+		this.mEngine.getTextureManager().loadTextures(this.mOnScreenControlTexture,this.mTexturePlayer);
 	}
 
 	@Override
@@ -123,10 +120,10 @@ public class CandyLevel extends BaseGameActivity {
 		mBoundChaseCamera.setBounds(0, tmxLayer.getWidth(), 0, tmxLayer.getHeight());
 		mBoundChaseCamera.setBoundsEnabled(true);
 		
-		final int centerX = (PHONE_WIDTH - this.mPlayerTextureRegion.getTileWidth()) / 2;
-		final int centerY = (PHONE_HEIGHT - this.mPlayerTextureRegion.getTileHeight()) / 2;
+		final int centerX = (PHONE_WIDTH - this.mPlayerTextureRegion.getWidth()) / 2;
+		final int centerY = (PHONE_HEIGHT - this.mPlayerTextureRegion.getHeight()) / 2;
 		/* Create the sprite and add it to the scene. */
-		final AnimatedSprite player = new AnimatedSprite(centerX, centerY, this.mPlayerTextureRegion);
+		final Sprite player = new Sprite(centerX, centerY, this.mPlayerTextureRegion);
 		this.mBoundChaseCamera.setChaseEntity(player);
 		final PhysicsHandler physicsHandler = new PhysicsHandler(player);
 		player.registerUpdateHandler(physicsHandler);
@@ -135,37 +132,28 @@ public class CandyLevel extends BaseGameActivity {
 		this.mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mBoundChaseCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
 			@Override
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
-				if (pValueY == 1){
+				if (pValueY == 1) {
 					// Up
 					if (playerDirection != PlayerDirection.UP){
-						player.animate(new long[]{200, 200, 200}, 0, 2, true);
 						playerDirection = PlayerDirection.UP;
 					}
-				}else if (pValueY == -1){
+				} else if (pValueY == -1) {
 					// Down
 					if (playerDirection != PlayerDirection.DOWN){
-						player.animate(new long[]{200, 200, 200}, 9, 11, true);
 						playerDirection = PlayerDirection.DOWN;
 					}
-				}else if (pValueX == -1){
+				} else if (pValueX == -1) {
 					// Left
 					if (playerDirection != PlayerDirection.LEFT){
-						player.animate(new long[]{200, 200, 200}, 3, 5, true);
 						playerDirection = PlayerDirection.LEFT;
 					}
-				}else if (pValueX == 1){
+				} else if (pValueX == 1) {
 					// Right
 					if (playerDirection != PlayerDirection.RIGHT){
-						player.animate(new long[]{200, 200, 200}, 6, 8, true);
 						playerDirection = PlayerDirection.RIGHT;
 					}
-				}else{
-					if (player.isAnimationRunning()){
-						player.stopAnimation();
-						playerDirection = PlayerDirection.NONE;
-					}
 				}
-				physicsHandler.setVelocity(pValueX * 60, pValueY * 60);
+				physicsHandler.setVelocity(pValueX * 64, pValueY * 64);
 			}
 		});
 		
