@@ -17,12 +17,14 @@ import org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap;
 import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadException;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
+import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.util.Debug;
 
@@ -40,7 +42,7 @@ public class CandyLevel extends BaseGameActivity {
 	public static final String TAG = CandyUtils.TAG;
 	private Texture mOnScreenControlTexture;
 	private Texture mTexturePlayer;
-	private TextureRegion mPlayerTextureRegion;
+	private TiledTextureRegion mPlayerTextureRegion;
 	private TextureRegion mOnScreenControlBaseTextureRegion;
 	private TextureRegion mOnScreenControlKnobTextureRegion;
 
@@ -84,14 +86,13 @@ public class CandyLevel extends BaseGameActivity {
 	public void onLoadResources() {
 		TextureRegionFactory.setAssetBasePath("gfx/");
 
-		new Texture(32, 32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mTexturePlayer = new Texture(128, 128, TextureOptions.DEFAULT);
+		this.mTexturePlayer = new Texture(256, 256, TextureOptions.DEFAULT);
 
 		this.mOnScreenControlTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mOnScreenControlBaseTextureRegion = TextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
 		this.mOnScreenControlKnobTextureRegion = TextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_knob.png", 128, 0);
 
-		this.mPlayerTextureRegion = TextureRegionFactory.createFromAsset(this.mTexturePlayer, this, "full_candy.png",0,0);
+		this.mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(this.mTexturePlayer, this, "candy.png",0,0,4,3);
 
 		this.mEngine.getTextureManager().loadTextures(this.mOnScreenControlTexture,this.mTexturePlayer);
 	}
@@ -123,7 +124,9 @@ public class CandyLevel extends BaseGameActivity {
 		final int centerX = (PHONE_WIDTH - this.mPlayerTextureRegion.getWidth()) / 2;
 		final int centerY = (PHONE_HEIGHT - this.mPlayerTextureRegion.getHeight()) / 2;
 		/* Create the sprite and add it to the scene. */
-		final Sprite player = new Sprite(centerX, centerY, this.mPlayerTextureRegion);
+		final AnimatedSprite player = new AnimatedSprite(centerX, centerY, this.mPlayerTextureRegion);
+		player.setRotation(0.5f); // TODO why is this needed?
+		player.animate(150,true);
 		this.mBoundChaseCamera.setChaseEntity(player);
 		final PhysicsHandler physicsHandler = new PhysicsHandler(player);
 		player.registerUpdateHandler(physicsHandler);
@@ -142,7 +145,6 @@ public class CandyLevel extends BaseGameActivity {
 					playerDirection = PlayerDirection.RIGHT;
 				}
 				physicsHandler.setVelocity(pValueX * 512, pValueY * 512);
-				physicsHandler.setAngularVelocity(pValueX * 512);
 			}
 		});
 		
