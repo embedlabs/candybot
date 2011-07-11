@@ -114,8 +114,8 @@ public class CandyLevel extends BaseGameActivity {
 		mScene.attachChild(tmxLayer); //background layer
 		
 
-		final TMXLayer tmxLayer2 = this.mTMXTiledMap.getTMXLayers().get(1);
-		//mScene.attachChild(tmxLayer2); //object layer
+//		final TMXLayer tmxLayer2 = this.mTMXTiledMap.getTMXLayers().get(1);
+//		mScene.attachChild(tmxLayer2); //object layer
 		
 		mBoundChaseCamera.setBounds(0, tmxLayer.getWidth(), 0, tmxLayer.getHeight());
 		mBoundChaseCamera.setBoundsEnabled(true);
@@ -129,31 +129,20 @@ public class CandyLevel extends BaseGameActivity {
 		player.registerUpdateHandler(physicsHandler);
 		mScene.attachChild(player);
 
-		this.mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mBoundChaseCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
+		this.mDigitalOnScreenControl = new DigitalOnScreenControl(32, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight()-32, this.mBoundChaseCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
 			@Override
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
 				if (pValueY == 1) {
-					// Up
-					if (playerDirection != PlayerDirection.UP){
-						playerDirection = PlayerDirection.UP;
-					}
+					playerDirection = PlayerDirection.UP;
 				} else if (pValueY == -1) {
-					// Down
-					if (playerDirection != PlayerDirection.DOWN){
-						playerDirection = PlayerDirection.DOWN;
-					}
+					playerDirection = PlayerDirection.DOWN;
 				} else if (pValueX == -1) {
-					// Left
-					if (playerDirection != PlayerDirection.LEFT){
-						playerDirection = PlayerDirection.LEFT;
-					}
+					playerDirection = PlayerDirection.LEFT;
 				} else if (pValueX == 1) {
-					// Right
-					if (playerDirection != PlayerDirection.RIGHT){
-						playerDirection = PlayerDirection.RIGHT;
-					}
+					playerDirection = PlayerDirection.RIGHT;
 				}
-				physicsHandler.setVelocity(pValueX * 64, pValueY * 64);
+				physicsHandler.setVelocity(pValueX * 512, pValueY * 512);
+				physicsHandler.setAngularVelocity(pValueX * 512);
 			}
 		});
 		
