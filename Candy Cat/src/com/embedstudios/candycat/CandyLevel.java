@@ -56,6 +56,7 @@ public class CandyLevel extends BaseGameActivity {
 		LEFT,
 		RIGHT
 	}
+	// Variable showing player direction
 	private PlayerDirection playerDirection = PlayerDirection.DOWN;
 
 	public static final String TAG = CandyUtils.TAG;
@@ -124,6 +125,7 @@ public class CandyLevel extends BaseGameActivity {
 		mBoundChaseCamera.setBounds(0, tmxLayer.getWidth(), 0, tmxLayer.getHeight());
 		mBoundChaseCamera.setBoundsEnabled(true);
 		
+		// Have the camera follow the player
 		final int centerX = (PHONE_WIDTH - this.mPlayerTextureRegion.getWidth()) / 2;
 		final int centerY = (PHONE_HEIGHT - this.mPlayerTextureRegion.getHeight()) / 2;
 		/* Create the sprite and add it to the scene. */
@@ -135,6 +137,7 @@ public class CandyLevel extends BaseGameActivity {
 		candy.registerUpdateHandler(physicsHandler);
 		mScene.attachChild(candy);
 
+		// Control onscreen control
 		this.mDigitalOnScreenControl = new DigitalOnScreenControl(32, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight()-32, this.mBoundChaseCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
 			@Override
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
@@ -151,6 +154,7 @@ public class CandyLevel extends BaseGameActivity {
 			}
 		});
 		
+		// Add onscreen control
 		this.mDigitalOnScreenControl.getControlBase().setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		this.mDigitalOnScreenControl.getControlBase().setAlpha(0.5f);
 		this.mDigitalOnScreenControl.getControlBase().setScaleCenter(0, 128);
