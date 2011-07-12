@@ -18,7 +18,6 @@ import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadExcepti
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
-import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
@@ -29,6 +28,7 @@ import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.util.Debug;
 
 import android.view.Display;
+import android.widget.Toast;
 
 public class CandyLevel extends BaseGameActivity {
 	private static final int WIDTH = 1536;
@@ -36,10 +36,11 @@ public class CandyLevel extends BaseGameActivity {
 	private static int PHONE_WIDTH,PHONE_HEIGHT;
 	
 	private int level,world;
+	
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
 	private BoundCamera mBoundChaseCamera;
-	public static final String TAG = CandyUtils.TAG;
+	
 	private Texture mOnScreenControlTexture;
 	private Texture mTexturePlayer;
 	private TiledTextureRegion mPlayerTextureRegion;
@@ -57,6 +58,7 @@ public class CandyLevel extends BaseGameActivity {
 	}
 	private PlayerDirection playerDirection = PlayerDirection.DOWN;
 
+	public static final String TAG = CandyUtils.TAG;
 	
 	@Override
 	public Engine onLoadEngine() {
@@ -100,7 +102,6 @@ public class CandyLevel extends BaseGameActivity {
 	@Override
 	public Scene onLoadScene() {
 		mEngine.registerUpdateHandler(new FPSLogger());
-
 		mScene = new Scene();
 		mScene.setBackground(new ColorBackground(1,1,1));
 		
@@ -108,6 +109,8 @@ public class CandyLevel extends BaseGameActivity {
 			final TMXLoader tmxLoader = new TMXLoader(this, this.mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 			this.mTMXTiledMap = tmxLoader.loadFromAsset(this, "tmx/1_1.tmx");
 		} catch (final TMXLoadException tmxle) {
+			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
+			finish();
 			Debug.e(tmxle);
 		}
 		
@@ -124,13 +127,13 @@ public class CandyLevel extends BaseGameActivity {
 		final int centerX = (PHONE_WIDTH - this.mPlayerTextureRegion.getWidth()) / 2;
 		final int centerY = (PHONE_HEIGHT - this.mPlayerTextureRegion.getHeight()) / 2;
 		/* Create the sprite and add it to the scene. */
-		final AnimatedSprite player = new AnimatedSprite(centerX, centerY, this.mPlayerTextureRegion);
-		player.setRotation(0.5f); // TODO why is this needed?
-		player.animate(150,true);
-		this.mBoundChaseCamera.setChaseEntity(player);
-		final PhysicsHandler physicsHandler = new PhysicsHandler(player);
-		player.registerUpdateHandler(physicsHandler);
-		mScene.attachChild(player);
+		final AnimatedSprite candy = new AnimatedSprite(centerX, centerY, this.mPlayerTextureRegion);
+		candy.setRotation(0.5f); // TODO why is this needed?
+		candy.animate(150,true);
+		this.mBoundChaseCamera.setChaseEntity(candy);
+		final PhysicsHandler physicsHandler = new PhysicsHandler(candy);
+		candy.registerUpdateHandler(physicsHandler);
+		mScene.attachChild(candy);
 
 		this.mDigitalOnScreenControl = new DigitalOnScreenControl(32, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight()-32, this.mBoundChaseCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
 			@Override
