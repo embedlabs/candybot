@@ -62,7 +62,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	private Scene mScene;
 	private PhysicsWorld mPhysicsWorld;
 	
-	public class LoadTask extends AsyncTask<Void,Integer,Void> {
+	public class SplashTask extends AsyncTask<Void,Integer,Void> {
 		@Override
 		protected Void doInBackground(Void... blah) {
 			pause(LOGO_DURATION);
@@ -121,7 +121,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public Engine onLoadEngine() {
-		Log.i(TAG,"onLoadEngine()");
+		Log.i(TAG,"MainMenu onLoadEngine()");
 		
 		Display display = getWindowManager().getDefaultDisplay(); 
 		WIDTH = display.getWidth();
@@ -135,25 +135,30 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public void onLoadResources() {
-		Log.i(TAG,"onLoadResources()");
-		mTexture = new Texture(512,64, TextureOptions.NEAREST);
+		Log.i(TAG,"MainMenu onLoadResources()");
+		mTexture = new Texture(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		TextureRegionFactory.setAssetBasePath("gfx/");
 		mCandyFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
-		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "movable_wall.png",64,0);
-		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "box.png",128,0);
-		mInertiaFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "inertia_wall.png",192,0);
-		mIceFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "ice.png",256,0);
+		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "movable_wall.png",65,0);
+		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "box.png",130,0);
+		mInertiaFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "inertia_wall.png",195,0);
+		mIceFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "ice.png",260,0);
 		mEngine.getTextureManager().loadTexture(mTexture);
 	}
 
 	@Override
 	public Scene onLoadScene() {
-		Log.i(TAG,"onLoadScene()");
+		Log.i(TAG,"MainMenu onLoadScene()");
 		mEngine.registerUpdateHandler(new FPSLogger());
-
+		/*
+		 * BASIC STUFF
+		 */
 		mScene = new Scene();
 		mScene.setBackground(new ColorBackground(0.07f,0.22f,0.51f));
 		
+		/*
+		 * CREATE PHYSICS WORLD
+		 */
 		mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*2), false, 3, 2);
 
 		final Shape ground = new Rectangle(0, HEIGHT, WIDTH, 2);
@@ -171,13 +176,16 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		mScene.attachChild(roof);
 		mScene.attachChild(left);
 		mScene.attachChild(right);
-
+		
 		mScene.registerUpdateHandler(mPhysicsWorld);
+		
 		return mScene;
 	}
 
 	@Override
 	public void onLoadComplete() {
+		Log.i(TAG, "MainMenu onLoadComplete()");
+		
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 
 		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
@@ -192,7 +200,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies parts
 		
-		new LoadTask().execute();
+		new SplashTask().execute();
 	}
 	
 	private void addFace(final float pX, final float pY,final int type) {
@@ -201,7 +209,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		final FixtureDef candyDef = PhysicsFactory.createFixtureDef(1, 0.85f, 0.5f);
 		final FixtureDef regularDef = PhysicsFactory.createFixtureDef(2, 0.5f, 0.5f);
 		final FixtureDef inertiaDef = PhysicsFactory.createFixtureDef(2, 1f, 0.5f);
-		final FixtureDef iceDef = PhysicsFactory.createFixtureDef(2, 0.5f, 0);
+		final FixtureDef iceDef = PhysicsFactory.createFixtureDef(3, 0.25f, 0);
 		
 		switch (type) {
 		case 0:
