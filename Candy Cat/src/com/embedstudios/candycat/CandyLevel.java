@@ -123,12 +123,12 @@ public class CandyLevel extends BaseGameActivity {
 		mBoundChaseCamera.setBoundsEnabled(true);
 		
 		// Have the camera follow the player
-		final int centerX = (PHONE_WIDTH - this.mPlayerTextureRegion.getWidth()) / 2;
-		final int centerY = (PHONE_HEIGHT - this.mPlayerTextureRegion.getHeight()) / 2;
+//		final int centerX = (PHONE_WIDTH - this.mPlayerTextureRegion.getWidth()) / 2;
+//		final int centerY = (PHONE_HEIGHT - this.mPlayerTextureRegion.getHeight()) / 2;
 		/* Create the sprite and add it to the scene. */
-		final AnimatedSprite candy = new AnimatedSprite(centerX, centerY, this.mPlayerTextureRegion);
+		final AnimatedSprite candy = new AnimatedSprite(64*21, 64*2, this.mPlayerTextureRegion);
 		candy.setRotation(0.5f); // TODO why is this needed?
-		candy.animate(50,true);
+//		candy.animate(50,true);
 		this.mBoundChaseCamera.setChaseEntity(candy);
 		final PhysicsHandler physicsHandler = new PhysicsHandler(candy);
 		candy.registerUpdateHandler(physicsHandler);
