@@ -58,7 +58,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	private static int WIDTH,HEIGHT;
 	private Texture mTexture;
-	private TextureRegion mCandyFaceTextureRegion,mWallFaceTextureRegion,mBoxFaceTextureRegion;
+	private TextureRegion mCandyFaceTextureRegion,mWallFaceTextureRegion,mBoxFaceTextureRegion,mInertiaFaceTextureRegion,mIceFaceTextureRegion;
 	private Scene mScene;
 	private PhysicsWorld mPhysicsWorld;
 	
@@ -68,13 +68,18 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			pause(LOGO_DURATION);
 			publishProgress(0);
 			pause(1000);
-			for (int i=1;i<=9;i++) {
+			for (int i=1;i<=6;i++) {
 				publishProgress(1);
 				pause(100);
-				if (i<=3) {
+				if (i<=2) {
 					publishProgress(2);
 					pause(100);
 					publishProgress(3);
+					pause(100);
+				} else if (i<=4) {
+					publishProgress(4);
+					pause(100);
+					publishProgress(5);
 					pause(100);
 				}
 			}
@@ -85,9 +90,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		protected void onProgressUpdate(Integer...integers) {
 			switch (integers[0]) {
 			case 0: enclosing_vf.showNext(); break;
-			case 1: addFace(0); break;
-			case 2: addFace(1); break;
-			default: addFace(2); break;
+			default: addFace(integers[0]-1); break;
 			}
 		}
 		
@@ -133,11 +136,13 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	@Override
 	public void onLoadResources() {
 		Log.i(TAG,"onLoadResources()");
-		mTexture = new Texture(256,64, TextureOptions.NEAREST);
+		mTexture = new Texture(512,64, TextureOptions.NEAREST);
 		TextureRegionFactory.setAssetBasePath("gfx/");
 		mCandyFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
-		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_movable_wall.png",64,0);
-		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_box.png",128,0);
+		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "movable_wall.png",64,0);
+		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "box.png",128,0);
+		mInertiaFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "inertia_wall.png",192,0);
+		mIceFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "ice.png",256,0);
 		mEngine.getTextureManager().loadTexture(mTexture);
 	}
 
@@ -193,21 +198,31 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	private void addFace(final float pX, final float pY,final int type) {
 		final Sprite face;
 		final Body body;
-		final FixtureDef objectFixtureDef = PhysicsFactory.createFixtureDef(1, 0.85f, 0.5f);
-		final FixtureDef objectFixtureDef2 = PhysicsFactory.createFixtureDef(2, 0.5f, 0.5f);
+		final FixtureDef candyDef = PhysicsFactory.createFixtureDef(1, 0.85f, 0.5f);
+		final FixtureDef regularDef = PhysicsFactory.createFixtureDef(2, 0.5f, 0.5f);
+		final FixtureDef inertiaDef = PhysicsFactory.createFixtureDef(2, 1f, 0.5f);
+		final FixtureDef iceDef = PhysicsFactory.createFixtureDef(2, 0.5f, 0);
 		
 		switch (type) {
 		case 0:
 			face = new Sprite(pX, pY,mCandyFaceTextureRegion);
-			body = PhysicsFactory.createCircleBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef);
+			body = PhysicsFactory.createCircleBody(mPhysicsWorld, face, BodyType.DynamicBody, candyDef);
 			break;
 		case 1:
 			face = new Sprite(pX,pY,mWallFaceTextureRegion);
-			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef2);
+			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, regularDef);
+			break;
+		case 2:
+			face = new Sprite(pX,pY,mBoxFaceTextureRegion);
+			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, regularDef);
+			break;
+		case 3:
+			face = new Sprite(pX,pY,mInertiaFaceTextureRegion);
+			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, inertiaDef);
 			break;
 		default:
-			face = new Sprite(pX,pY,mBoxFaceTextureRegion);
-			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, objectFixtureDef2);
+			face = new Sprite(pX,pY,mIceFaceTextureRegion);
+			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, iceDef);
 			break;
 		}
 		face.setAlpha(0);

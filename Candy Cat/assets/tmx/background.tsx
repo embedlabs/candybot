@@ -59,4 +59,10 @@
 			<property name="ice" value="true" />
 		</properties>
 	</tile>
+	<tile id="11">
+		<properties>
+			<property name="wall" value="true" />
+			<property name="lava" value="true" />
+		</properties>
+	</tile>
 </tileset>

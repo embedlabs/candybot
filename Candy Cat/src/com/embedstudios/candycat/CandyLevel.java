@@ -58,6 +58,8 @@ public class CandyLevel extends BaseGameActivity {
 	}
 	// Variable showing player direction
 	private PlayerDirection playerDirection = PlayerDirection.DOWN;
+	
+	private int candyAngleState=0;
 
 	public static final String TAG = CandyUtils.TAG;
 	
@@ -117,11 +119,6 @@ public class CandyLevel extends BaseGameActivity {
 		
 		final TMXLayer tmxLayer = this.mTMXTiledMap.getTMXLayers().get(0);
 		mScene.attachChild(tmxLayer); //background layer
-		
-
-//		final TMXLayer tmxLayer2 = this.mTMXTiledMap.getTMXLayers().get(1);
-//		mScene.attachChild(tmxLayer2); //object layer
-		
 		mBoundChaseCamera.setBounds(0, tmxLayer.getWidth(), 0, tmxLayer.getHeight());
 		mBoundChaseCamera.setBoundsEnabled(true);
 		
@@ -131,7 +128,7 @@ public class CandyLevel extends BaseGameActivity {
 		/* Create the sprite and add it to the scene. */
 		final AnimatedSprite candy = new AnimatedSprite(centerX, centerY, this.mPlayerTextureRegion);
 		candy.setRotation(0.5f); // TODO why is this needed?
-		candy.animate(150,true);
+		candy.animate(50,true);
 		this.mBoundChaseCamera.setChaseEntity(candy);
 		final PhysicsHandler physicsHandler = new PhysicsHandler(candy);
 		candy.registerUpdateHandler(physicsHandler);
