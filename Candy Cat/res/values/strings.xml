@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Candy Cat</string>
+    <string name="app_name">\u0020Candy Cat\u0020</string>
     <string name="loading">Loading . . .</string>
     <string name="button_play">Play!</string>
     <string name="button_gallery">Art Gallery</string>

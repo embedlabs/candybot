@@ -40,19 +40,22 @@
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:text="@string/button_play"
-				android:layout_margin="3dip" />
+				android:layout_margin="3dip"
+				android:drawableLeft="@drawable/menu_cat" />
 			<Button android:id="@+id/button_gallery"
 				style="@style/menuButton"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:text="@string/button_gallery"
-				android:layout_margin="3dip" />
+				android:layout_margin="3dip"
+				android:drawableLeft="@drawable/menu_lava" />
 			<Button android:id="@+id/button_achievements"
 				style="@style/menuButton"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:text="@string/button_achievements"
-				android:layout_margin="3dip" />
+				android:layout_margin="3dip"
+				android:drawableLeft="@drawable/sl_icon_scoreloop" />
 		</LinearLayout>
 	</ViewFlipper>
 </RelativeLayout>

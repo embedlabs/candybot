@@ -34,7 +34,6 @@ import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
