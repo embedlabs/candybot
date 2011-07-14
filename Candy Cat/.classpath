@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/andengine.jar"/>
 	<classpathentry kind="lib" path="lib/andenginephysicsbox2dextension.jar"/>
 	<classpathentry kind="lib" path="lib/scoreloop-core.jar"/>
+	<classpathentry kind="lib" path="lib/GoogleAdMobAdsSdk-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

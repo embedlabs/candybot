@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/balance"
+		android:text="[balance]"
+		android:textStyle="bold"
+		android:layout_marginBottom="10dp"/>
+		
+	<View android:layout_height="2dp"
+		android:layout_width="fill_parent"
+		android:background="#fff"
+		android:layout_margin="5dp"/>
+
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/stake_heading"
+		android:textStyle="bold"
+		android:layout_marginBottom="10dp"/>
+
+	<SeekBar android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/stake_slider"
+		android:paddingLeft="15dp"
+		android:paddingRight="15dp"
+		android:layout_marginBottom="10dp"/>
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/stake"
+		android:text="[stake]"
+		android:textStyle="bold"
+		android:layout_marginBottom="10dp"/>
+
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/balance_too_low"
+		android:visibility="invisible"
+		android:text="@string/balance_to_low"
+		android:textStyle="bold"
+		android:textColor="@color/default_error_text"
+		android:layout_marginBottom="10dp"/>
+		
+	<View android:layout_height="2dp"
+		android:layout_width="fill_parent"
+		android:background="#fff"
+		android:layout_margin="5dp"/>
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<RadioGroup android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/radio_group">
+			
+			<RadioButton android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/radio_anyone"
+				android:text="@string/anyone"/>
+				
+			<RadioButton android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/radio_direct"
+				android:text="@string/direct_format"/>
+							
+		</RadioGroup>
+		
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:id="@+id/btn_choose_opponent"
+			android:text="@string/choose_opponent"/>
+
+	</LinearLayout>
+	
+	<View android:layout_height="2dp"
+		android:layout_width="fill_parent"
+		android:background="#fff"
+		android:layout_margin="5dp"/>
+			
+	<Button android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/btn_play_challenge"
+		android:text="@string/play_challenge"/>
+			
+</LinearLayout>

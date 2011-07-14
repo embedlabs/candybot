@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="?android:attr/listPreferredItemHeight"
+	android:gravity="center_vertical">
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:text="[rank]"
+		android:id="@+id/score_rank"
+		android:gravity="center_vertical|center_horizontal"
+		android:paddingRight="5dp"
+		android:width="40dp"/>
+
+	<LinearLayout android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_weight="1">
+
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="[player name]"
+			android:id="@+id/player_name"
+			android:textStyle="bold"/>
+
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="[score info]"
+			android:id="@+id/score_info"/>
+
+	</LinearLayout>
+
+</LinearLayout>

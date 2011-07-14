@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">SLDemoCore</string>
+
+	<string name="EMPTY_ENTRY">---</string>
+	
+	<string name="menu_item_play">Gameplay</string>
+	<string name="menu_item_highscores">High Scores</string>
+	<string name="menu_item_challenges">Challenges</string>
+	<string name="menu_item_profile">Profile</string>
+	<string name="menu_item_post">Post</string>
+	<string name="menu_item_activities">Activities</string>
+	<string name="menu_item_achievements">Achievements</string>
+	<string name="menu_item_buddies">Buddies</string>
+	
+	<string name="btn_random_score">Random</string>
+	<string name="btn_game_over">Game Over</string>
+	<string name="btn_check_rank">Check Rank</string>
+	<string name="btn_load_buddy_activities">Load Activities\nof Friends</string>
+	<string name="btn_load_game_activities">Load Activities\nfor this Game</string>
+	<string name="btn_load">Load</string>
+	<string name="btn_load_prev">Prev</string>
+	<string name="btn_load_next">Next</string>
+	<string name="btn_show_me">Show Me</string>
+	<string name="btn_add">Add</string>
+	<string name="btn_update_profile">Update profile</string>
+	<string name="btn_directly_challenge_this_user">Directly Challenge This User</string>
+	
+	<string name="play_challenge">Play Challenge</string>
+	<string name="choose_opponent">Choose Opponent</string>
+	<string name="btn_accept_challenge">Accept Challenge</string>
+	<string name="btn_reject_challenge">Reject Challenge</string>
+
+	<string name="challenges_open">Open</string>
+	<string name="challenges_history">History</string>
+	<string name="new_challenge">New Challenge</string>
+	<string name="name">Name</string>
+	<string name="stake">Stake</string>
+	<string name="status">Status</string>
+	
+	<string name="other">Other</string>
+	<string name="won">Won</string>
+	<string name="lost">Lost</string>
+	<string name="anyone">Anyone</string>
+	<string name="direct">Direct</string>
+	<string name="direct_format">Direct: %s</string>
+	<string name="rejected">Rejected</string>
+	<string name="pending">Pending</string>
+	<string name="cancelled">Cancelled</string>
+	<string name="balance_to_low">Your balance is too low!</string>
+	
+	<string name="challenge_won_lost_format">You %s!</string>
+	<string name="challenge_stake_won_format" formatted="false">Your stake was: %s,\nand your prize is: %s</string>
+	<string name="challenge_stake_lost_format">You lost your stake: %s</string>
+	<string name="challenge_score_result_format" formatted="false">You scored: %d\n%s scored: %d</string>
+	
+	<string name="user_info_format">Name: %s</string>
+
+	<string name="profile_name_label">Name:</string>
+	<string name="profile_email_label">Email:</string>
+
+	<string name="your_balance_format">Your Balance: %1$s</string>
+	<string name="stake_heading">Amount of coins for challenge:</string>
+
+	<string name="challenge_info_format" formatted="false">You\'re about to accept the challenge\nagainst: %s\nfor Stake: %s\n\nChallenge created at: %s</string>
+	<string name="challenge_user_skill_format" formatted="false">%s Skill: %s</string>
+	<string name="challenge_opponent_info_format" formatted="false">Opponent Info:\nWinning Probability: %.1f\nChallenges Won: %d\nChallenges Lost: %d</string>
+	<string name="challenge_your">Your</string>
+	
+	<string name="history_challenge_info_format" formatted="false">Challenge info:\n\nCreated at: %s\nYour Score: %s\nOpponent Score: %s</string>
+
+	<string name="error_message_self_challenge">You cannot challenge yourself</string>
+	<string name="error_message_cannot_accept_challenge">Cannot accept challenge</string>
+	<string name="error_message_cannot_reject_challenge">Cannot reject challenge</string>
+	<string name="error_message_insufficient_balance">You don\'t have enough coins to play this challenge</string>
+	<string name="error_message_challenge_upload">Challenge upload failed</string>
+	<string name="error_message_request_cancelled">Request has been canceled</string>
+	<string name="error_message_not_on_highscore_list">You are not part of this high score list yet</string>
+	<string name="error_message_network">Network error occurred</string>
+	<string name="error_message_name_already_taken">User name has been already taken</string>
+	<string name="error_message_email_already_taken">This email has already been taken</string>
+	<string name="error_message_invalid_email_format">Invalid email format</string>
+
+	<string name="game_score_label">Score:</string>
+	<string name="submitted_score_label">Uploaded Score:</string>
+	<string name="submitted_challenge_score_label">Uploaded Challenge Score:</string>
+	<string name="submitted_challenge_score_info">Check out the progress in the Challenge History</string>
+	<string name="score_submit_failed">Score submit failed</string>
+	<string name="ranking_check_failed">Ranking check failed</string>
+	<string name="ranking_check_label">Rank:%s</string>
+	<string name="no_back_key">Use \'Game Over\'-button to end game</string>
+	<string name="game_normal">You are in a Normal Game</string>
+	<string name="game_challenge">You are in a Challenge Game</string>
+
+	<string name="progress_message_default">Loading...</string>
+	<string name="money_format" formatted="false">%d.%02d Coins</string>
+	
+	<string name="message_post_ok">Message posted</string>
+	<string name="message_post_failed">Message posting failed with exception: </string>
+	<string name="facebook_comm_ok">Facebook communication succeeded</string>
+	<string name="facebook_comm_failed">Facebook communication failed with exception: </string>
+	<string name="facebook_comm_cancelled">Facebook communication cancelled by user</string>
+	<string name="facebook_invalid_credentials">Facebook authorization failed due to invalid credentials entered</string>
+	<string name="myspace_comm_ok">MySpace communication succeeded</string>
+	<string name="myspace_comm_failed">MySpace communication failed with exception: </string>
+	<string name="myspace_comm_cancelled">MySpace communication cancelled by user</string>
+	<string name="myspace_invalid_credentials">MySpace authorization failed due to invalid credentials entered</string>
+	<string name="twitter_comm_ok">Twitter communication succeeded</string>
+	<string name="twitter_comm_failed">Twitter communication failed with exception: </string>
+	<string name="twitter_comm_cancelled">Twitter communication cancelled by user</string>
+	<string name="twitter_invalid_credentials">Twitter authorization failed due to invalid credentials entered</string>
+	
+	<string name="old_balance_format">Balance before Sync: %s</string>
+	<string name="new_balance_format">Balance after Sync: %s</string>
+	<string name="sync">Sync!</string>
+	<string name="reward_format">Reward: %s</string>
+	<string name="achievement_date_format">Achieved on: %s</string>
+	<string name="achievement_progress_format" formatted="false">Achievement progress: %s out of %s</string>
+    <string name="make_progress">Make Progress!</string>
+    <string name="create_new">Create new!</string>
+
+</resources>

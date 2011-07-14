@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/challenge_info"
+		android:layout_marginBottom="20dp"/>
+		
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/challenge_your_skill"/>
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/challenge_opponent_skill"
+		android:layout_marginBottom="20dp"/>
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/opponent_info"/>
+	
+	<LinearLayout android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+		
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/accept_button"
+			android:text="@string/btn_accept_challenge"/>
+		
+		<Button android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/reject_button"
+			android:text="@string/btn_reject_challenge"/>
+			
+	</LinearLayout>
+	
+</LinearLayout>

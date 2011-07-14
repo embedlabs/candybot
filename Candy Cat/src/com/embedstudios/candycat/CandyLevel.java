@@ -15,8 +15,12 @@ import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXLoader;
+import org.anddev.andengine.entity.layer.tiled.tmx.TMXProperties;
+import org.anddev.andengine.entity.layer.tiled.tmx.TMXTile;
+import org.anddev.andengine.entity.layer.tiled.tmx.TMXTileProperty;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap;
 import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadException;
+import org.anddev.andengine.entity.layer.tiled.tmx.TMXLoader.ITMXTilePropertiesListener;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
@@ -33,7 +37,7 @@ import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
-public class CandyLevel extends BaseGameActivity {
+public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesListener {
 	private static final int WIDTH = 1536;
 	private static final int HEIGHT = 1152;
 	private static int PHONE_WIDTH,PHONE_HEIGHT;
@@ -129,7 +133,7 @@ public class CandyLevel extends BaseGameActivity {
 		 * BACKGROUND
 		 */
 		try {
-			final TMXLoader tmxLoader = new TMXLoader(this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+			final TMXLoader tmxLoader = new TMXLoader(this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
 			mTMXTiledMap = tmxLoader.loadFromAsset(this, "tmx/"+world+"_"+level+".tmx");
 		} catch (final TMXLoadException tmxle) {
 			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
@@ -157,7 +161,7 @@ public class CandyLevel extends BaseGameActivity {
 		/* Create the sprite and add it to the scene. */
 		final AnimatedSprite candy = new AnimatedSprite(64*21, 64*2, mPlayerTextureRegion);
 		candy.setRotation(0.5f); // TODO why is this needed?
-		candy.animate(50,true);
+		candy.animate(100,true);
 		mBoundChaseCamera.setChaseEntity(candy);
 		final PhysicsHandler physicsHandler = new PhysicsHandler(candy);
 		candy.registerUpdateHandler(physicsHandler);
@@ -201,5 +205,11 @@ public class CandyLevel extends BaseGameActivity {
 	@Override
 	public void onLoadComplete() {
 		Log.i(TAG,"CandyLevel onLoadComplete()");
+	}
+
+	@Override
+	public void onTMXTileWithPropertiesCreated(TMXTiledMap pTMXTiledMap,TMXLayer pTMXLayer, TMXTile pTMXTile,TMXProperties<TMXTileProperty> pTMXTileProperties) {
+		// TODO Auto-generated method stub
+		
 	}
 }
