@@ -34,6 +34,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -46,6 +47,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+
+import com.scoreloop.client.android.ui.EntryScreenActivity;
+import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
 
 public class MainMenu extends LayoutGameActivity implements OnClickListener, IAccelerometerListener {
 	ViewFlipper enclosing_vf;
@@ -83,6 +87,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 					pause(100);
 				}
 			}
+			publishProgress(6);
 			return null;
 		}
 		
@@ -90,6 +95,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		protected void onProgressUpdate(Integer...integers) {
 			switch (integers[0]) {
 			case 0: enclosing_vf.showNext(); break;
+			case 6: ScoreloopManagerSingleton.get().showWelcomeBackToast(0); break;
 			default: addFace(integers[0]-1); break;
 			}
 		}
@@ -115,6 +121,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			startActivity(new Intent(this,CandyGallery.class));
 			break;
 		case R.id.button_achievements:
+			startActivity(new Intent(this,EntryScreenActivity.class));
 			break;
 		}
 	}
@@ -199,6 +206,12 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		setClick(button_play,button_gallery,button_achievements);
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies parts
+		
+		try {
+			ScoreloopManagerSingleton.init(this, "70C+VmvvyJ3M0aXxaMZQ0xq35uvSgoVOw/EG+0wy8vnHF7w6M8/WNw==");
+		} catch (Exception e) {
+			Log.e(TAG, "Singleton failed.",e);
+		}
 		
 		new SplashTask().execute();
 	}
@@ -286,5 +299,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		for (Button button:buttons) {
 			button.setOnClickListener(this);
 		}
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		ScoreloopManagerSingleton.destroy();
 	}
 }

@@ -137,7 +137,6 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 			mTMXTiledMap = tmxLoader.loadFromAsset(this, "tmx/"+world+"_"+level+".tmx");
 		} catch (final TMXLoadException tmxle) {
 			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
-			finish();
 			Debug.e(tmxle);
 		}
 		
