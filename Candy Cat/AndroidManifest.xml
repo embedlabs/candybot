@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.embedstudios.candycat"
       android:versionCode="1"
-      android:versionName="1.0">
+      android:versionName="1.0.0">
       
     <uses-sdk android:minSdkVersion="4" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
 	
 	<!-- Permission configuration required by Scoreloop -->
