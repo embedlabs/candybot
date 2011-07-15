@@ -92,10 +92,14 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		
 		@Override
 		protected void onProgressUpdate(Integer...integers) {
-			switch (integers[0]) {
-			case 0: enclosing_vf.showNext(); break;
-			case 6: ScoreloopManagerSingleton.get().showWelcomeBackToast(0); break;
-			default: addFace(integers[0]-1); break;
+			try {
+				switch (integers[0]) {
+				case 0: enclosing_vf.showNext(); break;
+				case 6: ScoreloopManagerSingleton.get().showWelcomeBackToast(0); break;
+				default: addFace(integers[0]-1); break;
+				}
+			} catch (Exception e) {
+				Log.e(TAG, "SplashTask onProgressUpdate() failed.",e);
 			}
 		}
 		
@@ -211,7 +215,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		} catch (Exception e) {
 			Log.e(TAG, "Singleton failed.",e);
 		}
-		
 		new SplashTask().execute();
 	}
 	

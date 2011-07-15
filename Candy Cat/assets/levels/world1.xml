@@ -3,5 +3,6 @@
 	<level id="1">
 		<object type="0" row="2" column="3" />
 		<object type="1" row="2" column="2" />
+		<tutorial text="Help the Candy Cat move the candy to the pipe." />
 	</level>
 </world>

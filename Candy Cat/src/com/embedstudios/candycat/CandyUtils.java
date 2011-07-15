@@ -18,9 +18,7 @@ import android.widget.Toast;
 public class CandyUtils {
 	public static final String TAG = "Candy Cat";
 	
-	public static ArrayList<int[]> parseLevelObjectsFromXml(Context context,final int world,final int level) {
-		final ArrayList<int[]> objectArrayList = new ArrayList<int[]>();
-		
+	public static void parseLevelObjectsFromXml(Context context,final int world,final int level,ArrayList<int[]> objectList,ArrayList<String> tutorialList) {
 		try {
 			// Load the XML into a DOM.
 			final InputStream input = context.getAssets().open("levels/world"+world+".xml");
@@ -38,17 +36,21 @@ public class CandyUtils {
 			// Load attributes into an Object[3], then append to objectArrayList.
 			for (int i=0;i<objectNodeList.getLength();i++) {
 				final Element currentObjectElement = (Element)objectNodeList.item(i);
-				objectArrayList.add(new int[]{
+				objectList.add(new int[]{
 					Integer.valueOf(currentObjectElement.getAttribute("type")),
 					Integer.valueOf(currentObjectElement.getAttribute("row")),
 					Integer.valueOf(currentObjectElement.getAttribute("column"))
 				});
 			}
-			return objectArrayList;
+			
+			final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("tutorial");
+			for (int i=0;i<tutorialNodeList.getLength();i++) {
+				final Element currentTutorialElement = (Element)tutorialNodeList.item(i);
+				tutorialList.add(currentTutorialElement.getAttribute("text"));
+			}
 		} catch (Exception e) {
 			Log.e(TAG,"XML FAIL!",e);
 			Toast.makeText(context, "Failed to load level.", Toast.LENGTH_LONG);
-			return null;
 		}
 	}
 }

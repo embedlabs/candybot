@@ -51,6 +51,9 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	private static final int MOVABLE_WALL = 5;
 	private static final int INERTIA_WALL = 6;
 	
+	private final ArrayList<int[]> objectList = new ArrayList<int[]>();
+	private final ArrayList<String> tutorialList = new ArrayList<String>();
+	
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
 	private BoundCamera mBoundChaseCamera;
@@ -148,9 +151,12 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 		/**
 		 * SPRITES
 		 */
-		final ArrayList<int[]> objectList = CandyUtils.parseLevelObjectsFromXml(this, world, level); // TODO
+		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList); // TODO
 		for (int[] i:objectList) {
 			createSprite(i[0],i[1],i[2]);
+		}
+		for (String text:tutorialList) {
+			addTutorialText(text);
 		}
 		
 		
@@ -196,14 +202,18 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 		return mScene;
 	}
 
+	private void addTutorialText(String text) {
+		// TODO Auto-generated method stub
+	}
+
 	private void createSprite(int type, int row, int column) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onLoadComplete() {
 		Log.i(TAG,"CandyLevel onLoadComplete()");
+		// TODO
 	}
 
 	@Override
