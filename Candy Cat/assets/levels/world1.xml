@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <world id="1">
 	<level id="1">
-		<object type="0" row="0" column="0" />
-		<object type="1" row="65" column="0" />
+		<object type="1" row="22" column="2" />
 	</level>
 </world>

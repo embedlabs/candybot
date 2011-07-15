@@ -222,6 +222,9 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 
 	private void createSprite(int type, int row, int column) {
 		final Sprite face;
+		row = row * 64;
+		column = column * 64;
+		
 		switch (type){
 		case 0:
 			face = new Sprite(row,column,mCandyFaceTextureRegion);
