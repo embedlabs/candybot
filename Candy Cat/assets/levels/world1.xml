@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <world id="1">
 	<level id="1">
-		<object type="0" row="2" column="3" />
-		<object type="1" row="2" column="2" />
-		<tutorial text="Help the Candy Cat move the candy to the pipe." />
+		<object type="0" row="0" column="0" />
+		<object type="1" row="65" column="0" />
 	</level>
 </world>

@@ -24,7 +24,9 @@ import org.anddev.andengine.entity.layer.tiled.tmx.TMXLoader.ITMXTilePropertiesL
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
+import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
+import org.anddev.andengine.extension.physics.box2d.PhysicsFactory;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -32,6 +34,8 @@ import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.util.Debug;
+
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import android.util.Log;
 import android.view.Display;
@@ -60,8 +64,9 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	
 	private Texture mOnScreenControlTexture;
 	private Texture mTexturePlayer;
+	private Texture mTexture;
 	private TiledTextureRegion mPlayerTextureRegion;
-	private TextureRegion mOnScreenControlBaseTextureRegion;
+	private TextureRegion mOnScreenControlBaseTextureRegion, mIceFaceTextureRegion, mCandyFaceTextureRegion, mCatFaceTextureRegion, mWallFaceTextureRegion, mBoxFaceTextureRegion, mInertiaFaceTextureRegion;
 	private TextureRegion mOnScreenControlKnobTextureRegion;
 
 	private DigitalOnScreenControl mDigitalOnScreenControl;
@@ -93,14 +98,14 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 		/**
 		 * If you want to see actual size.
 		 */
-		mBoundChaseCamera = new BoundCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,0,WIDTH,0,HEIGHT);
-		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mBoundChaseCamera);
+		//mBoundChaseCamera = new BoundCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,0,WIDTH,0,HEIGHT);
+		//final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mBoundChaseCamera);
 
 		/**
 		 * If you want to see the whole level.
 		 */
-//		mBoundChaseCamera = new BoundCamera(0,0,WIDTH,HEIGHT);
-//		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), mBoundChaseCamera);
+		mBoundChaseCamera = new BoundCamera(0,0,WIDTH,HEIGHT);
+		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), mBoundChaseCamera);
 		
 		return new Engine(engineOptions);
 	}
@@ -109,16 +114,25 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	public void onLoadResources() {
 		Log.i(TAG,"CandyLevel onLoadResources()");
 		TextureRegionFactory.setAssetBasePath("gfx/");
-		
+		mTexture = new Texture(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mTexturePlayer = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mOnScreenControlTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		
 		mOnScreenControlBaseTextureRegion = TextureRegionFactory.createFromAsset(mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
 		mOnScreenControlKnobTextureRegion = TextureRegionFactory.createFromAsset(mOnScreenControlTexture, this, "onscreen_control_knob.png", 128, 0);
-
 		mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(mTexturePlayer, this, "candy.png",0,0,4,3);
+		mEngine.getTextureManager().loadTextures(mOnScreenControlTexture,mTexturePlayer, mTexture);
+		
+		mCandyFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
+		mCatFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "cat.png", 320,0);
+		mIceFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "ice.png",260,0);
+		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "box.png",130,0);
+		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "movable_wall.png",65,0);
+		mInertiaFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "inertia_wall.png",195,0);
 
-		mEngine.getTextureManager().loadTextures(mOnScreenControlTexture,mTexturePlayer);
+		// private static final int BOMB = 3;
+		// private static final int ENEMY = 4;
+	
+		
 	}
 
 	@Override
@@ -207,7 +221,29 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	}
 
 	private void createSprite(int type, int row, int column) {
-		// TODO Auto-generated method stub
+		final Sprite face;
+		switch (type){
+		case 0:
+			face = new Sprite(row,column,mCandyFaceTextureRegion);
+			break;
+		case 1:
+			face = new Sprite(row,column,mCatFaceTextureRegion);
+			break;
+		case 2:
+			face = new Sprite(row,column,mBoxFaceTextureRegion);
+			break;
+		case 5:
+			face = new Sprite(row,column,mWallFaceTextureRegion);
+			break;
+		case 6:
+			face = new Sprite(row,column,mInertiaFaceTextureRegion);
+			break;
+		default:
+			face = new Sprite(row,column,mCandyFaceTextureRegion);
+			break;
+		}
+		mScene.attachChild(face);
+
 	}
 
 	@Override
