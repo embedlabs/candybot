@@ -215,7 +215,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		new SplashTask().execute();
 	}
 	
-	private void addFace(final float pX, final float pY,final int type) {
+	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {
 		final Sprite face;
 		final Body body;
 		final FixtureDef candyDef = PhysicsFactory.createFixtureDef(1, 0.85f, 0.5f);
@@ -245,6 +245,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			body = PhysicsFactory.createBoxBody(mPhysicsWorld, face, BodyType.DynamicBody, iceDef);
 			break;
 		}
+		body.setLinearVelocity(vX, vY);
 		face.setAlpha(0);
 		face.setScale(0);
 		face.registerEntityModifier(new ParallelEntityModifier(new AlphaModifier(1,0,1),new ScaleModifier(1,0,1)));
@@ -256,7 +257,9 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		final Random randGen = new Random();
 		final int x = randGen.nextInt(WIDTH-65);
 		final int y = randGen.nextInt(HEIGHT-65);
-		addFace(x,y,type);
+		final int vX = randGen.nextInt(21)-10;
+		final int vY = randGen.nextInt(21)-10;
+		addFace(x,y,type,vX,vY);
 	}
 	
 	@Override
