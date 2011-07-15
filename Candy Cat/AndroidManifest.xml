@@ -66,6 +66,9 @@
 		 
 		<activity android:name="com.scoreloop.client.android.ui.framework.ScreenActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
 		<activity android:name="com.scoreloop.client.android.ui.framework.TabsActivity"/>
+		
+		<activity android:name="com.scoreloop.client.android.ui.component.achievement.AchievementHeaderActivity"/>
+        <activity android:name="com.scoreloop.client.android.ui.component.achievement.AchievementListActivity"/>
         
     </application>
 </manifest>
