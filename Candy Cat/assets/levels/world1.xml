@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<world id="1">
-	<level id="1">
-		<object type="0" row="2" column="3" />
-		<object type="1" row="2" column="2" />
+<w id="1">
+	<l id="1">
+		<o n="0" r="2" c="3" />
+		<o n="1" r="2" c="2" />
 		
 		<!-- Delete this test section later: -->
-		<object type="2" row="2" column="4" />
-		<object type="3" row="2" column="5" />
-		<object type="4" row="2" column="6" />
-		<object type="5" row="2" column="7" />
-		<object type="6" row="2" column="8" />
+		<o n="2" r="2" c="4" />
+		<o n="3" r="2" c="5" />
+		<o n="4" r="2" c="6" />
+		<o n="5" r="2" c="7" />
+		<o n="6" r="2" c="8" />
 		<!-- End delete section. -->
 		
-		<tutorial text="Help the Candy Cat push the candy into the pipe!" />
-		<tutorial text="The Candy Cat is immune to gravity, but the candy is not." />
-	</level>
-</world>
+		<t i="Help the Candy Cat push the candy into the pipe!" />
+		<t i="The Candy Cat is immune to gravity, but the candy is not." />
+	</l>
+</w>

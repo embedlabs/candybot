@@ -28,25 +28,25 @@ public class CandyUtils {
 			doc.getDocumentElement().normalize();
 			
 			// Get all elements named level.
-			final NodeList levelNodeList = doc.getElementsByTagName("level");
+			final NodeList levelNodeList = doc.getElementsByTagName("l"); // l = level
 			// Select the correct level in the world.
 			final Element currentLevelElement = (Element)levelNodeList.item(level-1);
 			// Make a list of all child objects.
-			final NodeList objectNodeList = currentLevelElement.getElementsByTagName("object");
+			final NodeList objectNodeList = currentLevelElement.getElementsByTagName("o"); // o = object
 			// Load attributes into an Object[3], then append to objectArrayList.
 			for (int i=0;i<objectNodeList.getLength();i++) {
 				final Element currentObjectElement = (Element)objectNodeList.item(i);
 				objectList.add(new int[]{
-					Integer.valueOf(currentObjectElement.getAttribute("type")),
-					Integer.valueOf(currentObjectElement.getAttribute("row")),
-					Integer.valueOf(currentObjectElement.getAttribute("column"))
+					Integer.valueOf(currentObjectElement.getAttribute("n")), // n = number indicating type of object
+					Integer.valueOf(currentObjectElement.getAttribute("r")), // r = row
+					Integer.valueOf(currentObjectElement.getAttribute("c")) // c = column
 				});
 			}
 			
-			final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("tutorial");
+			final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("t"); // t = tutorial
 			for (int i=0;i<tutorialNodeList.getLength();i++) {
 				final Element currentTutorialElement = (Element)tutorialNodeList.item(i);
-				tutorialList.add(currentTutorialElement.getAttribute("text"));
+				tutorialList.add(currentTutorialElement.getAttribute("i")); // i = info, meaning the tutorial text
 			}
 		} catch (Exception e) {
 			Log.e(TAG,"XML FAIL!",e);
