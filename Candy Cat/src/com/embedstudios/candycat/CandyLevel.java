@@ -171,7 +171,6 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 		for (int[] i:objectList) {
 			createSprite(i[0],i[1],i[2]);
 		}
-		addTutorialText(tutorialList);
 		
 		return mScene;
 	}
@@ -227,6 +226,7 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	@Override
 	public void onLoadComplete() {
 		Log.i(TAG,"CandyLevel onLoadComplete()");
+		addTutorialText(tutorialList);
 		// TODO
 	}
 
