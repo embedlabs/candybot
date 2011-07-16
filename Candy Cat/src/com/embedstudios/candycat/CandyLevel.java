@@ -178,6 +178,10 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 
 	private void addTutorialText(ArrayList<String> inputList) {
 		// TODO Auto-generated method stub
+		// This is temporary, change later:
+		for (String text:inputList) {
+			Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+		}
 	}
 
 	private void createSprite(final int type, int row, int column) {

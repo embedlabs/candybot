@@ -3,11 +3,16 @@
 	<level id="1">
 		<object type="0" row="2" column="3" />
 		<object type="1" row="2" column="2" />
+		
+		<!-- Delete this test section later: -->
 		<object type="2" row="2" column="4" />
 		<object type="3" row="2" column="5" />
 		<object type="4" row="2" column="6" />
 		<object type="5" row="2" column="7" />
 		<object type="6" row="2" column="8" />
-		<tutorial text="Help the Candy Cat push the candy into the pipe." />
+		<!-- End delete section. -->
+		
+		<tutorial text="Help the Candy Cat push the candy into the pipe!" />
+		<tutorial text="The Candy Cat is immune to gravity, but the candy is not." />
 	</level>
 </world>
