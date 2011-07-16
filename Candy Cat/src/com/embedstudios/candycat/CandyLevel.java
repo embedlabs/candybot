@@ -60,17 +60,9 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	private TMXTiledMap mTMXTiledMap;
 	private BoundCamera mBoundChaseCamera;
 	
-	private Texture mOnScreenControlTexture;
-	private TextureRegion mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion;
-	
-	private Texture mTexturePlayer;
-	private TiledTextureRegion mPlayerTextureRegion;
-	
 	private Texture mObjectTexture;
 	private TextureRegion boxTR, movableWallTR, inertiaWallTR;
 	private TiledTextureRegion candyTTR, catTTR, bombTTR, enemyTTR;
-
-	private DigitalOnScreenControl mDigitalOnScreenControl;
 
 	private enum PlayerDirection{
 		NONE,
@@ -115,14 +107,6 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	public void onLoadResources() {
 		Log.i(TAG,"CandyLevel onLoadResources()");
 		TextureRegionFactory.setAssetBasePath("gfx/");
-		
-		mOnScreenControlTexture = new Texture(256, 128, TextureOptions.NEAREST_PREMULTIPLYALPHA);
-		mOnScreenControlBaseTextureRegion = TextureRegionFactory.createFromAsset(mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
-		mOnScreenControlKnobTextureRegion = TextureRegionFactory.createFromAsset(mOnScreenControlTexture, this, "onscreen_control_knob.png", 128, 0);
-
-		mTexturePlayer = new Texture(256, 256, TextureOptions.NEAREST_PREMULTIPLYALPHA);
-		mPlayerTextureRegion = TextureRegionFactory.createTiledFromAsset(mTexturePlayer, this, "candy.png",0,0,4,3);
-		
 
 		mObjectTexture = new Texture(512,512, TextureOptions.NEAREST_PREMULTIPLYALPHA);
 		candyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png",0,0,4,3); // done
@@ -133,7 +117,7 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 		movableWallTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "movable_wall.png",64,192);
 		inertiaWallTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "inertia_wall.png",128,192);
 
-		mEngine.getTextureManager().loadTextures(mOnScreenControlTexture,mTexturePlayer, mObjectTexture);
+		mEngine.getTextureManager().loadTexture(mObjectTexture);
 
 		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList);
 	}
