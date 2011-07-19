@@ -39,7 +39,6 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/button_play"
-				android:layout_margin="3dip"
 				android:layout_centerInParent="true" />
 <!-- 			<Button android:id="@+id/button_gallery" -->
 <!-- 				style="@style/menuButton" -->
@@ -47,13 +46,25 @@
 <!-- 				android:layout_height="wrap_content" -->
 <!-- 				android:text="@string/button_gallery" -->
 <!-- 				android:layout_margin="3dip" /> -->
-<!-- 			<Button android:id="@+id/button_achievements" -->
-<!-- 				style="@style/menuButton" -->
-<!-- 				android:layout_width="fill_parent" -->
-<!-- 				android:layout_height="wrap_content" -->
-<!-- 				android:text="@string/button_achievements" -->
-<!-- 				android:layout_margin="3dip" -->
-<!-- 				android:drawableLeft="@drawable/sl_icon_scoreloop" /> -->
+			<ImageView android:id="@+id/button_achievements"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/sl_button"
+				android:scaleType="center"
+				android:layout_marginRight="7dip"
+				android:layout_marginBottom="7dip"
+				android:layout_marginLeft="4dip"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentBottom="true" />
+			<ImageView android:id="@+id/button_facebook"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/fb_button"
+				android:scaleType="center"
+				android:layout_marginBottom="7dip"
+				android:layout_marginRight="4dip"
+				android:layout_alignParentBottom="true"
+				android:layout_toLeftOf="@id/button_achievements" />
 		</RelativeLayout>
 	</ViewFlipper>
 </RelativeLayout>

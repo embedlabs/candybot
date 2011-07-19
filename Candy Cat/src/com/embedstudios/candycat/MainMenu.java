@@ -33,12 +33,14 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -52,7 +54,8 @@ import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
 public class MainMenu extends LayoutGameActivity implements OnClickListener, IAccelerometerListener {
 	ViewFlipper enclosing_vf;
 	TextView mainmenu_tv;
-	Button button_play,button_gallery,button_achievements;
+	Button button_play;//,button_gallery,button_achievements;
+	ImageView button_achievements,button_facebook;
 
 	public static Typeface komika;
 	private static final int LOGO_DURATION=3000;
@@ -144,9 +147,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 //		case R.id.button_gallery:
 //			startActivity(new Intent(this,CandyGallery.class));
 //			break;
-//		case R.id.button_achievements:
-//			startActivity(new Intent(this,EntryScreenActivity.class));
-//			break;
+		case R.id.button_achievements:
+			startActivity(new Intent(this,EntryScreenActivity.class));
+			break;
+		case R.id.button_facebook:
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/candycat")));
 		}
 	}
 
@@ -154,7 +159,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public Engine onLoadEngine() {
 		Log.v(TAG,"MainMenu onLoadEngine()");
 		
-		Display display = getWindowManager().getDefaultDisplay(); 
+		Display display = getWindowManager().getDefaultDisplay();
 		WIDTH = display.getWidth();
 		HEIGHT = display.getHeight();
 		
@@ -239,10 +244,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
 		button_play = (Button)findViewById(R.id.button_play);
 //		button_gallery = (Button)findViewById(R.id.button_gallery);
-//		button_achievements = (Button)findViewById(R.id.button_achievements);
+		button_achievements = (ImageView)findViewById(R.id.button_achievements);
+		button_facebook = (ImageView)findViewById(R.id.button_facebook);
 		
 		setKomika(mainmenu_tv,button_play);//,button_gallery,button_achievements); // changes font
-		setClick(button_play);//,button_gallery,button_achievements);
+		setClick(button_play,button_achievements,button_facebook);//,button_gallery,button_achievements);
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies parts
 		
@@ -337,9 +343,9 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		}
 	}
 
-	public void setClick(Button... buttons) {
-		for (Button button:buttons) {
-			button.setOnClickListener(this);
+	public void setClick(View... views) {
+		for (View view:views) {
+			view.setOnClickListener(this);
 		}
 	}
 	
