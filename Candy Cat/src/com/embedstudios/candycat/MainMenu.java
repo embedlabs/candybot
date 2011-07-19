@@ -141,12 +141,12 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 				.putExtra("com.embedstudios.candycat.world", 1)
 				.putExtra("com.embedstudios.candycat.level", 1));
 			break;
-		case R.id.button_gallery:
-			startActivity(new Intent(this,CandyGallery.class));
-			break;
-		case R.id.button_achievements:
-			startActivity(new Intent(this,EntryScreenActivity.class));
-			break;
+//		case R.id.button_gallery:
+//			startActivity(new Intent(this,CandyGallery.class));
+//			break;
+//		case R.id.button_achievements:
+//			startActivity(new Intent(this,EntryScreenActivity.class));
+//			break;
 		}
 	}
 
@@ -199,7 +199,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(0.07f,0.22f,0.51f,5);
 		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(1, new Sprite(0, 0, mCloudsTextureRegion)));
 		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-2, new Sprite(0, HEIGHT-mSeaTextureRegion.getHeight(), mSeaTextureRegion)));
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5, new Sprite(0, HEIGHT-mHillsTextureRegion.getHeight()+10, mHillsTextureRegion)));
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5, new Sprite(0, HEIGHT-mHillsTextureRegion.getHeight(), mHillsTextureRegion)));
 		mScene.setBackground(autoParallaxBackground);
 		
 		/*
@@ -238,11 +238,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
 		button_play = (Button)findViewById(R.id.button_play);
-		button_gallery = (Button)findViewById(R.id.button_gallery);
-		button_achievements = (Button)findViewById(R.id.button_achievements);
+//		button_gallery = (Button)findViewById(R.id.button_gallery);
+//		button_achievements = (Button)findViewById(R.id.button_achievements);
 		
-		setKomika(mainmenu_tv,button_play,button_gallery,button_achievements); // changes font
-		setClick(button_play,button_gallery,button_achievements);
+		setKomika(mainmenu_tv,button_play);//,button_gallery,button_achievements); // changes font
+		setClick(button_play);//,button_gallery,button_achievements);
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies parts
 		
