@@ -12,11 +12,11 @@ import org.anddev.andengine.entity.modifier.ParallelEntityModifier;
 import org.anddev.andengine.entity.modifier.ScaleModifier;
 import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.ColorBackground;
+import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
+import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
 import org.anddev.andengine.entity.shape.Shape;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
-import org.anddev.andengine.extension.physics.box2d.FixedStepPhysicsWorld;
 import org.anddev.andengine.extension.physics.box2d.PhysicsConnector;
 import org.anddev.andengine.extension.physics.box2d.PhysicsFactory;
 import org.anddev.andengine.extension.physics.box2d.PhysicsWorld;
@@ -46,7 +46,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-
 import com.scoreloop.client.android.ui.EntryScreenActivity;
 import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
 
@@ -60,8 +59,13 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public static final String TAG=CandyUtils.TAG;
 	
 	private static int WIDTH,HEIGHT;
+	
 	private Texture mTexture;
 	private TextureRegion mCandyFaceTextureRegion,mWallFaceTextureRegion,mBoxFaceTextureRegion,mInertiaFaceTextureRegion,mIceFaceTextureRegion;
+	
+	private Texture mAutoParallaxBackgroundTexture;
+	private TextureRegion mCloudsTextureRegion,mSeaTextureRegion,mHillsTextureRegion;
+	
 	private Scene mScene;
 	private PhysicsWorld mPhysicsWorld;
 	
@@ -146,14 +150,21 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	@Override
 	public void onLoadResources() {
 		Log.i(TAG,"MainMenu onLoadResources()");
-		mTexture = new Texture(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		TextureRegionFactory.setAssetBasePath("gfx/");
+		
+		mTexture = new Texture(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mCandyFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
 		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "movable_wall.png",65,0);
 		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "box.png",130,0);
 		mInertiaFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "inertia_wall.png",195,0);
 		mIceFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "ice.png",260,0);
-		mEngine.getTextureManager().loadTexture(mTexture);
+		
+		mAutoParallaxBackgroundTexture = new Texture(1024,1024,TextureOptions.DEFAULT);
+		mCloudsTextureRegion = TextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_clouds.png",0,0);
+		mSeaTextureRegion = TextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_sea.png",0,132);
+		mHillsTextureRegion = TextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_hills.png",0,384);
+		
+		mEngine.getTextureManager().loadTextures(mTexture,mAutoParallaxBackgroundTexture);
 	}
 
 	@Override
@@ -164,12 +175,20 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		 * BASIC STUFF
 		 */
 		mScene = new Scene();
-		mScene.setBackground(new ColorBackground(0.07f,0.22f,0.51f));
+		
+		/*
+		 * PARALLAX BG
+		 */
+		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(0.07f,0.22f,0.51f,5);
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(1, new Sprite(0, 0, mCloudsTextureRegion)));
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-2, new Sprite(0, HEIGHT-mSeaTextureRegion.getHeight(), mSeaTextureRegion)));
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5, new Sprite(0, HEIGHT-mHillsTextureRegion.getHeight(), mHillsTextureRegion)));
+		mScene.setBackground(autoParallaxBackground);
 		
 		/*
 		 * CREATE PHYSICS WORLD
 		 */
-		mPhysicsWorld = new FixedStepPhysicsWorld(30, new Vector2(0, SensorManager.GRAVITY_EARTH*2), false, 3, 2);
+		mPhysicsWorld = new PhysicsWorld(new Vector2(0, SensorManager.GRAVITY_EARTH*2), false, 2, 2);
 
 		final Shape ground = new Rectangle(0, HEIGHT, WIDTH, 2);
 		final Shape roof = new Rectangle(0, -2, WIDTH, 2);
