@@ -69,27 +69,39 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	private Scene mScene;
 	private PhysicsWorld mPhysicsWorld;
 	
+	private SplashTask splashTask;
+	private boolean running = true;
+	
 	public class SplashTask extends AsyncTask<Void,Integer,Void> {
 		@Override
 		protected Void doInBackground(Void... blah) {
+			if (!running) {return null;}
 			pause(LOGO_DURATION);
+			if (!running) {return null;}
 			publishProgress(0);
+			if (!running) {return null;}
 			pause(1000);
 			for (int i=1;i<=6;i++) {
+				if (!running) {return null;}
 				publishProgress(1);
 				pause(100);
 				if (i<=2) {
+					if (!running) {return null;}
 					publishProgress(2);
 					pause(100);
+					if (!running) {return null;}
 					publishProgress(3);
 					pause(100);
 				} else if (i<=4) {
+					if (!running) {return null;}
 					publishProgress(4);
 					pause(100);
+					if (!running) {return null;}
 					publishProgress(5);
 					pause(100);
 				}
 			}
+			if (!running) {return null;}
 			publishProgress(6);
 			return null;
 		}
@@ -105,6 +117,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			} catch (Exception e) {
 				Log.e(TAG, "SplashTask onProgressUpdate() failed.",e);
 			}
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			Log.i(TAG,"SplashTask ended.");
 		}
 		
 		private void pause(int milliseconds) {
@@ -135,7 +152,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public Engine onLoadEngine() {
-		Log.i(TAG,"MainMenu onLoadEngine()");
+		Log.v(TAG,"MainMenu onLoadEngine()");
 		
 		Display display = getWindowManager().getDefaultDisplay(); 
 		WIDTH = display.getWidth();
@@ -149,7 +166,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public void onLoadResources() {
-		Log.i(TAG,"MainMenu onLoadResources()");
+		Log.v(TAG,"MainMenu onLoadResources()");
 		TextureRegionFactory.setAssetBasePath("gfx/");
 		
 		mTexture = new Texture(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
@@ -169,7 +186,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public Scene onLoadScene() {
-		Log.i(TAG,"MainMenu onLoadScene()");
+		Log.v(TAG,"MainMenu onLoadScene()");
 		mEngine.registerUpdateHandler(new FPSLogger());
 		/*
 		 * BASIC STUFF
@@ -213,7 +230,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 	@Override
 	public void onLoadComplete() {
-		Log.i(TAG, "MainMenu onLoadComplete()");
+		Log.v(TAG, "MainMenu onLoadComplete()");
 		
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 
@@ -234,7 +251,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		} catch (Exception e) {
 			Log.e(TAG, "Singleton failed.",e);
 		}
-		new SplashTask().execute();
+		splashTask = new SplashTask();
+		splashTask.execute();
 	}
 	
 	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {
@@ -327,7 +345,9 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	@Override
 	public void onDestroy() {
+		running=false;
 		super.onDestroy();
 		ScoreloopManagerSingleton.destroy();
+		Log.i(TAG,"MainMenu onDestroy()");
 	}
 }

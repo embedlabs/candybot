@@ -64,23 +64,11 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	private TextureRegion boxTR, movableWallTR, inertiaWallTR;
 	private TiledTextureRegion candyTTR, catTTR, bombTTR, enemyTTR;
 
-	private enum PlayerDirection{
-		NONE,
-		UP,
-		DOWN,
-		LEFT,
-		RIGHT
-	}
-	// Variable showing player direction
-	private PlayerDirection playerDirection = PlayerDirection.DOWN;
-	
-	private int candyAngleState=0;
-
 	public static final String TAG = CandyUtils.TAG;
 	
 	@Override
 	public Engine onLoadEngine() {
-		Log.i(TAG,"CandyLevel onLoadEngine()");
+		Log.v(TAG,"CandyLevel onLoadEngine()");
 		world = getIntent().getIntExtra("com.embedstudios.candycat.world", 0);
 		level = getIntent().getIntExtra("com.embedstudios.candycat.level", 0); // retrieves world/level to render from the intent
 		
@@ -105,7 +93,7 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 
 	@Override
 	public void onLoadResources() {
-		Log.i(TAG,"CandyLevel onLoadResources()");
+		Log.v(TAG,"CandyLevel onLoadResources()");
 		TextureRegionFactory.setAssetBasePath("gfx/");
 
 		mObjectTexture = new Texture(512,512, TextureOptions.NEAREST_PREMULTIPLYALPHA);
@@ -124,7 +112,7 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 
 	@Override
 	public Scene onLoadScene() {
-		Log.i(TAG,"CandyLevel onLoadScene()");
+		Log.v(TAG,"CandyLevel onLoadScene()");
 		
 		/**
 		 * BASICS
@@ -209,7 +197,7 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 
 	@Override
 	public void onLoadComplete() {
-		Log.i(TAG,"CandyLevel onLoadComplete()");
+		Log.v(TAG,"CandyLevel onLoadComplete()");
 		addTutorialText(tutorialList);
 		// TODO
 	}
