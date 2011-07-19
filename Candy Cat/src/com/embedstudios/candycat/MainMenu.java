@@ -182,7 +182,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(0.07f,0.22f,0.51f,5);
 		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(1, new Sprite(0, 0, mCloudsTextureRegion)));
 		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-2, new Sprite(0, HEIGHT-mSeaTextureRegion.getHeight(), mSeaTextureRegion)));
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5, new Sprite(0, HEIGHT-mHillsTextureRegion.getHeight(), mHillsTextureRegion)));
+		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5, new Sprite(0, HEIGHT-mHillsTextureRegion.getHeight()+10, mHillsTextureRegion)));
 		mScene.setBackground(autoParallaxBackground);
 		
 		/*
