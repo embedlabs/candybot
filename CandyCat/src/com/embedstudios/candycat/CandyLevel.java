@@ -3,7 +3,7 @@ package com.embedstudios.candycat;
 import java.util.ArrayList;
 
 import org.anddev.andengine.engine.Engine;
-import org.anddev.andengine.engine.camera.BoundCamera;
+import org.anddev.andengine.engine.camera.ZoomCamera;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -16,11 +16,21 @@ import org.anddev.andengine.entity.layer.tiled.tmx.TMXTileProperty;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap;
 import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadException;
 import org.anddev.andengine.entity.scene.Scene;
+import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.BaseSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
+import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
+import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
+import org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector;
+import org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector.IPinchZoomDetectorListener;
+import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
+import org.anddev.andengine.input.touch.TouchEvent;
+import org.anddev.andengine.input.touch.detector.ScrollDetector;
+import org.anddev.andengine.input.touch.detector.ScrollDetector.IScrollDetectorListener;
+import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -33,7 +43,7 @@ import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
-public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener {
+public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener, IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
 	private static final int WIDTH = 1536;
 	private static final int HEIGHT = 1152;
 	private static int PHONE_WIDTH,PHONE_HEIGHT;
@@ -52,11 +62,15 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
-	private BoundCamera mBoundChaseCamera;
+	private ZoomCamera mZoomCamera;
 	
 	private Texture mObjectTexture;
 	private TextureRegion boxTR, movableWallTR, inertiaWallTR;
 	private TiledTextureRegion candyTTR, catTTR, bombTTR, enemyTTR;
+
+	private SurfaceScrollDetector mScrollDetector;
+	private PinchZoomDetector mPinchZoomDetector;
+	private float mPinchZoomStartedCameraZoomFactor;
 
 	public static final String TAG = CandyUtils.TAG;
 	
@@ -70,19 +84,24 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		PHONE_WIDTH = display.getWidth();
 		PHONE_HEIGHT = display.getHeight();
 		
-		/**
-		 * If you want to see actual size.
-		 */
-		mBoundChaseCamera = new BoundCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,0,WIDTH,0,HEIGHT);
-		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mBoundChaseCamera);
-
-		/**
-		 * If you want to see the whole level.
-		 */
-//		mBoundChaseCamera = new BoundCamera(0,0,WIDTH,HEIGHT);
-//		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), mBoundChaseCamera);
+		mZoomCamera = new ZoomCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT);
+		mZoomCamera.setBoundsEnabled(true);
+		mZoomCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		
-		return new Engine(engineOptions);
+		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mZoomCamera);
+		final Engine engine = new Engine(engineOptions);
+		
+		try {
+			if(MultiTouch.isSupported(this)) {
+				engine.setTouchController(new MultiTouchController());
+			} else {
+				Log.i(TAG,"MultiTouch not supported. (phone model)");
+			}
+		} catch (final MultiTouchException e) {
+			Log.i(TAG,"MultiTouch not supported. (Android version)");
+		}
+		
+		return engine;
 	}
 
 	@Override
@@ -128,8 +147,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		final TMXLayer tmxLayer = mTMXTiledMap.getTMXLayers().get(0);
 		mScene.attachChild(tmxLayer); //background layer
-		mBoundChaseCamera.setBounds(0, tmxLayer.getWidth(), 0, tmxLayer.getHeight());
-		mBoundChaseCamera.setBoundsEnabled(true);
+		mZoomCamera.setBounds(0, tmxLayer.getWidth(), 0, tmxLayer.getHeight());
+		mZoomCamera.setBoundsEnabled(true);
 		
 		/**
 		 * SPRITES
@@ -137,6 +156,23 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		for (int[] i:objectList) {
 			createSprite(i[0],i[1],i[2]);
 		}
+		
+		
+		/**
+		 * CONTROLS
+		 */
+		this.mScrollDetector = new SurfaceScrollDetector(this);
+		if(MultiTouch.isSupportedByAndroidVersion()) {
+			try {
+				this.mPinchZoomDetector = new PinchZoomDetector(this);
+			} catch (final MultiTouchException e) {
+				this.mPinchZoomDetector = null;
+			}
+		} else {
+			this.mPinchZoomDetector = null;
+		}
+		this.mScene.setOnSceneTouchListener(this);
+		this.mScene.setTouchAreaBindingEnabled(true);
 		
 		return mScene;
 	}
@@ -211,5 +247,46 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	protected int getRenderSurfaceViewID() {
 		// TODO Auto-generated method stub
 		return R.id.rsv_level;
+	}
+
+	@Override
+	public void onScroll(final ScrollDetector pScollDetector, final TouchEvent pTouchEvent, final float pDistanceX, final float pDistanceY) {
+		final float zoomFactor = this.mZoomCamera.getZoomFactor();
+		this.mZoomCamera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY / zoomFactor);
+	}
+
+	@Override
+	public void onPinchZoomStarted(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent) {
+		this.mPinchZoomStartedCameraZoomFactor = this.mZoomCamera.getZoomFactor();
+	}
+
+	@Override
+	public void onPinchZoom(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
+		this.mZoomCamera.setZoomFactor(this.mPinchZoomStartedCameraZoomFactor * pZoomFactor);
+	}
+
+	@Override
+	public void onPinchZoomFinished(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
+		this.mZoomCamera.setZoomFactor(this.mPinchZoomStartedCameraZoomFactor * pZoomFactor);
+	}
+	
+	@Override
+	public boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
+		if(this.mPinchZoomDetector != null) {
+			this.mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
+
+			if(this.mPinchZoomDetector.isZooming()) {
+				this.mScrollDetector.setEnabled(false);
+			} else {
+				if(pSceneTouchEvent.isActionDown()) {
+					this.mScrollDetector.setEnabled(true);
+				}
+				this.mScrollDetector.onTouchEvent(pSceneTouchEvent);
+			}
+		} else {
+			this.mScrollDetector.onTouchEvent(pSceneTouchEvent);
+		}
+
+		return true;
 	}
 }
