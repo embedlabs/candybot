@@ -1,0 +1,61 @@
+com.embedstudios.candycat.CandyLevel:
+    private static final int WIDTH
+    private static final int HEIGHT
+    private static final int CANDY
+    private static final int CAT
+    private static final int BOX
+    private static final int BOMB
+    private static final int ENEMY
+    private static final int MOVABLE_WALL
+    private static final int INERTIA_WALL
+    public static final java.lang.String TAG
+com.embedstudios.candycat.CandyUtils:
+    public static final java.lang.String TAG
+com.embedstudios.candycat.MainMenu:
+    private static final int LOGO_DURATION
+    public static final java.lang.String TAG
+com.embedstudios.candycat.R
+com.embedstudios.candycat.R$anim
+com.embedstudios.candycat.R$attr
+com.embedstudios.candycat.R$color
+com.embedstudios.candycat.R$dimen
+com.embedstudios.candycat.R$drawable
+com.embedstudios.candycat.R$id
+com.embedstudios.candycat.R$layout
+com.embedstudios.candycat.R$menu
+com.embedstudios.candycat.R$string
+com.embedstudios.candycat.R$style
+com.scoreloop.client.android.core.controller.d:
+    public java.lang.String getDescription()
+com.scoreloop.client.android.core.server.b:
+    private static final long serialVersionUID
+com.scoreloop.client.android.core.server.c:
+    private static final long serialVersionUID
+com.scoreloop.client.android.core.server.d:
+    private static final long serialVersionUID
+com.scoreloop.client.android.core.util.Cache$1:
+    private static final long serialVersionUID
+com.scoreloop.client.android.ui.StandardScoreloopManager:
+    private static final java.lang.String PREFERENCES_ENTRY_USER_IMAGE_URL
+    private static final java.lang.String PREFERENCES_ENTRY_USER_NAME
+    private static final java.lang.String PREFERENCES_NAME
+com.scoreloop.client.android.ui.StandardScoreloopManager$Checker:
+    private static final java.lang.String SCORELOOP_UI
+com.scoreloop.client.android.ui.StandardScoreloopManager$VerifyException:
+    private static final long serialVersionUID
+com.scoreloop.client.android.ui.component.base.Configuration$ConfigurationException:
+    private static final java.lang.String SCORELOOP_UI
+    private static final long serialVersionUID
+com.scoreloop.client.android.ui.util.Base64$OutputStream:
+    465:466:public void resumeEncoding()
+    477:479:public void suspendEncoding()
+com.scoreloop.client.android.ui.util.Cache$2:
+    private static final long serialVersionUID
+org.anddev.andengine.opengl.view.GLSurfaceView$GLThread:
+    662:662:public int getRenderMode()
+org.anddev.andengine.opengl.view.LogWriter
+org.anddev.andengine.util.Base64$Decoder:
+    private static final int SKIP
+    private static final int EQUALS
+org.anddev.andengine.util.Base64$Encoder:
+    public static final int LINE_GROUPS
