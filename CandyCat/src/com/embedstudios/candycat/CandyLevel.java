@@ -26,14 +26,14 @@ import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
-import org.anddev.andengine.ui.activity.BaseGameActivity;
+import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
 import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
-public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesListener {
+public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener {
 	private static final int WIDTH = 1536;
 	private static final int HEIGHT = 1152;
 	private static int PHONE_WIDTH,PHONE_HEIGHT;
@@ -200,5 +200,16 @@ public class CandyLevel extends BaseGameActivity implements ITMXTilePropertiesLi
 	public void onTMXTileWithPropertiesCreated(TMXTiledMap pTMXTiledMap,TMXLayer pTMXLayer, TMXTile pTMXTile,TMXProperties<TMXTileProperty> pTMXTileProperties) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected int getLayoutID() {
+		return R.layout.level;
+	}
+
+	@Override
+	protected int getRenderSurfaceViewID() {
+		// TODO Auto-generated method stub
+		return R.id.rsv_level;
 	}
 }
