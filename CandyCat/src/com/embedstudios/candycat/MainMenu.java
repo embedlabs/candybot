@@ -194,12 +194,13 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public Scene onLoadScene() {
 		Log.v(TAG,"MainMenu onLoadScene()");
 		mEngine.registerUpdateHandler(new FPSLogger());
-		/*
+		
+		/**
 		 * BASIC STUFF
 		 */
 		mScene = new Scene();
 		
-		/*
+		/**
 		 * PARALLAX BG
 		 */
 		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(0.07f,0.22f,0.51f,5);
@@ -208,10 +209,10 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5, new DitheredSprite(0, HEIGHT-mHillsTextureRegion.getHeight(), mHillsTextureRegion)));
 		mScene.setBackground(autoParallaxBackground);
 		
-		/*
+		/**
 		 * CREATE PHYSICS WORLD
 		 */
-		mPhysicsWorld = new PhysicsWorld(new Vector2(0, SensorManager.GRAVITY_EARTH*2), false, 2, 2);
+		mPhysicsWorld = new PhysicsWorld(new Vector2(0, SensorManager.GRAVITY_EARTH), false, 2, 2);
 
 		final Shape ground = new Rectangle(0, HEIGHT, WIDTH, 2);
 		final Shape roof = new Rectangle(0, -2, WIDTH, 2);

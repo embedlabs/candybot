@@ -111,14 +111,14 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		Log.v(TAG,"CandyLevel onLoadResources()");
 		TextureRegionFactory.setAssetBasePath("gfx/");
 
-		mObjectTexture = new Texture(512,512, TextureOptions.NEAREST_PREMULTIPLYALPHA);
-		candyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png",0,0,4,3); // done
-		catTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "cat.png", 256,0,4,2); // done
-		boxTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "box.png",0,192); // done
-		bombTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bomb.png",256,128,4,2);
-		enemyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "enemy.png",256,256,4,2);
-		movableWallTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "movable_wall.png",64,192);
-		inertiaWallTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "inertia_wall.png",128,192);
+		mObjectTexture = new Texture(256,1024, TextureOptions.NEAREST_PREMULTIPLYALPHA);
+		candyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png",0,0,4,3);
+		catTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "cat.png", 0,193,4,2);
+		boxTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "box.png",0,580);
+		bombTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bomb.png",0,322,4,2);
+		enemyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "enemy.png",0,451,4,2);
+		movableWallTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "movable_wall.png",65,580);
+		inertiaWallTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "inertia_wall.png",130,580);
 
 		mEngine.getTextureManager().loadTexture(mObjectTexture);
 
@@ -272,13 +272,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
-		if(mPinchZoomDetector != null) {
+		if (mPinchZoomDetector != null) {
 			mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
-
-			if(mPinchZoomDetector.isZooming()) {
+			if (mPinchZoomDetector.isZooming()) {
 				mScrollDetector.setEnabled(false);
 			} else {
-				if(pSceneTouchEvent.isActionDown()) {
+				if (pSceneTouchEvent.isActionDown()) {
 					mScrollDetector.setEnabled(true);
 				}
 				mScrollDetector.onTouchEvent(pSceneTouchEvent);
