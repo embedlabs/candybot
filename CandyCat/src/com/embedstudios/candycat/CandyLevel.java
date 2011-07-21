@@ -18,9 +18,6 @@ import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadExcepti
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
-import org.anddev.andengine.entity.sprite.AnimatedSprite;
-import org.anddev.andengine.entity.sprite.BaseSprite;
-import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
@@ -33,14 +30,18 @@ import org.anddev.andengine.input.touch.detector.ScrollDetector.IScrollDetectorL
 import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
+import android.graphics.Typeface;
+import android.graphics.drawable.ShapeDrawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
+import android.view.Gravity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener, IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
@@ -48,30 +49,33 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private static final float HEIGHT = 1152;
 	private static float PHONE_WIDTH,PHONE_HEIGHT;
 	
-	private int level,world;
-	private static final int CANDY = 0;
-	private static final int CAT = 1;
-	private static final int BOX = 2;
-	private static final int BOMB = 3;
-	private static final int ENEMY = 4;
-	private static final int MOVABLE_WALL = 5;
-	private static final int INERTIA_WALL = 6;
+	int level,world;
+	static final int CANDY = 1;
+	static final int CAT = 2;
+	static final int BOX = 3;
+	static final int BOMB = 4;
+	static final int ENEMY = 5;
+	static final int MOVABLE_WALL = 6;
+	static final int INERTIA_WALL = 7;
 	
-	private final ArrayList<int[]> objectList = new ArrayList<int[]>();
-	private final ArrayList<String> tutorialList = new ArrayList<String>();
+	private final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
+	private final ArrayList<String> tutorialList = new ArrayList<String>(); // list of all tutorial text
+	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
+	private int[][] backgroundArray = new int[18][24]; // holds tmx array
+	private int[][] objectArray; // stores locations and types of all objects, correlates to spriteList
 	
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
 	private ZoomCamera mZoomCamera;
 	
 	private Texture mObjectTexture;
-	private TextureRegion boxTR, movableWallTR, inertiaWallTR;
-	private TiledTextureRegion candyTTR, catTTR, bombTTR, enemyTTR;
+	private TiledTextureRegion candyTTR, catTTR, bombTTR, enemyTTR, boxTTR, movableWallTTR, inertiaWallTTR;
 
 	private SurfaceScrollDetector mScrollDetector;
 	private PinchZoomDetector mPinchZoomDetector;
 	private float mPinchZoomStartedCameraZoomFactor;
 
+	public static Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
 	
 	@Override
@@ -114,15 +118,18 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		mObjectTexture = new Texture(256,1024, TextureOptions.NEAREST_PREMULTIPLYALPHA);
 		candyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png",0,0,4,3);
 		catTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "cat.png", 0,193,4,2);
-		boxTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "box.png",0,580);
+		boxTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "box.png",0,580,1,1);
 		bombTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bomb.png",0,322,4,2);
 		enemyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "enemy.png",0,451,4,2);
-		movableWallTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "movable_wall.png",65,580);
-		inertiaWallTR = TextureRegionFactory.createFromAsset(mObjectTexture, this, "inertia_wall.png",130,580);
+		movableWallTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "movable_wall.png",65,580,1,1);
+		inertiaWallTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "inertia_wall.png",130,580,1,1);
 
 		mEngine.getTextureManager().loadTexture(mObjectTexture);
 
 		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList);
+		objectArray = objectList.toArray(new int[objectList.size()][]);
+		
+		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
 	}
 
 	@Override
@@ -153,8 +160,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		/**
 		 * SPRITES
 		 */
-		for (int[] i:objectList) {
-			createSprite(i[0],i[1],i[2]);
+//		for (int[] i:objectList) {
+//			createSprite(i[0],i[1],i[2],objectList.indexOf(i));
+//		}
+		
+		for (int i=0;i<objectArray.length;i++) {
+			createSprite(objectArray[i][0],objectArray[i][1],objectArray[i][2],i);
 		}
 		
 		
@@ -181,61 +192,68 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		// TODO Auto-generated method stub
 		// This is temporary, change later:
 		for (String text:inputList) {
+//			final Toast toast = new Toast(this);
+//			final TextView textview = new TextView(this);
+//			textview.setText(text);
+//			textview.setTextColor(R.color.normal_text);
+//			textview.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+//			textview.setPadding(10, 10, 10, 10);
+//			textview.setBackgroundResource(R.drawable.button_normal);
+//			textview.setGravity(Gravity.CENTER_HORIZONTAL);
+//			CandyUtils.setKomika(komika, textview);
+//			toast.setDuration(Toast.LENGTH_LONG);
+//			toast.setView(textview);
+//			toast.show();
 			Toast.makeText(this, text, Toast.LENGTH_LONG).show();
 		}
 	}
 
-	private void createSprite(final int type, int row, int column) {
-		final BaseSprite face;
-		row *= 64;
-		column *= 64;
+	private void createSprite(final int type,final int row,final int column,final int index) {
+		// TODO
+		
+		final CandyAnimatedSprite face;
 		
 		switch (type){
-		case CANDY: // done
-			face = new AnimatedSprite(column,row,candyTTR);
-			((AnimatedSprite)face).animate(100,true);
+		case CANDY:
+			face = new CandyAnimatedSprite(row,column,candyTTR,index,CANDY);
 			break;
-		case CAT: // done
-			face = new AnimatedSprite(column,row,catTTR);
-			((AnimatedSprite)face).animate(100,true);
+		case CAT:
+			face = new CandyAnimatedSprite(row,column,catTTR,index,CAT);
 			break;
 		case BOX:
-			face = new Sprite(column,row,boxTR);
+			face = new CandyAnimatedSprite(row,column,boxTTR,index,BOX);
 			break;
 		case BOMB:
-			face = new AnimatedSprite(column,row,bombTTR);
-			((AnimatedSprite)face).animate(100,true);
+			face = new CandyAnimatedSprite(row,column,bombTTR,index,BOMB);
 			break;
 		case ENEMY:
-			face = new AnimatedSprite(column,row,enemyTTR);
-			((AnimatedSprite)face).animate(100,true);
+			face = new CandyAnimatedSprite(row,column,enemyTTR,index,ENEMY);
 			break;
 		case MOVABLE_WALL:
-			face = new Sprite(column,row,movableWallTR);
+			face = new CandyAnimatedSprite(row,column,movableWallTTR,index,MOVABLE_WALL);
 			break;
 		case INERTIA_WALL:
-			face = new Sprite(column,row,inertiaWallTR);
+			face = new CandyAnimatedSprite(row,column,inertiaWallTTR,index,INERTIA_WALL);
 			break;
-		default: // done
-			face = new AnimatedSprite(column,row,candyTTR);
-			((AnimatedSprite)face).animate(100,true);
+		default:
+			face = new CandyAnimatedSprite(row,column,candyTTR,index,CANDY);
 			break;
 		}
+		spriteList.add(face);
 		mScene.attachChild(face);
-
 	}
 
 	@Override
 	public void onLoadComplete() {
 		Log.v(TAG,"CandyLevel onLoadComplete()");
 		addTutorialText(tutorialList);
+//		spriteList.get(0).moveUp(backgroundArray, objectArray);
 		// TODO
 	}
 
 	@Override
-	public void onTMXTileWithPropertiesCreated(TMXTiledMap pTMXTiledMap,TMXLayer pTMXLayer, TMXTile pTMXTile,TMXProperties<TMXTileProperty> pTMXTileProperties) {
-		// TODO Auto-generated method stub
-		
+	public void onTMXTileWithPropertiesCreated(final TMXTiledMap pTMXTiledMap,final TMXLayer pTMXLayer,final TMXTile pTMXTile,final TMXProperties<TMXTileProperty> pTMXTileProperties) {
+		backgroundArray[pTMXTile.getTileRow()][pTMXTile.getTileColumn()]=pTMXTile.getGlobalTileID();
 	}
 
 	@Override
@@ -245,12 +263,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 
 	@Override
 	protected int getRenderSurfaceViewID() {
-		// TODO Auto-generated method stub
 		return R.id.rsv_level;
 	}
 
 	@Override
 	public void onScroll(final ScrollDetector pScollDetector, final TouchEvent pTouchEvent, final float pDistanceX, final float pDistanceY) {
+		// TODO
 		final float zoomFactor = mZoomCamera.getZoomFactor();
 		mZoomCamera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY / zoomFactor);
 	}
@@ -272,6 +290,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
+		// TODO
 		if (mPinchZoomDetector != null) {
 			mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
 			if (mPinchZoomDetector.isZooming()) {

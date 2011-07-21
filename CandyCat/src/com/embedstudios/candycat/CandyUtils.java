@@ -12,7 +12,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CandyUtils {
@@ -29,28 +33,49 @@ public class CandyUtils {
 			
 			// Get all elements named level.
 			final NodeList levelNodeList = doc.getElementsByTagName("l"); // l = level
-			// Select the correct level in the world.
-			final Element currentLevelElement = (Element)levelNodeList.item(level-1);
-			// Make a list of all child objects.
-			final NodeList objectNodeList = currentLevelElement.getElementsByTagName("o"); // o = object
-			// Load attributes into an Object[3], then append to objectArrayList.
-			for (int i=0;i<objectNodeList.getLength();i++) {
-				final Element currentObjectElement = (Element)objectNodeList.item(i);
-				objectList.add(new int[]{
-					Integer.valueOf(currentObjectElement.getAttribute("n")), // n = number indicating type of object
-					Integer.valueOf(currentObjectElement.getAttribute("r")), // r = row
-					Integer.valueOf(currentObjectElement.getAttribute("c")) // c = column
-				});
-			}
 			
-			final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("t"); // t = tutorial
-			for (int i=0;i<tutorialNodeList.getLength();i++) {
-				final Element currentTutorialElement = (Element)tutorialNodeList.item(i);
-				tutorialList.add(currentTutorialElement.getAttribute("i")); // i = info, meaning the tutorial text
+			// Select the correct level in the world.
+			for (int i=0;i<levelNodeList.getLength();i++) {
+				if (Integer.valueOf(((Element)levelNodeList.item(i)).getAttribute("id"))==level) {
+					final Element currentLevelElement = (Element)levelNodeList.item(i);
+
+					// Make a list of all child objects.
+					final NodeList objectNodeList = currentLevelElement.getElementsByTagName("o"); // o = object
+					
+					// Load attributes into an Object[3], then append to objectArrayList.
+					for (int j=0;j<objectNodeList.getLength();j++) {
+						final Element currentObjectElement = (Element)objectNodeList.item(j);
+						objectList.add(new int[]{
+							Integer.valueOf(currentObjectElement.getAttribute("n")), // n = number indicating type of object
+							Integer.valueOf(currentObjectElement.getAttribute("r")), // r = row
+							Integer.valueOf(currentObjectElement.getAttribute("c")) // c = column
+						});
+					}
+					
+					final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("t"); // t = tutorial
+					for (int j=0;j<tutorialNodeList.getLength();j++) {
+						final Element currentTutorialElement = (Element)tutorialNodeList.item(j);
+						tutorialList.add(currentTutorialElement.getAttribute("i")); // i = info, meaning the tutorial text
+					}
+					break;
+				}
 			}
 		} catch (Exception e) {
 			Log.e(TAG,"XML FAIL!",e);
 			Toast.makeText(context, "Failed to load level.", Toast.LENGTH_LONG);
+		}
+	}
+
+	public static void setKomika(Typeface komika,TextView... views) { // changes font
+		for (TextView tv:views) {
+			tv.setTypeface(komika);
+		}
+	}
+	
+
+	public static void setClick(OnClickListener listener,View... views) {
+		for (View view:views) {
+			view.setOnClickListener(listener);
 		}
 	}
 }

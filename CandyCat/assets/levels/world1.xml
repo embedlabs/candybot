@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <w id="1">
 	<l id="1">
-		<o n="0" r="2" c="3" />
-		<o n="1" r="2" c="2" />
-		
-		<!-- Delete this test section later: -->
-		<o n="2" r="2" c="4" />
-		<o n="3" r="2" c="5" />
-		<o n="4" r="2" c="6" />
-		<o n="5" r="2" c="7" />
-		<o n="6" r="2" c="8" />
-		<!-- End delete section. -->
-		
+		<o n="1" r="7" c="8" />
+		<o n="2" r="7" c="7" />
 		<t i="Help the Candy Cat push the candy into the pipe!" />
 		<t i="The Candy Cat is immune to gravity, but the candy is not." />
+	</l>
+	<l id="2">
+		<o n="1" r="2" c="12" />
+		<o n="2" r="2" c="11" />
+	</l>
+	<l id="3">
+		<o n="1" r="1" c="11" />
+		<o n="2" r="1" c="12" />
 	</l>
 </w>

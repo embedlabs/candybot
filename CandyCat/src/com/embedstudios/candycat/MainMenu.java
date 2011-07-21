@@ -249,8 +249,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		iv_facebook = (ImageView)findViewById(R.id.button_facebook);
 		iv_twitter = (ImageView)findViewById(R.id.button_twitter);
 		
-		setKomika(mainmenu_tv,button_play); // changes font
-		setClick(button_play,iv_achievements,iv_facebook,iv_twitter);
+		CandyUtils.setKomika(komika,mainmenu_tv,button_play); // changes font
+		CandyUtils.setClick(this,button_play,iv_achievements,iv_facebook,iv_twitter);
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies part
 		
@@ -337,18 +337,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	@Override
 	protected int getRenderSurfaceViewID() {
 		return R.id.rsv;
-	}
-
-	public void setKomika(TextView... views) { // changes font
-		for (TextView tv:views) {
-			tv.setTypeface(komika);
-		}
-	}
-
-	public void setClick(View... views) {
-		for (View view:views) {
-			view.setOnClickListener(this);
-		}
 	}
 	
 	@Override
