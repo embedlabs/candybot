@@ -769,31 +769,55 @@ com.badlogic.gdx.utils.LongMap$Values -> com.badlogic.gdx.utils.LongMap$Values:
     java.util.Iterator iterator() -> iterator
     void reset() -> reset
     void remove() -> remove
+com.embedstudios.candycat.CandyAnimatedSprite -> com.embedstudios.candycat.c:
+    boolean stable -> a
+    int index -> b
+    int type -> c
+    boolean gravityIsOn -> d
+    int candyRotationState -> e
+    void onPathStarted(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity) -> onPathStarted
+    void onPathWaypointStarted(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity,int) -> onPathWaypointStarted
+    void onPathWaypointFinished(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity,int) -> onPathWaypointFinished
+    void onPathFinished(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity) -> onPathFinished
 com.embedstudios.candycat.CandyGallery -> com.embedstudios.candycat.CandyGallery:
     void onCreate(android.os.Bundle) -> onCreate
 com.embedstudios.candycat.CandyLevel -> com.embedstudios.candycat.CandyLevel:
-    int PHONE_WIDTH -> a
-    int PHONE_HEIGHT -> b
+    float PHONE_WIDTH -> a
+    float PHONE_HEIGHT -> b
     int level -> c
     int world -> d
     java.util.ArrayList objectList -> e
     java.util.ArrayList tutorialList -> f
-    org.anddev.andengine.entity.scene.Scene mScene -> g
-    org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap mTMXTiledMap -> h
-    org.anddev.andengine.engine.camera.BoundCamera mBoundChaseCamera -> i
-    org.anddev.andengine.opengl.texture.Texture mObjectTexture -> j
-    org.anddev.andengine.opengl.texture.region.TextureRegion boxTR -> k
-    org.anddev.andengine.opengl.texture.region.TextureRegion movableWallTR -> l
-    org.anddev.andengine.opengl.texture.region.TextureRegion inertiaWallTR -> m
+    java.util.ArrayList spriteList -> g
+    int[][] backgroundArray -> h
+    int[][] objectArray -> i
+    org.anddev.andengine.entity.scene.Scene mScene -> j
+    org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap mTMXTiledMap -> k
+    org.anddev.andengine.engine.camera.ZoomCamera mZoomCamera -> l
+    org.anddev.andengine.opengl.texture.Texture mObjectTexture -> m
     org.anddev.andengine.opengl.texture.region.TiledTextureRegion candyTTR -> n
     org.anddev.andengine.opengl.texture.region.TiledTextureRegion catTTR -> o
     org.anddev.andengine.opengl.texture.region.TiledTextureRegion bombTTR -> p
     org.anddev.andengine.opengl.texture.region.TiledTextureRegion enemyTTR -> q
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion boxTTR -> r
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion movableWallTTR -> s
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion inertiaWallTTR -> t
+    org.anddev.andengine.input.touch.detector.SurfaceScrollDetector mScrollDetector -> u
+    org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector mPinchZoomDetector -> v
+    float mPinchZoomStartedCameraZoomFactor -> w
+    android.graphics.Typeface komika -> x
     org.anddev.andengine.engine.Engine onLoadEngine() -> onLoadEngine
     void onLoadResources() -> onLoadResources
     org.anddev.andengine.entity.scene.Scene onLoadScene() -> onLoadScene
     void onLoadComplete() -> onLoadComplete
     void onTMXTileWithPropertiesCreated(org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap,org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer,org.anddev.andengine.entity.layer.tiled.tmx.TMXTile,org.anddev.andengine.entity.layer.tiled.tmx.TMXProperties) -> onTMXTileWithPropertiesCreated
+    int getLayoutID() -> getLayoutID
+    int getRenderSurfaceViewID() -> getRenderSurfaceViewID
+    void onScroll(org.anddev.andengine.input.touch.detector.ScrollDetector,org.anddev.andengine.input.touch.TouchEvent,float,float) -> onScroll
+    void onPinchZoomStarted(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent) -> onPinchZoomStarted
+    void onPinchZoom(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent,float) -> onPinchZoom
+    void onPinchZoomFinished(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent,float) -> onPinchZoomFinished
+    boolean onSceneTouchEvent(org.anddev.andengine.entity.scene.Scene,org.anddev.andengine.input.touch.TouchEvent) -> onSceneTouchEvent
 com.embedstudios.candycat.DitheredSprite -> com.embedstudios.candycat.a:
     void onInitDraw(javax.microedition.khronos.opengles.GL10) -> onInitDraw
 com.embedstudios.candycat.MainMenu -> com.embedstudios.candycat.MainMenu:
@@ -836,6 +860,7 @@ com.embedstudios.candycat.MainMenu -> com.embedstudios.candycat.MainMenu:
 com.embedstudios.candycat.MainMenu$SplashTask -> com.embedstudios.candycat.b:
     com.embedstudios.candycat.MainMenu this$0 -> a
     java.lang.Void doInBackground$10299ca() -> a
+    void pause(int) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
     void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
@@ -3293,6 +3318,7 @@ com.scoreloop.client.android.ui.R$id -> com.scoreloop.client.android.ui.R$id:
     int control2 -> control2
     int edit_login -> edit_login
     int enclosing_rl -> enclosing_rl
+    int enclosing_rl_level -> enclosing_rl_level
     int enclosing_vf -> enclosing_vf
     int facebook_checkbox -> facebook_checkbox
     int gallery_ll -> gallery_ll
@@ -3308,6 +3334,7 @@ com.scoreloop.client.android.ui.R$id -> com.scoreloop.client.android.ui.R$id:
     int myspace_checkbox -> myspace_checkbox
     int ok_button -> ok_button
     int rsv -> rsv
+    int rsv_level -> rsv_level
     int sl_body -> sl_body
     int sl_button -> sl_button
     int sl_button_cancel -> sl_button_cancel
@@ -3397,6 +3424,7 @@ com.scoreloop.client.android.ui.R$id -> com.scoreloop.client.android.ui.R$id:
     int twitter_checkbox -> twitter_checkbox
 com.scoreloop.client.android.ui.R$layout -> com.scoreloop.client.android.ui.R$layout:
     int gallery -> gallery
+    int level -> level
     int main -> main
     int sl_challenge_payment -> sl_challenge_payment
     int sl_dialog_custom -> sl_dialog_custom
@@ -3449,6 +3477,7 @@ com.scoreloop.client.android.ui.R$string -> com.scoreloop.client.android.ui.R$st
     int button_achievements -> button_achievements
     int button_gallery -> button_gallery
     int button_play -> button_play
+    int facebook_link -> facebook_link
     int loading -> loading
     int sl_abuse_report_sent -> sl_abuse_report_sent
     int sl_abuse_report_title -> sl_abuse_report_title
@@ -3610,6 +3639,7 @@ com.scoreloop.client.android.ui.R$string -> com.scoreloop.client.android.ui.R$st
     int sl_twitter -> sl_twitter
     int sl_update -> sl_update
     int sl_username -> sl_username
+    int twitter_link -> twitter_link
 com.scoreloop.client.android.ui.R$style -> com.scoreloop.client.android.ui.R$style:
     int candyButton -> candyButton
     int menuButton -> menuButton
@@ -3782,7 +3812,7 @@ com.scoreloop.client.android.ui.StandardScoreloopManager$Checker -> com.scoreloo
     void add(java.lang.String,java.lang.Object[]) -> a
     void check() -> a
     java.lang.String format(java.lang.String,java.lang.Object[]) -> b
-    void informDeveloper$552c4e01() -> d
+    void informDeveloper(java.lang.String) -> a
     void reportOptional() -> b
     void reportRequired() -> c
 com.scoreloop.client.android.ui.StandardScoreloopManager$VerifyException -> com.scoreloop.client.android.ui.a:
@@ -7792,6 +7822,33 @@ org.anddev.andengine.entity.util.ScreenGrabber -> org.anddev.andengine.entity.ut
 org.anddev.andengine.entity.util.ScreenGrabber$IScreenGrabberCallback -> org.anddev.andengine.entity.util.ScreenGrabber$IScreenGrabberCallback:
     void onScreenGrabbed(android.graphics.Bitmap) -> onScreenGrabbed
     void onScreenGrabFailed(java.lang.Exception) -> onScreenGrabFailed
+org.anddev.andengine.extension.input.touch.controller.MultiTouch -> org.anddev.andengine.extension.input.touch.controller.MultiTouch:
+    java.lang.Boolean SUPPORTED -> SUPPORTED
+    java.lang.Boolean SUPPORTED_DISTINCT -> SUPPORTED_DISTINCT
+    boolean isSupportedByAndroidVersion() -> isSupportedByAndroidVersion
+    boolean isSupported(android.content.Context) -> isSupported
+    boolean isSupportedDistinct(android.content.Context) -> isSupportedDistinct
+org.anddev.andengine.extension.input.touch.controller.MultiTouchController -> org.anddev.andengine.extension.input.touch.controller.MultiTouchController:
+    boolean onHandleMotionEvent(android.view.MotionEvent) -> onHandleMotionEvent
+    boolean onHandleTouchMove(android.view.MotionEvent) -> onHandleTouchMove
+    boolean onHandleTouchAction(int,android.view.MotionEvent) -> onHandleTouchAction
+    int getPointerIndex(android.view.MotionEvent) -> getPointerIndex
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector -> org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector:
+    float TRIGGER_PINCHZOOM_MINIMUM_DISTANCE_DEFAULT -> TRIGGER_PINCHZOOM_MINIMUM_DISTANCE_DEFAULT
+    org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener mPinchZoomDetectorListener -> mPinchZoomDetectorListener
+    float mInitialDistance -> mInitialDistance
+    float mCurrentDistance -> mCurrentDistance
+    boolean mPinchZooming -> mPinchZooming
+    boolean isZooming() -> isZooming
+    boolean onManagedTouchEvent(org.anddev.andengine.input.touch.TouchEvent) -> onManagedTouchEvent
+    float getZoomFactor() -> getZoomFactor
+    float calculatePointerDistance(android.view.MotionEvent) -> calculatePointerDistance
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener -> org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener:
+    void onPinchZoomStarted(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent) -> onPinchZoomStarted
+    void onPinchZoom(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent,float) -> onPinchZoom
+    void onPinchZoomFinished(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent,float) -> onPinchZoomFinished
+org.anddev.andengine.extension.input.touch.exception.MultiTouchException -> org.anddev.andengine.extension.input.touch.exception.MultiTouchException:
+    long serialVersionUID -> serialVersionUID
 org.anddev.andengine.extension.physics.box2d.FixedStepPhysicsWorld -> org.anddev.andengine.extension.physics.box2d.FixedStepPhysicsWorld:
     int STEPSPERSECOND_DEFAULT -> STEPSPERSECOND_DEFAULT
     float mTimeStep -> mTimeStep

@@ -4103,6 +4103,14 @@ org.anddev.andengine.entity.Entity: void applyRotation(javax.microedition.khrono
 org.anddev.andengine.entity.Entity: void applyScale(javax.microedition.khronos.opengles.GL10)
 org.anddev.andengine.entity.Entity: void onManagedDraw(javax.microedition.khronos.opengles.GL10,org.anddev.andengine.engine.camera.Camera)
 org.anddev.andengine.entity.Entity: void onManagedUpdate(float)
+org.anddev.andengine.extension.input.touch.controller.MultiTouch
+org.anddev.andengine.extension.input.touch.controller.MultiTouch: java.lang.Boolean SUPPORTED
+org.anddev.andengine.extension.input.touch.controller.MultiTouch: java.lang.Boolean SUPPORTED_DISTINCT
+org.anddev.andengine.extension.input.touch.controller.MultiTouch: void <clinit>()
+org.anddev.andengine.extension.input.touch.controller.MultiTouch: MultiTouch()
+org.anddev.andengine.extension.input.touch.controller.MultiTouch: boolean isSupportedByAndroidVersion()
+org.anddev.andengine.extension.input.touch.controller.MultiTouch: boolean isSupported(android.content.Context)
+org.anddev.andengine.extension.input.touch.controller.MultiTouch: boolean isSupportedDistinct(android.content.Context)
 org.anddev.andengine.util.Callable
 org.anddev.andengine.util.Callable: java.lang.Object call()
 org.anddev.andengine.opengl.texture.source.AssetTextureSource
@@ -4203,6 +4211,9 @@ org.anddev.andengine.input.touch.detector.BaseDetector: void setEnabled(boolean)
 org.anddev.andengine.input.touch.detector.BaseDetector: boolean onManagedTouchEvent(org.anddev.andengine.input.touch.TouchEvent)
 org.anddev.andengine.input.touch.detector.BaseDetector: boolean onSceneTouchEvent(org.anddev.andengine.entity.scene.Scene,org.anddev.andengine.input.touch.TouchEvent)
 org.anddev.andengine.input.touch.detector.BaseDetector: boolean onTouchEvent(org.anddev.andengine.input.touch.TouchEvent)
+org.anddev.andengine.extension.input.touch.exception.MultiTouchException
+org.anddev.andengine.extension.input.touch.exception.MultiTouchException: long serialVersionUID
+org.anddev.andengine.extension.input.touch.exception.MultiTouchException: MultiTouchException()
 org.anddev.andengine.audio.IAudioEntity
 org.anddev.andengine.audio.IAudioEntity: void play()
 org.anddev.andengine.audio.IAudioEntity: void pause()
@@ -4475,6 +4486,24 @@ org.anddev.andengine.util.modifier.ease.EaseLinear: org.anddev.andengine.util.mo
 org.anddev.andengine.util.modifier.ease.EaseLinear: EaseLinear()
 org.anddev.andengine.util.modifier.ease.EaseLinear: org.anddev.andengine.util.modifier.ease.EaseLinear getInstance()
 org.anddev.andengine.util.modifier.ease.EaseLinear: float getPercentageDone(float,float,float,float)
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: float TRIGGER_PINCHZOOM_MINIMUM_DISTANCE_DEFAULT
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener mPinchZoomDetectorListener
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: float mInitialDistance
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: float mCurrentDistance
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: boolean mPinchZooming
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: PinchZoomDetector(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener)
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: boolean isZooming()
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: boolean onManagedTouchEvent(org.anddev.andengine.input.touch.TouchEvent)
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: float getZoomFactor()
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector: float calculatePointerDistance(android.view.MotionEvent)
+org.anddev.andengine.input.touch.detector.BaseDetector: boolean mEnabled
+org.anddev.andengine.input.touch.detector.BaseDetector: BaseDetector()
+org.anddev.andengine.input.touch.detector.BaseDetector: boolean isEnabled()
+org.anddev.andengine.input.touch.detector.BaseDetector: void setEnabled(boolean)
+org.anddev.andengine.input.touch.detector.BaseDetector: boolean onManagedTouchEvent(org.anddev.andengine.input.touch.TouchEvent)
+org.anddev.andengine.input.touch.detector.BaseDetector: boolean onSceneTouchEvent(org.anddev.andengine.entity.scene.Scene,org.anddev.andengine.input.touch.TouchEvent)
+org.anddev.andengine.input.touch.detector.BaseDetector: boolean onTouchEvent(org.anddev.andengine.input.touch.TouchEvent)
 org.anddev.andengine.entity.modifier.PathModifier$Path
 org.anddev.andengine.entity.modifier.PathModifier$Path: float[] mCoordinatesX
 org.anddev.andengine.entity.modifier.PathModifier$Path: float[] mCoordinatesY
@@ -8189,23 +8218,6 @@ org.anddev.andengine.entity.modifier.PathModifier$IPathModifierListener: void on
 org.anddev.andengine.entity.modifier.PathModifier$IPathModifierListener: void onPathWaypointStarted(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity,int)
 org.anddev.andengine.entity.modifier.PathModifier$IPathModifierListener: void onPathWaypointFinished(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity,int)
 org.anddev.andengine.entity.modifier.PathModifier$IPathModifierListener: void onPathFinished(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity)
-org.anddev.andengine.entity.particle.modifier.AlphaModifier
-org.anddev.andengine.entity.particle.modifier.AlphaModifier: AlphaModifier(float,float,float,float)
-org.anddev.andengine.entity.particle.modifier.AlphaModifier: void onSetInitialValue(org.anddev.andengine.entity.particle.Particle,float)
-org.anddev.andengine.entity.particle.modifier.AlphaModifier: void onSetValue(org.anddev.andengine.entity.particle.Particle,float)
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mFromValue
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mToValue
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mFromTime
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mToTime
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mDuration
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mSpanValue
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: BaseSingleValueSpanModifier(float,float,float,float)
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onSetInitialValue(org.anddev.andengine.entity.particle.Particle,float)
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onSetValue(org.anddev.andengine.entity.particle.Particle,float)
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onInitializeParticle(org.anddev.andengine.entity.particle.Particle)
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onUpdateParticle(org.anddev.andengine.entity.particle.Particle)
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onSetValueInternal(org.anddev.andengine.entity.particle.Particle,float)
-org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float calculateValue(float)
 org.anddev.andengine.entity.modifier.RotationByModifier
 org.anddev.andengine.entity.modifier.RotationByModifier: RotationByModifier(float,float)
 org.anddev.andengine.entity.modifier.RotationByModifier: RotationByModifier(org.anddev.andengine.entity.modifier.RotationByModifier)
@@ -8249,6 +8261,23 @@ org.anddev.andengine.util.modifier.BaseModifier: org.anddev.andengine.util.modif
 org.anddev.andengine.util.modifier.BaseModifier: void setModifierListener(org.anddev.andengine.util.modifier.IModifier$IModifierListener)
 org.anddev.andengine.util.modifier.BaseModifier: org.anddev.andengine.util.modifier.IModifier clone()
 org.anddev.andengine.util.modifier.BaseModifier: java.lang.Object clone()
+org.anddev.andengine.entity.particle.modifier.AlphaModifier
+org.anddev.andengine.entity.particle.modifier.AlphaModifier: AlphaModifier(float,float,float,float)
+org.anddev.andengine.entity.particle.modifier.AlphaModifier: void onSetInitialValue(org.anddev.andengine.entity.particle.Particle,float)
+org.anddev.andengine.entity.particle.modifier.AlphaModifier: void onSetValue(org.anddev.andengine.entity.particle.Particle,float)
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mFromValue
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mToValue
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mFromTime
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mToTime
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mDuration
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float mSpanValue
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: BaseSingleValueSpanModifier(float,float,float,float)
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onSetInitialValue(org.anddev.andengine.entity.particle.Particle,float)
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onSetValue(org.anddev.andengine.entity.particle.Particle,float)
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onInitializeParticle(org.anddev.andengine.entity.particle.Particle)
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onUpdateParticle(org.anddev.andengine.entity.particle.Particle)
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: void onSetValueInternal(org.anddev.andengine.entity.particle.Particle,float)
+org.anddev.andengine.entity.particle.modifier.BaseSingleValueSpanModifier: float calculateValue(float)
 org.anddev.andengine.entity.modifier.IEntityModifier
 org.anddev.andengine.entity.modifier.IEntityModifier: org.anddev.andengine.entity.modifier.IEntityModifier clone()
 org.anddev.andengine.util.modifier.ease.EaseQuintInOut
@@ -11516,6 +11545,10 @@ org.anddev.andengine.entity.particle.initializer.BaseSingleValueInitializer: Bas
 org.anddev.andengine.entity.particle.initializer.BaseSingleValueInitializer: void onInitializeParticle(org.anddev.andengine.entity.particle.Particle,float)
 org.anddev.andengine.entity.particle.initializer.BaseSingleValueInitializer: void onInitializeParticle(org.anddev.andengine.entity.particle.Particle)
 org.anddev.andengine.entity.particle.initializer.BaseSingleValueInitializer: float getRandomValue()
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener: void onPinchZoomStarted(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent)
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener: void onPinchZoom(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent,float)
+org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector$IPinchZoomDetectorListener: void onPinchZoomFinished(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent,float)
 org.anddev.andengine.util.SystemUtils
 org.anddev.andengine.util.SystemUtils: java.lang.String BOGOMIPS_PATTERN
 org.anddev.andengine.util.SystemUtils: java.lang.String MEMTOTAL_PATTERN
@@ -13653,6 +13686,22 @@ org.anddev.andengine.util.modifier.BaseModifier: org.anddev.andengine.util.modif
 org.anddev.andengine.util.modifier.BaseModifier: java.lang.Object clone()
 org.anddev.andengine.entity.particle.emitter.IParticleEmitter
 org.anddev.andengine.entity.particle.emitter.IParticleEmitter: void getPositionOffset(float[])
+org.anddev.andengine.extension.input.touch.controller.MultiTouchController
+org.anddev.andengine.extension.input.touch.controller.MultiTouchController: MultiTouchController()
+org.anddev.andengine.extension.input.touch.controller.MultiTouchController: boolean onHandleMotionEvent(android.view.MotionEvent)
+org.anddev.andengine.extension.input.touch.controller.MultiTouchController: boolean onHandleTouchMove(android.view.MotionEvent)
+org.anddev.andengine.extension.input.touch.controller.MultiTouchController: boolean onHandleTouchAction(int,android.view.MotionEvent)
+org.anddev.andengine.extension.input.touch.controller.MultiTouchController: int getPointerIndex(android.view.MotionEvent)
+org.anddev.andengine.input.touch.controller.BaseTouchController: org.anddev.andengine.input.touch.controller.ITouchController$ITouchEventCallback mTouchEventCallback
+org.anddev.andengine.input.touch.controller.BaseTouchController: boolean mRunOnUpdateThread
+org.anddev.andengine.input.touch.controller.BaseTouchController: org.anddev.andengine.util.pool.RunnablePoolUpdateHandler mTouchEventRunnablePoolUpdateHandler
+org.anddev.andengine.input.touch.controller.BaseTouchController: BaseTouchController()
+org.anddev.andengine.input.touch.controller.BaseTouchController: void setTouchEventCallback(org.anddev.andengine.input.touch.controller.ITouchController$ITouchEventCallback)
+org.anddev.andengine.input.touch.controller.BaseTouchController: void reset()
+org.anddev.andengine.input.touch.controller.BaseTouchController: void onUpdate(float)
+org.anddev.andengine.input.touch.controller.BaseTouchController: boolean fireTouchEvent(float,float,int,int,android.view.MotionEvent)
+org.anddev.andengine.input.touch.controller.BaseTouchController: void applyTouchOptions(org.anddev.andengine.engine.options.TouchOptions)
+org.anddev.andengine.input.touch.controller.BaseTouchController: org.anddev.andengine.input.touch.controller.ITouchController$ITouchEventCallback access$0(org.anddev.andengine.input.touch.controller.BaseTouchController)
 org.anddev.andengine.util.modifier.ease.EaseQuintOut
 org.anddev.andengine.util.modifier.ease.EaseQuintOut: org.anddev.andengine.util.modifier.ease.EaseQuintOut INSTANCE
 org.anddev.andengine.util.modifier.ease.EaseQuintOut: EaseQuintOut()
@@ -16307,6 +16356,7 @@ com.scoreloop.client.android.ui.R$string: int app_name
 com.scoreloop.client.android.ui.R$string: int button_achievements
 com.scoreloop.client.android.ui.R$string: int button_gallery
 com.scoreloop.client.android.ui.R$string: int button_play
+com.scoreloop.client.android.ui.R$string: int facebook_link
 com.scoreloop.client.android.ui.R$string: int loading
 com.scoreloop.client.android.ui.R$string: int sl_abuse_report_sent
 com.scoreloop.client.android.ui.R$string: int sl_abuse_report_title
@@ -16468,6 +16518,7 @@ com.scoreloop.client.android.ui.R$string: int sl_twentyfour
 com.scoreloop.client.android.ui.R$string: int sl_twitter
 com.scoreloop.client.android.ui.R$string: int sl_update
 com.scoreloop.client.android.ui.R$string: int sl_username
+com.scoreloop.client.android.ui.R$string: int twitter_link
 com.scoreloop.client.android.ui.R$string: R$string()
 com.scoreloop.client.android.ui.framework.BaseListItem
 com.scoreloop.client.android.ui.framework.BaseListItem: android.content.Context _context
@@ -16494,6 +16545,7 @@ com.scoreloop.client.android.ui.component.base.Manager: void submitLocalScores(j
 com.scoreloop.client.android.ui.component.base.Manager: void persistSessionUserName()
 com.scoreloop.client.android.ui.R$layout
 com.scoreloop.client.android.ui.R$layout: int gallery
+com.scoreloop.client.android.ui.R$layout: int level
 com.scoreloop.client.android.ui.R$layout: int main
 com.scoreloop.client.android.ui.R$layout: int sl_challenge_payment
 com.scoreloop.client.android.ui.R$layout: int sl_dialog_custom
@@ -17532,6 +17584,7 @@ com.scoreloop.client.android.ui.R$id: int control1
 com.scoreloop.client.android.ui.R$id: int control2
 com.scoreloop.client.android.ui.R$id: int edit_login
 com.scoreloop.client.android.ui.R$id: int enclosing_rl
+com.scoreloop.client.android.ui.R$id: int enclosing_rl_level
 com.scoreloop.client.android.ui.R$id: int enclosing_vf
 com.scoreloop.client.android.ui.R$id: int facebook_checkbox
 com.scoreloop.client.android.ui.R$id: int gallery_ll
@@ -17547,6 +17600,7 @@ com.scoreloop.client.android.ui.R$id: int mode_selector
 com.scoreloop.client.android.ui.R$id: int myspace_checkbox
 com.scoreloop.client.android.ui.R$id: int ok_button
 com.scoreloop.client.android.ui.R$id: int rsv
+com.scoreloop.client.android.ui.R$id: int rsv_level
 com.scoreloop.client.android.ui.R$id: int sl_body
 com.scoreloop.client.android.ui.R$id: int sl_button
 com.scoreloop.client.android.ui.R$id: int sl_button_cancel
@@ -25201,8 +25255,8 @@ com.scoreloop.client.android.ui.component.base.Configuration$Feature: com.scorel
 com.scoreloop.client.android.ui.ShowResultOverlayActivity
 org.anddev.andengine.ui.activity.BaseActivity
 org.anddev.andengine.ui.activity.BaseGameActivity
-com.embedstudios.candycat.CandyLevel
 org.anddev.andengine.ui.activity.LayoutGameActivity
+com.embedstudios.candycat.CandyLevel
 com.embedstudios.candycat.MainMenu
 org.anddev.andengine.ui.activity.BaseSplashActivity
 com.embedstudios.candycat.CandyGallery

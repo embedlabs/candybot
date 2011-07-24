@@ -1,13 +1,23 @@
+com.embedstudios.candycat.CandyAnimatedSprite:
+    public static final java.lang.String TAG
+    48:50:public void makeActive()
+    53:58:private synchronized void move(int,int,int[][])
+    85:86:public synchronized boolean moveRight(int[][],int[][])
+    92:93:public synchronized boolean moveLeft(int[][],int[][])
+    99:100:public synchronized boolean moveUp(int[][],int[][])
+    106:107:public synchronized boolean moveDown(int[][],int[][])
+    115:115:public synchronized void fall(int[][],int[][])
+    118:118:public boolean isStable()
 com.embedstudios.candycat.CandyLevel:
-    private static final int WIDTH
-    private static final int HEIGHT
-    private static final int CANDY
-    private static final int CAT
-    private static final int BOX
-    private static final int BOMB
-    private static final int ENEMY
-    private static final int MOVABLE_WALL
-    private static final int INERTIA_WALL
+    private static final float WIDTH
+    private static final float HEIGHT
+    static final int CANDY
+    static final int CAT
+    static final int BOX
+    static final int BOMB
+    static final int ENEMY
+    static final int MOVABLE_WALL
+    static final int INERTIA_WALL
     public static final java.lang.String TAG
 com.embedstudios.candycat.CandyUtils:
     public static final java.lang.String TAG
@@ -25,6 +35,7 @@ com.embedstudios.candycat.R$layout
 com.embedstudios.candycat.R$menu
 com.embedstudios.candycat.R$string
 com.embedstudios.candycat.R$style
+com.embedstudios.candycat.SpriteMover
 com.scoreloop.client.android.core.controller.d:
     public java.lang.String getDescription()
 com.scoreloop.client.android.core.server.b:

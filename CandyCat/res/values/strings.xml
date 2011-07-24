@@ -3,8 +3,6 @@
     <string name="app_name">\u0020Candy Cat\u0020</string>
     <string name="loading">Loading . . .</string>
     <string name="button_play">Play!</string>
-    <string name="button_gallery">Art Gallery</string>
-    <string name="button_achievements">Scoreloop</string>
     <string name="facebook_link">http://www.facebook.com/pages/Candy-Cat/236289176391475</string>
     <string name="twitter_link">http://www.twitter.com/EmbedStudios</string>
 </resources>
