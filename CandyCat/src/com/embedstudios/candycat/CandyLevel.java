@@ -41,10 +41,17 @@ import android.view.Display;
 import android.widget.Toast;
 
 public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener, IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
+	/**
+	 * Some important phone/game dimensions.
+	 */
 	private static final float WIDTH = 1536;
 	private static final float HEIGHT = 1152;
 	private static float PHONE_WIDTH,PHONE_HEIGHT;
 	
+	
+	/**
+	 * Instead of an enum...
+	 */
 	int level,world;
 	static final int CANDY = 1;
 	static final int CAT = 2;
@@ -54,6 +61,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	static final int MOVABLE_WALL = 6;
 	static final int INERTIA_WALL = 7;
 	
+	/**
+	 * Gotta keep track of all your variables and objects and stuff...
+	 */
 	private final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
 	private final ArrayList<String> tutorialList = new ArrayList<String>(); // list of all tutorial text
 	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
@@ -250,6 +260,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public void onTMXTileWithPropertiesCreated(final TMXTiledMap pTMXTiledMap,final TMXLayer pTMXLayer,final TMXTile pTMXTile,final TMXProperties<TMXTileProperty> pTMXTileProperties) {
 		backgroundArray[pTMXTile.getTileRow()][pTMXTile.getTileColumn()]=pTMXTile.getGlobalTileID();
+		// keeps track of the background tiles
 	}
 
 	@Override
@@ -261,7 +272,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	protected int getRenderSurfaceViewID() {
 		return R.id.rsv_level;
 	}
-
+	
+	
+	/**
+	 * Scroll/Zoom
+	 */
+	
 	@Override
 	public void onScroll(final ScrollDetector pScollDetector, final TouchEvent pTouchEvent, final float pDistanceX, final float pDistanceY) {
 		// TODO
