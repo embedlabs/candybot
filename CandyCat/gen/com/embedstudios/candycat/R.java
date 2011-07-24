@@ -344,6 +344,7 @@ public final class R {
         public static final int button_achievements=0x7f0600a4;
         public static final int button_gallery=0x7f0600a3;
         public static final int button_play=0x7f0600a2;
+        public static final int facebook_link=0x7f0600a5;
         public static final int loading=0x7f0600a1;
         public static final int sl_abuse_report_sent=0x7f060000;
         public static final int sl_abuse_report_title=0x7f060001;
@@ -505,6 +506,7 @@ public final class R {
         public static final int sl_twitter=0x7f06009d;
         public static final int sl_update=0x7f06009e;
         public static final int sl_username=0x7f06009f;
+        public static final int twitter_link=0x7f0600a6;
     }
     public static final class style {
         public static final int candyButton=0x7f070019;

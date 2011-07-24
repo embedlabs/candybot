@@ -148,10 +148,10 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			startActivity(new Intent(this,EntryScreenActivity.class));
 			break;
 		case R.id.button_facebook:
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/pages/Candy-Cat/236289176391475")));
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebook_link))));
 			break;
 		case R.id.button_twitter:
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.twitter.com/EmbedStudios")));
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.twitter_link))));
 			break;
 		}
 	}
