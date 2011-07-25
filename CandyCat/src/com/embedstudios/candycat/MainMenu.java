@@ -260,10 +260,12 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		} catch (Exception e) {
 			Log.e(TAG, "Singleton failed.",e);
 		}
+		
+		mAdvertisement = new ScreenAdvertisement(this, R.id.game_ad);
+		showAd();
+		
 		splashTask = new SplashTask();
 		splashTask.execute();
-		this.mAdvertisement = new ScreenAdvertisement(this, R.id.game_ad);
-		showAd();
 	}
 	
 	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {

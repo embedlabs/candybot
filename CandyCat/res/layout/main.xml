@@ -7,7 +7,6 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		 android:layout_gravity="center" />
-		
 	<ViewFlipper android:id="@+id/enclosing_vf"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent" >
@@ -25,21 +24,31 @@
 		<RelativeLayout android:id="@+id/mainmenu_rl"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
+			<com.google.ads.AdView
+				xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+				android:id="@+id/game_ad"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				ads:adUnitId="a14e01057884149"
+				ads:adSize="BANNER"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentRight="true" />
 			<TextView android:id="@+id/mainmenu_tv"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textSize="50dip"
 				android:text="@string/app_name"
-				android:layout_marginTop="40dip"
+				android:layout_margin="15dip"
 				android:textColor="@color/normal_text"
-				android:layout_alignParentTop="true"
+				android:layout_below="@id/game_ad"
 				android:layout_centerHorizontal="true" />
 			<Button android:id="@+id/button_play"
 				style="@style/menuButton"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/button_play"
-				android:layout_centerInParent="true" />
+				android:layout_below="@id/mainmenu_tv"
+				android:layout_centerHorizontal="true" />
 			<ImageView android:id="@+id/button_achievements"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -71,16 +80,4 @@
 				android:layout_toLeftOf="@id/button_facebook" />
 		</RelativeLayout>
 	</ViewFlipper>
-	 <com.google.ads.AdView 
-        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-        android:id="@+id/game_ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adUnitId="a14e01057884149"
-        ads:adSize="BANNER"
-        android:layout_gravity="top|right"
-        android:gravity="top|right"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        />
 </RelativeLayout>

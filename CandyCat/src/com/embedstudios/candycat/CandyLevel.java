@@ -2,6 +2,8 @@ package com.embedstudios.candycat;
 
 import java.util.ArrayList;
 
+import javax.microedition.khronos.opengles.GL11;
+
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.ZoomCamera;
 import org.anddev.andengine.engine.options.EngineOptions;
@@ -32,6 +34,7 @@ import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
+import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
@@ -82,8 +85,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private TMXTiledMap mTMXTiledMap;
 	private ZoomCamera mZoomCamera;
 	
-	private Texture mObjectTexture;
-	private TiledTextureRegion candyTTR, catTTR, bombTTR, enemyTTR, boxTTR, movableWallTTR, inertiaWallTTR;
+	private static Texture mObjectTexture;
+	private static TiledTextureRegion candyTTR, catTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
+	private static RectangleVertexBuffer candyRVB, catRVB, boxRVB, bombRVB, enemyRVB, movableWallRVB, inertiaWallRVB;
 
 	private SurfaceScrollDetector mScrollDetector;
 	private PinchZoomDetector mPinchZoomDetector;
@@ -193,6 +197,22 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 
 		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
+		
+		candyRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
+		catRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
+		boxRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
+		bombRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
+		enemyRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
+		movableWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
+		inertiaWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
+		
+		candyRVB.update(64,64);
+		catRVB.update(64,64);
+		boxRVB.update(64,64);
+		bombRVB.update(64,64);
+		enemyRVB.update(64,64);
+		movableWallRVB.update(64,64);
+		inertiaWallRVB.update(64,64);
 	}
 
 	@Override
@@ -278,28 +298,28 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		switch (type){
 		case CANDY:
-			face = new CandyAnimatedSprite(row,column,candyTTR,index,CANDY);
+			face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY);
 			break;
 		case CAT:
-			face = new CandyAnimatedSprite(row,column,catTTR,index,CAT);
+			face = new CandyAnimatedSprite(row,column,catTTR,catRVB,index,CAT);
 			break;
 		case BOX:
-			face = new CandyAnimatedSprite(row,column,boxTTR,index,BOX);
+			face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX);
 			break;
 		case BOMB:
-			face = new CandyAnimatedSprite(row,column,bombTTR,index,BOMB);
+			face = new CandyAnimatedSprite(row,column,bombTTR,bombRVB,index,BOMB);
 			break;
 		case ENEMY:
-			face = new CandyAnimatedSprite(row,column,enemyTTR,index,ENEMY);
+			face = new CandyAnimatedSprite(row,column,enemyTTR,enemyRVB,index,ENEMY);
 			break;
 		case MOVABLE_WALL:
-			face = new CandyAnimatedSprite(row,column,movableWallTTR,index,MOVABLE_WALL);
+			face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL);
 			break;
 		case INERTIA_WALL:
-			face = new CandyAnimatedSprite(row,column,inertiaWallTTR,index,INERTIA_WALL);
+			face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL);
 			break;
 		default:
-			face = new CandyAnimatedSprite(row,column,candyTTR,index,CANDY);
+			face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY);
 			break;
 		}
 		spriteList.add(face);

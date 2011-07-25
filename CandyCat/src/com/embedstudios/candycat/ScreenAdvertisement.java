@@ -6,7 +6,7 @@ package com.embedstudios.candycat;
  *
  * This class can be used with both AndEngine LayoutGameActivity derived classes and
  * regular Android Activity derived classes.
-*/
+ */
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
@@ -28,18 +28,20 @@ public class ScreenAdvertisement {
 
 	//show the ads.
 	private void showAds () {
-		// Show the ad.
+//		Show the ad.
 		AdView adView = (AdView)activity.findViewById(advertisementId);
 		adView.setVisibility(android.view.View.VISIBLE);
 		adView.setEnabled(true);
-		
-        AdRequest request = new AdRequest();
-        request.setTesting(false);
-        adView.loadAd(request);
+
+		AdRequest request = new AdRequest();
+		request.addTestDevice("3BC7A897716390AE61323AA7938F67FE");
+		request.setTesting(true);
+//		request.setTesting(false);
+		adView.loadAd(request);
 	}
 
-	//hide ads.
 	private void unshowAds () {
+//		hide ads.
 		AdView adView = (AdView)activity.findViewById(advertisementId);
 		adView.setVisibility(android.view.View.INVISIBLE);
 		adView.setEnabled(false);
@@ -56,11 +58,11 @@ public class ScreenAdvertisement {
 			showAds();
 		}
 	};
-	
+
 	public void showAdvertisement() {
 		adsHandler.post(showAdsRunnable);
 	}
-	
+
 	public void hideAdvertisement() {
 		adsHandler.post(unshowAdsRunnable);
 	}

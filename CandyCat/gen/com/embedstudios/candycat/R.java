@@ -167,11 +167,11 @@ public final class R {
     public static final class id {
         public static final int SecondaryProgress=0x7f0a007b;
         public static final int background=0x7f0a007a;
-        public static final int button_achievements=0x7f0a000d;
-        public static final int button_facebook=0x7f0a000e;
+        public static final int button_achievements=0x7f0a000e;
+        public static final int button_facebook=0x7f0a000f;
         public static final int button_ok=0x7f0a0018;
-        public static final int button_play=0x7f0a000c;
-        public static final int button_twitter=0x7f0a000f;
+        public static final int button_play=0x7f0a000d;
+        public static final int button_twitter=0x7f0a0010;
         public static final int cancel_button=0x7f0a006a;
         public static final int contender_icon=0x7f0a004b;
         public static final int contender_name=0x7f0a004c;
@@ -186,7 +186,7 @@ public final class R {
         public static final int enclosing_rl_level=0x7f0a0000;
         public static final int enclosing_vf=0x7f0a0007;
         public static final int facebook_checkbox=0x7f0a0066;
-        public static final int game_ad=0x7f0a0010;
+        public static final int game_ad=0x7f0a000b;
         public static final int icon=0x7f0a002a;
         public static final int loading_iv_level=0x7f0a0003;
         public static final int loading_rl_level=0x7f0a0002;
@@ -194,7 +194,7 @@ public final class R {
         public static final int logo_iv=0x7f0a0009;
         public static final int logo_rl=0x7f0a0008;
         public static final int mainmenu_rl=0x7f0a000a;
-        public static final int mainmenu_tv=0x7f0a000b;
+        public static final int mainmenu_tv=0x7f0a000c;
         public static final int message=0x7f0a0012;
         public static final int message_edittext=0x7f0a0069;
         public static final int mode=0x7f0a0052;

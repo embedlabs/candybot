@@ -6,6 +6,7 @@ import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier.Path;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
+import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.util.modifier.ease.EaseLinear;
 
 import android.util.Log;
@@ -32,8 +33,8 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	
 	public static final String TAG = CandyUtils.TAG;
 
-	public CandyAnimatedSprite(int row, int column, TiledTextureRegion pTiledTextureRegion, int index, int type) {
-		super(column*64, row*64, pTiledTextureRegion);
+	public CandyAnimatedSprite(int row, int column, TiledTextureRegion pTiledTextureRegion, RectangleVertexBuffer RVB, int index, int type) {
+		super(column*64, row*64, pTiledTextureRegion, RVB);
 		this.index = index;
 		this.type = type;
 		if (type==CandyLevel.CANDY||type==CandyLevel.BOX||type==CandyLevel.BOMB) {
@@ -42,11 +43,6 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 			gravityIsOn=false;
 		}
 		// TODO Auto-generated constructor stub
-	}
-	
-	public void makeActive() {
-		stable = false;
-		// TODO
 	}
 	
 	private synchronized void move(int row, int column, int[][] objectArray) {
