@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="Background" tilewidth="64" tileheight="64" spacing="3" margin="2">
-	<image source="gfx/bg_tileset.png" width="256" height="192" />
+	<image source="gfx/bg_tileset.png" width="269" height="202" />
 	<tile id="0">
 		<properties>
 			<property name="wall" value="true" />
