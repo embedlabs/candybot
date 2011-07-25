@@ -38,12 +38,6 @@
 				android:layout_height="wrap_content"
 				android:text="@string/button_play"
 				android:layout_centerInParent="true" />
-<!-- 			<Button android:id="@+id/button_gallery" -->
-<!-- 				style="@style/menuButton" -->
-<!-- 				android:layout_width="fill_parent" -->
-<!-- 				android:layout_height="wrap_content" -->
-<!-- 				android:text="@string/button_gallery" -->
-<!-- 				android:layout_margin="3dip" /> -->
 			<ImageView android:id="@+id/button_achievements"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

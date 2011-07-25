@@ -3,7 +3,7 @@
 	<tileset source="tmx/background.tsx"/>
 	<layer width="24" height="18">
 		<data encoding="base64" compression="gzip">
-			H4sIAAAAAAAAC82U3QqAMAiFXUH1/k+8goIh5/izeZEga02/eWTYRKQt+uWcR+yJOwaP5M3wxzXKj+hi9Vt9yNTvsaz4CtYMX4zzv/OzHMRDexH8dtB/zUF5FXxmTA+rw9KOYqv6zyxzj46L5Ol46249G/Te6yHr+7fq2YZmnfd+mL5M/Sj/BBpXfLt9f787Zy5WYMAGAAA=
+			H4sIAAAAAAAAC7WT4Q6AIAiEsfL9Xzl/1MZuB5yWbEzX5OM6sZlZ25y7IuqFe6zBNdK4qr/izfqD5y9SxzjIV/p5/rtGehXvmG6mX2H473iO6Vf5Wc/K6z/mn82kEtl9VPOw4j97Yyqzeqcrocxydr9MV/XPuCK/P+lru5CqfoUV8RX/v/Aj/cfI03SvZ/IG8lalxcAGAAA=
 		</data>
 	</layer>
 </map>

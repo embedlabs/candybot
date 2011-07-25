@@ -142,7 +142,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		case R.id.button_play:
 			startActivity(new Intent(this,CandyLevel.class)
 				.putExtra("com.embedstudios.candycat.world", 1)
-				.putExtra("com.embedstudios.candycat.level", 1));
+				.putExtra("com.embedstudios.candycat.level", 7));
 			break;
 		case R.id.button_achievements:
 			startActivity(new Intent(this,EntryScreenActivity.class));
@@ -305,8 +305,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		final Random randGen = new Random();
 		final int x = randGen.nextInt(WIDTH-65);
 		final int y = randGen.nextInt(HEIGHT-65);
-		final int vX = randGen.nextInt(21)-10;
-		final int vY = randGen.nextInt(21)-10;
+		final int vX = randGen.nextInt(31)-15;
+		final int vY = randGen.nextInt(31)-15;
 		addFace(x,y,type,vX,vY);
 	}
 	

@@ -35,9 +35,17 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
+import android.graphics.PixelFormat;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener, IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
@@ -84,6 +92,57 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public static Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
 	
+	private TextView loading_tv;
+	private ImageView loading_iv;
+	private RelativeLayout loading_rl_level;
+	
+	private LoadTask loadTask;
+	private boolean running = true;
+	
+	public class LoadTask extends AsyncTask<Void,Void,Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			if (!running) {return null;}
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				Log.e(TAG,"Delay failed.",e);
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			if (!loading_rl_level.equals(null)) {loading_rl_level.setVisibility(View.INVISIBLE);}
+			if (!loading_iv.equals(null)) {loading_iv.clearAnimation();}
+			if (running) {addTutorialText(tutorialList);}
+		}
+		
+	}
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		getWindow().setFormat(PixelFormat.RGBA_8888);
+		
+		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
+		loading_tv = (TextView)findViewById(R.id.loading_tv_level);
+		CandyUtils.setKomika(komika,loading_tv);
+		
+		loading_iv = (ImageView)findViewById(R.id.loading_iv_level);
+		loading_rl_level = (RelativeLayout)findViewById(R.id.loading_rl_level);
+	}
+	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		if (hasFocus) {
+			loading_iv.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely));
+		}
+	}
+	
 	@Override
 	public Engine onLoadEngine() {
 		Log.v(TAG,"CandyLevel onLoadEngine()");
@@ -121,7 +180,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		Log.v(TAG,"CandyLevel onLoadResources()");
 		TextureRegionFactory.setAssetBasePath("gfx/");
 
-		mObjectTexture = new Texture(256,1024, TextureOptions.NEAREST_PREMULTIPLYALPHA);
+		mObjectTexture = new Texture(256,1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		candyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png",0,0,4,3);
 		catTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "cat.png", 0,193,4,2);
 		boxTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "box.png",0,580,1,1);
@@ -134,8 +193,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 
 		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
-		
-		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
 	}
 
 	@Override
@@ -153,7 +210,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		 * BACKGROUND
 		 */
 		try {
-			final TMXLoader tmxLoader = new TMXLoader(this, mEngine.getTextureManager(), TextureOptions.NEAREST_PREMULTIPLYALPHA,this);
+			final TMXLoader tmxLoader = new TMXLoader(this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
 			mTMXTiledMap = tmxLoader.loadFromAsset(this, "tmx/"+world+"_"+level+".tmx");
 		} catch (final TMXLoadException tmxle) {
 			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
@@ -252,7 +309,10 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public void onLoadComplete() {
 		Log.v(TAG,"CandyLevel onLoadComplete()");
-		addTutorialText(tutorialList);
+		
+		loadTask = new LoadTask();
+		loadTask.execute();
+		
 //		spriteList.get(0).moveUp(backgroundArray, objectArray);
 		// TODO
 	}
@@ -318,5 +378,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		}
 
 		return true;
+	}
+	
+	@Override
+	public void onDestroy() {
+		running=false;
+		super.onDestroy();
+		Log.i(TAG,"CandyLevel onDestroy()");
 	}
 }
