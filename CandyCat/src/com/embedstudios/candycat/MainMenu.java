@@ -56,6 +56,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	TextView mainmenu_tv;
 	Button button_play;
 	ImageView iv_achievements,iv_facebook,iv_twitter;
+	private ScreenAdvertisement mAdvertisement;
 
 	public static Typeface komika;
 	private static final int LOGO_DURATION=3000;
@@ -261,6 +262,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		}
 		splashTask = new SplashTask();
 		splashTask.execute();
+		this.mAdvertisement = new ScreenAdvertisement(this, R.id.game_ad);
+		showAd();
 	}
 	
 	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {
@@ -339,6 +342,14 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		return R.id.rsv;
 	}
 	
+	protected void showAd() {
+		mAdvertisement.showAdvertisement();
+	}
+
+	protected void hideAd() {
+		mAdvertisement.hideAdvertisement();
+	}
+	
 	@Override
 	public void onDestroy() {
 		running=false;
@@ -346,4 +357,5 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		ScoreloopManagerSingleton.destroy();
 		Log.i(TAG,"MainMenu onDestroy()");
 	}
+	
 }

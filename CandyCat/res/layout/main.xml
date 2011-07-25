@@ -5,7 +5,9 @@
 	android:layout_height="fill_parent">
 	<org.anddev.andengine.opengl.view.RenderSurfaceView android:id="@+id/rsv"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent" />
+		android:layout_height="fill_parent"
+		 android:layout_gravity="center" />
+		
 	<ViewFlipper android:id="@+id/enclosing_vf"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent" >
@@ -69,4 +71,16 @@
 				android:layout_toLeftOf="@id/button_facebook" />
 		</RelativeLayout>
 	</ViewFlipper>
+	 <com.google.ads.AdView 
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:id="@+id/game_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adUnitId="a14e01057884149"
+        ads:adSize="BANNER"
+        android:layout_gravity="top|right"
+        android:gravity="top|right"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        />
 </RelativeLayout>
