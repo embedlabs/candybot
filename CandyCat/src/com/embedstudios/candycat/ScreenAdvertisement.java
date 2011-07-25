@@ -8,11 +8,14 @@ package com.embedstudios.candycat;
  * regular Android Activity derived classes.
  */
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
-
 import android.app.Activity;
 import android.os.Handler;
+import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
 
 public class ScreenAdvertisement {
 
@@ -20,16 +23,23 @@ public class ScreenAdvertisement {
 	final int advertisementId;
 
 	final Handler adsHandler = new Handler();
+	final AdView adView;
+	
+	final Animation in,out;
 
+	public final String TAG = CandyUtils.TAG;
+	
 	public ScreenAdvertisement(final Activity activity, final int advertisementId) {
 		this.activity = activity;
 		this.advertisementId = advertisementId;
+		adView = (AdView)activity.findViewById(advertisementId);
+		in = AnimationUtils.loadAnimation(activity, R.anim.ad_slide_in_top);
+		out = AnimationUtils.loadAnimation(activity, R.anim.ad_slide_out_top);
 	}
 
 	//show the ads.
 	private void showAds () {
 //		Show the ad.
-		AdView adView = (AdView)activity.findViewById(advertisementId);
 		adView.setVisibility(android.view.View.VISIBLE);
 		adView.setEnabled(true);
 
@@ -38,32 +48,35 @@ public class ScreenAdvertisement {
 		request.setTesting(true);
 //		request.setTesting(false);
 		adView.loadAd(request);
+		adView.startAnimation(in);
 	}
 
 	private void unshowAds () {
 //		hide ads.
-		AdView adView = (AdView)activity.findViewById(advertisementId);
+		adView.startAnimation(out);
 		adView.setVisibility(android.view.View.INVISIBLE);
 		adView.setEnabled(false);
 	}
 
-	final Runnable unshowAdsRunnable = new Runnable() {
+	private class UnshowAdsRunnable implements Runnable {
+		@Override
 		public void run() {
 			unshowAds();
 		}
 	};
 
-	final Runnable showAdsRunnable = new Runnable() {
+	private class ShowAdsRunnable implements Runnable {
+		@Override
 		public void run() {
 			showAds();
 		}
 	};
 
 	public void showAdvertisement() {
-		adsHandler.post(showAdsRunnable);
+		adsHandler.post(new ShowAdsRunnable());
 	}
 
 	public void hideAdvertisement() {
-		adsHandler.post(unshowAdsRunnable);
+		adsHandler.post(new UnshowAdsRunnable());
 	}
 }

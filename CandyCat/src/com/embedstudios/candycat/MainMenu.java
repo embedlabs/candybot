@@ -261,11 +261,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			Log.e(TAG, "Singleton failed.",e);
 		}
 		
-		mAdvertisement = new ScreenAdvertisement(this, R.id.game_ad);
-		showAd();
-		
 		splashTask = new SplashTask();
 		splashTask.execute();
+		
+		mAdvertisement = new ScreenAdvertisement(this, R.id.game_ad);
+		mAdvertisement.showAdvertisement();
 	}
 	
 	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {
@@ -342,14 +342,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	@Override
 	protected int getRenderSurfaceViewID() {
 		return R.id.rsv;
-	}
-	
-	protected void showAd() {
-		mAdvertisement.showAdvertisement();
-	}
-
-	protected void hideAd() {
-		mAdvertisement.hideAdvertisement();
 	}
 	
 	@Override

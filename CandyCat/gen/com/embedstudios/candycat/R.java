@@ -9,15 +9,17 @@ package com.embedstudios.candycat;
 
 public final class R {
     public static final class anim {
-        public static final int rotate_in=0x7f040000;
-        public static final int rotate_infinitely=0x7f040001;
-        public static final int rotate_out=0x7f040002;
-        public static final int sl_next_in=0x7f040003;
-        public static final int sl_next_out=0x7f040004;
-        public static final int sl_previous_in=0x7f040005;
-        public static final int sl_previous_out=0x7f040006;
-        public static final int slide_in_right=0x7f040007;
-        public static final int slide_out_left=0x7f040008;
+        public static final int ad_slide_in_top=0x7f040000;
+        public static final int ad_slide_out_top=0x7f040001;
+        public static final int rotate_in=0x7f040002;
+        public static final int rotate_infinitely=0x7f040003;
+        public static final int rotate_out=0x7f040004;
+        public static final int sl_next_in=0x7f040005;
+        public static final int sl_next_out=0x7f040006;
+        public static final int sl_previous_in=0x7f040007;
+        public static final int sl_previous_out=0x7f040008;
+        public static final int slide_in_right=0x7f040009;
+        public static final int slide_out_left=0x7f04000a;
     }
     public static final class attr {
     }
