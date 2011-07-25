@@ -44,7 +44,8 @@ public class ScreenAdvertisement {
 		adView.setEnabled(true);
 
 		AdRequest request = new AdRequest();
-		request.addTestDevice("3BC7A897716390AE61323AA7938F67FE");
+		request.addTestDevice("3BC7A897716390AE61323AA7938F67FE"); 
+		request.addTestDevice("8F1E2DB224F1D15D1BB0535FD9A429FF"); 
 		request.setTesting(true);
 //		request.setTesting(false);
 		adView.loadAd(request);
