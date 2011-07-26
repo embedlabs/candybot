@@ -392,13 +392,13 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 					 * BEGIN TEST CODE (TEMPORARY ONLY)
 					 */
 					if (pSceneTouchEvent.getMotionEvent().getY()<=PHONE_HEIGHT/3) {
-						spriteList.get(0).moveUp(backgroundArray, objectArray);
+						spriteList.get(0).moveUp(objectArray);
 					} else if (pSceneTouchEvent.getMotionEvent().getY()>=PHONE_HEIGHT/3*2) {
-						spriteList.get(0).moveDown(backgroundArray, objectArray);
+						spriteList.get(0).moveDown(objectArray);
 					} else if (pSceneTouchEvent.getMotionEvent().getX()>=PHONE_WIDTH/2) {
-						spriteList.get(0).moveRight(backgroundArray, objectArray);
+						spriteList.get(0).moveRight(objectArray);
 					} else {
-						spriteList.get(0).moveLeft(backgroundArray, objectArray);
+						spriteList.get(0).moveLeft(objectArray);
 					}
 					/**
 					 * END TEST CODE

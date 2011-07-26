@@ -26,12 +26,14 @@ import android.util.Log;
  */
 
 public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, IPathModifierListener {
-	private boolean stable = true;
+	public boolean stable = true;
 	public final int index,type;
 	public final boolean gravityIsOn;
 	private int candyLastMove =0;
 	private int candyRotationState = 0;
 	private int lastDirectionalMove = 0; // for ice block mechanics
+	
+	public boolean hasModifier = false;
 
 	public static final long[] frameArray = new long[]{50,50,50,50};
 	public static final String TAG = CandyUtils.TAG;
@@ -49,21 +51,32 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	}
 
 	private synchronized boolean move(int row, int column, int[][] objectArray) {
-		clearEntityModifiers();
-		candyLastMove=column;
-		registerEntityModifier(new PathModifier(0.2f, new Path(2).to(getX(), getY()).to(getX()+(column*64), getY()+(row*64)),this,EaseLinear.getInstance()));
-		objectArray[index][1]+=row;
-		objectArray[index][2]+=column;
-		Log.v(TAG, "Item moved to: "+objectArray[index][1]+", "+objectArray[index][2]);
-		return true;
+		if (!hasModifier) {
+			hasModifier=true;
+			candyLastMove = column;
+			if (row != 0) {
+				lastDirectionalMove = row;
+			}
+			registerEntityModifier(new PathModifier(0.2f, new Path(2).to(
+					getX(), getY()).to(getX() + (column * 64),
+					getY() + (row * 64)), this, EaseLinear.getInstance()));
+			objectArray[index][1] += row;
+			objectArray[index][2] += column;
+			Log.v(TAG, "Item moved to: " + objectArray[index][1] + ", "
+					+ objectArray[index][2]);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public void onPathStarted(PathModifier pPathModifier, IEntity pEntity) {
-		if (((CandyAnimatedSprite) pEntity).type==CandyLevel.CANDY) {
-			if (((CandyAnimatedSprite) pEntity).candyLastMove == -1) {
-				animate(frameArray, candyRotationState * 4, candyRotationState * 4 + 3, false);
-			} else if (((CandyAnimatedSprite) pEntity).candyLastMove == 1) {
+		
+		if (type==CandyLevel.CANDY) {
+			if (candyLastMove == -1) {
+				animate(frameArray, candyRotationState*4, candyRotationState*4+3, false);
+			} else if (candyLastMove == 1) {
 				animate(frameArray, new int[] {
 					((candyRotationState + 1) * 4) % 12,
 					candyRotationState * 4 + 3,
@@ -88,8 +101,8 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 
 	@Override
 	public void onPathFinished(PathModifier pPathModifier, IEntity pEntity) {
-		if (((CandyAnimatedSprite)pEntity).type==CandyLevel.CANDY) {
-			// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		if (type==CandyLevel.CANDY) {
 			if (candyLastMove==-1) {
 				candyRotationState = (candyRotationState + 1) % 3;
 			} else if (candyLastMove==1) {
@@ -97,40 +110,37 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 			}
 			setCurrentTileIndex(candyRotationState * 4);
 		}
+		hasModifier=false;
 	}
 
 	@Override
-	public synchronized boolean moveRight(int[][] levelArray, int[][] objectArray) {
+	public synchronized boolean moveRight(int[][] objectArray) {
 		// TODO Auto-generated method stub
 		return move(0,1,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveLeft(int[][] levelArray, int[][] objectArray) {
+	public synchronized boolean moveLeft(int[][] objectArray) {
 		// TODO Auto-generated method stub
 		return move(0,-1,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveUp(int[][] levelArray, int[][] objectArray) {
+	public synchronized boolean moveUp(int[][] objectArray) {
 		// TODO Auto-generated method stub
 		return move(-1,0,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveDown(int[][] levelArray, int[][] objectArray) {
+	public synchronized boolean moveDown(int[][] objectArray) {
 		// TODO Auto-generated method stub
 		return move(1,0,objectArray);
 	}
 
 	@Override
-	public synchronized void fall(int[][] levelArray, int[][] objectArray) {
+	public synchronized void fall(int[][] objectArray) {
 		if (gravityIsOn) {
 
 		}
-	}
-
-	public boolean isStable() {
-		return stable;
 	}
 }
