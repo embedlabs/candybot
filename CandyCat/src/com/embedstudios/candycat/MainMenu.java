@@ -71,9 +71,15 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	private Scene mScene;
 	private PhysicsWorld mPhysicsWorld;
 	
-	private SplashTask splashTask;
+	private SplashTask splashTask;	
 	
-	
+	@Override
+	public void onWindowFocusChanged(final boolean hasFocus)  {
+		super.onWindowFocusChanged(hasFocus);
+		if (hasFocus) {
+			button_play.requestFocus();
+		}
+	}
 	
 	@Override
 	public void onClick(View view) {
@@ -199,11 +205,10 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			Log.e(TAG, "Singleton failed.",e);
 		}
 		
-		splashTask = new SplashTask(enclosing_vf,this);
-		splashTask.execute();
-		
 		mAdvertisement = new CandyAdvertisement(this, R.id.game_ad);
-		mAdvertisement.showAdvertisement();
+		
+		splashTask = new SplashTask(enclosing_vf,mAdvertisement,this);
+		splashTask.execute();
 	}
 	
 	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {

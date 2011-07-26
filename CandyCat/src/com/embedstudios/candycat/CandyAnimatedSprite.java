@@ -29,8 +29,11 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	private boolean stable = true;
 	public final int index,type;
 	public final boolean gravityIsOn;
+	private int candyLastMove =0;
 	private int candyRotationState = 0;
-	
+	private int lastDirectionalMove = 0; // for ice block mechanics
+
+	public static final long[] frameArray = new long[]{50,50,50,50};
 	public static final String TAG = CandyUtils.TAG;
 
 	public CandyAnimatedSprite(int row, int column, TiledTextureRegion pTiledTextureRegion, RectangleVertexBuffer RVB, int index, int type) {
@@ -44,72 +47,89 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		}
 		// TODO Auto-generated constructor stub
 	}
-	
-	private synchronized void move(int row, int column, int[][] objectArray) {
+
+	private synchronized boolean move(int row, int column, int[][] objectArray) {
 		clearEntityModifiers();
+		candyLastMove=column;
 		registerEntityModifier(new PathModifier(0.2f, new Path(2).to(getX(), getY()).to(getX()+(column*64), getY()+(row*64)),this,EaseLinear.getInstance()));
 		objectArray[index][1]+=row;
 		objectArray[index][2]+=column;
 		Log.v(TAG, "Item moved to: "+objectArray[index][1]+", "+objectArray[index][2]);
+		return true;
 	}
 
 	@Override
 	public void onPathStarted(PathModifier pPathModifier, IEntity pEntity) {
-		// TODO Auto-generated method stub
+		if (((CandyAnimatedSprite) pEntity).type==CandyLevel.CANDY) {
+			if (((CandyAnimatedSprite) pEntity).candyLastMove == -1) {
+				animate(frameArray, candyRotationState * 4, candyRotationState * 4 + 3, false);
+			} else if (((CandyAnimatedSprite) pEntity).candyLastMove == 1) {
+				animate(frameArray, new int[] {
+					((candyRotationState + 1) * 4) % 12,
+					candyRotationState * 4 + 3,
+					candyRotationState * 4 + 2,
+					candyRotationState * 4 + 1
+				}, 0);
+			}
+		}
 	}
 
 	@Override
 	public void onPathWaypointStarted(PathModifier pPathModifier, IEntity pEntity, int pWaypointIndex) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onPathWaypointFinished(PathModifier pPathModifier, IEntity pEntity, int pWaypointIndex) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onPathFinished(PathModifier pPathModifier, IEntity pEntity) {
-		// TODO Auto-generated method stub
+		if (((CandyAnimatedSprite)pEntity).type==CandyLevel.CANDY) {
+			// TODO Auto-generated method stub
+			if (candyLastMove==-1) {
+				candyRotationState = (candyRotationState + 1) % 3;
+			} else if (candyLastMove==1) {
+				candyRotationState = (candyRotationState + 2) % 3;
+			}
+			setCurrentTileIndex(candyRotationState * 4);
+		}
 	}
 
 	@Override
 	public synchronized boolean moveRight(int[][] levelArray, int[][] objectArray) {
 		// TODO Auto-generated method stub
-		move(0,1,objectArray);
-		return true;
+		return move(0,1,objectArray);
 	}
 
 	@Override
 	public synchronized boolean moveLeft(int[][] levelArray, int[][] objectArray) {
 		// TODO Auto-generated method stub
-		move(0,-1,objectArray);
-		return true;
+		return move(0,-1,objectArray);
 	}
 
 	@Override
 	public synchronized boolean moveUp(int[][] levelArray, int[][] objectArray) {
 		// TODO Auto-generated method stub
-		move(-1,0,objectArray);
-		return true;
+		return move(-1,0,objectArray);
 	}
 
 	@Override
 	public synchronized boolean moveDown(int[][] levelArray, int[][] objectArray) {
 		// TODO Auto-generated method stub
-		move(1,0,objectArray);
-		return true;
+		return move(1,0,objectArray);
 	}
 
 	@Override
 	public synchronized void fall(int[][] levelArray, int[][] objectArray) {
 		if (gravityIsOn) {
-			
+
 		}
 	}
-	
+
 	public boolean isStable() {
 		return stable;
 	}

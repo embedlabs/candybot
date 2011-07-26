@@ -32,6 +32,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>AndEngine_src</name>
+			<type>2</type>
+			<locationURI>_android_AndEngine_6e0d82d9/src</locationURI>
+		</link>
+		<link>
 			<name>ScoreloopUI_src</name>
 			<type>2</type>
 			<locationURI>_android_ScoreloopUI_e7efe92a/src</locationURI>

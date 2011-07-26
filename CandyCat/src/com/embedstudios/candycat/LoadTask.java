@@ -23,7 +23,7 @@ public class LoadTask extends AsyncTask<Void,Void,Void> {
 	protected Void doInBackground(Void... params) {
 		if (!running) {return null;}
 		try {
-			Thread.sleep(200);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			Log.e(TAG,"Delay failed.",e);
 		}
@@ -38,6 +38,7 @@ public class LoadTask extends AsyncTask<Void,Void,Void> {
 		} catch (Exception e) {
 			Log.e(TAG,"LoadTask error.",e);
 		}
+		Log.i(TAG,"LoadTask ended.");
 	}
 	
 }

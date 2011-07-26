@@ -113,7 +113,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private CandyEngine candyEngine;
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getWindow().setFormat(PixelFormat.RGBA_8888);
@@ -124,6 +124,14 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		loading_iv = (ImageView)findViewById(R.id.loading_iv_level);
 		loading_rl_level = (RelativeLayout)findViewById(R.id.loading_rl_level);
+	}
+	
+	@Override
+	public void onWindowFocusChanged(final boolean hasFocus) {
+		if (hasFocus) {
+			loading_iv.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely));
+		}
+		super.onWindowFocusChanged(hasFocus);
 	}
 	
 	@Override
@@ -161,7 +169,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public void onLoadResources() {
 		Log.v(TAG,"CandyLevel onLoadResources()");
-		loading_iv.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely));
 		TextureRegionFactory.setAssetBasePath("gfx/");
 		
 		
@@ -324,7 +331,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		loadTask.execute();
 		
 //		addTutorialText(tutorialList);
-		// TODO
+//		// TODO
 //		spriteList.get(0).moveUp(backgroundArray, objectArray);
 	}
 
@@ -380,6 +387,23 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 				mScrollDetector.setEnabled(false);
 			} else {
 				if (pSceneTouchEvent.isActionDown()) {
+					
+					/**
+					 * BEGIN TEST CODE (TEMPORARY ONLY)
+					 */
+					if (pSceneTouchEvent.getMotionEvent().getY()<=PHONE_HEIGHT/3) {
+						spriteList.get(0).moveUp(backgroundArray, objectArray);
+					} else if (pSceneTouchEvent.getMotionEvent().getY()>=PHONE_HEIGHT/3*2) {
+						spriteList.get(0).moveDown(backgroundArray, objectArray);
+					} else if (pSceneTouchEvent.getMotionEvent().getX()>=PHONE_WIDTH/2) {
+						spriteList.get(0).moveRight(backgroundArray, objectArray);
+					} else {
+						spriteList.get(0).moveLeft(backgroundArray, objectArray);
+					}
+					/**
+					 * END TEST CODE
+					 */
+					
 					mScrollDetector.setEnabled(true);
 				}
 				mScrollDetector.onTouchEvent(pSceneTouchEvent);

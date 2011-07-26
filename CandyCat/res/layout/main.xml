@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/enclosing_rl"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_height="fill_parent"
+	android:fitsSystemWindows="false">
 	<org.anddev.andengine.opengl.view.RenderSurfaceView android:id="@+id/rsv"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		 android:layout_gravity="center" />
+		android:layout_gravity="center" />
 	<ViewFlipper android:id="@+id/enclosing_vf"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent" >
@@ -24,15 +25,6 @@
 		<RelativeLayout android:id="@+id/mainmenu_rl"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
-			<com.google.ads.AdView
-				xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-				android:id="@+id/game_ad"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				ads:adUnitId="a14e01057884149"
-				ads:adSize="BANNER"
-				android:layout_alignParentTop="true"
-				android:layout_alignParentRight="true" />
 			<TextView android:id="@+id/mainmenu_tv"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -49,7 +41,11 @@
 				android:layout_height="wrap_content"
 				android:text="@string/button_play"
 				android:layout_below="@id/mainmenu_tv"
-				android:layout_centerHorizontal="true" />
+				android:layout_centerHorizontal="true"
+				android:focusable="true"
+				android:focusableInTouchMode="true" >
+				<requestFocus />
+			</Button>
 			<ImageView android:id="@+id/button_achievements"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -79,6 +75,17 @@
 				android:layout_marginRight="4dip"
 				android:layout_alignParentBottom="true"
 				android:layout_toLeftOf="@id/button_facebook" />
+			<com.google.ads.AdView
+				xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+				android:id="@+id/game_ad"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				ads:adUnitId="a14e01057884149"
+				ads:adSize="BANNER"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentRight="true"
+				android:focusable="false"
+				android:focusableInTouchMode="false" />
 		</RelativeLayout>
 	</ViewFlipper>
 </RelativeLayout>
