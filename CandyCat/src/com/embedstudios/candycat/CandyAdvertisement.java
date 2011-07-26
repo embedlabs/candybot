@@ -10,14 +10,13 @@ package com.embedstudios.candycat;
 
 import android.app.Activity;
 import android.os.Handler;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 
-public class ScreenAdvertisement {
+public class CandyAdvertisement {
 
 	final Activity activity;
 	final int advertisementId;
@@ -29,7 +28,7 @@ public class ScreenAdvertisement {
 
 	public final String TAG = CandyUtils.TAG;
 	
-	public ScreenAdvertisement(final Activity activity, final int advertisementId) {
+	public CandyAdvertisement(final Activity activity, final int advertisementId) {
 		this.activity = activity;
 		this.advertisementId = advertisementId;
 		adView = (AdView)activity.findViewById(advertisementId);

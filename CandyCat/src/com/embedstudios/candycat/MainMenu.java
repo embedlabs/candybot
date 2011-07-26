@@ -34,7 +34,6 @@ import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -56,11 +55,10 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	TextView mainmenu_tv;
 	Button button_play;
 	ImageView iv_achievements,iv_facebook,iv_twitter;
-	private ScreenAdvertisement mAdvertisement;
+	private CandyAdvertisement mAdvertisement;
 
 	public static Typeface komika;
-	private static final int LOGO_DURATION=3000;
-	public static final String TAG=CandyUtils.TAG;
+	public static final String TAG = CandyUtils.TAG;
 	
 	private static int WIDTH,HEIGHT;
 	
@@ -74,68 +72,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	private PhysicsWorld mPhysicsWorld;
 	
 	private SplashTask splashTask;
-	private boolean running = true;
 	
-	public class SplashTask extends AsyncTask<Void,Integer,Void> {
-		@Override
-		protected Void doInBackground(Void... blah) {
-			if (!running) {return null;}
-			pause(LOGO_DURATION);
-			if (!running) {return null;}
-			publishProgress(0);
-			if (!running) {return null;}
-			pause(1000);
-			for (int i=1;i<=6;i++) {
-				if (!running) {return null;}
-				publishProgress(1);
-				pause(100);
-				if (i<=2) {
-					if (!running) {return null;}
-					publishProgress(2);
-					pause(100);
-					if (!running) {return null;}
-					publishProgress(3);
-					pause(100);
-				} else if (i<=4) {
-					if (!running) {return null;}
-					publishProgress(4);
-					pause(100);
-					if (!running) {return null;}
-					publishProgress(5);
-					pause(100);
-				}
-			}
-			if (!running) {return null;}
-			publishProgress(6);
-			return null;
-		}
-		
-		@Override
-		protected void onProgressUpdate(Integer...integers) {
-			try {
-				switch (integers[0]) {
-				case 0: enclosing_vf.showNext(); break;
-				case 6: ScoreloopManagerSingleton.get().showWelcomeBackToast(0); break;
-				default: addFace(integers[0]-1); break;
-				}
-			} catch (Exception e) {
-				Log.e(TAG, "SplashTask onProgressUpdate() failed.",e);
-			}
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			Log.i(TAG,"SplashTask ended.");
-		}
-		
-		private void pause(int milliseconds) {
-			try {
-				Thread.sleep(milliseconds);
-			} catch (InterruptedException e) {
-				Log.e(TAG,"Thread.sleep() failed.",e);
-			}
-		}
-	}
+	
 	
 	@Override
 	public void onClick(View view) {
@@ -261,10 +199,10 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			Log.e(TAG, "Singleton failed.",e);
 		}
 		
-		splashTask = new SplashTask();
+		splashTask = new SplashTask(enclosing_vf,this);
 		splashTask.execute();
 		
-		mAdvertisement = new ScreenAdvertisement(this, R.id.game_ad);
+		mAdvertisement = new CandyAdvertisement(this, R.id.game_ad);
 		mAdvertisement.showAdvertisement();
 	}
 	
@@ -306,7 +244,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		mPhysicsWorld.registerPhysicsConnector(new PhysicsConnector(face, body, true, true));
 	}
 	
-	private void addFace(final int type) {
+	public void addFace(final int type) {
 		final Random randGen = new Random();
 		final int x = randGen.nextInt(WIDTH-65);
 		final int y = randGen.nextInt(HEIGHT-65);
@@ -346,7 +284,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	@Override
 	public void onDestroy() {
-		running=false;
+		splashTask.running=false;
 		super.onDestroy();
 		ScoreloopManagerSingleton.destroy();
 		Log.i(TAG,"MainMenu onDestroy()");

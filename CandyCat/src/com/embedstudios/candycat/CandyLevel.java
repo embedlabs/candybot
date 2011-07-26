@@ -6,6 +6,9 @@ import javax.microedition.khronos.opengles.GL11;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.ZoomCamera;
+import org.anddev.andengine.engine.camera.hud.HUD;
+import org.anddev.andengine.engine.handler.timer.ITimerCallback;
+import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -20,7 +23,8 @@ import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadExcepti
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
-import org.anddev.andengine.entity.util.FPSLogger;
+import org.anddev.andengine.entity.text.ChangeableText;
+import org.anddev.andengine.entity.util.FPSCounter;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
 import org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector;
@@ -30,6 +34,7 @@ import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.input.touch.detector.ScrollDetector;
 import org.anddev.andengine.input.touch.detector.ScrollDetector.IScrollDetectorListener;
 import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
+import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
@@ -38,13 +43,12 @@ import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -84,10 +88,14 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
 	private ZoomCamera mZoomCamera;
+	private HUD hud;
 	
 	private static Texture mObjectTexture;
 	private static TiledTextureRegion candyTTR, catTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
 	private static RectangleVertexBuffer candyRVB, catRVB, boxRVB, bombRVB, enemyRVB, movableWallRVB, inertiaWallRVB;
+	
+	private static Texture mFontTexture;
+	private static Font andengine_komika;
 
 	private SurfaceScrollDetector mScrollDetector;
 	private PinchZoomDetector mPinchZoomDetector;
@@ -101,29 +109,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private RelativeLayout loading_rl_level;
 	
 	private LoadTask loadTask;
-	private boolean running = true;
 	
-	public class LoadTask extends AsyncTask<Void,Void,Void> {
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			if (!running) {return null;}
-			try {
-				Thread.sleep(200);
-			} catch (InterruptedException e) {
-				Log.e(TAG,"Delay failed.",e);
-			}
-			return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			if (!loading_rl_level.equals(null)) {loading_rl_level.setVisibility(View.INVISIBLE);}
-			if (!loading_iv.equals(null)) {loading_iv.clearAnimation();}
-			if (running) {addTutorialText(tutorialList);}
-		}
-		
-	}
+	private CandyEngine candyEngine;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -183,7 +170,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public void onLoadResources() {
 		Log.v(TAG,"CandyLevel onLoadResources()");
 		TextureRegionFactory.setAssetBasePath("gfx/");
-
+		
+		
+		/**
+		 * OBJECT TEXTURE
+		 */
 		mObjectTexture = new Texture(256,1024, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		candyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png",0,0,4,3);
 		catTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "cat.png", 0,193,4,2);
@@ -192,12 +183,29 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		enemyTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "enemy.png",0,451,4,2);
 		movableWallTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "movable_wall.png",65,580,1,1);
 		inertiaWallTTR = TextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "inertia_wall.png",130,580,1,1);
-
-		mEngine.getTextureManager().loadTexture(mObjectTexture);
-
+		
+		/**
+		 * FONT
+		 */
+		mFontTexture = new Texture(512,512, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		andengine_komika = new Font(mFontTexture, komika, 44, true, Color.DKGRAY);
+		
+		/**
+		 * ENGINE LOADING
+		 */
+		mEngine.getTextureManager().loadTextures(mObjectTexture,mFontTexture);
+		mEngine.getFontManager().loadFont(andengine_komika);
+		
+		/**
+		 * XML PARSING
+		 */
 		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
 		
+		
+		/**
+		 * RECTANGE VERTEX BUFFERS
+		 */
 		candyRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		catRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		boxRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
@@ -222,7 +230,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		/**
 		 * BASICS
 		 */
-		mEngine.registerUpdateHandler(new FPSLogger());
 		mScene = new Scene();
 		mScene.setBackground(new ColorBackground(1,1,1));
 		
@@ -241,12 +248,25 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		mScene.attachChild(tmxLayer); //background layer
 		
 		/**
-		 * SPRITES
+		 * HUD
 		 */
-//		for (int[] i:objectList) {
-//			createSprite(i[0],i[1],i[2],objectList.indexOf(i));
-//		}
+		hud = new HUD();
+		final FPSCounter fpsCounter = new FPSCounter();
+		mEngine.registerUpdateHandler(fpsCounter);
+		final ChangeableText fpsText = new ChangeableText(10,10, andengine_komika, "FPS:", "FPS: XXXXX".length());
+		hud.attachChild(fpsText);
+		mZoomCamera.setHUD(hud);
 		
+		hud.registerUpdateHandler(new TimerHandler(0.2f,true,new ITimerCallback(){
+			@Override
+			public void onTimePassed(final TimerHandler pTimerHandler) {
+				fpsText.setText("FPS: " + fpsCounter.getFPS());
+			}
+		}));
+		
+		/**
+		 * SPRITES
+		 */		
 		for (int i=0;i<objectArray.length;i++) {
 			createSprite(objectArray[i][0],objectArray[i][1],objectArray[i][2],i);
 		}
@@ -268,25 +288,18 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		mScene.setOnSceneTouchListener(this);
 		mScene.setTouchAreaBindingEnabled(true);
 		
+		/**
+		 * LOGIC ENGINE
+		 */
+		candyEngine = new CandyEngine(spriteList,objectArray,backgroundArray);
+		
 		return mScene;
 	}
 
-	private void addTutorialText(ArrayList<String> inputList) {
+	public void addTutorialText(ArrayList<String> inputList) {
 		// TODO Auto-generated method stub
 		// This is temporary, change later:
 		for (String text:inputList) {
-//			final Toast toast = new Toast(this);
-//			final TextView textview = new TextView(this);
-//			textview.setText(text);
-//			textview.setTextColor(R.color.normal_text);
-//			textview.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-//			textview.setPadding(10, 10, 10, 10);
-//			textview.setBackgroundResource(R.drawable.button_normal);
-//			textview.setGravity(Gravity.CENTER_HORIZONTAL);
-//			CandyUtils.setKomika(komika, textview);
-//			toast.setDuration(Toast.LENGTH_LONG);
-//			toast.setView(textview);
-//			toast.show();
 			Toast.makeText(this, text, Toast.LENGTH_LONG).show();
 		}
 	}
@@ -297,30 +310,14 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		final CandyAnimatedSprite face;
 		
 		switch (type){
-		case CANDY:
-			face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY);
-			break;
-		case CAT:
-			face = new CandyAnimatedSprite(row,column,catTTR,catRVB,index,CAT);
-			break;
-		case BOX:
-			face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX);
-			break;
-		case BOMB:
-			face = new CandyAnimatedSprite(row,column,bombTTR,bombRVB,index,BOMB);
-			break;
-		case ENEMY:
-			face = new CandyAnimatedSprite(row,column,enemyTTR,enemyRVB,index,ENEMY);
-			break;
-		case MOVABLE_WALL:
-			face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL);
-			break;
-		case INERTIA_WALL:
-			face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL);
-			break;
-		default:
-			face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY);
-			break;
+		case CANDY: face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY); break;
+		case CAT: face = new CandyAnimatedSprite(row,column,catTTR,catRVB,index,CAT); break;
+		case BOX: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX); break;
+		case BOMB: face = new CandyAnimatedSprite(row,column,bombTTR,bombRVB,index,BOMB); break;
+		case ENEMY: face = new CandyAnimatedSprite(row,column,enemyTTR,enemyRVB,index,ENEMY); break;
+		case MOVABLE_WALL: face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL); break;
+		case INERTIA_WALL: face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL); break;
+		default: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX); break;
 		}
 		spriteList.add(face);
 		mScene.attachChild(face);
@@ -330,11 +327,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public void onLoadComplete() {
 		Log.v(TAG,"CandyLevel onLoadComplete()");
 		
-		loadTask = new LoadTask();
+		loadTask = new LoadTask(loading_rl_level,loading_iv);
 		loadTask.execute();
 		
-//		spriteList.get(0).moveUp(backgroundArray, objectArray);
+//		addTutorialText(tutorialList);
 		// TODO
+//		spriteList.get(0).moveUp(backgroundArray, objectArray);
 	}
 
 	@Override
@@ -402,7 +400,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public void onDestroy() {
-		running=false;
+		loadTask.running=false;
 		super.onDestroy();
 		Log.i(TAG,"CandyLevel onDestroy()");
 	}
