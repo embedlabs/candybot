@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="24" height="18" tilewidth="64" tileheight="64">
+	<tileset source="tmx/background.tsx"/>
+	<layer width="24" height="18">
+		<data encoding="base64" compression="gzip">
+			H4sIAAAAAAAAC2NkYGBgpDGGAUYCNAOJatHNpzbA5n5ksaHofmRxbG4j5O7B4n50Gle6o7X78eknxv3E5p+BDH9y8jkhfzBg0Uese8hVT4zbSVFLz/RPbJgyoIkR0jeY0g+xmAmImaFsAIoNdezABgAA
+		</data>
+	</layer>
+</map>

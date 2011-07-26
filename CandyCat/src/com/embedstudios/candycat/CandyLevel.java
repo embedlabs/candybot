@@ -127,14 +127,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	}
 	
 	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			loading_iv.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely));
-		}
-	}
-	
-	@Override
 	public Engine onLoadEngine() {
 		Log.v(TAG,"CandyLevel onLoadEngine()");
 		world = getIntent().getIntExtra("com.embedstudios.candycat.world", 0);
@@ -169,6 +161,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public void onLoadResources() {
 		Log.v(TAG,"CandyLevel onLoadResources()");
+		loading_iv.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely));
 		TextureRegionFactory.setAssetBasePath("gfx/");
 		
 		

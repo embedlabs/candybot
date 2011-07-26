@@ -10,7 +10,6 @@
 *.class
 
 # any bin stuff
-bin/
 *.apk
 *.ap_
 *.dex
