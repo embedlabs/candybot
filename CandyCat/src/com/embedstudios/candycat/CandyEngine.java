@@ -13,5 +13,20 @@ public class CandyEngine {
 		this.objectArray = objectArray;
 		this.backgroundArray = backgroundArray;
 	}
-
+	
+	public void left() {
+		
+	}
+	
+	public void right() {
+		
+	}
+	
+	public void up() {
+		
+	}
+	
+	public void down() {
+		
+	}
 }
