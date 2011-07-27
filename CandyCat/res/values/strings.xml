@@ -5,6 +5,6 @@
     <string name="button_play">Play!</string>
     <string name="facebook_link">http://m.facebook.com/pages/Candy-Cat/236289176391475</string>
     <string name="twitter_link">https://mobile.twitter.com/#!/EmbedStudios</string>
-    <string name="play">PLAY</string>
-    <string name="pan">PAN</string>
+    <string name="play">PLAY MODE</string>
+    <string name="pan">PAN/ZOOM</string>
 </resources>

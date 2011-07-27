@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.microedition.khronos.opengles.GL11;
 
 import org.anddev.andengine.engine.Engine;
-import org.anddev.andengine.engine.camera.ZoomCamera;
+import org.anddev.andengine.engine.camera.SmoothCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
@@ -47,6 +47,7 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -60,9 +61,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	/**
 	 * Some important phone/game dimensions.
 	 */
-	private static final float WIDTH = 1536;
-	private static final float HEIGHT = 1152;
-	private static float PHONE_WIDTH,PHONE_HEIGHT;
+	public static final float WIDTH = 1536;
+	public static final float HEIGHT = 1152;
+	public static float PHONE_WIDTH,PHONE_HEIGHT;
 	
 	
 	/**
@@ -88,7 +89,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
-	private ZoomCamera mZoomCamera;
+	public SmoothCamera mSmoothCamera;
 	private HUD hud;
 	
 	private static Texture mObjectTexture;
@@ -111,14 +112,20 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	private LoadTask loadTask;
 	
-	private CandyEngine candyEngine;
+	public CandyEngine candyEngine;
 	
 	private String play,pan;
-	private boolean playMode=false;
+	private boolean playMode=true;
+	public boolean gameStarted=false;
 	private ChangeableText playCT;
 	
 	private float dragX,dragY;
 	private static float THRESHOLD = 50;
+	private static final int CAMERA_SPEED = 150;
+	
+	private static final long TIME_THRESHOLD = 250;
+	private long time;
+	private boolean tapOptionEnabled = false;
 	
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -157,11 +164,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		PHONE_WIDTH = display.getWidth();
 		PHONE_HEIGHT = display.getHeight();
 		
-		mZoomCamera = new ZoomCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT);
-		mZoomCamera.setBounds(0, WIDTH, 0, HEIGHT);
-		mZoomCamera.setBoundsEnabled(true);
+		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,300,300,1000);
+		mSmoothCamera.setBounds(0, WIDTH, 0, HEIGHT);
+		mSmoothCamera.setBoundsEnabled(true);
+		mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
 		
-		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mZoomCamera);
+		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mSmoothCamera);
 		final Engine engine = new Engine(engineOptions);
 		
 		try {
@@ -265,18 +273,24 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		final FPSCounter fpsCounter = new FPSCounter();
 		mEngine.registerUpdateHandler(fpsCounter);
-		final ChangeableText fpsText = new ChangeableText(10,10, andengine_komika, "FPS:", "FPS: XXXXX".length());
+		final ChangeableText fpsText = new ChangeableText(PHONE_WIDTH,10, andengine_komika, "FPS: 00.00", "FPS: XXXXX".length());
+		fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10, 10);
 		hud.attachChild(fpsText);
 		
-		playCT = new ChangeableText(10, PHONE_HEIGHT-54, andengine_komika,pan,Math.max(play.length(),pan.length())) {
+		playCT = new ChangeableText(10, 10, andengine_komika,playMode?play:pan,Math.max(play.length(),pan.length())) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN) {
-					if (getText().equals(pan)) {
+				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_UP&&gameStarted) {
+					if (!playMode) {
 						setText(play);
+						mSmoothCamera.setMaxVelocity(CAMERA_SPEED,CAMERA_SPEED);
+						mSmoothCamera.setChaseEntity(candyEngine.cat);
 						playMode=true;
 					} else {
 						setText(pan);
+						mSmoothCamera.setMaxZoomFactorChange(2);
+						mSmoothCamera.setMaxVelocity(1000,1000);
+						mSmoothCamera.setChaseEntity(null);
 						playMode=false;
 					}
 				}
@@ -286,7 +300,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		hud.attachChild(playCT);
 		hud.registerTouchArea(playCT);
 		
-		mZoomCamera.setHUD(hud);
+		mSmoothCamera.setHUD(hud);
 		
 		hud.registerUpdateHandler(new TimerHandler(0.2f,true,new ITimerCallback(){
 			@Override
@@ -384,79 +398,88 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public void onScroll(final ScrollDetector pScollDetector, final TouchEvent pTouchEvent, final float pDistanceX, final float pDistanceY) {
-		final float zoomFactor = mZoomCamera.getZoomFactor();
-		mZoomCamera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY / zoomFactor);
+		final float zoomFactor = mSmoothCamera.getZoomFactor();
+		mSmoothCamera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY / zoomFactor);
 	}
 
 	@Override
 	public void onPinchZoomStarted(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent) {
-		mPinchZoomStartedCameraZoomFactor = mZoomCamera.getZoomFactor();
+		mPinchZoomStartedCameraZoomFactor = mSmoothCamera.getZoomFactor();
 	}
 
 	@Override
 	public void onPinchZoom(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
-		mZoomCamera.setZoomFactor(Math.min(1, Math.max(mPinchZoomStartedCameraZoomFactor * pZoomFactor, PHONE_HEIGHT/HEIGHT)));
+		mSmoothCamera.setZoomFactor(Math.min(1, Math.max(mPinchZoomStartedCameraZoomFactor * pZoomFactor, PHONE_HEIGHT/HEIGHT)));
 	}
 
 	@Override
 	public void onPinchZoomFinished(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
-		mZoomCamera.setZoomFactor(Math.min(1, Math.max(mPinchZoomStartedCameraZoomFactor * pZoomFactor, PHONE_HEIGHT/HEIGHT)));
+		mSmoothCamera.setZoomFactor(Math.min(1, Math.max(mPinchZoomStartedCameraZoomFactor * pZoomFactor, PHONE_HEIGHT/HEIGHT)));
 	}
 	
 	@Override
 	public boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
-		if (!playMode) {
-			if (mPinchZoomDetector != null) {
-				mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
-				if (mPinchZoomDetector.isZooming()) {
-					mScrollDetector.setEnabled(false);
-				} else {
-					if (pSceneTouchEvent.isActionDown()) {
-						mScrollDetector.setEnabled(true);
+		if (gameStarted) {
+			if (!playMode) {
+				if (mPinchZoomDetector != null) {
+					mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
+					if (mPinchZoomDetector.isZooming()) {
+						mScrollDetector.setEnabled(false);
+					} else {
+						if (pSceneTouchEvent.isActionDown()) {
+							mScrollDetector.setEnabled(true);
+						}
+						mScrollDetector.onTouchEvent(pSceneTouchEvent);
 					}
+				} else {
 					mScrollDetector.onTouchEvent(pSceneTouchEvent);
 				}
 			} else {
-				mScrollDetector.onTouchEvent(pSceneTouchEvent);
-			}
-		} else {
-			final MotionEvent motionEvent = pSceneTouchEvent.getMotionEvent();
-			final float motionX = motionEvent.getX();
-			final float motionY = motionEvent.getY();
-			if (pSceneTouchEvent.isActionDown()) {
-				dragX = motionX;
-				dragY = motionY;
-			} else if (pSceneTouchEvent.isActionMove()) {
-				if (motionX-dragX>=THRESHOLD) {
+				final MotionEvent motionEvent = pSceneTouchEvent
+						.getMotionEvent();
+				final float motionX = motionEvent.getX();
+				final float motionY = motionEvent.getY();
+				if (pSceneTouchEvent.isActionDown()) {
+					time = System.currentTimeMillis();
+					tapOptionEnabled = true;
 					dragX = motionX;
 					dragY = motionY;
-					candyEngine.right();
-				} else if (dragX-motionX>=THRESHOLD) {
-					dragX = motionX;
-					dragY = motionY;
-					candyEngine.left();
-				} else if (motionY-dragY>=THRESHOLD) {
-					dragX = motionX;
-					dragY = motionY;
-					candyEngine.down();
-				} else if (dragY-motionY>=THRESHOLD) {
-					dragX = motionX;
-					dragY = motionY;
-					candyEngine.up();
+				} else if (pSceneTouchEvent.isActionMove()) {
+					if (motionX - dragX >= THRESHOLD) {
+						dragX = motionX;
+						dragY = motionY;
+						tapOptionEnabled = false;
+						candyEngine.right();
+					} else if (dragX - motionX >= THRESHOLD) {
+						dragX = motionX;
+						dragY = motionY;
+						tapOptionEnabled = false;
+						candyEngine.left();
+					} else if (motionY - dragY >= THRESHOLD) {
+						dragX = motionX;
+						dragY = motionY;
+						tapOptionEnabled = false;
+						candyEngine.down();
+					} else if (dragY - motionY >= THRESHOLD) {
+						dragX = motionX;
+						dragY = motionY;
+						tapOptionEnabled = false;
+						candyEngine.up();
+					}
+				} else if (tapOptionEnabled&&
+					pSceneTouchEvent.isActionUp()&&
+					System.currentTimeMillis()-time<=TIME_THRESHOLD) {
+					if (motionX<=PHONE_WIDTH/3&&motionY>=PHONE_HEIGHT/6&&motionY<=PHONE_HEIGHT*5/6) {
+						candyEngine.left();
+					} else if (motionX>=PHONE_WIDTH*2/3&&motionY>=PHONE_HEIGHT/6&&motionY<=PHONE_HEIGHT*5/6) {
+						candyEngine.right();
+					} else if (motionY<=PHONE_HEIGHT/3&&motionX>=PHONE_WIDTH/6&&motionX<=PHONE_WIDTH*5/6) {
+						candyEngine.up();
+					} else if (motionY>=PHONE_HEIGHT*2/3&&motionX>=PHONE_WIDTH/6&&motionX<=PHONE_WIDTH*5/6) {
+						candyEngine.down();
+					}
 				}
 			}
-			
-//			if (pSceneTouchEvent.isActionDown()) {
-//				if (pSceneTouchEvent.getMotionEvent().getY() <= PHONE_HEIGHT / 3) {
-//					spriteList.get(1).moveUp(objectArray);
-//				} else if (pSceneTouchEvent.getMotionEvent().getY() >= PHONE_HEIGHT / 3 * 2) {
-//					spriteList.get(1).moveDown(objectArray);
-//				} else if (pSceneTouchEvent.getMotionEvent().getX() >= PHONE_WIDTH / 2) {
-//					spriteList.get(1).moveRight(objectArray);
-//				} else {
-//					spriteList.get(1).moveLeft(objectArray);
-//				}
-//			}
 		}
 		return true;
 	}

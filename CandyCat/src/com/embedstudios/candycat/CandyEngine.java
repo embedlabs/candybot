@@ -11,7 +11,7 @@ public class CandyEngine {
 	
 	private int catX;
 	private int catY;
-	private CandyAnimatedSprite cat;
+	CandyAnimatedSprite cat;
 	
 	private static final String TAG = CandyUtils.TAG;
 
@@ -25,6 +25,7 @@ public class CandyEngine {
 				catY = objectArray[i][2];
 				cat = spriteList.get(i);
 				Log.i(TAG,"Cat located at row "+catX+", column "+catY);
+				break;
 			}
 		}
 	}
