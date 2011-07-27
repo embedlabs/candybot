@@ -1,5 +1,7 @@
 package com.embedstudios.candycat;
 
+import java.util.ArrayList;
+
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -10,13 +12,17 @@ public class LoadTask extends AsyncTask<Void,Void,Void> {
 	public boolean running = true;
 	private final RelativeLayout rl;
 	private final ImageView iv;
+	private final CandyLevel candyLevel;
+	private final ArrayList<String> tutorialList;
 	
 	public static final String TAG = CandyUtils.TAG;
 	
-	public LoadTask(final RelativeLayout rl, final ImageView iv) {
+	public LoadTask(final CandyLevel candyLevel, final RelativeLayout rl, final ImageView iv, final ArrayList<String> tutorialList) {
 		super();
 		this.rl=rl;
 		this.iv=iv;
+		this.candyLevel=candyLevel;
+		this.tutorialList=tutorialList;
 	}
 	
 	@Override
@@ -32,12 +38,9 @@ public class LoadTask extends AsyncTask<Void,Void,Void> {
 	
 	@Override
 	protected void onPostExecute(Void result) {
-		try {
-			rl.setVisibility(View.INVISIBLE);
-			iv.clearAnimation();
-		} catch (Exception e) {
-			Log.e(TAG,"LoadTask error.",e);
-		}
+		rl.setVisibility(View.INVISIBLE);
+		iv.clearAnimation();
+		candyLevel.addTutorialText(tutorialList);
 		Log.i(TAG,"LoadTask ended.");
 	}
 	

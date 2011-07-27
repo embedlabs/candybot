@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.anddev.andengine.opengl.texture.Texture;
+import org.anddev.andengine.opengl.util.GLHelper;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

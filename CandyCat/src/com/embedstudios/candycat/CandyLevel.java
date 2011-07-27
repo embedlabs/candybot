@@ -117,6 +117,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private boolean playMode=false;
 	private ChangeableText playCT;
 	
+	private float dragX,dragY;
+	private static float THRESHOLD = 50;
+	
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -333,8 +336,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	}
 
 	private void createSprite(final int type,final int row,final int column,final int index) {
-		// TODO
-		
 		final CandyAnimatedSprite face;
 		
 		switch (type){
@@ -355,12 +356,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public void onLoadComplete() {
 		Log.v(TAG,"CandyLevel onLoadComplete()");
 		
-		loadTask = new LoadTask(loading_rl_level,loading_iv);
+		loadTask = new LoadTask(this,loading_rl_level,loading_iv,tutorialList);
 		loadTask.execute();
 		
-//		addTutorialText(tutorialList);
-//		// TODO
-//		spriteList.get(0).moveUp(backgroundArray, objectArray);
 	}
 
 	@Override
@@ -386,7 +384,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public void onScroll(final ScrollDetector pScollDetector, final TouchEvent pTouchEvent, final float pDistanceX, final float pDistanceY) {
-		// TODO
 		final float zoomFactor = mZoomCamera.getZoomFactor();
 		mZoomCamera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY / zoomFactor);
 	}
@@ -409,7 +406,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
 		if (!playMode) {
-			// TODO
 			if (mPinchZoomDetector != null) {
 				mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
 				if (mPinchZoomDetector.isZooming()) {
@@ -424,17 +420,43 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 				mScrollDetector.onTouchEvent(pSceneTouchEvent);
 			}
 		} else {
+			final MotionEvent motionEvent = pSceneTouchEvent.getMotionEvent();
+			final float motionX = motionEvent.getX();
+			final float motionY = motionEvent.getY();
 			if (pSceneTouchEvent.isActionDown()) {
-				if (pSceneTouchEvent.getMotionEvent().getY() <= PHONE_HEIGHT / 3) {
-					spriteList.get(1).moveUp(objectArray);
-				} else if (pSceneTouchEvent.getMotionEvent().getY() >= PHONE_HEIGHT / 3 * 2) {
-					spriteList.get(1).moveDown(objectArray);
-				} else if (pSceneTouchEvent.getMotionEvent().getX() >= PHONE_WIDTH / 2) {
-					spriteList.get(1).moveRight(objectArray);
-				} else {
-					spriteList.get(1).moveLeft(objectArray);
+				dragX = motionX;
+				dragY = motionY;
+			} else if (pSceneTouchEvent.isActionMove()) {
+				if (motionX-dragX>=THRESHOLD) {
+					dragX = motionX;
+					dragY = motionY;
+					candyEngine.right();
+				} else if (dragX-motionX>=THRESHOLD) {
+					dragX = motionX;
+					dragY = motionY;
+					candyEngine.left();
+				} else if (motionY-dragY>=THRESHOLD) {
+					dragX = motionX;
+					dragY = motionY;
+					candyEngine.down();
+				} else if (dragY-motionY>=THRESHOLD) {
+					dragX = motionX;
+					dragY = motionY;
+					candyEngine.up();
 				}
 			}
+			
+//			if (pSceneTouchEvent.isActionDown()) {
+//				if (pSceneTouchEvent.getMotionEvent().getY() <= PHONE_HEIGHT / 3) {
+//					spriteList.get(1).moveUp(objectArray);
+//				} else if (pSceneTouchEvent.getMotionEvent().getY() >= PHONE_HEIGHT / 3 * 2) {
+//					spriteList.get(1).moveDown(objectArray);
+//				} else if (pSceneTouchEvent.getMotionEvent().getX() >= PHONE_WIDTH / 2) {
+//					spriteList.get(1).moveRight(objectArray);
+//				} else {
+//					spriteList.get(1).moveLeft(objectArray);
+//				}
+//			}
 		}
 		return true;
 	}

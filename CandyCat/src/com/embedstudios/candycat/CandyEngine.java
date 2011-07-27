@@ -11,36 +11,37 @@ public class CandyEngine {
 	
 	private int catX;
 	private int catY;
+	private CandyAnimatedSprite cat;
 	
 	private static final String TAG = CandyUtils.TAG;
 
 	public CandyEngine(ArrayList<CandyAnimatedSprite> spriteList, int[][] objectArray, int[][] backgroundArray) {
-		// TODO Auto-generated constructor stub
 		this.spriteList = spriteList;
 		this.objectArray = objectArray;
 		this.backgroundArray = backgroundArray;
-		for (int[] x:objectArray) {
-			if (x[0]==1) {
-				catX=x[1];
-				catY=x[2];
-				Log.i(TAG,"Cat located at row "+catX+", column "+"catY");
+		for (int i=0;i<objectArray.length;i++) {
+			if (objectArray[i][0]==2) {
+				catX = objectArray[i][1];
+				catY = objectArray[i][2];
+				cat = spriteList.get(i);
+				Log.i(TAG,"Cat located at row "+catX+", column "+catY);
 			}
 		}
 	}
 	
 	public void left() {
-		
+		cat.moveLeft(objectArray);
 	}
 	
 	public void right() {
-		
+		cat.moveRight(objectArray);
 	}
 	
 	public void up() {
-		
+		cat.moveUp(objectArray);
 	}
 	
 	public void down() {
-		
+		cat.moveDown(objectArray);
 	}
 }
