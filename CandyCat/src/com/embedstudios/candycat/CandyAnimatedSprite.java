@@ -11,20 +11,6 @@ import org.anddev.andengine.util.modifier.ease.EaseLinear;
 
 import android.util.Log;
 
-/**
- * 
- * Plan for moving:
- * 
- * 1. User drags finger if the game is in moving mode (it could also be in panning mode, this will be determined by a toggle button)
- * 2. This will trigger an event in the cat's move<Direction> method.
- * 3. The cat sprite will now lookup the location of objects in levelArray (CandyLevel.backgroundArray) and objectArray (CandyLevel.objectArray).
- * 4. If it can move freely, it will, and the method will return true.
- * 5. If it can't, it will return false.
- * 6. If it has another object that can be pushed, it will call that object's move<Direction> function.
- * 7. If that object can be moved, then it will move and return true, else it will return false, hence the cat sprite cannot move.
- * 8. The enemy obeys different rules, and will require an override/extension of this class, or something.
- */
-
 public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, IPathModifierListener {
 	public boolean stable = true;
 	public final int index,type;
