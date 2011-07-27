@@ -34,8 +34,10 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	private int lastDirectionalMove = 0; // for ice block mechanics
 	
 	public boolean hasModifier = false;
-
-	public static final long[] frameArray = new long[]{50,50,50,50};
+	
+	
+	public static int speed = 5;
+	public static final long[] frameArray = new long[]{250/speed,250/speed,250/speed,250/speed};
 	public static final String TAG = CandyUtils.TAG;
 
 	public CandyAnimatedSprite(int row, int column, TiledTextureRegion pTiledTextureRegion, RectangleVertexBuffer RVB, int index, int type) {
@@ -57,7 +59,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 			if (row != 0) {
 				lastDirectionalMove = row;
 			}
-			registerEntityModifier(new PathModifier(0.2f, new Path(2).to(
+			registerEntityModifier(new PathModifier(1/(float)speed, new Path(2).to(
 					getX(), getY()).to(getX() + (column * 64),
 					getY() + (row * 64)), this, EaseLinear.getInstance()));
 			objectArray[index][1] += row;
