@@ -185,6 +185,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		Log.v(TAG, "MainMenu onLoadComplete()");
 		
 		getWindow().setFormat(PixelFormat.RGBA_8888);
+		
+		ScoreloopManagerSingleton.init(this, "70C+VmvvyJ3M0aXxaMZQ0xq35uvSgoVOw/EG+0wy8vnHF7w6M8/WNw==");
 
 		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
 
@@ -198,12 +200,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		CandyUtils.setClick(this,button_play,iv_achievements,iv_facebook,iv_twitter);
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies part
-		
-		try {
-			ScoreloopManagerSingleton.init(this, "70C+VmvvyJ3M0aXxaMZQ0xq35uvSgoVOw/EG+0wy8vnHF7w6M8/WNw==");
-		} catch (Exception e) {
-			Log.e(TAG, "Singleton failed.",e);
-		}
 		
 		mAdvertisement = new CandyAdvertisement(this, R.id.game_ad);
 		
