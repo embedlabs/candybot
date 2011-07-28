@@ -9,10 +9,6 @@
 # java specific
 *.class
 
-# eclipse
-*.classpath
-*.project
-
 # any bin stuff
 *.apk
 *.ap_
