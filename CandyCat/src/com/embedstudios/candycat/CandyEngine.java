@@ -42,6 +42,10 @@ public class CandyEngine {
 		cat.moveDown(objectArray);
 	}
 	
+	/**
+	 * Basically returns -1 if it's the edge, 0 if there's nothing, otherwise returns the object code (BOX=3, for example).
+	 */
+	
 	public synchronized int getObjectRight(final int objectIndex) {
 		final int row = objectArray[objectIndex][1];
 		final int column = objectArray[objectIndex][2];
