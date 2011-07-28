@@ -164,7 +164,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		PHONE_WIDTH = display.getWidth();
 		PHONE_HEIGHT = display.getHeight();
 		
-		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,1000);
+		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,10000);
 		mSmoothCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		mSmoothCamera.setBoundsEnabled(true);
 		mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
@@ -207,7 +207,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		 * FONT
 		 */
 		mFontTexture = new Texture(512,512, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		andengine_komika = new Font(mFontTexture, komika, 44, true, Color.DKGRAY);
+		andengine_komika = new Font(mFontTexture, komika, 44, true, 0x80ff6600);
 		
 		/**
 		 * ENGINE LOADING
