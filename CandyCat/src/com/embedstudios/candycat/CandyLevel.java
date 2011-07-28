@@ -164,8 +164,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public Engine onLoadEngine() {
 		Log.v(TAG,"CandyLevel onLoadEngine()");
 		
-		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,100000);
-		mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
+		mSmoothCamera = new SmoothCamera((WIDTH-PHONE_WIDTH)/2,(HEIGHT-PHONE_HEIGHT)/2,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,100000);
+		mSmoothCamera.setZoomFactorDirect(PHONE_HEIGHT/HEIGHT);
 		mSmoothCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		mSmoothCamera.setBoundsEnabled(true);
 		
