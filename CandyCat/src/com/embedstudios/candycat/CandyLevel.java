@@ -43,11 +43,9 @@ import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
-import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -165,9 +163,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		PHONE_HEIGHT = display.getHeight();
 		
 		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,10000);
+		mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
 		mSmoothCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		mSmoothCamera.setBoundsEnabled(true);
-		mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
 		
 		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mSmoothCamera);
 		final Engine engine = new Engine(engineOptions);
@@ -207,7 +205,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		 * FONT
 		 */
 		mFontTexture = new Texture(512,512, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		andengine_komika = new Font(mFontTexture, komika, 44, true, 0x80ff6600);
+		andengine_komika = new Font(mFontTexture, komika, 44, true, 0x80444444);
 		
 		/**
 		 * ENGINE LOADING
