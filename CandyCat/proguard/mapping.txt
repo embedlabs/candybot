@@ -1,3 +1,74 @@
+a -> g:
+    java.util.Map a -> a
+    java.util.Map b -> b
+    void a(d,java.util.Map,android.net.Uri,android.webkit.WebView) -> a
+    boolean a(android.net.Uri) -> a
+    boolean b(android.net.Uri) -> b
+    boolean c(android.net.Uri) -> c
+    void a(android.webkit.WebView,java.lang.String,java.lang.String) -> a
+    void a(android.webkit.WebView,java.lang.String) -> a
+    void a(android.webkit.WebView,java.util.Map) -> a
+    void a(android.webkit.WebView) -> a
+    void b(android.webkit.WebView) -> b
+b -> e:
+    c a -> a
+    d b -> b
+    boolean c -> c
+    java.lang.String d -> d
+    void a() -> a
+    void a(java.net.HttpURLConnection) -> a
+    void b(java.net.HttpURLConnection) -> b
+    void a(java.lang.String) -> a
+    void run() -> run
+c -> f:
+    java.lang.String a -> a
+    java.lang.String b -> b
+    b c -> c
+    d d -> d
+    com.google.ads.AdRequest e -> e
+    android.webkit.WebView f -> f
+    java.lang.String g -> g
+    java.util.LinkedList h -> h
+    boolean i -> i
+    com.google.ads.AdRequest$ErrorCode j -> j
+    boolean k -> k
+    int l -> l
+    java.lang.Thread m -> m
+    void a(java.lang.String) -> a
+    void a() -> a
+    void a(com.google.ads.AdRequest) -> a
+    void run() -> run
+    java.lang.String a(com.google.ads.AdRequest,android.app.Activity) -> a
+    void a(com.google.ads.AdRequest$ErrorCode,boolean) -> a
+    void a(java.lang.String,java.lang.String) -> a
+    void b(java.lang.String) -> b
+    void a(com.google.ads.AdRequest$ErrorCode) -> a
+    void b() -> b
+    void a(int) -> a
+c$a -> y:
+    d b -> a
+    android.webkit.WebView c -> b
+    b d -> c
+    com.google.ads.AdRequest$ErrorCode e -> d
+    boolean f -> e
+    c a -> f
+    void run() -> run
+c$b -> z:
+    c a -> a
+c$c -> aa:
+    java.lang.String b -> a
+    java.lang.String c -> b
+    android.webkit.WebView d -> c
+    c a -> d
+    void run() -> run
+c$d -> ab:
+    c a -> a
+c$e -> ac:
+    d b -> a
+    java.util.LinkedList c -> b
+    int d -> c
+    c a -> d
+    void run() -> run
 com.badlogic.gdx.math.Vector2 -> com.badlogic.gdx.math.Vector2:
     com.badlogic.gdx.math.Vector2 tmp -> tmp
     float x -> x
@@ -769,46 +840,103 @@ com.badlogic.gdx.utils.LongMap$Values -> com.badlogic.gdx.utils.LongMap$Values:
     java.util.Iterator iterator() -> iterator
     void reset() -> reset
     void remove() -> remove
-com.embedstudios.candycat.CandyAnimatedSprite -> com.embedstudios.candycat.c:
+com.embedstudios.candycat.CandyAdvertisement -> com.embedstudios.candycat.h:
+    android.app.Activity activity -> b
+    int advertisementId -> c
+    android.os.Handler adsHandler -> a
+    com.google.ads.AdView adView -> d
+    android.view.animation.Animation in -> e
+    android.view.animation.Animation out -> f
+    java.lang.String TAG -> g
+    void access$1(com.embedstudios.candycat.CandyAdvertisement) -> a
+com.embedstudios.candycat.CandyAdvertisement$ShowAdsRunnable -> com.embedstudios.candycat.i:
+    com.embedstudios.candycat.CandyAdvertisement this$0 -> a
+    void run() -> run
+com.embedstudios.candycat.CandyAnimatedSprite -> com.embedstudios.candycat.g:
     boolean stable -> a
     int index -> b
     int type -> c
     boolean gravityIsOn -> d
-    int candyRotationState -> e
+    int candyLastMove -> e
+    int candyRotationState -> f
+    int lastDirectionalMove -> g
+    boolean hasModifier -> h
+    int SPEED -> i
+    long[] frameArray -> j
+    boolean move(int,int,int[][]) -> a
     void onPathStarted(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity) -> onPathStarted
     void onPathWaypointStarted(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity,int) -> onPathWaypointStarted
     void onPathWaypointFinished(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity,int) -> onPathWaypointFinished
     void onPathFinished(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity) -> onPathFinished
-com.embedstudios.candycat.CandyGallery -> com.embedstudios.candycat.CandyGallery:
-    void onCreate(android.os.Bundle) -> onCreate
+    boolean moveRight(int[][]) -> a
+    boolean moveLeft(int[][]) -> b
+    boolean moveUp(int[][]) -> c
+    boolean moveDown(int[][]) -> d
+com.embedstudios.candycat.CandyEngine -> com.embedstudios.candycat.f:
+    java.util.ArrayList spriteList -> b
+    int[][] objectArray -> c
+    int[][] backgroundArray -> d
+    com.embedstudios.candycat.CandyAnimatedSprite cat -> a
+    void left() -> a
+    void right() -> b
+    void up() -> c
+    void down() -> d
 com.embedstudios.candycat.CandyLevel -> com.embedstudios.candycat.CandyLevel:
-    float PHONE_WIDTH -> a
-    float PHONE_HEIGHT -> b
-    int level -> c
-    int world -> d
-    java.util.ArrayList objectList -> e
-    java.util.ArrayList tutorialList -> f
-    java.util.ArrayList spriteList -> g
-    int[][] backgroundArray -> h
-    int[][] objectArray -> i
-    org.anddev.andengine.entity.scene.Scene mScene -> j
-    org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap mTMXTiledMap -> k
-    org.anddev.andengine.engine.camera.ZoomCamera mZoomCamera -> l
-    org.anddev.andengine.opengl.texture.Texture mObjectTexture -> m
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion candyTTR -> n
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion catTTR -> o
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion bombTTR -> p
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion enemyTTR -> q
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion boxTTR -> r
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion movableWallTTR -> s
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion inertiaWallTTR -> t
-    org.anddev.andengine.input.touch.detector.SurfaceScrollDetector mScrollDetector -> u
-    org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector mPinchZoomDetector -> v
-    float mPinchZoomStartedCameraZoomFactor -> w
-    android.graphics.Typeface komika -> x
+    float PHONE_WIDTH -> e
+    float PHONE_HEIGHT -> a
+    int level -> f
+    int world -> g
+    java.util.ArrayList objectList -> h
+    java.util.ArrayList tutorialList -> i
+    java.util.ArrayList spriteList -> j
+    int[][] backgroundArray -> k
+    int[][] objectArray -> l
+    org.anddev.andengine.entity.scene.Scene mScene -> m
+    org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap mTMXTiledMap -> n
+    org.anddev.andengine.engine.camera.SmoothCamera mSmoothCamera -> b
+    org.anddev.andengine.engine.camera.hud.HUD hud -> o
+    org.anddev.andengine.opengl.texture.Texture mObjectTexture -> p
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion candyTTR -> q
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion catTTR -> r
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion boxTTR -> s
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion bombTTR -> t
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion enemyTTR -> u
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion movableWallTTR -> v
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion inertiaWallTTR -> w
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer candyRVB -> x
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer catRVB -> y
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer boxRVB -> z
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer bombRVB -> A
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer enemyRVB -> B
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer movableWallRVB -> C
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer inertiaWallRVB -> D
+    org.anddev.andengine.opengl.texture.Texture mFontTexture -> E
+    org.anddev.andengine.opengl.font.Font andengine_komika -> F
+    org.anddev.andengine.input.touch.detector.SurfaceScrollDetector mScrollDetector -> G
+    org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector mPinchZoomDetector -> H
+    float mPinchZoomStartedCameraZoomFactor -> I
+    android.graphics.Typeface komika -> J
+    android.widget.TextView loading_tv -> K
+    android.widget.ImageView loading_iv -> L
+    android.widget.RelativeLayout loading_rl_level -> M
+    com.embedstudios.candycat.LoadTask loadTask -> N
+    com.embedstudios.candycat.CandyEngine candyEngine -> c
+    java.lang.String play -> O
+    java.lang.String pan -> P
+    boolean playMode -> Q
+    boolean gameStarted -> d
+    org.anddev.andengine.entity.text.ChangeableText playCT -> R
+    float dragX -> S
+    float dragY -> T
+    float THRESHOLD -> U
+    long time -> V
+    boolean tapOptionEnabled -> W
+    void onCreate(android.os.Bundle) -> onCreate
+    void onWindowFocusChanged(boolean) -> onWindowFocusChanged
     org.anddev.andengine.engine.Engine onLoadEngine() -> onLoadEngine
     void onLoadResources() -> onLoadResources
     org.anddev.andengine.entity.scene.Scene onLoadScene() -> onLoadScene
+    void addTutorialText(java.util.ArrayList) -> a
     void onLoadComplete() -> onLoadComplete
     void onTMXTileWithPropertiesCreated(org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap,org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer,org.anddev.andengine.entity.layer.tiled.tmx.TMXTile,org.anddev.andengine.entity.layer.tiled.tmx.TMXProperties) -> onTMXTileWithPropertiesCreated
     int getLayoutID() -> getLayoutID
@@ -818,8 +946,34 @@ com.embedstudios.candycat.CandyLevel -> com.embedstudios.candycat.CandyLevel:
     void onPinchZoom(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent,float) -> onPinchZoom
     void onPinchZoomFinished(org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector,org.anddev.andengine.input.touch.TouchEvent,float) -> onPinchZoomFinished
     boolean onSceneTouchEvent(org.anddev.andengine.entity.scene.Scene,org.anddev.andengine.input.touch.TouchEvent) -> onSceneTouchEvent
-com.embedstudios.candycat.DitheredSprite -> com.embedstudios.candycat.a:
+    void onDestroy() -> onDestroy
+    boolean access$0(com.embedstudios.candycat.CandyLevel) -> a
+    java.lang.String access$1(com.embedstudios.candycat.CandyLevel) -> b
+    void access$2(com.embedstudios.candycat.CandyLevel,boolean) -> a
+    java.lang.String access$3(com.embedstudios.candycat.CandyLevel) -> c
+com.embedstudios.candycat.CandyLevel$1 -> com.embedstudios.candycat.a:
+    com.embedstudios.candycat.CandyLevel this$0 -> a
+    boolean onAreaTouched(org.anddev.andengine.input.touch.TouchEvent,float,float) -> onAreaTouched
+com.embedstudios.candycat.CandyLevel$2 -> com.embedstudios.candycat.b:
+    com.embedstudios.candycat.CandyLevel this$0 -> a
+    org.anddev.andengine.entity.text.ChangeableText val$fpsText -> b
+    org.anddev.andengine.entity.util.FPSCounter val$fpsCounter -> c
+    void onTimePassed(org.anddev.andengine.engine.handler.timer.TimerHandler) -> onTimePassed
+com.embedstudios.candycat.CandyUtils -> com.embedstudios.candycat.j:
+    void setKomika(android.graphics.Typeface,android.widget.TextView[]) -> a
+com.embedstudios.candycat.DitheredSprite -> com.embedstudios.candycat.d:
     void onInitDraw(javax.microedition.khronos.opengles.GL10) -> onInitDraw
+com.embedstudios.candycat.LoadTask -> com.embedstudios.candycat.e:
+    boolean running -> a
+    android.widget.RelativeLayout rl -> b
+    android.widget.ImageView iv -> c
+    com.embedstudios.candycat.CandyLevel candyLevel -> d
+    java.util.ArrayList tutorialList -> e
+    java.lang.Void doInBackground$10299ca() -> a
+    void pause(int) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
 com.embedstudios.candycat.MainMenu -> com.embedstudios.candycat.MainMenu:
     android.widget.ViewFlipper enclosing_vf -> a
     android.widget.TextView mainmenu_tv -> b
@@ -827,38 +981,41 @@ com.embedstudios.candycat.MainMenu -> com.embedstudios.candycat.MainMenu:
     android.widget.ImageView iv_achievements -> d
     android.widget.ImageView iv_facebook -> e
     android.widget.ImageView iv_twitter -> f
-    android.graphics.Typeface komika -> g
-    int WIDTH -> h
-    int HEIGHT -> i
-    org.anddev.andengine.opengl.texture.Texture mTexture -> j
-    org.anddev.andengine.opengl.texture.region.TextureRegion mCandyFaceTextureRegion -> k
-    org.anddev.andengine.opengl.texture.region.TextureRegion mWallFaceTextureRegion -> l
-    org.anddev.andengine.opengl.texture.region.TextureRegion mBoxFaceTextureRegion -> m
-    org.anddev.andengine.opengl.texture.region.TextureRegion mInertiaFaceTextureRegion -> n
-    org.anddev.andengine.opengl.texture.region.TextureRegion mIceFaceTextureRegion -> o
-    org.anddev.andengine.opengl.texture.Texture mAutoParallaxBackgroundTexture -> p
-    org.anddev.andengine.opengl.texture.region.TextureRegion mCloudsTextureRegion -> q
-    org.anddev.andengine.opengl.texture.region.TextureRegion mSeaTextureRegion -> r
-    org.anddev.andengine.opengl.texture.region.TextureRegion mHillsTextureRegion -> s
-    org.anddev.andengine.entity.scene.Scene mScene -> t
-    org.anddev.andengine.extension.physics.box2d.PhysicsWorld mPhysicsWorld -> u
-    com.embedstudios.candycat.MainMenu$SplashTask splashTask -> v
-    boolean running -> w
+    com.embedstudios.candycat.CandyAdvertisement mAdvertisement -> g
+    android.graphics.Typeface komika -> h
+    int WIDTH -> i
+    int HEIGHT -> j
+    org.anddev.andengine.opengl.texture.Texture mTexture -> k
+    org.anddev.andengine.opengl.texture.region.TextureRegion mCandyFaceTextureRegion -> l
+    org.anddev.andengine.opengl.texture.region.TextureRegion mWallFaceTextureRegion -> m
+    org.anddev.andengine.opengl.texture.region.TextureRegion mBoxFaceTextureRegion -> n
+    org.anddev.andengine.opengl.texture.region.TextureRegion mInertiaFaceTextureRegion -> o
+    org.anddev.andengine.opengl.texture.region.TextureRegion mIceFaceTextureRegion -> p
+    org.anddev.andengine.opengl.texture.Texture mAutoParallaxBackgroundTexture -> q
+    org.anddev.andengine.opengl.texture.region.TextureRegion mCloudsTextureRegion -> r
+    org.anddev.andengine.opengl.texture.region.TextureRegion mSeaTextureRegion -> s
+    org.anddev.andengine.opengl.texture.region.TextureRegion mHillsTextureRegion -> t
+    org.anddev.andengine.entity.scene.Scene mScene -> u
+    org.anddev.andengine.extension.physics.box2d.PhysicsWorld mPhysicsWorld -> v
+    com.embedstudios.candycat.SplashTask splashTask -> w
+    void onWindowFocusChanged(boolean) -> onWindowFocusChanged
     void onClick(android.view.View) -> onClick
     org.anddev.andengine.engine.Engine onLoadEngine() -> onLoadEngine
     void onLoadResources() -> onLoadResources
     org.anddev.andengine.entity.scene.Scene onLoadScene() -> onLoadScene
     void onLoadComplete() -> onLoadComplete
+    void addFace(int) -> a
     void onAccelerometerChanged(org.anddev.andengine.sensor.accelerometer.AccelerometerData) -> onAccelerometerChanged
     void onResumeGame() -> onResumeGame
     void onPauseGame() -> onPauseGame
     int getLayoutID() -> getLayoutID
     int getRenderSurfaceViewID() -> getRenderSurfaceViewID
     void onDestroy() -> onDestroy
-    boolean access$0(com.embedstudios.candycat.MainMenu) -> a
-    void access$1(com.embedstudios.candycat.MainMenu,int) -> a
-com.embedstudios.candycat.MainMenu$SplashTask -> com.embedstudios.candycat.b:
-    com.embedstudios.candycat.MainMenu this$0 -> a
+com.embedstudios.candycat.SplashTask -> com.embedstudios.candycat.c:
+    boolean running -> a
+    android.widget.ViewFlipper vf -> b
+    com.embedstudios.candycat.MainMenu mainMenu -> c
+    com.embedstudios.candycat.CandyAdvertisement candyAdvertisement -> d
     java.lang.Void doInBackground$10299ca() -> a
     void pause(int) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
@@ -939,6 +1096,214 @@ com.facebook.android.e -> com.facebook.android.e:
     android.os.Bundle a(java.lang.String) -> a
     android.os.Bundle b(java.lang.String) -> b
     void a(android.content.Context,java.lang.String,java.lang.String) -> a
+com.google.ads.Ad -> com.google.ads.Ad:
+    boolean isReady() -> isReady
+    void loadAd(com.google.ads.AdRequest) -> loadAd
+    void setAdListener(com.google.ads.AdListener) -> setAdListener
+    void stopLoading() -> stopLoading
+com.google.ads.AdActivity -> com.google.ads.AdActivity:
+    java.lang.String BASE_URL_PARAM -> BASE_URL_PARAM
+    java.lang.String HTML_PARAM -> HTML_PARAM
+    java.lang.String URL_PARAM -> URL_PARAM
+    java.lang.String INTENT_ACTION_PARAM -> INTENT_ACTION_PARAM
+    java.lang.String TYPE_PARAM -> TYPE_PARAM
+    java.lang.String ORIENTATION_PARAM -> ORIENTATION_PARAM
+    java.lang.Object a -> a
+    com.google.ads.AdActivity b -> b
+    d c -> c
+    com.google.ads.AdActivity d -> d
+    com.google.ads.AdActivity e -> e
+    g f -> f
+    long g -> g
+    android.widget.RelativeLayout h -> h
+    com.google.ads.AdActivity i -> i
+    boolean j -> j
+    android.widget.VideoView k -> k
+    void a(java.lang.String) -> a
+    android.widget.VideoView getVideoView() -> getVideoView
+    g getOpeningAdWebView() -> getOpeningAdWebView
+    boolean isShowing() -> isShowing
+    void launchAdActivity(d,e) -> launchAdActivity
+    void onClick(android.view.View) -> onClick
+    void onCreate(android.os.Bundle) -> onCreate
+    void a(g,boolean,int) -> a
+    void showVideo(android.widget.VideoView) -> showVideo
+    void onCompletion(android.media.MediaPlayer) -> onCompletion
+    void onDestroy() -> onDestroy
+    void onPrepared(android.media.MediaPlayer) -> onPrepared
+    boolean onError(android.media.MediaPlayer,int,int) -> onError
+    void onWindowFocusChanged(boolean) -> onWindowFocusChanged
+com.google.ads.AdListener -> com.google.ads.AdListener:
+    void onReceiveAd(com.google.ads.Ad) -> onReceiveAd
+    void onFailedToReceiveAd(com.google.ads.Ad,com.google.ads.AdRequest$ErrorCode) -> onFailedToReceiveAd
+    void onPresentScreen(com.google.ads.Ad) -> onPresentScreen
+    void onDismissScreen(com.google.ads.Ad) -> onDismissScreen
+    void onLeaveApplication(com.google.ads.Ad) -> onLeaveApplication
+com.google.ads.AdRequest -> com.google.ads.AdRequest:
+    java.lang.String VERSION -> VERSION
+    com.google.ads.AdRequest$Gender a -> a
+    java.lang.String b -> b
+    java.util.Set c -> c
+    java.util.Map d -> d
+    android.location.Location e -> e
+    boolean f -> f
+    boolean g -> g
+    java.lang.String LOGTAG -> LOGTAG
+    java.lang.String TEST_EMULATOR -> TEST_EMULATOR
+    java.util.Set h -> h
+    void setGender(com.google.ads.AdRequest$Gender) -> setGender
+    void setBirthday(java.lang.String) -> setBirthday
+    void setKeywords(java.util.Set) -> setKeywords
+    void addKeyword(java.lang.String) -> addKeyword
+    void setExtras(java.util.Map) -> setExtras
+    void addExtra(java.lang.String,java.lang.Object) -> addExtra
+    void setLocation(android.location.Location) -> setLocation
+    void setTesting(boolean) -> setTesting
+    java.util.Map getRequestMap(android.content.Context) -> getRequestMap
+    void addTestDevice(java.lang.String) -> addTestDevice
+    void setTestDevices(java.util.Set) -> setTestDevices
+    boolean isTestDevice(android.content.Context) -> isTestDevice
+com.google.ads.AdRequest$ErrorCode -> com.google.ads.AdRequest$ErrorCode:
+    com.google.ads.AdRequest$ErrorCode INVALID_REQUEST -> INVALID_REQUEST
+    com.google.ads.AdRequest$ErrorCode NO_FILL -> NO_FILL
+    com.google.ads.AdRequest$ErrorCode NETWORK_ERROR -> NETWORK_ERROR
+    com.google.ads.AdRequest$ErrorCode INTERNAL_ERROR -> INTERNAL_ERROR
+    java.lang.String a -> a
+    com.google.ads.AdRequest$ErrorCode[] b -> b
+    com.google.ads.AdRequest$ErrorCode[] values() -> values
+    com.google.ads.AdRequest$ErrorCode valueOf(java.lang.String) -> valueOf
+    java.lang.String toString() -> toString
+com.google.ads.AdRequest$Gender -> com.google.ads.AdRequest$Gender:
+    com.google.ads.AdRequest$Gender MALE -> MALE
+    com.google.ads.AdRequest$Gender FEMALE -> FEMALE
+    java.lang.String a -> a
+    com.google.ads.AdRequest$Gender[] b -> b
+    com.google.ads.AdRequest$Gender[] values() -> values
+    com.google.ads.AdRequest$Gender valueOf(java.lang.String) -> valueOf
+    java.lang.String toString() -> toString
+com.google.ads.AdSize -> com.google.ads.AdSize:
+    com.google.ads.AdSize BANNER -> BANNER
+    com.google.ads.AdSize IAB_MRECT -> IAB_MRECT
+    com.google.ads.AdSize IAB_BANNER -> IAB_BANNER
+    com.google.ads.AdSize IAB_LEADERBOARD -> IAB_LEADERBOARD
+    int a -> a
+    int b -> b
+    java.lang.String c -> c
+    int getWidth() -> getWidth
+    int getHeight() -> getHeight
+    java.lang.String toString() -> toString
+com.google.ads.AdView -> com.google.ads.AdView:
+    d a -> a
+    void a(android.content.Context,java.lang.String,int,com.google.ads.AdSize,android.util.AttributeSet) -> a
+    boolean a(android.content.Context,com.google.ads.AdSize,android.util.AttributeSet) -> a
+    void destroy() -> destroy
+    void a(android.content.Context,java.lang.String,com.google.ads.AdSize,android.util.AttributeSet) -> a
+    void a(android.content.Context,android.util.AttributeSet) -> a
+    void a(android.app.Activity,com.google.ads.AdSize,java.lang.String) -> a
+    boolean isReady() -> isReady
+    boolean isRefreshing() -> isRefreshing
+    void loadAd(com.google.ads.AdRequest) -> loadAd
+    void setAdListener(com.google.ads.AdListener) -> setAdListener
+    void stopLoading() -> stopLoading
+com.google.ads.InstallReceiver -> com.google.ads.InstallReceiver:
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    java.lang.String a(java.lang.String,java.lang.String,java.lang.String) -> a
+    void forwardIntent(android.content.Context,android.content.Intent) -> forwardIntent
+com.google.ads.InterstitialAd -> com.google.ads.InterstitialAd:
+    d a -> a
+    boolean isReady() -> isReady
+    void loadAd(com.google.ads.AdRequest) -> loadAd
+    void show() -> show
+    void setAdListener(com.google.ads.AdListener) -> setAdListener
+    void stopLoading() -> stopLoading
+com.google.ads.R -> com.google.ads.R:
+com.google.ads.R$attr -> com.google.ads.R$attr:
+com.google.ads.R$id -> com.google.ads.R$id:
+    int admob_adView_320_50_test_1 -> admob_adView_320_50_test_1
+    int admob_adView_320_50_test_2 -> admob_adView_320_50_test_2
+    int admob_adView_320_50_test_3 -> admob_adView_320_50_test_3
+    int admob_adView_320_50_test_4 -> admob_adView_320_50_test_4
+    int admob_layout_320_50_test -> admob_layout_320_50_test
+com.google.ads.R$layout -> com.google.ads.R$layout:
+    int admob_320_50_test -> admob_320_50_test
+com.google.ads.util.AdUtil -> com.google.ads.util.AdUtil:
+    int a -> a
+    java.lang.Boolean b -> b
+    java.lang.String c -> c
+    java.lang.String d -> d
+    android.media.AudioManager e -> e
+    boolean f -> f
+    boolean g -> g
+    java.lang.String h -> h
+    java.lang.String a(android.content.Context) -> a
+    int a() -> a
+    int b() -> b
+    int a(android.content.Context,android.util.DisplayMetrics) -> a
+    int b(android.content.Context,android.util.DisplayMetrics) -> b
+    boolean b(android.content.Context) -> b
+    boolean c(android.content.Context) -> c
+    boolean c() -> c
+    boolean a(android.net.Uri) -> a
+    java.lang.String a(java.lang.String) -> a
+    java.lang.String d(android.content.Context) -> d
+    java.lang.String e(android.content.Context) -> e
+    com.google.ads.util.AdUtil$a f(android.content.Context) -> f
+    android.util.DisplayMetrics a(android.app.Activity) -> a
+    java.lang.String a(android.location.Location) -> a
+    java.lang.String b(java.lang.String) -> b
+    java.util.HashMap b(android.net.Uri) -> b
+    boolean d() -> d
+    void a(boolean) -> a
+    void g(android.content.Context) -> g
+    java.lang.String h(android.content.Context) -> h
+    void a(android.webkit.WebView) -> a
+    void a(java.net.HttpURLConnection,android.content.Context) -> a
+    java.lang.String a(java.util.Map) -> a
+    org.json.JSONObject b(java.util.Map) -> b
+    org.json.JSONArray a(java.util.Set) -> a
+com.google.ads.util.AdUtil$UserActivityReceiver -> com.google.ads.util.AdUtil$UserActivityReceiver:
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.google.ads.util.AdUtil$a -> com.google.ads.util.AdUtil$a:
+    com.google.ads.util.AdUtil$a a -> a
+    com.google.ads.util.AdUtil$a b -> b
+    com.google.ads.util.AdUtil$a c -> c
+    com.google.ads.util.AdUtil$a d -> d
+    com.google.ads.util.AdUtil$a e -> e
+    com.google.ads.util.AdUtil$a f -> f
+    com.google.ads.util.AdUtil$a[] g -> g
+    com.google.ads.util.AdUtil$a[] values() -> values
+    com.google.ads.util.AdUtil$a valueOf(java.lang.String) -> valueOf
+com.google.ads.util.a -> com.google.ads.util.a:
+    void a(java.lang.String) -> a
+    void b(java.lang.String) -> b
+    void a(java.lang.String,java.lang.Throwable) -> a
+    void c(java.lang.String) -> c
+    void d(java.lang.String) -> d
+    void e(java.lang.String) -> e
+    void b(java.lang.String,java.lang.Throwable) -> b
+    boolean a(java.lang.String,int) -> a
+com.google.ads.util.b -> com.google.ads.util.b:
+    boolean a -> a
+    java.lang.String a(byte[]) -> a
+com.google.ads.util.b$a -> com.google.ads.util.b$a:
+    byte[] a -> a
+    int b -> b
+com.google.ads.util.b$b -> com.google.ads.util.b$b:
+    byte[] h -> h
+    byte[] i -> i
+    byte[] j -> j
+    int c -> c
+    int k -> k
+    boolean d -> d
+    boolean e -> e
+    boolean f -> f
+    byte[] l -> l
+    boolean g -> g
+    boolean a(byte[],int) -> a
+com.google.ads.util.c -> com.google.ads.util.c:
+    int a(android.content.Context,android.util.DisplayMetrics) -> a
+    int b(android.content.Context,android.util.DisplayMetrics) -> b
+    int a(android.content.Context,float,int) -> a
 com.scoreloop.client.android.core.PublishedFor__1_0_0 -> com.scoreloop.client.android.core.PublishedFor__1_0_0:
 com.scoreloop.client.android.core.PublishedFor__1_1_0 -> com.scoreloop.client.android.core.PublishedFor__1_1_0:
 com.scoreloop.client.android.core.PublishedFor__2_0_0 -> com.scoreloop.client.android.core.PublishedFor__2_0_0:
@@ -3150,6 +3515,8 @@ com.scoreloop.client.android.ui.ProfileScreenActivity -> com.scoreloop.client.an
     void onCreate(android.os.Bundle) -> onCreate
 com.scoreloop.client.android.ui.R -> com.scoreloop.client.android.ui.R:
 com.scoreloop.client.android.ui.R$anim -> com.scoreloop.client.android.ui.R$anim:
+    int ad_slide_in_top -> ad_slide_in_top
+    int ad_slide_out_top -> ad_slide_out_top
     int rotate_in -> rotate_in
     int rotate_infinitely -> rotate_infinitely
     int rotate_out -> rotate_out
@@ -3197,6 +3564,7 @@ com.scoreloop.client.android.ui.R$drawable -> com.scoreloop.client.android.ui.R$
     int facebook -> facebook
     int facebook_bright -> facebook_bright
     int fb_button -> fb_button
+    int full_candy -> full_candy
     int icon -> icon
     int scoreloop -> scoreloop
     int scoreloop_bright -> scoreloop_bright
@@ -3321,8 +3689,11 @@ com.scoreloop.client.android.ui.R$id -> com.scoreloop.client.android.ui.R$id:
     int enclosing_rl_level -> enclosing_rl_level
     int enclosing_vf -> enclosing_vf
     int facebook_checkbox -> facebook_checkbox
-    int gallery_ll -> gallery_ll
+    int game_ad -> game_ad
     int icon -> icon
+    int loading_iv_level -> loading_iv_level
+    int loading_rl_level -> loading_rl_level
+    int loading_tv_level -> loading_tv_level
     int logo_iv -> logo_iv
     int logo_rl -> logo_rl
     int mainmenu_rl -> mainmenu_rl
@@ -3423,7 +3794,6 @@ com.scoreloop.client.android.ui.R$id -> com.scoreloop.client.android.ui.R$id:
     int stake_text -> stake_text
     int twitter_checkbox -> twitter_checkbox
 com.scoreloop.client.android.ui.R$layout -> com.scoreloop.client.android.ui.R$layout:
-    int gallery -> gallery
     int level -> level
     int main -> main
     int sl_challenge_payment -> sl_challenge_payment
@@ -3474,11 +3844,11 @@ com.scoreloop.client.android.ui.R$menu -> com.scoreloop.client.android.ui.R$menu
     int sl_options_menu -> sl_options_menu
 com.scoreloop.client.android.ui.R$string -> com.scoreloop.client.android.ui.R$string:
     int app_name -> app_name
-    int button_achievements -> button_achievements
-    int button_gallery -> button_gallery
     int button_play -> button_play
     int facebook_link -> facebook_link
     int loading -> loading
+    int pan -> pan
+    int play -> play
     int sl_abuse_report_sent -> sl_abuse_report_sent
     int sl_abuse_report_title -> sl_abuse_report_title
     int sl_accept_challenge -> sl_accept_challenge
@@ -5741,6 +6111,659 @@ com.scoreloop.client.android.ui.util.LocalImageStorage -> com.scoreloop.client.a
     boolean putBitmap(android.content.Context,java.lang.String,android.graphics.Bitmap) -> putBitmap
     boolean putBitmap(android.content.Context,java.lang.String,com.scoreloop.client.android.ui.util.ImageDownloader$BitmapResult) -> putBitmap
     java.io.File putStream(android.content.Context,java.lang.String,java.io.InputStream) -> putStream
+d -> c:
+    java.lang.Object a -> a
+    java.lang.ref.WeakReference b -> b
+    com.google.ads.Ad c -> c
+    com.google.ads.AdListener d -> d
+    c e -> e
+    com.google.ads.AdRequest f -> f
+    com.google.ads.AdSize g -> g
+    f h -> h
+    java.lang.String i -> i
+    g j -> j
+    h k -> k
+    android.os.Handler l -> l
+    long m -> m
+    boolean n -> n
+    boolean o -> o
+    android.content.SharedPreferences p -> p
+    long q -> q
+    x r -> r
+    boolean s -> s
+    java.util.LinkedList t -> t
+    java.util.LinkedList u -> u
+    int v -> v
+    void a(java.lang.String) -> a
+    void a(java.util.LinkedList) -> a
+    void a() -> a
+    void b() -> b
+    void c() -> c
+    void d() -> d
+    android.app.Activity e() -> e
+    com.google.ads.Ad f() -> f
+    c g() -> g
+    java.lang.String h() -> h
+    g i() -> i
+    h j() -> j
+    com.google.ads.AdSize k() -> k
+    f l() -> l
+    void a(int) -> a
+    int m() -> m
+    long n() -> n
+    boolean A() -> A
+    boolean o() -> o
+    boolean p() -> p
+    void a(com.google.ads.AdRequest) -> a
+    void a(com.google.ads.AdRequest$ErrorCode) -> a
+    void q() -> q
+    void r() -> r
+    void s() -> s
+    void t() -> t
+    void u() -> u
+    void v() -> v
+    boolean w() -> w
+    void B() -> B
+    void a(java.lang.Runnable) -> a
+    void x() -> x
+    void a(com.google.ads.AdListener) -> a
+    void a(long) -> a
+    void y() -> y
+    void a(float) -> a
+    void z() -> z
+e -> d:
+    java.lang.String a -> a
+    java.util.HashMap b -> b
+    android.os.Bundle a() -> a
+    java.lang.String b() -> b
+    java.util.HashMap c() -> c
+f -> a:
+    java.util.LinkedList b -> a
+    long c -> b
+    long d -> c
+    java.util.LinkedList e -> d
+    long f -> e
+    java.lang.String g -> f
+    boolean h -> g
+    boolean i -> h
+    java.lang.String a -> i
+    void a() -> a
+    void b() -> b
+    void c() -> c
+    void d() -> d
+    long e() -> e
+    java.lang.String f() -> f
+    java.lang.String g() -> g
+    long h() -> h
+    long i() -> i
+    java.lang.String j() -> j
+    void a(java.lang.String) -> a
+    boolean k() -> k
+    void l() -> l
+    boolean m() -> m
+    void n() -> n
+    void o() -> o
+    java.lang.String p() -> p
+    void b(java.lang.String) -> b
+g -> b:
+    com.google.ads.AdActivity a -> a
+    com.google.ads.AdSize b -> b
+    void a() -> a
+    com.google.ads.AdActivity b() -> b
+    void a(com.google.ads.AdActivity) -> a
+    void loadDataWithBaseURL(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> loadDataWithBaseURL
+    void loadUrl(java.lang.String) -> loadUrl
+    void onMeasure(int,int) -> onMeasure
+h -> n:
+    d a -> a
+    java.util.Map b -> b
+    boolean c -> c
+    boolean d -> d
+    boolean e -> e
+    boolean f -> f
+    boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
+    void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
+    void a() -> a
+    void b() -> b
+i -> o:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+j -> l:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+k -> m:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+l -> j:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+m -> k:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+n -> h:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+o -> i:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+org.anddev.andengine.R -> org.anddev.andengine.R:
+org.anddev.andengine.R$anim -> org.anddev.andengine.R$anim:
+    int ad_slide_in_top -> ad_slide_in_top
+    int ad_slide_out_top -> ad_slide_out_top
+    int rotate_in -> rotate_in
+    int rotate_infinitely -> rotate_infinitely
+    int rotate_out -> rotate_out
+    int sl_next_in -> sl_next_in
+    int sl_next_out -> sl_next_out
+    int sl_previous_in -> sl_previous_in
+    int sl_previous_out -> sl_previous_out
+    int slide_in_right -> slide_in_right
+    int slide_out_left -> slide_out_left
+org.anddev.andengine.R$attr -> org.anddev.andengine.R$attr:
+org.anddev.andengine.R$color -> org.anddev.andengine.R$color:
+    int bg_center -> bg_center
+    int bg_start -> bg_start
+    int button_focused_stroke -> button_focused_stroke
+    int button_normal_center -> button_normal_center
+    int button_normal_end -> button_normal_end
+    int button_normal_start -> button_normal_start
+    int button_normal_stroke -> button_normal_stroke
+    int button_pressed_center -> button_pressed_center
+    int button_pressed_end -> button_pressed_end
+    int button_pressed_start -> button_pressed_start
+    int button_pressed_stroke -> button_pressed_stroke
+    int normal_text -> normal_text
+    int sl_color_background -> sl_color_background
+    int sl_color_background_caption -> sl_color_background_caption
+    int sl_color_background_footer -> sl_color_background_footer
+    int sl_color_background_header -> sl_color_background_header
+    int sl_color_background_status -> sl_color_background_status
+    int sl_color_divider -> sl_color_divider
+    int sl_color_foreground -> sl_color_foreground
+    int sl_color_foreground_inverted -> sl_color_foreground_inverted
+    int sl_color_scoreloop -> sl_color_scoreloop
+    int transparent -> transparent
+org.anddev.andengine.R$dimen -> org.anddev.andengine.R$dimen:
+    int sl_clickable_height -> sl_clickable_height
+    int sl_header_image_size -> sl_header_image_size
+    int sl_margin_default -> sl_margin_default
+    int sl_margin_shortcut -> sl_margin_shortcut
+    int sl_margin_small -> sl_margin_small
+org.anddev.andengine.R$drawable -> org.anddev.andengine.R$drawable:
+    int background_linear -> background_linear
+    int button -> button
+    int button_normal -> button_normal
+    int button_pressed -> button_pressed
+    int facebook -> facebook
+    int facebook_bright -> facebook_bright
+    int fb_button -> fb_button
+    int full_candy -> full_candy
+    int icon -> icon
+    int scoreloop -> scoreloop
+    int scoreloop_bright -> scoreloop_bright
+    int sl_border_gradient -> sl_border_gradient
+    int sl_button -> sl_button
+    int sl_button_account_settings -> sl_button_account_settings
+    int sl_button_add_coins -> sl_button_add_coins
+    int sl_button_add_friend -> sl_button_add_friend
+    int sl_button_arrow -> sl_button_arrow
+    int sl_button_close -> sl_button_close
+    int sl_button_more -> sl_button_more
+    int sl_challenge_participants_background -> sl_challenge_participants_background
+    int sl_challenge_seekbar -> sl_challenge_seekbar
+    int sl_challenge_seekbar_background -> sl_challenge_seekbar_background
+    int sl_challenge_seekbar_progress -> sl_challenge_seekbar_progress
+    int sl_challenge_seekbar_thumb -> sl_challenge_seekbar_thumb
+    int sl_challenge_settings_background -> sl_challenge_settings_background
+    int sl_challenge_settings_background_image -> sl_challenge_settings_background_image
+    int sl_challenge_vs_background -> sl_challenge_vs_background
+    int sl_checkbox_checked -> sl_checkbox_checked
+    int sl_checkbox_checked_disabled -> sl_checkbox_checked_disabled
+    int sl_checkbox_selector -> sl_checkbox_selector
+    int sl_checkbox_unchecked -> sl_checkbox_unchecked
+    int sl_checkbox_unchecked_disabled -> sl_checkbox_unchecked_disabled
+    int sl_dialog_background -> sl_dialog_background
+    int sl_dialog_button_background -> sl_dialog_button_background
+    int sl_dialog_button_background_pressed -> sl_dialog_button_background_pressed
+    int sl_dialog_button_background_selector -> sl_dialog_button_background_selector
+    int sl_dialog_input_background -> sl_dialog_input_background
+    int sl_header_background -> sl_header_background
+    int sl_header_button_background -> sl_header_button_background
+    int sl_header_button_background_selector -> sl_header_button_background_selector
+    int sl_header_caption_background -> sl_header_caption_background
+    int sl_header_icon_achievements -> sl_header_icon_achievements
+    int sl_header_icon_add_coins -> sl_header_icon_add_coins
+    int sl_header_icon_challenges -> sl_header_icon_challenges
+    int sl_header_icon_leaderboards -> sl_header_icon_leaderboards
+    int sl_header_icon_market -> sl_header_icon_market
+    int sl_header_icon_news_closed -> sl_header_icon_news_closed
+    int sl_header_icon_news_opened -> sl_header_icon_news_opened
+    int sl_header_icon_user -> sl_header_icon_user
+    int sl_header_market_background -> sl_header_market_background
+    int sl_highlighted_background -> sl_highlighted_background
+    int sl_icon_achievements -> sl_icon_achievements
+    int sl_icon_add_friends -> sl_icon_add_friends
+    int sl_icon_addressbook -> sl_icon_addressbook
+    int sl_icon_challenge_anyone -> sl_icon_challenge_anyone
+    int sl_icon_challenge_lost -> sl_icon_challenge_lost
+    int sl_icon_challenge_won -> sl_icon_challenge_won
+    int sl_icon_challenges -> sl_icon_challenges
+    int sl_icon_change_email -> sl_icon_change_email
+    int sl_icon_change_picture -> sl_icon_change_picture
+    int sl_icon_change_username -> sl_icon_change_username
+    int sl_icon_device -> sl_icon_device
+    int sl_icon_facebook -> sl_icon_facebook
+    int sl_icon_flag_inappropriate -> sl_icon_flag_inappropriate
+    int sl_icon_friends -> sl_icon_friends
+    int sl_icon_games -> sl_icon_games
+    int sl_icon_games_loading -> sl_icon_games_loading
+    int sl_icon_leaderboards -> sl_icon_leaderboards
+    int sl_icon_market -> sl_icon_market
+    int sl_icon_menu_account_settings -> sl_icon_menu_account_settings
+    int sl_icon_merge_account -> sl_icon_merge_account
+    int sl_icon_myspace -> sl_icon_myspace
+    int sl_icon_news_closed -> sl_icon_news_closed
+    int sl_icon_news_opened -> sl_icon_news_opened
+    int sl_icon_next -> sl_icon_next
+    int sl_icon_plus_content -> sl_icon_plus_content
+    int sl_icon_previous -> sl_icon_previous
+    int sl_icon_recommend -> sl_icon_recommend
+    int sl_icon_remove_friend -> sl_icon_remove_friend
+    int sl_icon_scoreloop -> sl_icon_scoreloop
+    int sl_icon_see_more -> sl_icon_see_more
+    int sl_icon_socialproviders -> sl_icon_socialproviders
+    int sl_icon_top -> sl_icon_top
+    int sl_icon_twitter -> sl_icon_twitter
+    int sl_icon_user -> sl_icon_user
+    int sl_list_item_caption_background -> sl_list_item_caption_background
+    int sl_list_item_normal_normal -> sl_list_item_normal_normal
+    int sl_list_item_normal_selected -> sl_list_item_normal_selected
+    int sl_logo -> sl_logo
+    int sl_score_divider -> sl_score_divider
+    int sl_screen_background -> sl_screen_background
+    int sl_screen_background_pattern -> sl_screen_background_pattern
+    int sl_selector_list_item -> sl_selector_list_item
+    int sl_shortcut_background -> sl_shortcut_background
+    int sl_shortcut_friends_active -> sl_shortcut_friends_active
+    int sl_shortcut_friends_default -> sl_shortcut_friends_default
+    int sl_shortcut_highlight -> sl_shortcut_highlight
+    int sl_shortcut_home_active -> sl_shortcut_home_active
+    int sl_shortcut_home_default -> sl_shortcut_home_default
+    int sl_shortcut_market_active -> sl_shortcut_market_active
+    int sl_shortcut_market_default -> sl_shortcut_market_default
+    int sl_spinner_background -> sl_spinner_background
+    int sl_status_background -> sl_status_background
+    int sl_tab_active -> sl_tab_active
+    int sl_tab_default_left_border -> sl_tab_default_left_border
+    int sl_tab_default_right_border -> sl_tab_default_right_border
+    int splash -> splash
+    int t_button -> t_button
+    int twitter -> twitter
+    int twitter_bright -> twitter_bright
+org.anddev.andengine.R$id -> org.anddev.andengine.R$id:
+    int SecondaryProgress -> SecondaryProgress
+    int background -> background
+    int button_achievements -> button_achievements
+    int button_facebook -> button_facebook
+    int button_ok -> button_ok
+    int button_play -> button_play
+    int button_twitter -> button_twitter
+    int cancel_button -> cancel_button
+    int contender_icon -> contender_icon
+    int contender_name -> contender_name
+    int contender_stats -> contender_stats
+    int contestant_icon -> contestant_icon
+    int contestant_name -> contestant_name
+    int contestant_stats -> contestant_stats
+    int control1 -> control1
+    int control2 -> control2
+    int edit_login -> edit_login
+    int enclosing_rl -> enclosing_rl
+    int enclosing_rl_level -> enclosing_rl_level
+    int enclosing_vf -> enclosing_vf
+    int facebook_checkbox -> facebook_checkbox
+    int game_ad -> game_ad
+    int icon -> icon
+    int loading_iv_level -> loading_iv_level
+    int loading_rl_level -> loading_rl_level
+    int loading_tv_level -> loading_tv_level
+    int logo_iv -> logo_iv
+    int logo_rl -> logo_rl
+    int mainmenu_rl -> mainmenu_rl
+    int mainmenu_tv -> mainmenu_tv
+    int message -> message
+    int message_edittext -> message_edittext
+    int mode -> mode
+    int mode_selector -> mode_selector
+    int myspace_checkbox -> myspace_checkbox
+    int ok_button -> ok_button
+    int rsv -> rsv
+    int rsv_level -> rsv_level
+    int sl_body -> sl_body
+    int sl_button -> sl_button
+    int sl_button_cancel -> sl_button_cancel
+    int sl_button_ok -> sl_button_ok
+    int sl_caption_container -> sl_caption_container
+    int sl_contender_name -> sl_contender_name
+    int sl_contender_score -> sl_contender_score
+    int sl_contestant_name -> sl_contestant_name
+    int sl_contestant_score -> sl_contestant_score
+    int sl_control_button -> sl_control_button
+    int sl_control_header -> sl_control_header
+    int sl_control_icon -> sl_control_icon
+    int sl_description -> sl_description
+    int sl_dialog_error_layout -> sl_dialog_error_layout
+    int sl_dialog_hint -> sl_dialog_hint
+    int sl_dialog_profile_edit_initial_layout -> sl_dialog_profile_edit_initial_layout
+    int sl_dialog_profile_edit_layout -> sl_dialog_profile_edit_layout
+    int sl_error_message -> sl_error_message
+    int sl_footer -> sl_footer
+    int sl_header -> sl_header
+    int sl_header_achievements -> sl_header_achievements
+    int sl_header_caption -> sl_header_caption
+    int sl_header_caption_land -> sl_header_caption_land
+    int sl_header_friends -> sl_header_friends
+    int sl_header_games -> sl_header_games
+    int sl_header_image -> sl_header_image
+    int sl_header_layout -> sl_header_layout
+    int sl_header_number_achievements -> sl_header_number_achievements
+    int sl_header_number_friends -> sl_header_number_friends
+    int sl_header_number_games -> sl_header_number_games
+    int sl_header_subtitle -> sl_header_subtitle
+    int sl_header_title -> sl_header_title
+    int sl_icon -> sl_icon
+    int sl_image_tab_layout -> sl_image_tab_layout
+    int sl_image_tab_view -> sl_image_tab_view
+    int sl_item_account_settings -> sl_item_account_settings
+    int sl_list -> sl_list
+    int sl_list_item_achievement_accessory -> sl_list_item_achievement_accessory
+    int sl_list_item_achievement_description -> sl_list_item_achievement_description
+    int sl_list_item_achievement_icon -> sl_list_item_achievement_icon
+    int sl_list_item_achievement_title -> sl_list_item_achievement_title
+    int sl_list_item_caption_title -> sl_list_item_caption_title
+    int sl_list_item_game_detail_text -> sl_list_item_game_detail_text
+    int sl_list_item_main_icon -> sl_list_item_main_icon
+    int sl_list_item_main_subtitle -> sl_list_item_main_subtitle
+    int sl_list_item_main_title -> sl_list_item_main_title
+    int sl_list_item_news_accessory -> sl_list_item_news_accessory
+    int sl_list_item_news_description -> sl_list_item_news_description
+    int sl_list_item_news_icon -> sl_list_item_news_icon
+    int sl_list_item_news_title -> sl_list_item_news_title
+    int sl_list_item_score_percent -> sl_list_item_score_percent
+    int sl_list_item_score_result -> sl_list_item_score_result
+    int sl_list_item_score_title -> sl_list_item_score_title
+    int sl_number -> sl_number
+    int sl_post_text -> sl_post_text
+    int sl_prize -> sl_prize
+    int sl_scores -> sl_scores
+    int sl_shortcuts -> sl_shortcuts
+    int sl_spinner_bar -> sl_spinner_bar
+    int sl_spinner_view -> sl_spinner_view
+    int sl_status -> sl_status
+    int sl_status_close_button -> sl_status_close_button
+    int sl_status_logo -> sl_status_logo
+    int sl_submit_local_score_button -> sl_submit_local_score_button
+    int sl_subtitle -> sl_subtitle
+    int sl_subtitle2 -> sl_subtitle2
+    int sl_tab -> sl_tab
+    int sl_tabs_body -> sl_tabs_body
+    int sl_tabs_segments -> sl_tabs_segments
+    int sl_text -> sl_text
+    int sl_title -> sl_title
+    int sl_user_profile_edit_current_label -> sl_user_profile_edit_current_label
+    int sl_user_profile_edit_current_text -> sl_user_profile_edit_current_text
+    int sl_user_profile_edit_initial_current_label -> sl_user_profile_edit_initial_current_label
+    int sl_user_profile_edit_initial_current_text -> sl_user_profile_edit_initial_current_text
+    int sl_user_profile_edit_initial_email_label -> sl_user_profile_edit_initial_email_label
+    int sl_user_profile_edit_initial_email_text -> sl_user_profile_edit_initial_email_text
+    int sl_user_profile_edit_initial_username_label -> sl_user_profile_edit_initial_username_label
+    int sl_user_profile_edit_initial_username_text -> sl_user_profile_edit_initial_username_text
+    int sl_user_profile_edit_layout -> sl_user_profile_edit_layout
+    int sl_user_profile_edit_new_label -> sl_user_profile_edit_new_label
+    int sl_user_profile_edit_new_text -> sl_user_profile_edit_new_text
+    int sl_webview -> sl_webview
+    int stake -> stake
+    int stake_selector -> stake_selector
+    int stake_text -> stake_text
+    int twitter_checkbox -> twitter_checkbox
+org.anddev.andengine.R$layout -> org.anddev.andengine.R$layout:
+    int level -> level
+    int main -> main
+    int sl_challenge_payment -> sl_challenge_payment
+    int sl_dialog_custom -> sl_dialog_custom
+    int sl_dialog_error -> sl_dialog_error
+    int sl_dialog_login -> sl_dialog_login
+    int sl_dialog_ok_cancel -> sl_dialog_ok_cancel
+    int sl_dialog_profile_edit -> sl_dialog_profile_edit
+    int sl_dialog_profile_edit_initial -> sl_dialog_profile_edit_initial
+    int sl_dialog_text_button -> sl_dialog_text_button
+    int sl_dialog_toast -> sl_dialog_toast
+    int sl_header_caption -> sl_header_caption
+    int sl_header_default -> sl_header_default
+    int sl_header_game -> sl_header_game
+    int sl_header_market -> sl_header_market
+    int sl_header_user -> sl_header_user
+    int sl_list_item_achievement -> sl_list_item_achievement
+    int sl_list_item_caption -> sl_list_item_caption
+    int sl_list_item_challenge_controls -> sl_list_item_challenge_controls
+    int sl_list_item_challenge_history -> sl_list_item_challenge_history
+    int sl_list_item_challenge_open -> sl_list_item_challenge_open
+    int sl_list_item_challenge_participants -> sl_list_item_challenge_participants
+    int sl_list_item_challenge_settings -> sl_list_item_challenge_settings
+    int sl_list_item_challenge_settings_edit -> sl_list_item_challenge_settings_edit
+    int sl_list_item_empty -> sl_list_item_empty
+    int sl_list_item_game_detail -> sl_list_item_game_detail
+    int sl_list_item_icon_title_small -> sl_list_item_icon_title_small
+    int sl_list_item_icon_title_subtitle -> sl_list_item_icon_title_subtitle
+    int sl_list_item_main -> sl_list_item_main
+    int sl_list_item_market -> sl_list_item_market
+    int sl_list_item_news -> sl_list_item_news
+    int sl_list_item_score -> sl_list_item_score
+    int sl_list_item_score_excluded -> sl_list_item_score_excluded
+    int sl_list_item_score_highlighted -> sl_list_item_score_highlighted
+    int sl_list_item_score_submit_local -> sl_list_item_score_submit_local
+    int sl_list_item_user -> sl_list_item_user
+    int sl_list_item_user_add_buddies -> sl_list_item_user_add_buddies
+    int sl_list_view -> sl_list_view
+    int sl_post -> sl_post
+    int sl_result -> sl_result
+    int sl_screen -> sl_screen
+    int sl_spinner_item -> sl_spinner_item
+    int sl_spinner_view -> sl_spinner_view
+    int sl_tab_caption -> sl_tab_caption
+    int sl_tab_shortcut -> sl_tab_shortcut
+    int sl_tabs -> sl_tabs
+org.anddev.andengine.R$menu -> org.anddev.andengine.R$menu:
+    int sl_options_menu -> sl_options_menu
+org.anddev.andengine.R$string -> org.anddev.andengine.R$string:
+    int app_name -> app_name
+    int button_play -> button_play
+    int facebook_link -> facebook_link
+    int loading -> loading
+    int pan -> pan
+    int play -> play
+    int sl_abuse_report_sent -> sl_abuse_report_sent
+    int sl_abuse_report_title -> sl_abuse_report_title
+    int sl_accept_challenge -> sl_accept_challenge
+    int sl_accept_start_challenge -> sl_accept_start_challenge
+    int sl_account_settings -> sl_account_settings
+    int sl_account_settings_shortcut -> sl_account_settings_shortcut
+    int sl_achievements -> sl_achievements
+    int sl_achievements_capitalized -> sl_achievements_capitalized
+    int sl_achievements_no_awards -> sl_achievements_no_awards
+    int sl_add_coins -> sl_add_coins
+    int sl_add_friend -> sl_add_friend
+    int sl_add_friends -> sl_add_friends
+    int sl_addressbook -> sl_addressbook
+    int sl_against -> sl_against
+    int sl_against_anyone -> sl_against_anyone
+    int sl_anyone -> sl_anyone
+    int sl_balance_too_low -> sl_balance_too_low
+    int sl_cancel -> sl_cancel
+    int sl_challenge_this_friend -> sl_challenge_this_friend
+    int sl_challenges -> sl_challenges
+    int sl_challenges_history -> sl_challenges_history
+    int sl_change_email -> sl_change_email
+    int sl_change_picture -> sl_change_picture
+    int sl_change_picture_details -> sl_change_picture_details
+    int sl_change_username -> sl_change_username
+    int sl_choose_photo -> sl_choose_photo
+    int sl_community -> sl_community
+    int sl_create_challenge -> sl_create_challenge
+    int sl_current -> sl_current
+    int sl_details -> sl_details
+    int sl_device_library -> sl_device_library
+    int sl_email -> sl_email
+    int sl_error_message_challenge_accept -> sl_error_message_challenge_accept
+    int sl_error_message_challenge_balance -> sl_error_message_challenge_balance
+    int sl_error_message_challenge_game_not_ready -> sl_error_message_challenge_game_not_ready
+    int sl_error_message_challenge_ongoing -> sl_error_message_challenge_ongoing
+    int sl_error_message_challenge_reject -> sl_error_message_challenge_reject
+    int sl_error_message_connect_failed -> sl_error_message_connect_failed
+    int sl_error_message_email_already_taken -> sl_error_message_email_already_taken
+    int sl_error_message_email_already_taken_title -> sl_error_message_email_already_taken_title
+    int sl_error_message_invalid_email -> sl_error_message_invalid_email
+    int sl_error_message_network -> sl_error_message_network
+    int sl_error_message_username_already_taken -> sl_error_message_username_already_taken
+    int sl_facebook -> sl_facebook
+    int sl_featured_game_capitalized -> sl_featured_game_capitalized
+    int sl_find -> sl_find
+    int sl_find_match -> sl_find_match
+    int sl_format_achievements -> sl_format_achievements
+    int sl_format_achievements_extended -> sl_format_achievements_extended
+    int sl_format_added_as_friend -> sl_format_added_as_friend
+    int sl_format_balance -> sl_format_balance
+    int sl_format_challenge_stats -> sl_format_challenge_stats
+    int sl_format_challenges_subtitle -> sl_format_challenges_subtitle
+    int sl_format_challenges_title -> sl_format_challenges_title
+    int sl_format_connect_failed -> sl_format_connect_failed
+    int sl_format_found_many_users -> sl_format_found_many_users
+    int sl_format_friend_already_added -> sl_format_friend_already_added
+    int sl_format_friend_already_removed -> sl_format_friend_already_removed
+    int sl_format_friends_added -> sl_format_friends_added
+    int sl_format_friends_playing -> sl_format_friends_playing
+    int sl_format_leaderboards_percent -> sl_format_leaderboards_percent
+    int sl_format_new_news_items -> sl_format_new_news_items
+    int sl_format_number_friends -> sl_format_number_friends
+    int sl_format_number_games -> sl_format_number_games
+    int sl_format_one_friend_added -> sl_format_one_friend_added
+    int sl_format_playing -> sl_format_playing
+    int sl_format_post -> sl_format_post
+    int sl_format_posted -> sl_format_posted
+    int sl_format_recommend_subtitle -> sl_format_recommend_subtitle
+    int sl_format_recommend_title -> sl_format_recommend_title
+    int sl_format_removed_as_friend -> sl_format_removed_as_friend
+    int sl_format_score_title -> sl_format_score_title
+    int sl_format_stake -> sl_format_stake
+    int sl_format_unlocked -> sl_format_unlocked
+    int sl_format_welcome_back -> sl_format_welcome_back
+    int sl_found_no_user -> sl_found_no_user
+    int sl_found_too_many_users -> sl_found_too_many_users
+    int sl_friends -> sl_friends
+    int sl_friends_capitalized -> sl_friends_capitalized
+    int sl_friends_games -> sl_friends_games
+    int sl_friends_games_subtitle -> sl_friends_games_subtitle
+    int sl_games -> sl_games
+    int sl_games_capitalized -> sl_games_capitalized
+    int sl_games_subtitle -> sl_games_subtitle
+    int sl_get -> sl_get
+    int sl_global -> sl_global
+    int sl_home -> sl_home
+    int sl_images -> sl_images
+    int sl_launch -> sl_launch
+    int sl_leaderboards -> sl_leaderboards
+    int sl_leave_accept_challenge -> sl_leave_accept_challenge
+    int sl_leave_accept_game_recommendation -> sl_leave_accept_game_recommendation
+    int sl_leave_accept_game_recommendation_ok -> sl_leave_accept_game_recommendation_ok
+    int sl_leave_accept_match_buddies -> sl_leave_accept_match_buddies
+    int sl_leave_accept_match_buddies_ok -> sl_leave_accept_match_buddies_ok
+    int sl_leave_payment -> sl_leave_payment
+    int sl_local_leaderboard -> sl_local_leaderboard
+    int sl_market -> sl_market
+    int sl_market_description -> sl_market_description
+    int sl_merge_account_description -> sl_merge_account_description
+    int sl_merge_account_email_current -> sl_merge_account_email_current
+    int sl_merge_account_not_found -> sl_merge_account_not_found
+    int sl_merge_account_subtitle -> sl_merge_account_subtitle
+    int sl_merge_account_success -> sl_merge_account_success
+    int sl_merge_account_success_title -> sl_merge_account_success_title
+    int sl_merge_account_title -> sl_merge_account_title
+    int sl_my_games -> sl_my_games
+    int sl_myspace -> sl_myspace
+    int sl_new -> sl_new
+    int sl_new_challenge -> sl_new_challenge
+    int sl_new_games -> sl_new_games
+    int sl_new_games_subtitle -> sl_new_games_subtitle
+    int sl_news -> sl_news
+    int sl_next -> sl_next
+    int sl_no_friends -> sl_no_friends
+    int sl_no_friends_playing -> sl_no_friends_playing
+    int sl_no_games -> sl_no_games
+    int sl_no_history_challenges -> sl_no_history_challenges
+    int sl_no_news -> sl_no_news
+    int sl_no_news_items -> sl_no_news_items
+    int sl_no_open_challenges -> sl_no_open_challenges
+    int sl_no_scores -> sl_no_scores
+    int sl_no_thanks -> sl_no_thanks
+    int sl_not_on_highscore_list -> sl_not_on_highscore_list
+    int sl_ok -> sl_ok
+    int sl_one_news_item -> sl_one_news_item
+    int sl_open_challenges -> sl_open_challenges
+    int sl_pending -> sl_pending
+    int sl_playing -> sl_playing
+    int sl_please_email_address -> sl_please_email_address
+    int sl_please_email_valid -> sl_please_email_valid
+    int sl_popular_games -> sl_popular_games
+    int sl_popular_games_subtitle -> sl_popular_games_subtitle
+    int sl_post -> sl_post
+    int sl_previous -> sl_previous
+    int sl_recommend_sent -> sl_recommend_sent
+    int sl_register_username -> sl_register_username
+    int sl_reject_challenge -> sl_reject_challenge
+    int sl_rejected -> sl_rejected
+    int sl_remove_friend -> sl_remove_friend
+    int sl_scoreloop_username -> sl_scoreloop_username
+    int sl_see_more -> sl_see_more
+    int sl_select_stake -> sl_select_stake
+    int sl_set_default -> sl_set_default
+    int sl_slapp_subtitle -> sl_slapp_subtitle
+    int sl_slapp_title -> sl_slapp_title
+    int sl_status_error_balance -> sl_status_error_balance
+    int sl_status_error_network -> sl_status_error_network
+    int sl_status_success_challenge_created -> sl_status_success_challenge_created
+    int sl_status_success_challenge_lost -> sl_status_success_challenge_lost
+    int sl_status_success_challenge_won -> sl_status_success_challenge_won
+    int sl_status_success_local_score -> sl_status_success_local_score
+    int sl_status_success_score -> sl_status_success_score
+    int sl_submit_local_scores -> sl_submit_local_scores
+    int sl_top -> sl_top
+    int sl_try_again -> sl_try_again
+    int sl_twentyfour -> sl_twentyfour
+    int sl_twitter -> sl_twitter
+    int sl_update -> sl_update
+    int sl_username -> sl_username
+    int twitter_link -> twitter_link
+org.anddev.andengine.R$style -> org.anddev.andengine.R$style:
+    int candyButton -> candyButton
+    int menuButton -> menuButton
+    int sl_dialog -> sl_dialog
+    int sl_font_size_big -> sl_font_size_big
+    int sl_font_size_giant -> sl_font_size_giant
+    int sl_font_size_huge -> sl_font_size_huge
+    int sl_font_size_large -> sl_font_size_large
+    int sl_font_size_normal -> sl_font_size_normal
+    int sl_font_size_small -> sl_font_size_small
+    int sl_list_view -> sl_list_view
+    int sl_text_big_bold -> sl_text_big_bold
+    int sl_text_big_bold_blue -> sl_text_big_bold_blue
+    int sl_text_big_bold_inverted -> sl_text_big_bold_inverted
+    int sl_text_giant_bold -> sl_text_giant_bold
+    int sl_text_huge_bold -> sl_text_huge_bold
+    int sl_text_large_bold -> sl_text_large_bold
+    int sl_text_large_bold_inverted -> sl_text_large_bold_inverted
+    int sl_text_large_normal -> sl_text_large_normal
+    int sl_text_large_normal_inverted -> sl_text_large_normal_inverted
+    int sl_text_normal_bold -> sl_text_normal_bold
+    int sl_text_normal_bold_inverted -> sl_text_normal_bold_inverted
+    int sl_text_normal_normal -> sl_text_normal_normal
+    int sl_text_normal_normal_inverted -> sl_text_normal_normal_inverted
+    int sl_text_small_bold -> sl_text_small_bold
+    int sl_text_small_bold_inverted -> sl_text_small_bold_inverted
+    int sl_text_small_normal -> sl_text_small_normal
+    int sl_text_small_normal_inverted -> sl_text_small_normal_inverted
 org.anddev.andengine.audio.BaseAudioEntity -> org.anddev.andengine.audio.BaseAudioEntity:
     org.anddev.andengine.audio.IAudioManager mAudioManager -> mAudioManager
     float mLeftVolume -> mLeftVolume
@@ -5799,7 +6822,7 @@ org.anddev.andengine.audio.music.MusicFactory -> org.anddev.andengine.audio.musi
     java.lang.String sAssetBasePath -> sAssetBasePath
     void setAssetBasePath(java.lang.String) -> setAssetBasePath
     void reset() -> reset
-    org.anddev.andengine.audio.music.Music createMusicFromFile(org.anddev.andengine.audio.music.MusicManager,android.content.Context,java.io.File) -> createMusicFromFile
+    org.anddev.andengine.audio.music.Music createMusicFromFile(org.anddev.andengine.audio.music.MusicManager,java.io.File) -> createMusicFromFile
     org.anddev.andengine.audio.music.Music createMusicFromAsset(org.anddev.andengine.audio.music.MusicManager,android.content.Context,java.lang.String) -> createMusicFromAsset
     org.anddev.andengine.audio.music.Music createMusicFromResource(org.anddev.andengine.audio.music.MusicManager,android.content.Context,int) -> createMusicFromResource
 org.anddev.andengine.audio.music.MusicManager -> org.anddev.andengine.audio.music.MusicManager:
@@ -5824,7 +6847,7 @@ org.anddev.andengine.audio.sound.SoundFactory -> org.anddev.andengine.audio.soun
     java.lang.String sAssetBasePath -> sAssetBasePath
     void setAssetBasePath(java.lang.String) -> setAssetBasePath
     void reset() -> reset
-    org.anddev.andengine.audio.sound.Sound createSoundFromPath(org.anddev.andengine.audio.sound.SoundManager,android.content.Context,java.lang.String) -> createSoundFromPath
+    org.anddev.andengine.audio.sound.Sound createSoundFromPath(org.anddev.andengine.audio.sound.SoundManager,java.lang.String) -> createSoundFromPath
     org.anddev.andengine.audio.sound.Sound createSoundFromAsset(org.anddev.andengine.audio.sound.SoundManager,android.content.Context,java.lang.String) -> createSoundFromAsset
     org.anddev.andengine.audio.sound.Sound createSoundFromResource(org.anddev.andengine.audio.sound.SoundManager,android.content.Context,int) -> createSoundFromResource
     org.anddev.andengine.audio.sound.Sound createSoundFromFileDescriptor(org.anddev.andengine.audio.sound.SoundManager,java.io.FileDescriptor,long,long) -> createSoundFromFileDescriptor
@@ -5847,9 +6870,12 @@ org.anddev.andengine.collision.RectangularShapeCollisionChecker -> org.anddev.an
     float[] VERTICES_COLLISION_TMP_A -> VERTICES_COLLISION_TMP_A
     float[] VERTICES_COLLISION_TMP_B -> VERTICES_COLLISION_TMP_B
     boolean checkContains(org.anddev.andengine.entity.shape.RectangularShape,float,float) -> checkContains
+    boolean isVisible(org.anddev.andengine.engine.camera.Camera,org.anddev.andengine.entity.shape.RectangularShape) -> isVisible
+    boolean isVisible(org.anddev.andengine.engine.camera.Camera,org.anddev.andengine.entity.primitive.Line) -> isVisible
     boolean checkCollision(org.anddev.andengine.entity.shape.RectangularShape,org.anddev.andengine.entity.shape.RectangularShape) -> checkCollision
     boolean checkCollision(org.anddev.andengine.entity.shape.RectangularShape,org.anddev.andengine.entity.primitive.Line) -> checkCollision
     void fillVertices(org.anddev.andengine.entity.shape.RectangularShape,float[]) -> fillVertices
+    void fillVertices(org.anddev.andengine.engine.camera.Camera,float[]) -> fillVertices
 org.anddev.andengine.collision.ShapeCollisionChecker -> org.anddev.andengine.collision.ShapeCollisionChecker:
     boolean checkCollision(int,float[],int,float[]) -> checkCollision
     boolean checkCollisionSub(int,int,float[],float[],int) -> checkCollisionSub
@@ -5872,8 +6898,10 @@ org.anddev.andengine.engine.DoubleSceneSplitScreenEngine -> org.anddev.andengine
     void onUpdateScene(float) -> onUpdateScene
     void convertSurfaceToSceneTouchEvent(org.anddev.andengine.engine.camera.Camera,org.anddev.andengine.input.touch.TouchEvent) -> convertSurfaceToSceneTouchEvent
     void updateUpdateHandlers(float) -> updateUpdateHandlers
+    void onUpdateCameraSurface() -> onUpdateCameraSurface
 org.anddev.andengine.engine.Engine -> org.anddev.andengine.engine.Engine:
     org.anddev.andengine.sensor.SensorDelay SENSORDELAY_DEFAULT -> SENSORDELAY_DEFAULT
+    int UPDATEHANDLERS_CAPACITY_DEFAULT -> UPDATEHANDLERS_CAPACITY_DEFAULT
     boolean mRunning -> mRunning
     long mLastTick -> mLastTick
     float mSecondsElapsedTotal -> mSecondsElapsedTotal
@@ -5909,6 +6937,7 @@ org.anddev.andengine.engine.Engine -> org.anddev.andengine.engine.Engine:
     org.anddev.andengine.engine.camera.Camera getCamera() -> getCamera
     float getSecondsElapsedTotal() -> getSecondsElapsedTotal
     void setSurfaceSize(int,int) -> setSurfaceSize
+    void onUpdateCameraSurface() -> onUpdateCameraSurface
     int getSurfaceWidth() -> getSurfaceWidth
     int getSurfaceHeight() -> getSurfaceHeight
     org.anddev.andengine.input.touch.controller.ITouchController getTouchController() -> getTouchController
@@ -5992,6 +7021,7 @@ org.anddev.andengine.engine.SingleSceneSplitScreenEngine -> org.anddev.andengine
     org.anddev.andengine.engine.camera.Camera getCameraFromSurfaceTouchEvent(org.anddev.andengine.input.touch.TouchEvent) -> getCameraFromSurfaceTouchEvent
     void convertSurfaceToSceneTouchEvent(org.anddev.andengine.engine.camera.Camera,org.anddev.andengine.input.touch.TouchEvent) -> convertSurfaceToSceneTouchEvent
     void updateUpdateHandlers(float) -> updateUpdateHandlers
+    void onUpdateCameraSurface() -> onUpdateCameraSurface
 org.anddev.andengine.engine.camera.BoundCamera -> org.anddev.andengine.engine.camera.BoundCamera:
     boolean mBoundsEnabled -> mBoundsEnabled
     float mBoundsMinX -> mBoundsMinX
@@ -6023,6 +7053,10 @@ org.anddev.andengine.engine.camera.Camera -> org.anddev.andengine.engine.camera.
     org.anddev.andengine.entity.IEntity mChaseEntity -> mChaseEntity
     float mRotation -> mRotation
     float mCameraSceneRotation -> mCameraSceneRotation
+    int mSurfaceX -> mSurfaceX
+    int mSurfaceY -> mSurfaceY
+    int mSurfaceWidth -> mSurfaceWidth
+    int mSurfaceHeight -> mSurfaceHeight
     float getMinX() -> getMinX
     float getMaxX() -> getMaxX
     float getMinY() -> getMinY
@@ -6034,6 +7068,8 @@ org.anddev.andengine.engine.camera.Camera -> org.anddev.andengine.engine.camera.
     void setZClippingPlanes(float,float) -> setZClippingPlanes
     float getWidth() -> getWidth
     float getHeight() -> getHeight
+    float getWidthRaw() -> getWidthRaw
+    float getHeightRaw() -> getHeightRaw
     float getCenterX() -> getCenterX
     float getCenterY() -> getCenterY
     void setCenter(float,float) -> setCenter
@@ -6046,12 +7082,20 @@ org.anddev.andengine.engine.camera.Camera -> org.anddev.andengine.engine.camera.
     void setRotation(float) -> setRotation
     float getCameraSceneRotation() -> getCameraSceneRotation
     void setCameraSceneRotation(float) -> setCameraSceneRotation
+    int getSurfaceX() -> getSurfaceX
+    int getSurfaceY() -> getSurfaceY
+    int getSurfaceWidth() -> getSurfaceWidth
+    int getSurfaceHeight() -> getSurfaceHeight
+    void setSurfaceSize(int,int,int,int) -> setSurfaceSize
+    boolean isRotated() -> isRotated
     void onUpdate(float) -> onUpdate
     void reset() -> reset
     void onDrawHUD(javax.microedition.khronos.opengles.GL10) -> onDrawHUD
+    void updateChaseEntity() -> updateChaseEntity
+    boolean isLineVisible(org.anddev.andengine.entity.primitive.Line) -> isLineVisible
     boolean isRectangularShapeVisible(org.anddev.andengine.entity.shape.RectangularShape) -> isRectangularShapeVisible
-    void onApplyMatrix(javax.microedition.khronos.opengles.GL10) -> onApplyMatrix
-    void onApplyPositionIndependentMatrix(javax.microedition.khronos.opengles.GL10) -> onApplyPositionIndependentMatrix
+    void onApplySceneMatrix(javax.microedition.khronos.opengles.GL10) -> onApplySceneMatrix
+    void onApplySceneBackgroundMatrix(javax.microedition.khronos.opengles.GL10) -> onApplySceneBackgroundMatrix
     void onApplyCameraSceneMatrix(javax.microedition.khronos.opengles.GL10) -> onApplyCameraSceneMatrix
     void applyRotation(javax.microedition.khronos.opengles.GL10,float,float,float) -> applyRotation
     void convertSceneToCameraSceneTouchEvent(org.anddev.andengine.input.touch.TouchEvent) -> convertSceneToCameraSceneTouchEvent
@@ -6128,7 +7172,7 @@ org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl -> org.andde
     void onHandleControlBaseLeft() -> onHandleControlBaseLeft
     void onHandleControlKnobReleased() -> onHandleControlKnobReleased
     boolean onHandleControlBaseTouched(org.anddev.andengine.input.touch.TouchEvent,float,float) -> onHandleControlBaseTouched
-    void updateControlKnob(org.anddev.andengine.input.touch.TouchEvent,float,float) -> updateControlKnob
+    void updateControlKnob(float,float) -> updateControlKnob
     void onUpdateControlKnob(float,float) -> onUpdateControlKnob
     org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl$IOnScreenControlListener access$0(org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl) -> access$0
     float access$1(org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl) -> access$1
@@ -6252,10 +7296,15 @@ org.anddev.andengine.engine.options.EngineOptions$ScreenOrientation -> org.andde
     org.anddev.andengine.engine.options.EngineOptions$ScreenOrientation valueOf(java.lang.String) -> valueOf
 org.anddev.andengine.engine.options.RenderOptions -> org.anddev.andengine.engine.options.RenderOptions:
     boolean mDisableExtensionVertexBufferObjects -> mDisableExtensionVertexBufferObjects
+    boolean mDisableExtensionDrawTexture -> mDisableExtensionDrawTexture
+    boolean isDisableExtensionVertexBufferObjects() -> isDisableExtensionVertexBufferObjects
     org.anddev.andengine.engine.options.RenderOptions enableExtensionVertexBufferObjects() -> enableExtensionVertexBufferObjects
     org.anddev.andengine.engine.options.RenderOptions disableExtensionVertexBufferObjects() -> disableExtensionVertexBufferObjects
     org.anddev.andengine.engine.options.RenderOptions setDisableExtensionVertexBufferObjects(boolean) -> setDisableExtensionVertexBufferObjects
-    boolean isDisableExtensionVertexBufferObjects() -> isDisableExtensionVertexBufferObjects
+    boolean isDisableExtensionDrawTexture() -> isDisableExtensionDrawTexture
+    org.anddev.andengine.engine.options.RenderOptions enableExtensionDrawTexture() -> enableExtensionDrawTexture
+    org.anddev.andengine.engine.options.RenderOptions disableExtensionDrawTexture() -> disableExtensionDrawTexture
+    org.anddev.andengine.engine.options.RenderOptions setDisableExtensionDrawTexture(boolean) -> setDisableExtensionDrawTexture
 org.anddev.andengine.engine.options.TouchOptions -> org.anddev.andengine.engine.options.TouchOptions:
     boolean mRunOnUpdateThread -> mRunOnUpdateThread
     org.anddev.andengine.engine.options.TouchOptions enableRunOnUpdateThread() -> enableRunOnUpdateThread
@@ -6335,6 +7384,7 @@ org.anddev.andengine.entity.Entity -> org.anddev.andengine.entity.Entity:
     void setIgnoreUpdate(boolean) -> setIgnoreUpdate
     boolean isChildrenIgnoreUpdate() -> isChildrenIgnoreUpdate
     void setChildrenIgnoreUpdate(boolean) -> setChildrenIgnoreUpdate
+    boolean hasParent() -> hasParent
     org.anddev.andengine.entity.IEntity getParent() -> getParent
     void setParent(org.anddev.andengine.entity.IEntity) -> setParent
     int getZIndex() -> getZIndex
@@ -6347,6 +7397,7 @@ org.anddev.andengine.entity.Entity -> org.anddev.andengine.entity.Entity:
     void setPosition(float,float) -> setPosition
     void setInitialPosition() -> setInitialPosition
     float getRotation() -> getRotation
+    boolean isRotated() -> isRotated
     void setRotation(float) -> setRotation
     float getRotationCenterX() -> getRotationCenterX
     float getRotationCenterY() -> getRotationCenterY
@@ -6374,12 +7425,17 @@ org.anddev.andengine.entity.Entity -> org.anddev.andengine.entity.Entity:
     void setColor(float,float,float,float) -> setColor
     int getChildCount() -> getChildCount
     org.anddev.andengine.entity.IEntity getChild(int) -> getChild
+    int getChildIndex(org.anddev.andengine.entity.IEntity) -> getChildIndex
+    boolean setChildIndex(org.anddev.andengine.entity.IEntity,int) -> setChildIndex
     org.anddev.andengine.entity.IEntity getFirstChild() -> getFirstChild
     org.anddev.andengine.entity.IEntity getLastChild() -> getLastChild
     boolean detachSelf() -> detachSelf
     void detachChildren() -> detachChildren
     void attachChild(org.anddev.andengine.entity.IEntity) -> attachChild
+    boolean attachChild(org.anddev.andengine.entity.IEntity,int) -> attachChild
     org.anddev.andengine.entity.IEntity findChild(org.anddev.andengine.entity.IEntity$IEntityMatcher) -> findChild
+    boolean swapChildren(org.anddev.andengine.entity.IEntity,org.anddev.andengine.entity.IEntity) -> swapChildren
+    boolean swapChildren(int,int) -> swapChildren
     void sortChildren() -> sortChildren
     void sortChildren(java.util.Comparator) -> sortChildren
     boolean detachChild(org.anddev.andengine.entity.IEntity) -> detachChild
@@ -6424,6 +7480,8 @@ org.anddev.andengine.entity.Entity -> org.anddev.andengine.entity.Entity:
     void applyRotation(javax.microedition.khronos.opengles.GL10) -> applyRotation
     void applyScale(javax.microedition.khronos.opengles.GL10) -> applyScale
     void onManagedDraw(javax.microedition.khronos.opengles.GL10,org.anddev.andengine.engine.camera.Camera) -> onManagedDraw
+    void onDrawChildren(javax.microedition.khronos.opengles.GL10,org.anddev.andengine.engine.camera.Camera) -> onDrawChildren
+    void onManagedDrawChildren(javax.microedition.khronos.opengles.GL10,org.anddev.andengine.engine.camera.Camera) -> onManagedDrawChildren
     void onManagedUpdate(float) -> onManagedUpdate
 org.anddev.andengine.entity.Entity$1 -> org.anddev.andengine.entity.b:
     void call(java.lang.Object) -> call
@@ -6438,6 +7496,7 @@ org.anddev.andengine.entity.IEntity -> org.anddev.andengine.entity.IEntity:
     void setChildrenIgnoreUpdate(boolean) -> setChildrenIgnoreUpdate
     int getZIndex() -> getZIndex
     void setZIndex(int) -> setZIndex
+    boolean hasParent() -> hasParent
     org.anddev.andengine.entity.IEntity getParent() -> getParent
     void setParent(org.anddev.andengine.entity.IEntity) -> setParent
     float getX() -> getX
@@ -6447,6 +7506,7 @@ org.anddev.andengine.entity.IEntity -> org.anddev.andengine.entity.IEntity:
     void setInitialPosition() -> setInitialPosition
     void setPosition(org.anddev.andengine.entity.IEntity) -> setPosition
     void setPosition(float,float) -> setPosition
+    boolean isRotated() -> isRotated
     float getRotation() -> getRotation
     void setRotation(float) -> setRotation
     float getRotationCenterX() -> getRotationCenterX
@@ -6488,10 +7548,15 @@ org.anddev.andengine.entity.IEntity -> org.anddev.andengine.entity.IEntity:
     void onAttached() -> onAttached
     void onDetached() -> onDetached
     void attachChild(org.anddev.andengine.entity.IEntity) -> attachChild
+    boolean attachChild(org.anddev.andengine.entity.IEntity,int) -> attachChild
     org.anddev.andengine.entity.IEntity getChild(int) -> getChild
     org.anddev.andengine.entity.IEntity getFirstChild() -> getFirstChild
     org.anddev.andengine.entity.IEntity getLastChild() -> getLastChild
+    int getChildIndex(org.anddev.andengine.entity.IEntity) -> getChildIndex
+    boolean setChildIndex(org.anddev.andengine.entity.IEntity,int) -> setChildIndex
     org.anddev.andengine.entity.IEntity findChild(org.anddev.andengine.entity.IEntity$IEntityMatcher) -> findChild
+    boolean swapChildren(int,int) -> swapChildren
+    boolean swapChildren(org.anddev.andengine.entity.IEntity,org.anddev.andengine.entity.IEntity) -> swapChildren
     void sortChildren() -> sortChildren
     void sortChildren(java.util.Comparator) -> sortChildren
     boolean detachSelf() -> detachSelf
@@ -6885,7 +7950,8 @@ org.anddev.andengine.entity.modifier.PathModifier -> org.anddev.andengine.entity
     org.anddev.andengine.util.modifier.IModifier clone() -> clone
     float onUpdate(float,java.lang.Object) -> onUpdate
     org.anddev.andengine.entity.modifier.PathModifier$IPathModifierListener access$3(org.anddev.andengine.entity.modifier.PathModifier) -> access$3
-    org.anddev.andengine.util.modifier.IModifier$IModifierListener access$4(org.anddev.andengine.entity.modifier.PathModifier) -> access$4
+    void access$4(org.anddev.andengine.entity.modifier.PathModifier,java.lang.Object) -> access$4
+    void access$5(org.anddev.andengine.entity.modifier.PathModifier,java.lang.Object) -> access$5
 org.anddev.andengine.entity.modifier.PathModifier$1 -> org.anddev.andengine.entity.modifier.a:
     org.anddev.andengine.entity.modifier.PathModifier this$0 -> a
     void onSubSequenceFinished(org.anddev.andengine.util.modifier.IModifier,java.lang.Object,int) -> onSubSequenceFinished
@@ -7284,6 +8350,7 @@ org.anddev.andengine.entity.scene.background.AutoParallaxBackground -> org.andde
     void setParallaxChangePerSecond(float) -> setParallaxChangePerSecond
     void onUpdate(float) -> onUpdate
 org.anddev.andengine.entity.scene.background.BaseBackground -> org.anddev.andengine.entity.scene.background.BaseBackground:
+    int BACKGROUNDMODIFIERS_CAPACITY_DEFAULT -> BACKGROUNDMODIFIERS_CAPACITY_DEFAULT
     org.anddev.andengine.util.modifier.ModifierList mBackgroundModifiers -> mBackgroundModifiers
     void addBackgroundModifier(org.anddev.andengine.util.modifier.IModifier) -> addBackgroundModifier
     boolean removeBackgroundModifier(org.anddev.andengine.util.modifier.IModifier) -> removeBackgroundModifier
@@ -7457,6 +8524,7 @@ org.anddev.andengine.entity.scene.menu.item.decorator.BaseMenuItemDecorator -> o
     void setAlpha(float) -> setAlpha
     void setColor(float,float,float) -> setColor
     void setColor(float,float,float,float) -> setColor
+    boolean isRotated() -> isRotated
     float getRotation() -> getRotation
     void setRotation(float) -> setRotation
     float getRotationCenterX() -> getRotationCenterX
@@ -7503,10 +8571,15 @@ org.anddev.andengine.entity.scene.menu.item.decorator.BaseMenuItemDecorator -> o
     boolean onAreaTouched(org.anddev.andengine.input.touch.TouchEvent,float,float) -> onAreaTouched
     int getChildCount() -> getChildCount
     void attachChild(org.anddev.andengine.entity.IEntity) -> attachChild
+    boolean attachChild(org.anddev.andengine.entity.IEntity,int) -> attachChild
     org.anddev.andengine.entity.IEntity getFirstChild() -> getFirstChild
     org.anddev.andengine.entity.IEntity getLastChild() -> getLastChild
     org.anddev.andengine.entity.IEntity getChild(int) -> getChild
+    int getChildIndex(org.anddev.andengine.entity.IEntity) -> getChildIndex
+    boolean setChildIndex(org.anddev.andengine.entity.IEntity,int) -> setChildIndex
     org.anddev.andengine.entity.IEntity findChild(org.anddev.andengine.entity.IEntity$IEntityMatcher) -> findChild
+    boolean swapChildren(org.anddev.andengine.entity.IEntity,org.anddev.andengine.entity.IEntity) -> swapChildren
+    boolean swapChildren(int,int) -> swapChildren
     void sortChildren() -> sortChildren
     void sortChildren(java.util.Comparator) -> sortChildren
     boolean detachSelf() -> detachSelf
@@ -7518,6 +8591,7 @@ org.anddev.andengine.entity.scene.menu.item.decorator.BaseMenuItemDecorator -> o
     void callOnChildren(org.anddev.andengine.entity.IEntity$IEntityMatcher,org.anddev.andengine.entity.IEntity$IEntityCallable) -> callOnChildren
     org.anddev.andengine.util.Transformation getLocalToSceneTransformation() -> getLocalToSceneTransformation
     org.anddev.andengine.util.Transformation getSceneToLocalTransformation() -> getSceneToLocalTransformation
+    boolean hasParent() -> hasParent
     org.anddev.andengine.entity.IEntity getParent() -> getParent
     void setParent(org.anddev.andengine.entity.IEntity) -> setParent
     boolean isVisible() -> isVisible
@@ -8243,7 +9317,7 @@ org.anddev.andengine.opengl.font.Font -> org.anddev.andengine.opengl.font.Font:
     void drawCharacterString(java.lang.String) -> drawCharacterString
     int getStringWidth(java.lang.String) -> getStringWidth
     void getLetterBounds(char,org.anddev.andengine.opengl.font.Size) -> getLetterBounds
-    void prepareLettes(char[]) -> prepareLettes
+    void prepareLetters(char[]) -> prepareLetters
     org.anddev.andengine.opengl.font.Letter getLetter(char) -> getLetter
     org.anddev.andengine.opengl.font.Letter createLetter(char) -> createLetter
     void update(javax.microedition.khronos.opengles.GL10) -> update
@@ -8333,7 +9407,9 @@ org.anddev.andengine.opengl.texture.Texture -> org.anddev.andengine.opengl.textu
     void clearTextureSources() -> clearTextureSources
     void loadToHardware(javax.microedition.khronos.opengles.GL10) -> loadToHardware
     void unloadFromHardware(javax.microedition.khronos.opengles.GL10) -> unloadFromHardware
+    void reloadToHardware(javax.microedition.khronos.opengles.GL10) -> reloadToHardware
     void writeTextureToHardware(javax.microedition.khronos.opengles.GL10) -> writeTextureToHardware
+    void bind(javax.microedition.khronos.opengles.GL10) -> bind
     void applyTextureOptions(javax.microedition.khronos.opengles.GL10) -> applyTextureOptions
     void allocateAndBindTextureOnHardware(javax.microedition.khronos.opengles.GL10) -> allocateAndBindTextureOnHardware
     void deleteTextureOnHardware(javax.microedition.khronos.opengles.GL10) -> deleteTextureOnHardware
@@ -8449,6 +9525,7 @@ org.anddev.andengine.opengl.texture.builder.ITextureBuilder$TextureSourcePacking
 org.anddev.andengine.opengl.texture.region.BaseTextureRegion -> org.anddev.andengine.opengl.texture.region.BaseTextureRegion:
     org.anddev.andengine.opengl.texture.Texture mTexture -> mTexture
     org.anddev.andengine.opengl.texture.region.buffer.TextureRegionBuffer mTextureRegionBuffer -> mTextureRegionBuffer
+    org.anddev.andengine.opengl.texture.region.crop.TextureRegionCrop mTextureRegionCrop -> mTextureRegionCrop
     int mWidth -> mWidth
     int mHeight -> mHeight
     int mTexturePositionX -> mTexturePositionX
@@ -8463,6 +9540,7 @@ org.anddev.andengine.opengl.texture.region.BaseTextureRegion -> org.anddev.anden
     int getTexturePositionY() -> getTexturePositionY
     org.anddev.andengine.opengl.texture.Texture getTexture() -> getTexture
     org.anddev.andengine.opengl.texture.region.buffer.TextureRegionBuffer getTextureBuffer() -> getTextureBuffer
+    org.anddev.andengine.opengl.texture.region.crop.TextureRegionCrop getTexureRegionCrop() -> getTexureRegionCrop
     boolean isFlippedHorizontal() -> isFlippedHorizontal
     void setFlippedHorizontal(boolean) -> setFlippedHorizontal
     boolean isFlippedVertical() -> isFlippedVertical
@@ -8473,14 +9551,23 @@ org.anddev.andengine.opengl.texture.region.BaseTextureRegion -> org.anddev.anden
     float getTextureCoordinateY1() -> getTextureCoordinateY1
     float getTextureCoordinateX2() -> getTextureCoordinateX2
     float getTextureCoordinateY2() -> getTextureCoordinateY2
+    int getTextureCropLeft() -> getTextureCropLeft
+    int getTextureCropTop() -> getTextureCropTop
+    int getTextureCropWidth() -> getTextureCropWidth
+    int getTextureCropHeight() -> getTextureCropHeight
     void updateTextureRegionBuffer() -> updateTextureRegionBuffer
     void onApply(javax.microedition.khronos.opengles.GL10) -> onApply
+    void onApplyCrop(javax.microedition.khronos.opengles.GL11) -> onApplyCrop
 org.anddev.andengine.opengl.texture.region.TextureRegion -> org.anddev.andengine.opengl.texture.region.TextureRegion:
     org.anddev.andengine.opengl.texture.region.TextureRegion clone() -> clone
     float getTextureCoordinateX1() -> getTextureCoordinateX1
     float getTextureCoordinateY1() -> getTextureCoordinateY1
     float getTextureCoordinateX2() -> getTextureCoordinateX2
     float getTextureCoordinateY2() -> getTextureCoordinateY2
+    int getTextureCropLeft() -> getTextureCropLeft
+    int getTextureCropTop() -> getTextureCropTop
+    int getTextureCropWidth() -> getTextureCropWidth
+    int getTextureCropHeight() -> getTextureCropHeight
     java.lang.Object clone() -> clone
 org.anddev.andengine.opengl.texture.region.TextureRegionFactory -> org.anddev.andengine.opengl.texture.region.TextureRegionFactory:
     java.lang.String sAssetBasePath -> sAssetBasePath
@@ -8526,13 +9613,17 @@ org.anddev.andengine.opengl.texture.region.TiledTextureRegion -> org.anddev.ande
     int getCurrentTileIndex() -> getCurrentTileIndex
     void setCurrentTileIndex(int,int) -> setCurrentTileIndex
     void setCurrentTileIndex(int) -> setCurrentTileIndex
-    float getTexturePositionOfCurrentTileX() -> getTexturePositionOfCurrentTileX
-    float getTexturePositionOfCurrentTileY() -> getTexturePositionOfCurrentTileY
+    int getTexturePositionOfCurrentTileX() -> getTexturePositionOfCurrentTileX
+    int getTexturePositionOfCurrentTileY() -> getTexturePositionOfCurrentTileY
     org.anddev.andengine.opengl.texture.region.TiledTextureRegion clone() -> clone
     float getTextureCoordinateX1() -> getTextureCoordinateX1
     float getTextureCoordinateY1() -> getTextureCoordinateY1
     float getTextureCoordinateX2() -> getTextureCoordinateX2
     float getTextureCoordinateY2() -> getTextureCoordinateY2
+    int getTextureCropLeft() -> getTextureCropLeft
+    int getTextureCropTop() -> getTextureCropTop
+    int getTextureCropWidth() -> getTextureCropWidth
+    int getTextureCropHeight() -> getTextureCropHeight
     void nextTile() -> nextTile
     java.lang.Object clone() -> clone
 org.anddev.andengine.opengl.texture.region.buffer.SpriteBatchTextureRegionBuffer -> org.anddev.andengine.opengl.texture.region.buffer.SpriteBatchTextureRegionBuffer:
@@ -8550,6 +9641,25 @@ org.anddev.andengine.opengl.texture.region.buffer.TextureRegionBuffer -> org.and
     boolean isFlippedVertical() -> isFlippedVertical
     void setFlippedVertical(boolean) -> setFlippedVertical
     void update() -> update
+org.anddev.andengine.opengl.texture.region.crop.TextureRegionCrop -> org.anddev.andengine.opengl.texture.region.crop.TextureRegionCrop:
+    int LEFT_INDEX -> LEFT_INDEX
+    int BOTTOM_INDEX -> BOTTOM_INDEX
+    int WIDTH_INDEX -> WIDTH_INDEX
+    int HEIGHT_INDEX -> HEIGHT_INDEX
+    org.anddev.andengine.opengl.texture.region.BaseTextureRegion mTextureRegion -> mTextureRegion
+    boolean mFlippedHorizontal -> mFlippedHorizontal
+    boolean mFlippedVertical -> mFlippedVertical
+    int[] mData -> mData
+    boolean mDirty -> mDirty
+    boolean isDirty() -> isDirty
+    int[] getData() -> getData
+    boolean isFlippedHorizontal() -> isFlippedHorizontal
+    void setFlippedHorizontal(boolean) -> setFlippedHorizontal
+    boolean isFlippedVertical() -> isFlippedVertical
+    void setFlippedVertical(boolean) -> setFlippedVertical
+    void update() -> update
+    void selectOnHardware(javax.microedition.khronos.opengles.GL11) -> selectOnHardware
+    void apply(javax.microedition.khronos.opengles.GL11) -> apply
 org.anddev.andengine.opengl.texture.source.AssetTextureSource -> org.anddev.andengine.opengl.texture.source.AssetTextureSource:
     int mWidth -> mWidth
     int mHeight -> mHeight
@@ -8783,8 +9893,9 @@ org.anddev.andengine.opengl.util.GLHelper -> org.anddev.andengine.opengl.util.GL
     int sCurrentMatrix -> sCurrentMatrix
     int sCurrentSourceBlendMode -> sCurrentSourceBlendMode
     int sCurrentDestinationBlendMode -> sCurrentDestinationBlendMode
-    org.anddev.andengine.opengl.util.FastFloatBuffer sCurrentTextureFloatBuffer -> sCurrentTextureFloatBuffer
     org.anddev.andengine.opengl.util.FastFloatBuffer sCurrentVertexFloatBuffer -> sCurrentVertexFloatBuffer
+    org.anddev.andengine.opengl.util.FastFloatBuffer sCurrentTextureFloatBuffer -> sCurrentTextureFloatBuffer
+    org.anddev.andengine.opengl.texture.region.crop.TextureRegionCrop sCurrentTextureRegionCrop -> sCurrentTextureRegionCrop
     boolean sEnableDither -> sEnableDither
     boolean sEnableLightning -> sEnableLightning
     boolean sEnableDepthTest -> sEnableDepthTest
@@ -8830,6 +9941,7 @@ org.anddev.andengine.opengl.util.GLHelper -> org.anddev.andengine.opengl.util.GL
     void bindBuffer(javax.microedition.khronos.opengles.GL11,int) -> bindBuffer
     void deleteBuffer(javax.microedition.khronos.opengles.GL11,int) -> deleteBuffer
     void bindTexture(javax.microedition.khronos.opengles.GL10,int) -> bindTexture
+    void forceBindTexture(javax.microedition.khronos.opengles.GL10,int) -> forceBindTexture
     void deleteTexture(javax.microedition.khronos.opengles.GL10,int) -> deleteTexture
     void texCoordPointer(javax.microedition.khronos.opengles.GL10,org.anddev.andengine.opengl.util.FastFloatBuffer) -> texCoordPointer
     void texCoordZeroPointer(javax.microedition.khronos.opengles.GL11) -> texCoordZeroPointer
@@ -8844,6 +9956,7 @@ org.anddev.andengine.opengl.util.GLHelper -> org.anddev.andengine.opengl.util.GL
     void setShadeModelFlat(javax.microedition.khronos.opengles.GL10) -> setShadeModelFlat
     void setPerspectiveCorrectionHintFastest(javax.microedition.khronos.opengles.GL10) -> setPerspectiveCorrectionHintFastest
     void bufferData(javax.microedition.khronos.opengles.GL11,java.nio.ByteBuffer,int) -> bufferData
+    void textureCrop(javax.microedition.khronos.opengles.GL11,org.anddev.andengine.opengl.texture.region.crop.TextureRegionCrop) -> textureCrop
     void glTexSubImage2D(javax.microedition.khronos.opengles.GL10,int,int,int,int,android.graphics.Bitmap,int,int,org.anddev.andengine.opengl.texture.Texture$TextureFormat) -> glTexSubImage2D
     int[] convertARGB_8888toRGBA_8888(int[]) -> convertARGB_8888toRGBA_8888
     byte[] convertARGB_8888toRGB_565(int[]) -> convertARGB_8888toRGB_565
@@ -9652,13 +10765,15 @@ org.anddev.andengine.util.modifier.BaseDurationModifier -> org.anddev.andengine.
 org.anddev.andengine.util.modifier.BaseModifier -> org.anddev.andengine.util.modifier.BaseModifier:
     boolean mFinished -> mFinished
     boolean mRemoveWhenFinished -> mRemoveWhenFinished
-    org.anddev.andengine.util.modifier.IModifier$IModifierListener mModifierListener -> mModifierListener
+    org.anddev.andengine.util.SmartList mModifierListeners -> mModifierListeners
     boolean isFinished() -> isFinished
     boolean isRemoveWhenFinished() -> isRemoveWhenFinished
     void setRemoveWhenFinished(boolean) -> setRemoveWhenFinished
-    org.anddev.andengine.util.modifier.IModifier$IModifierListener getModifierListener() -> getModifierListener
-    void setModifierListener(org.anddev.andengine.util.modifier.IModifier$IModifierListener) -> setModifierListener
+    void addModifierListener(org.anddev.andengine.util.modifier.IModifier$IModifierListener) -> addModifierListener
+    boolean removeModifierListener(org.anddev.andengine.util.modifier.IModifier$IModifierListener) -> removeModifierListener
     org.anddev.andengine.util.modifier.IModifier clone() -> clone
+    void onModifierStarted(java.lang.Object) -> onModifierStarted
+    void onModifierFinished(java.lang.Object) -> onModifierFinished
     java.lang.Object clone() -> clone
 org.anddev.andengine.util.modifier.BaseSingleValueChangeModifier -> org.anddev.andengine.util.modifier.BaseSingleValueChangeModifier:
     float mValueChangePerSecond -> mValueChangePerSecond
@@ -9681,6 +10796,7 @@ org.anddev.andengine.util.modifier.BaseTripleValueSpanModifier -> org.anddev.and
     void onSetInitialValues(java.lang.Object,float,float) -> onSetInitialValues
     void onSetValues(java.lang.Object,float,float,float) -> onSetValues
 org.anddev.andengine.util.modifier.IModifier -> org.anddev.andengine.util.modifier.IModifier:
+    java.util.Comparator MODIFIER_COMPARATOR_DURATION_DESCENDING -> MODIFIER_COMPARATOR_DURATION_DESCENDING
     void reset() -> reset
     boolean isFinished() -> isFinished
     boolean isRemoveWhenFinished() -> isRemoveWhenFinished
@@ -9689,8 +10805,10 @@ org.anddev.andengine.util.modifier.IModifier -> org.anddev.andengine.util.modifi
     float getSecondsElapsed() -> getSecondsElapsed
     float getDuration() -> getDuration
     float onUpdate(float,java.lang.Object) -> onUpdate
-    org.anddev.andengine.util.modifier.IModifier$IModifierListener getModifierListener() -> getModifierListener
-    void setModifierListener(org.anddev.andengine.util.modifier.IModifier$IModifierListener) -> setModifierListener
+    void addModifierListener(org.anddev.andengine.util.modifier.IModifier$IModifierListener) -> addModifierListener
+    boolean removeModifierListener(org.anddev.andengine.util.modifier.IModifier$IModifierListener) -> removeModifierListener
+org.anddev.andengine.util.modifier.IModifier$1 -> org.anddev.andengine.util.modifier.a:
+    int compare(java.lang.Object,java.lang.Object) -> compare
 org.anddev.andengine.util.modifier.IModifier$CloneNotSupportedException -> org.anddev.andengine.util.modifier.IModifier$CloneNotSupportedException:
     long serialVersionUID -> serialVersionUID
 org.anddev.andengine.util.modifier.IModifier$IModifierListener -> org.anddev.andengine.util.modifier.IModifier$IModifierListener:
@@ -9704,6 +10822,8 @@ org.anddev.andengine.util.modifier.LoopModifier -> org.anddev.andengine.util.mod
     org.anddev.andengine.util.modifier.LoopModifier$ILoopModifierListener mLoopModifierListener -> mLoopModifierListener
     int mLoopCount -> mLoopCount
     int mLoop -> mLoop
+    boolean mModifierStartedCalled -> mModifierStartedCalled
+    boolean mFinishedCached -> mFinishedCached
     org.anddev.andengine.util.modifier.LoopModifier clone() -> clone
     org.anddev.andengine.util.modifier.LoopModifier$ILoopModifierListener getLoopModifierListener() -> getLoopModifierListener
     void setLoopModifierListener(org.anddev.andengine.util.modifier.LoopModifier$ILoopModifierListener) -> setLoopModifierListener
@@ -9711,16 +10831,12 @@ org.anddev.andengine.util.modifier.LoopModifier -> org.anddev.andengine.util.mod
     float getDuration() -> getDuration
     float onUpdate(float,java.lang.Object) -> onUpdate
     void reset() -> reset
-    void onHandleLoopStarted(java.lang.Object) -> onHandleLoopStarted
-    void onHandleLoopFinished(java.lang.Object) -> onHandleLoopFinished
+    void onModifierStarted(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierStarted
+    void onModifierFinished(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierFinished
     org.anddev.andengine.util.modifier.IModifier clone() -> clone
 org.anddev.andengine.util.modifier.LoopModifier$ILoopModifierListener -> org.anddev.andengine.util.modifier.LoopModifier$ILoopModifierListener:
     void onLoopStarted(org.anddev.andengine.util.modifier.LoopModifier,int,int) -> onLoopStarted
     void onLoopFinished(org.anddev.andengine.util.modifier.LoopModifier,int,int) -> onLoopFinished
-org.anddev.andengine.util.modifier.LoopModifier$InternalModifierListener -> org.anddev.andengine.util.modifier.b:
-    org.anddev.andengine.util.modifier.LoopModifier this$0 -> a
-    void onModifierStarted(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierStarted
-    void onModifierFinished(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierFinished
 org.anddev.andengine.util.modifier.ModifierList -> org.anddev.andengine.util.modifier.ModifierList:
     long serialVersionUID -> serialVersionUID
     java.lang.Object mTarget -> mTarget
@@ -9731,22 +10847,22 @@ org.anddev.andengine.util.modifier.ParallelModifier -> org.anddev.andengine.util
     float mSecondsElapsed -> mSecondsElapsed
     float mDuration -> mDuration
     org.anddev.andengine.util.modifier.IModifier[] mModifiers -> mModifiers
+    boolean mFinishedCached -> mFinishedCached
     org.anddev.andengine.util.modifier.ParallelModifier clone() -> clone
     float getSecondsElapsed() -> getSecondsElapsed
     float getDuration() -> getDuration
     float onUpdate(float,java.lang.Object) -> onUpdate
     void reset() -> reset
-    org.anddev.andengine.util.modifier.IModifier clone() -> clone
-org.anddev.andengine.util.modifier.ParallelModifier$InternalModifierListener -> org.anddev.andengine.util.modifier.c:
-    org.anddev.andengine.util.modifier.ParallelModifier this$0 -> a
     void onModifierStarted(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierStarted
     void onModifierFinished(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierFinished
+    org.anddev.andengine.util.modifier.IModifier clone() -> clone
 org.anddev.andengine.util.modifier.SequenceModifier -> org.anddev.andengine.util.modifier.SequenceModifier:
     org.anddev.andengine.util.modifier.SequenceModifier$ISubSequenceModifierListener mSubSequenceModifierListener -> mSubSequenceModifierListener
     org.anddev.andengine.util.modifier.IModifier[] mSubSequenceModifiers -> mSubSequenceModifiers
     int mCurrentSubSequenceModifierIndex -> mCurrentSubSequenceModifierIndex
     float mSecondsElapsed -> mSecondsElapsed
     float mDuration -> mDuration
+    boolean mFinishedCached -> mFinishedCached
     org.anddev.andengine.util.modifier.SequenceModifier clone() -> clone
     org.anddev.andengine.util.modifier.SequenceModifier$ISubSequenceModifierListener getSubSequenceModifierListener() -> getSubSequenceModifierListener
     void setSubSequenceModifierListener(org.anddev.andengine.util.modifier.SequenceModifier$ISubSequenceModifierListener) -> setSubSequenceModifierListener
@@ -9754,17 +10870,12 @@ org.anddev.andengine.util.modifier.SequenceModifier -> org.anddev.andengine.util
     float getDuration() -> getDuration
     float onUpdate(float,java.lang.Object) -> onUpdate
     void reset() -> reset
-    void onHandleModifierStarted(org.anddev.andengine.util.modifier.SequenceModifier$InternalModifierListener,org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onHandleModifierStarted
-    void onHandleModifierFinished(org.anddev.andengine.util.modifier.SequenceModifier$InternalModifierListener,org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onHandleModifierFinished
+    void onModifierStarted(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierStarted
+    void onModifierFinished(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierFinished
     org.anddev.andengine.util.modifier.IModifier clone() -> clone
-    void access$1(org.anddev.andengine.util.modifier.SequenceModifier,org.anddev.andengine.util.modifier.SequenceModifier$InternalModifierListener,org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> access$1
 org.anddev.andengine.util.modifier.SequenceModifier$ISubSequenceModifierListener -> org.anddev.andengine.util.modifier.SequenceModifier$ISubSequenceModifierListener:
     void onSubSequenceStarted(org.anddev.andengine.util.modifier.IModifier,java.lang.Object,int) -> onSubSequenceStarted
     void onSubSequenceFinished(org.anddev.andengine.util.modifier.IModifier,java.lang.Object,int) -> onSubSequenceFinished
-org.anddev.andengine.util.modifier.SequenceModifier$InternalModifierListener -> org.anddev.andengine.util.modifier.a:
-    org.anddev.andengine.util.modifier.SequenceModifier this$0 -> a
-    void onModifierStarted(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierStarted
-    void onModifierFinished(org.anddev.andengine.util.modifier.IModifier,java.lang.Object) -> onModifierFinished
 org.anddev.andengine.util.modifier.ease.EaseBackIn -> org.anddev.andengine.util.modifier.ease.EaseBackIn:
     org.anddev.andengine.util.modifier.ease.EaseBackIn INSTANCE -> INSTANCE
     org.anddev.andengine.util.modifier.ease.EaseBackIn getInstance() -> getInstance
@@ -9905,7 +11016,6 @@ org.anddev.andengine.util.modifier.ease.IEaseFunction -> org.anddev.andengine.ut
     org.anddev.andengine.util.modifier.ease.IEaseFunction DEFAULT -> DEFAULT
     float getPercentageDone(float,float,float,float) -> getPercentageDone
 org.anddev.andengine.util.modifier.util.ModifierUtils -> org.anddev.andengine.util.modifier.util.ModifierUtils:
-    org.anddev.andengine.util.modifier.IModifier getModifierWithLongestDuration(org.anddev.andengine.util.modifier.IModifier[]) -> getModifierWithLongestDuration
     float getSequenceDurationOfModifier(org.anddev.andengine.util.modifier.IModifier[]) -> getSequenceDurationOfModifier
 org.anddev.andengine.util.path.Direction -> org.anddev.andengine.util.path.Direction:
     org.anddev.andengine.util.path.Direction UP -> UP
@@ -10071,3 +11181,24 @@ org.anddev.andengine.util.sort.Sorter -> org.anddev.andengine.util.sort.Sorter:
     void sort(java.util.List,int,int,java.util.Comparator) -> sort
     void sort(java.lang.Object[],java.util.Comparator) -> sort
     void sort(java.util.List,java.util.Comparator) -> sort
+p -> w:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+q -> v:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+r -> u:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+s -> t:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+t -> s:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+u -> r:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+v -> q:
+    void a(d,java.util.HashMap,android.webkit.WebView) -> a
+w -> p:
+    android.content.Context a -> a
+    java.lang.String b -> b
+    void run() -> run
+x -> x:
+    java.lang.ref.WeakReference a -> a
+    void run() -> run

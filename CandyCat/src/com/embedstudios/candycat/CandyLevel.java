@@ -61,7 +61,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	 */
 	public static final float WIDTH = 1536;
 	public static final float HEIGHT = 1152;
-	public static float PHONE_WIDTH,PHONE_HEIGHT;
+	public static float PHONE_WIDTH =  854;
+	public static float PHONE_HEIGHT = 480;
 	
 	
 	/**
@@ -140,6 +141,15 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		play = getString(R.string.play);
 		pan = getString(R.string.pan);
+		
+		world = getIntent().getIntExtra("com.embedstudios.candycat.world", 0);
+		level = getIntent().getIntExtra("com.embedstudios.candycat.level", 0); // retrieves world/level to render from the intent
+		
+		Log.i(TAG,"Level "+world+"_"+level);
+		
+		Display display = getWindowManager().getDefaultDisplay(); 
+		PHONE_WIDTH = display.getWidth();
+		PHONE_HEIGHT = display.getHeight();
 	}
 	
 	@Override
@@ -153,16 +163,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public Engine onLoadEngine() {
 		Log.v(TAG,"CandyLevel onLoadEngine()");
-		world = getIntent().getIntExtra("com.embedstudios.candycat.world", 0);
-		level = getIntent().getIntExtra("com.embedstudios.candycat.level", 0); // retrieves world/level to render from the intent
 		
-		Log.i(TAG,"Level "+world+"_"+level);
-		
-		Display display = getWindowManager().getDefaultDisplay(); 
-		PHONE_WIDTH = display.getWidth();
-		PHONE_HEIGHT = display.getHeight();
-		
-		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,10000);
+		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,100000);
 		mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
 		mSmoothCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		mSmoothCamera.setBoundsEnabled(true);

@@ -1,16 +1,21 @@
+com.embedstudios.candycat.CandyAdvertisement:
+    54:57:private void unshowAds()
+    78:79:public void hideAdvertisement()
+    53:53:static void access$0(com.embedstudios.candycat.CandyAdvertisement)
+com.embedstudios.candycat.CandyAdvertisement$UnshowAdsRunnable
 com.embedstudios.candycat.CandyAnimatedSprite:
     public static final java.lang.String TAG
-    48:50:public void makeActive()
-    53:58:private synchronized void move(int,int,int[][])
-    85:86:public synchronized boolean moveRight(int[][],int[][])
-    92:93:public synchronized boolean moveLeft(int[][],int[][])
-    99:100:public synchronized boolean moveUp(int[][],int[][])
-    106:107:public synchronized boolean moveDown(int[][],int[][])
-    115:115:public synchronized void fall(int[][],int[][])
-    118:118:public boolean isStable()
+    133:133:public synchronized void fall(int[][])
+com.embedstudios.candycat.CandyEngine:
+    private static final java.lang.String TAG
+    46:48:public synchronized int getObjectRight(int)
+    52:54:public synchronized int getObjectLeft(int)
+    58:60:public synchronized int getObjectTop(int)
+    64:66:public synchronized int getObjectBottom(int)
+    70:75:public synchronized int getObject(int,int,int,int)
 com.embedstudios.candycat.CandyLevel:
-    private static final float WIDTH
-    private static final float HEIGHT
+    public static final float WIDTH
+    public static final float HEIGHT
     static final int CANDY
     static final int CAT
     static final int BOX
@@ -19,10 +24,13 @@ com.embedstudios.candycat.CandyLevel:
     static final int MOVABLE_WALL
     static final int INERTIA_WALL
     public static final java.lang.String TAG
+    private static final int CAMERA_SPEED
+    private static final long TIME_THRESHOLD
 com.embedstudios.candycat.CandyUtils:
     public static final java.lang.String TAG
+com.embedstudios.candycat.LoadTask:
+    public static final java.lang.String TAG
 com.embedstudios.candycat.MainMenu:
-    private static final int LOGO_DURATION
     public static final java.lang.String TAG
 com.embedstudios.candycat.R
 com.embedstudios.candycat.R$anim
@@ -35,6 +43,9 @@ com.embedstudios.candycat.R$layout
 com.embedstudios.candycat.R$menu
 com.embedstudios.candycat.R$string
 com.embedstudios.candycat.R$style
+com.embedstudios.candycat.SplashTask:
+    private static final int LOGO_DURATION
+    public static final java.lang.String TAG
 com.embedstudios.candycat.SpriteMover
 com.scoreloop.client.android.core.controller.d:
     public java.lang.String getDescription()
