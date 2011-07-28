@@ -121,7 +121,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	private float dragX,dragY;
 	private static float THRESHOLD = 50;
-	private static final int CAMERA_SPEED = 150;
+	private static final int CAMERA_SPEED = 200;
 	
 	private static final long TIME_THRESHOLD = 250;
 	private long time;
@@ -164,7 +164,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		PHONE_WIDTH = display.getWidth();
 		PHONE_HEIGHT = display.getHeight();
 		
-		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,300,300,1000);
+		mSmoothCamera = new SmoothCamera(0,0,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,1000);
 		mSmoothCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		mSmoothCamera.setBoundsEnabled(true);
 		mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
@@ -283,7 +283,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_UP&&gameStarted) {
 					if (!playMode) {
 						setText(play);
-						mSmoothCamera.setMaxVelocity(CAMERA_SPEED,CAMERA_SPEED);
+						mSmoothCamera.setMaxVelocity(CAMERA_SPEED*3,CAMERA_SPEED*3);
 						mSmoothCamera.setChaseEntity(candyEngine.cat);
 						playMode=true;
 					} else {
@@ -435,6 +435,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 					mScrollDetector.onTouchEvent(pSceneTouchEvent);
 				}
 			} else {
+				mSmoothCamera.setMaxVelocity(CAMERA_SPEED,CAMERA_SPEED);
 				final MotionEvent motionEvent = pSceneTouchEvent
 						.getMotionEvent();
 				final float motionX = motionEvent.getX();
