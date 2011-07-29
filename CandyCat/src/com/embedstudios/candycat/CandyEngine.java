@@ -49,18 +49,18 @@ public class CandyEngine {
 
 		for (int i=0;i<objectArray.length;i++) {
 			final int type = objectArray[i][0];
-			if (type==5) {
+			if (type==CandyLevel.ENEMY) {
 				enemyList.add(spriteList.get(i));
-			} else if (type==2) {
+			} else if (type==CandyLevel.CAT) {
 				catIndex = i;
 				cat = spriteList.get(i);
 				Log.i(TAG,"Cat located at row "+objectArray[i][1]+", column "+objectArray[i][2]);
-			} else if (type==1) {
+			} else if (type==CandyLevel.CANDY) {
 				candyIndex = i;
 				candy = spriteList.get(i);
 				gravityList.add(candy);
 				Log.i(TAG,"Candy located at row "+objectArray[i][1]+", column "+objectArray[i][2]);
-			} else if (type==3||type==4) {
+			} else if (type==CandyLevel.BOX||type==CandyLevel.BOMB) {
 				gravityList.add(spriteList.get(i));
 			}
 		}
@@ -74,13 +74,13 @@ public class CandyEngine {
 		final int fg = getObjectLeft(catIndex);
 
 		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is an empty background and no object to the left,
-			cat.moveLeft(objectArray); // then move left,
+			cat.moveLeft(); // then move left,
 			while (cat.hasModifier) {pause(10);} // and wait for completion.
 		} else if (fg>=0) { // Otherwise if there is an object to the left,
 			if (objectArray[fg][0]!=CandyLevel.ENEMY&&getBackgroundLeft(fg)==EMPTY_TILE&&getObjectLeft(fg)==NO_OBJECT) { // there is no obstacle blocking the object, and its not an enemy,
 				final CandyAnimatedSprite pushable = spriteList.get(fg);
-				cat.moveLeft(objectArray); // then move them,
-				pushable.moveLeft(objectArray);
+				cat.moveLeft(); // then move them,
+				pushable.moveLeft();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else { // Otherwise, if it's an enemy,
 				// TODO enemy
@@ -96,13 +96,13 @@ public class CandyEngine {
 		final int fg = getObjectRight(catIndex);
 
 		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is an empty background and no object to the right,
-			cat.moveRight(objectArray); // then move right,
+			cat.moveRight(); // then move right,
 			while (cat.hasModifier) {pause(10);} // and wait for completion.
 		} else if (fg>=0) { // Otherwise if there is an object to the right,
 			if (objectArray[fg][0]!=CandyLevel.ENEMY&&getBackgroundRight(fg)==EMPTY_TILE&&getObjectRight(fg)==NO_OBJECT) { // there is no obstacle blocking the object, and its not an enemy,
 				final CandyAnimatedSprite pushable = spriteList.get(fg);
-				cat.moveRight(objectArray); // then move them,
-				pushable.moveRight(objectArray);
+				cat.moveRight(); // then move them,
+				pushable.moveRight();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else { // Otherwise, if it's an enemy,
 				// TODO enemy
@@ -118,13 +118,13 @@ public class CandyEngine {
 		final int fg = getObjectTop(catIndex);
 
 		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is no tile or object at the top,
-			cat.moveUp(objectArray); // then move there,
+			cat.moveUp(); // then move there,
 			while (cat.hasModifier) {pause(10);} // and wait for completion.
 		} else if (fg>=0) { // If it is an object,
 			if ((objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL)&&(getBackgroundTop(fg)==EMPTY_TILE&&getObjectTop(fg)==NO_OBJECT)) { // and if it's empty at the top and is an fg wall,
 				final CandyAnimatedSprite pushable = spriteList.get(fg);
-				cat.moveUp(objectArray); // then move them, 
-				spriteList.get(fg).moveUp(objectArray);
+				cat.moveUp(); // then move them, 
+				spriteList.get(fg).moveUp();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
 				// TODO enemy
@@ -140,13 +140,13 @@ public class CandyEngine {
 		final int fg = getObjectBottom(catIndex);
 
 		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is no tile or object at the bottom,
-			cat.moveDown(objectArray); // then move there,
+			cat.moveDown(); // then move there,
 			while (cat.hasModifier) {pause(10);} // and wait for completion.
 		} else if (fg>=0) { // If it is an object,
 			if ((objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL)&&(getBackgroundBottom(fg)==EMPTY_TILE&&getObjectBottom(fg)==NO_OBJECT)) { // and if it's empty at the bottom and is an fg wall,
 				final CandyAnimatedSprite pushable = spriteList.get(fg);
-				cat.moveDown(objectArray); // then move them, 
-				spriteList.get(fg).moveDown(objectArray);
+				cat.moveDown(); // then move them, 
+				spriteList.get(fg).moveDown();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
 				// TODO enemy
@@ -157,7 +157,9 @@ public class CandyEngine {
 
 	private void settle() {
 		for (CandyAnimatedSprite gSprite:gravityList) {
-			gSprite.fall(objectArray, fallDistance(gSprite.index));
+			if (objectArray[gSprite.index][1]!=-1) {
+				gSprite.fall(fallDistance(gSprite.index));
+			}
 		}
 		boolean settled = false;
 		while (!settled) {

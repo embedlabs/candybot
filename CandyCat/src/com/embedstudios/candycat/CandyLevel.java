@@ -59,10 +59,10 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	/**
 	 * Some important phone/game dimensions.
 	 */
-	public static final float WIDTH = 1536;
-	public static final float HEIGHT = 1152;
-	public static float PHONE_WIDTH =  854;
-	public static float PHONE_HEIGHT = 480;
+	public final float WIDTH = 1536;
+	public final float HEIGHT = 1152;
+	public float PHONE_WIDTH =  854;
+	public float PHONE_HEIGHT = 480;
 	
 	
 	/**
@@ -91,18 +91,18 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public SmoothCamera mSmoothCamera;
 	private HUD hud;
 	
-	private static Texture mObjectTexture;
-	private static TiledTextureRegion candyTTR, catTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
-	private static RectangleVertexBuffer candyRVB, catRVB, boxRVB, bombRVB, enemyRVB, movableWallRVB, inertiaWallRVB;
+	private Texture mObjectTexture;
+	private TiledTextureRegion candyTTR, catTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
+	private RectangleVertexBuffer candyRVB, catRVB, boxRVB, /* no bombRVB */ enemyRVB, movableWallRVB, inertiaWallRVB;
 	
-	private static Texture mFontTexture;
-	private static Font andengine_komika;
+	private Texture mFontTexture;
+	private Font andengine_komika;
 
 	private SurfaceScrollDetector mScrollDetector;
 	private PinchZoomDetector mPinchZoomDetector;
 	private float mPinchZoomStartedCameraZoomFactor;
 
-	public static Typeface komika;
+	public Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
 	
 	private TextView loading_tv;
@@ -228,7 +228,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		candyRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		catRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		boxRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
-		bombRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		enemyRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		movableWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		inertiaWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
@@ -236,7 +235,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		candyRVB.update(64,64);
 		catRVB.update(64,64);
 		boxRVB.update(64,64);
-		bombRVB.update(64,64);
 		enemyRVB.update(64,64);
 		movableWallRVB.update(64,64);
 		inertiaWallRVB.update(64,64);
@@ -353,14 +351,14 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		final CandyAnimatedSprite face;
 		
 		switch (type){
-		case CANDY: face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY,tmxLayer); break;
-		case CAT: face = new CandyAnimatedSprite(row,column,catTTR,catRVB,index,CAT,tmxLayer); break;
-		case BOX: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer); break;
-		case BOMB: face = new CandyAnimatedSprite(row,column,bombTTR,bombRVB,index,BOMB,tmxLayer); break;
-		case ENEMY: face = new CandyAnimatedSprite(row,column,enemyTTR,enemyRVB,index,ENEMY,tmxLayer); break;
-		case MOVABLE_WALL: face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL,tmxLayer); break;
-		case INERTIA_WALL: face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL,tmxLayer); break;
-		default: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer); break;
+		case CANDY: face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY,tmxLayer,objectArray,backgroundArray); break;
+		case CAT: face = new CandyAnimatedSprite(row,column,catTTR,catRVB,index,CAT,tmxLayer,objectArray,backgroundArray); break;
+		case BOX: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer,objectArray,backgroundArray); break;
+		case BOMB: face = new CandyAnimatedSprite(row,column,bombTTR,index,BOMB,tmxLayer,objectArray,backgroundArray); break;
+		case ENEMY: face = new CandyAnimatedSprite(row,column,enemyTTR,enemyRVB,index,ENEMY,tmxLayer,objectArray,backgroundArray); break;
+		case MOVABLE_WALL: face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL,tmxLayer,objectArray,backgroundArray); break;
+		case INERTIA_WALL: face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL,tmxLayer,objectArray,backgroundArray); break;
+		default: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer,objectArray,backgroundArray); break;
 		}
 		spriteList.add(face);
 		mScene.attachChild(face);

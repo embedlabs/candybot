@@ -42,7 +42,7 @@ public class LoadTask extends AsyncTask<Void,Void,Void> {
 	
 	@Override
 	protected void onPostExecute(Void result) {
-		candyLevel.mSmoothCamera.setMaxZoomFactorChange((1-CandyLevel.PHONE_HEIGHT/CandyLevel.HEIGHT));
+		candyLevel.mSmoothCamera.setMaxZoomFactorChange((1-candyLevel.PHONE_HEIGHT/candyLevel.HEIGHT));
 		candyLevel.mSmoothCamera.setChaseEntity(candyLevel.candyEngine.cat);
 		candyLevel.mSmoothCamera.setZoomFactor(1);
 		candyLevel.gameStarted=true;

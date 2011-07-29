@@ -8,6 +8,7 @@ import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.WakeLockOptions;
 import org.anddev.andengine.entity.scene.Scene;
+import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 import org.anddev.andengine.opengl.view.RenderSurfaceView;
 import org.anddev.andengine.sensor.accelerometer.AccelerometerSensorOptions;
 import org.anddev.andengine.sensor.accelerometer.IAccelerometerListener;
@@ -106,6 +107,8 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 		this.mEngine.interruptUpdateThread();
 
 		this.onUnloadResources();
+		
+		BufferObjectManager.getActiveInstance().clear();
 	}
 
 	@Override

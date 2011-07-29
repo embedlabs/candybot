@@ -57,7 +57,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	ImageView iv_achievements,iv_facebook,iv_twitter;
 	private CandyAdvertisement mAdvertisement;
 
-	public static Typeface komika;
+	public Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
 	
 	private static int WIDTH,HEIGHT;
@@ -87,7 +87,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		case R.id.button_play:
 			startActivity(new Intent(this,CandyLevel.class)
 				.putExtra("com.embedstudios.candycat.world", 1)
-				.putExtra("com.embedstudios.candycat.level", 9));
+				.putExtra("com.embedstudios.candycat.level", 11));
 			break;
 		case R.id.button_achievements:
 			startActivity(new Intent(this,EntryScreenActivity.class));

@@ -16,6 +16,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 //	public boolean stable = true;
 	public final int index,type;
 	private final TMXLayer tmxLayer; // TODO for bombs
+	private final int[][] objectArray,backgroundArray;
 //	public final boolean gravityIsOn;
 	private int candyLastMove = 0;
 	private int candyRotationState = 0;
@@ -25,16 +26,37 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	
 	public boolean blowUp = false;
 	
+	public static final long[] catDurations = new long[]{3000,100,1000,100,5000,100,1000,100,5000,100,100,100,5000,500};
+	public static final int[] catFrames = new int[]{0,1,2,1,0,3,4,3,0,5,6,5,0,7};
 	
 	public static int SPEED = 10;
 	public static final long[] frameArray = new long[]{250/SPEED,250/SPEED,250/SPEED,250/SPEED};
 	public static final String TAG = CandyUtils.TAG;
 
-	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final RectangleVertexBuffer RVB,final int index,final int type,final TMXLayer tmxLayer) {
+	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final RectangleVertexBuffer RVB,final int index,final int type,final TMXLayer tmxLayer,final int[][] objectArray,final int[][] backgroundArray) {
 		super(column*64, row*64, pTiledTextureRegion, RVB);
 		this.index = index;
 		this.type = type;
 		this.tmxLayer = tmxLayer;
+		this.objectArray = objectArray;
+		this.backgroundArray = backgroundArray;
+		
+		if (this.type==CandyLevel.CAT) {
+			this.animate(catDurations, catFrames, -1);
+		}
+	}
+	
+	/**
+	 * FOR BOMBS
+	 */
+	
+	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final int index,final int type,final TMXLayer tmxLayer,final int[][] objectArray,final int[][] backgroundArray) {
+		super(column*64, row*64, pTiledTextureRegion.clone());
+		this.index = index;
+		this.type = type;
+		this.tmxLayer = tmxLayer;
+		this.objectArray = objectArray;
+		this.backgroundArray = backgroundArray;
 	}
 
 	private synchronized boolean move(final int rowDelta, final int columnDelta, final int[][] objectArray) {
@@ -97,27 +119,27 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	}
 
 	@Override
-	public synchronized boolean moveRight(final int[][] objectArray) {
+	public synchronized boolean moveRight() {
 		return move(0,1,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveLeft(final int[][] objectArray) {
+	public synchronized boolean moveLeft() {
 		return move(0,-1,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveUp(final int[][] objectArray) {
+	public synchronized boolean moveUp() {
 		return move(-1,0,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveDown(final int[][] objectArray) {
+	public synchronized boolean moveDown() {
 		return move(1,0,objectArray);
 	}
 
 	@Override
-	public synchronized boolean fall(final int[][] objectArray,final int distance) {
+	public synchronized boolean fall(final int distance) {
 		if (distance>0) {
 			return move(distance, 0, objectArray);
 		} else {
@@ -134,9 +156,20 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		}
 	}
 
-	public void showBombAnim() {
+	public synchronized void showBombAnim() {
+		animate(50,false, new IAnimationListener(){
+			@Override
+			public void onAnimationEnd(AnimatedSprite pAnimatedSprite) {
+				setVisible(false);
+				tmxLayer.getTMXTile(objectArray[index][2], objectArray[index][1]+1).setTextureRegion(null);
+				backgroundArray[objectArray[index][1]+1][objectArray[index][2]]=0;
+				objectArray[index][1]=-1;
+
+				hasModifier = false;
+				Log.i(TAG,"Bomb explosion ended.");
+			}
+		});
 		Log.i(TAG,"Bomb explosion started.");
 		// TODO Auto-generated method stub
-		hasModifier = false;
 	}
 }
