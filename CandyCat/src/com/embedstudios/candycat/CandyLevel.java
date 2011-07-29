@@ -331,7 +331,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 			mPinchZoomDetector = null;
 		}
 		mScene.setOnSceneTouchListener(this);
-//		mScene.setTouchAreaBindingEnabled(true);
+		mScene.setTouchAreaBindingEnabled(true);
 		
 		/**
 		 * LOGIC ENGINE
