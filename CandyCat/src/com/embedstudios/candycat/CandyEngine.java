@@ -39,6 +39,8 @@ public class CandyEngine {
 	private static final String TAG = CandyUtils.TAG;
 
 	private final CandyLevel candyLevel;
+	
+	public boolean win = false;
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevel candyLevel) {
 		this.spriteList = spriteList;
@@ -86,8 +88,6 @@ public class CandyEngine {
 			}
 		}
 		settle();
-
-		candyLevel.gameStarted=true;
 	}
 
 	public void right() {
@@ -110,8 +110,6 @@ public class CandyEngine {
 			}
 		}
 		settle();
-
-		candyLevel.gameStarted=true;
 	}
 
 	public void up() {
@@ -124,7 +122,7 @@ public class CandyEngine {
 			cat.moveUp(objectArray); // then move there,
 			while (cat.hasModifier) {pause(10);} // and wait for completion.
 		} else if (fg>=0) { // If it is an object,
-			if (objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL||getBackgroundTop(fg)==EMPTY_TILE&&getObjectRight(fg)==NO_OBJECT) { // and if it's empty at the top and is an fg wall,
+			if ((objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL)&&(getBackgroundTop(fg)==EMPTY_TILE&&getObjectTop(fg)==NO_OBJECT)) { // and if it's empty at the top and is an fg wall,
 				final CandyAnimatedSprite pushable = spriteList.get(fg);
 				cat.moveUp(objectArray); // then move them, 
 				spriteList.get(fg).moveUp(objectArray);
@@ -134,8 +132,6 @@ public class CandyEngine {
 			}
 		}
 		settle();
-
-		candyLevel.gameStarted=true;
 	}
 
 	public void down() {
@@ -148,7 +144,7 @@ public class CandyEngine {
 			cat.moveDown(objectArray); // then move there,
 			while (cat.hasModifier) {pause(10);} // and wait for completion.
 		} else if (fg>=0) { // If it is an object,
-			if (objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL||getBackgroundBottom(fg)==EMPTY_TILE&&getObjectRight(fg)==NO_OBJECT) { // and if it's empty at the bottom and is an fg wall,
+			if ((objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL)&&(getBackgroundBottom(fg)==EMPTY_TILE&&getObjectBottom(fg)==NO_OBJECT)) { // and if it's empty at the bottom and is an fg wall,
 				final CandyAnimatedSprite pushable = spriteList.get(fg);
 				cat.moveDown(objectArray); // then move them, 
 				spriteList.get(fg).moveDown(objectArray);
@@ -158,12 +154,9 @@ public class CandyEngine {
 			}
 		}
 		settle();
-
-		candyLevel.gameStarted=true;
 	}
 
 	private void settle() {
-		// TODO Auto-generated method stub
 		for (CandyAnimatedSprite gSprite:gravityList) {
 			gSprite.fall(objectArray, fallDistance(gSprite.index));
 		}
@@ -171,26 +164,43 @@ public class CandyEngine {
 		while (!settled) {
 			pause(10);
 			for (CandyAnimatedSprite gSprite:gravityList) {
-				if (gSprite.hasModifier) {
-					break;
-				} else if (gravityList.indexOf(gSprite)==gravityList.size()-1) {
-					settled=true;
+				if (!gSprite.hasModifier) {
+					if (gSprite.index==candyIndex) {
+						gSprite.showCandyAnim();
+					}
+					if (gravityList.indexOf(gSprite)==gravityList.size()-1) {
+						settled=true;
+					}
 				}
 			}
 		}
+		
+		if (win) {
+			// TODO
+		} else {
+			candyLevel.gameStarted=true;
+		}
+		
 	}
 
 	private int fallDistance(final int index) {
 		// TODO Auto-generated method stub
 		int row = objectArray[index][1];
+		final int initialRow = 0+row;
 		final int column = objectArray[index][2];
 		int fallDistance = 0;
 		while (true) {
 			final int result = getBackgroundBottom(row,column);
-			if (result==EMPTY_TILE||result==LASER_HORIZONTAL||result==LASER_VERTICAL||result==LASER_CROSS&&getObjectBottom(row,column)==NO_OBJECT) {
+			if ((result==EMPTY_TILE||result==LASER_HORIZONTAL||result==LASER_VERTICAL||result==LASER_CROSS)&&getObjectBottom(row,column)==NO_OBJECT) {
 				fallDistance++;
 				row++;
 			} else {
+				if (index==candyIndex&&(result==PIPE_LEFT||result==PIPE_RIGHT||result==PIPE_LEFT_ICE||result==PIPE_RIGHT_ICE)) {
+					win=true;
+				}
+				if (objectArray[index][0]==CandyLevel.BOMB&&row-initialRow>=1&&(result==WALL||result==WALL_ICE||result==WALL_LAVA)) {
+					spriteList.get(index).blowUp = true;
+				}
 				break;
 			}
 		}

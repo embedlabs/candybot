@@ -23,6 +23,8 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	
 	public boolean hasModifier = false;
 	
+	public boolean blowUp = false;
+	
 	
 	public static int SPEED = 10;
 	public static final long[] frameArray = new long[]{250/SPEED,250/SPEED,250/SPEED,250/SPEED};
@@ -35,20 +37,19 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		this.tmxLayer = tmxLayer;
 	}
 
-	private synchronized boolean move(int row, int column, int[][] objectArray) {
+	private synchronized boolean move(final int rowDelta, final int columnDelta, final int[][] objectArray) {
 		if (!hasModifier) {
 			hasModifier=true;
-			candyLastMove = column;
-			if (row != 0) {
-				lastDirectionalMove = row;
+			candyLastMove = columnDelta;
+			if (rowDelta != 0) {
+				lastDirectionalMove = rowDelta;
 			}
-			registerEntityModifier(new PathModifier(1/(float)SPEED*((row!=0)?Math.abs(row):1)*((column!=0)?Math.abs(column):1), new Path(2).to(
-					getX(), getY()).to(getX() + (column * 64),
-					getY() + (row * 64)), this, EaseLinear.getInstance()));
-			objectArray[index][1] += row;
-			objectArray[index][2] += column;
-			Log.v(TAG, "Item moved to: " + objectArray[index][1] + ", "
-					+ objectArray[index][2]);
+			registerEntityModifier(new PathModifier(1/(float)SPEED*((rowDelta!=0)?Math.abs(rowDelta):1)*((columnDelta!=0)?Math.abs(columnDelta):1), new Path(2).to(
+					getX(), getY()).to(getX() + (columnDelta * 64),
+					getY() + (rowDelta * 64)), this, EaseLinear.getInstance()));
+			objectArray[index][1] += rowDelta;
+			objectArray[index][2] += columnDelta;
+			Log.v(TAG, "Item moved to: " + objectArray[index][1] + ", " + objectArray[index][2]);
 			return true;
 		} else {
 			return false;
@@ -56,7 +57,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	}
 
 	@Override
-	public void onPathStarted(PathModifier pPathModifier, IEntity pEntity) {
+	public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
 		if (type==CandyLevel.CANDY) {
 			if (candyLastMove == -1) {
 				animate(frameArray, candyRotationState*4, candyRotationState*4+3, false);
@@ -87,7 +88,11 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 			}
 			setCurrentTileIndex(candyRotationState * 4);
 		}
-		hasModifier=false;
+		if (blowUp&&type==CandyLevel.BOMB) {
+			showBombAnim();
+		} else {
+			hasModifier=false;
+		}
 	}
 
 	@Override
@@ -117,5 +122,18 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		} else {
 			return true;
 		}
+	}
+
+	public void showCandyAnim() {
+		if (type==CandyLevel.CANDY) {
+			hasModifier = true;
+			// TODO
+			hasModifier = false;
+		}
+	}
+
+	public void showBombAnim() {
+		// TODO Auto-generated method stub
+		hasModifier = false;
 	}
 }

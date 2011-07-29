@@ -120,10 +120,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private ChangeableText playCT;
 	
 	private float dragX,dragY;
-	private static float THRESHOLD = 50;
+	private static float DRAG_DISTANCE_THRESHOLD = 50;
 	private static final int CAMERA_SPEED = 200;
-	
-	private static final long TIME_THRESHOLD = 250;
+	private static final long TAP_THRESHOLD = 250;
 	private long time;
 	private boolean tapOptionEnabled = false;
 	
@@ -284,7 +283,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_UP&&gameStarted) {
 					if (!playMode) {
 						setText(play);
-						mSmoothCamera.setMaxVelocity(CAMERA_SPEED*3,CAMERA_SPEED*3);
+//						mSmoothCamera.setMaxVelocity(CAMERA_SPEED*3,CAMERA_SPEED*3);
 						mSmoothCamera.setChaseEntity(candyEngine.cat);
 						playMode=true;
 					} else {
@@ -447,22 +446,22 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 					dragX = motionX;
 					dragY = motionY;
 				} else if (pSceneTouchEvent.isActionMove()) {
-					if (motionX - dragX >= THRESHOLD) {
+					if (motionX - dragX >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
 						candyEngine.right();
-					} else if (dragX - motionX >= THRESHOLD) {
+					} else if (dragX - motionX >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
 						candyEngine.left();
-					} else if (motionY - dragY >= THRESHOLD) {
+					} else if (motionY - dragY >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
 						candyEngine.down();
-					} else if (dragY - motionY >= THRESHOLD) {
+					} else if (dragY - motionY >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
@@ -470,7 +469,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 					}
 				} else if (tapOptionEnabled&&
 					pSceneTouchEvent.isActionUp()&&
-					System.currentTimeMillis()-time<=TIME_THRESHOLD) {
+					System.currentTimeMillis()-time<=TAP_THRESHOLD) {
 					if (motionX<=PHONE_WIDTH/3&&motionY>=PHONE_HEIGHT/6&&motionY<=PHONE_HEIGHT*5/6) {
 						candyEngine.left();
 					} else if (motionX>=PHONE_WIDTH*2/3&&motionY>=PHONE_HEIGHT/6&&motionY<=PHONE_HEIGHT*5/6) {
