@@ -112,6 +112,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private LoadTask loadTask;
 	
 	public CandyEngine candyEngine;
+	private TMXLayer tmxLayer;
 	
 	private String play,pan;
 	private boolean playMode=true;
@@ -263,7 +264,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 			Debug.e(tmxle);
 		}
 		
-		final TMXLayer tmxLayer = mTMXTiledMap.getTMXLayers().get(0);
+		tmxLayer = mTMXTiledMap.getTMXLayers().get(0);
 		mScene.attachChild(tmxLayer); //background layer
 		
 		/**
@@ -353,14 +354,14 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		final CandyAnimatedSprite face;
 		
 		switch (type){
-		case CANDY: face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY); break;
-		case CAT: face = new CandyAnimatedSprite(row,column,catTTR,catRVB,index,CAT); break;
-		case BOX: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX); break;
-		case BOMB: face = new CandyAnimatedSprite(row,column,bombTTR,bombRVB,index,BOMB); break;
-		case ENEMY: face = new CandyAnimatedSprite(row,column,enemyTTR,enemyRVB,index,ENEMY); break;
-		case MOVABLE_WALL: face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL); break;
-		case INERTIA_WALL: face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL); break;
-		default: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX); break;
+		case CANDY: face = new CandyAnimatedSprite(row,column,candyTTR,candyRVB,index,CANDY,tmxLayer); break;
+		case CAT: face = new CandyAnimatedSprite(row,column,catTTR,catRVB,index,CAT,tmxLayer); break;
+		case BOX: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer); break;
+		case BOMB: face = new CandyAnimatedSprite(row,column,bombTTR,bombRVB,index,BOMB,tmxLayer); break;
+		case ENEMY: face = new CandyAnimatedSprite(row,column,enemyTTR,enemyRVB,index,ENEMY,tmxLayer); break;
+		case MOVABLE_WALL: face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL,tmxLayer); break;
+		case INERTIA_WALL: face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL,tmxLayer); break;
+		default: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer); break;
 		}
 		spriteList.add(face);
 		mScene.attachChild(face);

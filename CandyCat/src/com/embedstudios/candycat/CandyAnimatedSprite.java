@@ -1,6 +1,7 @@
 package com.embedstudios.candycat;
 
 import org.anddev.andengine.entity.IEntity;
+import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
 import org.anddev.andengine.entity.modifier.PathModifier;
 import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier.Path;
@@ -12,12 +13,13 @@ import org.anddev.andengine.util.modifier.ease.EaseLinear;
 import android.util.Log;
 
 public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, IPathModifierListener {
-	public boolean stable = true;
+//	public boolean stable = true;
 	public final int index,type;
-	public final boolean gravityIsOn;
+	private final TMXLayer tmxLayer; // TODO for bombs
+//	public final boolean gravityIsOn;
 	private int candyLastMove = 0;
 	private int candyRotationState = 0;
-	private int lastDirectionalMove = 0; // for ice block mechanics
+	private int lastDirectionalMove = 0; // TODO for ice block mechanics
 	
 	public boolean hasModifier = false;
 	
@@ -26,16 +28,11 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	public static final long[] frameArray = new long[]{250/SPEED,250/SPEED,250/SPEED,250/SPEED};
 	public static final String TAG = CandyUtils.TAG;
 
-	public CandyAnimatedSprite(int row, int column, TiledTextureRegion pTiledTextureRegion, RectangleVertexBuffer RVB, int index, int type) {
+	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final RectangleVertexBuffer RVB,final int index,final int type,final TMXLayer tmxLayer) {
 		super(column*64, row*64, pTiledTextureRegion, RVB);
 		this.index = index;
 		this.type = type;
-		if (type==CandyLevel.CANDY||type==CandyLevel.BOX||type==CandyLevel.BOMB) {
-			gravityIsOn=true;
-		} else {
-			gravityIsOn=false;
-		}
-		// TODO Auto-generated constructor stub
+		this.tmxLayer = tmxLayer;
 	}
 
 	private synchronized boolean move(int row, int column, int[][] objectArray) {
@@ -75,16 +72,10 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	}
 
 	@Override
-	public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-		// TODO Auto-generated method stub
-
-	}
+	public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {}
 
 	@Override
-	public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-		// TODO Auto-generated method stub
-
-	}
+	public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {}
 
 	@Override
 	public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
@@ -122,7 +113,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	@Override
 	public synchronized boolean fall(final int[][] objectArray,final int distance) {
 		if (distance>0) {
-			return move(0, -distance, objectArray);
+			return move(distance, 0, objectArray);
 		} else {
 			return true;
 		}
