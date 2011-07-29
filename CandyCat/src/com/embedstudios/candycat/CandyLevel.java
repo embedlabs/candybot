@@ -336,7 +336,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		/**
 		 * LOGIC ENGINE
 		 */
-		candyEngine = new CandyEngine(spriteList,objectArray,backgroundArray);
+		candyEngine = new CandyEngine(spriteList,objectArray,backgroundArray,this);
 		
 		return mScene;
 	}

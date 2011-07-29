@@ -15,7 +15,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	public boolean stable = true;
 	public final int index,type;
 	public final boolean gravityIsOn;
-	private int candyLastMove =0;
+	private int candyLastMove = 0;
 	private int candyRotationState = 0;
 	private int lastDirectionalMove = 0; // for ice block mechanics
 	
@@ -45,7 +45,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 			if (row != 0) {
 				lastDirectionalMove = row;
 			}
-			registerEntityModifier(new PathModifier(1/(float)SPEED, new Path(2).to(
+			registerEntityModifier(new PathModifier(1/(float)SPEED*((row!=0)?Math.abs(row):1)*((column!=0)?Math.abs(column):1), new Path(2).to(
 					getX(), getY()).to(getX() + (column * 64),
 					getY() + (row * 64)), this, EaseLinear.getInstance()));
 			objectArray[index][1] += row;
@@ -60,7 +60,6 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 
 	@Override
 	public void onPathStarted(PathModifier pPathModifier, IEntity pEntity) {
-		
 		if (type==CandyLevel.CANDY) {
 			if (candyLastMove == -1) {
 				animate(frameArray, candyRotationState*4, candyRotationState*4+3, false);
@@ -76,20 +75,19 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	}
 
 	@Override
-	public void onPathWaypointStarted(PathModifier pPathModifier, IEntity pEntity, int pWaypointIndex) {
+	public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void onPathWaypointFinished(PathModifier pPathModifier, IEntity pEntity, int pWaypointIndex) {
+	public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void onPathFinished(PathModifier pPathModifier, IEntity pEntity) {
-		// TODO Auto-generated method stub
+	public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
 		if (type==CandyLevel.CANDY) {
 			if (candyLastMove==-1) {
 				candyRotationState = (candyRotationState + 1) % 3;
@@ -102,33 +100,27 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	}
 
 	@Override
-	public synchronized boolean moveRight(int[][] objectArray) {
-		// TODO Auto-generated method stub
+	public synchronized boolean moveRight(final int[][] objectArray) {
 		return move(0,1,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveLeft(int[][] objectArray) {
-		// TODO Auto-generated method stub
+	public synchronized boolean moveLeft(final int[][] objectArray) {
 		return move(0,-1,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveUp(int[][] objectArray) {
-		// TODO Auto-generated method stub
+	public synchronized boolean moveUp(final int[][] objectArray) {
 		return move(-1,0,objectArray);
 	}
 
 	@Override
-	public synchronized boolean moveDown(int[][] objectArray) {
-		// TODO Auto-generated method stub
+	public synchronized boolean moveDown(final int[][] objectArray) {
 		return move(1,0,objectArray);
 	}
 
 	@Override
-	public synchronized void fall(int[][] objectArray) {
-		if (gravityIsOn) {
-
-		}
+	public synchronized boolean fall(final int[][] objectArray,final int distance) {
+		return move(0,-distance,objectArray);
 	}
 }

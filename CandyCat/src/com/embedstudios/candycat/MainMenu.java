@@ -85,7 +85,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
-			startActivity(new Intent(this,HorizontalListViewDemo.class)
+			startActivity(new Intent(this,CandyLevel.class)
 				.putExtra("com.embedstudios.candycat.world", 1)
 				.putExtra("com.embedstudios.candycat.level", 1));
 			break;
