@@ -121,6 +121,10 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 
 	@Override
 	public synchronized boolean fall(final int[][] objectArray,final int distance) {
-		return move(0,-distance,objectArray);
+		if (distance>0) {
+			return move(0, -distance, objectArray);
+		} else {
+			return true;
+		}
 	}
 }
