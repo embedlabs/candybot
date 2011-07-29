@@ -49,7 +49,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 					getY() + (rowDelta * 64)), this, EaseLinear.getInstance()));
 			objectArray[index][1] += rowDelta;
 			objectArray[index][2] += columnDelta;
-			Log.v(TAG, "Item moved to: " + objectArray[index][1] + ", " + objectArray[index][2]);
+			Log.v(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
 			return true;
 		} else {
 			return false;
@@ -93,6 +93,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		} else {
 			hasModifier=false;
 		}
+		Log.v(TAG,"Item " + index + "'s path finished.");
 	}
 
 	@Override
@@ -127,12 +128,14 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	public void showCandyAnim() {
 		if (type==CandyLevel.CANDY) {
 			hasModifier = true;
+			Log.i(TAG,"Candy winning animation started.");
 			// TODO
 			hasModifier = false;
 		}
 	}
 
 	public void showBombAnim() {
+		Log.i(TAG,"Bomb explosion started.");
 		// TODO Auto-generated method stub
 		hasModifier = false;
 	}

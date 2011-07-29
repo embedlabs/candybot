@@ -2,7 +2,6 @@ package com.embedstudios.candycat;
 
 import java.util.ArrayList;
 
-import android.os.Handler;
 import android.util.Log;
 
 public class CandyEngine {
@@ -65,7 +64,7 @@ public class CandyEngine {
 				gravityList.add(spriteList.get(i));
 			}
 		}
-		logArray();
+		logArray("Start array:");
 	}
 
 	public void left() {
@@ -165,7 +164,7 @@ public class CandyEngine {
 			pause(10);
 			for (CandyAnimatedSprite gSprite:gravityList) {
 				if (!gSprite.hasModifier) {
-					if (gSprite.index==candyIndex) {
+					if (gSprite.index==candyIndex&&win) {
 						gSprite.showCandyAnim();
 					}
 					if (gravityList.indexOf(gSprite)==gravityList.size()-1) {
@@ -174,8 +173,10 @@ public class CandyEngine {
 				}
 			}
 		}
+		Log.v(TAG,"Settled.");
 		
 		if (win) {
+			logArray("End array:");
 			// TODO
 		} else {
 			candyLevel.gameStarted=true;
@@ -285,7 +286,8 @@ public class CandyEngine {
 		return backgroundArray[row+rowChange][column+columnChange];
 	}
 
-	private void logArray() {
+	private void logArray(final String message) {
+		Log.i(TAG,message);
 		for (int[] i:backgroundArray) {
 			final StringBuilder sBuilder = new StringBuilder();
 			for (int j:i) {
