@@ -88,7 +88,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		case R.id.button_play:
 			startActivity(new Intent(this,CandyLevel.class)
 				.putExtra("com.embedstudios.candycat.world", 1)
-				.putExtra("com.embedstudios.candycat.level", 7));
+				.putExtra("com.embedstudios.candycat.level", 13));
 			break;
 		case R.id.button_achievements:
 			startActivity(new Intent(this,EntryScreenActivity.class));
