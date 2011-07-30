@@ -1,10 +1,12 @@
 package com.embedstudios.candycat;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import android.util.Log;
 
-public class CandyEngine {
+public class CandyEngine implements Comparator<CandyAnimatedSprite> {
 
 	public static final int EDGE = -2;
 	public static final int NO_OBJECT = -1;
@@ -92,7 +94,7 @@ public class CandyEngine {
 				cat.moveLeft(); // then move them,
 				pushable.moveLeft();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
-			} else { // Otherwise, if it's an enemy,
+			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
 				// TODO enemy
 				death = true;
 			}
@@ -115,7 +117,7 @@ public class CandyEngine {
 				cat.moveRight(); // then move them,
 				pushable.moveRight();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
-			} else { // Otherwise, if it's an enemy,
+			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
 				// TODO enemy
 				death = true;
 			}
@@ -170,11 +172,13 @@ public class CandyEngine {
 	}
 
 	private void settle() {
+		Collections.sort(gravityList,this);
 		for (CandyAnimatedSprite gSprite:gravityList) {
 			if (objectArray[gSprite.index][1]!=-1) {
 				gSprite.fall(fallDistance(gSprite.index));
 			}
 		}
+		
 		boolean settled = false;
 		while (!settled) {
 			pause(10);
@@ -354,5 +358,11 @@ public class CandyEngine {
 		
 		candyLevel.gameStarted = true;
 		Log.i(TAG,"CandyEngine finished resetting.");
+	}
+
+	@Override
+	public int compare(CandyAnimatedSprite object1, CandyAnimatedSprite object2) {
+		return objectArray[object2.index][1]-objectArray[object1.index][1];
+		// TODO bias by teleporter locations
 	}
 }
