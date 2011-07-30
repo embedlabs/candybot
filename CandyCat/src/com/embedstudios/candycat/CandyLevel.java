@@ -48,13 +48,10 @@ import org.anddev.andengine.util.Debug;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener, IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
@@ -108,11 +105,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
 	
-	private TextView loading_tv;
-	private ImageView loading_iv;
-	private RelativeLayout loading_rl_level;
+//	private TextView loading_tv;
+//	private ImageView loading_iv;
+//	private RelativeLayout loading_rl_level;
 	
-	private LoadTask loadTask;
+//	private LoadTask loadTask;
 	
 	public CandyEngine candyEngine;
 	public TMXLayer tmxLayer;
@@ -137,11 +134,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 		
 		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
-		loading_tv = (TextView)findViewById(R.id.loading_tv_level);
-		CandyUtils.setKomika(komika,loading_tv);
-		
-		loading_iv = (ImageView)findViewById(R.id.loading_iv_level);
-		loading_rl_level = (RelativeLayout)findViewById(R.id.loading_rl_level);
+//		loading_tv = (TextView)findViewById(R.id.loading_tv_level);
+//		CandyUtils.setKomika(komika,loading_tv);
+//		
+//		loading_iv = (ImageView)findViewById(R.id.loading_iv_level);
+//		loading_rl_level = (RelativeLayout)findViewById(R.id.loading_rl_level);
 		
 		play = getString(R.string.play);
 		pan = getString(R.string.pan);
@@ -156,13 +153,13 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		PHONE_HEIGHT = display.getHeight();
 	}
 	
-	@Override
-	public void onWindowFocusChanged(final boolean hasFocus) {
-		if (hasFocus) {
-			loading_iv.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely));
-		}
-		super.onWindowFocusChanged(hasFocus);
-	}
+//	@Override
+//	public void onWindowFocusChanged(final boolean hasFocus) {
+//		if (hasFocus) {
+//			loading_iv.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely));
+//		}
+//		super.onWindowFocusChanged(hasFocus);
+//	}
 	
 	@Override
 	public Engine onLoadEngine() {
@@ -384,9 +381,24 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public void onLoadComplete() {
 		Log.v(TAG,"CandyLevel onLoadComplete()");
 		
-		loadTask = new LoadTask(this,loading_rl_level,loading_iv,tutorialList);
-		loadTask.execute();
-		
+//		loadTask = new LoadTask(this,loading_rl_level,loading_iv,tutorialList);
+//		loadTask.execute();
+
+		new Handler().post(new Runnable(){
+			@Override
+			public void run() {
+				mSmoothCamera.setMaxZoomFactorChange((1-PHONE_HEIGHT/HEIGHT));
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					Log.e(TAG,"Level start delay FAIL!",e);
+				}
+				mSmoothCamera.setChaseEntity(candyEngine.cat);
+				mSmoothCamera.setZoomFactor(1);
+				gameStarted=true;
+				addTutorialText(tutorialList);
+			}
+		});
 	}
 
 	@Override
@@ -505,7 +517,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public void onDestroy() {
-		loadTask.running=false;
+//		loadTask.running=false;
 		super.onDestroy();
 		Log.i(TAG,"CandyLevel onDestroy()");
 	}

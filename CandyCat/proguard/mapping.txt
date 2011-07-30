@@ -840,7 +840,56 @@ com.badlogic.gdx.utils.LongMap$Values -> com.badlogic.gdx.utils.LongMap$Values:
     java.util.Iterator iterator() -> iterator
     void reset() -> reset
     void remove() -> remove
-com.embedstudios.candycat.CandyAdvertisement -> com.embedstudios.candycat.h:
+com.devsmart.android.ui.HorizontialListView -> com.devsmart.android.ui.HorizontialListView:
+    boolean mAlwaysOverrideTouch -> c
+    android.widget.ListAdapter mAdapter -> a
+    int mLeftViewIndex -> d
+    int mRightViewIndex -> e
+    int mCurrentX -> f
+    int mNextX -> b
+    int mMaxX -> g
+    int mDisplayOffset -> h
+    android.widget.Scroller mScroller -> i
+    android.view.GestureDetector mGesture -> j
+    java.util.Queue mRemovedViewQueue -> k
+    android.widget.AdapterView$OnItemSelectedListener mOnItemSelected -> l
+    android.widget.AdapterView$OnItemClickListener mOnItemClicked -> m
+    boolean mDataChanged -> n
+    android.database.DataSetObserver mDataObserver -> o
+    android.view.GestureDetector$OnGestureListener mOnGesture -> p
+    void initView() -> b
+    void setOnItemSelectedListener(android.widget.AdapterView$OnItemSelectedListener) -> setOnItemSelectedListener
+    void setOnItemClickListener(android.widget.AdapterView$OnItemClickListener) -> setOnItemClickListener
+    android.view.View getSelectedView() -> getSelectedView
+    void setAdapter(android.widget.ListAdapter) -> a
+    void reset() -> c
+    void setSelection(int) -> setSelection
+    void addAndMeasureChild(android.view.View,int) -> a
+    void onLayout(boolean,int,int,int,int) -> onLayout
+    boolean dispatchTouchEvent(android.view.MotionEvent) -> dispatchTouchEvent
+    boolean onFling$503634dd(float) -> a
+    boolean onDown$53fcfd4e() -> a
+    android.widget.Adapter getAdapter() -> getAdapter
+    void setAdapter(android.widget.Adapter) -> setAdapter
+    void access$2$34f965f8(com.devsmart.android.ui.HorizontialListView) -> a
+    void access$3(com.devsmart.android.ui.HorizontialListView) -> b
+    android.widget.AdapterView$OnItemClickListener access$4(com.devsmart.android.ui.HorizontialListView) -> c
+    int access$5(com.devsmart.android.ui.HorizontialListView) -> d
+    android.widget.AdapterView$OnItemSelectedListener access$6(com.devsmart.android.ui.HorizontialListView) -> e
+com.devsmart.android.ui.HorizontialListView$1 -> com.devsmart.android.ui.c:
+    com.devsmart.android.ui.HorizontialListView this$0 -> a
+    void onChanged() -> onChanged
+    void onInvalidated() -> onInvalidated
+com.devsmart.android.ui.HorizontialListView$2 -> com.devsmart.android.ui.b:
+    com.devsmart.android.ui.HorizontialListView this$0 -> a
+    boolean onDown(android.view.MotionEvent) -> onDown
+    boolean onFling(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onFling
+    boolean onScroll(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onScroll
+    boolean onSingleTapConfirmed(android.view.MotionEvent) -> onSingleTapConfirmed
+com.devsmart.android.ui.HorizontialListView$3 -> com.devsmart.android.ui.a:
+    com.devsmart.android.ui.HorizontialListView this$0 -> a
+    void run() -> run
+com.embedstudios.candycat.CandyAdvertisement -> com.embedstudios.candycat.k:
     android.app.Activity activity -> b
     int advertisementId -> c
     android.os.Handler adsHandler -> a
@@ -849,90 +898,130 @@ com.embedstudios.candycat.CandyAdvertisement -> com.embedstudios.candycat.h:
     android.view.animation.Animation out -> f
     java.lang.String TAG -> g
     void access$1(com.embedstudios.candycat.CandyAdvertisement) -> a
-com.embedstudios.candycat.CandyAdvertisement$ShowAdsRunnable -> com.embedstudios.candycat.i:
+com.embedstudios.candycat.CandyAdvertisement$ShowAdsRunnable -> com.embedstudios.candycat.l:
     com.embedstudios.candycat.CandyAdvertisement this$0 -> a
     void run() -> run
-com.embedstudios.candycat.CandyAnimatedSprite -> com.embedstudios.candycat.g:
-    boolean stable -> a
-    int index -> b
-    int type -> c
-    boolean gravityIsOn -> d
-    int candyLastMove -> e
-    int candyRotationState -> f
-    int lastDirectionalMove -> g
-    boolean hasModifier -> h
-    int SPEED -> i
-    long[] frameArray -> j
+com.embedstudios.candycat.CandyAnimatedSprite -> com.embedstudios.candycat.j:
+    int index -> a
+    int type -> d
+    org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer tmxLayer -> e
+    int[][] objectArray -> f
+    int[][] backgroundArray -> g
+    int candyLastMove -> h
+    int candyRotationState -> i
+    int lastDirectionalMove -> j
+    boolean hasModifier -> b
+    boolean blowUp -> c
+    long[] catDurations -> k
+    int[] catFrames -> l
+    int SPEED -> m
+    long[] frameArray -> n
+    int initialRow -> o
+    int initialColumn -> p
     boolean move(int,int,int[][]) -> a
     void onPathStarted(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity) -> onPathStarted
     void onPathWaypointStarted(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity,int) -> onPathWaypointStarted
     void onPathWaypointFinished(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity,int) -> onPathWaypointFinished
     void onPathFinished(org.anddev.andengine.entity.modifier.PathModifier,org.anddev.andengine.entity.IEntity) -> onPathFinished
-    boolean moveRight(int[][]) -> a
-    boolean moveLeft(int[][]) -> b
-    boolean moveUp(int[][]) -> c
-    boolean moveDown(int[][]) -> d
-com.embedstudios.candycat.CandyEngine -> com.embedstudios.candycat.f:
+    boolean moveRight() -> a
+    boolean moveLeft() -> b
+    boolean moveUp() -> c
+    boolean moveDown() -> d
+    boolean fall(int) -> a
+    void showCandyAnim() -> e
+    void showBombAnim() -> f
+    void reset() -> reset
+    org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer access$0(com.embedstudios.candycat.CandyAnimatedSprite) -> a
+    int[][] access$1(com.embedstudios.candycat.CandyAnimatedSprite) -> b
+    int[][] access$2(com.embedstudios.candycat.CandyAnimatedSprite) -> c
+com.embedstudios.candycat.CandyAnimatedSprite$1 -> com.embedstudios.candycat.h:
+    com.embedstudios.candycat.CandyAnimatedSprite this$0 -> a
+    void onAnimationEnd(org.anddev.andengine.entity.sprite.AnimatedSprite) -> onAnimationEnd
+com.embedstudios.candycat.CandyEngine -> com.embedstudios.candycat.i:
     java.util.ArrayList spriteList -> b
-    int[][] objectArray -> c
-    int[][] backgroundArray -> d
+    java.util.ArrayList enemyList -> c
+    java.util.ArrayList gravityList -> d
+    int[][] objectArray -> e
+    int[][] backgroundArray -> f
+    int[][] originalBackgroundArray -> g
     com.embedstudios.candycat.CandyAnimatedSprite cat -> a
+    com.embedstudios.candycat.CandyAnimatedSprite candy -> h
+    int catIndex -> i
+    int candyIndex -> j
+    com.embedstudios.candycat.CandyLevel candyLevel -> k
+    boolean win -> l
+    boolean death -> m
     void left() -> a
     void right() -> b
     void up() -> c
     void down() -> d
+    void settle() -> f
+    int getObjectLeft(int) -> a
+    int getObjectRight(int) -> b
+    int getObjectTop(int) -> c
+    int getObjectBottom(int) -> d
+    int getObjectBottom(int,int) -> a
+    int getObject(int,int,int,int) -> a
+    int getBackgroundLeft(int) -> e
+    int getBackgroundRight(int) -> f
+    int getBackgroundTop(int) -> g
+    int getBackgroundBottom(int) -> h
+    int getBackgroundBottom(int,int) -> b
+    int getBackground(int,int,int,int) -> b
+    void logArray$552c4e01() -> g
+    void pause$13462e() -> h
+    void resetLevel() -> e
 com.embedstudios.candycat.CandyLevel -> com.embedstudios.candycat.CandyLevel:
-    float PHONE_WIDTH -> e
+    float WIDTH -> g
+    float HEIGHT -> h
+    float PHONE_WIDTH -> i
     float PHONE_HEIGHT -> a
-    int level -> f
-    int world -> g
-    java.util.ArrayList objectList -> h
-    java.util.ArrayList tutorialList -> i
-    java.util.ArrayList spriteList -> j
-    int[][] backgroundArray -> k
-    int[][] objectArray -> l
-    org.anddev.andengine.entity.scene.Scene mScene -> m
-    org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap mTMXTiledMap -> n
-    org.anddev.andengine.engine.camera.SmoothCamera mSmoothCamera -> b
-    org.anddev.andengine.engine.camera.hud.HUD hud -> o
-    org.anddev.andengine.opengl.texture.Texture mObjectTexture -> p
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion candyTTR -> q
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion catTTR -> r
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion boxTTR -> s
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion bombTTR -> t
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion enemyTTR -> u
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion movableWallTTR -> v
-    org.anddev.andengine.opengl.texture.region.TiledTextureRegion inertiaWallTTR -> w
-    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer candyRVB -> x
-    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer catRVB -> y
-    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer boxRVB -> z
-    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer bombRVB -> A
-    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer enemyRVB -> B
-    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer movableWallRVB -> C
-    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer inertiaWallRVB -> D
-    org.anddev.andengine.opengl.texture.Texture mFontTexture -> E
-    org.anddev.andengine.opengl.font.Font andengine_komika -> F
-    org.anddev.andengine.input.touch.detector.SurfaceScrollDetector mScrollDetector -> G
-    org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector mPinchZoomDetector -> H
-    float mPinchZoomStartedCameraZoomFactor -> I
-    android.graphics.Typeface komika -> J
-    android.widget.TextView loading_tv -> K
-    android.widget.ImageView loading_iv -> L
-    android.widget.RelativeLayout loading_rl_level -> M
-    com.embedstudios.candycat.LoadTask loadTask -> N
-    com.embedstudios.candycat.CandyEngine candyEngine -> c
-    java.lang.String play -> O
-    java.lang.String pan -> P
-    boolean playMode -> Q
-    boolean gameStarted -> d
-    org.anddev.andengine.entity.text.ChangeableText playCT -> R
+    int level -> j
+    int world -> k
+    java.util.ArrayList objectList -> l
+    java.util.ArrayList tutorialList -> m
+    java.util.ArrayList spriteList -> n
+    int[][] backgroundArray -> o
+    org.anddev.andengine.opengl.texture.region.TextureRegion[][] trArray -> b
+    int[][] objectArray -> p
+    org.anddev.andengine.entity.scene.Scene mScene -> q
+    org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap mTMXTiledMap -> r
+    org.anddev.andengine.engine.camera.SmoothCamera mSmoothCamera -> c
+    org.anddev.andengine.engine.camera.hud.HUD hud -> s
+    org.anddev.andengine.opengl.texture.Texture mObjectTexture -> t
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion candyTTR -> u
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion catTTR -> v
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion boxTTR -> w
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion bombTTR -> x
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion enemyTTR -> y
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion movableWallTTR -> z
+    org.anddev.andengine.opengl.texture.region.TiledTextureRegion inertiaWallTTR -> A
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer candyRVB -> B
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer catRVB -> C
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer boxRVB -> D
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer enemyRVB -> E
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer movableWallRVB -> F
+    org.anddev.andengine.opengl.vertex.RectangleVertexBuffer inertiaWallRVB -> G
+    org.anddev.andengine.opengl.texture.Texture mFontTexture -> H
+    org.anddev.andengine.opengl.font.Font andengine_komika -> I
+    org.anddev.andengine.input.touch.detector.SurfaceScrollDetector mScrollDetector -> J
+    org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector mPinchZoomDetector -> K
+    float mPinchZoomStartedCameraZoomFactor -> L
+    android.graphics.Typeface komika -> M
+    com.embedstudios.candycat.CandyEngine candyEngine -> d
+    org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer tmxLayer -> e
+    java.lang.String play -> N
+    java.lang.String pan -> O
+    boolean playMode -> P
+    boolean gameStarted -> f
+    org.anddev.andengine.entity.text.ChangeableText playCT -> Q
+    org.anddev.andengine.entity.text.Text resetT -> R
     float dragX -> S
     float dragY -> T
-    float THRESHOLD -> U
+    float DRAG_DISTANCE_THRESHOLD -> U
     long time -> V
     boolean tapOptionEnabled -> W
     void onCreate(android.os.Bundle) -> onCreate
-    void onWindowFocusChanged(boolean) -> onWindowFocusChanged
     org.anddev.andengine.engine.Engine onLoadEngine() -> onLoadEngine
     void onLoadResources() -> onLoadResources
     org.anddev.andengine.entity.scene.Scene onLoadScene() -> onLoadScene
@@ -951,29 +1040,34 @@ com.embedstudios.candycat.CandyLevel -> com.embedstudios.candycat.CandyLevel:
     java.lang.String access$1(com.embedstudios.candycat.CandyLevel) -> b
     void access$2(com.embedstudios.candycat.CandyLevel,boolean) -> a
     java.lang.String access$3(com.embedstudios.candycat.CandyLevel) -> c
-com.embedstudios.candycat.CandyLevel$1 -> com.embedstudios.candycat.a:
+    java.util.ArrayList access$4(com.embedstudios.candycat.CandyLevel) -> d
+com.embedstudios.candycat.CandyLevel$1 -> com.embedstudios.candycat.b:
     com.embedstudios.candycat.CandyLevel this$0 -> a
     boolean onAreaTouched(org.anddev.andengine.input.touch.TouchEvent,float,float) -> onAreaTouched
-com.embedstudios.candycat.CandyLevel$2 -> com.embedstudios.candycat.b:
+com.embedstudios.candycat.CandyLevel$2 -> com.embedstudios.candycat.c:
+    com.embedstudios.candycat.CandyLevel this$0 -> a
+    boolean onAreaTouched(org.anddev.andengine.input.touch.TouchEvent,float,float) -> onAreaTouched
+com.embedstudios.candycat.CandyLevel$3 -> com.embedstudios.candycat.d:
     com.embedstudios.candycat.CandyLevel this$0 -> a
     org.anddev.andengine.entity.text.ChangeableText val$fpsText -> b
     org.anddev.andengine.entity.util.FPSCounter val$fpsCounter -> c
     void onTimePassed(org.anddev.andengine.engine.handler.timer.TimerHandler) -> onTimePassed
-com.embedstudios.candycat.CandyUtils -> com.embedstudios.candycat.j:
-    void setKomika(android.graphics.Typeface,android.widget.TextView[]) -> a
-com.embedstudios.candycat.DitheredSprite -> com.embedstudios.candycat.d:
+com.embedstudios.candycat.CandyLevel$4 -> com.embedstudios.candycat.e:
+    com.embedstudios.candycat.CandyLevel this$0 -> a
+    void run() -> run
+com.embedstudios.candycat.DitheredSprite -> com.embedstudios.candycat.g:
     void onInitDraw(javax.microedition.khronos.opengles.GL10) -> onInitDraw
-com.embedstudios.candycat.LoadTask -> com.embedstudios.candycat.e:
-    boolean running -> a
-    android.widget.RelativeLayout rl -> b
-    android.widget.ImageView iv -> c
-    com.embedstudios.candycat.CandyLevel candyLevel -> d
-    java.util.ArrayList tutorialList -> e
-    java.lang.Void doInBackground$10299ca() -> a
-    void pause(int) -> a
-    void onPostExecute(java.lang.Object) -> onPostExecute
-    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-    void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
+com.embedstudios.candycat.HorizontalListViewDemo -> com.embedstudios.candycat.HorizontalListViewDemo:
+    java.lang.String[] dataObjects -> a
+    android.widget.BaseAdapter mAdapter -> b
+    void onCreate(android.os.Bundle) -> onCreate
+    java.lang.String[] access$0() -> a
+com.embedstudios.candycat.HorizontalListViewDemo$1 -> com.embedstudios.candycat.a:
+    com.embedstudios.candycat.HorizontalListViewDemo this$0 -> a
+    int getCount() -> getCount
+    java.lang.Object getItem(int) -> getItem
+    long getItemId(int) -> getItemId
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
 com.embedstudios.candycat.MainMenu -> com.embedstudios.candycat.MainMenu:
     android.widget.ViewFlipper enclosing_vf -> a
     android.widget.TextView mainmenu_tv -> b
@@ -1011,7 +1105,7 @@ com.embedstudios.candycat.MainMenu -> com.embedstudios.candycat.MainMenu:
     int getLayoutID() -> getLayoutID
     int getRenderSurfaceViewID() -> getRenderSurfaceViewID
     void onDestroy() -> onDestroy
-com.embedstudios.candycat.SplashTask -> com.embedstudios.candycat.c:
+com.embedstudios.candycat.SplashTask -> com.embedstudios.candycat.f:
     boolean running -> a
     android.widget.ViewFlipper vf -> b
     com.embedstudios.candycat.MainMenu mainMenu -> c
@@ -3557,6 +3651,7 @@ com.scoreloop.client.android.ui.R$dimen -> com.scoreloop.client.android.ui.R$dim
     int sl_margin_shortcut -> sl_margin_shortcut
     int sl_margin_small -> sl_margin_small
 com.scoreloop.client.android.ui.R$drawable -> com.scoreloop.client.android.ui.R$drawable:
+    int background -> background
     int background_linear -> background_linear
     int button -> button
     int button_normal -> button_normal
@@ -3691,9 +3786,8 @@ com.scoreloop.client.android.ui.R$id -> com.scoreloop.client.android.ui.R$id:
     int facebook_checkbox -> facebook_checkbox
     int game_ad -> game_ad
     int icon -> icon
-    int loading_iv_level -> loading_iv_level
-    int loading_rl_level -> loading_rl_level
-    int loading_tv_level -> loading_tv_level
+    int image -> image
+    int listview -> listview
     int logo_iv -> logo_iv
     int logo_rl -> logo_rl
     int mainmenu_rl -> mainmenu_rl
@@ -3792,9 +3886,11 @@ com.scoreloop.client.android.ui.R$id -> com.scoreloop.client.android.ui.R$id:
     int stake -> stake
     int stake_selector -> stake_selector
     int stake_text -> stake_text
+    int title -> title
     int twitter_checkbox -> twitter_checkbox
 com.scoreloop.client.android.ui.R$layout -> com.scoreloop.client.android.ui.R$layout:
     int level -> level
+    int listviewdemo -> listviewdemo
     int main -> main
     int sl_challenge_payment -> sl_challenge_payment
     int sl_dialog_custom -> sl_dialog_custom
@@ -3840,6 +3936,7 @@ com.scoreloop.client.android.ui.R$layout -> com.scoreloop.client.android.ui.R$la
     int sl_tab_caption -> sl_tab_caption
     int sl_tab_shortcut -> sl_tab_shortcut
     int sl_tabs -> sl_tabs
+    int viewitem -> viewitem
 com.scoreloop.client.android.ui.R$menu -> com.scoreloop.client.android.ui.R$menu:
     int sl_options_menu -> sl_options_menu
 com.scoreloop.client.android.ui.R$string -> com.scoreloop.client.android.ui.R$string:
@@ -3849,6 +3946,7 @@ com.scoreloop.client.android.ui.R$string -> com.scoreloop.client.android.ui.R$st
     int loading -> loading
     int pan -> pan
     int play -> play
+    int reset -> reset
     int sl_abuse_report_sent -> sl_abuse_report_sent
     int sl_abuse_report_title -> sl_abuse_report_title
     int sl_accept_challenge -> sl_accept_challenge
@@ -6283,6 +6381,7 @@ org.anddev.andengine.R$dimen -> org.anddev.andengine.R$dimen:
     int sl_margin_shortcut -> sl_margin_shortcut
     int sl_margin_small -> sl_margin_small
 org.anddev.andengine.R$drawable -> org.anddev.andengine.R$drawable:
+    int background -> background
     int background_linear -> background_linear
     int button -> button
     int button_normal -> button_normal
@@ -6417,9 +6516,8 @@ org.anddev.andengine.R$id -> org.anddev.andengine.R$id:
     int facebook_checkbox -> facebook_checkbox
     int game_ad -> game_ad
     int icon -> icon
-    int loading_iv_level -> loading_iv_level
-    int loading_rl_level -> loading_rl_level
-    int loading_tv_level -> loading_tv_level
+    int image -> image
+    int listview -> listview
     int logo_iv -> logo_iv
     int logo_rl -> logo_rl
     int mainmenu_rl -> mainmenu_rl
@@ -6518,9 +6616,11 @@ org.anddev.andengine.R$id -> org.anddev.andengine.R$id:
     int stake -> stake
     int stake_selector -> stake_selector
     int stake_text -> stake_text
+    int title -> title
     int twitter_checkbox -> twitter_checkbox
 org.anddev.andengine.R$layout -> org.anddev.andengine.R$layout:
     int level -> level
+    int listviewdemo -> listviewdemo
     int main -> main
     int sl_challenge_payment -> sl_challenge_payment
     int sl_dialog_custom -> sl_dialog_custom
@@ -6566,6 +6666,7 @@ org.anddev.andengine.R$layout -> org.anddev.andengine.R$layout:
     int sl_tab_caption -> sl_tab_caption
     int sl_tab_shortcut -> sl_tab_shortcut
     int sl_tabs -> sl_tabs
+    int viewitem -> viewitem
 org.anddev.andengine.R$menu -> org.anddev.andengine.R$menu:
     int sl_options_menu -> sl_options_menu
 org.anddev.andengine.R$string -> org.anddev.andengine.R$string:
@@ -6575,6 +6676,7 @@ org.anddev.andengine.R$string -> org.anddev.andengine.R$string:
     int loading -> loading
     int pan -> pan
     int play -> play
+    int reset -> reset
     int sl_abuse_report_sent -> sl_abuse_report_sent
     int sl_abuse_report_title -> sl_abuse_report_title
     int sl_accept_challenge -> sl_accept_challenge

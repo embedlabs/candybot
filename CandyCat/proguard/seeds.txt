@@ -4579,6 +4579,7 @@ org.anddev.andengine.extension.input.touch.exception.MultiTouchException: long s
 org.anddev.andengine.extension.input.touch.exception.MultiTouchException: MultiTouchException()
 org.anddev.andengine.R$layout
 org.anddev.andengine.R$layout: int level
+org.anddev.andengine.R$layout: int listviewdemo
 org.anddev.andengine.R$layout: int main
 org.anddev.andengine.R$layout: int sl_challenge_payment
 org.anddev.andengine.R$layout: int sl_dialog_custom
@@ -4624,6 +4625,7 @@ org.anddev.andengine.R$layout: int sl_spinner_view
 org.anddev.andengine.R$layout: int sl_tab_caption
 org.anddev.andengine.R$layout: int sl_tab_shortcut
 org.anddev.andengine.R$layout: int sl_tabs
+org.anddev.andengine.R$layout: int viewitem
 org.anddev.andengine.R$layout: R$layout()
 org.anddev.andengine.util.modifier.ease.EaseLinear
 org.anddev.andengine.util.modifier.ease.EaseLinear: org.anddev.andengine.util.modifier.ease.EaseLinear INSTANCE
@@ -6414,9 +6416,8 @@ org.anddev.andengine.R$id: int enclosing_vf
 org.anddev.andengine.R$id: int facebook_checkbox
 org.anddev.andengine.R$id: int game_ad
 org.anddev.andengine.R$id: int icon
-org.anddev.andengine.R$id: int loading_iv_level
-org.anddev.andengine.R$id: int loading_rl_level
-org.anddev.andengine.R$id: int loading_tv_level
+org.anddev.andengine.R$id: int image
+org.anddev.andengine.R$id: int listview
 org.anddev.andengine.R$id: int logo_iv
 org.anddev.andengine.R$id: int logo_rl
 org.anddev.andengine.R$id: int mainmenu_rl
@@ -6515,6 +6516,7 @@ org.anddev.andengine.R$id: int sl_webview
 org.anddev.andengine.R$id: int stake
 org.anddev.andengine.R$id: int stake_selector
 org.anddev.andengine.R$id: int stake_text
+org.anddev.andengine.R$id: int title
 org.anddev.andengine.R$id: int twitter_checkbox
 org.anddev.andengine.R$id: R$id()
 org.anddev.andengine.engine.LimitedFPSEngine
@@ -7383,6 +7385,7 @@ org.anddev.andengine.R$string: int facebook_link
 org.anddev.andengine.R$string: int loading
 org.anddev.andengine.R$string: int pan
 org.anddev.andengine.R$string: int play
+org.anddev.andengine.R$string: int reset
 org.anddev.andengine.R$string: int sl_abuse_report_sent
 org.anddev.andengine.R$string: int sl_abuse_report_title
 org.anddev.andengine.R$string: int sl_accept_challenge
@@ -12529,6 +12532,7 @@ org.anddev.andengine.opengl.texture.Texture: void deleteTextureOnHardware(javax.
 org.anddev.andengine.opengl.texture.Texture: int generateHardwareTextureID(javax.microedition.khronos.opengles.GL10)
 org.anddev.andengine.opengl.texture.Texture: void sendPlaceholderBitmapToHardware(int,int)
 org.anddev.andengine.R$drawable
+org.anddev.andengine.R$drawable: int background
 org.anddev.andengine.R$drawable: int background_linear
 org.anddev.andengine.R$drawable: int button
 org.anddev.andengine.R$drawable: int button_normal
@@ -17383,6 +17387,7 @@ com.scoreloop.client.android.ui.R$string: int facebook_link
 com.scoreloop.client.android.ui.R$string: int loading
 com.scoreloop.client.android.ui.R$string: int pan
 com.scoreloop.client.android.ui.R$string: int play
+com.scoreloop.client.android.ui.R$string: int reset
 com.scoreloop.client.android.ui.R$string: int sl_abuse_report_sent
 com.scoreloop.client.android.ui.R$string: int sl_abuse_report_title
 com.scoreloop.client.android.ui.R$string: int sl_accept_challenge
@@ -17570,6 +17575,7 @@ com.scoreloop.client.android.ui.component.base.Manager: void submitLocalScores(j
 com.scoreloop.client.android.ui.component.base.Manager: void persistSessionUserName()
 com.scoreloop.client.android.ui.R$layout
 com.scoreloop.client.android.ui.R$layout: int level
+com.scoreloop.client.android.ui.R$layout: int listviewdemo
 com.scoreloop.client.android.ui.R$layout: int main
 com.scoreloop.client.android.ui.R$layout: int sl_challenge_payment
 com.scoreloop.client.android.ui.R$layout: int sl_dialog_custom
@@ -17615,6 +17621,7 @@ com.scoreloop.client.android.ui.R$layout: int sl_spinner_view
 com.scoreloop.client.android.ui.R$layout: int sl_tab_caption
 com.scoreloop.client.android.ui.R$layout: int sl_tab_shortcut
 com.scoreloop.client.android.ui.R$layout: int sl_tabs
+com.scoreloop.client.android.ui.R$layout: int viewitem
 com.scoreloop.client.android.ui.R$layout: R$layout()
 com.scoreloop.client.android.core.model.User$Gender
 com.scoreloop.client.android.core.model.User$Gender: com.scoreloop.client.android.core.model.User$Gender FEMALE
@@ -18613,9 +18620,8 @@ com.scoreloop.client.android.ui.R$id: int enclosing_vf
 com.scoreloop.client.android.ui.R$id: int facebook_checkbox
 com.scoreloop.client.android.ui.R$id: int game_ad
 com.scoreloop.client.android.ui.R$id: int icon
-com.scoreloop.client.android.ui.R$id: int loading_iv_level
-com.scoreloop.client.android.ui.R$id: int loading_rl_level
-com.scoreloop.client.android.ui.R$id: int loading_tv_level
+com.scoreloop.client.android.ui.R$id: int image
+com.scoreloop.client.android.ui.R$id: int listview
 com.scoreloop.client.android.ui.R$id: int logo_iv
 com.scoreloop.client.android.ui.R$id: int logo_rl
 com.scoreloop.client.android.ui.R$id: int mainmenu_rl
@@ -18714,6 +18720,7 @@ com.scoreloop.client.android.ui.R$id: int sl_webview
 com.scoreloop.client.android.ui.R$id: int stake
 com.scoreloop.client.android.ui.R$id: int stake_selector
 com.scoreloop.client.android.ui.R$id: int stake_text
+com.scoreloop.client.android.ui.R$id: int title
 com.scoreloop.client.android.ui.R$id: int twitter_checkbox
 com.scoreloop.client.android.ui.R$id: R$id()
 com.scoreloop.client.android.core.util.Logger
@@ -20464,6 +20471,7 @@ com.scoreloop.client.android.core.model.BaseEntity: org.json.JSONObject d()
 com.scoreloop.client.android.core.model.BaseEntity: java.lang.String toString()
 com.scoreloop.client.android.core.model.BaseEntity: void a(org.json.JSONObject)
 com.scoreloop.client.android.ui.R$drawable
+com.scoreloop.client.android.ui.R$drawable: int background
 com.scoreloop.client.android.ui.R$drawable: int background_linear
 com.scoreloop.client.android.ui.R$drawable: int button
 com.scoreloop.client.android.ui.R$drawable: int button_normal
@@ -26434,6 +26442,8 @@ com.scoreloop.client.android.ui.framework.SegmentedView: SegmentedView(android.c
 org.anddev.andengine.opengl.view.RenderSurfaceView
 org.anddev.andengine.opengl.view.RenderSurfaceView: RenderSurfaceView(android.content.Context,android.util.AttributeSet)
 org.anddev.andengine.opengl.view.GLSurfaceView: GLSurfaceView(android.content.Context,android.util.AttributeSet)
+com.devsmart.android.ui.HorizontialListView
+com.devsmart.android.ui.HorizontialListView: HorizontialListView(android.content.Context,android.util.AttributeSet)
 com.google.ads.AdView
 com.google.ads.AdView: AdView(android.content.Context,android.util.AttributeSet,int)
 com.badlogic.gdx.physics.box2d.Shape$Type: com.badlogic.gdx.physics.box2d.Shape$Type[] values()
@@ -26574,6 +26584,7 @@ com.scoreloop.client.android.ui.component.user.UserDetailListActivity
 com.scoreloop.client.android.ui.component.entry.EntryListActivity
 com.scoreloop.client.android.ui.component.post.PostOverlayActivity
 com.scoreloop.client.android.ui.PostScoreOverlayActivity
+com.embedstudios.candycat.HorizontalListViewDemo
 com.scoreloop.client.android.core.spi.BaseAuthActivity
 com.scoreloop.client.android.ui.framework.ScreenActivity
 com.scoreloop.client.android.ui.BuddiesScreenActivity

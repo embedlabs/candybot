@@ -194,6 +194,9 @@ public class CandyEngine {
 		if (win&&!death) {
 			logArray("End array:");
 			// TODO
+		} else if (death) {
+			// TODO
+			resetLevel();
 		} else {
 			candyLevel.gameStarted=true;
 		}
