@@ -117,6 +117,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private String play,pan;
 	private boolean playMode=true;
 	public boolean gameStarted=false;
+	private boolean resumeHasRun=false;
+	
 	private ChangeableText playCT;
 	private Text resetT;
 	
@@ -383,22 +385,30 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 //		loadTask = new LoadTask(this,loading_rl_level,loading_iv,tutorialList);
 //		loadTask.execute();
-
-		new Handler().post(new Runnable(){
-			@Override
-			public void run() {
-				mSmoothCamera.setMaxZoomFactorChange((1-PHONE_HEIGHT/HEIGHT));
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					Log.e(TAG,"Level start delay FAIL!",e);
+	}
+	
+	@Override
+	public void onResumeGame() {
+		Log.v(TAG,"CandyLevel onResumeGame()");
+		
+		if (!resumeHasRun) {
+			resumeHasRun=true;
+			new Handler().post(new Runnable(){
+				@Override
+				public void run() {
+					mSmoothCamera.setMaxZoomFactorChange((1-PHONE_HEIGHT/HEIGHT));
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						Log.e(TAG,"Level start delay FAIL!",e);
+					}
+					mSmoothCamera.setChaseEntity(candyEngine.cat);
+					mSmoothCamera.setZoomFactor(1);
+					gameStarted=true;
+					addTutorialText(tutorialList);
 				}
-				mSmoothCamera.setChaseEntity(candyEngine.cat);
-				mSmoothCamera.setZoomFactor(1);
-				gameStarted=true;
-				addTutorialText(tutorialList);
-			}
-		});
+			});
+		}
 	}
 
 	@Override

@@ -79,7 +79,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 					getY() + (rowDelta * 64)), this, EaseLinear.getInstance()));
 			objectArray[index][1] += rowDelta;
 			objectArray[index][2] += columnDelta;
-			Log.v(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
+			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
 			return true;
 		} else {
 			return false;
