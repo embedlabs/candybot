@@ -74,13 +74,13 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	private SplashTask splashTask;	
 	
-	@Override
-	public void onWindowFocusChanged(final boolean hasFocus)  {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			button_play.requestFocus();
-		}
-	}
+//	@Override
+//	public void onWindowFocusChanged(final boolean hasFocus)  {
+//		super.onWindowFocusChanged(hasFocus);
+//		if (hasFocus) {
+//			button_play.requestFocus();
+//		}
+//	}
 	
 	@Override
 	public void onClick(View view) {
