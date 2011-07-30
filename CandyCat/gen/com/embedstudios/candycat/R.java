@@ -357,6 +357,7 @@ public final class R {
         public static final int loading=0x7f0600a1;
         public static final int pan=0x7f0600a6;
         public static final int play=0x7f0600a5;
+        public static final int reset=0x7f0600a7;
         public static final int sl_abuse_report_sent=0x7f060000;
         public static final int sl_abuse_report_title=0x7f060001;
         public static final int sl_accept_challenge=0x7f060002;

@@ -24,6 +24,7 @@ import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.text.ChangeableText;
+import org.anddev.andengine.entity.text.Text;
 import org.anddev.andengine.entity.util.FPSCounter;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
@@ -37,6 +38,7 @@ import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
+import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
@@ -84,6 +86,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private final ArrayList<String> tutorialList = new ArrayList<String>(); // list of all tutorial text
 	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
 	private int[][] backgroundArray = new int[18][24]; // holds tmx array
+	public TextureRegion[][] trArray = new TextureRegion[18][24];
 	private int[][] objectArray; // stores locations and types of all objects, correlates to spriteList
 	
 	private Scene mScene;
@@ -112,17 +115,18 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private LoadTask loadTask;
 	
 	public CandyEngine candyEngine;
-	private TMXLayer tmxLayer;
+	public TMXLayer tmxLayer;
 	
 	private String play,pan;
 	private boolean playMode=true;
 	public boolean gameStarted=false;
 	private ChangeableText playCT;
+	private Text resetT;
 	
 	private float dragX,dragY;
-	private static float DRAG_DISTANCE_THRESHOLD = 50;
-	private static final int CAMERA_SPEED = 200;
-	private static final long TAP_THRESHOLD = 250;
+	public static float DRAG_DISTANCE_THRESHOLD = 50;
+	public static final int CAMERA_SPEED = 200;
+	public static final long TAP_THRESHOLD = 250;
 	private long time;
 	private boolean tapOptionEnabled = false;
 	
@@ -271,17 +275,16 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		final FPSCounter fpsCounter = new FPSCounter();
 		mEngine.registerUpdateHandler(fpsCounter);
-		final ChangeableText fpsText = new ChangeableText(PHONE_WIDTH,10, andengine_komika, "FPS: 00.00", "FPS: XXXXX".length());
-		fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10, 10);
+		final ChangeableText fpsText = new ChangeableText(PHONE_WIDTH,PHONE_HEIGHT, andengine_komika, "FPS: 00.00", "FPS: XXXXX".length());
+		fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10, PHONE_HEIGHT-fpsText.getHeight()-10);
 		hud.attachChild(fpsText);
 		
-		playCT = new ChangeableText(10, 10, andengine_komika,playMode?play:pan,Math.max(play.length(),pan.length())) {
+		playCT = new ChangeableText(PHONE_WIDTH,10, andengine_komika,playMode?play:pan,Math.max(play.length(),pan.length())) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_UP&&gameStarted) {
 					if (!playMode) {
 						setText(play);
-//						mSmoothCamera.setMaxVelocity(CAMERA_SPEED*3,CAMERA_SPEED*3);
 						mSmoothCamera.setChaseEntity(candyEngine.cat);
 						playMode=true;
 					} else {
@@ -295,8 +298,21 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 				return true;
 			}
 		};
+		playCT.setPosition(PHONE_WIDTH-playCT.getWidth()-10,10);
 		hud.attachChild(playCT);
 		hud.registerTouchArea(playCT);
+		
+		resetT = new Text(10,10,andengine_komika,getString(R.string.reset)){
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
+				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_UP&&gameStarted) {
+					candyEngine.resetLevel();
+				}
+				return true;
+			}
+		};
+		hud.attachChild(resetT);
+		hud.registerTouchArea(resetT);
 		
 		mSmoothCamera.setHUD(hud);
 		
@@ -375,8 +391,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 
 	@Override
 	public void onTMXTileWithPropertiesCreated(final TMXTiledMap pTMXTiledMap,final TMXLayer pTMXLayer,final TMXTile pTMXTile,final TMXProperties<TMXTileProperty> pTMXTileProperties) {
-		backgroundArray[pTMXTile.getTileRow()][pTMXTile.getTileColumn()]=pTMXTile.getGlobalTileID();
+		final int row = pTMXTile.getTileRow();
+		final int column = pTMXTile.getTileColumn();
+		backgroundArray[row][column]=pTMXTile.getGlobalTileID();
 		// keeps track of the background tiles
+		
+		trArray[row][column]=pTMXTile.getTextureRegion();
 	}
 
 	@Override

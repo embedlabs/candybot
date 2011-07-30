@@ -30,6 +30,7 @@ public class CandyEngine {
 
 	private final int[][] objectArray;
 	private final int[][] backgroundArray;
+	private final int[][] originalBackgroundArray;
 
 	CandyAnimatedSprite cat,candy;
 	int catIndex = -1;
@@ -40,6 +41,7 @@ public class CandyEngine {
 	private final CandyLevel candyLevel;
 	
 	public boolean win = false;
+	public boolean death = false;
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevel candyLevel) {
 		this.spriteList = spriteList;
@@ -47,6 +49,14 @@ public class CandyEngine {
 		this.backgroundArray = backgroundArray;
 		this.candyLevel = candyLevel;
 
+		
+		originalBackgroundArray = new int[18][24];
+		for (int i=0;i<18;i++) {
+			for (int j=0;j<24;j++) {
+				originalBackgroundArray[i][j]=backgroundArray[i][j];
+			}
+		}
+		
 		for (int i=0;i<objectArray.length;i++) {
 			final int type = objectArray[i][0];
 			if (type==CandyLevel.ENEMY) {
@@ -84,6 +94,7 @@ public class CandyEngine {
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else { // Otherwise, if it's an enemy,
 				// TODO enemy
+				death = true;
 			}
 		}
 		settle();
@@ -106,6 +117,7 @@ public class CandyEngine {
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else { // Otherwise, if it's an enemy,
 				// TODO enemy
+				death = true;
 			}
 		}
 		settle();
@@ -128,6 +140,7 @@ public class CandyEngine {
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
 				// TODO enemy
+				death = true;
 			}
 		}
 		settle();
@@ -150,6 +163,7 @@ public class CandyEngine {
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
 				// TODO enemy
+				death = true;
 			}
 		}
 		settle();
@@ -177,7 +191,7 @@ public class CandyEngine {
 		}
 		Log.v(TAG,"Settled.");
 		
-		if (win) {
+		if (win&&!death) {
 			logArray("End array:");
 			// TODO
 		} else {
@@ -306,5 +320,36 @@ public class CandyEngine {
 		} catch (InterruptedException e) {
 			Log.e(TAG,"Thread.sleep() failed.",e);
 		}
+	}
+	
+	public synchronized void resetLevel() {
+		Log.i(TAG,"CandyEngine reset.");
+		candyLevel.gameStarted = false;
+		
+		/**
+		 * RESET SPRITES
+		 */
+		for (CandyAnimatedSprite cas:spriteList) {
+			cas.reset();
+		}
+		
+		/**
+		 * RESET BACKGROUND
+		 */
+		for (int row=0;row<18;row++) {
+			for (int column=0;column<24;column++) {
+				candyLevel.tmxLayer.getTMXTile(column,row).setTextureRegion(candyLevel.trArray[row][column]);
+				backgroundArray[row][column] = originalBackgroundArray[row][column];
+			}
+		}
+		
+		/**
+		 * RESET GAME STATE
+		 */
+		win = false;
+		death = false;
+		
+		candyLevel.gameStarted = true;
+		Log.i(TAG,"CandyEngine finished resetting.");
 	}
 }

@@ -7,4 +7,5 @@
     <string name="twitter_link">https://mobile.twitter.com/#!/EmbedStudios</string>
     <string name="play">PLAY MODE</string>
     <string name="pan">PAN/ZOOM</string>
+    <string name="reset">RESET</string>
 </resources>

@@ -32,6 +32,8 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	public static int SPEED = 10;
 	public static final long[] frameArray = new long[]{250/SPEED,250/SPEED,250/SPEED,250/SPEED};
 	public static final String TAG = CandyUtils.TAG;
+	
+	public final int initialRow,initialColumn;
 
 	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final RectangleVertexBuffer RVB,final int index,final int type,final TMXLayer tmxLayer,final int[][] objectArray,final int[][] backgroundArray) {
 		super(column*64, row*64, pTiledTextureRegion, RVB);
@@ -40,6 +42,9 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		this.tmxLayer = tmxLayer;
 		this.objectArray = objectArray;
 		this.backgroundArray = backgroundArray;
+		
+		initialRow = row;
+		initialColumn = column;
 		
 		if (this.type==CandyLevel.CAT) {
 			this.animate(catDurations, catFrames, -1);
@@ -57,6 +62,9 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		this.tmxLayer = tmxLayer;
 		this.objectArray = objectArray;
 		this.backgroundArray = backgroundArray;
+		
+		initialRow = row;
+		initialColumn = column;
 	}
 
 	private synchronized boolean move(final int rowDelta, final int columnDelta, final int[][] objectArray) {
@@ -171,5 +179,21 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		});
 		Log.i(TAG,"Bomb explosion started.");
 		// TODO Auto-generated method stub
+	}
+	
+	public synchronized void reset() {
+		clearEntityModifiers();
+		hasModifier = false;
+		blowUp = false;
+		stopAnimation();
+		setPosition(initialColumn*64,initialRow*64);
+		objectArray[index][1] = initialRow;
+		objectArray[index][2] = initialColumn;
+		setCurrentTileIndex(0);
+		setVisible(true);
+		
+		if (this.type==CandyLevel.CAT) {
+			this.animate(catDurations, catFrames, -1);
+		}
 	}
 }
