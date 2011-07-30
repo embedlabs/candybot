@@ -178,7 +178,6 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 			}
 		});
 		Log.i(TAG,"Bomb explosion started.");
-		// TODO Auto-generated method stub
 	}
 	
 	public synchronized void reset() {

@@ -183,13 +183,8 @@ public class CandyEngine implements Comparator<CandyAnimatedSprite> {
 		while (!settled) {
 			pause(10);
 			for (CandyAnimatedSprite gSprite:gravityList) {
-				if (!gSprite.hasModifier) {
-					if (gSprite.index==candyIndex&&win) {
-						gSprite.showCandyAnim();
-					}
-					if (gravityList.indexOf(gSprite)==gravityList.size()-1) {
-						settled=true;
-					}
+				if (gravityList.indexOf(gSprite)==gravityList.size()-1&&!gSprite.hasModifier) {
+					settled=true;
 				}
 			}
 		}
@@ -197,6 +192,7 @@ public class CandyEngine implements Comparator<CandyAnimatedSprite> {
 		
 		if (win&&!death) {
 			logArray("End array:");
+			win();
 			// TODO
 		} else if (death) {
 			// TODO
@@ -205,6 +201,11 @@ public class CandyEngine implements Comparator<CandyAnimatedSprite> {
 			candyLevel.gameStarted=true;
 		}
 		
+	}
+
+	private synchronized void win() {
+		candy.showCandyAnim();
+		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
 	}
 
 	private int fallDistance(final int index) {
