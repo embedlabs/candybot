@@ -21,6 +21,7 @@ import org.anddev.andengine.extension.physics.box2d.PhysicsConnector;
 import org.anddev.andengine.extension.physics.box2d.PhysicsFactory;
 import org.anddev.andengine.extension.physics.box2d.PhysicsWorld;
 import org.anddev.andengine.extension.physics.box2d.util.Vector2Pool;
+import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -287,7 +288,13 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public void onDestroy() {
 		splashTask.running=false;
 		super.onDestroy();
+		
+		/**
+		 * DESTROY SINGLETONS
+		 */
+		BufferObjectManager.getActiveInstance().clear();
 		ScoreloopManagerSingleton.destroy();
+		
 		Log.i(TAG,"MainMenu onDestroy()");
 	}
 	
