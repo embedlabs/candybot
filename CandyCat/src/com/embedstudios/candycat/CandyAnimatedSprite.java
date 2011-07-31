@@ -2,16 +2,19 @@ package com.embedstudios.candycat;
 
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
+import org.anddev.andengine.entity.modifier.ColorModifier;
 import org.anddev.andengine.entity.modifier.PathModifier;
 import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier.Path;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
+import org.anddev.andengine.util.modifier.IModifier;
+import org.anddev.andengine.util.modifier.ease.EaseBounceOut;
 import org.anddev.andengine.util.modifier.ease.EaseLinear;
+import org.anddev.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;
 
 import android.util.Log;
-
 public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, IPathModifierListener {
 //	public boolean stable = true;
 	public final int index,type;
@@ -25,6 +28,8 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	public boolean hasModifier = false;
 	
 	public boolean blowUp = false;
+	
+	public boolean spriteDead = false;
 	
 	public static final long[] catDurations = new long[]{3000,100,1000,100,5000,100,1000,100,5000,100,100,100,5000,500};
 	public static final int[] catFrames = new int[]{0,1,2,1,0,3,4,3,0,5,6,5,0,7};
@@ -120,6 +125,8 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		}
 		if (blowUp&&type==CandyLevel.BOMB) {
 			showBombAnim();
+		} else if (spriteDead&&type==CandyLevel.ENEMY) {
+			showDeadSprite();
 		} else {
 			hasModifier=false;
 		}
@@ -179,11 +186,32 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		});
 		Log.i(TAG,"Bomb explosion started.");
 	}
+
+	public void showDeadSprite() {
+		hasModifier=true;
+		objectArray[index][1]=-1;
+		spriteDead=true;
+		// TODO Auto-generated method stub
+		registerEntityModifier(new ColorModifier(0.5f,1, 1, 1, 0, 1, 0, new IEntityModifierListener(){
+
+			@Override
+			public void onModifierStarted(IModifier<IEntity> pModifier, IEntity pItem) {}
+
+			@Override
+			public void onModifierFinished(IModifier<IEntity> pModifier, IEntity pItem) {
+				setVisible(false);
+				hasModifier=false;
+			}
+			
+		}, EaseBounceOut.getInstance()));
+	}
 	
 	public synchronized void reset() {
+		super.reset();
 		clearEntityModifiers();
 		hasModifier = false;
 		blowUp = false;
+		spriteDead = false;
 		stopAnimation();
 		setPosition(initialColumn*64,initialRow*64);
 		objectArray[index][1] = initialRow;

@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import android.util.Log;
 
-public class CandyEngine implements Comparator<CandyAnimatedSprite> {
+public class CandyEngine {
 
 	public static final int EDGE = -2;
 	public static final int NO_OBJECT = -1;
@@ -172,7 +172,23 @@ public class CandyEngine implements Comparator<CandyAnimatedSprite> {
 	}
 
 	private void settle() {
-		Collections.sort(gravityList,this);
+		
+		/**
+		 * ENEMIES MOVE
+		 */
+		if (!(enemyList.size()==0||death)) {
+			Collections.sort(enemyList,new EnemyComparator());
+			for (CandyAnimatedSprite enemySprite:enemyList) {
+				if (!enemySprite.spriteDead) {
+					// TODO move them
+				}
+			}
+		}
+		
+		/**
+		 * OBJECTS FALL
+		 */
+		Collections.sort(gravityList,new GravityComparator());
 		for (CandyAnimatedSprite gSprite:gravityList) {
 			if (objectArray[gSprite.index][1]!=-1) {
 				gSprite.fall(fallDistance(gSprite.index));
@@ -190,12 +206,18 @@ public class CandyEngine implements Comparator<CandyAnimatedSprite> {
 		}
 		Log.v(TAG,"Settled.");
 		
+		
+		/**
+		 * SPECIAL CIRCUMSTANCES
+		 */
 		if (win&&!death) {
 			logArray("End array:");
 			win();
 			// TODO
 		} else if (death) {
 			// TODO
+			cat.showDeadSprite();
+			while (cat.hasModifier) {pause(10);};
 			resetLevel();
 		} else {
 			candyLevel.gameStarted=true;
@@ -360,10 +382,31 @@ public class CandyEngine implements Comparator<CandyAnimatedSprite> {
 		candyLevel.gameStarted = true;
 		Log.i(TAG,"CandyEngine finished resetting.");
 	}
-
-	@Override
-	public int compare(CandyAnimatedSprite object1, CandyAnimatedSprite object2) {
-		return objectArray[object2.index][1]-objectArray[object1.index][1];
-		// TODO bias by teleporter locations
+	
+	
+	public class GravityComparator implements Comparator<CandyAnimatedSprite> {
+		@Override
+		public int compare(CandyAnimatedSprite object1, CandyAnimatedSprite object2) {
+			return objectArray[object2.index][1]-objectArray[object1.index][1];
+			// TODO bias by teleporter locations
+		}
+	}
+	
+	public class EnemyComparator implements Comparator<CandyAnimatedSprite> {
+		final int catRow = objectArray[catIndex][1];
+		final int catColumn = objectArray[catIndex][2];
+		
+		@Override
+		public int compare(CandyAnimatedSprite enemy1, CandyAnimatedSprite enemy2) {
+			final int enemy1row = objectArray[enemy1.index][1];
+			final int enemy1column = objectArray[enemy1.index][2];
+			final int enemy2row = objectArray[enemy2.index][1];
+			final int enemy2column = objectArray[enemy2.index][2];
+			
+			final double resultDouble = Math.sqrt(Math.pow(catRow-enemy1row, 2)+Math.pow(catColumn-enemy1column, 2))-Math.sqrt(Math.pow(catRow-enemy2row, 2)+Math.pow(catColumn-enemy2column, 2));
+			final int resultInt = (int)Math.signum(resultDouble)*(int)Math.ceil(Math.abs(resultDouble));
+			// TODO bias by teleporter locations
+			return resultInt;
+		}
 	}
 }

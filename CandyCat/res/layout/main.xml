@@ -46,6 +46,26 @@
 				android:focusableInTouchMode="true" >
 				<requestFocus />
 			</Button>
+			<EditText android:id="@+id/edittext_world"
+				android:layout_margin="3dip"
+				android:layout_width="100dip"
+				android:layout_height="wrap_content"
+				android:hint="@string/world"
+				android:layout_centerHorizontal="true"
+				android:layout_below="@id/button_play"
+				android:inputType="phone"
+				android:digits="0123456789"
+				android:imeOptions="actionDone" />e
+			<EditText android:id="@+id/edittext_level"
+				android:layout_margin="3dip"
+				android:layout_width="100dip"
+				android:layout_height="wrap_content"
+				android:hint="@string/level"
+				android:layout_centerHorizontal="true"
+				android:layout_below="@id/edittext_world"
+				android:inputType="phone"
+				android:digits="0123456789"
+				android:imeOptions="actionDone" />"
 			<ImageView android:id="@+id/button_achievements"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
