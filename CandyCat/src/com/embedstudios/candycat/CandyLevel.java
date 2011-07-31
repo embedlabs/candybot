@@ -129,6 +129,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private long time;
 	private boolean tapOptionEnabled = false;
 	
+	public int teleporter1column = -1;
+	public int teleporter2column = -1;
+	
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -412,11 +415,17 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	}
 
 	@Override
-	public void onTMXTileWithPropertiesCreated(final TMXTiledMap pTMXTiledMap,final TMXLayer pTMXLayer,final TMXTile pTMXTile,final TMXProperties<TMXTileProperty> pTMXTileProperties) {
+	public synchronized void onTMXTileWithPropertiesCreated(final TMXTiledMap pTMXTiledMap,final TMXLayer pTMXLayer,final TMXTile pTMXTile,final TMXProperties<TMXTileProperty> pTMXTileProperties) {
 		final int row = pTMXTile.getTileRow();
 		final int column = pTMXTile.getTileColumn();
 		backgroundArray[row][column]=pTMXTile.getGlobalTileID();
 		// keeps track of the background tiles
+		
+		if (backgroundArray[row][column]==CandyEngine.TELEPORTER_IN) {
+			teleporter1column=column;
+		} else if (backgroundArray[row][column]==CandyEngine.TELEPORTER_OUT) {
+			teleporter2column=column;
+		}
 		
 		trArray[row][column]=pTMXTile.getTextureRegion();
 	}

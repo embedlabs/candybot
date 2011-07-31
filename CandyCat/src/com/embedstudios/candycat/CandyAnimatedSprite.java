@@ -1,5 +1,7 @@
 package com.embedstudios.candycat;
 
+import javax.microedition.khronos.opengles.GL11;
+
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
 import org.anddev.andengine.entity.modifier.ColorModifier;
@@ -18,12 +20,11 @@ import android.util.Log;
 public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, IPathModifierListener {
 //	public boolean stable = true;
 	public final int index,type;
-	private final TMXLayer tmxLayer; // TODO for bombs
+	private final TMXLayer tmxLayer;
 	private final int[][] objectArray,backgroundArray;
-//	public final boolean gravityIsOn;
 	private int candyLastMove = 0;
 	private int candyRotationState = 0;
-	private int lastDirectionalMove = 0; // TODO for ice block mechanics
+	public int lastDirectionalMove = 0; // TODO for ice block mechanics
 	
 	public boolean hasModifier = false;
 	
@@ -61,29 +62,27 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	 */
 	
 	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final int index,final int type,final TMXLayer tmxLayer,final int[][] objectArray,final int[][] backgroundArray) {
-		super(column*64, row*64, pTiledTextureRegion.clone());
-		this.index = index;
-		this.type = type;
-		this.tmxLayer = tmxLayer;
-		this.objectArray = objectArray;
-		this.backgroundArray = backgroundArray;
-		
-		initialRow = row;
-		initialColumn = column;
+		this(row,column,pTiledTextureRegion.clone(),rvbGen(),index,type,tmxLayer,objectArray,backgroundArray);
+	}
+	
+	private static RectangleVertexBuffer rvbGen() {
+		final RectangleVertexBuffer rvb = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW,true);
+		rvb.update(64, 64);
+		return rvb;
 	}
 
 	private synchronized boolean move(final int rowDelta, final int columnDelta, final int[][] objectArray) {
 		if (!hasModifier) {
 			hasModifier=true;
 			candyLastMove = columnDelta;
-			if (rowDelta != 0) {
-				lastDirectionalMove = rowDelta;
+			if (columnDelta != 0) {
+				lastDirectionalMove = columnDelta;
 			}
+			objectArray[index][1] += rowDelta;
+			objectArray[index][2] += columnDelta;
 			registerEntityModifier(new PathModifier(1/(float)SPEED*((rowDelta!=0)?Math.abs(rowDelta):1)*((columnDelta!=0)?Math.abs(columnDelta):1), new Path(2).to(
 					getX(), getY()).to(getX() + (columnDelta * 64),
 					getY() + (rowDelta * 64)), this, EaseLinear.getInstance()));
-			objectArray[index][1] += rowDelta;
-			objectArray[index][2] += columnDelta;
 			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
 			return true;
 		} else {
@@ -192,6 +191,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		objectArray[index][1]=-1;
 		spriteDead=true;
 		// TODO Auto-generated method stub
+		// test this soon
 		registerEntityModifier(new ColorModifier(0.5f,1, 1, 1, 0, 1, 0, new IEntityModifierListener(){
 
 			@Override

@@ -9,6 +9,12 @@
 # java specific
 *.class
 
+# eclipse stuff
+*.project
+
+# android stuff
+*/R.java
+
 # any bin stuff
 *.apk
 *.ap_
