@@ -11,6 +11,7 @@
 
 # eclipse stuff
 *.project
+*.classpath
 
 # android stuff
 */R.java
