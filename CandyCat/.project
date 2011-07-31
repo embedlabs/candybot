@@ -32,14 +32,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>AndEngine_src</name>
-			<type>2</type>
-			<locationURI>_android_AndEngine_6e0d82d9/src</locationURI>
-		</link>
-		<link>
 			<name>ScoreloopUI_src</name>
 			<type>2</type>
-			<locationURI>_android_ScoreloopUI_e7efe92a/src</locationURI>
+			<location>/Users/Shrav/embed-studios/Scoreloop_core_social_android_2.3.2/ScoreloopUI/src</location>
+		</link>
+		<link>
+			<name>org_anddev_andengine_src</name>
+			<type>2</type>
+			<locationURI>_android_org_anddev_andengine_41cf2b3/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
