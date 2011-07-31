@@ -25,6 +25,15 @@ public class CandyEngine {
 	public static final int PIPE_LEFT_ICE = 10;
 	public static final int PIPE_RIGHT_ICE = 11;
 	public static final int WALL_LAVA = 12;
+	
+	public static final int SQUARE_EMPTY = 20;
+	public static final int SQUARE_OCCUPIED = 21;
+	public static final int SQUARE_LASER = 22;
+	public static final int SQUARE_LASER_OCCUPIED = 23;
+	public static final int SQUARE_EDGE = 24;
+	public static final int SQUARE_PIPE = 25;
+	public static final int SQUARE_TELEPORTER = 26;
+	public static final int SQUARE_WALL = 27;
 
 	private final ArrayList<CandyAnimatedSprite> spriteList;
 	private final ArrayList<CandyAnimatedSprite> enemyList = new ArrayList<CandyAnimatedSprite>();
@@ -95,7 +104,6 @@ public class CandyEngine {
 				pushable.moveLeft();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
-				// TODO enemy
 				death = true;
 			}
 		}
@@ -118,7 +126,6 @@ public class CandyEngine {
 				pushable.moveRight();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
-				// TODO enemy
 				death = true;
 			}
 		}
@@ -141,7 +148,6 @@ public class CandyEngine {
 				spriteList.get(fg).moveUp();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
-				// TODO enemy
 				death = true;
 			}
 		}
@@ -164,24 +170,42 @@ public class CandyEngine {
 				spriteList.get(fg).moveDown();
 				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
 			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
-				// TODO enemy
 				death = true;
 			}
 		}
 		settle();
 	}
 
-	private void settle() {
+	private synchronized void settle() {
+		boolean settled;
 		
 		/**
 		 * ENEMIES MOVE
 		 */
-		if (!(enemyList.size()==0||death)) {
+		if (enemyList.size()!=0&&!death&&enemyList.size()>0) {
 			Collections.sort(enemyList,new EnemyComparator());
 			for (CandyAnimatedSprite enemySprite:enemyList) {
 				if (!enemySprite.spriteDead) {
-					// TODO move them
+					enemyMove(enemySprite);
 				}
+			}
+		}
+		
+		settled = false;
+		while  (!settled) {
+			pause(10);
+			if (enemyList.size()!=0&&!death&&enemyList.size()>0) {
+				for (CandyAnimatedSprite enemySprite:enemyList) {
+					if (!enemySprite.spriteDead) {
+						if (enemySprite.hasModifier) {
+							break;
+						} else if (enemyList.indexOf(enemySprite)==enemyList.size()-1) {
+							settled=true;
+						}
+					}
+				}
+			} else {
+				settled=true;
 			}
 		}
 		
@@ -195,11 +219,13 @@ public class CandyEngine {
 			}
 		}
 		
-		boolean settled = false;
+		settled = false;
 		while (!settled) {
 			pause(10);
 			for (CandyAnimatedSprite gSprite:gravityList) {
-				if (gravityList.indexOf(gSprite)==gravityList.size()-1&&!gSprite.hasModifier) {
+				if (gSprite.hasModifier) {
+					break;
+				} else if (gravityList.indexOf(gSprite)==gravityList.size()-1) {
 					settled=true;
 				}
 			}
@@ -213,9 +239,7 @@ public class CandyEngine {
 		if (win&&!death) {
 			logArray("End array:");
 			win();
-			// TODO
 		} else if (death) {
-			// TODO
 			cat.showDeadSprite();
 			while (cat.hasModifier) {pause(10);};
 			resetLevel();
@@ -225,27 +249,49 @@ public class CandyEngine {
 		
 	}
 
-	private synchronized void win() {
-		candy.showCandyAnim();
-		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
+	private synchronized void enemyMove(CandyAnimatedSprite enemySprite) {
+		// TODO Auto-generated method stub
+		final int enemyRow = objectArray[enemySprite.index][1];
+		final int enemyColumn = objectArray[enemySprite.index][2];
+		final int catRow = objectArray[catIndex][1];
+		final int catColumn = objectArray[catIndex][2];
+		
+		if (Math.abs(catRow-enemyRow)>=Math.abs(catColumn-enemyColumn)) { // If the enemy should move vertically,
+			if (catRow<enemyRow) { // and it should move up,
+				final int result = getBackgroundTop(enemySprite.index);
+				if (getObjectTop(enemySprite.index)==NO_OBJECT&&result==EMPTY_TILE) { // and if above it is empty,
+					enemySprite.moveUp();
+				} else if (getObjectTop(enemySprite.index)==NO_OBJECT&&(result==EMPTY_TILE||isLaser(result))) {
+					
+				}
+			}
+		}
+		
 	}
 
-	private int fallDistance(final int index) {
-		// TODO Auto-generated method stub
+	private synchronized void win() {
+		candy.showCandyAnim();
+		while (candy.hasModifier) {pause(10);};
+		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
+		pause(2000);
+		candyLevel.finish();
+	}
+
+	private synchronized int fallDistance(final int index) {
 		int row = objectArray[index][1];
 		final int initialRow = 0+row;
 		final int column = objectArray[index][2];
 		int fallDistance = 0;
 		while (true) {
 			final int result = getBackgroundBottom(row,column);
-			if ((result==EMPTY_TILE||result==LASER_HORIZONTAL||result==LASER_VERTICAL||result==LASER_CROSS)&&getObjectBottom(row,column)==NO_OBJECT) {
+			if ((result==EMPTY_TILE||isLaser(result))&&getObjectBottom(row,column)==NO_OBJECT) {
 				fallDistance++;
 				row++;
 			} else {
-				if (index==candyIndex&&(result==PIPE_LEFT||result==PIPE_RIGHT||result==PIPE_LEFT_ICE||result==PIPE_RIGHT_ICE)) {
+				if (index==candyIndex&&isPipe(result)) {
 					win=true;
 				}
-				if (objectArray[index][0]==CandyLevel.BOMB&&row-initialRow>=1&&(result==WALL||result==WALL_ICE||result==WALL_LAVA)) {
+				if (objectArray[index][0]==CandyLevel.BOMB&&row-initialRow>=1&&isWall(result)) {
 					spriteList.get(index).blowUp = true;
 				}
 				break;
@@ -332,7 +378,7 @@ public class CandyEngine {
 		return backgroundArray[row+rowChange][column+columnChange];
 	}
 
-	private void logArray(final String message) {
+	private synchronized void logArray(final String message) {
 		Log.i(TAG,message);
 		for (int[] i:backgroundArray) {
 			final StringBuilder sBuilder = new StringBuilder();
@@ -405,8 +451,146 @@ public class CandyEngine {
 			
 			final double resultDouble = Math.sqrt(Math.pow(catRow-enemy1row, 2)+Math.pow(catColumn-enemy1column, 2))-Math.sqrt(Math.pow(catRow-enemy2row, 2)+Math.pow(catColumn-enemy2column, 2));
 			final int resultInt = (int)Math.signum(resultDouble)*(int)Math.ceil(Math.abs(resultDouble));
-			// TODO bias by teleporter locations
+
 			return resultInt;
+		}
+	}
+	
+	private boolean isLaser(int type) {
+		switch (type) {
+		case LASER_HORIZONTAL:
+		case LASER_VERTICAL:
+		case LASER_CROSS:
+			return true;
+		default:
+			return false;
+		}
+	}
+	
+	private boolean isPipe(int type) {
+		switch (type) {
+		case PIPE_LEFT:
+		case PIPE_RIGHT:
+		case PIPE_LEFT_ICE:
+		case PIPE_RIGHT_ICE:
+			return true;
+		default:
+			return false;
+		}
+	}
+	
+	private boolean isWall(int type) {
+		switch (type) {
+		case WALL:
+		case WALL_ICE:
+		case WALL_LAVA:
+			return true;
+		default:
+			return false;
+		}
+	}
+	
+	private int topSituation(int index) {
+		final int topB = getBackgroundTop(index);
+		final int topO = getObjectTop(index);
+		
+		if (topB==EDGE) {
+			return SQUARE_EDGE;
+		} else if (topO==NO_OBJECT) {
+			if (topB==EMPTY_TILE) {
+				return SQUARE_EMPTY;
+			} else if (isLaser(topB)) {
+				return SQUARE_LASER;
+			} else if (isPipe(topB)) {
+				return SQUARE_PIPE;
+			} else if (topB==TELEPORTER_OUT){
+				return SQUARE_TELEPORTER;
+			} else {
+				return SQUARE_WALL;
+			}
+		} else {
+			if (isLaser(topB)) {
+				return SQUARE_LASER_OCCUPIED;
+			} else {
+				return SQUARE_OCCUPIED;
+			}
+		}
+	}
+	
+	private int bottomSituation(int index) {
+		final int bottomB = getBackgroundBottom(index);
+		final int bottomO = getObjectBottom(index);
+		
+		if (bottomB==EDGE) {
+			return SQUARE_EDGE;
+		} else if (bottomO==NO_OBJECT) {
+			if (bottomB==EMPTY_TILE) {
+				return SQUARE_EMPTY;
+			} else if (isLaser(bottomB)) {
+				return SQUARE_LASER;
+			} else if (isPipe(bottomB)) {
+				return SQUARE_PIPE;
+			} else if (bottomB==TELEPORTER_IN) {
+				return SQUARE_TELEPORTER;
+			} else {
+				return SQUARE_WALL;
+			}
+		} else {
+			if (isLaser(bottomB)) {
+				return SQUARE_LASER_OCCUPIED;
+			} else {
+				return SQUARE_OCCUPIED;
+			}
+		}
+	}
+	
+	private int leftSituation(int index) {
+		final int leftB = getBackgroundLeft(index);
+		final int leftO = getObjectLeft(index);
+		
+		if (leftB==EDGE) {
+			return SQUARE_EDGE;
+		} else if (leftO==NO_OBJECT) {
+			if (leftB==EMPTY_TILE) {
+				return SQUARE_EMPTY;
+			} else if (isLaser(leftB)) {
+				return SQUARE_LASER;
+			} else if (isPipe(leftB)) {
+				return SQUARE_PIPE;
+			} else {
+				return SQUARE_WALL;
+			}
+		} else {
+			if (isLaser(leftB)) {
+				return SQUARE_LASER_OCCUPIED;
+			} else {
+				return SQUARE_OCCUPIED;
+			}
+		}
+	}
+	
+	private int rightSituation(int index) {
+		final int rightB = getBackgroundRight(index);
+		final int rightO = getObjectRight(index);
+		
+		if (rightB==EDGE) {
+			return SQUARE_EDGE;
+		} else if (rightO==NO_OBJECT) {
+			if (rightB==EMPTY_TILE) {
+				return SQUARE_EMPTY;
+			} else if (isLaser(rightB)) {
+				return SQUARE_LASER;
+			} else if (isPipe(rightB)) {
+				return SQUARE_PIPE;
+			} else {
+				return SQUARE_WALL;
+			}
+		} else {
+			if (isLaser(rightB)) {
+				return SQUARE_LASER_OCCUPIED;
+			} else {
+				return SQUARE_OCCUPIED;
+			}
 		}
 	}
 }

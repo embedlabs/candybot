@@ -55,7 +55,7 @@
 				android:layout_below="@id/button_play"
 				android:inputType="phone"
 				android:digits="0123456789"
-				android:imeOptions="actionDone" />e
+				android:imeOptions="actionNext" />
 			<EditText android:id="@+id/edittext_level"
 				android:layout_margin="3dip"
 				android:layout_width="100dip"
@@ -65,7 +65,7 @@
 				android:layout_below="@id/edittext_world"
 				android:inputType="phone"
 				android:digits="0123456789"
-				android:imeOptions="actionDone" />"
+				android:imeOptions="actionDone" />
 			<ImageView android:id="@+id/button_achievements"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
