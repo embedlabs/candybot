@@ -316,12 +316,11 @@ public class CandyEngine {
 			win();
 		} else if (death) {
 			cat.showDeadSprite();
-			while (cat.hasModifier) {pause(10);}
+			pause(10,catIndex);
 			resetLevel();
 		} else {
 			candyLevel.gameStarted=true;
 		}
-		
 	}
 
 	private synchronized void enemyMove(CandyAnimatedSprite enemySprite) {
@@ -341,7 +340,6 @@ public class CandyEngine {
 //				}
 //			}
 //		}
-		
 	}
 
 	private synchronized void win() {
