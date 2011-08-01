@@ -17,7 +17,7 @@ import org.anddev.andengine.util.modifier.ease.EaseLinear;
 import org.anddev.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;
 
 import android.util.Log;
-public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, IPathModifierListener {
+public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifierListener {
 //	public boolean stable = true;
 	public final int index,type;
 	private final TMXLayer tmxLayer;
@@ -30,7 +30,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	
 	public boolean blowUp = false;
 	
-	public boolean spriteDead = false;
+	public boolean enemyDead = false;
 	
 	public static final long[] catDurations = new long[]{3000,100,1000,100,5000,100,1000,100,5000,100,100,100,5000,500};
 	public static final int[] catFrames = new int[]{0,1,2,1,0,3,4,3,0,5,6,5,0,7};
@@ -53,7 +53,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		initialColumn = column;
 		
 		if (this.type==CandyLevel.CAT) {
-			this.animate(catDurations, catFrames, -1);
+			animate(catDurations, catFrames, -1);
 		}
 	}
 	
@@ -71,19 +71,32 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		return rvb;
 	}
 
-	private synchronized boolean move(final int rowDelta, final int columnDelta, final int[][] objectArray) {
+	public synchronized boolean move(final int rowDelta, final int columnDelta) {
 		if (!hasModifier) {
 			hasModifier=true;
 			candyLastMove = columnDelta;
 			if (columnDelta != 0) {
 				lastDirectionalMove = columnDelta;
 			}
-			objectArray[index][1] += rowDelta;
-			objectArray[index][2] += columnDelta;
+			objectArray[index][CandyEngine.ROW] += rowDelta;
+			objectArray[index][CandyEngine.COLUMN] += columnDelta;
 			registerEntityModifier(new PathModifier(1/(float)SPEED*((rowDelta!=0)?Math.abs(rowDelta):1)*((columnDelta!=0)?Math.abs(columnDelta):1), new Path(2).to(
 					getX(), getY()).to(getX() + (columnDelta * 64),
 					getY() + (rowDelta * 64)), this, EaseLinear.getInstance()));
 			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public synchronized boolean teleport(final int newRow,final int newColumn) {
+		if (!hasModifier) {
+			hasModifier=true;
+			objectArray[index][CandyEngine.ROW] = newRow;
+			objectArray[index][CandyEngine.COLUMN] = newColumn;
+			setPosition(64*newColumn, 64*newRow);
+			hasModifier=false;
 			return true;
 		} else {
 			return false;
@@ -124,7 +137,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		}
 		if (blowUp&&type==CandyLevel.BOMB) {
 			showBombAnim();
-		} else if (spriteDead&&type==CandyLevel.ENEMY) {
+		} else if (enemyDead&&type==CandyLevel.ENEMY) {
 			showDeadSprite();
 		} else {
 			hasModifier=false;
@@ -132,30 +145,25 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		Log.v(TAG,"Item " + index + "'s path finished.");
 	}
 
-	@Override
-	public synchronized boolean moveRight() {
-		return move(0,1,objectArray);
-	}
+//	public synchronized boolean moveRight() {
+//		return move(0,1,objectArray);
+//	}
+//
+//	public synchronized boolean moveLeft() {
+//		return move(0,-1,objectArray);
+//	}
+//
+//	public synchronized boolean moveUp() {
+//		return move(-1,0,objectArray);
+//	}
+//
+//	public synchronized boolean moveDown() {
+//		return move(1,0,objectArray);
+//	}
 
-	@Override
-	public synchronized boolean moveLeft() {
-		return move(0,-1,objectArray);
-	}
-
-	@Override
-	public synchronized boolean moveUp() {
-		return move(-1,0,objectArray);
-	}
-
-	@Override
-	public synchronized boolean moveDown() {
-		return move(1,0,objectArray);
-	}
-
-	@Override
 	public synchronized boolean fall(final int distance) {
 		if (distance>0) {
-			return move(distance, 0, objectArray);
+			return move(distance, 0);
 		} else {
 			return true;
 		}
@@ -189,7 +197,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 	public void showDeadSprite() {
 		hasModifier=true;
 		objectArray[index][1]=-1;
-		spriteDead=true;
+		enemyDead=true;
 		// TODO Auto-generated method stub
 		// test this soon
 		registerEntityModifier(new ColorModifier(0.5f,1, 1, 1, 0, 1, 0, new IEntityModifierListener(){
@@ -211,7 +219,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		clearEntityModifiers();
 		hasModifier = false;
 		blowUp = false;
-		spriteDead = false;
+		enemyDead = false;
 		stopAnimation();
 		setPosition(initialColumn*64,initialRow*64);
 		objectArray[index][1] = initialRow;
@@ -219,8 +227,8 @@ public class CandyAnimatedSprite extends AnimatedSprite implements SpriteMover, 
 		setCurrentTileIndex(0);
 		setVisible(true);
 		
-		if (this.type==CandyLevel.CAT) {
-			this.animate(catDurations, catFrames, -1);
+		if (type==CandyLevel.CAT) {
+			animate(catDurations, catFrames, -1);
 		}
 	}
 }

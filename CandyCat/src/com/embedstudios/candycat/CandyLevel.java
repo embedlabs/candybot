@@ -499,34 +499,34 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
-						candyEngine.right();
+						candyEngine.move(0,CandyEngine.COLUMN_RIGHT);
 					} else if (dragX - motionX >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
-						candyEngine.left();
+						candyEngine.move(0,CandyEngine.COLUMN_LEFT);
 					} else if (motionY - dragY >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
-						candyEngine.down();
+						candyEngine.move(CandyEngine.ROW_DOWN,0);
 					} else if (dragY - motionY >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
-						candyEngine.up();
+						candyEngine.move(CandyEngine.ROW_UP,0);
 					}
 				} else if (tapOptionEnabled&&
 					pSceneTouchEvent.isActionUp()&&
 					System.currentTimeMillis()-time<=TAP_THRESHOLD) {
 					if (motionX<=PHONE_WIDTH/3&&motionY>=PHONE_HEIGHT/6&&motionY<=PHONE_HEIGHT*5/6) {
-						candyEngine.left();
+						candyEngine.move(0,CandyEngine.COLUMN_LEFT);
 					} else if (motionX>=PHONE_WIDTH*2/3&&motionY>=PHONE_HEIGHT/6&&motionY<=PHONE_HEIGHT*5/6) {
-						candyEngine.right();
+						candyEngine.move(0,CandyEngine.COLUMN_RIGHT);
 					} else if (motionY<=PHONE_HEIGHT/3&&motionX>=PHONE_WIDTH/6&&motionX<=PHONE_WIDTH*5/6) {
-						candyEngine.up();
+						candyEngine.move(CandyEngine.ROW_UP,0);
 					} else if (motionY>=PHONE_HEIGHT*2/3&&motionX>=PHONE_WIDTH/6&&motionX<=PHONE_WIDTH*5/6) {
-						candyEngine.down();
+						candyEngine.move(CandyEngine.ROW_DOWN,0);
 					}
 				}
 			}

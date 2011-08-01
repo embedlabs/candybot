@@ -87,7 +87,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
-			startActivity(new Intent(this,WorldSelect.class)
+			startActivity(new Intent(this,CandyLevel.class)
 				.putExtra("com.embedstudios.candycat.world", Integer.valueOf(((EditText)findViewById(R.id.edittext_world)).getText().toString()))
 				.putExtra("com.embedstudios.candycat.level", Integer.valueOf(((EditText)findViewById(R.id.edittext_level)).getText().toString())));
 			break;

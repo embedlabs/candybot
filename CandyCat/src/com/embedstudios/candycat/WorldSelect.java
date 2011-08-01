@@ -15,7 +15,7 @@ public class WorldSelect extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.menu);
  
         // Reference the Gallery view
         Gallery g = (Gallery) findViewById(R.id.gallery);

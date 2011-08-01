@@ -1,8 +1,10 @@
 package com.embedstudios.candycat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import android.util.Log;
 
@@ -36,18 +38,25 @@ public class CandyEngine {
 	public static final int SQUARE_WALL = 27;
 	public static final int SQUARE_ENEMY = 28;
 	
-	public static final int UP = -1;
-	public static final int DOWN = 1;
-	public static final int LEFT = -1;
-	public static final int RIGHT = 1;
+	public static final int ROW_UP = -1;
+	public static final int ROW_DOWN = 1;
+	public static final int COLUMN_LEFT = -1;
+	public static final int COLUMN_RIGHT = 1;
 	
+	/**
+	 * FOR ARRAY ACCESS
+	 */
 	public static final int TYPE = 0;
 	public static final int ROW = 1;
 	public static final int COLUMN = 2;
+	
+	public static final int SITUATION = 0;
+	public static final int OBJECT = 1;
+	public static final int BACKGROUND = 2;
 
-	private final ArrayList<CandyAnimatedSprite> spriteList;
-	private final ArrayList<CandyAnimatedSprite> enemyList = new ArrayList<CandyAnimatedSprite>();
-	private final ArrayList<CandyAnimatedSprite> gravityList = new ArrayList<CandyAnimatedSprite>();
+	private final List<CandyAnimatedSprite> spriteList;
+	private final List<CandyAnimatedSprite> enemyList = new ArrayList<CandyAnimatedSprite>();
+	private final List<CandyAnimatedSprite> gravityList = new ArrayList<CandyAnimatedSprite>();
 
 	private final int[][] objectArray;
 	private final int[][] backgroundArray;
@@ -98,92 +107,146 @@ public class CandyEngine {
 		logArray("Start array:");
 	}
 
-	public void left() {
+//	public void left() {
+//		candyLevel.gameStarted=false;
+//
+//		final int bg = getBackgroundLeft(catIndex);
+//		final int fg = getObjectLeft(catIndex);
+//
+//		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is an empty background and no object to the left,
+//			cat.moveLeft(); // then move left,
+//			while (cat.hasModifier) {pause(10);} // and wait for completion.
+//		} else if (fg>=0) { // Otherwise if there is an object to the left,
+//			if (objectArray[fg][0]!=CandyLevel.ENEMY&&getBackgroundLeft(fg)==EMPTY_TILE&&getObjectLeft(fg)==NO_OBJECT) { // there is no obstacle blocking the object, and its not an enemy,
+//				final CandyAnimatedSprite pushable = spriteList.get(fg);
+//				cat.moveLeft(); // then move them,
+//				pushable.moveLeft();
+//				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
+//			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
+//				death = true;
+//			}
+//		}
+//		settle();
+//	}
+//
+//	public void right() {
+//		candyLevel.gameStarted=false;
+//
+//		final int bg = getBackgroundRight(catIndex);
+//		final int fg = getObjectRight(catIndex);
+//
+//		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is an empty background and no object to the right,
+//			cat.moveRight(); // then move right,
+//			while (cat.hasModifier) {pause(10);} // and wait for completion.
+//		} else if (fg>=0) { // Otherwise if there is an object to the right,
+//			if (objectArray[fg][0]!=CandyLevel.ENEMY&&getBackgroundRight(fg)==EMPTY_TILE&&getObjectRight(fg)==NO_OBJECT) { // there is no obstacle blocking the object, and its not an enemy,
+//				final CandyAnimatedSprite pushable = spriteList.get(fg);
+//				cat.moveRight(); // then move them,
+//				pushable.moveRight();
+//				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
+//			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
+//				death = true;
+//			}
+//		}
+//		settle();
+//	}
+//
+//	public void up() {
+//		candyLevel.gameStarted=false;
+//
+//		final int bg = getBackgroundTop(catIndex);
+//		final int fg = getObjectTop(catIndex);
+//
+//		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is no tile or object at the top,
+//			cat.moveUp(); // then move there,
+//			while (cat.hasModifier) {pause(10);} // and wait for completion.
+//		} else if (fg>=0) { // If it is an object,
+//			if ((objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL)&&(getBackgroundTop(fg)==EMPTY_TILE&&getObjectTop(fg)==NO_OBJECT)) { // and if it's empty at the top and is an fg wall,
+//				final CandyAnimatedSprite pushable = spriteList.get(fg);
+//				cat.moveUp(); // then move them, 
+//				spriteList.get(fg).moveUp();
+//				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
+//			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
+//				death = true;
+//			}
+//		}
+//		settle();
+//	}
+//
+//	public void down() {
+//		candyLevel.gameStarted=false;
+//
+//		final int bg = getBackgroundBottom(catIndex);
+//		final int fg = getObjectBottom(catIndex);
+//
+//		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is no tile or object at the bottom,
+//			cat.moveDown(); // then move there,
+//			while (cat.hasModifier) {pause(10);} // and wait for completion.
+//		} else if (fg>=0) { // If it is an object,
+//			if ((objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL)&&(getBackgroundBottom(fg)==EMPTY_TILE&&getObjectBottom(fg)==NO_OBJECT)) { // and if it's empty at the bottom and is an fg wall,
+//				final CandyAnimatedSprite pushable = spriteList.get(fg);
+//				cat.moveDown(); // then move them, 
+//				spriteList.get(fg).moveDown();
+//				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
+//			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
+//				death = true;
+//			}
+//		}
+//		settle();
+//	}
+	
+	public synchronized void move(final int rowDirection,final int columnDirection) {
 		candyLevel.gameStarted=false;
-
-		final int bg = getBackgroundLeft(catIndex);
-		final int fg = getObjectLeft(catIndex);
-
-		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is an empty background and no object to the left,
-			cat.moveLeft(); // then move left,
-			while (cat.hasModifier) {pause(10);} // and wait for completion.
-		} else if (fg>=0) { // Otherwise if there is an object to the left,
-			if (objectArray[fg][0]!=CandyLevel.ENEMY&&getBackgroundLeft(fg)==EMPTY_TILE&&getObjectLeft(fg)==NO_OBJECT) { // there is no obstacle blocking the object, and its not an enemy,
-				final CandyAnimatedSprite pushable = spriteList.get(fg);
-				cat.moveLeft(); // then move them,
-				pushable.moveLeft();
-				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
-			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
-				death = true;
+		
+		final int[] situationArray = situation(catIndex,rowDirection,columnDirection);
+		final int s = situationArray[SITUATION];
+		boolean shouldDie = false;
+		switch (s) {
+		case SQUARE_ENEMY:
+		case SQUARE_LASER:
+			death = true;
+		case SQUARE_EMPTY:
+			move(rowDirection,columnDirection,catIndex);
+			break;
+			
+		case SQUARE_LASER_OCCUPIED:
+			shouldDie = true;
+		case SQUARE_OCCUPIED:
+			final int[] situationArray2 = situation(situationArray[OBJECT],rowDirection,columnDirection);
+			final int s2 = situationArray2[SITUATION];
+			switch (s2) {
+			case SQUARE_ENEMY:
+			case SQUARE_LASER_OCCUPIED:
+			case SQUARE_OCCUPIED:
+			case SQUARE_WALL:
+			case SQUARE_PIPE:
+			case SQUARE_EDGE: break;
+			case SQUARE_LASER:
+			case SQUARE_EMPTY:
+				if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
+					if (shouldDie) {death=true;}
+					move(rowDirection,columnDirection,catIndex,situationArray[OBJECT]);
+				}
+				break;
+			case SQUARE_TELEPORTER: break;
 			}
+			break;
+		
+		case SQUARE_WALL:
+		case SQUARE_PIPE:
+		case SQUARE_EDGE: break;
+		
+		case SQUARE_TELEPORTER: /* TODO */ break;
 		}
+		
 		settle();
 	}
-
-	public void right() {
-		candyLevel.gameStarted=false;
-
-		final int bg = getBackgroundRight(catIndex);
-		final int fg = getObjectRight(catIndex);
-
-		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is an empty background and no object to the right,
-			cat.moveRight(); // then move right,
-			while (cat.hasModifier) {pause(10);} // and wait for completion.
-		} else if (fg>=0) { // Otherwise if there is an object to the right,
-			if (objectArray[fg][0]!=CandyLevel.ENEMY&&getBackgroundRight(fg)==EMPTY_TILE&&getObjectRight(fg)==NO_OBJECT) { // there is no obstacle blocking the object, and its not an enemy,
-				final CandyAnimatedSprite pushable = spriteList.get(fg);
-				cat.moveRight(); // then move them,
-				pushable.moveRight();
-				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
-			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
-				death = true;
-			}
+	
+	private synchronized void move(final int rowDirection,final int columnDirection,Integer... spriteIndexes) {
+		for (int spriteIndex:spriteIndexes) {
+			spriteList.get(spriteIndex).move(rowDirection,columnDirection);
 		}
-		settle();
-	}
-
-	public void up() {
-		candyLevel.gameStarted=false;
-
-		final int bg = getBackgroundTop(catIndex);
-		final int fg = getObjectTop(catIndex);
-
-		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is no tile or object at the top,
-			cat.moveUp(); // then move there,
-			while (cat.hasModifier) {pause(10);} // and wait for completion.
-		} else if (fg>=0) { // If it is an object,
-			if ((objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL)&&(getBackgroundTop(fg)==EMPTY_TILE&&getObjectTop(fg)==NO_OBJECT)) { // and if it's empty at the top and is an fg wall,
-				final CandyAnimatedSprite pushable = spriteList.get(fg);
-				cat.moveUp(); // then move them, 
-				spriteList.get(fg).moveUp();
-				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
-			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
-				death = true;
-			}
-		}
-		settle();
-	}
-
-	public void down() {
-		candyLevel.gameStarted=false;
-
-		final int bg = getBackgroundBottom(catIndex);
-		final int fg = getObjectBottom(catIndex);
-
-		if (bg==EMPTY_TILE&&fg==NO_OBJECT) { // If there is no tile or object at the bottom,
-			cat.moveDown(); // then move there,
-			while (cat.hasModifier) {pause(10);} // and wait for completion.
-		} else if (fg>=0) { // If it is an object,
-			if ((objectArray[fg][0]==CandyLevel.INERTIA_WALL||objectArray[fg][0]==CandyLevel.MOVABLE_WALL)&&(getBackgroundBottom(fg)==EMPTY_TILE&&getObjectBottom(fg)==NO_OBJECT)) { // and if it's empty at the bottom and is an fg wall,
-				final CandyAnimatedSprite pushable = spriteList.get(fg);
-				cat.moveDown(); // then move them, 
-				spriteList.get(fg).moveDown();
-				while (cat.hasModifier||pushable.hasModifier) {pause(10);} // and wait for completion.
-			} else if (objectArray[fg][0]==CandyLevel.ENEMY) { // Otherwise, if it's an enemy,
-				death = true;
-			}
-		}
-		settle();
+		pause(10,spriteIndexes);
 	}
 
 	private synchronized void settle() {
@@ -195,7 +258,7 @@ public class CandyEngine {
 		if (enemyList.size()!=0&&!death&&enemyList.size()>0) {
 			Collections.sort(enemyList,new EnemyComparator());
 			for (CandyAnimatedSprite enemySprite:enemyList) {
-				if (!enemySprite.spriteDead) {
+				if (!enemySprite.enemyDead) {
 					enemyMove(enemySprite);
 				}
 			}
@@ -206,12 +269,14 @@ public class CandyEngine {
 			pause(10);
 			if (enemyList.size()!=0&&!death&&enemyList.size()>0) {
 				for (CandyAnimatedSprite enemySprite:enemyList) {
-					if (!enemySprite.spriteDead) {
+					if (!enemySprite.enemyDead) {
 						if (enemySprite.hasModifier) {
 							break;
 						} else if (enemyList.indexOf(enemySprite)==enemyList.size()-1) {
 							settled=true;
 						}
+					} else if (enemyList.indexOf(enemySprite)==enemyList.size()-1) {
+						settled=true;
 					}
 				}
 			} else {
@@ -251,7 +316,7 @@ public class CandyEngine {
 			win();
 		} else if (death) {
 			cat.showDeadSprite();
-			while (cat.hasModifier) {pause(10);};
+			while (cat.hasModifier) {pause(10);}
 			resetLevel();
 		} else {
 			candyLevel.gameStarted=true;
@@ -260,98 +325,34 @@ public class CandyEngine {
 	}
 
 	private synchronized void enemyMove(CandyAnimatedSprite enemySprite) {
-		// TODO Auto-generated method stub
-		final int enemyRow = objectArray[enemySprite.index][1];
-		final int enemyColumn = objectArray[enemySprite.index][2];
-		final int catRow = objectArray[catIndex][1];
-		final int catColumn = objectArray[catIndex][2];
-		
-		if (Math.abs(catRow-enemyRow)>=Math.abs(catColumn-enemyColumn)) { // If the enemy should move vertically,
-			if (catRow<enemyRow) { // and it should move up,
-				final int result = getBackgroundTop(enemySprite.index);
-				if (getObjectTop(enemySprite.index)==NO_OBJECT&&result==EMPTY_TILE) { // and if above it is empty,
-					enemySprite.moveUp();
-				} else if (getObjectTop(enemySprite.index)==NO_OBJECT&&(result==EMPTY_TILE||isLaser(result))) {
-					
-				}
-			}
-		}
+//		// TODO Auto-generated method stub
+//		final int enemyRow = objectArray[enemySprite.index][1];
+//		final int enemyColumn = objectArray[enemySprite.index][2];
+//		final int catRow = objectArray[catIndex][1];
+//		final int catColumn = objectArray[catIndex][2];
+//		
+//		if (Math.abs(catRow-enemyRow)>=Math.abs(catColumn-enemyColumn)) { // If the enemy should move vertically,
+//			if (catRow<enemyRow) { // and it should move up,
+//				final int result = getBackgroundTop(enemySprite.index);
+//				if (getObjectTop(enemySprite.index)==NO_OBJECT&&result==EMPTY_TILE) { // and if above it is empty,
+//					enemySprite.moveUp();
+//				} else if (getObjectTop(enemySprite.index)==NO_OBJECT&&(result==EMPTY_TILE||isLaser(result))) {
+//					
+//				}
+//			}
+//		}
 		
 	}
 
 	private synchronized void win() {
 		candy.showCandyAnim();
-		while (candy.hasModifier) {pause(10);};
+		while (candy.hasModifier) {pause(10);}
 		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
 		pause(2000);
 		candyLevel.finish(); // TODO change this
 	}
 
-	private synchronized int fallDistance(final int index) {
-		int row = objectArray[index][ROW];
-		final int initialRow = objectArray[index][ROW];
-		final int column = objectArray[index][COLUMN];
-		int fallDistance = 0;
-		
-		while (true) {
-			final int result = getBackground(row,column,DOWN,0);
-			if ((result==EMPTY_TILE||Conditionals.isLaser(result))&&getObject(row,column,DOWN,0)==NO_OBJECT) {
-				fallDistance++;
-				row++;
-			} else {
-				if (index==candyIndex&&Conditionals.isPipe(result)) {
-					win=true;
-				}
-				if (objectArray[index][TYPE]==CandyLevel.BOMB&&row-initialRow>=1&&Conditionals.isWall(result)) {
-					spriteList.get(index).blowUp = true;
-				}
-				break;
-			}
-		}
-		return fallDistance;
-	}
-
-	/**
-	 * Basically returns -2 if it's the edge, -1 if there's nothing, otherwise returns the index.
-	 */
-	
-	private synchronized int getObject(final int objectIndex,final int rowDirection,final int columnDirection) {
-		final int row = objectArray[objectIndex][ROW];
-		final int column = objectArray[objectIndex][COLUMN];
-		
-		return getObject(row,column,rowDirection,columnDirection);
-	}
-	
-	private synchronized int getObject(final int row,final int column,final int rowDirection,final int columnDirection) {
-		if (!Conditionals.condition(row,column,rowDirection,columnDirection)) {
-			for (int i=0;i<objectArray.length;i++) {
-				if (row+rowDirection==objectArray[i][ROW]&&column+columnDirection==objectArray[i][COLUMN]) {
-					return i;
-				}
-			}
-			return NO_OBJECT;
-		} else {
-			return EDGE;
-		}
-	}
-
-
-	/**
-	 * Basically returns -2 if its the edge, otherwise returns the background tile :D
-	 */
-	
-	private synchronized int getBackground(final int objectIndex,final int rowDirection,final int columnDirection) {
-		final int row = objectArray[objectIndex][ROW];
-		final int column = objectArray[objectIndex][COLUMN];
-		
-		return getBackground(row,column,rowDirection,columnDirection);
-	}
-	
-	private synchronized int getBackground(final int row,final int column,final int rowDirection,final int columnDirection) {
-		return Conditionals.condition(row,column,rowDirection,columnDirection)?EDGE:backgroundArray[row+rowDirection][column+columnDirection];
-	}
-
-	private synchronized void logArray(final String message) {
+	private synchronized void logArray(final String message) { // DONE/TESTED
 		Log.i(TAG,message);
 		for (int[] i:backgroundArray) {
 			final StringBuilder sBuilder = new StringBuilder();
@@ -363,14 +364,51 @@ public class CandyEngine {
 		}
 	}
 
-	private void pause(int milliseconds) {
-		try {
-			Thread.sleep(milliseconds);
-		} catch (InterruptedException e) {
-			Log.e(TAG,"Thread.sleep() failed.",e);
+	private void pause(final int milliseconds,final Integer... indexArray) { // DONE/UNTESTED
+		final List<CandyAnimatedSprite> casList= new ArrayList<CandyAnimatedSprite>();
+		for (int index:indexArray) {
+			casList.add(spriteList.get(index));
 		}
+		pause(milliseconds,casList);
+//		while (true) {
+//			try {
+//				Thread.sleep(milliseconds);
+//			} catch (InterruptedException e) {
+//				Log.e(TAG,"Thread.sleep() failed.",e);
+//			}
+//			if (casArray.length>0) {
+//				for (int i=0;i<casArray.length;i++) {
+//					if (casArray[i].hasModifier) {
+//						break;
+//					} else if (i==casArray.length-1){
+//						return;
+//					}
+//				}
+//			}
+//		}
 	}
 	
+	private void pause(final int milliseconds,final List<CandyAnimatedSprite> casList) {
+		while (true) {
+			try {
+				Thread.sleep(milliseconds);
+			} catch (InterruptedException e) {
+				Log.e(TAG,"Thread.sleep() failed.",e);
+			}
+			if (casList.size()>0) {
+				for (CandyAnimatedSprite cas:casList) {
+					if (cas.hasModifier) {
+						break;
+					} else if (casList.indexOf(cas)==casList.size()-1){
+						return;
+					}
+				}
+			} else {
+				return;
+			}
+		}
+	}
+
 	public synchronized void resetLevel() {
 		Log.i(TAG,"CandyEngine reset.");
 		candyLevel.gameStarted = false;
@@ -401,8 +439,8 @@ public class CandyEngine {
 		candyLevel.gameStarted = true;
 		Log.i(TAG,"CandyEngine finished resetting.");
 	}
-	
-	private synchronized int[] situation(final int index,final int rowDirection,final int columnDirection) {
+
+	private synchronized int[] situation(final int index,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
 		final int s;
 		final int o = getObject(index,rowDirection,columnDirection);
 		final int b = getBackground(index,rowDirection,columnDirection);
@@ -416,7 +454,7 @@ public class CandyEngine {
 				s = SQUARE_LASER;
 			} else if (Conditionals.isPipe(b)) {
 				s = SQUARE_PIPE;
-			} else if (b==TELEPORTER_OUT) {
+			} else if ((b==TELEPORTER_OUT&&rowDirection==ROW_UP)||(b==TELEPORTER_IN&&rowDirection==ROW_DOWN)) {
 				s = SQUARE_TELEPORTER;
 			} else {
 				s = SQUARE_WALL;
@@ -424,7 +462,7 @@ public class CandyEngine {
 		} else {
 			if (Conditionals.isLaser(b)) {
 				s = SQUARE_LASER_OCCUPIED;
-			} else if (o==CandyLevel.ENEMY) {
+			} else if (objectArray[o][TYPE]==CandyLevel.ENEMY) {
 				s = SQUARE_ENEMY;
 			} else {
 				s = SQUARE_OCCUPIED;
@@ -433,10 +471,74 @@ public class CandyEngine {
 		
 		return new int[]{s,o,b}; // easy to memorize
 	}
+
+	private synchronized int fallDistance(final int index) { // NOT DONE
+		int row = objectArray[index][ROW];
+		final int initialRow = objectArray[index][ROW];
+		final int column = objectArray[index][COLUMN];
+		int fallDistance = 0;
+		
+		while (true) {
+			final int result = getBackground(row,column,ROW_DOWN,0);
+			if ((result==EMPTY_TILE||Conditionals.isLaser(result))&&getObject(row,column,ROW_DOWN,0)==NO_OBJECT) {
+				fallDistance++;
+				row++;
+			} else {
+				if (index==candyIndex&&Conditionals.isPipe(result)) {
+					win=true;
+				}
+				if (objectArray[index][TYPE]==CandyLevel.BOMB&&row-initialRow>=1&&Conditionals.isWall(result)) {
+					spriteList.get(index).blowUp = true;
+				}
+				break;
+			}
+		}
+		return fallDistance;
+	}
+
+	/**
+	 * Basically returns -2 if it's the edge, -1 if there's nothing, otherwise returns the index.
+	 */
 	
+	private synchronized int getObject(final int objectIndex,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+		final int row = objectArray[objectIndex][ROW];
+		final int column = objectArray[objectIndex][COLUMN];
+		
+		return getObject(row,column,rowDirection,columnDirection);
+	}
+	
+	private synchronized int getObject(final int row,final int column,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+		if (!Conditionals.condition(row,column,rowDirection,columnDirection)) {
+			for (int i=0;i<objectArray.length;i++) {
+				if (row+rowDirection==objectArray[i][ROW]&&column+columnDirection==objectArray[i][COLUMN]) {
+					return i;
+				}
+			}
+			return NO_OBJECT;
+		} else {
+			return EDGE;
+		}
+	}
+
+
+	/**
+	 * Basically returns -2 if its the edge, otherwise returns the background tile :D
+	 */
+	
+	private synchronized int getBackground(final int objectIndex,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+		final int row = objectArray[objectIndex][ROW];
+		final int column = objectArray[objectIndex][COLUMN];
+		
+		return getBackground(row,column,rowDirection,columnDirection);
+	}
+	
+	private synchronized int getBackground(final int row,final int column,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+		return Conditionals.condition(row,column,rowDirection,columnDirection)?EDGE:backgroundArray[row+rowDirection][column+columnDirection];
+	}
+
 	private static class Conditionals {
 		
-		private static boolean isLaser(int type) {
+		private static boolean isLaser(int type) { // DONE/UNTESTED
 			switch (type) {
 			case LASER_HORIZONTAL:
 			case LASER_VERTICAL:
@@ -447,7 +549,7 @@ public class CandyEngine {
 			}
 		}
 		
-		private static boolean isPipe(int type) {
+		private static boolean isPipe(int type) { // DONE/UNTESTED
 			switch (type) {
 			case PIPE_LEFT:
 			case PIPE_RIGHT:
@@ -459,7 +561,7 @@ public class CandyEngine {
 			}
 		}
 		
-		private static boolean isWall(int type) {
+		private static boolean isWall(int type) { // DONE/UNTESTED
 			switch (type) {
 			case WALL:
 			case WALL_ICE:
@@ -474,7 +576,7 @@ public class CandyEngine {
 		 * A master conditional statement.
 		 */
 		
-		private static boolean condition(final int row,final int column,final int rowDirection,final int columnDirection) {
+		private static boolean condition(final int row,final int column,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
 			final boolean condition;
 			if (rowDirection==-1) {
 				condition=(row==0);
@@ -489,9 +591,9 @@ public class CandyEngine {
 		}
 	}
 	
-	private class GravityComparator implements Comparator<CandyAnimatedSprite> {
+	private class GravityComparator implements Comparator<CandyAnimatedSprite> { // DONE/UNTESTED
 		@Override
-		public int compare(CandyAnimatedSprite object1, CandyAnimatedSprite object2) {
+		public synchronized int compare(CandyAnimatedSprite object1, CandyAnimatedSprite object2) {
 			return objectArray[object2.index][ROW]
 					+((objectArray[object2.index][COLUMN]==candyLevel.teleporter1column)?100:0)
 					+((objectArray[object2.index][COLUMN]==candyLevel.teleporter2column)?1000:0)
@@ -501,12 +603,12 @@ public class CandyEngine {
 		}
 	}
 	
-	private class EnemyComparator implements Comparator<CandyAnimatedSprite> {
+	private class EnemyComparator implements Comparator<CandyAnimatedSprite> { // DONE/UNTESTED
 		final int catRow = objectArray[catIndex][ROW];
 		final int catColumn = objectArray[catIndex][COLUMN];
 		
 		@Override
-		public int compare(CandyAnimatedSprite enemy1, CandyAnimatedSprite enemy2) {
+		public synchronized int compare(CandyAnimatedSprite enemy1, CandyAnimatedSprite enemy2) {
 			final int enemy1row = objectArray[enemy1.index][ROW];
 			final int enemy1column = objectArray[enemy1.index][COLUMN];
 			final int enemy2row = objectArray[enemy2.index][ROW];
