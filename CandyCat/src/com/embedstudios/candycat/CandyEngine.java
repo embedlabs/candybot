@@ -132,6 +132,7 @@ public class CandyEngine {
 			case SQUARE_WALL:
 			case SQUARE_PIPE:
 			case SQUARE_EDGE: break;
+			
 			case SQUARE_LASER:
 			case SQUARE_EMPTY:
 				if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
@@ -139,7 +140,8 @@ public class CandyEngine {
 					move(rowDirection,columnDirection,catIndex,situationArray[OBJECT]);
 				}
 				break;
-			case SQUARE_TELEPORTER: break;
+				
+			case SQUARE_TELEPORTER: /* TODO */ break;
 			}
 			break;
 		
@@ -161,7 +163,6 @@ public class CandyEngine {
 	}
 
 	private synchronized void settle() {
-		boolean settled;
 		
 		/**
 		 * ENEMIES MOVE
@@ -175,25 +176,7 @@ public class CandyEngine {
 			}
 		}
 		
-		settled = false;
-		while  (!settled) {
-			pause(10);
-			if (enemyList.size()!=0&&!death&&enemyList.size()>0) {
-				for (CandyAnimatedSprite enemySprite:enemyList) {
-					if (!enemySprite.enemyDead) {
-						if (enemySprite.hasModifier) {
-							break;
-						} else if (enemyList.indexOf(enemySprite)==enemyList.size()-1) {
-							settled=true;
-						}
-					} else if (enemyList.indexOf(enemySprite)==enemyList.size()-1) {
-						settled=true;
-					}
-				}
-			} else {
-				settled=true;
-			}
-		}
+		pause(10,enemyList);
 		
 		/**
 		 * OBJECTS FALL
@@ -205,17 +188,8 @@ public class CandyEngine {
 			}
 		}
 		
-		settled = false;
-		while (!settled) {
-			pause(10);
-			for (CandyAnimatedSprite gSprite:gravityList) {
-				if (gSprite.hasModifier) {
-					break;
-				} else if (gravityList.indexOf(gSprite)==gravityList.size()-1) {
-					settled=true;
-				}
-			}
-		}
+		pause(10,gravityList);
+		
 		Log.v(TAG,"Settled.");
 		
 		
@@ -235,22 +209,81 @@ public class CandyEngine {
 	}
 
 	private synchronized void enemyMove(CandyAnimatedSprite enemySprite) {
-//		// TODO Auto-generated method stub
-//		final int enemyRow = objectArray[enemySprite.index][1];
-//		final int enemyColumn = objectArray[enemySprite.index][2];
-//		final int catRow = objectArray[catIndex][1];
-//		final int catColumn = objectArray[catIndex][2];
-//		
-//		if (Math.abs(catRow-enemyRow)>=Math.abs(catColumn-enemyColumn)) { // If the enemy should move vertically,
-//			if (catRow<enemyRow) { // and it should move up,
-//				final int result = getBackgroundTop(enemySprite.index);
-//				if (getObjectTop(enemySprite.index)==NO_OBJECT&&result==EMPTY_TILE) { // and if above it is empty,
-//					enemySprite.moveUp();
-//				} else if (getObjectTop(enemySprite.index)==NO_OBJECT&&(result==EMPTY_TILE||isLaser(result))) {
-//					
-//				}
-//			}
-//		}
+		// TODO Auto-generated method stub
+		final int enemyRow = objectArray[enemySprite.index][ROW];
+		final int enemyColumn = objectArray[enemySprite.index][COLUMN];
+		final int catRow = objectArray[catIndex][ROW];
+		final int catColumn = objectArray[catIndex][COLUMN];
+		
+		final int verticalDiff=Math.abs(catRow-enemyRow);
+		final int horizontalDiff=Math.abs(catColumn-enemyColumn);
+		
+		final int rowDirection,columnDirection;
+		
+		if (verticalDiff>=horizontalDiff) {
+			columnDirection=0;
+			if (enemyRow>catRow) {
+				rowDirection=ROW_UP;
+			} else {
+				rowDirection=ROW_DOWN;
+			}
+		} else {
+			rowDirection=0;
+			if (enemyColumn>catColumn) {
+				columnDirection=COLUMN_LEFT;
+			} else {
+				columnDirection=COLUMN_RIGHT;
+			}
+		}
+		
+		final int[] situationArray = situation(enemySprite.index, rowDirection, columnDirection);
+		final int s = situationArray[0];
+		
+		boolean shouldDie = false;
+		switch (s) {
+		case SQUARE_LASER:
+			enemySprite.enemyDead = true;
+		case SQUARE_EMPTY:
+			move(rowDirection,columnDirection,enemySprite.index);
+			break;
+			
+		case SQUARE_LASER_OCCUPIED:
+			shouldDie = true;
+		case SQUARE_OCCUPIED:
+			if (objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.CAT) {
+				death = true;
+				move(rowDirection,columnDirection,enemySprite.index);
+			} else {
+				final int[] situationArray2 = situation(situationArray[OBJECT],rowDirection,columnDirection);
+				final int s2 = situationArray2[SITUATION];
+				switch (s2) {
+				case SQUARE_ENEMY:
+				case SQUARE_LASER_OCCUPIED:
+				case SQUARE_OCCUPIED:
+				case SQUARE_WALL:
+				case SQUARE_PIPE:
+				case SQUARE_EDGE: break;
+				
+				case SQUARE_LASER:
+				case SQUARE_EMPTY:
+					if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
+						if (shouldDie) {enemySprite.enemyDead=true;}
+						move(rowDirection,columnDirection,enemySprite.index,situationArray[OBJECT]);
+					}
+					break;
+					
+				case SQUARE_TELEPORTER: /* TODO */ break;
+				}
+			}
+			break;
+			
+		case SQUARE_ENEMY:
+		case SQUARE_WALL:
+		case SQUARE_PIPE:
+		case SQUARE_EDGE: break;
+		
+		case SQUARE_TELEPORTER: /* TODO */ break;
+		}
 	}
 
 	private synchronized void win() {

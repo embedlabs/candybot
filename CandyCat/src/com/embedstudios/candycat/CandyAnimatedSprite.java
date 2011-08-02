@@ -35,6 +35,9 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 	public static final long[] catDurations = new long[]{3000,100,1000,100,5000,100,1000,100,5000,100,100,100,5000,500};
 	public static final int[] catFrames = new int[]{0,1,2,1,0,3,4,3,0,5,6,5,0,7};
 	
+	public static final long[] enemyDurations = new long[]{3000,100,2000,100,2000,100,1000,100,2000,300,2000,100,2000,100};
+	public static final int[] enemyFrames = new int[]{0,1,2,1,0,3,4,3,0,5,0,6,7,6};
+	
 	public static int SPEED = 10;
 	public static final long[] frameArray = new long[]{250/SPEED,250/SPEED,250/SPEED,250/SPEED};
 	public static final String TAG = CandyUtils.TAG;
@@ -54,6 +57,8 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 		
 		if (this.type==CandyLevel.CAT) {
 			animate(catDurations, catFrames, -1);
+		} else if (this.type==CandyLevel.ENEMY) {
+			animate(enemyDurations,enemyFrames,-1);
 		}
 	}
 	
@@ -183,9 +188,9 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 			@Override
 			public void onAnimationEnd(AnimatedSprite pAnimatedSprite) {
 				setVisible(false);
-				tmxLayer.getTMXTile(objectArray[index][2], objectArray[index][1]+1).setTextureRegion(null);
-				backgroundArray[objectArray[index][1]+1][objectArray[index][2]]=0;
-				objectArray[index][1]=-1;
+				tmxLayer.getTMXTile(objectArray[index][CandyEngine.COLUMN], objectArray[index][CandyEngine.ROW]+1).setTextureRegion(null);
+				backgroundArray[objectArray[index][CandyEngine.ROW]+1][objectArray[index][CandyEngine.COLUMN]]=0;
+				objectArray[index][CandyEngine.ROW]=-1;
 
 				hasModifier = false;
 				Log.i(TAG,"Bomb explosion ended.");
@@ -196,7 +201,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 
 	public void showDeadSprite() {
 		hasModifier=true;
-		objectArray[index][1]=-1;
+		objectArray[index][CandyEngine.ROW]=-1;
 		enemyDead=true;
 		// TODO Auto-generated method stub
 		// test this soon
@@ -226,9 +231,11 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 		objectArray[index][2] = initialColumn;
 		setCurrentTileIndex(0);
 		setVisible(true);
-		
+
 		if (type==CandyLevel.CAT) {
 			animate(catDurations, catFrames, -1);
+		} else if (type==CandyLevel.ENEMY) {
+			animate(enemyDurations,enemyFrames,-1);
 		}
 	}
 }
