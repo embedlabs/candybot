@@ -209,7 +209,6 @@ public class CandyEngine {
 	}
 
 	private synchronized void enemyMove(CandyAnimatedSprite enemySprite) {
-		// TODO Auto-generated method stub
 		final int enemyRow = objectArray[enemySprite.index][ROW];
 		final int enemyColumn = objectArray[enemySprite.index][COLUMN];
 		final int catRow = objectArray[catIndex][ROW];
@@ -294,7 +293,7 @@ public class CandyEngine {
 		candyLevel.finish(); // TODO change this
 	}
 
-	private synchronized void logArray(final String message) { // DONE/TESTED
+	private synchronized void logArray(final String message) {
 		Log.i(TAG,message);
 		for (int[] i:backgroundArray) {
 			final StringBuilder sBuilder = new StringBuilder();
@@ -306,7 +305,7 @@ public class CandyEngine {
 		}
 	}
 
-	private void pause(final int milliseconds,final Integer... indexArray) { // DONE/UNTESTED
+	private void pause(final int milliseconds,final Integer... indexArray) {
 		final List<CandyAnimatedSprite> casList= new ArrayList<CandyAnimatedSprite>();
 		for (int index:indexArray) {
 			casList.add(spriteList.get(index));
@@ -366,7 +365,7 @@ public class CandyEngine {
 		Log.i(TAG,"CandyEngine finished resetting.");
 	}
 
-	private synchronized int[] situation(final int index,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+	private synchronized int[] situation(final int index,final int rowDirection,final int columnDirection) {
 		final int s;
 		final int o = getObject(index,rowDirection,columnDirection);
 		final int b = getBackground(index,rowDirection,columnDirection);
@@ -398,7 +397,7 @@ public class CandyEngine {
 		return new int[]{s,o,b}; // easy to memorize
 	}
 
-	private synchronized int fallDistance(final int index) { // NOT DONE
+	private synchronized int fallDistance(final int index) {
 		int row = objectArray[index][ROW];
 		final int initialRow = objectArray[index][ROW];
 		final int column = objectArray[index][COLUMN];
@@ -426,14 +425,14 @@ public class CandyEngine {
 	 * Basically returns -2 if it's the edge, -1 if there's nothing, otherwise returns the index.
 	 */
 	
-	private synchronized int getObject(final int objectIndex,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+	private synchronized int getObject(final int objectIndex,final int rowDirection,final int columnDirection) {
 		final int row = objectArray[objectIndex][ROW];
 		final int column = objectArray[objectIndex][COLUMN];
 		
 		return getObject(row,column,rowDirection,columnDirection);
 	}
 	
-	private synchronized int getObject(final int row,final int column,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+	private synchronized int getObject(final int row,final int column,final int rowDirection,final int columnDirection) {
 		if (!Conditionals.condition(row,column,rowDirection,columnDirection)) {
 			for (int i=0;i<objectArray.length;i++) {
 				if (row+rowDirection==objectArray[i][ROW]&&column+columnDirection==objectArray[i][COLUMN]) {
@@ -451,20 +450,20 @@ public class CandyEngine {
 	 * Basically returns -2 if its the edge, otherwise returns the background tile :D
 	 */
 	
-	private synchronized int getBackground(final int objectIndex,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+	private synchronized int getBackground(final int objectIndex,final int rowDirection,final int columnDirection) {
 		final int row = objectArray[objectIndex][ROW];
 		final int column = objectArray[objectIndex][COLUMN];
 		
 		return getBackground(row,column,rowDirection,columnDirection);
 	}
 	
-	private synchronized int getBackground(final int row,final int column,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+	private synchronized int getBackground(final int row,final int column,final int rowDirection,final int columnDirection) {
 		return Conditionals.condition(row,column,rowDirection,columnDirection)?EDGE:backgroundArray[row+rowDirection][column+columnDirection];
 	}
 
 	private static class Conditionals {
 		
-		private static boolean isLaser(int type) { // DONE/UNTESTED
+		private static boolean isLaser(int type) {
 			switch (type) {
 			case LASER_HORIZONTAL:
 			case LASER_VERTICAL:
@@ -475,7 +474,7 @@ public class CandyEngine {
 			}
 		}
 		
-		private static boolean isPipe(int type) { // DONE/UNTESTED
+		private static boolean isPipe(int type) {
 			switch (type) {
 			case PIPE_LEFT:
 			case PIPE_RIGHT:
@@ -487,7 +486,7 @@ public class CandyEngine {
 			}
 		}
 		
-		private static boolean isWall(int type) { // DONE/UNTESTED
+		private static boolean isWall(int type) {
 			switch (type) {
 			case WALL:
 			case WALL_ICE:
@@ -502,7 +501,7 @@ public class CandyEngine {
 		 * A master conditional statement.
 		 */
 		
-		private static boolean condition(final int row,final int column,final int rowDirection,final int columnDirection) { // DONE/UNTESTED
+		private static boolean condition(final int row,final int column,final int rowDirection,final int columnDirection) {
 			final boolean condition;
 			if (rowDirection==-1) {
 				condition=(row==0);
@@ -517,7 +516,7 @@ public class CandyEngine {
 		}
 	}
 	
-	private class GravityComparator implements Comparator<CandyAnimatedSprite> { // DONE/UNTESTED
+	private class GravityComparator implements Comparator<CandyAnimatedSprite> {
 		@Override
 		public synchronized int compare(CandyAnimatedSprite object1, CandyAnimatedSprite object2) {
 			return objectArray[object2.index][ROW]
@@ -529,7 +528,7 @@ public class CandyEngine {
 		}
 	}
 	
-	private class EnemyComparator implements Comparator<CandyAnimatedSprite> { // DONE/UNTESTED
+	private class EnemyComparator implements Comparator<CandyAnimatedSprite> {
 		final int catRow = objectArray[catIndex][ROW];
 		final int catColumn = objectArray[catIndex][COLUMN];
 		
