@@ -5,6 +5,7 @@ import javax.microedition.khronos.opengles.GL11;
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
 import org.anddev.andengine.entity.modifier.ColorModifier;
+import org.anddev.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier;
 import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier.Path;
@@ -14,11 +15,10 @@ import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.util.modifier.IModifier;
 import org.anddev.andengine.util.modifier.ease.EaseBounceOut;
 import org.anddev.andengine.util.modifier.ease.EaseLinear;
-import org.anddev.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;
 
 import android.util.Log;
+
 public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifierListener {
-//	public boolean stable = true;
 	public final int index,type;
 	private final TMXLayer tmxLayer;
 	private final int[][] objectArray,backgroundArray;

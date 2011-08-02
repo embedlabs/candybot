@@ -105,12 +105,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
 	
-//	private TextView loading_tv;
-//	private ImageView loading_iv;
-//	private RelativeLayout loading_rl_level;
-	
-//	private LoadTask loadTask;
-	
 	public CandyEngine candyEngine;
 	public TMXLayer tmxLayer;
 	
@@ -139,11 +133,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 		
 		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
-//		loading_tv = (TextView)findViewById(R.id.loading_tv_level);
-//		CandyUtils.setKomika(komika,loading_tv);
-//		
-//		loading_iv = (ImageView)findViewById(R.id.loading_iv_level);
-//		loading_rl_level = (RelativeLayout)findViewById(R.id.loading_rl_level);
 		
 		play = getString(R.string.play);
 		pan = getString(R.string.pan);
@@ -157,14 +146,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		PHONE_WIDTH = display.getWidth();
 		PHONE_HEIGHT = display.getHeight();
 	}
-	
-//	@Override
-//	public void onWindowFocusChanged(final boolean hasFocus) {
-//		if (hasFocus) {
-//			loading_iv.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate_infinitely));
-//		}
-//		super.onWindowFocusChanged(hasFocus);
-//	}
 	
 	@Override
 	public Engine onLoadEngine() {
@@ -284,7 +265,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		playCT = new ChangeableText(PHONE_WIDTH,10, andengine_komika,playMode?play:pan,Math.max(play.length(),pan.length())) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_UP&&gameStarted) {
+				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&gameStarted) {
 					if (!playMode) {
 						setText(play);
 						mSmoothCamera.setChaseEntity(candyEngine.cat);
@@ -307,7 +288,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		resetT = new Text(10,10,andengine_komika,getString(R.string.reset)){
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_UP&&gameStarted) {
+				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&&gameStarted) {
 					candyEngine.resetLevel();
 				}
 				return true;
@@ -315,6 +296,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		};
 		hud.attachChild(resetT);
 		hud.registerTouchArea(resetT);
+		
+		hud.setOnSceneTouchListener(this);
+		hud.setTouchAreaBindingEnabled(true);
 		
 		mSmoothCamera.setHUD(hud);
 		
@@ -346,8 +330,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		} else {
 			mPinchZoomDetector = null;
 		}
-		mScene.setOnSceneTouchListener(this);
-		mScene.setTouchAreaBindingEnabled(true);
 		
 		/**
 		 * LOGIC ENGINE
@@ -385,9 +367,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public void onLoadComplete() {
 		Log.v(TAG,"CandyLevel onLoadComplete()");
-		
-//		loadTask = new LoadTask(this,loading_rl_level,loading_iv,tutorialList);
-//		loadTask.execute();
 	}
 	
 	@Override
@@ -536,7 +515,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public void onDestroy() {
-//		loadTask.running=false;
 		super.onDestroy();
 		Log.i(TAG,"CandyLevel onDestroy()");
 	}

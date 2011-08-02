@@ -2,7 +2,6 @@ package com.embedstudios.candycat;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

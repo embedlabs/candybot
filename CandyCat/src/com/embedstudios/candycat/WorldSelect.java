@@ -49,7 +49,7 @@ public class WorldSelect extends Activity {
  
             i.setImageResource(mImageIds[position]);
             i.setScaleType(ImageView.ScaleType.FIT_XY);
-            i.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)); // To fill screen (view)
+            i.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT)); // To fill screen (view)
             RelativeLayout borderImg = new RelativeLayout(mContext); // Add Image view to relative layout
             borderImg.setPadding(1,1,1,1);								// Customize Border as your wish prem
             borderImg.setBackgroundColor(0xff000000);	

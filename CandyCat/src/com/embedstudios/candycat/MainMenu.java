@@ -73,15 +73,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	private Scene mScene;
 	private PhysicsWorld mPhysicsWorld;
 	
-	private SplashTask splashTask;	
-	
-//	@Override
-//	public void onWindowFocusChanged(final boolean hasFocus)  {
-//		super.onWindowFocusChanged(hasFocus);
-//		if (hasFocus) {
-//			button_play.requestFocus();
-//		}
-//	}
+	private SplashTask splashTask;
 	
 	@Override
 	public void onClick(View view) {
