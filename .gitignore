@@ -12,6 +12,7 @@
 # eclipse stuff
 *.project
 *.classpath
+CandyCat/proguard/*
 
 # android stuff
 */R.java
