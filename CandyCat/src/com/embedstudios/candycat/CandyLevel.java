@@ -118,9 +118,10 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private Text resetT;
 	
 	private float dragX,dragY;
-	public static float DRAG_DISTANCE_THRESHOLD = 50;
+	public static float DRAG_DISTANCE_THRESHOLD = 30;
 	public static final int CAMERA_SPEED = 200;
-	public static final long TAP_THRESHOLD = 250;
+	public static final int TAP_THRESHOLD = 225;
+	public static final int DOUBLE_TAP_THRESHOLD = 300;
 	private long time;
 	private boolean tapOptionEnabled = false;
 	
@@ -444,6 +445,16 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
 		if (gameStarted) {
 			if (!playMode) {
+				if (pSceneTouchEvent.isActionDown()) {
+					if (System.currentTimeMillis()-time<=DOUBLE_TAP_THRESHOLD) {
+						if (2*mSmoothCamera.getZoomFactor()>=1+PHONE_HEIGHT/HEIGHT) {
+							mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
+						} else {
+							mSmoothCamera.setZoomFactor(1);
+						}
+					}
+					time = System.currentTimeMillis();
+				}
 				if (mPinchZoomDetector != null) {
 					mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
 					if (mPinchZoomDetector.isZooming()) {

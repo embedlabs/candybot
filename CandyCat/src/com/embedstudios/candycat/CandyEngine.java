@@ -129,12 +129,12 @@ public class CandyEngine {
 			final int[] situationArray2 = situation(situationArray[OBJECT],rowDirection,columnDirection);
 			final int s2 = situationArray2[SITUATION];
 			switch (s2) {
-			case SQUARE_ENEMY:
-			case SQUARE_LASER_OCCUPIED:
-			case SQUARE_OCCUPIED:
-			case SQUARE_WALL:
-			case SQUARE_PIPE:
-			case SQUARE_EDGE: break;
+//			case SQUARE_ENEMY:
+//			case SQUARE_LASER_OCCUPIED:
+//			case SQUARE_OCCUPIED:
+//			case SQUARE_WALL:
+//			case SQUARE_PIPE:
+//			case SQUARE_EDGE: break;
 			
 			case SQUARE_LASER:
 			case SQUARE_EMPTY:
@@ -278,12 +278,12 @@ public class CandyEngine {
 				final int[] situationArray2 = situation(situationArray[OBJECT],rowDirection,columnDirection);
 				final int s2 = situationArray2[SITUATION];
 				switch (s2) {
-				case SQUARE_ENEMY:
-				case SQUARE_LASER_OCCUPIED:
-				case SQUARE_OCCUPIED:
-				case SQUARE_WALL:
-				case SQUARE_PIPE:
-				case SQUARE_EDGE: break;
+//				case SQUARE_ENEMY:
+//				case SQUARE_LASER_OCCUPIED:
+//				case SQUARE_OCCUPIED:
+//				case SQUARE_WALL:
+//				case SQUARE_PIPE:
+//				case SQUARE_EDGE: break;
 				
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
