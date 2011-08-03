@@ -118,14 +118,14 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private Text resetT;
 	
 	private float dragX,dragY;
-	public static float DRAG_DISTANCE_THRESHOLD = 30;
+	public static float DRAG_DISTANCE_THRESHOLD = 37.5f;
 	public static final int CAMERA_SPEED = 200;
 	public static final int TAP_THRESHOLD = 225;
 	public static final int DOUBLE_TAP_THRESHOLD = 300;
 	private long time;
 	private boolean tapOptionEnabled = false;
 	
-	public int teleporter1column = -1;
+//	public int teleporter1column = -1;
 	public int teleporter2column = -1;
 	
 	@Override
@@ -396,9 +396,10 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		backgroundArray[row][column]=pTMXTile.getGlobalTileID();
 		// keeps track of the background tiles
 		
-		if (backgroundArray[row][column]==CandyEngine.TELEPORTER_IN) {
-			teleporter1column=column;
-		} else if (backgroundArray[row][column]==CandyEngine.TELEPORTER_OUT) {
+//		if (backgroundArray[row][column]==CandyEngine.TELEPORTER_IN) {
+//			teleporter1column=column;
+//		} else
+		if (backgroundArray[row][column]==CandyEngine.TELEPORTER_OUT) {
 			teleporter2column=column;
 		}
 		
@@ -521,8 +522,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 				}
 			}
 		} else {
-			dragX=pSceneTouchEvent.getMotionEvent().getX();
-			dragY=pSceneTouchEvent.getMotionEvent().getY();
+			reset=true;
 		}
 		return true;
 	}

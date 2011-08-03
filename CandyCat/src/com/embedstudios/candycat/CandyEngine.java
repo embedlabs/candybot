@@ -89,20 +89,23 @@ public class CandyEngine {
 		}
 		
 		for (int i=0;i<objectArray.length;i++) {
-			final int type = objectArray[i][0];
-			if (type==CandyLevel.ENEMY) {
+			switch (objectArray[i][TYPE]) {
+			case CandyLevel.ENEMY:
 				enemyList.add(spriteList.get(i));
-			} else if (type==CandyLevel.CAT) {
+				break;
+			case CandyLevel.CAT:
 				catIndex = i;
 				cat = spriteList.get(i);
-				Log.i(TAG,"Cat located at row "+objectArray[i][1]+", column "+objectArray[i][2]);
-			} else if (type==CandyLevel.CANDY) {
+				Log.i(TAG,"Cat located at row "+objectArray[i][ROW]+", column "+objectArray[i][COLUMN]);
+				break;
+			case CandyLevel.CANDY:
 				candyIndex = i;
 				candy = spriteList.get(i);
-				gravityList.add(candy);
-				Log.i(TAG,"Candy located at row "+objectArray[i][1]+", column "+objectArray[i][2]);
-			} else if (type==CandyLevel.BOX||type==CandyLevel.BOMB) {
+				Log.i(TAG,"Candy located at row "+objectArray[i][ROW]+", column "+objectArray[i][COLUMN]);
+			case CandyLevel.BOX:
+			case CandyLevel.BOMB:
 				gravityList.add(spriteList.get(i));
+				break;
 			}
 		}
 		logArray("Start array:");
@@ -128,14 +131,7 @@ public class CandyEngine {
 		case SQUARE_OCCUPIED:
 			final int[] situationArray2 = situation(situationArray[OBJECT],rowDirection,columnDirection);
 			final int s2 = situationArray2[SITUATION];
-			switch (s2) {
-//			case SQUARE_ENEMY:
-//			case SQUARE_LASER_OCCUPIED:
-//			case SQUARE_OCCUPIED:
-//			case SQUARE_WALL:
-//			case SQUARE_PIPE:
-//			case SQUARE_EDGE: break;
-			
+			switch (s2) {			
 			case SQUARE_LASER:
 			case SQUARE_EMPTY:
 				if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
@@ -278,13 +274,6 @@ public class CandyEngine {
 				final int[] situationArray2 = situation(situationArray[OBJECT],rowDirection,columnDirection);
 				final int s2 = situationArray2[SITUATION];
 				switch (s2) {
-//				case SQUARE_ENEMY:
-//				case SQUARE_LASER_OCCUPIED:
-//				case SQUARE_OCCUPIED:
-//				case SQUARE_WALL:
-//				case SQUARE_PIPE:
-//				case SQUARE_EDGE: break;
-				
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
 					if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
@@ -297,11 +286,6 @@ public class CandyEngine {
 				}
 			}
 			break;
-			
-		case SQUARE_ENEMY:
-		case SQUARE_WALL:
-		case SQUARE_PIPE:
-		case SQUARE_EDGE: break;
 		
 		case SQUARE_TELEPORTER: /* TODO */ break;
 		}
@@ -424,7 +408,6 @@ public class CandyEngine {
 
 	private synchronized int fallDistance(final int index) {
 		int row = objectArray[index][ROW];
-		final int initialRow = objectArray[index][ROW];
 		final int column = objectArray[index][COLUMN];
 		int fallDistance = 0;
 		
@@ -441,12 +424,17 @@ public class CandyEngine {
 						candyBurned=true;
 					}
 				}
-				if (objectArray[index][TYPE]==CandyLevel.BOMB&&row-initialRow>=1&&Conditionals.isWall(result)) {
+				if (objectArray[index][TYPE]==CandyLevel.BOMB&&fallDistance>=1&&Conditionals.isWall(result)) {
 					spriteList.get(index).blowUp = true;
 				}
 				break;
 			}
 		}
+		
+		if (fallDistance>=1) {
+			candyLevel.reset=true;
+		}
+		
 		return fallDistance;
 	}
 
@@ -549,11 +537,11 @@ public class CandyEngine {
 		@Override
 		public synchronized int compare(CandyAnimatedSprite object1, CandyAnimatedSprite object2) {
 			return objectArray[object2.index][ROW]
-					+((objectArray[object2.index][COLUMN]==candyLevel.teleporter1column)?100:0)
-					+((objectArray[object2.index][COLUMN]==candyLevel.teleporter2column)?1000:0)
+//					+((objectArray[object2.index][COLUMN]==candyLevel.teleporter1column)?100:0)
+					+((objectArray[object2.index][COLUMN]==candyLevel.teleporter2column)?100:0)
 					-objectArray[object1.index][ROW]
-					-((objectArray[object1.index][COLUMN]==candyLevel.teleporter1column)?100:0)
-					-((objectArray[object1.index][COLUMN]==candyLevel.teleporter2column)?1000:0);
+//					-((objectArray[object1.index][COLUMN]==candyLevel.teleporter1column)?100:0)
+					-((objectArray[object1.index][COLUMN]==candyLevel.teleporter2column)?100:0);
 		}
 	}
 	
