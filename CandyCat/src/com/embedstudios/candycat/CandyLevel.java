@@ -503,6 +503,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 					}
 				}
 			}
+		} else {
+			dragX=pSceneTouchEvent.getMotionEvent().getX();
+			dragY=pSceneTouchEvent.getMotionEvent().getY();
 		}
 		return true;
 	}

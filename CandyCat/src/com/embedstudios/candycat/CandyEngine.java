@@ -71,6 +71,7 @@ public class CandyEngine {
 	
 	public boolean win = false;
 	public boolean death = false;
+	public boolean catMoved = false;
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevel candyLevel) {
 		this.spriteList = spriteList;
@@ -117,6 +118,7 @@ public class CandyEngine {
 		case SQUARE_LASER:
 			death = true;
 		case SQUARE_EMPTY:
+			catMoved = true;
 			move(rowDirection,columnDirection,catIndex);
 			break;
 			
@@ -137,6 +139,7 @@ public class CandyEngine {
 			case SQUARE_EMPTY:
 				if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
 					if (shouldDie) {death=true;}
+					catMoved = true;
 					move(rowDirection,columnDirection,catIndex,situationArray[OBJECT]);
 				}
 				break;
@@ -167,16 +170,21 @@ public class CandyEngine {
 		/**
 		 * ENEMIES MOVE
 		 */
-		if (enemyList.size()!=0&&!death&&enemyList.size()>0) {
-			Collections.sort(enemyList,new EnemyComparator());
-			for (CandyAnimatedSprite enemySprite:enemyList) {
-				if (!enemySprite.enemyDead) {
-					enemyMove(enemySprite);
+		
+		if (catMoved) {
+			if (enemyList.size()!=0&&!death&&enemyList.size()>0) {
+				Collections.sort(enemyList,new EnemyComparator());
+				for (CandyAnimatedSprite enemySprite:enemyList) {
+					if (!enemySprite.enemyDead) {
+						enemyMove(enemySprite);
+					}
 				}
 			}
+			
+			pause(10,enemyList);
+			
+			catMoved = false;
 		}
-		
-		pause(10,enemyList);
 		
 		/**
 		 * OBJECTS FALL
@@ -216,6 +224,10 @@ public class CandyEngine {
 		
 		final int verticalDiff=Math.abs(catRow-enemyRow);
 		final int horizontalDiff=Math.abs(catColumn-enemyColumn);
+		
+		if (verticalDiff==0&&horizontalDiff==0) {
+			return;
+		}
 		
 		final int rowDirection,columnDirection;
 		
@@ -360,6 +372,7 @@ public class CandyEngine {
 		 */
 		win = false;
 		death = false;
+		catMoved = false; // this variable should be false anyway if this method is being called, just in case
 		
 		candyLevel.gameStarted = true;
 		Log.i(TAG,"CandyEngine finished resetting.");
