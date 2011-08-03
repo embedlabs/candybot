@@ -10,8 +10,6 @@
 *.class
 
 # eclipse stuff
-*.project
-*.classpath
 CandyCat/proguard/*
 
 # android stuff
