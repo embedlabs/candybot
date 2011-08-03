@@ -88,7 +88,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
-	public SmoothCamera mSmoothCamera;
+	public CandyCamera mSmoothCamera;
 	private HUD hud;
 	
 	private Texture mObjectTexture;
@@ -153,7 +153,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public Engine onLoadEngine() {
 		Log.v(TAG,"CandyLevel onLoadEngine()");
 		
-		mSmoothCamera = new SmoothCamera((WIDTH-PHONE_WIDTH)/2,(HEIGHT-PHONE_HEIGHT)/2,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,100000);
+		mSmoothCamera = new CandyCamera((WIDTH-PHONE_WIDTH)/2,(HEIGHT-PHONE_HEIGHT)/2,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,100000);
 		mSmoothCamera.setZoomFactorDirect(PHONE_HEIGHT/HEIGHT);
 		mSmoothCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		mSmoothCamera.setBoundsEnabled(true);
@@ -449,9 +449,13 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 				if (pSceneTouchEvent.isActionDown()) {
 					if (System.currentTimeMillis()-time<=DOUBLE_TAP_THRESHOLD) {
 						if (2*mSmoothCamera.getZoomFactor()>=1+PHONE_HEIGHT/HEIGHT) {
+							mSmoothCamera.setCenter(WIDTH/2,HEIGHT/2);
 							mSmoothCamera.setZoomFactor(PHONE_HEIGHT/HEIGHT);
 						} else {
+							mSmoothCamera.convertCameraSceneToSceneTouchEvent(pSceneTouchEvent);
+							mSmoothCamera.setCenterDirect(pSceneTouchEvent.getX(),pSceneTouchEvent.getY());
 							mSmoothCamera.setZoomFactor(1);
+							return true;
 						}
 					}
 					time = System.currentTimeMillis();
@@ -485,8 +489,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 						reset = false;
 						dragX = motionX;
 						dragY = motionY;
-					}
-					if (motionX - dragX >= DRAG_DISTANCE_THRESHOLD) {
+					} else if (motionX - dragX >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
 						tapOptionEnabled = false;
