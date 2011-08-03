@@ -72,6 +72,7 @@ public class CandyEngine {
 	public boolean win = false;
 	public boolean death = false;
 	public boolean catMoved = false;
+	public boolean candyBurned = false;
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevel candyLevel) {
 		this.spriteList = spriteList;
@@ -204,12 +205,21 @@ public class CandyEngine {
 		/**
 		 * SPECIAL CIRCUMSTANCES
 		 */
-		if (win&&!death) {
+		if (win&&!(death||candyBurned)) {
 			logArray("End array:");
 			win();
-		} else if (death) {
+		} else if (death&&!candyBurned) {
 			cat.showDeadSprite();
 			pause(10,catIndex);
+			resetLevel();
+		} else if (candyBurned&&!death) {
+			candy.showDeadSprite();
+			pause(10,candyIndex);
+			resetLevel();
+		} else if (death&&candyBurned) {
+			cat.showDeadSprite();
+			candy.showDeadSprite();
+			pause(10,catIndex,candyIndex);
 			resetLevel();
 		} else {
 			candyLevel.gameStarted=true;
@@ -372,8 +382,10 @@ public class CandyEngine {
 		 */
 		win = false;
 		death = false;
+		candyBurned = false;
 		catMoved = false; // this variable should be false anyway if this method is being called, just in case
 		
+		candyLevel.reset = true;
 		candyLevel.gameStarted = true;
 		Log.i(TAG,"CandyEngine finished resetting.");
 	}
@@ -422,8 +434,12 @@ public class CandyEngine {
 				fallDistance++;
 				row++;
 			} else {
-				if (index==candyIndex&&Conditionals.isPipe(result)) {
-					win=true;
+				if (index==candyIndex) {
+					if (Conditionals.isPipe(result)) {
+						win=true;
+					} else if (result==WALL_LAVA) {
+						candyBurned=true;
+					}
 				}
 				if (objectArray[index][TYPE]==CandyLevel.BOMB&&row-initialRow>=1&&Conditionals.isWall(result)) {
 					spriteList.get(index).blowUp = true;

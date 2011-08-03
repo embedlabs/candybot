@@ -13,8 +13,8 @@ import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.util.modifier.IModifier;
-import org.anddev.andengine.util.modifier.ease.EaseBounceOut;
 import org.anddev.andengine.util.modifier.ease.EaseLinear;
+import org.anddev.andengine.util.modifier.ease.EaseQuadIn;
 
 import android.util.Log;
 
@@ -150,22 +150,6 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 		Log.v(TAG,"Item " + index + "'s path finished.");
 	}
 
-//	public synchronized boolean moveRight() {
-//		return move(0,1,objectArray);
-//	}
-//
-//	public synchronized boolean moveLeft() {
-//		return move(0,-1,objectArray);
-//	}
-//
-//	public synchronized boolean moveUp() {
-//		return move(-1,0,objectArray);
-//	}
-//
-//	public synchronized boolean moveDown() {
-//		return move(1,0,objectArray);
-//	}
-
 	public synchronized boolean fall(final int distance) {
 		if (distance>0) {
 			return move(distance, 0);
@@ -205,7 +189,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 		enemyDead=true;
 		// TODO Auto-generated method stub
 		// test this soon
-		registerEntityModifier(new ColorModifier(0.5f,1, 1, 1, 0, 1, 0, new IEntityModifierListener(){
+		registerEntityModifier(new ColorModifier(1,1, 1, 0.8f, 0.5f, 1, 0.5f, new IEntityModifierListener(){
 
 			@Override
 			public void onModifierStarted(IModifier<IEntity> pModifier, IEntity pItem) {}
@@ -216,7 +200,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 				hasModifier=false;
 			}
 			
-		}, EaseBounceOut.getInstance()));
+		}, EaseQuadIn.getInstance()));
 	}
 	
 	public synchronized void reset() {

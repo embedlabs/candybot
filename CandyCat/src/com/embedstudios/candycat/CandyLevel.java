@@ -112,6 +112,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private boolean playMode=true;
 	public boolean gameStarted=false;
 	private boolean resumeHasRun=false;
+	public boolean reset = false;
 	
 	private ChangeableText playCT;
 	private Text resetT;
@@ -468,6 +469,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 					dragX = motionX;
 					dragY = motionY;
 				} else if (pSceneTouchEvent.isActionMove()) {
+					if (reset) {
+						reset = false;
+						dragX = motionX;
+						dragY = motionY;
+					}
 					if (motionX - dragX >= DRAG_DISTANCE_THRESHOLD) {
 						dragX = motionX;
 						dragY = motionY;
