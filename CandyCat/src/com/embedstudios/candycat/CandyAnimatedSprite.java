@@ -7,7 +7,6 @@ import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
 import org.anddev.andengine.entity.modifier.ColorModifier;
 import org.anddev.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier;
-import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier.Path;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
@@ -18,12 +17,12 @@ import org.anddev.andengine.util.modifier.ease.EaseQuadIn;
 
 import android.util.Log;
 
-public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifierListener {
+public class CandyAnimatedSprite extends AnimatedSprite {
 	public final int index,type;
 	private final TMXLayer tmxLayer;
 	private final int[][] objectArray,backgroundArray;
-	private int candyLastMove = 0;
-	private int candyRotationState = 0;
+	public int candyLastMove = 0;
+	public int candyRotationState = 0;
 	public int lastDirectionalMove = 0; // TODO for ice block mechanics
 	
 	public boolean hasModifier = false;
@@ -87,7 +86,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 			objectArray[index][CandyEngine.COLUMN] += columnDelta;
 			registerEntityModifier(new PathModifier(1/(float)SPEED*((rowDelta!=0)?Math.abs(rowDelta):1)*((columnDelta!=0)?Math.abs(columnDelta):1), new Path(2).to(
 					getX(), getY()).to(getX() + (columnDelta * 64),
-					getY() + (rowDelta * 64)), this, EaseLinear.getInstance()));
+					getY() + (rowDelta * 64)), new CandyPathModifierListener(this), EaseLinear.getInstance()));
 			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
 			return true;
 		} else {
@@ -106,48 +105,6 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 		} else {
 			return false;
 		}
-	}
-
-	@Override
-	public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
-		if (type==CandyLevel.CANDY) {
-			if (candyLastMove == -1) {
-				animate(frameArray, candyRotationState*4, candyRotationState*4+3, false);
-			} else if (candyLastMove == 1) {
-				animate(frameArray, new int[] {
-					((candyRotationState + 1) * 4) % 12,
-					candyRotationState * 4 + 3,
-					candyRotationState * 4 + 2,
-					candyRotationState * 4 + 1
-				}, 0);
-			}
-		}
-	}
-
-	@Override
-	public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {}
-
-	@Override
-	public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {}
-
-	@Override
-	public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
-		if (type==CandyLevel.CANDY) {
-			if (candyLastMove==-1) {
-				candyRotationState = (candyRotationState + 1) % 3;
-			} else if (candyLastMove==1) {
-				candyRotationState = (candyRotationState + 2) % 3;
-			}
-			setCurrentTileIndex(candyRotationState * 4);
-		}
-		if (blowUp&&type==CandyLevel.BOMB) {
-			showBombAnim();
-		} else if (enemyDead&&type==CandyLevel.ENEMY) {
-			showDeadSprite();
-		} else {
-			hasModifier=false;
-		}
-		Log.v(TAG,"Item " + index + "'s path finished.");
 	}
 
 	public synchronized boolean fall(final int distance) {

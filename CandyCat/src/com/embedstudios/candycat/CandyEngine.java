@@ -143,7 +143,27 @@ public class CandyEngine {
 			}
 			break;
 		
-		case SQUARE_TELEPORTER: /* TODO */ break;
+		case SQUARE_TELEPORTER:
+			if (rowDirection==1) {
+				switch(situation(candyLevel.teleporter2row,candyLevel.teleporter2column,rowDirection,columnDirection)[SITUATION]) {
+				case SQUARE_LASER:
+					death=true;
+				case SQUARE_EMPTY:
+					catMoved=true;
+					teleport(candyLevel.teleporter2row+1,candyLevel.teleporter2column,catIndex);
+					break;
+				}
+			} else if (rowDirection==-1) {
+				switch(situation(candyLevel.teleporter1row,candyLevel.teleporter1column,rowDirection,columnDirection)[SITUATION]) {
+				case SQUARE_LASER:
+					death=true;
+				case SQUARE_EMPTY:
+					catMoved=true;
+					teleport(candyLevel.teleporter1row-1,candyLevel.teleporter1column,catIndex);
+					break;
+				}
+			}
+			break;
 		}
 		
 		settle();
@@ -158,7 +178,17 @@ public class CandyEngine {
 				spriteList.get(spriteIndex).move(glideDistance*rowDirection, glideDistance*columnDirection);
 			}
 		}
-		pause(10,spriteIndexes);
+		pause(5,spriteIndexes);
+	}
+	
+	private synchronized void teleport(final int row,final int column,Integer... spriteIndexes) {
+		for (int spriteIndex:spriteIndexes) {
+			spriteList.get(spriteIndex).teleport(row, column);
+			if (spriteIndex==catIndex) {
+				candyLevel.mCandyCamera.setMaxVelocity(3000, 3000);
+			}
+		}
+		pause(5,spriteIndexes);
 	}
 
 	private synchronized void settle() {
@@ -177,7 +207,7 @@ public class CandyEngine {
 				}
 			}
 			
-			pause(10,enemyList);
+			pause(5,enemyList);
 			
 			catMoved = false;
 		}
@@ -192,7 +222,7 @@ public class CandyEngine {
 			}
 		}
 		
-		pause(10,gravityList);
+		pause(5,gravityList);
 		
 		Log.v(TAG,"Settled.");
 		
@@ -205,16 +235,16 @@ public class CandyEngine {
 			win();
 		} else if (death&&!candyBurned) {
 			cat.showDeadSprite();
-			pause(10,catIndex);
+			pause(5,catIndex);
 			resetLevel();
 		} else if (candyBurned&&!death) {
 			candy.showDeadSprite();
-			pause(10,candyIndex);
+			pause(5,candyIndex);
 			resetLevel();
 		} else if (death&&candyBurned) {
 			cat.showDeadSprite();
 			candy.showDeadSprite();
-			pause(10,catIndex,candyIndex);
+			pause(5,catIndex,candyIndex);
 			resetLevel();
 		} else {
 			candyLevel.gameStarted=true;
@@ -284,13 +314,31 @@ public class CandyEngine {
 			}
 			break;
 		
-		case SQUARE_TELEPORTER: /* TODO */ break;
+		case SQUARE_TELEPORTER:
+			if (rowDirection==1) {
+				switch(situation(candyLevel.teleporter2row,candyLevel.teleporter2column,rowDirection,columnDirection)[SITUATION]) {
+				case SQUARE_LASER:
+					enemySprite.enemyDead = true;
+				case SQUARE_EMPTY:
+					teleport(candyLevel.teleporter2row+1,candyLevel.teleporter2column,enemySprite.index);
+					break;
+				}
+			} else if (rowDirection==-1) {
+				switch(getBackground(candyLevel.teleporter1row,candyLevel.teleporter1column,rowDirection,columnDirection)) {
+				case SQUARE_LASER:
+					enemySprite.enemyDead = true;
+				case SQUARE_EMPTY:
+					teleport(candyLevel.teleporter1row-1,candyLevel.teleporter1column,enemySprite.index);
+					break;
+				}
+			}
+			break;
 		}
 	}
 
 	private synchronized void win() {
 		candy.showCandyAnim();
-		while (candy.hasModifier) {pause(10);}
+		pause(5,candyIndex);
 		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
 		pause(2000);
 		candyLevel.finish(); // TODO change this
@@ -309,11 +357,13 @@ public class CandyEngine {
 	}
 
 	private void pause(final int milliseconds,final Integer... indexArray) {
-		final List<CandyAnimatedSprite> casList= new ArrayList<CandyAnimatedSprite>();
-		for (int index:indexArray) {
-			casList.add(spriteList.get(index));
+		if (indexArray.length>0) {
+			final List<CandyAnimatedSprite> casList= new ArrayList<CandyAnimatedSprite>();
+			for (int index:indexArray) {
+				casList.add(spriteList.get(index));
+			}
+			pause(milliseconds,casList);
 		}
-		pause(milliseconds,casList);
 	}
 	
 	private void pause(final int milliseconds,final List<CandyAnimatedSprite> casList) {
