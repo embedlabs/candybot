@@ -524,8 +524,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 					}
 				}
 			}
-		} else {
-			reset=true;
 		}
 		return true;
 	}

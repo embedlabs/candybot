@@ -145,10 +145,6 @@ public class CandyEngine {
 			}
 			break;
 		
-		case SQUARE_WALL:
-		case SQUARE_PIPE:
-		case SQUARE_EDGE: break;
-		
 		case SQUARE_TELEPORTER: /* TODO */ break;
 		}
 		
@@ -157,7 +153,12 @@ public class CandyEngine {
 	
 	private synchronized void move(final int rowDirection,final int columnDirection,Integer... spriteIndexes) {
 		for (int spriteIndex:spriteIndexes) {
-			spriteList.get(spriteIndex).move(rowDirection,columnDirection);
+			if (objectArray[spriteIndex][TYPE]!=CandyLevel.INERTIA_WALL) {
+				spriteList.get(spriteIndex).move(rowDirection,columnDirection);
+			} else {
+				final int glideDistance=glideDistance(spriteIndex,rowDirection,columnDirection);
+				spriteList.get(spriteIndex).move(glideDistance*rowDirection, glideDistance*columnDirection);
+			}
 		}
 		pause(10,spriteIndexes);
 	}
@@ -375,10 +376,23 @@ public class CandyEngine {
 	}
 
 	private synchronized int[] situation(final int index,final int rowDirection,final int columnDirection) {
-		final int s;
 		final int o = getObject(index,rowDirection,columnDirection);
 		final int b = getBackground(index,rowDirection,columnDirection);
+		final int s = situationProcessing(o,b,rowDirection);
 		
+		return new int[]{s,o,b};
+	}
+	
+	private synchronized int[] situation(final int row,final int column,final int rowDirection,final int columnDirection) {
+		final int o = getObject(row,column,rowDirection,columnDirection);
+		final int b = getBackground(row,column,rowDirection,columnDirection);
+		final int s = situationProcessing(o,b,rowDirection);
+		
+		return new int[]{s,o,b};
+	}
+	
+	private int situationProcessing(final int o,final int b,final int rowDirection) {
+		final int s;
 		if (b==EDGE||o==EDGE) {
 			s = SQUARE_EDGE;
 		} else if (o==NO_OBJECT) {
@@ -402,8 +416,30 @@ public class CandyEngine {
 				s = SQUARE_OCCUPIED;
 			}
 		}
+		return s;
+	}
+	
+	private synchronized int glideDistance(final int index,final int rowDirection,final int columnDirection) {
+		int glideDistance = 0;
+		int row = objectArray[index][ROW];
+		int column = objectArray[index][COLUMN];
 		
-		return new int[]{s,o,b}; // easy to memorize
+		outer:
+		while (true) {
+			final int[] situationArray = situation(row,column,rowDirection,columnDirection);
+			switch (situationArray[SITUATION]) {
+			case SQUARE_EMPTY:
+			case SQUARE_LASER:
+				glideDistance++;
+				row+=rowDirection;
+				column+=columnDirection;
+				break;
+			default:
+				break outer;
+			}
+		}
+		
+		return glideDistance;
 	}
 
 	private synchronized int fallDistance(final int index) {
@@ -411,23 +447,31 @@ public class CandyEngine {
 		final int column = objectArray[index][COLUMN];
 		int fallDistance = 0;
 		
+		outer:
 		while (true) {
-			final int result = getBackground(row,column,ROW_DOWN,0);
-			if ((result==EMPTY_TILE||Conditionals.isLaser(result))&&getObject(row,column,ROW_DOWN,0)==NO_OBJECT) {
+			final int[] situationArray = situation(row,column, ROW_DOWN, 0);
+			switch (situationArray[SITUATION]) {
+			case SQUARE_EMPTY:
+			case SQUARE_LASER:
 				fallDistance++;
 				row++;
-			} else {
-				if (index==candyIndex) {
-					if (Conditionals.isPipe(result)) {
-						win=true;
-					} else if (result==WALL_LAVA) {
-						candyBurned=true;
-					}
-				}
-				if (objectArray[index][TYPE]==CandyLevel.BOMB&&fallDistance>=1&&Conditionals.isWall(result)) {
-					spriteList.get(index).blowUp = true;
-				}
 				break;
+			case SQUARE_PIPE:
+				if (index==candyIndex) {
+					win = true;
+				}
+				break outer;
+			case SQUARE_WALL:
+				if (objectArray[index][TYPE]==CandyLevel.BOMB&&fallDistance>=1) {
+					spriteList.get(index).blowUp = true;
+				} else if (situationArray[BACKGROUND]==WALL_LAVA&&index==candyIndex) {
+					candyBurned = true;
+				}
+				break outer;
+			case SQUARE_TELEPORTER:
+				/* TODO */
+				break outer;
+			default: break outer;
 			}
 		}
 		
@@ -503,16 +547,16 @@ public class CandyEngine {
 			}
 		}
 		
-		private static boolean isWall(int type) {
-			switch (type) {
-			case WALL:
-			case WALL_ICE:
-			case WALL_LAVA:
-				return true;
-			default:
-				return false;
-			}
-		}
+//		private static boolean isWall(int type) {
+//			switch (type) {
+//			case WALL:
+//			case WALL_ICE:
+//			case WALL_LAVA:
+//				return true;
+//			default:
+//				return false;
+//			}
+//		}
 
 		/**
 		 * A master conditional statement.
