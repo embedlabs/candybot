@@ -7,15 +7,14 @@ import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import android.util.Log;
 
 public class CandyPathModifierListener implements IPathModifierListener {
+	final CandyAnimatedSprite cas;
 	
-	public CandyPathModifierListener() {
-		// TODO
+	public CandyPathModifierListener(final CandyAnimatedSprite cas) {
+		this.cas=cas;
 	}
 	
 	@Override
 	public void onPathStarted(PathModifier pPathModifier, IEntity pEntity) {
-		final CandyAnimatedSprite cas = (CandyAnimatedSprite)pEntity;
-		
 		if (cas.type==CandyLevel.CANDY) {
 			if (cas.candyLastMove == -1) {
 				cas.animate(CandyAnimatedSprite.frameArray, cas.candyRotationState*4, cas.candyRotationState*4+3, false);
@@ -38,8 +37,6 @@ public class CandyPathModifierListener implements IPathModifierListener {
 
 	@Override
 	public void onPathFinished(PathModifier pPathModifier, IEntity pEntity) {
-		final CandyAnimatedSprite cas = (CandyAnimatedSprite)pEntity;
-
 		if (cas.type==CandyLevel.CANDY) {
 			if (cas.candyLastMove==-1) {
 				cas.candyRotationState = (cas.candyRotationState + 1) % 3;
