@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.microedition.khronos.opengles.GL11;
 
 import org.anddev.andengine.engine.Engine;
-import org.anddev.andengine.engine.camera.SmoothCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;

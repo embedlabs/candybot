@@ -140,8 +140,6 @@ public class CandyEngine {
 					move(rowDirection,columnDirection,catIndex,situationArray[OBJECT]);
 				}
 				break;
-				
-			case SQUARE_TELEPORTER: /* TODO */ break;
 			}
 			break;
 		
@@ -282,8 +280,6 @@ public class CandyEngine {
 						move(rowDirection,columnDirection,enemySprite.index,situationArray[OBJECT]);
 					}
 					break;
-					
-				case SQUARE_TELEPORTER: /* TODO */ break;
 				}
 			}
 			break;

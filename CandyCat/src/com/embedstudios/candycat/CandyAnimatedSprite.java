@@ -187,8 +187,7 @@ public class CandyAnimatedSprite extends AnimatedSprite implements IPathModifier
 		hasModifier=true;
 		objectArray[index][CandyEngine.ROW]=-1;
 		enemyDead=true;
-		// TODO Auto-generated method stub
-		// test this soon
+
 		registerEntityModifier(new ColorModifier(1,1, 1, 0.8f, 0.5f, 1, 0.5f, new IEntityModifierListener(){
 
 			@Override
