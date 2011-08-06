@@ -85,8 +85,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 				.putExtra("com.embedstudios.candycat.level", Integer.valueOf(((EditText)findViewById(R.id.edittext_level)).getText().toString())));
 			} catch (Exception e) {
 			startActivity(new Intent(this,CandyLevel.class)
-				.putExtra("com.embedstudios.candycat.world", 1)
-				.putExtra("com.embedstudios.candycat.level", 1));
+				.putExtra("com.embedstudios.candycat.world", 2)
+				.putExtra("com.embedstudios.candycat.level", 17));
 			}
 			break;
 		case R.id.button_achievements:

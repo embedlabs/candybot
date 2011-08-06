@@ -75,7 +75,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		return rvb;
 	}
 
-	public synchronized boolean move(final int rowDelta, final int columnDelta) {
+	public synchronized boolean move(final int rowDelta, final int columnDelta, final boolean rotate) {
 		if (!hasModifier) {
 			hasModifier=true;
 			candyLastMove = columnDelta;
@@ -86,12 +86,16 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			objectArray[index][CandyEngine.COLUMN] += columnDelta;
 			registerEntityModifier(new PathModifier(1/(float)SPEED*((rowDelta!=0)?Math.abs(rowDelta):1)*((columnDelta!=0)?Math.abs(columnDelta):1), new Path(2).to(
 					getX(), getY()).to(getX() + (columnDelta * 64),
-					getY() + (rowDelta * 64)), new CandyPathModifierListener(this), EaseLinear.getInstance()));
+					getY() + (rowDelta * 64)), new CandyPathModifierListener(this,rotate), EaseLinear.getInstance()));
 			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	public synchronized boolean move(final int rowDelta, final int columnDelta) {
+		return move(rowDelta,columnDelta,true);
 	}
 	
 	public synchronized boolean teleport(final int newRow,final int newColumn) {
@@ -176,6 +180,19 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			animate(catDurations, catFrames, -1);
 		} else if (type==CandyLevel.ENEMY) {
 			animate(enemyDurations,enemyFrames,-1);
+		}
+	}
+
+	public synchronized boolean doQueue(final int[] command) {
+		switch (command[CandyEngine.COMMAND]) {
+		case CandyEngine.TELEPORT:
+			return teleport(command[CandyEngine.ROW],command[CandyEngine.COLUMN]);
+		case CandyEngine.MOVE_ICE:
+			return move(command[CandyEngine.ROW],command[CandyEngine.COLUMN],false);
+		case CandyEngine.FALL:
+			return fall(command[CandyEngine.ROW]);
+		default:
+			return false;
 		}
 	}
 }

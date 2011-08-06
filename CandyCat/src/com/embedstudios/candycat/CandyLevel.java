@@ -26,10 +26,8 @@ import org.anddev.andengine.entity.text.Text;
 import org.anddev.andengine.entity.util.FPSCounter;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
-import org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector;
 import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
-import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
@@ -103,10 +101,10 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public boolean playMode=true;
 	public boolean gameStarted=false;
 	private boolean resumeHasRun=false;
-	public boolean reset = false;
+	public boolean resetDragDistance = false;
 	
-	private ChangeableText playCT;
-	private Text resetT;
+	private ChangeableText playChangeableText;
+	private Text resetLevelText;
 	
 	public static final int CAMERA_SPEED = 200;
 	
@@ -258,7 +256,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10, PHONE_HEIGHT-fpsText.getHeight()-10);
 		hud.attachChild(fpsText);
 		
-		playCT = new ChangeableText(PHONE_WIDTH,10, andengine_komika,playMode?play:pan,Math.max(play.length(),pan.length())) {
+		playChangeableText = new ChangeableText(PHONE_WIDTH,10, andengine_komika,playMode?play:pan,Math.max(play.length(),pan.length())) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&gameStarted) {
@@ -272,16 +270,17 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 						mCandyCamera.setMaxVelocity(1000,1000);
 						mCandyCamera.setChaseEntity(null);
 						playMode=false;
+						resetDragDistance=true;
 					}
 				}
 				return true;
 			}
 		};
-		playCT.setPosition(PHONE_WIDTH-playCT.getWidth()-10,10);
-		hud.attachChild(playCT);
-		hud.registerTouchArea(playCT);
+		playChangeableText.setPosition(PHONE_WIDTH-playChangeableText.getWidth()-10,10);
+		hud.attachChild(playChangeableText);
+		hud.registerTouchArea(playChangeableText);
 		
-		resetT = new Text(10,10,andengine_komika,getString(R.string.reset)){
+		resetLevelText = new Text(10,10,andengine_komika,getString(R.string.reset)){
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&&gameStarted) {
@@ -290,11 +289,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 				return true;
 			}
 		};
-		hud.attachChild(resetT);
-		hud.registerTouchArea(resetT);
-		
-		hud.setOnSceneTouchListener(new CandyTouchSystem(this));
+		hud.attachChild(resetLevelText);
+		hud.registerTouchArea(resetLevelText);
+
 		hud.setTouchAreaBindingEnabled(true);
+		hud.setOnSceneTouchListener(new CandyTouchSystem(this));
 		
 		mCandyCamera.setHUD(hud);
 		

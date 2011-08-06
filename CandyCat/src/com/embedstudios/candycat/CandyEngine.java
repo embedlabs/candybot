@@ -3,6 +3,7 @@ package com.embedstudios.candycat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import android.util.Log;
@@ -37,6 +38,10 @@ public class CandyEngine {
 	public static final int SQUARE_WALL = 27;
 	public static final int SQUARE_ENEMY = 28;
 	
+	public static final int TELEPORT = 40;
+	public static final int MOVE_ICE = 41;
+	public static final int FALL = 42;
+	
 	public static final int ROW_UP = -1;
 	public static final int ROW_DOWN = 1;
 	public static final int COLUMN_LEFT = -1;
@@ -45,6 +50,7 @@ public class CandyEngine {
 	/**
 	 * FOR ARRAY ACCESS
 	 */
+	public static final int COMMAND = 0;
 	public static final int TYPE = 0;
 	public static final int ROW = 1;
 	public static final int COLUMN = 2;
@@ -53,6 +59,7 @@ public class CandyEngine {
 	public static final int OBJECT = 1;
 	public static final int BACKGROUND = 2;
 
+	private final List<LinkedList<int[]>> spriteQueue = new ArrayList<LinkedList<int[]>>();
 	private final List<CandyAnimatedSprite> spriteList;
 	private final List<CandyAnimatedSprite> enemyList = new ArrayList<CandyAnimatedSprite>();
 	private final List<CandyAnimatedSprite> gravityList = new ArrayList<CandyAnimatedSprite>();
@@ -60,15 +67,15 @@ public class CandyEngine {
 	private final int[][] objectArray;
 	private final int[][] backgroundArray;
 	private final int[][] originalBackgroundArray;
-
+	
+	private final CandyLevel candyLevel;
+	
 	CandyAnimatedSprite cat,candy;
 	int catIndex = -1;
 	int candyIndex = -1;
 
 	private static final String TAG = CandyUtils.TAG;
 
-	private final CandyLevel candyLevel;
-	
 	public boolean win = false;
 	public boolean death = false;
 	public boolean catMoved = false;
@@ -104,6 +111,7 @@ public class CandyEngine {
 				Log.i(TAG,"Candy located at row "+objectArray[i][ROW]+", column "+objectArray[i][COLUMN]);
 			case CandyLevel.BOX:
 			case CandyLevel.BOMB:
+				spriteQueue.add(new LinkedList<int[]>());
 				gravityList.add(spriteList.get(i));
 				break;
 			}
@@ -150,7 +158,7 @@ public class CandyEngine {
 					death=true;
 				case SQUARE_EMPTY:
 					catMoved=true;
-					teleport(candyLevel.teleporter2row+1,candyLevel.teleporter2column,catIndex);
+					teleport(candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column,catIndex);
 					break;
 				}
 			} else if (rowDirection==-1) {
@@ -159,7 +167,7 @@ public class CandyEngine {
 					death=true;
 				case SQUARE_EMPTY:
 					catMoved=true;
-					teleport(candyLevel.teleporter1row-1,candyLevel.teleporter1column,catIndex);
+					teleport(candyLevel.teleporter1row+ROW_UP,candyLevel.teleporter1column,catIndex);
 					break;
 				}
 			}
@@ -218,11 +226,11 @@ public class CandyEngine {
 		Collections.sort(gravityList,new GravityComparator());
 		for (CandyAnimatedSprite gSprite:gravityList) {
 			if (objectArray[gSprite.index][1]!=-1) {
-				gSprite.fall(fallDistance(gSprite.index));
+				gSprite.fall(fallDistance(gSprite.index,gravityList.indexOf(gSprite)));
 			}
 		}
 		
-		pause(5,gravityList);
+		pauseFall(5);
 		
 		Log.v(TAG,"Settled.");
 		
@@ -320,7 +328,7 @@ public class CandyEngine {
 				case SQUARE_LASER:
 					enemySprite.enemyDead = true;
 				case SQUARE_EMPTY:
-					teleport(candyLevel.teleporter2row+1,candyLevel.teleporter2column,enemySprite.index);
+					teleport(candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column,enemySprite.index);
 					break;
 				}
 			} else if (rowDirection==-1) {
@@ -328,7 +336,7 @@ public class CandyEngine {
 				case SQUARE_LASER:
 					enemySprite.enemyDead = true;
 				case SQUARE_EMPTY:
-					teleport(candyLevel.teleporter1row-1,candyLevel.teleporter1column,enemySprite.index);
+					teleport(candyLevel.teleporter1row+ROW_UP,candyLevel.teleporter1column,enemySprite.index);
 					break;
 				}
 			}
@@ -367,13 +375,8 @@ public class CandyEngine {
 	}
 	
 	private void pause(final int milliseconds,final List<CandyAnimatedSprite> casList) {
-		while (true) {
-			try {
-				Thread.sleep(milliseconds);
-			} catch (InterruptedException e) {
-				Log.e(TAG,"Thread.sleep() failed.",e);
-			}
-			if (casList.size()>0) {
+		if (casList.size()>0) {
+			while (true) {
 				for (CandyAnimatedSprite cas:casList) {
 					if (cas.hasModifier) {
 						break;
@@ -381,10 +384,44 @@ public class CandyEngine {
 						return;
 					}
 				}
-			} else {
-				return;
+				try {
+					Thread.sleep(milliseconds);
+				} catch (InterruptedException e) {
+					Log.e(TAG,"Thread.sleep() failed.",e);
+				}
 			}
 		}
+	}
+	
+	private synchronized void pauseFall(final int milliseconds) {
+		if (gravityList.size()>0) {
+			while (true) {
+				for (int i=0;i<gravityList.size();i++) {
+					if (!gravityList.get(i).hasModifier) {
+						if (spriteQueue.get(i).size()>0) {
+							gravityList.get(i).doQueue(spriteQueue.get(i).remove());
+							Log.i(TAG,"Queue task done. "+spriteQueue.get(i).size());
+						} else if (i==gravityList.size()-1&&queueAllEmpty()) {
+							return;
+						}
+					}
+				}
+				try {
+					Thread.sleep(milliseconds);
+				} catch (InterruptedException e) {
+					Log.e(TAG,"Thread.sleep() failed.",e);
+				}
+			}
+		}
+	}
+	
+	public boolean queueAllEmpty() {
+		for (LinkedList<int[]> ll:spriteQueue) {
+			if (ll.size()>0) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public synchronized void resetLevel() {
@@ -488,9 +525,11 @@ public class CandyEngine {
 		return glideDistance;
 	}
 
-	private synchronized int fallDistance(final int index) {
-		int row = objectArray[index][ROW];
-		final int column = objectArray[index][COLUMN];
+	private synchronized int fallDistance(final int index,final int gIndex) {
+		return fallDistance(index,gIndex,objectArray[index][ROW],objectArray[index][COLUMN]);
+	}
+	
+	private synchronized int fallDistance(final int index,final int gIndex,int row,final int column) {
 		int fallDistance = 0;
 		
 		outer:
@@ -515,14 +554,22 @@ public class CandyEngine {
 				}
 				break outer;
 			case SQUARE_TELEPORTER:
-				/* TODO */
+				switch(situation(candyLevel.teleporter2row,candyLevel.teleporter2column,ROW_DOWN,0)[SITUATION]) {
+				case SQUARE_LASER:
+				case SQUARE_EMPTY:
+					spriteQueue.get(gIndex).add(new int[]{TELEPORT,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column});
+					Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+					spriteQueue.get(gIndex).add(new int[]{FALL,fallDistance(index,gIndex,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column),0});
+					Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+					break;
+				}
 				break outer;
 			default: break outer;
 			}
 		}
 		
 		if (fallDistance>=1) {
-			candyLevel.reset=true;
+			candyLevel.resetDragDistance=true;
 		}
 		
 		return fallDistance;
@@ -592,17 +639,6 @@ public class CandyEngine {
 				return false;
 			}
 		}
-		
-//		private static boolean isWall(int type) {
-//			switch (type) {
-//			case WALL:
-//			case WALL_ICE:
-//			case WALL_LAVA:
-//				return true;
-//			default:
-//				return false;
-//			}
-//		}
 
 		/**
 		 * A master conditional statement.
@@ -627,10 +663,8 @@ public class CandyEngine {
 		@Override
 		public synchronized int compare(CandyAnimatedSprite object1, CandyAnimatedSprite object2) {
 			return objectArray[object2.index][ROW]
-//					+((objectArray[object2.index][COLUMN]==candyLevel.teleporter1column)?100:0)
 					+((objectArray[object2.index][COLUMN]==candyLevel.teleporter2column)?100:0)
 					-objectArray[object1.index][ROW]
-//					-((objectArray[object1.index][COLUMN]==candyLevel.teleporter1column)?100:0)
 					-((objectArray[object1.index][COLUMN]==candyLevel.teleporter2column)?100:0);
 		}
 	}

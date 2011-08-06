@@ -112,8 +112,8 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 					dragX = motionX;
 					dragY = motionY;
 				} else if (pSceneTouchEvent.isActionMove()) {
-					if (candyLevel.reset) {
-						candyLevel.reset = false;
+					if (candyLevel.resetDragDistance) {
+						candyLevel.resetDragDistance = false;
 						dragX = motionX;
 						dragY = motionY;
 						return true;
