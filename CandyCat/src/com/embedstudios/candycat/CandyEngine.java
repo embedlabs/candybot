@@ -453,7 +453,7 @@ public class CandyEngine {
 		candyBurned = false;
 		catMoved = false; // this variable should be false anyway if this method is being called, just in case
 		
-		candyLevel.reset = true;
+		candyLevel.resetDragDistance = true;
 		candyLevel.gameStarted = true;
 		Log.i(TAG,"CandyEngine finished resetting.");
 	}
