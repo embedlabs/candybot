@@ -105,6 +105,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			objectArray[index][CandyEngine.COLUMN] = newColumn;
 			setPosition(64*newColumn, 64*newRow);
 			hasModifier=false;
+			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
 			return true;
 		} else {
 			return false;
@@ -187,7 +188,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		switch (command[CandyEngine.COMMAND]) {
 		case CandyEngine.TELEPORT:
 			return teleport(command[CandyEngine.ROW],command[CandyEngine.COLUMN]);
-		case CandyEngine.MOVE_ICE:
+		case CandyEngine.SLIDE_ICE:
 			return move(command[CandyEngine.ROW],command[CandyEngine.COLUMN],false);
 		case CandyEngine.FALL:
 			return fall(command[CandyEngine.ROW]);

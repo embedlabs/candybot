@@ -39,7 +39,7 @@ public class CandyEngine {
 	public static final int SQUARE_ENEMY = 28;
 	
 	public static final int TELEPORT = 40;
-	public static final int MOVE_ICE = 41;
+	public static final int SLIDE_ICE = 41;
 	public static final int FALL = 42;
 	
 	public static final int ROW_UP = -1;
@@ -80,6 +80,9 @@ public class CandyEngine {
 	public boolean death = false;
 	public boolean catMoved = false;
 	public boolean candyBurned = false;
+	
+	private boolean teleportationRequired = false;
+	private boolean slidingOnIceRequired = false;
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevel candyLevel) {
 		this.spriteList = spriteList;
@@ -225,8 +228,47 @@ public class CandyEngine {
 		 */
 		Collections.sort(gravityList,new GravityComparator());
 		for (CandyAnimatedSprite gSprite:gravityList) {
-			if (objectArray[gSprite.index][1]!=-1) {
-				gSprite.fall(fallDistance(gSprite.index,gravityList.indexOf(gSprite)));
+			if (objectArray[gSprite.index][ROW]!=-1) {
+				final int gIndex = gravityList.indexOf(gSprite);
+				int tempRow = objectArray[gSprite.index][ROW];
+				int tempColumn = objectArray[gSprite.index][COLUMN];
+				
+				final int fallDistance = fallDistance(gSprite.index,gIndex);
+				tempRow+=fallDistance;
+				gSprite.fall(fallDistance);
+				
+				while (true) {
+					if (teleportationRequired) {
+						teleportationRequired = false;
+						
+						tempRow = candyLevel.teleporter2row+ROW_DOWN;
+						tempColumn = candyLevel.teleporter2column;
+						spriteQueue.get(gIndex).add(new int[]{TELEPORT,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column});
+						Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+						
+						final int fallDistance2 = fallDistance(gSprite.index,gIndex,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column);
+						tempRow+=fallDistance2;
+						spriteQueue.get(gIndex).add(new int[]{FALL,fallDistance2,0});
+						Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+						continue;
+					} else if (slidingOnIceRequired) {
+						slidingOnIceRequired = false;
+						
+						final int slideDistance = slideDistance(tempRow,tempColumn,gSprite.lastDirectionalMove);
+						tempColumn+=(slideDistance*gSprite.lastDirectionalMove);
+						spriteQueue.get(gIndex).add(new int[]{SLIDE_ICE,0,slideDistance*gSprite.lastDirectionalMove});
+						Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+						
+						final int fallDistance2 = fallDistance(gSprite.index,gIndex,tempRow,tempColumn);
+						tempRow+=fallDistance2;
+						spriteQueue.get(gIndex).add(new int[]{FALL,fallDistance2,0});
+						Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+						
+						continue;
+					} else {
+						break;
+					}
+				}
 			}
 		}
 		
@@ -401,8 +443,11 @@ public class CandyEngine {
 						if (spriteQueue.get(i).size()>0) {
 							gravityList.get(i).doQueue(spriteQueue.get(i).remove());
 							Log.i(TAG,"Queue task done. "+spriteQueue.get(i).size());
-						} else if (i==gravityList.size()-1&&queueAllEmpty()) {
-							return;
+						} else {
+							gravityList.get(i).lastDirectionalMove = 0;
+							if (i==gravityList.size()-1&&queueAllEmpty()) {
+								return;
+							}
 						}
 					}
 				}
@@ -524,6 +569,30 @@ public class CandyEngine {
 		
 		return glideDistance;
 	}
+	
+	private synchronized int slideDistance(final int row,int column,final int columnDirection) { // TODO make sure that an object has moved sideways during the current turn in order to slide on ice...
+		int slideDistance = 0;
+		if (columnDirection!=0) {
+			outer:
+				while (true) {
+					if (getBackground(row,column,ROW_DOWN,0)==WALL_ICE) {
+						final int[] situationArray = situation(row,column,0,columnDirection);
+						switch (situationArray[SITUATION]) {
+						case SQUARE_EMPTY:
+						case SQUARE_LASER:
+							slideDistance++;
+							column+=columnDirection;
+							break;
+						default: break outer;
+						}
+					} else {
+						break;
+					}
+				}
+		}
+		
+		return slideDistance;
+	}
 
 	private synchronized int fallDistance(final int index,final int gIndex) {
 		return fallDistance(index,gIndex,objectArray[index][ROW],objectArray[index][COLUMN]);
@@ -551,16 +620,15 @@ public class CandyEngine {
 					spriteList.get(index).blowUp = true;
 				} else if (situationArray[BACKGROUND]==WALL_LAVA&&index==candyIndex) {
 					candyBurned = true;
+				} else if (situationArray[BACKGROUND]==WALL_ICE&&spriteList.get(index).lastDirectionalMove!=0) {
+					slidingOnIceRequired = true;
 				}
 				break outer;
 			case SQUARE_TELEPORTER:
 				switch(situation(candyLevel.teleporter2row,candyLevel.teleporter2column,ROW_DOWN,0)[SITUATION]) {
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
-					spriteQueue.get(gIndex).add(new int[]{TELEPORT,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column});
-					Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
-					spriteQueue.get(gIndex).add(new int[]{FALL,fallDistance(index,gIndex,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column),0});
-					Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+					teleportationRequired=true;
 					break;
 				}
 				break outer;
