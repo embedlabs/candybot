@@ -84,9 +84,10 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			}
 			objectArray[index][CandyEngine.ROW] += rowDelta;
 			objectArray[index][CandyEngine.COLUMN] += columnDelta;
-			registerEntityModifier(new PathModifier(1/(float)SPEED*((rowDelta!=0)?Math.abs(rowDelta):1)*((columnDelta!=0)?Math.abs(columnDelta):1), new Path(2).to(
-					getX(), getY()).to(getX() + (columnDelta * 64),
-					getY() + (rowDelta * 64)), new CandyPathModifierListener(this,rotate), EaseLinear.getInstance()));
+			registerEntityModifier(new PathModifier(1/(float)SPEED*((rowDelta!=0)?Math.abs(rowDelta):1)*((columnDelta!=0)?Math.abs(columnDelta):1),
+					new Path(2).to(getX(),getY())
+						.to(getX()+(columnDelta*64),getY()+(rowDelta*64)),
+					new CandyPathModifierListener(this,rotate), EaseLinear.getInstance()));
 			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
 			return true;
 		} else {
@@ -105,7 +106,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			objectArray[index][CandyEngine.COLUMN] = newColumn;
 			setPosition(64*newColumn, 64*newRow);
 			hasModifier=false;
-			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
+			Log.d(TAG, "Item " + index + " to: " + objectArray[index][CandyEngine.ROW] + ", " + objectArray[index][CandyEngine.COLUMN]);
 			return true;
 		} else {
 			return false;
@@ -135,7 +136,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			public void onAnimationEnd(AnimatedSprite pAnimatedSprite) {
 				setVisible(false);
 				tmxLayer.getTMXTile(objectArray[index][CandyEngine.COLUMN], objectArray[index][CandyEngine.ROW]+1).setTextureRegion(null);
-				backgroundArray[objectArray[index][CandyEngine.ROW]+1][objectArray[index][CandyEngine.COLUMN]]=0;
+				backgroundArray[objectArray[index][CandyEngine.ROW]+1][objectArray[index][CandyEngine.COLUMN]]=CandyEngine.EMPTY_TILE;
 				objectArray[index][CandyEngine.ROW]=-1;
 
 				hasModifier = false;
@@ -170,10 +171,13 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		hasModifier = false;
 		blowUp = false;
 		enemyDead = false;
+		candyLastMove = 0;
+		candyRotationState = 0;
+		lastDirectionalMove = 0;
 		stopAnimation();
 		setPosition(initialColumn*64,initialRow*64);
-		objectArray[index][1] = initialRow;
-		objectArray[index][2] = initialColumn;
+		objectArray[index][CandyEngine.ROW] = initialRow;
+		objectArray[index][CandyEngine.COLUMN] = initialColumn;
 		setCurrentTileIndex(0);
 		setVisible(true);
 
