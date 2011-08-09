@@ -8,8 +8,8 @@ import org.anddev.andengine.extension.input.touch.detector.PinchZoomDetector.IPi
 import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.input.touch.detector.ScrollDetector;
-import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 import org.anddev.andengine.input.touch.detector.ScrollDetector.IScrollDetectorListener;
+import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 
 import android.view.MotionEvent;
 
@@ -37,7 +37,7 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 		
 		mScrollDetector = new SurfaceScrollDetector(this);
 		
-		if(MultiTouch.isSupportedByAndroidVersion()) {
+		if (MultiTouch.isSupportedByAndroidVersion()) {
 			try {
 				mPinchZoomDetector = new PinchZoomDetector(this);
 			} catch (final MultiTouchException e) {
@@ -70,7 +70,7 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 	}
 	
 	@Override
-	public boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
+	public synchronized boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
 		if (candyLevel.gameStarted) {
 			if (!candyLevel.playMode) {
 				if (pSceneTouchEvent.isActionDown()) {
@@ -84,8 +84,9 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 							mCandyCamera.setZoomFactor(1);
 							return true;
 						}
+					} else {
+						time = System.currentTimeMillis();
 					}
-					time = System.currentTimeMillis();
 				}
 				if (mPinchZoomDetector != null) {
 					mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);

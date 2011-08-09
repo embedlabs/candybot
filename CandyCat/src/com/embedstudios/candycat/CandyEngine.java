@@ -124,60 +124,64 @@ public class CandyEngine {
 	
 	public synchronized void move(final int rowDirection,final int columnDirection) {
 		candyLevel.gameStarted=false;
-		
-		final int[] situationArray = situation(catIndex,rowDirection,columnDirection);
-		final int s = situationArray[SITUATION];
-		boolean shouldDie = false;
-		switch (s) {
-		case SQUARE_ENEMY:
-		case SQUARE_LASER:
-			death = true;
-		case SQUARE_EMPTY:
-			catMoved = true;
-			move(rowDirection,columnDirection,catIndex);
-			break;
-			
-		case SQUARE_LASER_OCCUPIED:
-			shouldDie = true;
-		case SQUARE_OCCUPIED:
-			final int[] situationArray2 = situation(situationArray[OBJECT],rowDirection,columnDirection);
-			final int s2 = situationArray2[SITUATION];
-			switch (s2) {			
-			case SQUARE_LASER:
-			case SQUARE_EMPTY:
-				if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
-					if (shouldDie) {death=true;}
+		new Thread(new Runnable(){
+			@Override
+			public void run() {
+				final int[] situationArray = situation(catIndex,rowDirection,columnDirection);
+				final int s = situationArray[SITUATION];
+				boolean shouldDie = false;
+				switch (s) {
+				case SQUARE_ENEMY:
+				case SQUARE_LASER:
+					death = true;
+				case SQUARE_EMPTY:
 					catMoved = true;
-					move(rowDirection,columnDirection,catIndex,situationArray[OBJECT]);
-				}
-				break;
-			}
-			break;
-		
-		case SQUARE_TELEPORTER:
-			if (rowDirection==1) {
-				switch(situation(candyLevel.teleporter2row,candyLevel.teleporter2column,rowDirection,columnDirection)[SITUATION]) {
-				case SQUARE_LASER:
-					death=true;
-				case SQUARE_EMPTY:
-					catMoved=true;
-					teleport(candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column,catIndex);
+					move(rowDirection,columnDirection,catIndex);
+					break;
+					
+				case SQUARE_LASER_OCCUPIED:
+					shouldDie = true;
+				case SQUARE_OCCUPIED:
+					final int[] situationArray2 = situation(situationArray[OBJECT],rowDirection,columnDirection);
+					final int s2 = situationArray2[SITUATION];
+					switch (s2) {			
+					case SQUARE_LASER:
+					case SQUARE_EMPTY:
+						if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
+							if (shouldDie) {death=true;}
+							catMoved = true;
+							move(rowDirection,columnDirection,catIndex,situationArray[OBJECT]);
+						}
+						break;
+					}
+					break;
+				
+				case SQUARE_TELEPORTER:
+					if (rowDirection==1) {
+						switch(situation(candyLevel.teleporter2row,candyLevel.teleporter2column,rowDirection,columnDirection)[SITUATION]) {
+						case SQUARE_LASER:
+							death=true;
+						case SQUARE_EMPTY:
+							catMoved=true;
+							teleport(candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column,catIndex);
+							break;
+						}
+					} else if (rowDirection==-1) {
+						switch(situation(candyLevel.teleporter1row,candyLevel.teleporter1column,rowDirection,columnDirection)[SITUATION]) {
+						case SQUARE_LASER:
+							death=true;
+						case SQUARE_EMPTY:
+							catMoved=true;
+							teleport(candyLevel.teleporter1row+ROW_UP,candyLevel.teleporter1column,catIndex);
+							break;
+						}
+					}
 					break;
 				}
-			} else if (rowDirection==-1) {
-				switch(situation(candyLevel.teleporter1row,candyLevel.teleporter1column,rowDirection,columnDirection)[SITUATION]) {
-				case SQUARE_LASER:
-					death=true;
-				case SQUARE_EMPTY:
-					catMoved=true;
-					teleport(candyLevel.teleporter1row+ROW_UP,candyLevel.teleporter1column,catIndex);
-					break;
-				}
+				
+				settle();
 			}
-			break;
-		}
-		
-		settle();
+		}).start();
 	}
 	
 	private synchronized void move(final int rowDirection,final int columnDirection,Integer... spriteIndexes) {
@@ -286,15 +290,18 @@ public class CandyEngine {
 		} else if (death&&!candyBurned) {
 			cat.showDeadSprite();
 			pause(5,catIndex);
+			pause(1500);
 			resetLevel();
 		} else if (candyBurned&&!death) {
 			candy.showDeadSprite();
 			pause(5,candyIndex);
+			pause(1500);
 			resetLevel();
 		} else if (death&&candyBurned) {
 			cat.showDeadSprite();
 			candy.showDeadSprite();
 			pause(5,catIndex,candyIndex);
+			pause(1500);
 			resetLevel();
 		} else {
 			candyLevel.gameStarted=true;
@@ -413,6 +420,12 @@ public class CandyEngine {
 				casList.add(spriteList.get(index));
 			}
 			pause(milliseconds,casList);
+		} else {
+			try {
+				Thread.sleep(milliseconds);
+			} catch (InterruptedException e) {
+				Log.e(TAG,"Thread.sleep() failed.",e);
+			}
 		}
 	}
 	
@@ -460,7 +473,7 @@ public class CandyEngine {
 		}
 	}
 	
-	public boolean queueAllEmpty() {
+	private boolean queueAllEmpty() {
 		for (LinkedList<int[]> ll:spriteQueue) {
 			if (ll.size()>0) {
 				return false;
