@@ -222,12 +222,16 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		/**
 		 * BACKGROUND
 		 */
+		final TMXLoader tmxLoader = new TMXLoader(this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
 		try {
-			final TMXLoader tmxLoader = new TMXLoader(this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
 			mTMXTiledMap = tmxLoader.loadFromAsset(this, "tmx/"+world+"_"+level+".tmx");
 		} catch (final TMXLoadException tmxle) {
-			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
-			Debug.e(tmxle);
+			try {
+				mTMXTiledMap = tmxLoader.loadFromAsset(this, "tmx/1_1.tmx");
+			} catch (TMXLoadException e) {
+				Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
+				Debug.e(tmxle);
+			}
 		}
 		
 		tmxLayer = mTMXTiledMap.getTMXLayers().get(0);

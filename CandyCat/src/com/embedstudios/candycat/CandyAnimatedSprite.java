@@ -23,7 +23,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	private final int[][] objectArray,backgroundArray;
 	public int candyLastMove = 0;
 	public int candyRotationState = 0;
-	public int lastDirectionalMove = 0; // TODO for ice block mechanics
+	public int lastDirectionalMove = 0;
 	
 	public boolean hasModifier = false;
 	

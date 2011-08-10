@@ -592,7 +592,7 @@ public class CandyEngine {
 		return glideDistance;
 	}
 	
-	private synchronized int slideDistance(final int row,int column,final int columnDirection) { // TODO make sure that an object has moved sideways during the current turn in order to slide on ice...
+	private synchronized int slideDistance(final int row,int column,final int columnDirection) {
 		int slideDistance = 0;
 		if (columnDirection!=0) {
 			outer:
