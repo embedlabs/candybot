@@ -3,6 +3,9 @@ package org.anddev.andengine.util.modifier;
 import org.anddev.andengine.util.modifier.ease.IEaseFunction;
 
 /**
+ * (c) 2010 Nicolas Gramlich 
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 23:29:22 - 19.03.2010
  */
@@ -68,7 +71,7 @@ public abstract class BaseSingleValueSpanModifier<T> extends BaseDurationModifie
 
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed, final T pItem) {
-		final float percentageDone = this.mEaseFunction.getPercentageDone(this.getSecondsElapsed(), this.mDuration, 0, 1);
+		final float percentageDone = this.mEaseFunction.getPercentage(this.getSecondsElapsed(), this.mDuration);
 
 		this.onSetValue(pItem, percentageDone, this.mFromValue + percentageDone * this.mValueSpan);
 	}

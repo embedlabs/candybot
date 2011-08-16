@@ -7,18 +7,20 @@ import java.nio.IntBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
-import javax.microedition.khronos.opengles.GL11Ext;
 
 import org.anddev.andengine.engine.options.RenderOptions;
-import org.anddev.andengine.opengl.texture.Texture.TextureFormat;
-import org.anddev.andengine.opengl.texture.region.crop.TextureRegionCrop;
+import org.anddev.andengine.opengl.texture.Texture.PixelFormat;
 import org.anddev.andengine.util.Debug;
 
 import android.graphics.Bitmap;
+import android.opengl.GLException;
 import android.opengl.GLUtils;
 import android.os.Build;
 
 /**
+ * (c) 2010 Nicolas Gramlich
+ * (c) 2011 Zynga Inc.
+ *
  * @author Nicolas Gramlich
  * @since 18:00:43 - 08.03.2010
  */
@@ -48,7 +50,6 @@ public class GLHelper {
 
 	private static FastFloatBuffer sCurrentVertexFloatBuffer = null;
 	private static FastFloatBuffer sCurrentTextureFloatBuffer = null;
-	private static TextureRegionCrop sCurrentTextureRegionCrop = null;
 
 	private static boolean sEnableDither = true;
 	private static boolean sEnableLightning = true;
@@ -71,6 +72,7 @@ public class GLHelper {
 
 	public static boolean EXTENSIONS_VERTEXBUFFEROBJECTS = false;
 	public static boolean EXTENSIONS_DRAWTEXTURE = false;
+	public static boolean EXTENSIONS_TEXTURE_NON_POWER_OF_TWO = false;
 
 	// ===========================================================
 	// Methods
@@ -86,7 +88,6 @@ public class GLHelper {
 
 		GLHelper.sCurrentVertexFloatBuffer = null;
 		GLHelper.sCurrentTextureFloatBuffer = null;
-		GLHelper.sCurrentTextureRegionCrop = null;
 
 		GLHelper.enableDither(pGL);
 		GLHelper.enableLightning(pGL);
@@ -108,6 +109,7 @@ public class GLHelper {
 
 		GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS = false;
 		GLHelper.EXTENSIONS_DRAWTEXTURE = false;
+		GLHelper.EXTENSIONS_TEXTURE_NON_POWER_OF_TWO = false;
 	}
 
 	public static void enableExtensions(final GL10 pGL, final RenderOptions pRenderOptions) {
@@ -120,12 +122,15 @@ public class GLHelper {
 		Debug.d("EXTENSIONS: " + extensions);
 
 		final boolean isOpenGL10 = version.contains("1.0");
+		final boolean isOpenGL2X = version.contains("2.");
 		final boolean isSoftwareRenderer = renderer.contains("PixelFlinger");
 		final boolean isVBOCapable = extensions.contains("_vertex_buffer_object");
 		final boolean isDrawTextureCapable = extensions.contains("draw_texture");
+		final boolean isTextureNonPowerOfTwoCapable = extensions.contains("texture_npot");
 
 		GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS = !pRenderOptions.isDisableExtensionVertexBufferObjects() && !isSoftwareRenderer && (isVBOCapable || !isOpenGL10);
-		GLHelper.EXTENSIONS_DRAWTEXTURE  = !pRenderOptions.isDisableExtensionVertexBufferObjects() && (isDrawTextureCapable || !isOpenGL10);
+		GLHelper.EXTENSIONS_DRAWTEXTURE = !pRenderOptions.isDisableExtensionVertexBufferObjects() && (isDrawTextureCapable || !isOpenGL10);
+		GLHelper.EXTENSIONS_TEXTURE_NON_POWER_OF_TWO = isTextureNonPowerOfTwoCapable || isOpenGL2X;
 
 		GLHelper.hackBrokenDevices();
 		Debug.d("EXTENSIONS_VERXTEXBUFFEROBJECTS = " + GLHelper.EXTENSIONS_VERTEXBUFFEROBJECTS);
@@ -400,11 +405,17 @@ public class GLHelper {
 		pGL11.glBufferData(GL11.GL_ARRAY_BUFFER, pByteBuffer.capacity(), pByteBuffer, pUsage);
 	}
 
-	public static void textureCrop(final GL11 pGL11, final TextureRegionCrop pTextureRegionCrop) {
-		if (pTextureRegionCrop != GLHelper.sCurrentTextureRegionCrop || pTextureRegionCrop.isDirty()) {
-			GLHelper.sCurrentTextureRegionCrop = pTextureRegionCrop;
-			pGL11.glTexParameteriv(GL10.GL_TEXTURE_2D, GL11Ext.GL_TEXTURE_CROP_RECT_OES, pTextureRegionCrop.getData(), 0);
-		}
+	/**
+	 * <b>Note:</b> does not pre-multiply the alpha channel!</br>
+	 * Except that difference, same as: {@link GLUtils#texSubImage2D(int, int, int, int, Bitmap, int, int)}</br>
+	 * </br>
+	 * See topic: '<a href="http://groups.google.com/group/android-developers/browse_thread/thread/baa6c33e63f82fca">PNG loading that doesn't premultiply alpha?</a>'
+	 * @param pBorder
+	 */
+	public static void glTexImage2D(final GL10 pGL, final int pTarget, final int pLevel, final Bitmap pBitmap, final int pBorder, final PixelFormat pPixelFormat) {
+		final Buffer pixelBuffer = GLHelper.getPixels(pBitmap, pPixelFormat);
+
+		pGL.glTexImage2D(pTarget, pLevel, pPixelFormat.getGLFormat(), pBitmap.getWidth(), pBitmap.getHeight(), pBorder, pPixelFormat.getGLFormat(), pPixelFormat.getGLType(), pixelBuffer);
 	}
 
 	/**
@@ -413,27 +424,30 @@ public class GLHelper {
 	 * </br>
 	 * See topic: '<a href="http://groups.google.com/group/android-developers/browse_thread/thread/baa6c33e63f82fca">PNG loading that doesn't premultiply alpha?</a>'
 	 */
-	public static void glTexSubImage2D(final GL10 pGL, final int pTarget, final int pLevel, final int pXOffset, final int pYOffset, final Bitmap pBitmap, final int pFormat, final int pType, final TextureFormat pTextureFormat) {
+	public static void glTexSubImage2D(final GL10 pGL, final int pTarget, final int pLevel, final int pXOffset, final int pYOffset, final Bitmap pBitmap, final PixelFormat pPixelFormat) {
+		final Buffer pixelBuffer = GLHelper.getPixels(pBitmap, pPixelFormat);
+
+		pGL.glTexSubImage2D(pTarget, pLevel, pXOffset, pYOffset, pBitmap.getWidth(), pBitmap.getHeight(), pPixelFormat.getGLFormat(), pPixelFormat.getGLType(), pixelBuffer);
+	}
+
+	private static Buffer getPixels(final Bitmap pBitmap, final PixelFormat pPixelFormat) {
 		final int[] pixelsARGB_8888 = GLHelper.getPixelsARGB_8888(pBitmap);
 
-		final Buffer pixelBuffer;
-		switch(pTextureFormat) {
+		switch(pPixelFormat) {
 			case RGB_565:
-				pixelBuffer = ByteBuffer.wrap(GLHelper.convertARGB_8888toRGB_565(pixelsARGB_8888));
-				break;
+				return ByteBuffer.wrap(GLHelper.convertARGB_8888toRGB_565(pixelsARGB_8888));
 			case RGBA_8888:
-				pixelBuffer = IntBuffer.wrap(GLHelper.convertARGB_8888toRGBA_8888(pixelsARGB_8888));
-				break;
+				return IntBuffer.wrap(GLHelper.convertARGB_8888toRGBA_8888(pixelsARGB_8888));
+			case RGBA_4444:
+				return ByteBuffer.wrap(GLHelper.convertARGB_8888toARGB_4444(pixelsARGB_8888));
+			case A_8:
+				return ByteBuffer.wrap(GLHelper.convertARGB_8888toA_8(pixelsARGB_8888));
 			default:
-				throw new IllegalArgumentException("Unexpected pTextureFormat: '" + pTextureFormat + "'.");
+				throw new IllegalArgumentException("Unexpected " + PixelFormat.class.getSimpleName() + ": '" + pPixelFormat + "'.");
 		}
-
-		pGL.glTexSubImage2D(pTarget, pLevel, pXOffset, pYOffset, pBitmap.getWidth(), pBitmap.getHeight(), pFormat, pType, pixelBuffer);
 	}
 
 	private static int[] convertARGB_8888toRGBA_8888(final int[] pPixelsARGB_8888) {
-		final long start = System.nanoTime();
-		
 		if(GLHelper.IS_LITTLE_ENDIAN) {
 			for(int i = pPixelsARGB_8888.length - 1; i >= 0; i--) {
 				final int pixel = pPixelsARGB_8888[i];
@@ -447,10 +461,6 @@ public class GLHelper {
 				pPixelsARGB_8888[i] = (pixel & 0x00FFFFFF) << 8 | (pixel & 0xFF000000) >> 24;
 			}
 		}
-
-		final long end = System.nanoTime();
-		Debug.d("Conversion time: " + (end - start) + " ms");
-
 		return pPixelsARGB_8888;
 	}
 
@@ -488,6 +498,56 @@ public class GLHelper {
 		return pixelsRGB_565;
 	}
 
+	private static byte[] convertARGB_8888toARGB_4444(final int[] pPixelsARGB_8888) {
+		final byte[] pixelsARGB_4444 = new byte[pPixelsARGB_8888.length * 2];
+		if(GLHelper.IS_LITTLE_ENDIAN) {
+			for(int i = pPixelsARGB_8888.length - 1, j = pixelsARGB_4444.length - 1; i >= 0; i--) {
+				final int pixel = pPixelsARGB_8888[i];
+
+				final int alpha = ((pixel >> 28) & 0x0F);
+				final int red = ((pixel >> 16) & 0xF0);
+				final int green = ((pixel >> 8) & 0xF0);
+				final int blue = ((pixel) & 0x0F);
+
+				/* Byte1: [A1 A2 A3 A4 R1 R2 R3 R4]
+				 * Byte2: [G1 G2 G3 G4 G2 G2 G3 G4] */
+
+				pixelsARGB_4444[j--] = (byte)(alpha | red);
+				pixelsARGB_4444[j--] = (byte)(green | blue);
+			}
+		} else {
+			for(int i = pPixelsARGB_8888.length - 1, j = pixelsARGB_4444.length - 1; i >= 0; i--) {
+				final int pixel = pPixelsARGB_8888[i];
+
+				final int alpha = ((pixel >> 28) & 0x0F);
+				final int red = ((pixel >> 16) & 0xF0);
+				final int green = ((pixel >> 8) & 0xF0);
+				final int blue = ((pixel) & 0x0F);
+
+				/* Byte2: [G1 G2 G3 G4 G2 G2 G3 G4]
+				 * Byte1: [A1 A2 A3 A4 R1 R2 R3 R4] */
+
+				pixelsARGB_4444[j--] = (byte)(green | blue);
+				pixelsARGB_4444[j--] = (byte)(alpha | red);
+			}
+		}
+		return pixelsARGB_4444;
+	}
+
+	private static byte[] convertARGB_8888toA_8(final int[] pPixelsARGB_8888) {
+		final byte[] pixelsA_8 = new byte[pPixelsARGB_8888.length];
+		if(GLHelper.IS_LITTLE_ENDIAN) {
+			for(int i = pPixelsARGB_8888.length - 1; i >= 0; i--) {
+				pixelsA_8[i] = (byte) (pPixelsARGB_8888[i] >> 24);
+			}
+		} else {
+			for(int i = pPixelsARGB_8888.length - 1; i >= 0; i--) {
+				pixelsA_8[i] = (byte) (pPixelsARGB_8888[i] & 0xFF);
+			}
+		}
+		return pixelsA_8;
+	}
+
 	public static int[] getPixelsARGB_8888(final Bitmap pBitmap) {
 		final int w = pBitmap.getWidth();
 		final int h = pBitmap.getHeight();
@@ -496,6 +556,13 @@ public class GLHelper {
 		pBitmap.getPixels(pixelsARGB_8888, 0, w, 0, 0, w, h);
 
 		return pixelsARGB_8888;
+	}
+
+	public static void checkGLError(final GL10 pGL) throws GLException { // TODO Use more often!
+		final int err = pGL.glGetError();
+		if (err != GL10.GL_NO_ERROR) {
+			throw new GLException(err);
+		}
 	}
 
 	// ===========================================================

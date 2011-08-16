@@ -22,10 +22,10 @@ import org.anddev.andengine.extension.physics.box2d.PhysicsFactory;
 import org.anddev.andengine.extension.physics.box2d.PhysicsWorld;
 import org.anddev.andengine.extension.physics.box2d.util.Vector2Pool;
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
-import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
+import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
+import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.sensor.accelerometer.AccelerometerData;
 import org.anddev.andengine.sensor.accelerometer.IAccelerometerListener;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
@@ -64,10 +64,10 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	private static int WIDTH,HEIGHT;
 	
-	private Texture mTexture;
+	private BitmapTextureAtlas mTexture;
 	private TextureRegion mCandyFaceTextureRegion,mWallFaceTextureRegion,mBoxFaceTextureRegion,mInertiaFaceTextureRegion,mIceFaceTextureRegion;
 	
-	private Texture mAutoParallaxBackgroundTexture;
+	private BitmapTextureAtlas mAutoParallaxBackgroundTexture;
 	private TextureRegion mCloudsTextureRegion,mSeaTextureRegion,mHillsTextureRegion;
 	
 	private Scene mScene;
@@ -118,19 +118,19 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	@Override
 	public void onLoadResources() {
 		Log.v(TAG,"MainMenu onLoadResources()");
-		TextureRegionFactory.setAssetBasePath("gfx/");
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		
-		mTexture = new Texture(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		mCandyFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
-		mWallFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "movable_wall.png",65,0);
-		mBoxFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "box.png",130,0);
-		mInertiaFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "inertia_wall.png",195,0);
-		mIceFaceTextureRegion = TextureRegionFactory.createFromAsset(mTexture, this, "ice.png",260,0);
+		mTexture = new BitmapTextureAtlas(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mCandyFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
+		mWallFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "movable_wall.png",65,0);
+		mBoxFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "box.png",130,0);
+		mInertiaFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "inertia_wall.png",195,0);
+		mIceFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "ice.png",260,0);
 		
-		mAutoParallaxBackgroundTexture = new Texture(1024,1024,TextureOptions.DEFAULT);
-		mCloudsTextureRegion = TextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_clouds.png",0,0);
-		mSeaTextureRegion = TextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_sea.png",0,132);
-		mHillsTextureRegion = TextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_hills.png",0,384);
+		mAutoParallaxBackgroundTexture = new BitmapTextureAtlas(1024,1024,TextureOptions.DEFAULT);
+		mCloudsTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_clouds.png",0,0);
+		mSeaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_sea.png",0,132);
+		mHillsTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_hills.png",0,384);
 		
 		mEngine.getTextureManager().loadTextures(mTexture,mAutoParallaxBackgroundTexture);
 	}

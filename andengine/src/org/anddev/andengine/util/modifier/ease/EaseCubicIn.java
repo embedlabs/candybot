@@ -1,7 +1,11 @@
 package org.anddev.andengine.util.modifier.ease;
 
 /**
- * @author Gil, Nicolas Gramlich
+ * (c) 2010 Nicolas Gramlich
+ * (c) 2011 Zynga Inc.
+ *
+ * @author Gil
+ * @author Nicolas Gramlich
  * @since 16:52:11 - 26.07.2010
  */
 public class EaseCubicIn implements IEaseFunction {
@@ -20,6 +24,7 @@ public class EaseCubicIn implements IEaseFunction {
 	// ===========================================================
 
 	private EaseCubicIn() {
+
 	}
 
 	public static EaseCubicIn getInstance() {
@@ -38,13 +43,17 @@ public class EaseCubicIn implements IEaseFunction {
 	// ===========================================================
 
 	@Override
-	public float getPercentageDone(float pSecondsElapsed, final float pDuration, final float pMinValue, final float pMaxValue) {
-		return pMaxValue * (pSecondsElapsed /= pDuration) * pSecondsElapsed * pSecondsElapsed + pMinValue;
+	public float getPercentage(final float pSecondsElapsed, final float pDuration) {
+		return EaseCubicIn.getValue(pSecondsElapsed / pDuration);
 	}
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
+
+	public static float getValue(final float pPercentage) {
+		return pPercentage * pPercentage * pPercentage;
+	}
 
 	// ===========================================================
 	// Inner and Anonymous Classes

@@ -2,6 +2,9 @@ package org.anddev.andengine.util.modifier;
 
 
 /**
+ * (c) 2010 Nicolas Gramlich
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 10:49:51 - 03.09.2010
  * @param <T>
@@ -43,7 +46,7 @@ public abstract class BaseSingleValueChangeModifier<T> extends BaseDurationModif
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 
-	protected abstract void onChangeValue(final T pItem, final float pValue);
+	protected abstract void onChangeValue(final float pSecondsElapsed, final T pItem, final float pValue);
 
 	@Override
 	protected void onManagedInitialize(final T pItem) {
@@ -52,7 +55,7 @@ public abstract class BaseSingleValueChangeModifier<T> extends BaseDurationModif
 
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed, final T pItem) {
-		this.onChangeValue(pItem, this.mValueChangePerSecond * pSecondsElapsed);
+		this.onChangeValue(pSecondsElapsed, pItem, this.mValueChangePerSecond * pSecondsElapsed);
 	}
 
 	// ===========================================================

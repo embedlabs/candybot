@@ -1,13 +1,15 @@
 package org.anddev.andengine.opengl.texture.region.buffer;
 
-import static org.anddev.andengine.opengl.vertex.SpriteBatchVertexBuffer.VERTICES_PER_RECTANGLE;
-
 import org.anddev.andengine.opengl.buffer.BufferObject;
-import org.anddev.andengine.opengl.texture.Texture;
+import org.anddev.andengine.opengl.texture.ITexture;
 import org.anddev.andengine.opengl.texture.region.BaseTextureRegion;
 import org.anddev.andengine.opengl.util.FastFloatBuffer;
+import org.anddev.andengine.opengl.vertex.SpriteBatchVertexBuffer;
 
 /**
+ * (c) 2010 Nicolas Gramlich
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 12:32:14 - 14.06.2011
  */
@@ -20,19 +22,27 @@ public class SpriteBatchTextureRegionBuffer extends BufferObject {
 	// Fields
 	// ===========================================================
 
-	private int mIndex;
+	protected int mIndex;
 
 	// ===========================================================
 	// Constructors
 	// ===========================================================
 
 	public SpriteBatchTextureRegionBuffer(final int pCapacity, final int pDrawType, final boolean pManaged) {
-		super(pCapacity * 2 * VERTICES_PER_RECTANGLE, pDrawType, pManaged);
+		super(pCapacity * 2 * SpriteBatchVertexBuffer.VERTICES_PER_RECTANGLE, pDrawType, pManaged);
 	}
 
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
+
+	public int getIndex() {
+		return this.mIndex;
+	}
+
+	public void setIndex(final int pIndex) {
+		this.mIndex = pIndex;
+	}
 
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
@@ -42,12 +52,8 @@ public class SpriteBatchTextureRegionBuffer extends BufferObject {
 	// Methods
 	// ===========================================================
 
-	public void setIndex(final int pIndex) {
-		this.mIndex = pIndex;
-	}
-
 	public void add(final BaseTextureRegion pTextureRegion) {
-		final Texture texture = pTextureRegion.getTexture();
+		final ITexture texture = pTextureRegion.getTexture();
 
 		if(texture == null) { // TODO Check really needed?
 			return;

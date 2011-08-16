@@ -1,8 +1,11 @@
 package org.anddev.andengine.opengl.texture.region;
 
-import org.anddev.andengine.opengl.texture.Texture;
+import org.anddev.andengine.opengl.texture.ITexture;
 
 /**
+ * (c) 2010 Nicolas Gramlich 
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 18:14:42 - 09.03.2010
  */
@@ -25,7 +28,7 @@ public class TiledTextureRegion extends BaseTextureRegion {
 	// Constructors
 	// ===========================================================
 
-	public TiledTextureRegion(final Texture pTexture, final int pTexturePositionX, final int pTexturePositionY, final int pWidth, final int pHeight, final int pTileColumns, final int pTileRows) {
+	public TiledTextureRegion(final ITexture pTexture, final int pTexturePositionX, final int pTexturePositionY, final int pWidth, final int pHeight, final int pTileColumns, final int pTileRows) {
 		super(pTexture, pTexturePositionX, pTexturePositionY, pWidth, pHeight);
 		this.mTileColumns = pTileColumns;
 		this.mTileRows = pTileRows;
@@ -125,26 +128,6 @@ public class TiledTextureRegion extends BaseTextureRegion {
 		return (float)(this.getTexturePositionOfCurrentTileY() + this.getTileHeight()) / this.mTexture.getHeight();
 	}
 	
-	@Override
-	public int getTextureCropLeft() {
-		return this.getTexturePositionOfCurrentTileX();
-	}
-
-	@Override
-	public int getTextureCropTop() {
-		return this.getTexturePositionOfCurrentTileY();
-	}
-
-	@Override
-	public int getTextureCropWidth() {
-		return this.getTileWidth();
-	}
-
-	@Override
-	public int getTextureCropHeight() {
-		return this.getTileHeight();
-	}
-
 	// ===========================================================
 	// Methods
 	// ===========================================================

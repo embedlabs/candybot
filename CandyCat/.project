@@ -32,24 +32,24 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>AndEngineMultiTouchExtension_src</name>
+			<type>2</type>
+			<locationURI>_android_AndEngineMultiTouchExtension_388759c0/src</locationURI>
+		</link>
+		<link>
+			<name>AndEnginePhysicsBox2DExtension_src</name>
+			<type>2</type>
+			<locationURI>_android_AndEnginePhysicsBox2DExtension_83d4a030/src</locationURI>
+		</link>
+		<link>
+			<name>AndEngine_src</name>
+			<type>2</type>
+			<locationURI>_android_AndEngine_6e0d82d9/src</locationURI>
+		</link>
+		<link>
 			<name>ScoreloopUI_src</name>
 			<type>2</type>
 			<locationURI>_android_ScoreloopUI_e7efe92a/src</locationURI>
-		</link>
-		<link>
-			<name>org_anddev_andengine_extension_input_touch_controller_src</name>
-			<type>2</type>
-			<locationURI>_android_org_anddev_andengine_extension_input_touch_controller_bf0b247d/src</locationURI>
-		</link>
-		<link>
-			<name>org_anddev_andengine_extension_physics_box2d_src</name>
-			<type>2</type>
-			<locationURI>_android_org_anddev_andengine_extension_physics_box2d_73c657f9/src</locationURI>
-		</link>
-		<link>
-			<name>org_anddev_andengine_src</name>
-			<type>2</type>
-			<locationURI>_android_org_anddev_andengine_41cf2b3/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

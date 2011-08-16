@@ -21,7 +21,7 @@ import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 import org.anddev.andengine.opengl.font.FontFactory;
 import org.anddev.andengine.opengl.font.FontManager;
 import org.anddev.andengine.opengl.texture.TextureManager;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.anddev.andengine.opengl.util.GLHelper;
 import org.anddev.andengine.sensor.SensorDelay;
 import org.anddev.andengine.sensor.accelerometer.AccelerometerData;
@@ -54,6 +54,9 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 
 /**
+ * (c) 2010 Nicolas Gramlich 
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 12:21:31 - 08.03.2010
  */
@@ -116,7 +119,7 @@ public class Engine implements SensorEventListener, OnTouchListener, ITouchEvent
 	// ===========================================================
 
 	public Engine(final EngineOptions pEngineOptions) {
-		TextureRegionFactory.reset();
+		BitmapTextureAtlasTextureRegionFactory.reset();
 		SoundFactory.reset();
 		MusicFactory.reset();
 		FontFactory.reset();
@@ -278,19 +281,19 @@ public class Engine implements SensorEventListener, OnTouchListener, ITouchEvent
 	public void onAccuracyChanged(final Sensor pSensor, final int pAccuracy) {
 		if(this.mRunning) {
 			switch(pSensor.getType()) {
-			case Sensor.TYPE_ACCELEROMETER:
-				if(this.mAccelerometerData != null) {
-					this.mAccelerometerData.setAccuracy(pAccuracy);
-					this.mAccelerometerListener.onAccelerometerChanged(this.mAccelerometerData);
-				} else if(this.mOrientationData != null) {
-					this.mOrientationData.setAccelerometerAccuracy(pAccuracy);
+				case Sensor.TYPE_ACCELEROMETER:
+					if(this.mAccelerometerData != null) {
+						this.mAccelerometerData.setAccuracy(pAccuracy);
+						this.mAccelerometerListener.onAccelerometerChanged(this.mAccelerometerData);
+					} else if(this.mOrientationData != null) {
+						this.mOrientationData.setAccelerometerAccuracy(pAccuracy);
+						this.mOrientationListener.onOrientationChanged(this.mOrientationData);
+					}
+					break;
+				case Sensor.TYPE_MAGNETIC_FIELD:
+					this.mOrientationData.setMagneticFieldAccuracy(pAccuracy);
 					this.mOrientationListener.onOrientationChanged(this.mOrientationData);
-				}
-				break;
-			case Sensor.TYPE_MAGNETIC_FIELD:
-				this.mOrientationData.setMagneticFieldAccuracy(pAccuracy);
-				this.mOrientationListener.onOrientationChanged(this.mOrientationData);
-				break;
+					break;
 			}
 		}
 	}
@@ -299,19 +302,19 @@ public class Engine implements SensorEventListener, OnTouchListener, ITouchEvent
 	public void onSensorChanged(final SensorEvent pEvent) {
 		if(this.mRunning) {
 			switch(pEvent.sensor.getType()) {
-			case Sensor.TYPE_ACCELEROMETER:
-				if(this.mAccelerometerData != null) {
-					this.mAccelerometerData.setValues(pEvent.values);
-					this.mAccelerometerListener.onAccelerometerChanged(this.mAccelerometerData);
-				} else if(this.mOrientationData != null) {
-					this.mOrientationData.setAccelerometerValues(pEvent.values);
+				case Sensor.TYPE_ACCELEROMETER:
+					if(this.mAccelerometerData != null) {
+						this.mAccelerometerData.setValues(pEvent.values);
+						this.mAccelerometerListener.onAccelerometerChanged(this.mAccelerometerData);
+					} else if(this.mOrientationData != null) {
+						this.mOrientationData.setAccelerometerValues(pEvent.values);
+						this.mOrientationListener.onOrientationChanged(this.mOrientationData);
+					}
+					break;
+				case Sensor.TYPE_MAGNETIC_FIELD:
+					this.mOrientationData.setMagneticFieldValues(pEvent.values);
 					this.mOrientationListener.onOrientationChanged(this.mOrientationData);
-				}
-				break;
-			case Sensor.TYPE_MAGNETIC_FIELD:
-				this.mOrientationData.setMagneticFieldValues(pEvent.values);
-				this.mOrientationListener.onOrientationChanged(this.mOrientationData);
-				break;
+					break;
 			}
 		}
 	}
@@ -343,15 +346,15 @@ public class Engine implements SensorEventListener, OnTouchListener, ITouchEvent
 	@Override
 	public void onStatusChanged(final String pProvider, final int pStatus, final Bundle pExtras) {
 		switch(pStatus) {
-		case LocationProvider.AVAILABLE:
-			this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.AVAILABLE, pExtras);
-			break;
-		case LocationProvider.OUT_OF_SERVICE:
-			this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.OUT_OF_SERVICE, pExtras);
-			break;
-		case LocationProvider.TEMPORARILY_UNAVAILABLE:
-			this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.TEMPORARILY_UNAVAILABLE, pExtras);
-			break;
+			case LocationProvider.AVAILABLE:
+				this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.AVAILABLE, pExtras);
+				break;
+			case LocationProvider.OUT_OF_SERVICE:
+				this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.OUT_OF_SERVICE, pExtras);
+				break;
+			case LocationProvider.TEMPORARILY_UNAVAILABLE:
+				this.mLocationListener.onLocationProviderStatusChanged(LocationProviderStatus.TEMPORARILY_UNAVAILABLE, pExtras);
+				break;
 		}
 	}
 

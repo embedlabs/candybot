@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org_anddev_andengine_extension_physics_box2d</name>
+	<name>AndEnginePhysicsBox2DExtension</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -32,9 +32,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>org_anddev_andengine_src</name>
+			<name>AndEngine_src</name>
 			<type>2</type>
-			<locationURI>_android_org_anddev_andengine_41cf2b3/src</locationURI>
+			<locationURI>_android_AndEngine_6e0d82d9/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

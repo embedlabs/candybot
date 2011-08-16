@@ -4,14 +4,19 @@ import java.util.ArrayList;
 
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.sprite.BaseSprite;
-import org.anddev.andengine.opengl.texture.Texture;
+import org.anddev.andengine.opengl.texture.ITexture;
+import org.anddev.andengine.opengl.texture.region.buffer.SpriteBatchTextureRegionBuffer;
+import org.anddev.andengine.opengl.vertex.SpriteBatchVertexBuffer;
 import org.anddev.andengine.util.SmartList;
 
 /**
+ * (c) 2010 Nicolas Gramlich
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 12:10:35 - 15.06.2011
  */
-public class SpriteGroup extends SpriteBatch {
+public class SpriteGroup extends DynamicSpriteBatch {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -24,8 +29,16 @@ public class SpriteGroup extends SpriteBatch {
 	// Constructors
 	// ===========================================================
 
-	public SpriteGroup(final Texture pTexture, final int pCapacity) {
+	public SpriteGroup(final ITexture pTexture, final int pCapacity) {
 		super(pTexture, pCapacity);
+
+		/* Make children not be drawn automatically, as we handle the drawing ourself. */
+		this.setChildrenVisible(false);
+	}
+
+	public SpriteGroup(final ITexture pTexture, final int pCapacity, final SpriteBatchVertexBuffer pSpriteBatchVertexBuffer, final SpriteBatchTextureRegionBuffer pSpriteBatchTextureRegionBuffer) {
+		super(pTexture, pCapacity, pSpriteBatchVertexBuffer, pSpriteBatchTextureRegionBuffer);
+
 		/* Make children not be drawn automatically, as we handle the drawing ourself. */
 		this.setChildrenVisible(false);
 	}
@@ -45,9 +58,7 @@ public class SpriteGroup extends SpriteBatch {
 	@Deprecated
 	public void attachChild(final IEntity pEntity) throws IllegalArgumentException {
 		if(pEntity instanceof BaseSprite) {
-			this.assertCapacity();
-			this.assertTexture(((BaseSprite)pEntity).getTextureRegion());
-			super.attachChild(pEntity);
+			this.attachChild((BaseSprite)pEntity);
 		} else {
 			throw new IllegalArgumentException("A SpriteGroup can only handle children of type BaseSprite or subclasses of BaseSprite, like Sprite, TiledSprite or AnimatedSprite.");
 		}
@@ -67,11 +78,16 @@ public class SpriteGroup extends SpriteBatch {
 	}
 
 	@Override
-	protected void onDrawSpriteBatch() {
+	protected boolean onUpdateSpriteBatch() {
 		final SmartList<IEntity> children = this.mChildren;
-		final int childCount = children.size();
-		for(int i = 0; i < childCount; i++) {
-			super.drawWithoutChecks((BaseSprite)children.get(i));
+		if(children == null) {
+			return false;
+		} else {
+			final int childCount = children.size();
+			for(int i = 0; i < childCount; i++) {
+				super.drawWithoutChecks((BaseSprite)children.get(i));
+			}
+			return true;
 		}
 	}
 

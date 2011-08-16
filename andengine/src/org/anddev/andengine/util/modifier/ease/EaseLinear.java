@@ -1,7 +1,11 @@
 package org.anddev.andengine.util.modifier.ease;
 
 /**
- * @author Gil, Nicolas Gramlich
+ * (c) 2010 Nicolas Gramlich
+ * (c) 2011 Zynga Inc.
+ *
+ * @author Gil
+ * @author Nicolas Gramlich
  * @since 16:50:40 - 26.07.2010
  */
 public class EaseLinear implements IEaseFunction {
@@ -20,6 +24,7 @@ public class EaseLinear implements IEaseFunction {
 	// ===========================================================
 
 	private EaseLinear() {
+
 	}
 
 	public static EaseLinear getInstance() {
@@ -38,8 +43,8 @@ public class EaseLinear implements IEaseFunction {
 	// ===========================================================
 
 	@Override
-	public float getPercentageDone(final float pSecondsElapsed, final float pDuration, final float pMinValue, final float pMaxValue) {
-		return pMaxValue * pSecondsElapsed / pDuration + pMinValue;
+	public float getPercentage(final float pSecondsElapsed, final float pDuration) {
+		return pSecondsElapsed / pDuration;
 	}
 
 	// ===========================================================

@@ -5,6 +5,9 @@ import org.anddev.andengine.util.constants.Constants;
 import android.util.Log;
 
 /**
+ * (c) 2010 Nicolas Gramlich 
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 13:29:16 - 08.03.2010
  */
@@ -90,7 +93,7 @@ public class Debug implements Constants {
 	}
 
 	public static void w(final Throwable pThrowable) {
-		Debug.w(sDebugTag, pThrowable);
+		Debug.w("", pThrowable);
 	}
 
 	public static void w(final String pMessage, final Throwable pThrowable) {

@@ -1,7 +1,11 @@
 package org.anddev.andengine.util.modifier.ease;
 
 /**
- * @author Gil, Nicolas Gramlich
+ * (c) 2010 Nicolas Gramlich
+ * (c) 2011 Zynga Inc.
+ *
+ * @author Gil
+ * @author Nicolas Gramlich
  * @since 16:52:11 - 26.07.2010
  */
 public class EaseBounceIn implements IEaseFunction {
@@ -39,13 +43,18 @@ public class EaseBounceIn implements IEaseFunction {
 	// ===========================================================
 
 	@Override
-	public float getPercentageDone(final float pSecondsElapsed, final float pDuration, final float pMinValue, final float pMaxValue) {
-		return pMaxValue - EaseBounceOut.getInstance().getPercentageDone(pDuration - pSecondsElapsed, pDuration, 0, pMaxValue) + pMinValue;
+	public float getPercentage(final float pSecondsElapsed, final float pDuration) {
+		return EaseBounceIn.getValue(pSecondsElapsed / pDuration);
 	}
 
 	// ===========================================================
 	// Methods
 	// ===========================================================
+
+	public static float getValue(final float pPercentage) {
+		// TODO Inline?
+		return 1 - EaseBounceOut.getValue(1 - pPercentage);
+	}
 
 	// ===========================================================
 	// Inner and Anonymous Classes

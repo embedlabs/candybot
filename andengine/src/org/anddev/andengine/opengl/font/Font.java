@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.util.GLHelper;
+import org.anddev.andengine.opengl.texture.ITexture;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -20,6 +19,9 @@ import android.util.FloatMath;
 import android.util.SparseArray;
 
 /**
+ * (c) 2010 Nicolas Gramlich 
+ * (c) 2011 Zynga Inc.
+ * 
  * @author Nicolas Gramlich
  * @since 10:39:33 - 03.04.2010
  */
@@ -29,13 +31,15 @@ public class Font {
 	// ===========================================================
 
 	protected static final float LETTER_LEFT_OFFSET = 0;
-	private static final int LETTER_EXTRA_WIDTH = 10;
+	protected static final int LETTER_EXTRA_WIDTH = 10;
+
+	protected final static int PADDING = 1; 
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
 
-	private final Texture mTexture;
+	private final ITexture mTexture;
 	private final float mTextureWidth;
 	private final float mTextureHeight;
 	private int mCurrentTextureX = 0;
@@ -63,7 +67,7 @@ public class Font {
 	// Constructors
 	// ===========================================================
 
-	public Font(final Texture pTexture, final Typeface pTypeface, final float pSize, final boolean pAntiAlias, final int pColor) {
+	public Font(final ITexture pTexture, final Typeface pTypeface, final float pSize, final boolean pAntiAlias, final int pColor) {
 		this.mTexture = pTexture;
 		this.mTextureWidth = pTexture.getWidth();
 		this.mTextureHeight = pTexture.getHeight();
@@ -79,7 +83,7 @@ public class Font {
 		this.mBackgroundPaint.setStyle(Style.FILL);
 
 		this.mFontMetrics = this.mPaint.getFontMetrics();
-		this.mLineHeight = (int) FloatMath.ceil(Math.abs(this.mFontMetrics.ascent) + Math.abs(this.mFontMetrics.descent));
+		this.mLineHeight = (int) FloatMath.ceil(Math.abs(this.mFontMetrics.ascent) + Math.abs(this.mFontMetrics.descent)) + (PADDING * 2);
 		this.mLineGap = (int) (FloatMath.ceil(this.mFontMetrics.leading));
 	}
 
@@ -95,7 +99,7 @@ public class Font {
 		return this.mLineHeight;
 	}
 
-	public Texture getTexture() {
+	public ITexture getTexture() {
 		return this.mTexture;
 	}
 
@@ -121,18 +125,20 @@ public class Font {
 		this.mPaint.getTextWidths(String.valueOf(pCharacter), this.mTemporaryTextWidthFetchers);
 		return (int) (FloatMath.ceil(this.mTemporaryTextWidthFetchers[0]));
 	}
-
+	
 	private Bitmap getLetterBitmap(final char pCharacter) {
 		final Rect getLetterBitmapTemporaryRect = this.mGetLetterBitmapTemporaryRect;
 		final String characterAsString = String.valueOf(pCharacter);
 		this.mPaint.getTextBounds(characterAsString, 0, 1, getLetterBitmapTemporaryRect);
+		
+		getLetterBitmapTemporaryRect.right += PADDING * 2;
 
 		final int lineHeight = this.getLineHeight();
-		final Bitmap bitmap = Bitmap.createBitmap(getLetterBitmapTemporaryRect.width() == 0 ? 1 : getLetterBitmapTemporaryRect.width() + LETTER_EXTRA_WIDTH, lineHeight, Bitmap.Config.ARGB_8888);
+		final Bitmap bitmap = Bitmap.createBitmap(getLetterBitmapTemporaryRect.width() == 0 ? 1 + (2 * PADDING) : getLetterBitmapTemporaryRect.width() + LETTER_EXTRA_WIDTH, lineHeight, Bitmap.Config.ARGB_8888);
 		this.mCanvas.setBitmap(bitmap);
 
 		/* Make background transparent. */
-		this.mCanvas.drawRect(0, 0, getLetterBitmapTemporaryRect.width() + LETTER_EXTRA_WIDTH, lineHeight, this.mBackgroundPaint);
+		this.mCanvas.drawRect(0, 0, bitmap.getWidth(), bitmap.getHeight(), this.mBackgroundPaint);
 
 		/* Actually draw the character. */
 		this.drawCharacterString(characterAsString);
@@ -141,7 +147,7 @@ public class Font {
 	}
 
 	protected void drawCharacterString(final String pCharacterAsString) {
-		this.mCanvas.drawText(pCharacterAsString, LETTER_LEFT_OFFSET, -this.mFontMetrics.ascent, this.mPaint);
+		this.mCanvas.drawText(pCharacterAsString, LETTER_LEFT_OFFSET + PADDING, -this.mFontMetrics.ascent + PADDING, this.mPaint);
 	}
 
 	public int getStringWidth(final String pText) {
@@ -151,7 +157,7 @@ public class Font {
 
 	private void getLetterBounds(final char pCharacter, final Size pSize) {
 		this.mPaint.getTextBounds(String.valueOf(pCharacter), 0, 1, this.mGetLetterBoundsTemporaryRect);
-		pSize.set(this.mGetLetterBoundsTemporaryRect.width() + LETTER_EXTRA_WIDTH, this.getLineHeight());
+		pSize.set(this.mGetLetterBoundsTemporaryRect.width() + LETTER_EXTRA_WIDTH + (2 * PADDING), this.getLineHeight());
 	}
 
 	public void prepareLetters(final char ... pCharacters) {
@@ -210,6 +216,7 @@ public class Font {
 				final Letter letter = lettersPendingToBeDrawnToTexture.get(i);
 				final Bitmap bitmap = this.getLetterBitmap(letter.mCharacter);
 
+				// TODO What about premultiplyalpha of the textureOptions?
 				GLUtils.texSubImage2D(GL10.GL_TEXTURE_2D, 0, (int)(letter.mTextureX * textureWidth), (int)(letter.mTextureY * textureHeight), bitmap);
 
 				bitmap.recycle();
