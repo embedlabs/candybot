@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="src" path="org_anddev_andengine_extension_physics_box2d_src"/>
+	<classpathentry kind="src" path="org_anddev_andengine_extension_input_touch_controller_src"/>
+	<classpathentry kind="src" path="org_anddev_andengine_src"/>
+	<classpathentry kind="src" path="ScoreloopUI_src"/>
+	<classpathentry kind="lib" path="/ScoreloopUI/libs/scoreloop-core.jar"/>
+	<classpathentry kind="lib" path="lib/GoogleAdMobAdsSdk-4.1.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
