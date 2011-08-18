@@ -160,7 +160,6 @@ public final class R {
         public static final int t_button=0x7f02006b;
         public static final int twitter=0x7f02006c;
         public static final int twitter_bright=0x7f02006d;
-        public static final int world=0x7f02006e;
     }
     public static final class id {
         public static final int SecondaryProgress=0x7f0a007b;
@@ -186,7 +185,7 @@ public final class R {
         public static final int enclosing_rl_level=0x7f0a0000;
         public static final int enclosing_vf=0x7f0a0004;
         public static final int facebook_checkbox=0x7f0a0066;
-        public static final int gallery=0x7f0a0010;
+        public static final int gallery_world=0x7f0a0010;
         public static final int game_ad=0x7f0a000f;
         public static final int icon=0x7f0a002a;
         public static final int logo_iv=0x7f0a0006;
@@ -292,7 +291,7 @@ public final class R {
     public static final class layout {
         public static final int level=0x7f030000;
         public static final int main=0x7f030001;
-        public static final int menu=0x7f030002;
+        public static final int select_world=0x7f030002;
         public static final int sl_challenge_payment=0x7f030003;
         public static final int sl_dialog_custom=0x7f030004;
         public static final int sl_dialog_error=0x7f030005;
