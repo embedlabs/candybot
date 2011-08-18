@@ -66,7 +66,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	 */
 	
 	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final int index,final int type,final TMXLayer tmxLayer,final int[][] objectArray,final int[][] backgroundArray) {
-		this(row,column,pTiledTextureRegion.clone(),rvbGen(),index,type,tmxLayer,objectArray,backgroundArray);
+		this(row,column,pTiledTextureRegion.deepCopy(),rvbGen(),index,type,tmxLayer,objectArray,backgroundArray);
 	}
 	
 	private static RectangleVertexBuffer rvbGen() {

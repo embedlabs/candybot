@@ -46,7 +46,7 @@ public class QuadraticBezierMoveModifier extends DurationEntityModifier {
 	}
 
 	@Override
-	public QuadraticBezierMoveModifier clone() {
+	public QuadraticBezierMoveModifier deepCopy() {
 		return new QuadraticBezierMoveModifier(this.mDuration, this.mX1, this.mY1, this.mX2, this.mY2, this.mX3, this.mY3, this.mEaseFunction);
 	}
 
@@ -88,19 +88,4 @@ public class QuadraticBezierMoveModifier extends DurationEntityModifier {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
-	public void updatePosition(final float pPercentageDone, final IEntity pEntity) {
-		final float u = 1 - pPercentageDone;
-		final float tt = pPercentageDone*pPercentageDone;
-		final float uu = u*u;
-
-		final float ut2 = 2 * u * pPercentageDone;
-
-		/* Formula:
-		 * ((1-t)^2 * p1) + (2*(t)*(1-t) * p2) + ((t^2) * p3) */
-		final float x = (uu * this.mX1) + (ut2 * this.mX2) + (tt * this.mX3);
-		final float y = (uu * this.mY1) + (ut2 * this.mY2) + (tt * this.mY3);
-
-		pEntity.setPosition(x, y);
-	}
 }
