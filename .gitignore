@@ -1,5 +1,4 @@
-## generic files to ignore
-
+# generic files to ignore
 *~
 *.lock
 *.DS_Store
@@ -12,7 +11,7 @@
 # eclipse stuff
 */.classpath
 */.project
-CandyCat/proguard/*
+proguard/
 
 # android stuff
 */R.java
@@ -21,3 +20,6 @@ CandyCat/proguard/*
 *.apk
 *.ap_
 *.dex
+
+# Mercurial
+.hg/
