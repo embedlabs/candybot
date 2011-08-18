@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import javax.microedition.khronos.opengles.GL11;
 
 import org.anddev.andengine.engine.Engine;
+import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.anddev.andengine.entity.layer.tiled.tmx.CandyTMXLoader;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
-import org.anddev.andengine.entity.layer.tiled.tmx.TMXLoader;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXLoader.ITMXTilePropertiesListener;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXProperties;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXTile;
@@ -222,16 +223,13 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		/**
 		 * BACKGROUND
 		 */
-		final TMXLoader tmxLoader = new TMXLoader(this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
+		final CandyTMXLoader tmxLoader = new CandyTMXLoader("normal",this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
 		try {
-			mTMXTiledMap = tmxLoader.loadFromAsset(this, "tmx/"+world+"_"+level+".tmx");
+			mTMXTiledMap = tmxLoader.loadFromAsset(this, "levels/"+world+"_"+level+".ccl");
 		} catch (final TMXLoadException tmxle) {
-			try {
-				mTMXTiledMap = tmxLoader.loadFromAsset(this, "tmx/1_1.tmx");
-			} catch (TMXLoadException e) {
-				Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
-				Debug.e(tmxle);
-			}
+			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
+			Debug.e(tmxle);
+			finish();
 		}
 		
 		tmxLayer = mTMXTiledMap.getTMXLayers().get(0);

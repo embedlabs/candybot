@@ -1,5 +1,6 @@
 package com.embedstudios.candycat;
 
+import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;

@@ -25,7 +25,7 @@ public class CandyUtils {
 	public static void parseLevelObjectsFromXml(Context context,final int world,final int level,ArrayList<int[]> objectList,ArrayList<String> tutorialList) {
 		try {
 			// Load the XML into a DOM.
-			final InputStream input = context.getAssets().open("levels/w"+world+".xml");
+			final InputStream input = context.getAssets().open("levels/w/w"+world+".xml");
 			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			final DocumentBuilder db = dbf.newDocumentBuilder();
 			final Document doc = db.parse(new InputSource(input));

@@ -165,6 +165,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		}, EaseQuadIn.getInstance()));
 	}
 	
+	@Override
 	public synchronized void reset() {
 		super.reset();
 		clearEntityModifiers();
