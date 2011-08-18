@@ -88,7 +88,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 					new Path(2).to(getX(),getY())
 						.to(getX()+(columnDelta*64),getY()+(rowDelta*64)),
 					new CandyPathModifierListener(this,rotate), EaseLinear.getInstance()));
-			Log.d(TAG, "Item " + index + " to: " + objectArray[index][1] + ", " + objectArray[index][2]);
+			Log.d(TAG, "Item " + index + " to: " + objectArray[index][CandyEngine.ROW] + ", " + objectArray[index][CandyEngine.COLUMN]);
 			return true;
 		} else {
 			return false;

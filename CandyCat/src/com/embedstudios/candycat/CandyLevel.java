@@ -7,8 +7,6 @@ import javax.microedition.khronos.opengles.GL11;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
-import org.anddev.andengine.engine.handler.timer.ITimerCallback;
-import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -24,7 +22,7 @@ import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.text.ChangeableText;
 import org.anddev.andengine.entity.text.Text;
-import org.anddev.andengine.entity.util.FPSCounter;
+import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
 import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
@@ -217,6 +215,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		/**
 		 * BASICS
 		 */
+		mEngine.registerUpdateHandler(new FPSLogger());
 		mScene = new Scene();
 		mScene.setBackground(new ColorBackground(1,1,1));
 		
@@ -252,11 +251,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		 */
 		hud = new HUD();
 		
-		final FPSCounter fpsCounter = new FPSCounter();
-		mEngine.registerUpdateHandler(fpsCounter);
-		final ChangeableText fpsText = new ChangeableText(PHONE_WIDTH,PHONE_HEIGHT, andengine_komika, "FPS: 00.00", "FPS: XXXXX".length());
-		fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10, PHONE_HEIGHT-fpsText.getHeight()-10);
-		hud.attachChild(fpsText);
+//		final FPSCounter fpsCounter = new FPSCounter();
+//		mEngine.registerUpdateHandler(fpsCounter);
+//		final ChangeableText fpsText = new ChangeableText(PHONE_WIDTH,PHONE_HEIGHT, andengine_komika, "FPS: 00.00", "FPS: XXXXX".length());
+//		fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10, PHONE_HEIGHT-fpsText.getHeight()-10);
+//		hud.attachChild(fpsText);
 		
 		playChangeableText = new ChangeableText(PHONE_WIDTH,10, andengine_komika,playMode?play:pan,Math.max(play.length(),pan.length())) {
 			@Override
@@ -299,12 +298,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		mCandyCamera.setHUD(hud);
 		
-		hud.registerUpdateHandler(new TimerHandler(0.2f,true,new ITimerCallback(){
-			@Override
-			public void onTimePassed(final TimerHandler pTimerHandler) {
-				fpsText.setText("FPS: " + fpsCounter.getFPS());
-			}
-		}));
+//		hud.registerUpdateHandler(new TimerHandler(0.2f,true,new ITimerCallback(){
+//			@Override
+//			public void onTimePassed(final TimerHandler pTimerHandler) {
+//				fpsText.setText("FPS: " + fpsCounter.getFPS());
+//			}
+//		}));
 		
 		return mScene;
 	}
