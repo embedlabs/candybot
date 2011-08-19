@@ -55,11 +55,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public float PHONE_WIDTH =  854;
 	public float PHONE_HEIGHT = 480;
 	
-	
-	/**
-	 * Instead of an enum...
-	 */
 	int level,world;
+	String theme;
+	
 	static final int CANDY = 1;
 	static final int CAT = 2;
 	static final int BOX = 3;
@@ -116,6 +114,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setWindowAnimations(android.R.style.Animation);
 
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 		
@@ -125,7 +124,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		pan = getString(R.string.pan);
 		
 		world = getIntent().getIntExtra("com.embedstudios.candycat.world", 0);
-		level = getIntent().getIntExtra("com.embedstudios.candycat.level", 0); // retrieves world/level to render from the intent
+		level = getIntent().getIntExtra("com.embedstudios.candycat.level", 0);
+		theme = getIntent().getStringExtra("com.embedstudios.candycat.theme");
 		
 		Log.i(TAG,"Level "+world+"_"+level);
 		
@@ -162,7 +162,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public void onLoadResources() {
 		Log.v(TAG,"CandyLevel onLoadResources()");
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/"+theme+"/");
 		
 		
 		/**
@@ -222,7 +223,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		/**
 		 * BACKGROUND
 		 */
-		final CandyTMXLoader tmxLoader = new CandyTMXLoader("normal",this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
+		final CandyTMXLoader tmxLoader = new CandyTMXLoader((theme==null)?"normal":theme,this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
 		try {
 			mTMXTiledMap = tmxLoader.loadFromAsset(this, "levels/"+world+"_"+level+".ccl");
 		} catch (final TMXLoadException tmxle) {

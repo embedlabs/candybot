@@ -31,6 +31,8 @@ import org.anddev.andengine.sensor.accelerometer.IAccelerometerListener;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
@@ -75,6 +77,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	private SplashTask splashTask;
 	
+	private String theme="normal";
+	
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
@@ -82,9 +86,11 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			try {
 				startActivity(new Intent(this,CandyLevel.class)
 					.putExtra("com.embedstudios.candycat.world", Integer.valueOf(((EditText)findViewById(R.id.edittext_world)).getText().toString()))
-					.putExtra("com.embedstudios.candycat.level", Integer.valueOf(((EditText)findViewById(R.id.edittext_level)).getText().toString())));
+					.putExtra("com.embedstudios.candycat.level", Integer.valueOf(((EditText)findViewById(R.id.edittext_level)).getText().toString()))
+					.putExtra("com.embedstudios.candycat.theme", theme));
 			} catch (Exception e) {
-				startActivity(new Intent(this,WorldSelect.class));
+				startActivity(new Intent(this,WorldSelect.class)
+					.putExtra("com.embedstudios.candycat.theme", theme));
 			}
 			break;
 		case R.id.button_achievements:
@@ -116,7 +122,19 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	@Override
 	public void onLoadResources() {
 		Log.v(TAG,"MainMenu onLoadResources()");
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+		
+		final SharedPreferences p = getPreferences(MODE_PRIVATE);
+		final Editor e = p.edit();
+		
+		theme = p.getString("com.embedstudios.candycat.preferences.theme", "normal");
+//		theme = "normal";
+		theme = "inverted";
+		Log.i(TAG,"THEME: "+theme);
+		
+		e.putString("com.embedstudios.candycat.preferences.theme", theme);
+		e.commit();
+		
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/normal/");
 		
 		mTexture = new BitmapTextureAtlas(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mCandyFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);

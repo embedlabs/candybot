@@ -29,6 +29,7 @@ public class WorldSelect extends Activity implements View.OnTouchListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setWindowAnimations(android.R.style.Animation);
 		setContentView(R.layout.select_world);
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 
@@ -93,7 +94,8 @@ public class WorldSelect extends Activity implements View.OnTouchListener {
 			Log.i(CandyUtils.TAG,"Action up.");
 			startActivity(new Intent(this,CandyLevel.class)
 				.putExtra("com.embedstudios.candycat.world", worldArrayList.indexOf(v)+1)
-				.putExtra("com.embedstudios.candycat.level", 1));
+				.putExtra("com.embedstudios.candycat.level", 1)
+				.putExtra("com.embedstudios.candycat.theme", getIntent().getStringExtra("com.embedstudios.candycat.theme")));
 		} else {
 			world_g.onTouchEvent(event);
 			return false;
