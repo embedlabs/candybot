@@ -127,8 +127,8 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		final Editor e = p.edit();
 		
 		theme = p.getString("com.embedstudios.candycat.preferences.theme", "normal");
-//		theme = "normal";
-		theme = "inverted";
+		theme = "normal"; // TODO remove and make it a preference
+
 		Log.i(TAG,"THEME: "+theme);
 		
 		e.putString("com.embedstudios.candycat.preferences.theme", theme);

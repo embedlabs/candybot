@@ -231,7 +231,7 @@ public class CandyEngine {
 				}
 			}
 			
-			pause(5,enemyList);
+//			pause(5,enemyList);
 			
 			catMoved = false;
 		}
