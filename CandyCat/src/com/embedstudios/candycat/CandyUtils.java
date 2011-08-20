@@ -22,7 +22,7 @@ import android.widget.Toast;
 public class CandyUtils {
 	public static final String TAG = "Candy Cat";
 	
-	public static void parseLevelObjectsFromXml(Context context,final int world,final int level,ArrayList<int[]> objectList,ArrayList<String> tutorialList) {
+	public static void parseLevelObjectsFromXml(Context context,final int world,final int level,ArrayList<int[]> objectList,ArrayList<String[]> tutorialList) {
 		try {
 			// Load the XML into a DOM.
 			final InputStream input = context.getAssets().open("levels/w/w"+world+".xml");
@@ -55,7 +55,11 @@ public class CandyUtils {
 					final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("t"); // t = tutorial
 					for (int j=0;j<tutorialNodeList.getLength();j++) {
 						final Element currentTutorialElement = (Element)tutorialNodeList.item(j);
-						tutorialList.add(currentTutorialElement.getAttribute("i")); // i = info, meaning the tutorial text
+						tutorialList.add(new String[]{
+							currentTutorialElement.getAttribute("i"), // i = info, meaning the tutorial text
+							currentTutorialElement.getAttribute("r"), // r = row
+							currentTutorialElement.getAttribute("c") // c = column
+						});
 					}
 					break;
 				}

@@ -121,7 +121,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		}
 	}
 
-	public void showCandyAnim() {
+	public synchronized void showCandyAnim() {
 		if (type==CandyLevel.CANDY) {
 			hasModifier = true;
 			Log.i(TAG,"Candy winning animation started.");
@@ -146,7 +146,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		Log.i(TAG,"Bomb explosion started.");
 	}
 
-	public void showDeadSprite() {
+	public synchronized void showDeadSprite() {
 		hasModifier=true;
 		objectArray[index][CandyEngine.ROW]=-1;
 		enemyDead=true;

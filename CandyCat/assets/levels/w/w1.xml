@@ -3,9 +3,6 @@
 	<l id="1">
 		<o n="1" r="7" c="8" />
 		<o n="2" r="7" c="7" />
-		<t i="Help the Candy Cat push the candy into the pipe!" />
-		<t i="The Candy Cat is immune to gravity, but the candy is not." />
-		<t i="Try zooming and panning around the level." />
 	</l>
 	<l id="2">
 		<o n="1" r="2" c="12" />

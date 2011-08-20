@@ -422,7 +422,7 @@ public class CandyEngine {
 		}
 	}
 
-	private void pause(final int milliseconds,final Integer... indexArray) {
+	private synchronized void pause(final int milliseconds,final Integer... indexArray) {
 		if (indexArray.length>0) {
 			final List<CandyAnimatedSprite> casList= new ArrayList<CandyAnimatedSprite>();
 			for (int index:indexArray) {
@@ -438,7 +438,7 @@ public class CandyEngine {
 		}
 	}
 	
-	private void pause(final int milliseconds,final List<CandyAnimatedSprite> casList) {
+	private synchronized void pause(final int milliseconds,final List<CandyAnimatedSprite> casList) {
 		if (casList.size()>0) {
 			while (true) {
 				for (CandyAnimatedSprite cas:casList) {

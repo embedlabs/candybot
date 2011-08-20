@@ -70,7 +70,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	 * Gotta keep track of all your variables and objects and stuff...
 	 */
 	private final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
-	private final ArrayList<String> tutorialList = new ArrayList<String>(); // list of all tutorial text
+	private final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list of all tutorial text
 	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
 	private int[][] backgroundArray = new int[18][24]; // holds tmx array
 	public TextureRegion[][] trArray = new TextureRegion[18][24];
@@ -182,7 +182,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		 * FONT
 		 */
 		mFontTexture = new BitmapTextureAtlas(512,512, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		andengine_komika = new Font(mFontTexture, komika, 44, true, 0x80444444);
+		andengine_komika = new Font(mFontTexture, komika, 64, true, 0x80444444);
 		
 		/**
 		 * ENGINE LOADING
@@ -241,6 +241,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		for (int i=0;i<objectArray.length;i++) {
 			createSprite(objectArray[i][CandyEngine.TYPE],objectArray[i][CandyEngine.ROW],objectArray[i][CandyEngine.COLUMN],i);
 		}
+		
+		/**
+		 * TUTORIAL TEXT
+		 */
+		addTutorialText(tutorialList);
 		
 		/**
 		 * LOGIC ENGINE
@@ -309,11 +314,13 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		return mScene;
 	}
 
-	public void addTutorialText(ArrayList<String> inputList) {
-		// TODO Auto-generated method stub
-		// This is temporary, change later:
-		for (String text:inputList) {
-			Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+	public void addTutorialText(ArrayList<String[]> inputTutorialList) {
+		for (String[] tutorialTextArray:inputTutorialList) {
+			final Text text = new Text(Float.parseFloat(tutorialTextArray[CandyEngine.COLUMN])*64,
+				Float.parseFloat(tutorialTextArray[CandyEngine.ROW])*64,
+				andengine_komika,
+				tutorialTextArray[0].replace("\\n", "\n"));
+			mScene.attachChild(text);
 		}
 	}
 
@@ -323,13 +330,15 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		switch (type){
 		case CANDY: face = new CandyAnimatedSprite(row,column,candyTTR,index,CANDY,tmxLayer,objectArray,backgroundArray); break;
 		case CAT: face = new CandyAnimatedSprite(row,column,catTTR,index,CAT,tmxLayer,objectArray,backgroundArray); break;
-		case BOX: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer,objectArray,backgroundArray); break;
 		case BOMB: face = new CandyAnimatedSprite(row,column,bombTTR,index,BOMB,tmxLayer,objectArray,backgroundArray); break;
 		case ENEMY: face = new CandyAnimatedSprite(row,column,enemyTTR,index,ENEMY,tmxLayer,objectArray,backgroundArray); break;
 		case MOVABLE_WALL: face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL,tmxLayer,objectArray,backgroundArray); break;
 		case INERTIA_WALL: face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL,tmxLayer,objectArray,backgroundArray); break;
-		default: face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer,objectArray,backgroundArray); break;
+		case BOX:
+		default:
+			face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer,objectArray,backgroundArray); break;
 		}
+		
 		spriteList.add(face);
 		mScene.attachChild(face);
 	}
@@ -345,19 +354,20 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		if (!resumeHasRun) {
 			resumeHasRun=true;
+			
+			mCandyCamera.setMaxZoomFactorChange((1-PHONE_HEIGHT/HEIGHT));
+			mCandyCamera.setChaseEntity(candyEngine.cat);
+			
 			new Handler().post(new Runnable(){
 				@Override
-				public void run() {
-					mCandyCamera.setMaxZoomFactorChange((1-PHONE_HEIGHT/HEIGHT));
+				public void run() { // TODO preference
 					try {
 						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 						Log.e(TAG,"Level start delay FAIL!",e);
 					}
-					mCandyCamera.setChaseEntity(candyEngine.cat);
 					mCandyCamera.setZoomFactor(1);
 					gameStarted=true;
-					addTutorialText(tutorialList);
 				}
 			});
 		}
