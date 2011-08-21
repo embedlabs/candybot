@@ -256,17 +256,19 @@ public class CandyEngine {
 					if (teleportationRequired) {
 						teleportationRequired = false;
 						
-						tempRow = candyLevel.teleporter2row+ROW_DOWN;
-						tempColumn = candyLevel.teleporter2column;
-						Log.d(TAG,"Adding to queue...");
-						spriteQueue.get(gIndex).add(new int[]{TELEPORT,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column});
-						Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
-						
-						final int fallDistance2 = fallDistance(gSprite.index,gIndex,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column);
-						tempRow+=fallDistance2;
-						Log.d(TAG,"Adding to queue...");
-						spriteQueue.get(gIndex).add(new int[]{FALL,fallDistance2,0});
-						Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+						if (!gSprite.blowUp) {
+							tempRow = candyLevel.teleporter2row+ROW_DOWN;
+							tempColumn = candyLevel.teleporter2column;
+							Log.d(TAG,"Adding to queue...");
+							spriteQueue.get(gIndex).add(new int[]{TELEPORT,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column});
+							Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+							
+							final int fallDistance2 = fallDistance(gSprite.index,gIndex,candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column);
+							tempRow+=fallDistance2;
+							Log.d(TAG,"Adding to queue...");
+							spriteQueue.get(gIndex).add(new int[]{FALL,fallDistance2,0});
+							Log.d(TAG,"Queue added to. "+spriteQueue.get(gIndex).size());
+						}
 						
 						continue;
 					} else if (slidingOnIceRequired) {
@@ -274,7 +276,7 @@ public class CandyEngine {
 						
 						final int slideDistance = slideDistance(tempRow,tempColumn,gSprite.lastDirectionalMove);
 						
-						if (slideDistance!=0) {
+						if (slideDistance!=0&&!gSprite.blowUp) {
 							tempColumn+=(slideDistance*gSprite.lastDirectionalMove);
 							Log.d(TAG,"Adding to queue...");
 							spriteQueue.get(gIndex).add(new int[]{SLIDE_ICE,0,slideDistance*gSprite.lastDirectionalMove});
