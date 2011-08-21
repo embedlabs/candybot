@@ -42,7 +42,6 @@ import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -83,15 +82,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
-			try {
-				startActivity(new Intent(this,CandyLevel.class)
-					.putExtra("com.embedstudios.candycat.world", Integer.valueOf(((EditText)findViewById(R.id.edittext_world)).getText().toString()))
-					.putExtra("com.embedstudios.candycat.level", Integer.valueOf(((EditText)findViewById(R.id.edittext_level)).getText().toString()))
-					.putExtra("com.embedstudios.candycat.theme", theme));
-			} catch (Exception e) {
-				startActivity(new Intent(this,WorldSelect.class)
-					.putExtra("com.embedstudios.candycat.theme", theme));
-			}
+			startActivity(new Intent(this,WorldSelect.class).putExtra("com.embedstudios.candycat.theme", theme));
 			break;
 		case R.id.button_achievements:
 			startActivity(new Intent(this,EntryScreenActivity.class));

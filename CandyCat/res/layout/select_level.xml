@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/background_linear">
+	<GridView android:id="@+id/gridview_level"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+	    android:verticalSpacing="10dip"
+	    android:horizontalSpacing="7dip"
+	    android:numColumns="5"
+	    android:columnWidth="80px"
+	    android:stretchMode="spacingWidthUniform"
+	    android:gravity="center"
+		android:layout_centerInParent="true"
+		android:listSelector="@android:color/transparent" />
+</RelativeLayout>

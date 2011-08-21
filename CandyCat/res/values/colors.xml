@@ -3,9 +3,6 @@
     <color name="bg_start">#0B154F</color>
     <color name="bg_center">#1A5BB3</color>
     
-    <color name="normal_text">#FFFFFFFF</color>
-    <color name="transparent">#00000000</color>
-    
     <color name="button_normal_start">#F7EEE000</color>
     <color name="button_normal_center">#F7CC4400</color>
     <color name="button_normal_end">#F7992222</color>

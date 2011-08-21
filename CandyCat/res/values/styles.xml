@@ -2,7 +2,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="candyButton" parent="android:Widget.Button">
         <item name="android:background">@drawable/button</item>
-        <item name="android:textColor">@color/normal_text</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
     <style name="menuButton" parent="@style/candyButton">
         <item name="android:paddingBottom">10dip</item>

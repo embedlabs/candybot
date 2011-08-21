@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 public class CandyUtils {
 	public static final String TAG = "Candy Cat";
+	public static Typeface komika;
 	
 	public static void parseLevelObjectsFromXml(Context context,final int world,final int level,ArrayList<int[]> objectList,ArrayList<String[]> tutorialList) {
 		try {
@@ -70,9 +71,18 @@ public class CandyUtils {
 		}
 	}
 
-	public static void setKomika(Typeface komika,TextView... views) { // changes font
+	public static void setKomika(Typeface inputKomika,TextView... views) { // changes font
+		komika = inputKomika;
 		for (TextView tv:views) {
 			tv.setTypeface(komika);
+		}
+	}
+	
+	public static void setKomika(TextView... views) {
+		if (komika!=null) {
+			for (TextView tv:views) {
+				tv.setTypeface(komika);
+			}
 		}
 	}
 	

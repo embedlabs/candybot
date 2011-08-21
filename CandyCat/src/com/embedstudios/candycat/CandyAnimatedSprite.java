@@ -150,8 +150,15 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		hasModifier=true;
 		objectArray[index][CandyEngine.ROW]=-1;
 		enemyDead=true;
-
-		registerEntityModifier(new ColorModifier(1,1,1,1,0.5f,1,0.5f,new IEntityModifierListener(){
+		
+		final float deathSpeed;
+		if (type==CandyLevel.CAT) {
+			deathSpeed = 1;
+		} else {
+			deathSpeed = 0.3f;
+		}
+		
+		registerEntityModifier(new ColorModifier(deathSpeed,1,1,1,0.5f,1,0.5f,new IEntityModifierListener(){
 
 			@Override
 			public void onModifierStarted(IModifier<IEntity> pModifier, IEntity pItem) {}
