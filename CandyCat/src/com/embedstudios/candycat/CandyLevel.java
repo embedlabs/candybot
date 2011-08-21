@@ -291,7 +291,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&&gameStarted) {
-					candyEngine.resetLevel();
+					candyEngine.resetLevel(true);
 				}
 				return true;
 			}

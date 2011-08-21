@@ -312,18 +312,18 @@ public class CandyEngine {
 			cat.showDeadSprite();
 			pause(5,catIndex);
 			pause(1500);
-			resetLevel();
+			resetLevel(false);
 		} else if (candyBurned&&!death) {
 			candy.showDeadSprite();
 			pause(5,candyIndex);
 			pause(1500);
-			resetLevel();
+			resetLevel(false);
 		} else if (death&&candyBurned) {
 			cat.showDeadSprite();
 			candy.showDeadSprite();
 			pause(5,catIndex,candyIndex);
 			pause(1500);
-			resetLevel();
+			resetLevel(false);
 		} else {
 			candyLevel.gameStarted=true;
 		}
@@ -504,20 +504,22 @@ public class CandyEngine {
 		return true;
 	}
 
-	public synchronized void resetLevel() {
+	public synchronized void resetLevel(final boolean shouldJoin) {
 		Log.i(TAG,"CandyEngine reset.");
 		
-		while (true) {
-			try {
-				currentThread.join();
-				break;
-			} catch (InterruptedException e) {
-				pause(5);
-			} catch (NullPointerException e) {
-				break;
+		if (shouldJoin) {
+			while (true) {
+				try {
+					currentThread.join();
+					break;
+				} catch (InterruptedException e) {
+					pause(5);
+				} catch (NullPointerException e) {
+					break;
+				}
 			}
+			Log.i(TAG, "Joined \"currentThread\".");
 		}
-		Log.i(TAG, "Joined \"currentThread\".");
 		
 		candyLevel.gameStarted = false;
 		
