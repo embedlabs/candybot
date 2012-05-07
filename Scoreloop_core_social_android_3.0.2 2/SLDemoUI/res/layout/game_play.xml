@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/status" />
+
+		<TextView android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/mode" />
+
+		<EditText android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/edit_text_score"
+			android:inputType="numberSigned" android:text="@string/s123" />
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_unlock_achievements"
+			android:text="@string/unlock_achievements" />
+		<CheckBox android:layout_width="wrap_content" android:text="@string/localScore"
+			android:layout_height="wrap_content" android:id="@+id/check_box_locally"></CheckBox>
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_game_over"
+			android:text="@string/game_over" />
+
+	</LinearLayout>
+</ScrollView>

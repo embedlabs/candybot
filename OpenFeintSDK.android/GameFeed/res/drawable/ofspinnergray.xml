@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+  <item android:drawable="@drawable/ofspinnergray01" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray02" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray03" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray04" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray05" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray06" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray07" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray08" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray09" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray10" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray11" android:duration="100" />
+  <item android:drawable="@drawable/ofspinnergray12" android:duration="100" />
+</animation-list>

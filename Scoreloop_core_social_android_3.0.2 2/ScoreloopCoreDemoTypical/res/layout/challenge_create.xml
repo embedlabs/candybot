@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="wrap_content" style="@android:style/Theme.Black">
+	<TextView android:id="@+id/challenge_create_info"
+		android:layout_height="wrap_content" android:textColor="@android:color/white"
+		android:layout_width="wrap_content" android:text="@string/challenge_create_info"
+		android:padding="3dp"></TextView>
+		
+	<Spinner android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/spinnerModes"></Spinner>
+
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:paddingTop="10dp"
+		android:paddingBottom="10dp"
+		android:gravity="center_vertical">
+
+		<Button  android:text="@string/minus" android:padding="3dp" 
+			android:id="@+id/button_minus" android:layout_height="35dp" 
+			android:layout_width="35dp"></Button>
+			
+		<SeekBar android:layout_weight="1" android:layout_width="fill_parent"
+			android:padding="3dp" android:id="@+id/stake_seeker"
+			android:layout_height="35dp"></SeekBar>
+			
+		<Button android:id="@+id/button_plus" android:padding="3dp" 
+			android:text="@string/plus" android:layout_height="35dp" android:layout_width="35dp"></Button>
+
+	</LinearLayout>
+
+	<TextView android:id="@+id/challenge_stake"
+		android:layout_height="wrap_content" android:layout_width="wrap_content"
+		android:text="" android:layout_gravity="center" android:textColor="@android:color/white"></TextView>
+
+	<Button android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/start_challenge"
+		android:paddingTop="5dp" android:id="@+id/start_challenge" />
+</LinearLayout>

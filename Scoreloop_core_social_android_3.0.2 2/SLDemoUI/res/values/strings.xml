@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_label">SLDemoUI</string>
+	<string name="s123">123</string>
+	<string name="start">Start!</string>
+	<string name="game_over">Game Over</string>
+	<string name="leaderboards">Leaderboards</string>
+	<string name="profile">Profile Settings</string>
+	<string name="entry">Scoreloop</string>
+	<string name="enable">Enable Scoreloop</string>
+	<string name="achievements">Achievements</string>
+	<string name="challenges">Challenges</string>
+	<string name="social_market">Social Market</string>
+	<string name="friends">Friends</string>
+	<string name="new_game">New Game</string>
+	<string name="resume_game">Resume Game</string>
+	<string name="achievement_achieved">Already achieved!</string>
+	<string name="achievement_progress_format" formatted="false">Achievement progress: %s out of %s</string>
+	<string name="make_progress">Make Progress!</string>
+	<string name="unlock_achievements">Unlock Achievements</string>
+	<string name="status_normal">Normal (non-Challenge) Game</string>
+	<string name="status_challenge">Challenge Game</string>
+	<string name="unlock">Unlock Premium</string>
+	<string name="game_items">Game Items</string>
+	<string name="localScore">Submit locally only</string>
+	<string name="local_leaderboard">Local Leadearboard</string>
+	<string name="game_has_no_modes">(game has no modes)</string>
+
+</resources>

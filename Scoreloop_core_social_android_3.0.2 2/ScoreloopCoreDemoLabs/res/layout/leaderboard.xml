@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/linearLayout1"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_height="fill_parent"
+	android:layout_width="fill_parent">
+
+
+	<ImageView android:layout_height="wrap_content" android:id="@+id/imageView1"
+		android:src="@drawable/sl_icon_badge" android:layout_width="fill_parent"
+		android:layout_marginTop="5dip" android:layout_marginBottom="3dip"
+		android:layout_gravity="center"></ImageView>
+
+	<ListView android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:id="@+id/leaderboard_list">
+	</ListView>
+
+</LinearLayout>

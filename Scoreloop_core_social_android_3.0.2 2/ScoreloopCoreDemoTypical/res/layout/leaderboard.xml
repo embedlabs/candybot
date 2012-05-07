@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/linearLayout1"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_height="fill_parent"
+	android:layout_width="fill_parent">
+
+	<Spinner android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/spinnerModes"></Spinner>
+	<Spinner android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:id="@+id/spinnerSearchList">
+	</Spinner>
+	
+	<Button android:id="@+id/button_page_prev" android:layout_width="fill_parent"
+		android:layout_height="40dip" android:gravity="center" android:text="@string/prev_page"></Button>
+
+	<ListView android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:id="@+id/leaderboard_list"
+		android:layout_weight="1.0">
+	</ListView>
+
+	<Button android:id="@+id/button_page_next" android:layout_width="fill_parent"
+		android:layout_height="40dip" android:text="@string/next_page"></Button>
+
+</LinearLayout>

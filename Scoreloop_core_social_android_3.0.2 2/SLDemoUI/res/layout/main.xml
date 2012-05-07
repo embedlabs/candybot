@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+
+		<TextView android:id="@+id/info_label" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="" />
+
+		<LinearLayout android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+			<Button android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_weight="1"
+				android:id="@+id/button_new_game" android:text="@string/new_game" />
+
+			<Button android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_weight="1"
+				android:id="@+id/button_resume_game" android:text="@string/resume_game" />
+
+		</LinearLayout>
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/button_enable"
+			android:text="@string/enable"/>
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/button_unlock"
+			android:text="@string/unlock"/>
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_entry"
+			android:text="@string/entry" />
+
+		<View android:layout_width="fill_parent" android:layout_height="2dp"
+			android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+			android:background="#ffffffff" />
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/button_game_items"
+			android:text="@string/game_items"/>		
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_leaderboards"
+			android:text="@string/leaderboards" />
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text="@string/local_leaderboard"
+			android:id="@+id/button_local_leaderboard"></Button>
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_achievements"
+			android:text="@string/achievements" />
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_challenges"
+			android:text="@string/challenges" />
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_profile"
+			android:text="@string/profile" />
+
+		<View android:layout_width="fill_parent" android:layout_height="2dp"
+			android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+			android:background="#ffffffff" />
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_friends"
+			android:text="@string/friends" />
+
+		<Button android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:id="@+id/button_social_market"
+			android:text="@string/social_market" />
+	</LinearLayout>
+</ScrollView>

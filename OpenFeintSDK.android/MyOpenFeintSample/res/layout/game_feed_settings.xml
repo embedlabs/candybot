@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--
+		<Gallery xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/gallery" android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+	-->
+
+<RelativeLayout android:layout_width="fill_parent"
+	android:id="@+id/gamebar" android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/grey">
+	<LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="fill_parent">
+		<RadioGroup android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/radio_alignment" android:orientation="horizontal">
+			<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/radio_alignment_top" android:text="Top" android:layout_marginRight="10px"></RadioButton>
+			<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="Bottom" android:id="@+id/radio_alignment_bottom"></RadioButton>
+		</RadioGroup>
+		<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/checkbox_animated" android:checked="true" android:text="Animated"></CheckBox>
+		<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/checkbox_custom" android:text="Custom Assets"></CheckBox>
+		<Spinner android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/spinner_layout_type" android:prompt="@string/spinner_layout_type_prompt"></Spinner>
+		<Button android:layout_height="wrap_content" android:text="Start GameFeed Activity" android:layout_width="fill_parent" android:id="@+id/button_start_gamefeed_activity"></Button>
+	</LinearLayout>
+</RelativeLayout>

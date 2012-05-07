@@ -21,18 +21,22 @@ public class WorldAdapter extends BaseAdapter {
 		mContext = c;
 	}
 
+	@Override
 	public int getCount() {
 		return mImageIds.length;
 	}
 
+	@Override
 	public Object getItem(final int position) {
 		return position;
 	}
 
+	@Override
 	public long getItemId(final int position) {
 		return position;
 	}
 
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		final ImageView i = new ImageView(mContext);

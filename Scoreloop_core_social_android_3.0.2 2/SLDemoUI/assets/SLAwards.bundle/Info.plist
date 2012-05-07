@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- DO NOT EDIT - THIS FILE WAS GENERATED WITHIN AN EXPORT OF YOUR GAMES LIST OF AWARDS -->
+<!-- WITH EDITING THIS FILE YOU WILL MAKE IT UNPROCESSABLE (CHECKSUM ERRORS) -->
+<!--  -->
+<!-- File was generated on Thu Apr 14 14:05:24 +0000 2011 -->
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en_US</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.scoreloop.awardsbundle</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>SLAwards</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>SCOL</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>SLAchievableListIdentifier</key>
+	<string>f9c7fd93-fec5-4c43-917d-69e1833db20f</string>
+	<key>SLAwards</key>
+	<array>
+		<dict>
+			<key>counterRange</key>
+			<string>{0, 1}</string>
+			<key>identifier</key>
+			<string>com.scoreloop.demo.smiley</string>
+			<key>importance</key>
+			<integer>0</integer>
+			<key>rewardMoney</key>
+			<dict>
+				<key>amount</key>
+				<integer>100</integer>
+				<key>currency</key>
+				<string>XPT</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>counterRange</key>
+			<string>{0, 2}</string>
+			<key>identifier</key>
+			<string>com.scoreloop.demo.sunny</string>
+			<key>importance</key>
+			<integer>0</integer>
+			<key>rewardMoney</key>
+			<dict>
+				<key>amount</key>
+				<integer>600</integer>
+				<key>currency</key>
+				<string>XPT</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>counterRange</key>
+			<string>{0, 3}</string>
+			<key>identifier</key>
+			<string>com.scoreloop.demo.hearts</string>
+			<key>importance</key>
+			<integer>0</integer>
+			<key>rewardMoney</key>
+			<dict>
+				<key>amount</key>
+				<integer>1000</integer>
+				<key>currency</key>
+				<string>XPT</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>counterRange</key>
+			<string>{0, 1}</string>
+			<key>identifier</key>
+			<string>com.scoreloop.demo.quicktwo</string>
+			<key>importance</key>
+			<integer>0</integer>
+			<key>rewardMoney</key>
+			<dict>
+				<key>amount</key>
+				<integer>300</integer>
+				<key>currency</key>
+				<string>XPT</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

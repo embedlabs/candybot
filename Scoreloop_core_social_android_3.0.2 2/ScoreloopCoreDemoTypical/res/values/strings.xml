@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SL Typical</string>
+    <string name="start_game">Start Game</string>
+    <string name="enable_scoreloop">Enable Scoreloop</string>
+    <string name="resume_game">Resume Game</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="profile">Your Profile</string>
+    <string name="scoreloop">Scoreloop</string>
+    <string name="submitting_your_score">Submitting your score to Scoreloop. Please stand by.</string>
+    <string name="score_submitted">Your Score was submitted to Scoreloop. Check out the Leaderboards!</string>
+    <string name="score_stored_locally">Your Score could not be submitted to Scoreloop, probably because there is no
+        internet connection right now. It was instead stored on your device, you can try to submit it later from the
+        leaderboards section!
+    </string>
+    <string name="score_submitted_challenge">Your Score for this Challenge was submitted to Scoreloop. Check the
+        Challenges History later to see if you have won!
+    </string>
+    <string name="challenge_won">You won the Challenge! %1$s only scored %2$s. You recieve the prize of %3$s!</string>
+    <string name="challenge_lost">You lost the Challenge. %1$s scored %2$s!</string>
+    <string name="awesome">Awesome!</string>
+    <string name="leaderboard_error">The leaderboard could not be loaded. Please check your internet connection!
+    </string>
+    <string name="score_submit_error">The score could not be submitted.</string>
+    <string name="too_bad">Too bad…</string>
+    <string name="loading">Loading…</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="profile_picture">Picture</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="game_over">Game Over / Submit Score</string>
+    <string name="your_score">Your Score:</string>
+    <string name="add_1">+1</string>
+    <string name="add_10">+10</string>
+    <string name="add_100">+100</string>
+    <string name="profile_success">Your profile was updated successfully!</string>
+    <string name="profile_success_email_taken">This email address is already registered with Scoreloop. To link this
+        device to your account please check your inbox!
+    </string>
+    <string name="profile_load_error">Your profile could not be loaded right now, sorry!</string>
+    <string name="profile_error_email_invalid">This is not a valid email address!</string>
+    <string name="profile_error_username_taken">This username is already taken!</string>
+    <string name="profile_error_username_too_short">This username is too short!</string>
+    <string name="profile_error_username_invalid">This username is invalid!</string>
+    <string name="profile_image_select_error">Seems like you have not selected a valid image.</string>
+    <string name="profile_image_submit_error">The image could not be submitted to Scoreloop.</string>
+    <string name="select_mode">Select game mode</string>
+    <string name="show_local_scores">Show local scores</string>
+    <string name="prev_page">Previous page</string>
+    <string name="next_page">Next page</string>
+    <string name="sync_local">Submit to Scoreloop</string>
+    <string name="remove_local_scores">Remove local scores</string>
+    <string name="show_me">Show me!</string>
+    <string name="friends_load_error">Error loading your friends. Please make sure you are online!</string>
+    <string name="friends">Friends</string>
+    <string name="add_friend">Add friends</string>
+    <string name="from_address_book">From address book</string>
+    <string name="by_scoreloop_username">by Scoreloop username</string>
+    <string name="enter_scoreloop_username">enter Scoreloop username</string>
+    <string name="user_add_error">Sorry, we could not add a friend right now. Please make sure you are online!</string>
+    <string name="user_added">Successfully added
+        <i>%s</i>
+        to your friends.
+    </string>
+    <string name="user_remove_error">Sorry, we could not remove a friend right now. Please make sure you are online!
+    </string>
+    <string name="user_removed">Successfully removed
+        <i>%s</i>
+        from your friends.
+    </string>
+    <string name="user_add_not_found">Sorry, we don\'t know anybody by that name.</string>
+    <string name="user_address_book_error">Could not retrieve you contacts.</string>
+    <string name="user_address_book_nobody">There are no Scoreloop Users in your address book which are not your friends
+        already. You should tell all your friends about Scoreloop!
+    </string>
+    <string name="challenges">Challenges</string>
+    <string name="challenge">Challenge</string>
+    <string name="open_challenges">Open Challenges</string>
+    <string name="challenges_history">History</string>
+    <string name="new_challenge">New Challenge</string>
+    <string name="anyone">anyone</string>
+    <string name="user_add_friend">Add
+        <i>%s</i>
+        as a friend
+    </string>
+    <string name="user_remove_friend">Remove %s from your friends</string>
+    <string name="challenge_user">Challenge %s</string>
+    <string name="user_load_error">Could not load the profile!</string>
+    <string name="accept_challenge">Accept challenge from
+        <i>%1$s</i>
+        for<b>%2$s</b>?
+    </string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="challenge_error">Sorry, there was an error. Please make sure you are connected to the internet and try
+        again!
+    </string>
+    <string name="balance_text">Your current balance is %s.</string>
+    <string name="buy_more">Buy more %s!</string>
+    <string name="price_text">%1$s as low as %2$s</string>
+    <string name="price_text_free">%s for free!</string>
+    <string name="choose_payment">Choose a payment</string>
+    <string name="payment_provider">Buy with %1$s for %2$s</string>
+    <string name="external_price">(click to see price)</string>
+    <string name="challenge_error_already_you">This challenge is already assigned to you!</string>
+    <string name="challenge_error_already_someone">Sorry, his challenge is already assigned to someone!</string>
+    <string name="challenge_error_balance">Sprry, cou an not accept that challenge because your balance is not enough.
+    </string>
+    <string name="challenge_error_reject">Sorry, you can not reject that challenge!</string>
+    <string name="challenge_error_accept">Sorry, you can not accept that challenge!</string>
+    <string name="new_challenge_explanation">You can start a challenge that can be accepted by any Scoreloop user from
+        around the world, or you can pick one of your friends to challenge directly.
+    </string>
+    <string name="challenge_anyone">Challenge anyone</string>
+    <string name="challenge_friend">Challenge friend</string>
+    <string name="start_challenge">Send Challenge &amp; Play!</string>
+    <string name="challenge_create_info">You are about to start a challenge against %1$s. Please choose the mode to play
+        and the stake you want to put, you currently own %2$s.
+    </string>
+    <string name="challenge_error_paused_game">There is currently a paused game session. You need finish playing that
+        game before starting a new one.
+    </string>
+    <string name="challenge_status_accepted">accepted</string>
+    <string name="challenge_status_open">open</string>
+    <string name="challenge_status_assigned">assigned</string>
+    <string name="challenge_status_rejected">rejected</string>
+    <string name="challenge_status_cancelled">canceled</string>
+    <string name="challenge_status_complete">complete</string>
+    <string name="challenge_status_created">created</string>
+    <string name="challenge_status_invalid">invalid</string>
+    <string name="challenge_status_invited">invited</string>
+    <string name="challenge_history_status">Status:\t%s</string>
+    <string name="challenge_history_stake">Stake:\t%s</string>
+    <string name="challenge_history_created_at">Created at:\t%s</string>
+    <string name="challenge_history_contender">Contender: %s</string>
+    <string name="challenge_history_contender_score">Contender Score: %s</string>
+    <string name="challenge_history_contestant">Contestant: %s</string>
+    <string name="challenge_history_contestant_score">Contestant Score: %s</string>
+    <string name="challenge_history_completed_at">Completed at:\t%s</string>
+    <string name="challenge_history_winner">Winner: %s</string>
+    <string name="achievements">Achievements</string>
+    <string name="achievement_achieved">Achieved!</string>
+    <string name="achievement_progress">%1$d of %2$d</string>
+    <string name="achievement_unachieved">not achieved</string>
+    <string name="achieved_1000points">Achievement unlocked: 1000 points!</string>
+    <string name="achieved_10times">Achievement unlocked: Played 10 times!</string>
+    <string name="achievements_error">Could not load the Achievements right now...</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="payment_load_error">There was an error while loading the available payment methods. Please try again
+        later.
+    </string>
+    <string name="no_payment_methods">Sorry, there are no payment methods available for your location.</string>
+    <string name="payment_succeded">Purchase completed.</string>
+    <string name="payment_pending">Unfortunately your payment could not be completed immediately. If you are billed for
+        the purchase and do not receive your coins within 24 hours please contact support@scoreloop.com!
+    </string>
+    <string name="payment_failed">Payment failed. You might want to try a different method.</string>
+    <string name="payment_cancelled">Payment was cancelled.</string>
+</resources>

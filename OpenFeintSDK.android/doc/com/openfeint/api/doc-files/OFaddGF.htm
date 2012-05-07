@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Getting Started with OpenFeint SDK for Android 1.10.2: 6. Add GameFeed to your game</title>
+	<script type="text/javascript" src="http://www.openfeint.com/ofdeveloper/index.php/resource/usermeet.core/js/jquery.js"></script>
+	<script type="text/javascript" src="http://www.openfeint.com/ofdeveloper/index.php/resource/usermeet.core/js/jquery.MultiFile.pack.js"></script>
+	<script type="text/javascript" src="http://www.openfeint.com/ofdeveloper/index.php/resource/usermeet.core/js/jquery.validate.pack.js"></script>
+	<script type="text/javascript" src="http://www.openfeint.com/ofdeveloper/index.php/resource/usermeet.core/js/cerb4.common.js"></script>
+
+  <link rel="stylesheet" href="http://www.openfeint.com/ofdeveloper/index.php/resource/usermeet.core/css/sc/default.css" />
+
+		<style type='text/css'>
+		@charset "UTF-8";
+/* CSS Document */
+
+body{
+	background-color:#fff;
+	width:98%;
+	height:100%;
+padding-left: 2%;
+margin: 0px auto;
+}
+
+li {
+	padding-top:3px;
+	//padding-bottom:3px;
+}
+  
+a:link{
+	color:#117711;
+	text-decoration:none;
+}
+
+a:visited{
+	color:#117711;
+	text-decoration:none;
+}
+
+a:hover{
+
+	text-decoration:underline;
+}
+
+h1{
+	color:#474747;
+}
+
+h2{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	line-height:18px;
+	color:#474747;
+	font-weight:b
+}
+
+#container{
+	margin:0 auto;
+	width:100%;
+}
+
+#content{
+	width:900px;
+	
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	line-height:18px;
+	color:#474747;
+	
+	padding-left:30px;
+	
+}
+
+#content a:link{
+	color:#117711;
+	text-decoration:none;
+}
+
+#content a:visited{
+	color:#117711;
+	text-decoration:none;
+}
+
+#content a:hover{
+
+	text-decoration:underline;
+}
+
+#home{
+	width:700px;
+	
+
+}
+
+
+.logo{
+	margin-top:25px;
+	padding-bottom:40px;
+}
+
+.homeCol1{
+	width:300px;
+	float:left;
+	padding-right:50px;
+	margin-top:15px;
+	
+}
+
+
+.homeCol2{
+		width:300px;
+		float:left;
+		margin-top:15px;
+
+
+}
+
+TABLE.sidebar { width:220px; border: 1px solid #474747; }
+TABLE.sidebar TH { background-color: #474747; }
+TABLE.sidebar TD A { color: #117711; }
+
+
+td {
+color:#000 !important;
+font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	line-height:18px;
+}
+
+#tagline {
+	display:none;
+padding:5px;
+text-align:right;
+width:98%;
+}
+
+#home li a:link{
+	color:#646464;
+}
+
+#home li a:visited{
+	color:#646464;
+}
+
+
+#home li a:hover{
+	text-decoration:underline;
+	
+	}
+
+.divider {
+padding-top:10px;
+padding-bottom:10px;
+}
+	</style>
+</head>
+<body>
+
+<div id="header">
+	<div id="container">
+	<div class="logo"><a href="./index.htm"><img src="./of_devSupport.png" style="border:none;" alt=""/></a></div></div>
+
+</div>
+
+<h3>Platform: OpenFeint Android SDK 1.10.2</h3>
+
+<h4>Readme.html for OpenFeint Android SDK 1.10.2 <br/>Release date 8.31.2011 <br/>
+Release Notes Copyright (c) 2009-2011 Aurora Feint Inc. <br/>
+All Rights Reserved. </h4>
+
+
+<h4>OpenFeint Android Quick Start Guide</h4>
+<table>
+<tr><td  width="20%" valign="top" style="vertical-align:top">
+<div id="menu">The steps necessary to start
+developing your first OpenFeint-enabled game on Android are:
+<ol>
+ <li><a href="./OFregistering.htm">Register your game on the OpenFeint developer site</a></li>
+  <li><a href="./OFbuild.htm">Build and run the OpenFeint Sample Application</a>
+    <ul>
+	    <li><a href="./OFbuild.htm#Play_with_the_OF_Sample_App_for">In Eclipse</a></li>
+	  <li><a href="./OFbuild.htm#Build_with_Ant">In Ant</a></li>
+  </ul>
+  </li>
+  <li><a href="./OFsample.htm">Get familiar with OpenFeint features in the Sample App</a></li>
+  <li><a  href="./OFinYourGame.htm">Integrate OpenFeint into your game</a></li>
+  <li><a  href="./OFaddFeatures.htm">Add OpenFeint features to your game</a></li>
+  <li>Add GameFeed to your game</li>
+  <li><a  href="./OFtestUsers.htm">Work with test users</a></li>
+  <li><a  href="./OFobfuscate.htm">Obfuscate your code with ProGuard</a></li>
+  <li><a  href="./OFapproval.htm">The approval process</a></li>
+   <li><a  href="./OFapproval.htm">Learn more about OpenFeint</a></li>
+  </ol>
+</div>
+<table width="100%"><tr><td align="left"><a  href="./OFaddFeatures.htm">&lt;&lt;Prev</a></td><td width="50%">&nbsp;</td><td align="right"><a  href="./OFtestUsers.htm">Next &gt;&gt;</a></td></tr></table>
+</td><td width="5%">&nbsp;</td>
+<td style="width:50em;" valign="top"><h4><a name="gf"></a>Integrating GameFeed into your game</h4>
+<div id="importable">
+To get GameFeed up and running in your game:
+<ol>
+<li>Before you integrate GameFeed into your game, make sure you've updated your OpenFeint integration to the current version of OpenFeintAPI.  
+<li><b>High Level Integration Overview</b>
+<br/>To prepare your code for GameFeed, here's what you do:
+<ol>
+	<li>Update your main menu UI and layout to make space for the GameFeed UI element.
+		<div><strong>- For Portrait, you will need to clear an approximately 76 pixel high space to fit the game bar.  (The actual number of pixels will vary with the screen resolution of the target device.)</strong></div>
+		<div><strong>- For Landscape, you will need to clear an approximately 62 pixel high space to fit the game bar.  (The actual number of pixels will vary with the screen resolution of the target device.).</strong></div>
+		<img src="sampletest.png" />
+	</li>
+
+	<li>Include the GameFeed API code as described <a href="#code">here</a> (the easy part).</li>
+</ol>
+</li>
+
+<a name="code"></a>
+
+<li>Link against the GameFeed library:
+	<ul>
+		<li>In Eclipse:
+			<br/>Import the GameFeed library into your project:<br/>
+			<ol>
+				<li>Right-click the application project.</li>
+				<li>Click <b>Import</b>.</li>
+				<li>Click <b>Existing Projects into Workspace.</b>.</li>
+				<li>Click <b>Next</b>.</li> 
+				<li>Browse to the directory in which the OpenFeintAPI and GameFeed libraries are stored.</li>
+				<li>Click <b>OK</b>.</li>
+				<li>If OpenFeintAPI is not yet imported, click its checkbox.</li>
+				<li>If GameFeed is not yet imported, click its checkbox.</li>
+				<li>Click <b>Finish</b>.</li>
+				<li>Build the OpenFeint and GameFeed libraries.</li>
+			</ol>
+		</li>
+		<li>In Ant:
+			<ol>
+				<li>Edit the <b>default.properties</b> file in your game project's directory.</li>
+				<li>There should already be an <b>android.library.reference.1</b> entry for your reference to OpenFeintAPI.  Add an <b>android.library.reference.2</b> entry that points 
+					to the GameFeed folder in the unzipped release.  If the GameFeed folder is a sibling to your game project folder, it should look like this:
+					<pre>android.library.reference.2=../GameFeed</pre></li>
+		 	</ol>
+		</li>
+	</ul>
+</li>
+<li>Integrate
+<p>There is an example of how to use GameFeed in the provided sample application.  See <b>MyOpenFeintSample/src/com/openfeint/example/GameFeedPage.java</b> for details.</p>
+Basically, to integrate GameFeed:
+<ol>
+<li>Make sure OpenFeint is initialized first (in the <code>onCreate()</code> method of your <b>Application</b> class).</li>
+<li>in the <code>onCreate()</code> method of the <b>Activity</b> class in which you want to show GameFeed, create a <pre>Map<String, Object></pre> with all the settings you
+want to configure GameFeed.  Take a look at <b>GameFeed/src/com/openfeint/gamefeed/GameFeedSettings</b> for the full set of keys you can configure.</li>
+<li>Create a new <code>GameFeedView</code> with
+<pre>GameFeedView gameFeedView = new GameFeedView(this, your_settings_map);</pre></li>
+<li>Add <code>gameFeedView</code> to your layout.  The easiest way to do this is
+ <pre>gameFeedView.addToLayout(this.findViewById(R.id.root_layout_id));</pre></li>
+</ol>
+</li>
+<li>Add to your layout
+<p><code>GameFeedView#addToLayout(View)</code> works on <code>LinearLayout</code>, <code>RelativeLayout</code>, and <code>FrameLayout</code> classes.  It works best on the <code>FrameLayout</code> class
+(i.e. if you animate in and out, it won't shift your content around).  If your root layout isn't one of these classes, it may be worth adding a <code>FrameLayout</code> at the root of your layout hierarchy and
+using that as the layout that you add <code>GameFeedView</code> to.</p>
+If you want to position your <code>GameFeedView</code> in a custom way, you should be able to simply call <code>yourLayout.addView(gameFeedView)</code> without any trouble, but be aware that if you go with 
+this implementation, none of the alignment or animation settings will work.</li>
+<li>Hiding and showing
+<p>Call <code>hide()</code> or <code>show()</code> on your <code>GameFeedView</code> when you want to specifically hide or show it.  These methods are necessary if you've
+enabled the animation setting (see <code>GameFeedSettings.AnimateIn</code>), but if you just want to show and hide the view without animating, you can simply call <code>setVisibility(View.GONE)</code> or 
+<code>setVisibility(View.VISIBLE)</code>.</p>
+</li>
+</ol>
+</div> 
+</td></tr></table>
+</body>
+
+</html>

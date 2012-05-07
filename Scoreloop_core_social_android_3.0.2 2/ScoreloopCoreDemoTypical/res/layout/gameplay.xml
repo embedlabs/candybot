@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+		<TextView android:text="(Gameplay Details)" android:id="@+id/gameplay_details"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+
+		<LinearLayout android:id="@+id/linearLayout1"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<TextView android:layout_height="wrap_content"
+				android:layout_width="wrap_content" android:text="@string/your_score"
+				android:id="@+id/textView1"></TextView>
+			<EditText android:id="@+id/scoreText" android:layout_height="wrap_content"
+				android:text="0" android:layout_width="fill_parent"
+				android:inputType="numberSigned"></EditText>
+		</LinearLayout>
+
+		<LinearLayout android:orientation="horizontal"
+			android:layout_height="wrap_content" android:layout_width="fill_parent"
+			android:id="@+id/linearLayout2" android:layout_gravity="center">
+			<Button android:text="@string/add_1" android:id="@+id/button_score1"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_gravity="center"></Button>
+			<Button android:text="@string/add_10" android:id="@+id/button_score10"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_gravity="center"></Button>
+			<Button android:text="@string/add_100" android:id="@+id/button_score100"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_gravity="center"></Button>
+		</LinearLayout>
+
+		<Button android:text="@string/game_over" android:id="@+id/button_game_over"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+
+	</LinearLayout>
+</ScrollView>

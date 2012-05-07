@@ -50,15 +50,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.scoreloop.client.android.ui.EntryScreenActivity;
-import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+
 
 public class MainMenu extends LayoutGameActivity implements OnClickListener, IAccelerometerListener {
 	ViewFlipper enclosing_vf;
 	TextView mainmenu_tv;
 	Button button_play;
 	ImageView iv_achievements,iv_facebook,iv_twitter;
-	private CandyAdvertisement mAdvertisement;
 
 	public Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
@@ -83,9 +81,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		switch (view.getId()) {
 		case R.id.button_play:
 			startActivity(new Intent(this,WorldSelect.class).putExtra("com.embedstudios.candycat.theme", theme));
-			break;
-		case R.id.button_achievements:
-			startActivity(new Intent(this,EntryScreenActivity.class));
 			break;
 		case R.id.button_facebook:
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebook_link))));
@@ -193,7 +188,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 		
-		ScoreloopManagerSingleton.init(this, "70C+VmvvyJ3M0aXxaMZQ0xq35uvSgoVOw/EG+0wy8vnHF7w6M8/WNw==");
 
 		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
 
@@ -207,11 +201,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		CandyUtils.setClick(this,button_play,iv_achievements,iv_facebook,iv_twitter);
 
 		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies part
-		
-		mAdvertisement = new CandyAdvertisement(this, R.id.game_ad);
-		
-		splashTask = new SplashTask(enclosing_vf,mAdvertisement,this);
-		splashTask.execute();
+				
 	}
 	
 	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {
@@ -292,14 +282,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	@Override
 	public void onDestroy() {
-		splashTask.running=false;
-		super.onDestroy();
 		
-		/**
-		 * DESTROY SINGLETONS
-		 */
-		BufferObjectManager.getActiveInstance().clear();
-		ScoreloopManagerSingleton.destroy();
 		
 		Log.i(TAG,"MainMenu onDestroy()");
 	}

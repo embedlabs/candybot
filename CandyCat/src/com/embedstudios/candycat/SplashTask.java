@@ -1,25 +1,22 @@
 package com.embedstudios.candycat;
 
+
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ViewFlipper;
-
-import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
 
 public class SplashTask extends AsyncTask<Void,Integer,Void> {
 	public boolean running = true;
 	private final ViewFlipper vf;
 	private final MainMenu mainMenu;
-	private final CandyAdvertisement candyAdvertisement;
 	
 	private static final int LOGO_DURATION=3000;
 	public static final String TAG = CandyUtils.TAG;
 	
-	public SplashTask(final ViewFlipper vf, final CandyAdvertisement candyAdvertisement, final MainMenu mainMenu) {
+	public SplashTask(final ViewFlipper vf, final MainMenu mainMenu) {
 		super();
 		this.vf=vf;
 		this.mainMenu=mainMenu;
-		this.candyAdvertisement=candyAdvertisement;
 	}
 	
 	@Override
@@ -62,9 +59,7 @@ public class SplashTask extends AsyncTask<Void,Integer,Void> {
 		try {
 			switch (integers[0]) {
 			case 0: vf.showNext(); break;
-			case 6: ScoreloopManagerSingleton.get().showWelcomeBackToast(0); break;
-			case 7: candyAdvertisement.showAdvertisement(); break;
-			default: mainMenu.addFace(integers[0]-1); break;
+						default: mainMenu.addFace(integers[0]-1); break;
 			}
 		} catch (Exception e) {
 			Log.e(TAG, "SplashTask onProgressUpdate() failed.",e);

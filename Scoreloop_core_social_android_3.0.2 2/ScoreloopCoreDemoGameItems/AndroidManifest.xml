@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.scoreloop.client.android.core.demo.gameitems"
+	android:versionCode="1" android:versionName="1.0">
+
+	<!-- Permission configuration required by Scoreloop -->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	
+	<!--  Permissions for Fortumo Payment -->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.SEND_SMS" />
+	<uses-permission android:name="android.permission.RECEIVE_SMS" />
+	<uses-permission android:name="android.permission.READ_SMS"/>
+	<uses-permission android:name="android.permission.WRITE_SMS"/>
+
+	<!--  Permission for Google In App Billing -->
+	<uses-permission android:name="com.android.vending.BILLING"/>
+
+	<application android:icon="@drawable/icon" android:label="@string/app_name"
+		android:name=".GameItemsApplication">
+
+		<activity android:name=".MainActivity" android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<activity android:name=".ShopActivity"
+			android:configChanges="keyboardHidden|keyboard|orientation"
+			android:screenOrientation="portrait"></activity>
+		<activity android:name=".GamePlayActivity"
+			android:configChanges="keyboardHidden|keyboard|orientation"
+			android:screenOrientation="portrait"></activity>
+		
+		<activity android:name="com.scoreloop.client.android.core.ui.ProxyActivity" android:configChanges="orientation|keyboard|keyboardHidden"/>
+		
+		<activity android:name="com.paypal.android.MEP.PayPalActivity" 
+			android:theme="@android:style/Theme.Translucent.NoTitleBar" 
+			android:configChanges="keyboardHidden|orientation"/>
+					
+		<activity android:name="com.fortumo.android.FortumoActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+		
+		<service android:name="com.scoreloop.client.android.core.paymentprovider.googlemarket.BillingService" />
+        <receiver android:name="com.scoreloop.client.android.core.paymentprovider.googlemarket.BillingReceiver">
+            <intent-filter>
+                <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
+                <action android:name="com.android.vending.billing.RESPONSE_CODE" />
+                <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+		
+	</application>
+</manifest>

@@ -1,0 +1,728 @@
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/ScoreloopManager.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/ScoreloopManager.java
+index e752b47..50f2eed 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/ScoreloopManager.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/ScoreloopManager.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -30,18 +30,19 @@ import com.scoreloop.client.android.core.model.Achievement;
+ import com.scoreloop.client.android.core.model.AwardList;
+ import com.scoreloop.client.android.core.model.Continuation;
+ import com.scoreloop.client.android.core.model.Score;
++import com.scoreloop.client.android.core.model.Session;
+ 
+ /**
+- * The ScoreloopManager is the general managing class for ScoreloopUI. A single instance of 
++ * The ScoreloopManager is the general managing class for ScoreloopUI. A single instance of
+  * ScoreloopManager is shared by all activities in the application. The ScoreloopManager
+  * should be instantiated from within the <b>Android application</b> class. The shared
+- * ScoreloopManager instance should persist for the lifecycle of the game. The 
+- * ScoreloopManagerSingleton class is used to intialize instances of ScoreloopManager. 
++ * ScoreloopManager instance should persist for the lifecycle of the game. The
++ * ScoreloopManagerSingleton class is used to intialize instances of ScoreloopManager.
+  * 
+  * Basic Usage:\n
+  * -# Use the ScoreloopManagerSingleton class to initialize the ScoreloopManager.
+  * -# Access the ScoreloopManager using ScoreloopManagerSingleton.get().
+- * -# Invoke the desired ScoreloopManager method. 
++ * -# Invoke the desired ScoreloopManager method.
+  *
+  *  \sa ScoreloopManagerSingleton
+  */
+@@ -52,7 +53,7 @@ public interface ScoreloopManager {
+ 	 * as having been achieved by the session user. The method can be used
+ 	 * to specify whether a toast message should be displayed and also
+ 	 * whether the achieved award should be submitted to the Scoreloop
+-	 * servers straight away. 
++	 * servers straight away.
+ 	 * 
+ 	 * Note that loadAchievements() must first have
+ 	 * been called before this method is invoked, otherwise a
+@@ -134,7 +135,7 @@ public interface ScoreloopManager {
+ 
+ 	/**
+ 	 * This method is used to check whether the list of achievements
+-	 * have been successfully requested from the server. 
++	 * have been successfully requested from the server.
+ 	 * @return true if the list of achievements were successfully loaded, otherwise @c false.
+ 	 */
+ 	boolean hasLoadedAchievements();
+@@ -168,7 +169,7 @@ public interface ScoreloopManager {
+ 	 * has been achieved or not. The award identifier is defined
+ 	 * by the developer and configured on https://developer.scoreloop.com.
+ 	 * Note that loadAchievements() must have first been called
+-	 * before this method can be invoked, otherwise a 
++	 * before this method can be invoked, otherwise a
+ 	 * <a href="http://download.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html">
+ 	 * java.lang.IllegalStateException</a> will be thrown.
+ 	 * @param awardId The identifier for the award specified on the developer web site.
+@@ -178,8 +179,8 @@ public interface ScoreloopManager {
+ 
+ 	/**
+ 	 * This method loads a list of Scoreloop
+-	 * achievement objects from the server. 
+-	 * Once this method 
++	 * achievement objects from the server.
++	 * Once this method
+ 	 * has been called (and after a successful repsonse has been
+ 	 * received from the server) the following methods can be used:
+ 	 * - hasLoadedAchievements(), (to check whether the load
+@@ -190,81 +191,81 @@ public interface ScoreloopManager {
+ 	 * - achieveAward(String, boolean, boolean).
+ 	 * 
+ 	 * @param continuation A continuation that gets called when
+-	 * the loading of achievements completes with or without errors. 
++	 * the loading of achievements completes with or without errors.
+ 	 * This can be  be @c null.
+ 	 *
+ 	 * Normally, a Scoreloop server request is made on the first call to this method after an installation of the game.
+-	 * By setting the ui.feature.achievement.forceSync property in scoreloop.properties to false, loadAchievements() will not make this initial server request 
++	 * By setting the ui.feature.achievement.forceSync property in scoreloop.properties to false, loadAchievements() will not make this initial server request
+ 	 * which has pros and cons. As a pro, you can use the achievements without network access (you still
+-	 * have to call loadAchievements() though but this will return the achievements from the local store only. 
++	 * have to call loadAchievements() though but this will return the achievements from the local store only.
+ 	 * As a cons, if the game was deleted and reinstalled, the returned
+ 	 * achievements will not know about previous achievements before submitAchievement() is called.
+ 	 */
+ 	void loadAchievements(Continuation<Boolean> continuation);
+ 
+ 	/**
+-	* This method is used to submit a score to Scoreloop.
+-	* It should be called once the game play
+-	* activity has ended. This method will automatically
+-	* check whether a challenge is underway and, if so, submit
+-	* the score as part of the challenge. The method will also
+-	* automatically detect whether the score should be submitted
+-	* on behalf of the challenge contender or the challenge contestant.
+-	*
+-	* If no challenge is currently underway, the score will be submitted
+-	* to Scoreloop on behalf of the session user in the standard way.
+-	*
+-	* After submitting the score, @link com.scoreloop.client.android.ui.OnScoreSubmitObserver.onScoreSubmit(final int, final Exception) OnScoreSubmitObserver.onScoreSubmit(final int, final Exception)@endlink will be called.
+-	* 
+-	* This method always tries to submit the score to the remote Scoreloop servers. If this will not be possible due to connection problems,
+-	* the score will be stored in the local (offline) leaderboards list instead. You might then submit the best score of the local leaderboard
+-	* some time later. 
+-	*
+-	* \sa @link scoreloopui-integratescores Submitting Scores to Scoreloop@endlink
+-	*
+-	* @param scoreResult A <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Double.html">java.lang.Double</a> object representing the
+-	* score result obtained by the user in the game.
+-	* @param mode A <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Integer.html">java.lang.Integer</a> representing the mode at which the score was obtained. If the game does not support modes, pass @c null here instead.
++	 * This method is used to submit a score to Scoreloop.
++	 * It should be called once the game play
++	 * activity has ended. This method will automatically
++	 * check whether a challenge is underway and, if so, submit
++	 * the score as part of the challenge. The method will also
++	 * automatically detect whether the score should be submitted
++	 * on behalf of the challenge contender or the challenge contestant.
++	 *
++	 * If no challenge is currently underway, the score will be submitted
++	 * to Scoreloop on behalf of the session user in the standard way.
++	 *
++	 * After submitting the score, @link com.scoreloop.client.android.ui.OnScoreSubmitObserver.onScoreSubmit(final int, final Exception) OnScoreSubmitObserver.onScoreSubmit(final int, final Exception)@endlink will be called.
++	 * 
++	 * This method always tries to submit the score to the remote Scoreloop servers. If this will not be possible due to connection problems,
++	 * the score will be stored in the local (offline) leaderboards list instead. You might then submit the best score of the local leaderboard
++	 * some time later.
++	 *
++	 * \sa @link scoreloopui-integratescores Submitting Scores to Scoreloop@endlink
++	 *
++	 * @param scoreResult A <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Double.html">java.lang.Double</a> object representing the
++	 * score result obtained by the user in the game.
++	 * @param mode A <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Integer.html">java.lang.Integer</a> representing the mode at which the score was obtained. If the game does not support modes, pass @c null here instead.
+ 	 */
+ 	void onGamePlayEnded(Double scoreResult, Integer mode);
+ 
+ 	/**
+-	* 
+-	* This method is used to submit a score object to Scoreloop
+-	* and should be used when the score to be submitted has multiple components, such as
+-	* the:
+-	* - result (mandatory),
+-	* - minor result, (optional),
+-	* - level, (optional),
+-	* - mode, (optional).
+-	*
+-	* This method should be called once the game play
+-	* activity has ended. This method will automatically
+-	* check whether a challenge is underway and, if so, submit
+-	* the score as part of the challenge. The method will also
+-	* automatically detect whether the score should be submitted
+-	* on behalf of the challenge contender or the challenge contestant.
+-	*
+-	* If no challenge is currently underway, the score will be submitted
+-	* to Scoreloop on behalf of the session user in the standard way.
+-	*
+-	* After submitting the score, @link com.scoreloop.client.android.ui.OnScoreSubmitObserver.onScoreSubmit(final int, final Exception)OnScoreSubmitObserver.onScoreSubmit(final int, final Exception)@endlink will be called.
+-	*
+-	* This method allows you to specify whether the score should be submitted to the local (offline) leaderboard only. You might then submit 
+-	* the best score of the local leaderboard some time later. Pass null or false if you want the score to be submitted to the Scoreloop servers.  
+-	* Note, that scores which are part of a challenge are always submitted remotely.
+-	* 
+-	* \sa @link scoreloopui-integratescores Submitting Scores to Scoreloop@endlink for details about how to
+-	* create complex Score objects.
+-	*
+-	* @param score A Score object representing the score result obtained by the user in the game. 
+-	* @param submitLocallyOnly A Boolean which when true will indicate that the score should be submitted to the local (offline) leaderaboard list only.
+-	* Pass null or false to send a score to the Scoreloop servers.
+-	*/
++	 * 
++	 * This method is used to submit a score object to Scoreloop
++	 * and should be used when the score to be submitted has multiple components, such as
++	 * the:
++	 * - result (mandatory),
++	 * - minor result, (optional),
++	 * - level, (optional),
++	 * - mode, (optional).
++	 *
++	 * This method should be called once the game play
++	 * activity has ended. This method will automatically
++	 * check whether a challenge is underway and, if so, submit
++	 * the score as part of the challenge. The method will also
++	 * automatically detect whether the score should be submitted
++	 * on behalf of the challenge contender or the challenge contestant.
++	 *
++	 * If no challenge is currently underway, the score will be submitted
++	 * to Scoreloop on behalf of the session user in the standard way.
++	 *
++	 * After submitting the score, @link com.scoreloop.client.android.ui.OnScoreSubmitObserver.onScoreSubmit(final int, final Exception)OnScoreSubmitObserver.onScoreSubmit(final int, final Exception)@endlink will be called.
++	 *
++	 * This method allows you to specify whether the score should be submitted to the local (offline) leaderboard only. You might then submit
++	 * the best score of the local leaderboard some time later. Pass null or false if you want the score to be submitted to the Scoreloop servers.
++	 * Note, that scores which are part of a challenge are always submitted remotely.
++	 * 
++	 * \sa @link scoreloopui-integratescores Submitting Scores to Scoreloop@endlink for details about how to
++	 * create complex Score objects.
++	 *
++	 * @param score A Score object representing the score result obtained by the user in the game.
++	 * @param submitLocallyOnly A Boolean which when true will indicate that the score should be submitted to the local (offline) leaderaboard list only.
++	 * Pass null or false to send a score to the Scoreloop servers.
++	 */
+ 	void onGamePlayEnded(Score score, Boolean submitLocallyOnly);
+ 
+ 	/**
+-	 * Use this method to prevent that the Terms of Service dialog is presented at a place where you don't want it to come up. 
++	 * Use this method to prevent that the Terms of Service dialog is presented at a place where you don't want it to come up.
+ 	 * Note, that in this case no Scoreloop functionality will be available until you pass true to another call of this method again.
+ 	 * 
+ 	 * @param ask false, to prevent the Terms of Service dialog to be shown.
+@@ -298,7 +299,7 @@ public interface ScoreloopManager {
+ 	 * Set this observer to get informed about score submissions,
+ 	 * (if the submission to the server succeeded or failed).
+ 	 *
+-	 * @param observer A valid observer. Pass @c null to remove 
++	 * @param observer A valid observer. Pass @c null to remove
+ 	 * the observer.
+ 	 * \sa OnScoreSubmitObserver
+ 	 */
+@@ -307,9 +308,9 @@ public interface ScoreloopManager {
+ 	/**
+ 	 * This method correctly sets an OnStartGamePlayRequestObserver
+ 	 * in ScoreloopManager.
+-	 * This observer must be set if the challenges feature has been 
+-	 * enabled in the game. 
+-	 *  
++	 * This observer must be set if the challenges feature has been
++	 * enabled in the game.
++	 * 
+ 	 * @param observer a valid observer. Pass @c null to remove the observer.
+ 	 */
+ 	void setOnStartGamePlayRequestObserver(OnStartGamePlayRequestObserver observer);
+@@ -317,29 +318,29 @@ public interface ScoreloopManager {
+ 	/**
+ 	 * This method displays a "welcome back" toast showing
+ 	 * the user's Scoreloop display name.
+-	 * If no display name exists for the user, then no toast is shown. 
++	 * If no display name exists for the user, then no toast is shown.
+ 	 * The display name is set after the ScoreloopUI is finished with an
+ 	 * authenticated user.
+ 	 * 
+-	 * @param delay A time interval in milliseconds after which the toast should be shown. To show the toast immediately, pass zero here.  
++	 * @param delay A time interval in milliseconds after which the toast should be shown. To show the toast immediately, pass zero here.
+ 	 */
+ 	void showWelcomeBackToast(long delay);
+ 
+ 	/**
+-	 * This method is used to submit achievements to the Scoreloop server. 
++	 * This method is used to submit achievements to the Scoreloop server.
+ 	 * This method will implicitly call the  loadAchievements()
+ 	 * method if it has not already been called.
+ 	 * 
+-	 * @param continuation A continuation that will be invoked when all achievements have been submitted. 
+-	 * This value can be @c null. 
++	 * @param continuation A continuation that will be invoked when all achievements have been submitted.
++	 * This value can be @c null.
+ 	 */
+ 	void submitAchievements(Continuation<Boolean> continuation);
+ 
+ 	/**
+-	 * @param continuation A <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Runnable.html">java.lang.Runnable</a> that will be invoked 
++	 * @param continuation A <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Runnable.html">java.lang.Runnable</a> that will be invoked
+ 	 * when the local scores hav been submitted to to the Scoreloop servers. Note that only the currently best local score of every mode which has not yet been
+-	 * submitted will be uploaded to the server.  
+-	 * This value can be @c null. 
++	 * submitted will be uploaded to the server.
++	 * This value can be @c null.
+ 	 */
+ 	void submitLocalScores(Runnable continuation);
+ 
+@@ -366,4 +367,10 @@ public interface ScoreloopManager {
+ 	 */
+ 	Set<String> getSupportedPaymentProviderKinds();
+ 
++	/**
++	 * 
++	 * @return The current Session
++	 */
++	Session getSession();
++
+ }
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/ScoreloopManagerSingleton.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/ScoreloopManagerSingleton.java
+index 612642a..27ff4b2 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/ScoreloopManagerSingleton.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/ScoreloopManagerSingleton.java
+@@ -25,7 +25,6 @@ import android.content.Context;
+ 
+ import com.scoreloop.client.android.core.model.Challenge;
+ import com.scoreloop.client.android.core.model.Score;
+-import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.ui.component.base.Configuration;
+ import com.scoreloop.client.android.ui.component.base.Factory;
+ 
+@@ -53,8 +52,6 @@ public class ScoreloopManagerSingleton {
+ 
+ 		int getLastSubmitStatus();
+ 
+-		Session getSession();
+-
+ 		void init(Context context, String gameSecret);
+ 	}
+ 
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/ShowResultOverlayActivity.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/ShowResultOverlayActivity.java
+index cb5a3e8..47bb280 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/ShowResultOverlayActivity.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/ShowResultOverlayActivity.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -29,7 +29,6 @@ import android.widget.Button;
+ import android.widget.TextView;
+ 
+ import com.scoreloop.client.android.core.model.Challenge;
+-import com.scoreloop.client.android.core.model.Session;
+ 
+ /**
+  * You can use this activity to show the result of a game play to the player. Start this activity after receiving an @link com.scoreloop.client.android.ui.OnScoreSubmitObserver.onScoreSubmit() onScoreSubmit() @endlink callback.
+@@ -61,7 +60,7 @@ public class ShowResultOverlayActivity extends Activity {
+ 			if (challenge.isOpen() || challenge.isAssigned()) {
+ 				text = getResources().getString(R.string.sl_status_success_challenge_created);
+ 			} else if (challenge.isComplete()) {
+-				if (Session.getCurrentSession().getUser().equals(challenge.getWinner())) {
++				if (ScoreloopManagerSingleton.getImpl().getSession().getUser().equals(challenge.getWinner())) {
+ 					text = getResources().getString(R.string.sl_status_success_challenge_won);
+ 				} else {
+ 					text = getResources().getString(R.string.sl_status_success_challenge_lost);
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/agent/ManageBuddiesTask.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/agent/ManageBuddiesTask.java
+index 5eafc45..bf2e3c9 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/agent/ManageBuddiesTask.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/agent/ManageBuddiesTask.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -30,9 +30,9 @@ import com.scoreloop.client.android.core.controller.RequestControllerException;
+ import com.scoreloop.client.android.core.controller.RequestControllerObserver;
+ import com.scoreloop.client.android.core.controller.UserController;
+ import com.scoreloop.client.android.core.model.Continuation;
+-import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.core.model.User;
+ import com.scoreloop.client.android.ui.R;
++import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+ import com.scoreloop.client.android.ui.component.base.Constant;
+ import com.scoreloop.client.android.ui.framework.BaseActivity;
+ import com.scoreloop.client.android.ui.framework.ValueStore;
+@@ -89,7 +89,7 @@ public class ManageBuddiesTask implements RequestControllerObserver {
+ 	}
+ 
+ 	private void processNextOrFinish() {
+-		final User sessionUser = Session.getCurrentSession().getUser();
++		final User sessionUser = ScoreloopManagerSingleton.get().getSession().getUser();
+ 		final List<User> sessionUserBuddies = sessionUser.getBuddyUsers();
+ 		User user;
+ 		do {
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/agent/UserAgent.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/agent/UserAgent.java
+index f23cbe1..a07ece8 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/agent/UserAgent.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/agent/UserAgent.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -24,15 +24,15 @@ package com.scoreloop.client.android.ui.component.agent;
+ import com.scoreloop.client.android.core.controller.RequestController;
+ import com.scoreloop.client.android.core.controller.UserController;
+ import com.scoreloop.client.android.core.model.Entity;
+-import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.core.model.User;
++import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+ import com.scoreloop.client.android.ui.component.base.Constant;
+ import com.scoreloop.client.android.ui.framework.ValueStore;
+ 
+ public class UserAgent extends BaseAgent {
+ 
+ 	public static final String[]	SUPPORTED_KEYS	= { Constant.USER_NAME, Constant.USER_IMAGE_URL, Constant.USER_BALANCE,
+-			Constant.NUMBER_GAMES, Constant.NUMBER_BUDDIES, Constant.NUMBER_GLOBAL_ACHIEVEMENTS };
++		Constant.NUMBER_GAMES, Constant.NUMBER_BUDDIES, Constant.NUMBER_GLOBAL_ACHIEVEMENTS };
+ 
+ 	private UserController			_userController;
+ 
+@@ -45,7 +45,7 @@ public class UserAgent extends BaseAgent {
+ 		final User user = _userController.getUser();
+ 		putValue(Constant.USER_NAME, user.getDisplayName());
+ 		putValue(Constant.USER_IMAGE_URL, user.getImageUrl());
+-		putValue(Constant.USER_BALANCE, Session.getCurrentSession().getBalance());
++		putValue(Constant.USER_BALANCE, ScoreloopManagerSingleton.get().getSession().getBalance());
+ 		putValue(Constant.NUMBER_GAMES, user.getGamesCounter());
+ 		putValue(Constant.NUMBER_BUDDIES, user.getBuddiesCounter());
+ 		putValue(Constant.NUMBER_GLOBAL_ACHIEVEMENTS, user.getGlobalAchievementsCounter());
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/ComponentActivity.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/ComponentActivity.java
+index b602637..ac588dd 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/ComponentActivity.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/ComponentActivity.java
+@@ -35,6 +35,7 @@ import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.core.model.TermsOfService.Status;
+ import com.scoreloop.client.android.core.model.User;
+ import com.scoreloop.client.android.ui.R;
++import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+ import com.scoreloop.client.android.ui.component.agent.BaseAgent;
+ import com.scoreloop.client.android.ui.framework.BaseActivity;
+ import com.scoreloop.client.android.ui.framework.ValueStore;
+@@ -120,7 +121,7 @@ public abstract class ComponentActivity extends BaseActivity implements Componen
+ 	}
+ 
+ 	public Session getSession() {
+-		return Session.getCurrentSession();
++		return ScoreloopManagerSingleton.get().getSession();
+ 	}
+ 
+ 	public ValueStore getSessionGameValues() {
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/ComponentListActivity.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/ComponentListActivity.java
+index b8ef1b1..a1f7d22 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/ComponentListActivity.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/ComponentListActivity.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -40,7 +40,7 @@ import com.scoreloop.client.android.ui.framework.BaseListItem;
+ import com.scoreloop.client.android.ui.framework.ScreenDescription;
+ 
+ public abstract class ComponentListActivity<T extends BaseListItem> extends ComponentActivity implements OnClickListener,
+-		OnItemClickListener, OnListItemClickListener<T> {
++OnItemClickListener, OnListItemClickListener<T> {
+ 
+ 	private BaseListItem	_footerItem;
+ 	protected boolean		_isVisibleOptionsMenuAccountSettings	= true;
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/PackageManager.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/PackageManager.java
+index 28533e9..a05da76 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/PackageManager.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/PackageManager.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -27,7 +27,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
+ import android.net.Uri;
+ 
+ import com.scoreloop.client.android.core.model.Game;
+-import com.scoreloop.client.android.core.model.Session;
++import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+ 
+ public class PackageManager {
+ 
+@@ -40,7 +40,7 @@ public class PackageManager {
+ 	}
+ 
+ 	public static void installScoreloopApp(final Context context) {
+-		download(context, Session.getCurrentSession().getScoreloopAppDownloadUrl());
++		download(context, ScoreloopManagerSingleton.get().getSession().getScoreloopAppDownloadUrl());
+ 	}
+ 
+ 	public static void installGame(final Context context, final Game game) {
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/StringFormatter.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/StringFormatter.java
+index 0746774..72ff5b4 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/StringFormatter.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/base/StringFormatter.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -38,9 +38,9 @@ import com.scoreloop.client.android.core.model.Ranking;
+ import com.scoreloop.client.android.core.model.Score;
+ import com.scoreloop.client.android.core.model.ScoreFormatter;
+ import com.scoreloop.client.android.core.model.ScoreFormatter.ScoreFormatKey;
+-import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.core.model.User;
+ import com.scoreloop.client.android.ui.R;
++import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+ import com.scoreloop.client.android.ui.framework.ValueStore;
+ 
+ public class StringFormatter {
+@@ -222,7 +222,7 @@ public class StringFormatter {
+ 		User user = score.getUser();
+ 		if (user == null) {
+ 			// if the score comes from the rank, it will not have a user object, so use the session user
+-			user = Session.getCurrentSession().getUser();
++			user = ScoreloopManagerSingleton.get().getSession().getUser();
+ 		}
+ 		return String.format(context.getString(R.string.sl_format_score_title), rank, user.getDisplayName());
+ 	}
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/challenge/ChallengeSettingsEditListItem.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/challenge/ChallengeSettingsEditListItem.java
+index 2fa36b9..8d1d44c 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/challenge/ChallengeSettingsEditListItem.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/challenge/ChallengeSettingsEditListItem.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -33,8 +33,8 @@ import android.widget.Spinner;
+ import android.widget.TextView;
+ 
+ import com.scoreloop.client.android.core.model.Money;
+-import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.ui.R;
++import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+ import com.scoreloop.client.android.ui.component.base.ComponentActivity;
+ import com.scoreloop.client.android.ui.component.base.Constant;
+ import com.scoreloop.client.android.ui.component.base.StringFormatter;
+@@ -45,7 +45,7 @@ class ChallengeSettingsEditListItem extends ChallengeSettingsListItem {
+ 		TextView	stakeText;
+ 	}
+ 
+-	private final List<Money>	stakes	= Session.getCurrentSession().getChallengeStakes();
++	private final List<Money>	stakes	= ScoreloopManagerSingleton.get().getSession().getChallengeStakes();
+ 
+ 	private int					_modePosition;
+ 	private int					_stakePosition;
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/post/PostOverlayActivity.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/post/PostOverlayActivity.java
+index 616143a..91ef4de 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/post/PostOverlayActivity.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/post/PostOverlayActivity.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -47,13 +47,13 @@ import com.scoreloop.client.android.core.controller.RequestControllerObserver;
+ import com.scoreloop.client.android.core.controller.SocialProviderController;
+ import com.scoreloop.client.android.core.controller.SocialProviderControllerObserver;
+ import com.scoreloop.client.android.core.model.Entity;
+-import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.core.model.SocialProvider;
+ import com.scoreloop.client.android.ui.R;
++import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+ import com.scoreloop.client.android.ui.framework.BaseActivity;
+ 
+ public class PostOverlayActivity extends Activity implements RequestControllerObserver, OnCheckedChangeListener,
+-		SocialProviderControllerObserver {
++SocialProviderControllerObserver {
+ 
+ 	private static Entity		_messageTarget			= null;
+ 
+@@ -134,7 +134,7 @@ public class PostOverlayActivity extends Activity implements RequestControllerOb
+ 		if (isChecked) {
+ 			final CheckBox checkBox = (CheckBox) button;
+ 			final SocialProvider provider = _checkboxToProviderMap.get(checkBox);
+-			if (!provider.isUserConnected(Session.getCurrentSession().getUser())) {
++			if (!provider.isUserConnected(ScoreloopManagerSingleton.get().getSession().getUser())) {
+ 				blockUI(true);
+ 
+ 				// make the UI more responsive by scheduling the connect in the next run-loop iteration
+@@ -277,7 +277,7 @@ public class PostOverlayActivity extends Activity implements RequestControllerOb
+ 	}
+ 
+ 	private void updateProviderCheckbox(final SocialProvider provider) {
+-		if (!provider.isUserConnected(Session.getCurrentSession().getUser())) {
++		if (!provider.isUserConnected(ScoreloopManagerSingleton.get().getSession().getUser())) {
+ 			final CheckBox checkbox = _providerToCheckboxMap.get(provider);
+ 			checkbox.setChecked(false);
+ 		}
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/score/ScoreListActivity.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/score/ScoreListActivity.java
+index 8812908..b238064 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/score/ScoreListActivity.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/score/ScoreListActivity.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -34,7 +34,6 @@ import com.scoreloop.client.android.core.controller.ScoresController;
+ import com.scoreloop.client.android.core.model.Ranking;
+ import com.scoreloop.client.android.core.model.Score;
+ import com.scoreloop.client.android.core.model.SearchList;
+-import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.core.model.User;
+ import com.scoreloop.client.android.ui.R;
+ import com.scoreloop.client.android.ui.component.base.ComponentListActivity;
+@@ -49,7 +48,7 @@ import com.scoreloop.client.android.ui.framework.ValueStore;
+ import com.scoreloop.client.android.ui.framework.ValueStore.Observer;
+ 
+ public class ScoreListActivity extends ComponentListActivity<ScoreListItem> implements Observer,
+-		PagingListAdapter.OnListItemClickListener<ScoreListItem> {
++PagingListAdapter.OnListItemClickListener<ScoreListItem> {
+ 
+ 	private static final String	RECENT_TOP_RANK				= "recentTopRank";
+ 
+@@ -182,7 +181,7 @@ public class ScoreListActivity extends ComponentListActivity<ScoreListItem> impl
+ 	@Override
+ 	public void onRefresh(final int flags) {
+ 		showSpinnerFor(_scoresController);
+-		if (Session.getCurrentSession().getGame().hasModes()) {
++		if (getSession().getGame().hasModes()) {
+ 			_scoresController.setMode(getScreenValues().<Integer> getValue(Constant.MODE));
+ 		} else {
+ 			_scoresController.setMode(null);
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/score/ScoreListItem.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/score/ScoreListItem.java
+index a9a2e02..8a724c7 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/score/ScoreListItem.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/score/ScoreListItem.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -24,9 +24,9 @@ package com.scoreloop.client.android.ui.component.score;
+ import android.graphics.drawable.Drawable;
+ 
+ import com.scoreloop.client.android.core.model.Score;
+-import com.scoreloop.client.android.core.model.Session;
+ import com.scoreloop.client.android.core.model.User;
+ import com.scoreloop.client.android.ui.R;
++import com.scoreloop.client.android.ui.ScoreloopManagerSingleton;
+ import com.scoreloop.client.android.ui.component.base.ComponentActivity;
+ import com.scoreloop.client.android.ui.component.base.Constant;
+ import com.scoreloop.client.android.ui.component.base.StandardListItem;
+@@ -47,7 +47,7 @@ public class ScoreListItem extends StandardListItem<Score> {
+ 		User user = getTarget().getUser();
+ 		if (user == null) {
+ 			// if the score comes from the rank, it will not have a user object, so use the session user
+-			user = Session.getCurrentSession().getUser();
++			user = ScoreloopManagerSingleton.get().getSession().getUser();
+ 		}
+ 		return user.getImageUrl();
+ 	}
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/user/UserHeaderActivity.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/user/UserHeaderActivity.java
+index 1a354ee..e166dea 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/component/user/UserHeaderActivity.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/component/user/UserHeaderActivity.java
+@@ -8,7 +8,7 @@
+  * 
+  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  * use this file except in compliance with the License. You may obtain a copy
+- * of the License at 
++ * of the License at
+  * 
+  *      http://www.apache.org/licenses/LICENSE-2.0
+  * 
+@@ -197,15 +197,20 @@ public class UserHeaderActivity extends ComponentHeaderActivity implements OnCli
+ 	}
+ 
+ 	private void postAbuseReport() {
+-		_messageController = new MessageController(getRequestControllerObserver());
++		final User u = getUser();
+ 
+-		_messageController.setTarget(getUser());
+-		_messageController.setMessageType(MessageController.TYPE_ABUSE_REPORT);
+-		_messageController.setText("Inappropriate user in ScoreloopUI");
+-		_messageController.addReceiverWithUsers(MessageController.RECEIVER_SYSTEM);
++		if (u != null && u.getIdentifier() != null) {
+ 
+-		if (_messageController.isSubmitAllowed()) {
+-			_messageController.submitMessage();
++			_messageController = new MessageController(getRequestControllerObserver());
++
++			_messageController.setTarget(getUser());
++			_messageController.setMessageType(MessageController.TYPE_ABUSE_REPORT);
++			_messageController.setText("Inappropriate user in ScoreloopUI");
++			_messageController.addReceiverWithUsers(MessageController.RECEIVER_SYSTEM);
++
++			if (_messageController.isSubmitAllowed()) {
++				_messageController.submitMessage();
++			}
+ 		}
+ 	}
+ 
+diff --git a/ScoreloopUI/src/com/scoreloop/client/android/ui/util/LocalImageStorage.java b/ScoreloopUI/src/com/scoreloop/client/android/ui/util/LocalImageStorage.java
+index 376c13d..7803001 100644
+--- a/ScoreloopUI/src/com/scoreloop/client/android/ui/util/LocalImageStorage.java
++++ b/ScoreloopUI/src/com/scoreloop/client/android/ui/util/LocalImageStorage.java
+@@ -67,8 +67,12 @@ public class LocalImageStorage {
+ 		final String lastPurgeKey = "lastPurge";
+ 		final long lastPurge = pref.getLong(lastPurgeKey, -1);
+ 		if (Math.abs(System.currentTimeMillis() - lastPurge) > ONE_DAY) {
+-			pref.edit().putLong(lastPurgeKey, System.currentTimeMillis()).commit();
+-			purge(context, 7 * ONE_DAY);
++			try {
++				pref.edit().putLong(lastPurgeKey, System.currentTimeMillis()).commit();
++				purge(context, 7 * ONE_DAY);
++			} catch (final Exception e) {
++				// retry later...
++			}
+ 		}
+ 	}
+ 

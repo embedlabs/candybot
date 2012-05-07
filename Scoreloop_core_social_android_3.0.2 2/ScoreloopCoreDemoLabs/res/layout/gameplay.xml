@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_height="wrap_content" android:layout_width="fill_parent"
+                  android:layout_gravity="center">
+        <TextView android:layout_height="wrap_content" android:id="@+id/description"
+                  android:text="@string/description" android:layout_width="fill_parent" android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <ProgressBar android:id="@+id/progressBar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@android:style/Widget.ProgressBar.Horizontal"/>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_height="wrap_content" android:layout_width="fill_parent"
+                  android:layout_gravity="center">
+        <Button android:text="@string/add_1" android:id="@+id/button_score1" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_gravity="center"/>
+        <Button android:text="@string/add_10" android:id="@+id/button_score10" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_gravity="center"/>
+        <Button android:text="@string/add_100" android:id="@+id/button_score100" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_gravity="center"/>
+        <TextView android:id="@+id/scoreText" android:layout_height="wrap_content"
+                  android:text="0" android:layout_width="fill_parent" android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_height="wrap_content" android:layout_width="fill_parent"
+                  android:layout_gravity="center">
+        <TextView android:layout_height="wrap_content" android:id="@+id/ghostGame"
+                  android:text="@string/ghostGame" android:layout_width="fill_parent" android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <ProgressBar android:id="@+id/progressBarGhostGame"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@android:style/Widget.ProgressBar.Horizontal"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                  android:text="@string/your_time"/>
+        <TextView android:id="@+id/scoreTime" android:layout_height="wrap_content"
+                  android:text="" android:layout_width="fill_parent" android:layout_marginLeft="10dip"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                  android:text="@string/your_clicks"/>
+        <TextView android:id="@+id/scoreClicks" android:layout_height="wrap_content"
+                  android:text="" android:layout_width="fill_parent" android:layout_marginLeft="10dip"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                  android:text="@string/your_level"/>
+        <TextView android:id="@+id/scoreLevel" android:layout_height="wrap_content"
+                  android:text="" android:layout_width="fill_parent" android:layout_marginLeft="10dip"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                  android:text="@string/expected_rank"/>
+        <TextView android:id="@+id/expectedRank" android:layout_height="wrap_content"
+                  android:text="" android:layout_width="fill_parent" android:layout_marginLeft="10dip"/>
+    </LinearLayout>
+</LinearLayout>
