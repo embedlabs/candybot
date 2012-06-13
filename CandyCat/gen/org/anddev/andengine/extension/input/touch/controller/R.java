@@ -78,6 +78,7 @@ public final class R {
         public static final int twitterstring=0x7f060007;
     }
     public static final class style {
+        public static final int Theme_NoBackground=0x7f070002;
         public static final int candyButton=0x7f070000;
         public static final int menuButton=0x7f070001;
     }
