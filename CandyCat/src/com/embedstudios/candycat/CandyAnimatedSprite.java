@@ -45,6 +45,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 
 	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final RectangleVertexBuffer RVB,final int index,final int type,final TMXLayer tmxLayer,final int[][] objectArray,final int[][] backgroundArray) {
 		super(column*64, row*64, pTiledTextureRegion, RVB);
+		this.setCullingEnabled(true);
 		this.index = index;
 		this.type = type;
 		this.tmxLayer = tmxLayer;
