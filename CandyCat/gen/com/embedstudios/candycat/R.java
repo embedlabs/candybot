@@ -17,7 +17,6 @@ public final class R {
     public static final class color {
         public static final int bg_center=0x7f050001;
         public static final int bg_start=0x7f050000;
-        public static final int button_focused_stroke=0x7f05000a;
         public static final int button_normal_center=0x7f050003;
         public static final int button_normal_end=0x7f050004;
         public static final int button_normal_start=0x7f050002;
@@ -62,15 +61,14 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f060000;
-        public static final int button_play=0x7f060002;
-        public static final int facebook_link=0x7f060003;
-        public static final int level=0x7f060009;
-        public static final int loading=0x7f060001;
-        public static final int pan=0x7f060005;
-        public static final int play=0x7f060006;
-        public static final int reset=0x7f060007;
-        public static final int twitter_link=0x7f060004;
-        public static final int world=0x7f060008;
+        public static final int button_play=0x7f060001;
+        public static final int facebook_link=0x7f060002;
+        public static final int facebookstring=0x7f060008;
+        public static final int pan=0x7f060004;
+        public static final int play=0x7f060005;
+        public static final int reset=0x7f060006;
+        public static final int twitter_link=0x7f060003;
+        public static final int twitterstring=0x7f060007;
     }
     public static final class style {
         public static final int candyButton=0x7f070000;

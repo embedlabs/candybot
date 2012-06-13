@@ -30,6 +30,7 @@
 				android:layout_centerHorizontal="true"
 				android:focusable="true" />
 			<ImageView android:id="@+id/button_facebook"
+				android:contentDescription ="@string/facebookstring"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="@drawable/fb_button"
@@ -40,6 +41,7 @@
 				android:layout_alignParentRight="true"
 				android:layout_alignParentBottom="true" />
 			<ImageView android:id="@+id/button_twitter"
+			    android:contentDescription ="@string/twitterstring"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:background="@drawable/t_button"

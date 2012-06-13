@@ -13,5 +13,4 @@
     <color name="button_pressed_end">#AAA022</color>
     <color name="button_pressed_stroke">#FF6633</color>
     
-    <color name="button_focused_stroke">#FF9999</color>
 </resources>

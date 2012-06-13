@@ -174,7 +174,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		mScene.attachChild(roof);
 		mScene.attachChild(left);
 		mScene.attachChild(right);
-		
+		/// addFace(1); justing testing to make sure we can come back and fix it later - shrav
 		mScene.registerUpdateHandler(mPhysicsWorld);
 		
 		return mScene;
@@ -197,9 +197,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		CandyUtils.setKomika(komika,mainmenu_tv,button_play); // changes font
 		CandyUtils.setClick(this,button_play,iv_facebook,iv_twitter);
 
-		
-		
-		
 	}
 	
 	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {
