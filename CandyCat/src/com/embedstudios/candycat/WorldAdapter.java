@@ -12,7 +12,7 @@ public class WorldAdapter extends BaseAdapter {
 	private final Context mContext;
 
 	private final Integer[] mImageIds = {
-			R.drawable.full_candy,
+			R.drawable.twitter,
 			R.drawable.twitter,
 			R.drawable.facebook
 	};

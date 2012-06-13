@@ -34,6 +34,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.net.Uri;
@@ -93,9 +94,15 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public Engine onLoadEngine() {
 		Log.v(TAG,"MainMenu onLoadEngine()");
 		
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+		
+		// Display Adapter, don't attempt to simplify. Fixes the pan button from cutting off - Shrav
 		Display display = getWindowManager().getDefaultDisplay();
-		WIDTH = display.getWidth();
-		HEIGHT = display.getHeight();
+		Point size = new Point();
+		display.getSize(size);
+		WIDTH = size.x;
+		HEIGHT = size.y;
 		
 		final Camera camera = new Camera(0,0,WIDTH,HEIGHT);
 		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), camera);

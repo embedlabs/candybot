@@ -1,7 +1,0 @@
-digraph G
-{
-  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
-  node [fontname="FreeSans",fontsize="10",shape=record];
-  rankdir=LR;
-  Node1 [label="ScoreComparator",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d4/d98/classcom_1_1scoreloop_1_1client_1_1android_1_1core_1_1model_1_1_score_comparator.html"];
-}

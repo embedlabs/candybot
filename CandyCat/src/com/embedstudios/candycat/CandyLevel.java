@@ -52,8 +52,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	 */
 	public final float WIDTH = 1536;
 	public final float HEIGHT = 1152;
-	public float PHONE_WIDTH =  854;
-	public float PHONE_HEIGHT = 480;
+	public float PHONE_WIDTH =  1280;
+	public float PHONE_HEIGHT = 720;
 	
 	int level,world;
 	String theme;
@@ -113,6 +113,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
+				
 		super.onCreate(savedInstanceState);
 		getWindow().setWindowAnimations(android.R.style.Animation);
 
