@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/user_profile_layout"
+    style="@style/content_slim"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/upper_round_rect_dark" >
+
+    <include
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        layout="@layout/image_holder"
+        android:background="@drawable/full_round_rect_grey" />
+
+    <TextView
+        android:id="@+id/text_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/image_holder"
+        android:text="@string/not_login"
+        android:textSize="20dp"
+        android:visibility="invisible" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/text_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_one"
+        android:layout_toRightOf="@+id/image_holder"
+        android:layout_marginRight="50dp"
+        android:text="@string/not_login"
+        android:visibility="invisible" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/text_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_two"
+        android:layout_toRightOf="@+id/image_holder"
+        android:text="@string/not_login"
+        android:visibility="invisible" >
+    </TextView>
+
+    <Button
+        android:id="@+id/button_profile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/btn_blue_selector"
+        android:textSize="15dp"
+        android:textColor="@android:color/white"
+        android:padding="5dp"
+        android:visibility="invisible" />
+
+</RelativeLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    <LinearLayout
+        android:id="@+id/gree_posting_layout_upper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:background="#fff"
+        android:orientation="vertical" >
+        <include layout="@layout/gree_modal_navigation_bar" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView 
+                android:id="@+id/gree_form_title_label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gree_posting_form_title_label"
+                />
+            <EditText
+                android:id="@+id/gree_form_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="@string/gree_posting_form_title_hint"
+                android:focusable="true">
+                <requestFocus />
+            </EditText>
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gree_posting_form_text_label"
+                />
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+                <EditText
+                    android:id="@+id/gree_form_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:gravity="top|left"
+                    android:hint="@string/gree_posting_form_text_hint"
+                    android:lines="5" >
+                    <requestFocus />
+                </EditText>
+                <TextView
+                    android:id="@+id/gree_text_letter_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="0/100" />
+            </FrameLayout>
+</LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+        <include layout="@layout/gree_posting_tool_bar" />
+        <net.gree.asdk.core.dashboard.EmojiPaletteView
+            android:id="@+id/gree_emoji_palette_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/gree_notificationLayout"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="match_parent"
+	android:layout_height="wrap_content" android:background="@drawable/gree_notification_background">
+
+    <ImageView
+        android:id="@+id/gree_notificationImageView"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:contentDescription="@string/gree_content_greelogo"
+        android:src="@drawable/gree_notification_place_holder" />
+
+	<LinearLayout android:id="@+id/gree_notificationMessageLayout"
+		android:layout_width="0dp" android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical" android:layout_weight="1.0"
+		android:orientation="vertical" android:layout_marginTop="7dp"
+		android:layout_marginBottom="7dp" android:layout_marginLeft="10dp"
+		android:layout_marginRight="7dp">
+		<TextView android:id="@+id/gree_notificationMessageTextView"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:ellipsize="end" android:singleLine="true" android:text=""
+			android:textColor="#C8C8C8"
+			android:textSize="12dp" />
+	</LinearLayout>
+</LinearLayout>

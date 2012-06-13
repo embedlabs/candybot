@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal"
+	android:layout_width="fill_parent"
+	android:layout_height="60dp"
+	android:gravity="bottom"
+	android:background="#e1e2e3"
+	android:paddingLeft="15dp"
+	android:paddingBottom="10dp"
+	>
+	<LinearLayout 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_centerInParent="true">
+		<TextView
+			android:id="@+id/gree_pull_to_refresh_text"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textSize="14dp"
+			android:textStyle="bold"
+			android:gravity="center"
+			android:textColor="#334455"
+			android:shadowDx="0"
+			android:shadowDy="1"
+			android:shadowColor="#f7f8f9"
+			/>
+		<TextView
+			android:id="@+id/gree_pull_to_refresh_last_update"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textSize="13dp"
+			android:gravity="center"
+			android:textColor="#778899"
+			android:shadowDx="0"
+			android:shadowDy="1"
+			android:shadowColor="#f7f8f9"
+			/>
+	</LinearLayout>
+
+
+	<ImageView
+		android:id="@+id/gree_pull_to_refresh_image"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		/>
+
+</RelativeLayout>	

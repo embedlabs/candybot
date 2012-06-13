@@ -51,12 +51,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-
 public class MainMenu extends LayoutGameActivity implements OnClickListener, IAccelerometerListener {
 	ViewFlipper enclosing_vf;
 	TextView mainmenu_tv;
 	Button button_play;
-	ImageView iv_achievements,iv_facebook,iv_twitter;
+	ImageView iv_facebook,iv_twitter;
 
 	public Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
@@ -72,7 +71,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	private Scene mScene;
 	private PhysicsWorld mPhysicsWorld;
 	
-	private SplashTask splashTask;
 	
 	private String theme="normal";
 	
@@ -80,7 +78,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
-			startActivity(new Intent(this,WorldSelect.class).putExtra("com.embedstudios.candycat.theme", theme));
+			startActivity(new Intent(this,CandyLevel.class).putExtra("com.embedstudios.candycat.theme", theme));
 			break;
 		case R.id.button_facebook:
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebook_link))));
@@ -193,15 +191,15 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
 		button_play = (Button)findViewById(R.id.button_play);
-		iv_achievements = (ImageView)findViewById(R.id.button_achievements);
 		iv_facebook = (ImageView)findViewById(R.id.button_facebook);
 		iv_twitter = (ImageView)findViewById(R.id.button_twitter);
 		
 		CandyUtils.setKomika(komika,mainmenu_tv,button_play); // changes font
-		CandyUtils.setClick(this,button_play,iv_achievements,iv_facebook,iv_twitter);
+		CandyUtils.setClick(this,button_play,iv_facebook,iv_twitter);
 
-		enclosing_vf = (ViewFlipper)findViewById(R.id.enclosing_vf); //identifies part
-				
+		
+		
+		
 	}
 	
 	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {
@@ -282,7 +280,12 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	
 	@Override
 	public void onDestroy() {
+		super.onDestroy();
 		
+		/**
+		 * DESTROY SINGLETONS
+		 */
+		BufferObjectManager.getActiveInstance().clear();
 		
 		Log.i(TAG,"MainMenu onDestroy()");
 	}

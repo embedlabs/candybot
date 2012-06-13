@@ -8,20 +8,6 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_gravity="center" />
-	<ViewFlipper android:id="@+id/enclosing_vf"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent" >
-		<RelativeLayout android:id="@+id/logo_rl"
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:background="@drawable/background_linear">
-			<ImageView android:id="@+id/logo_iv"
-				android:layout_width="854px"
-				android:layout_height="480px"
-				android:scaleType="fitXY"
-				android:src="@drawable/splash"
-				android:layout_centerInParent="true" />
-		</RelativeLayout>
 		<RelativeLayout android:id="@+id/mainmenu_rl"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
@@ -43,26 +29,16 @@
 				android:layout_below="@id/mainmenu_tv"
 				android:layout_centerHorizontal="true"
 				android:focusable="true" />
-			<ImageView android:id="@+id/button_achievements"
+			<ImageView android:id="@+id/button_facebook"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:background="@drawable/sl_button"
+				android:background="@drawable/fb_button"
 				android:scaleType="center"
 				android:layout_marginRight="7dip"
 				android:layout_marginBottom="7dip"
 				android:layout_marginLeft="4dip"
 				android:layout_alignParentRight="true"
 				android:layout_alignParentBottom="true" />
-			<ImageView android:id="@+id/button_facebook"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:background="@drawable/fb_button"
-				android:scaleType="center"
-				android:layout_marginBottom="7dip"
-				android:layout_marginRight="4dip"
-				android:layout_marginLeft="4dip"
-				android:layout_alignParentBottom="true"
-				android:layout_toLeftOf="@id/button_achievements" />
 			<ImageView android:id="@+id/button_twitter"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -72,17 +48,6 @@
 				android:layout_marginRight="4dip"
 				android:layout_alignParentBottom="true"
 				android:layout_toLeftOf="@id/button_facebook" />
-			<com.google.ads.AdView
-				xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-				android:id="@+id/game_ad"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				ads:adUnitId="a14e01057884149"
-				ads:adSize="BANNER"
-				android:layout_alignParentTop="true"
-				android:layout_alignParentRight="true"
-				android:focusable="false"
-				android:focusableInTouchMode="false" />
+			
 		</RelativeLayout>
-	</ViewFlipper>
 </RelativeLayout>

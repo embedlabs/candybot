@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="#FFFFFF"
+  android:orientation="vertical"
+  android:visibility="visible" >
+  <include layout="@layout/gree_dashboard_navigation_bar" />
+  <LinearLayout 
+      android:orientation="horizontal"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:background="#eeeeee"
+      android:gravity="center">
+      <EditText
+          android:id="@+id/gree_subbrowser_url"
+          android:layout_width="fill_parent"
+          android:layout_height="42dp"
+          android:layout_marginTop="9dp"
+          android:layout_marginLeft="6dp"
+          android:layout_marginRight="6dp"
+          android:layout_marginBottom="6dp"
+          android:textSize="16dp"
+          android:editable="false"
+          android:singleLine="true"
+          android:ellipsize="end"
+          />
+  </LinearLayout>
+  <FrameLayout
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent">
+      <net.gree.asdk.core.ui.GreeWebView
+          android:id="@+id/gree_sub_webview"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent" />
+      <ProgressBar
+          android:id="@+id/gree_subbrowser_loading_indicator"
+          android:indeterminateDrawable="@drawable/gree_loader_progress"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:indeterminate="true"
+          android:layout_gravity="center"
+          android:visibility="gone" />
+  </FrameLayout>
+</LinearLayout>

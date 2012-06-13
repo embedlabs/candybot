@@ -1,0 +1,6 @@
+net.gree.asdk.api
+net.gree.asdk.api.alarm
+net.gree.asdk.api.auth
+net.gree.asdk.api.notifications.c2dm
+net.gree.asdk.api.ui
+net.gree.asdk.api.wallet
