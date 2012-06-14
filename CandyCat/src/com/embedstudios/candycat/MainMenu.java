@@ -1,6 +1,8 @@
 package com.embedstudios.candycat;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
@@ -38,6 +40,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -90,6 +93,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Engine onLoadEngine() {
 		Log.v(TAG,"MainMenu onLoadEngine()");
@@ -101,8 +105,12 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
-		WIDTH = size.x;
-		HEIGHT = size.y;
+		WIDTH = display.getWidth();
+		HEIGHT = display.getHeight();
+		
+
+		
+
 		
 		final Camera camera = new Camera(0,0,WIDTH,HEIGHT);
 		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), camera);
@@ -110,6 +118,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		return new Engine(engineOptions);
 	}
 
+	
 	@Override
 	public void onLoadResources() {
 		Log.v(TAG,"MainMenu onLoadResources()");
@@ -146,7 +155,6 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	public Scene onLoadScene() {
 		Log.v(TAG,"MainMenu onLoadScene()");
 		mEngine.registerUpdateHandler(new FPSLogger());
-		
 		/**
 		 * BASIC STUFF
 		 */
@@ -176,14 +184,17 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		PhysicsFactory.createBoxBody(mPhysicsWorld, roof, BodyType.StaticBody, wallFixtureDef);
 		PhysicsFactory.createBoxBody(mPhysicsWorld, left, BodyType.StaticBody, wallFixtureDef);
 		PhysicsFactory.createBoxBody(mPhysicsWorld, right, BodyType.StaticBody, wallFixtureDef);
-
 		mScene.attachChild(ground);
 		mScene.attachChild(roof);
 		mScene.attachChild(left);
 		mScene.attachChild(right);
-		/// addFace(1); justing testing to make sure we can come back and fix it later - shrav
-		mScene.registerUpdateHandler(mPhysicsWorld);
 		
+		
+		
+		
+		   
+				
+		mScene.registerUpdateHandler(mPhysicsWorld);		
 		return mScene;
 	}
 

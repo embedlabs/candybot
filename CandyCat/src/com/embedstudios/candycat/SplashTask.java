@@ -1,9 +1,9 @@
- package com.embedstudios.candycat;
-
+package com.embedstudios.candycat;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ViewFlipper;
+
 
 public class SplashTask extends AsyncTask<Void,Integer,Void> {
 	public boolean running = true;
@@ -59,7 +59,7 @@ public class SplashTask extends AsyncTask<Void,Integer,Void> {
 		try {
 			switch (integers[0]) {
 			case 0: vf.showNext(); break;
-						default: mainMenu.addFace(integers[0]-1); break;
+			default: mainMenu.addFace(integers[0]-1); break;
 			}
 		} catch (Exception e) {
 			Log.e(TAG, "SplashTask onProgressUpdate() failed.",e);
