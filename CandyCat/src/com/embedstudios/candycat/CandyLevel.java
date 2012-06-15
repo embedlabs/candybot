@@ -38,6 +38,7 @@ import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,10 +51,10 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	/**
 	 * Some important phone/game dimensions.
 	 */
-	public final float WIDTH = 1536;
-	public final float HEIGHT = 1152;
-	public float PHONE_WIDTH =  1280;
-	public float PHONE_HEIGHT = 720;
+	public final float WIDTH = 64*24;
+	public final float HEIGHT = 64*18;
+	public float PHONE_WIDTH;
+	public float PHONE_HEIGHT;
 	
 	int level,world;
 	String theme;
@@ -129,15 +130,24 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		theme = getIntent().getStringExtra("com.embedstudios.candycat.theme");
 		
 		Log.i(TAG,"Level "+world+"_"+level);
-		
-		Display display = getWindowManager().getDefaultDisplay(); 
-		PHONE_WIDTH = display.getWidth();
-		PHONE_HEIGHT = display.getHeight();
 	}
 	
 	@Override
 	public Engine onLoadEngine() {
 		Log.v(TAG,"CandyLevel onLoadEngine()");
+
+		if (android.os.Build.VERSION.SDK_INT>=13) {
+			Display display = getWindowManager().getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);
+			PHONE_WIDTH = display.getWidth();
+			PHONE_HEIGHT = display.getHeight();
+			Log.i(TAG,String.valueOf(PHONE_WIDTH));
+		} else {
+			Display display = getWindowManager().getDefaultDisplay(); 
+			PHONE_WIDTH = display.getWidth();
+			PHONE_HEIGHT = display.getHeight();
+		}
 		
 		mCandyCamera = new CandyCamera((WIDTH-PHONE_WIDTH)/2,(HEIGHT-PHONE_HEIGHT)/2,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,100000);
 		mCandyCamera.setZoomFactorDirect(PHONE_HEIGHT/HEIGHT);

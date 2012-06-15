@@ -102,15 +102,18 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 
 		
 		// Display Adapter, don't attempt to simplify. Fixes the pan button from cutting off - Shrav
-		Display display = getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		WIDTH = display.getWidth();
-		HEIGHT = display.getHeight();
 		
-
-		
-
+		if (android.os.Build.VERSION.SDK_INT>=13) {
+			Display display = getWindowManager().getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);
+			WIDTH = display.getWidth();
+			HEIGHT = display.getHeight();
+		} else {
+			Display display = getWindowManager().getDefaultDisplay(); 
+			WIDTH = display.getWidth();
+			HEIGHT = display.getHeight();
+		}
 		
 		final Camera camera = new Camera(0,0,WIDTH,HEIGHT);
 		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), camera);
