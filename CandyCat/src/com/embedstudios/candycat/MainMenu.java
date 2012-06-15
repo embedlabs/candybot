@@ -1,8 +1,6 @@
 package com.embedstudios.candycat;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
@@ -40,7 +38,6 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
