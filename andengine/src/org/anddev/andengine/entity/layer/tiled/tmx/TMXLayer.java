@@ -202,12 +202,12 @@ public class TMXLayer extends RectangularShape implements TMXConstants {
 
 		/* Determine the area that is visible in the camera. */
 		final float firstColumnRaw = (cameraMinX - layerMinX) / scaledTileWidth;
-		final int firstColumn = MathUtils.bringToBounds(0, tileColumns - 1, (int)android.util.FloatMath.floor(firstColumnRaw));
-		final int lastColumn = MathUtils.bringToBounds(0, tileColumns - 1, (int)android.util.FloatMath.ceil(firstColumnRaw + cameraWidth / scaledTileWidth));
+		final int firstColumn = MathUtils.bringToBounds(0, tileColumns - 1, (int)Math.floor(firstColumnRaw));
+		final int lastColumn = MathUtils.bringToBounds(0, tileColumns - 1, (int)Math.ceil(firstColumnRaw + cameraWidth / scaledTileWidth));
 
 		final float firstRowRaw = (cameraMinY - layerMinY) / scaledTileHeight;
-		final int firstRow = MathUtils.bringToBounds(0, tileRows - 1, (int)android.util.FloatMath.floor(firstRowRaw));
-		final int lastRow = MathUtils.bringToBounds(0, tileRows - 1, (int)android.util.FloatMath.floor(firstRowRaw + cameraHeight / scaledTileHeight));
+		final int firstRow = MathUtils.bringToBounds(0, tileRows - 1, (int)Math.floor(firstRowRaw));
+		final int lastRow = MathUtils.bringToBounds(0, tileRows - 1, (int)Math.floor(firstRowRaw + cameraHeight / scaledTileHeight));
 
 		final int visibleTilesTotalWidth = (lastColumn - firstColumn + 1) * tileWidth;
 

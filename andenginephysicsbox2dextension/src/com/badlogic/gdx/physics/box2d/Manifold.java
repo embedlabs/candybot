@@ -72,7 +72,8 @@ public class Manifold {
                 public float tangentImpulse;
                 public int contactID = 0;
                 
-                public String toString() {
+                @Override
+				public String toString() {
                         return "id: " + contactID + ", " + localPoint + ", "  + normalImpulse + ", " + tangentImpulse;
                 }
         }
