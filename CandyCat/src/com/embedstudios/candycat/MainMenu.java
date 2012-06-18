@@ -51,12 +51,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 public class MainMenu extends LayoutGameActivity implements OnClickListener, IAccelerometerListener {
 	ViewFlipper enclosing_vf;
 	TextView mainmenu_tv;
 	Button button_play;
 	ImageView iv_facebook,iv_twitter;
+	GoogleAnalyticsTracker tracker;
+
 
 	public Typeface komika;
 	public static final String TAG = CandyUtils.TAG;
@@ -96,7 +99,9 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		Log.v(TAG,"MainMenu onLoadEngine()");
 		
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
+		tracker = GoogleAnalyticsTracker.getInstance();
+	    // Start the tracker in manual dispatch mode...
+	    tracker.startNewSession("UA-32708172-1", this);
 		
 		// Display Adapter, don't attempt to simplify. Fixes the pan button from cutting off - Shrav
 		
@@ -301,7 +306,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		 * DESTROY SINGLETONS
 		 */
 		BufferObjectManager.getActiveInstance().clear();
-		
+	    tracker.stopSession();
 		Log.i(TAG,"MainMenu onDestroy()");
 	}
 	
