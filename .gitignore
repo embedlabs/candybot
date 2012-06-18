@@ -20,6 +20,7 @@ proguard/
 *.apk
 *.ap_
 *.dex
+*/bin
 
 # Mercurial
 .hg/
