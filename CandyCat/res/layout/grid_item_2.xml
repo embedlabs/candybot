@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:id="@+id/grid_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_grid" >
+    
+    <ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="32px"
+	    android:layout_height="32px"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentRight="true"
+	    android:src="@drawable/star" />
+	<RelativeLayout 
+		android:layout_width="60px"
+		android:layout_height="60px"
+		android:layout_centerInParent="true">
+		<TextView android:id="@+id/grid_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:textSize="40px"
+			android:textColor="@android:color/white"
+			android:layout_centerInParent="true" />	
+	</RelativeLayout>
+</RelativeLayout>

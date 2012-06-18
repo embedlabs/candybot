@@ -423,10 +423,13 @@ containing a value of this type.
         public static final int gree_user_notification_button=0x7f030017;
         public static final int grid_item=0x7f030018;
         public static final int grid_item_1=0x7f030019;
-        public static final int level=0x7f03001a;
-        public static final int main=0x7f03001b;
-        public static final int select_level=0x7f03001c;
-        public static final int select_world=0x7f03001d;
+        public static final int grid_item_2=0x7f03001a;
+        public static final int grid_item_3=0x7f03001b;
+        public static final int grid_item_lock=0x7f03001c;
+        public static final int level=0x7f03001d;
+        public static final int main=0x7f03001e;
+        public static final int select_level=0x7f03001f;
+        public static final int select_world=0x7f030020;
     }
     public static final class menu {
         public static final int gree_subbrowser=0x7f0d0000;
