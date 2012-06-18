@@ -1,6 +1,8 @@
 package com.embedstudios.candycat;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -93,7 +95,7 @@ public class CandyUtils {
 						Log.i(TAG,"Time requirement: "+candyLevel.timeForStar);
 					}
 					break;
-				} else {
+				} else if (i+1 == levelNodeList.getLength()) {
 					throw new Exception("Missing level "+world+"-"+level+"!");
 				}
 			}
@@ -103,6 +105,29 @@ public class CandyUtils {
 			if (!(world==1&level==1)) {
 				parseLevelObjectsFromXml(candyLevel,1,1,objectList,tutorialList);
 			}
+		}
+	}
+	
+	public static InputStream tmxFromXML(final CandyLevel candyLevel,final int world,final int level) {
+		// Load the XML into a DOM.
+		try {
+			final InputStream input = candyLevel.getAssets().open("levels/w"+world+".xml");
+			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			final DocumentBuilder db = dbf.newDocumentBuilder();
+			final Document doc = db.parse(new InputSource(input));
+			doc.getDocumentElement().normalize();
+			final NodeList levelNodeList = doc.getElementsByTagName("l");
+			for (int i=0;i<levelNodeList.getLength();i++) {
+				if (Integer.valueOf(((Element)levelNodeList.item(i)).getAttribute("id"))==level) {
+					final Element currentLevelElement = (Element)levelNodeList.item(i);
+					final NodeList nodeList = currentLevelElement.getElementsByTagName("c");
+					return new ByteArrayInputStream(((Element)nodeList.item(0)).getTextContent().getBytes());
+				}
+			}
+			throw new Exception("Missing level "+world+"-"+level+"!");
+		} catch (Exception e) {
+			Log.e(TAG,"Failed to load TMX, loading default.",e);
+			return new ByteArrayInputStream("H4sIAAAAAAAAA2NkYGBgpDGmFRg1f9R8aptPzXQ9HMNn1PxR80k1n5qYCYiZkfgAkQjLUsAGAAA=".getBytes());
 		}
 	}
 

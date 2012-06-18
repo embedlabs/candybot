@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <w id="1">
 	<l id="1">
+	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRg1f9R8aptPzXQ9HMNn1PxR80k1n5qYCYiZkfgAkQjLUsAGAAA=</c>
 		<o n="1" r="7" c="8" />
 		<o n="2" r="7" c="7" />
 		<h r="10" c="5">Help the Cat move the candy&#10;into the hole!</h>
-		<m>30</m>
-		<t>30000</t>
+		<m>25</m>
+		<t>25000</t>
 	</l>
 	<l id="2">
+	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRgM5lPid3q7nxR3EqOWVPcPVvXUSLPUMIsW6vHFFznpkxT/EZt+iPUzNeMXX5rHpZdc95CTJgiFFzlpbKDKZ2pjJiBmhrIBxL8siMAGAAA=</c>
 		<o n="1" r="2" c="12" />
 		<o n="2" r="2" c="11" />
 	</l>
 	<l id="3">
+	    <c>H4sIAAAAAAAAA8VTQQ7AIAjD+f8/b5clhpRS2NyaEIwppSoOMxsfhLl8rxUwDbS/Zs/1daz2L//IW6Tb7VFFR5v1U/ioR8f7qq9qV87F3gHN21OwWc78qZwdvpEH1bv6XzP9N9GZmWidzVLHT4Wv3mmkE+VKHFfMYs0JPJqpmsAGAAA=</c>
 		<o n="1" r="1" c="11" />
 		<o n="2" r="1" c="12" />
 	</l>
 	<l id="4">
+	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+bj8RIr/B1P4kGI3PrWkmEEOICa80MVICV96hz8udxErTsjvlLoVmxg9zCcmjSHnI2xm4gs/Ut1JbP4gNh6JsRNdPzbzyQWUpB9K7KdW/YGMmYCYGYkPADZ6hBDABgAA</c>
 		<o n="1" r="2" c="12" />
 		<o n="2" r="2" c="11" />
 	</l>
 	<l id="5">
+	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRhI86kRBvR2P7nxgksfIXOItYPY8CE1vAdT+ONzCy4xauUvcv2Iz73ofsMmTq752NSRA3CFP640hU2MUPomxf2k+oPYtEtOHsFlPjXzAzl1BSHMBMTMSHwAq0EXYcAGAAA=</c>
 		<o n="1" r="1" c="12" />
 		<o n="2" r="2" c="12" />
 	</l>
 	<l id="6">
+	    <c>H4sIAAAAAAAAA82U3Q6AIAhGsd7/nfWii+a+H7Uo2dhQ8CgDLBFRkjVL7nx0n7NZPPL3eYzEorO9rfiMucqffSOqH+NnyJ981r8of1dDxmd7Iz28K1/NIItXPjWfynb8N+QrPvpP1drFOP5TzeYfTc/Lrum0u+7ABgAA</c>
 		<o n="1" r="14" c="3" />
 		<o n="2" r="14" c="2" />
 		<o n="3" r="1" c="2" />
@@ -32,6 +38,7 @@
 		<o n="3" r="7" c="15" />
 	</l>
 	<l id="7">
+	    <c>H4sIAAAAAAAAA91SWwqAMAxrlQnC7n9e9a8E08fEBwbCClnSdkxFRG+mB6ZnvQo19m3E24zGvFgvhph/1tdqq+Fovsi38733j/Kj92fI5DM8Of9xdsNqPs79x/w3/g/mVr0VjnjQG82avZ/d8QrYLtPO2dEr3AAU4SjvwAYAAA==</c>
 		<o n="1" r="4" c="11" />
 		<o n="3" r="5" c="11" />
 		<o n="3" r="6" c="11" />
@@ -48,6 +55,7 @@
 		<o n="2" r="16" c="11" />
 	</l>
 	<l id="8">
+	    <c>H4sIAAAAAAAAC7VUQQ7AIAgr8/9/3g47mSpFqgnRILYFDAEgLptjBdkVfBa38604urmc6p/1rd7s9KsYVQ0unAofwGvY0cH8ii/TUMWv5jDXxPFHK/1VuE7qk92pMbdmkcrPNAC8Z9lMYniZnm79XPFuez4b//kF6azLJcAGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="1" c="10" />
@@ -62,6 +70,7 @@
 		<o n="3" r="4" c="22" />
 	</l>
 	<l id="9">
+	    <c>H4sIAAAAAAAAA8WU0QpAIQhDrf7/n+uhx91tSd4CIcjNg0otIlpxVB3HH7G4zH/znzKqfiP+m3PJ+ihd5f64PWZ6dFe1VF5Wx+aL9lnVznB8aZ0cd98Zj/JwOVAv1fvr/83xUP4nNdguMf+b0VeMfZ9IRrfnwAYAAA==</c>
 		<o n="1" r="1" c="8" />
 		<o n="2" r="1" c="12" />
 		<o n="3" r="1" c="16" />
@@ -69,6 +78,7 @@
 		<o n="3" r="10" c="14" />
 	</l>
 	<l id="10">
+	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFUA2nxY0vdxPaz/QCoyGP2F6NPxxA0LmY4sfdHdSYj6yOnQzR82nnvmkYCYgZiZBPQC2Gm9HwAYAAA==</c>
 		<o n="1" r="2" c="2" />
 		<o n="2" r="2" c="1" />
 		<o n="3" r="5" c="20" />
@@ -76,6 +86,7 @@
 		<o n="4" r="5" c="5" />
 	</l>
 	<l id="11">
+	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+ZT6fSiHDyMaTch8Uv1HTFiR6lZS1JNqPrHxS6z5lMQPqeFL7/RJyAxizackPQzG/EVquUErQOvymxrlJzpmAmJmJD4AMxVbGMAGAAA=</c>
 		<o n="1" r="2" c="4" />
 		<o n="2" r="2" c="3" />
 		<o n="3" r="5" c="20" />
@@ -83,11 +94,13 @@
 		<o n="4" r="5" c="5" />
 	</l>
 	<l id="12">
+	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+aT6dTiGD7H+xCVOjv9JdT8jGk2MelxuRhdDN59QGKCrI9Y9uNyCz/3UTkuU5nVapX9K4hefPK54ptR8fPYRcgcxaikF9Cp/qI2ZgJgZygYAnp8u2sAGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="4" r="10" c="19" />
 	</l>
 	<l id="13">
+	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCW+bjMINY/hMRw6SfW/eSGJzb1lMYRLeKXUPgTUofLPEJhTYn7sdmBTQ2h8McmRmwYk2oGqXFHzfxL6/ICVx6kVvok1nxq54uhUH4SMp/amAmImaFsAAV+u/DABgAA</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="6" c="3" />
@@ -97,12 +110,14 @@
 		<o n="4" r="6" c="15" />
 	</l>
 	<l id="14">
+	    <c>H4sIAAAAAAAAC2NkYGBgpDGGAUYCNAOJatHNpzbA5n5ksaHofmRxbG4j5O7B4n50Gle6o7X78eknxv3E5p+BDH9y8jkhfzBg0Uese8hVT4zbSVFLz/RPbJgyoIkR0jeY0g+xmAmImaFsAIoNdezABgAA</c>
 		<o n="1" r="3" c="12" />
 		<o n="2" r="4" c="12" />
 		<o n="3" r="2" c="4" />
 		<o n="4" r="10" c="17" />
 	</l>
 	<l id="15">
+	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaC1e+nlfnQ+tfxAb/fjkic2XZDqN1Lcic98dHWkugmXfmLMJxbgcxs2t2ITo2b+pUbaGgz5i5rmUxtQmr8GS/lATcwExMxIfAAeKlKTwAYAAA==</c>
 		<o n="1" r="1" c="4" />
 		<o n="2" r="1" c="3" />
 		<o n="3" r="5" c="8" />
@@ -110,21 +125,25 @@
 		<o n="4" r="9" c="21" />
 	</l>
 	<l id="16">
+	    <c>H4sIAAAAAAAAC8VV0Q6AIAjUsv7/k6utB3Y75NRYbExSOE9Aq6WUmqye9NYUifAP8Hu0id8Yx/ay+MjrhHlmj/BHfIz9Gt/DxDilviy/dmS2gr8qf+BjPzWi9vxs3fp5PZnF39Ye785oLpX3YuU8CieLH9VFyb/3lrA9I26z/anWQ/WZlaz/yXbr/toXN5DhQ8AGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 	</l>
 	<l id="17">
+	    <c>H4sIAAAAAAAAC8VSgQmAMAxbde7/k3WwgoRtSadiISC0TUw6SynZx2BVZ7I4i3tsp/ZL4y9BDcVLlP/PfFRd18tkZ5YJ+y+lnvCrPhE9z/c8RuhpzvQP4kEphV99w8p9ezxRH9H3j/yRXbwF9nDG9RysVu5rrYe5qvzMv3Pj/VV+5nsln7exXdjb9wn6b6YOwAYAAA==</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="2" c="21" />
 	</l>
 	<l id="18">
+	    <c>H4sIAAAAAAAAC7VUAQqAIBDzKvv/k0sokGN3u0UejE6bawvVWmu2GIfDmDsJBgeVOQ7irdBHvbX4W5asYf6VLJbwvL73Xcmi6LP6qo98e+8oC3qH9OdxF/KwfJm+cn5QXsZHXtA5ZHkyTuSTcSP9ipZy3yha81x2PzAvlTXdjecn0vV+Knvk7bP/EOn/VcoeV7Dd2J/+ArkNhlbABgAA</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="2" c="18" />
 		<o n="4" r="2" c="16" />
 	</l>
 	<l id="19">
+	    <c>H4sIAAAAAAAAC72U4QqAMAiEtVrv/8j1w8GQu81kJhyNmd/0iqmIaLGqgvF147Nylh1MX69uzfKRc9HcyJPLlPULvds+MhDTszJ8lmeeID7zJLLP+hj5bTFDJPp3RP0iPuttNl/n3ybEZzXof0OK9r8j/uJn79tofuYn8nesX+UrdLw6bf0AlvvSxsAGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="5" c="5" />
@@ -143,6 +162,7 @@
 		<o n="4" r="1" c="21" />
 	</l>
 	<l id="20">
+	    <c>H4sIAAAAAAAAC7WT4Q6AIAiEsfL9Xzl/1MZuB5yWbEzX5OM6sZlZ25y7IuqFe6zBNdK4qr/izfqD5y9SxzjIV/p5/rtGehXvmG6mX2H473iO6Vf5Wc/K6z/mn82kEtl9VPOw4j97Yyqzeqcrocxydr9MV/XPuCK/P+lru5CqfoUV8RX/v/Aj/cfI03SvZ/IG8lalxcAGAAA=</c>
 		<o n="1" r="1" c="3" />
 		<o n="2" r="1" c="2" />
 		<o n="3" r="1" c="6" />

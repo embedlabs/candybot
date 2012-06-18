@@ -213,7 +213,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
 		
-		
 		/**
 		 * RECTANGE VERTEX BUFFERS
 		 */
@@ -242,7 +241,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		 */
 		final CandyTMXLoader tmxLoader = new CandyTMXLoader((theme==null)?"normal":theme,this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
 		try {
-			mTMXTiledMap = tmxLoader.loadFromAsset(this, "levels/"+world+"_"+level+".ccl");
+			mTMXTiledMap = tmxLoader.load(CandyUtils.tmxFromXML(this, world, level));
 		} catch (final TMXLoadException tmxle) {
 			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
 			Debug.e(tmxle);
