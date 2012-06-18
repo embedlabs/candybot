@@ -11,7 +11,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
@@ -23,10 +22,23 @@ public class CandyUtils {
 	public static final String TAG = "Candy Cat";
 	public static Typeface komika;
 	
-	public static void parseLevelObjectsFromXml(Context context,final int world,final int level,ArrayList<int[]> objectList,ArrayList<String[]> tutorialList) {
+	/**
+	 * w: world
+	 *     l: level
+	 *         o: object
+	 *         t: tutorial text
+	 *         m: move requirement
+	 *         s: time requirement in milliseconds
+	 */
+	
+	public static void parseLevelObjectsFromXml(final CandyLevel candyLevel,
+			final int world,
+			final int level,
+			ArrayList<int[]> objectList,
+			final ArrayList<String[]> tutorialList) {
 		try {
 			// Load the XML into a DOM.
-			final InputStream input = context.getAssets().open("levels/w/w"+world+".xml");
+			final InputStream input = candyLevel.getAssets().open("levels/w/w"+world+".xml");
 			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			final DocumentBuilder db = dbf.newDocumentBuilder();
 			final Document doc = db.parse(new InputSource(input));
@@ -62,12 +74,30 @@ public class CandyUtils {
 							currentTutorialElement.getAttribute("c") // c = column
 						});
 					}
+					
+					final NodeList moveNodeList = currentLevelElement.getElementsByTagName("m");
+					if (moveNodeList.getLength() == 0) {
+						candyLevel.movesForStar = 1;
+						Log.e(TAG,"Level "+world+"-"+level+" lacks moves requirement.");
+					} else {
+						candyLevel.movesForStar = Integer.valueOf(((Element)moveNodeList.item(0)).getAttribute("n"));
+						Log.i(TAG,"Move requirement: "+candyLevel.movesForStar);
+					}
+					
+					final NodeList timeNodeList = currentLevelElement.getElementsByTagName("s");
+					if (timeNodeList.getLength() == 0) {
+						candyLevel.timeForStar = 1000;
+						Log.e(TAG,"Level "+world+"-"+level+" lacks time requirement.");
+					} else {
+						candyLevel.timeForStar = Integer.valueOf(((Element)timeNodeList.item(0)).getAttribute("ms"));
+						Log.i(TAG,"Time requirement: "+candyLevel.timeForStar);
+					}
 					break;
 				}
 			}
 		} catch (Exception e) {
 			Log.e(TAG,"XML FAIL!",e);
-			Toast.makeText(context, "Failed to load level.", Toast.LENGTH_LONG);
+			Toast.makeText(candyLevel, "Failed to load level.", Toast.LENGTH_LONG);
 		}
 	}
 

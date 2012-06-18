@@ -114,6 +114,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public int teleporter2column = -1;
 	public int teleporter2row = -1;
 	
+	public int movesForStar;
+	public int timeForStar;
+	
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 				
@@ -134,6 +137,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		Log.i(TAG,"Level "+world+"_"+level);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public Engine onLoadEngine() {
 		Log.v(TAG,"CandyLevel onLoadEngine()");

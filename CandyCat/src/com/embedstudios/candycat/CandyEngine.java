@@ -9,7 +9,11 @@ import java.util.List;
 import android.util.Log;
 
 public class CandyEngine {
-
+	
+	/**
+	 * INTEGER CODES
+	 */
+	
 	public static final int EDGE = -2;
 	public static final int NO_OBJECT = -1;
 	
@@ -50,6 +54,7 @@ public class CandyEngine {
 	/**
 	 * FOR ARRAY ACCESS
 	 */
+	
 	public static final int COMMAND = 0;
 	public static final int TYPE = 0;
 	public static final int ROW = 1;
@@ -59,23 +64,47 @@ public class CandyEngine {
 	public static final int OBJECT = 1;
 	public static final int BACKGROUND = 2;
 
+	/**
+	 * OBJECT REFERENCE TRACKERS
+	 */
+	
 	private final List<LinkedList<int[]>> spriteQueue = new ArrayList<LinkedList<int[]>>();
 	private final List<CandyAnimatedSprite> spriteList;
 	private final List<CandyAnimatedSprite> enemyList = new ArrayList<CandyAnimatedSprite>();
 	private final List<CandyAnimatedSprite> gravityList = new ArrayList<CandyAnimatedSprite>();
 
+	/**
+	 * OBJECT LOCATION TRACKERS
+	 */
+	
 	private final int[][] objectArray;
 	private final int[][] backgroundArray;
 	private final int[][] originalBackgroundArray;
 	
+	/**
+	 * GAME VIEW REFERENCE
+	 */
+	
 	private final CandyLevel candyLevel;
+	
+	/**
+	 * EASE OF ACCESS
+	 */
 	
 	CandyAnimatedSprite cat,candy;
 	int catIndex = -1;
 	int candyIndex = -1;
 
+	/**
+	 * LOG TAG
+	 */
+	
 	private static final String TAG = CandyUtils.TAG;
 
+	/**
+	 * GAME STATE VARIABLES
+	 */
+	
 	public boolean win = false;
 	public boolean death = false;
 	public boolean catMoved = false;
@@ -84,7 +113,20 @@ public class CandyEngine {
 	private boolean teleportationRequired = false;
 	private boolean slidingOnIceRequired = false;
 	
+	/**
+	 * THREADING
+	 */
+	
 	private Thread currentThread;
+	
+	/**
+	 * GAME STATISTICS
+	 */
+	// TODO EXPAND
+	private int moves = 0;
+	private int restarts = 0;
+	private long startTime;
+	private int enemiesDefeated = 0;
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevel candyLevel) {
 		this.spriteList = spriteList;
@@ -121,7 +163,7 @@ public class CandyEngine {
 				break;
 			}
 		}
-		Log.i(TAG,""+spriteQueue.size());
+		Log.i(TAG,"spriteQueue.size(): "+spriteQueue.size());
 		logArray("Start array:");
 	}
 	
@@ -150,6 +192,7 @@ public class CandyEngine {
 				death = true;
 			case SQUARE_EMPTY:
 				catMoved = true;
+				maybeStartTimer();
 				move(rowDirection,columnDirection,catIndex);
 				break;
 				
@@ -164,6 +207,7 @@ public class CandyEngine {
 					if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
 						if (shouldDie) {death=true;}
 						catMoved = true;
+						maybeStartTimer();
 						move(rowDirection,columnDirection,catIndex,situationArray[OBJECT]);
 					}
 					break;
@@ -177,6 +221,7 @@ public class CandyEngine {
 						death=true;
 					case SQUARE_EMPTY:
 						catMoved=true;
+						maybeStartTimer();
 						teleport(candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column,catIndex);
 						break;
 					}
@@ -186,6 +231,7 @@ public class CandyEngine {
 						death=true;
 					case SQUARE_EMPTY:
 						catMoved=true;
+						maybeStartTimer();
 						teleport(candyLevel.teleporter1row+ROW_UP,candyLevel.teleporter1column,catIndex);
 						break;
 					}
@@ -194,6 +240,10 @@ public class CandyEngine {
 			}
 			
 			settle();
+		}
+
+		private void maybeStartTimer() {
+			if (moves==0) {CandyEngine.this.startTime = System.currentTimeMillis();}
 		}
 	}
 	
@@ -234,7 +284,7 @@ public class CandyEngine {
 					}
 				}
 			}
-			
+			moves++;
 			catMoved = false;
 		}
 		
@@ -367,6 +417,7 @@ public class CandyEngine {
 		switch (s) {
 		case SQUARE_LASER:
 			enemySprite.enemyDead = true;
+			enemiesDefeated++;
 		case SQUARE_EMPTY:
 			move(rowDirection,columnDirection,enemySprite.index);
 			break;
@@ -384,7 +435,9 @@ public class CandyEngine {
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
 					if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
-						if (shouldDie) {enemySprite.enemyDead=true;}
+						if (shouldDie) {enemySprite.enemyDead=true;
+							enemiesDefeated++;
+						}
 						move(rowDirection,columnDirection,enemySprite.index,situationArray[OBJECT]);
 					}
 					break;
@@ -397,6 +450,7 @@ public class CandyEngine {
 				switch(situation(candyLevel.teleporter2row,candyLevel.teleporter2column,rowDirection,columnDirection)[SITUATION]) {
 				case SQUARE_LASER:
 					enemySprite.enemyDead = true;
+					enemiesDefeated++;
 				case SQUARE_EMPTY:
 					teleport(candyLevel.teleporter2row+ROW_DOWN,candyLevel.teleporter2column,enemySprite.index);
 					break;
@@ -405,6 +459,7 @@ public class CandyEngine {
 				switch(getBackground(candyLevel.teleporter1row,candyLevel.teleporter1column,rowDirection,columnDirection)) {
 				case SQUARE_LASER:
 					enemySprite.enemyDead = true;
+					enemiesDefeated++;
 				case SQUARE_EMPTY:
 					teleport(candyLevel.teleporter1row+ROW_UP,candyLevel.teleporter1column,enemySprite.index);
 					break;
@@ -419,6 +474,34 @@ public class CandyEngine {
 		pause(5,candyIndex);
 		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
 		pause(2000);
+		
+		final int milliseconds = (int)(System.currentTimeMillis()-startTime);
+		Log.i(TAG,"Level Completion Info:");
+		Log.i(TAG,"Moves: "+moves);
+		Log.i(TAG,"Restarts: "+restarts);
+		Log.i(TAG,"Completion time (ms): "+milliseconds);
+		Log.i(TAG,"Enemies defeated: "+enemiesDefeated);
+		
+		/**
+		 * TODO SHRAV:
+		 * 
+		 * Award first star here because they won.
+		 * 
+		 * moves: stores the number of moves the player took
+		 * Add this variable to the existing stored number to keep a cumulative count of moves done.
+		 * Compare moves to candyLevel.movesForStar to award the second star.
+		 * 
+		 * restarts: stores the number of restarts
+		 * Add this variable to the existing stored number to keep a cumulative count of game restarts.
+		 * 
+		 * milliseconds: stores milliseconds to complete the level
+		 * Add this variable to the existing stored number to keep a cumulative count of play time.
+		 * Compare milliseconds to candyLevel.timeForStar to award the third star.
+		 * 
+		 * enemiesDefeated: how many enemies died during the level
+		 * Add this variable to the existing stored number to keep a cumulative count of enemies defeated.
+		 */
+		
 		candyLevel.finish(); // TODO change this
 	}
 
@@ -522,6 +605,7 @@ public class CandyEngine {
 		}
 		
 		candyLevel.gameStarted = false;
+		restarts++;
 		
 		/**
 		 * RESET SPRITES
@@ -546,7 +630,8 @@ public class CandyEngine {
 		win = false;
 		death = false;
 		candyBurned = false;
-		catMoved = false; // this variable should be false anyway if this method is being called, just in case
+		assert !catMoved;
+//		catMoved = false; // this variable should be false anyway if this method is being called, just in case
 		
 		candyLevel.resetDragDistance = true;
 		candyLevel.gameStarted = true;
