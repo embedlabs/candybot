@@ -93,11 +93,16 @@ public class CandyUtils {
 						Log.i(TAG,"Time requirement: "+candyLevel.timeForStar);
 					}
 					break;
+				} else {
+					throw new Exception("Missing level "+world+"-"+level+"!");
 				}
 			}
 		} catch (Exception e) {
 			Log.e(TAG,"XML FAIL!",e);
 			Toast.makeText(candyLevel, "Failed to load level.", Toast.LENGTH_LONG);
+			if (!(world==1&level==1)) {
+				parseLevelObjectsFromXml(candyLevel,1,1,objectList,tutorialList);
+			}
 		}
 	}
 

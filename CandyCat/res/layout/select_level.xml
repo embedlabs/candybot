@@ -6,7 +6,7 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 	    android:verticalSpacing="10dip"
-	    android:horizontalSpacing="10dip"
+	    android:horizontalSpacing="0dip"
 	    android:numColumns="5"
 	    android:columnWidth="70dp"
 	    android:rowHeight="120dp"
