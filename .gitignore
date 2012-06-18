@@ -21,6 +21,7 @@ proguard/
 *.ap_
 *.dex
 */bin
+*/gen
 
 # Mercurial
 .hg/
