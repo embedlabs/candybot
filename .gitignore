@@ -1,9 +1,16 @@
 # generic files to ignore
 *~
 *.lock
-*.DS_Store
 *.swp
 *.out
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
 
 # java specific
 *.class
@@ -14,14 +21,15 @@
 proguard/
 
 # android stuff
-*/R.java
+R.java
 
 # any bin stuff
 *.apk
 *.ap_
 *.dex
-*/bin
-*/gen
+*.jar
+bin/
+gen/
 
 # Mercurial
 .hg/
