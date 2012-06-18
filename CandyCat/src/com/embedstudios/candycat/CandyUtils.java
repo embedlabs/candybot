@@ -38,7 +38,7 @@ public class CandyUtils {
 			final ArrayList<String[]> tutorialList) {
 		try {
 			// Load the XML into a DOM.
-			final InputStream input = candyLevel.getAssets().open("levels/w/w"+world+".xml");
+			final InputStream input = candyLevel.getAssets().open("levels/w"+world+".xml");
 			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			final DocumentBuilder db = dbf.newDocumentBuilder();
 			final Document doc = db.parse(new InputSource(input));
@@ -65,11 +65,11 @@ public class CandyUtils {
 						});
 					}
 					
-					final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("t"); // t = tutorial
+					final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("h"); // h = help = tutorial
 					for (int j=0;j<tutorialNodeList.getLength();j++) {
 						final Element currentTutorialElement = (Element)tutorialNodeList.item(j);
 						tutorialList.add(new String[]{
-							currentTutorialElement.getAttribute("i"), // i = info, meaning the tutorial text
+							currentTutorialElement.getTextContent(),
 							currentTutorialElement.getAttribute("r"), // r = row
 							currentTutorialElement.getAttribute("c") // c = column
 						});
@@ -80,16 +80,16 @@ public class CandyUtils {
 						candyLevel.movesForStar = 1;
 						Log.e(TAG,"Level "+world+"-"+level+" lacks moves requirement.");
 					} else {
-						candyLevel.movesForStar = Integer.valueOf(((Element)moveNodeList.item(0)).getAttribute("n"));
+						candyLevel.movesForStar = Integer.valueOf(((Element)moveNodeList.item(0)).getTextContent());
 						Log.i(TAG,"Move requirement: "+candyLevel.movesForStar);
 					}
 					
-					final NodeList timeNodeList = currentLevelElement.getElementsByTagName("s");
+					final NodeList timeNodeList = currentLevelElement.getElementsByTagName("t");
 					if (timeNodeList.getLength() == 0) {
 						candyLevel.timeForStar = 1000;
 						Log.e(TAG,"Level "+world+"-"+level+" lacks time requirement.");
 					} else {
-						candyLevel.timeForStar = Integer.valueOf(((Element)timeNodeList.item(0)).getAttribute("ms"));
+						candyLevel.timeForStar = Integer.valueOf(((Element)timeNodeList.item(0)).getTextContent());
 						Log.i(TAG,"Time requirement: "+candyLevel.timeForStar);
 					}
 					break;

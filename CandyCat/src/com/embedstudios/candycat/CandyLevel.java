@@ -257,6 +257,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		tmxLayer = mTMXTiledMap.getTMXLayers().get(0);
 		mScene.attachChild(tmxLayer); //background layer
+		
+		/**
+		 * TUTORIAL TEXT
+		 */
+		addTutorialText(tutorialList);
 
 		/**
 		 * SPRITES
@@ -264,11 +269,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		for (int i=0;i<objectArray.length;i++) {
 			createSprite(objectArray[i][CandyEngine.TYPE],objectArray[i][CandyEngine.ROW],objectArray[i][CandyEngine.COLUMN],i);
 		}
-		
-		/**
-		 * TUTORIAL TEXT
-		 */
-		addTutorialText(tutorialList);
 		
 		/**
 		 * LOGIC ENGINE
