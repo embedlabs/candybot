@@ -1,0 +1,1 @@
+android create project -p . -t 8 -k oauth.signpost.commonshttp  -a Signposthttp -n SignpostCommonsHttp

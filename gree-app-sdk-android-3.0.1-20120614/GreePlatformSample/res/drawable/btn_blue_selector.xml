@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Pressed button -->
+    <item android:drawable="@drawable/btn_blue_pressed" android:state_pressed="true"/>
+    <!-- Inactive tab -->
+    <item android:drawable="@drawable/btn_blue_default" android:state_pressed="false"/>
+    <!-- Pressed tab -->
+
+</selector>

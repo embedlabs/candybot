@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="Animation.GreePopupDialog" parent="android:Animation.Dialog">
+		<item name="android:windowEnterAnimation">@anim/gree_popup_dialog_open</item>
+		<item name="android:windowExitAnimation">@anim/gree_popup_dialog_close</item>
+	</style>
+	<style name="GreeRadioStyle" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/gree_tabbutton</item>
+    </style>
+    <style name="GreeRadioRightStyle" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/gree_tabbutton_right</item>
+    </style>
+	<style name="Animation.GreeWebViewDialog" parent="android:Animation.Dialog">
+		<item name="android:windowEnterAnimation">@anim/gree_dialog_enter</item>
+		<item name="android:windowExitAnimation">@anim/gree_dialog_exit</item>
+	</style>
+	<style name="Animation.GreeDashboardActivity" parent="android:Animation.Activity">
+		<item name="android:activityOpenEnterAnimation">@anim/gree_activity_open_enter</item>
+		<item name="android:activityOpenExitAnimation">@anim/gree_activity_open_exit</item>
+		<item name="android:activityCloseEnterAnimation">@anim/gree_activity_close_enter</item>
+		<item name="android:activityCloseExitAnimation">@anim/gree_activity_close_exit</item>
+	</style></resources>

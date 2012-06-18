@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/gree_subbrowser_menu_back"
+        android:icon="@drawable/gree_ic_menu_back"
+        android:title="@string/gree_subbrowser_menu_back"
+        />
+    <item
+        android:id="@+id/gree_subbrowser_menu_forward"
+        android:icon="@drawable/gree_ic_menu_forward"
+        android:title="@string/gree_subbrowser_menu_forward"
+        />
+    <item
+        android:id="@+id/gree_subbrowser_menu_reload"
+        android:icon="@drawable/gree_ic_menu_refresh"
+        android:title="@string/gree_subbrowser_menu_reload"
+        />
+    <item
+        android:id="@+id/gree_subbrowser_menu_close"
+        android:icon="@drawable/gree_ic_menu_close_clear_cancel"
+        android:title="@string/gree_subbrowser_menu_close"
+        />
+</menu>

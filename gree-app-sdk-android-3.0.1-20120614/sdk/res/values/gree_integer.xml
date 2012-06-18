@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<integer name="gree_popup_dialog_animation_duration">500</integer>
+	<integer name="gree_max_image_edge">480</integer>
+	<integer name="gree_request_code_get_image">1</integer>
+	<integer name="gree_request_code_capture_image">2</integer>
+	<integer name="gree_request_show_modal_dialog">3</integer>
+	<integer name="gree_request_show_text_input_view">3</integer>
+	<integer name="gree_loading_indicator_animation_duration">2000</integer>
+</resources>

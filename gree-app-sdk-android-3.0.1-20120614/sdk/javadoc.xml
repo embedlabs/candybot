@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="libs/commons-codec-1.4.jar:vendor/signpost/signpost-commonshttp4/bin/signpost-commonshttp4.jar:libs/gson-2.0.jar:vendor/signpost/signpost-core/bin/signpost-core.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false"  source="1.6" splitindex="true" use="true" version="true" >
+        <fileset dir="src">
+            <include name="**/net/gree/asdk/api/*"/>
+            <include name="**/net/gree/asdk/api/alarm/*"/>
+            <include name="**/net/gree/asdk/api/auth/*"/>
+            <include name="**/net/gree/asdk/api/ui/*"/>
+            <include name="**/net/gree/asdk/api/wallet/*"/>
+            <include name="**/net/gree/asdk/api/notifications/c2dm/*"/>
+            <exclude name="**/FriendCode.java"/>
+        </fileset>
+        </javadoc>
+    </target>
+</project>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/app_background"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/profile"
+        layout="@layout/profile_holder" />
+
+    <ScrollView
+        style="@style/content_slim"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/white" >
+
+        <LinearLayout
+            style="@style/content_slim"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/bodyMessage"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Input Body Message"
+                android:inputType="text"
+                android:lines="3" />
+
+            <TextView
+                android:id="@+id/touchUrlText"
+                style="@style/one_line_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/attach_screenshot" >
+            </TextView>
+
+            <RadioGroup
+                android:id="@+id/isSetScreenShot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/yes"
+                    style="@style/one_line_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ok" />
+
+                <RadioButton
+                    android:id="@+id/no"
+                    style="@style/one_line_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/shareDialogButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/show_share_dialog" />
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/statusBarBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/gree_status_bar" />
+
+</LinearLayout>

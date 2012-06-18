@@ -37,6 +37,7 @@ import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
+import android.annotation.SuppressLint;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -47,6 +48,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+@SuppressLint("NewApi")
 public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener {
 	/**
 	 * Some important phone/game dimensions.

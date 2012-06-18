@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff" >
+
+　　 <LinearLayout
+        android:id="@+id/gree_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
+        <net.gree.asdk.core.dashboard.ModalNavigationBar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gree_posting_navigationbar" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gree_posting_layout_upper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/gree_header"
+        android:layout_above="@+id/gree_footer"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/gree_thumbnail"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:visibility="gone" />
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/gree_mood"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="top|left"
+                android:textSize="14dp"
+                android:hint="@string/gree_posting_hint_message"
+                android:focusable="true"
+                android:imeOptions="flagNoExtractUi"
+                android:background="#fff">
+                <requestFocus />
+            </EditText>
+        </ScrollView>
+    </LinearLayout>
+
+　　 <LinearLayout
+        android:id="@+id/gree_footer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <include layout="@layout/gree_posting_tool_bar" />
+
+        <net.gree.asdk.core.dashboard.EmojiPaletteView
+            android:id="@+id/gree_emoji_palette_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" />
+       </LinearLayout>
+</RelativeLayout>

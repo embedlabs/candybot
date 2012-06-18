@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="gree_button_cancel">閉じる</string>
+    <string name="gree_error_oauth_title">認証エラー</string>
+    <string name="gree_error_oauth_sign_message">署名の生成に失敗しました。アプリ提供者に問い合わせて下さい。[EC:O-01]</string>
+    <string name="gree_error_oauth_auth_message">認証に失敗しました。無効な認証情報です。アプリ提供者に問い合わせて下さい[EC:O-02]</string>
+    <string name="gree_error_oauth_expect_message">サーバーから予期せぬ値を受け取りました。時間をおいて再度お試しください。[EC:O-03]</string>
+    <string name="gree_error_oauth_comm_message">認証に失敗しました。接続環境を確認してください。[EC:O-04]</string>
+
+    <!-- in game notification title -->
+    <string name="gree_notification_logged" translatable="false">こんにちは、%1$sさん。</string>
+
+    <!-- dialog title -->
+    <string name="gree_dialog_title_share">シェア</string>
+    <string name="gree_dialog_title_request">リクエストを送る</string>
+    <string name="gree_dialog_title_invite">招待状を送る</string>
+
+    <!--  following dashboard view strings -->
+    <string name="gree_posting_hint_message">入力してください</string>
+    <string name="gree_posting_send_label">送信</string>
+    <string name="gree_posting_cancel_dialog_message">キャンセルしますか?</string>
+    <string name="gree_posting_discard_image_message">画像を削除しますか?</string>
+    <string name="gree_posting_no_emoji_message">絵文字をダウンロードしています。</string>
+
+    <string name="gree_posting_form_title_label">タイトル</string>
+    <string name="gree_posting_form_title_hint">タイトルを入力してください</string>
+    <string name="gree_posting_form_text_label">テキスト</string>
+    <string name="gree_posting_form_text_hint">テキストを入力してください</string>
+
+    <string name="gree_uploader_camera">写真を撮る</string>
+    <string name="gree_uploader_gallery">ギャラリーから選択</string>
+    <string name="gree_uploader_unselect">選択を解除</string>
+    <string name="gree_uploader_selection_dialog_title">投稿方法を選択して下さい</string>
+    <string name="gree_missing_sdcard_message">SDカードが必要です</string>
+    <string name="gree_thumbnail_progress_message">サムネイル生成中</string>
+
+    <!--  notification board title -->
+    <string name="gree_notification_board_title">お知らせ</string>
+
+    <string name="gree_confirm_androidmarket_open_for_iab_title">購入方法変更のお知らせ</string>
+    <string name="gree_confirm_androidmarket_snsapp_open_for_iab_message">GREEコインの購入方法が変わりました。\nGoogle Playから、GREE(アプリ)をインストールしてください。</string>
+    <string name="gree_confirm_androidmarket_snsapp_update_open_for_iab_message">GREEコインの購入方法が変わりました。\nGoogle Playから、GREE(アプリ)を更新してください。</string>
+    <string name="gree_button_install">インストール</string>
+    <string name="gree_button_update">更新する</string>
+
+    <string name="gree_greesso_searching">アプリを探しています&#8230;</string>
+
+    <!-- dashboard menu strings -->
+    <string name="gree_dashboard_menu_reload">更新</string>
+    <string name="gree_dashboard_menu_settings">設定</string>
+
+    <!-- subbrowser menu strings -->
+    <string name="gree_subbrowser_menu_back">戻る</string>
+    <string name="gree_subbrowser_menu_forward">進む</string>
+    <string name="gree_subbrowser_menu_reload">更新</string>
+    <string name="gree_dashboard_menu_reload_universal_menu">メニューを更新</string>
+    <string name="gree_subbrowser_menu_close">ブラウザを閉じる</string>
+
+    <!-- pull to refresh strings -->
+    <string name="gree_pull_to_refresh_pull_label">引き下げて更新</string>
+    <string name="gree_pull_to_refresh_release_label">指を離して更新</string>
+    <string name="gree_pull_to_refresh_refreshing_label">更新中&#8230;</string>
+    <string name="gree_pull_to_refresh_last_update">前回更新:</string>
+
+    <string name="gree_internet_connect_failure">インターネットに接続できませんでした。通信環境を確認してから、もう一度送信してください。</string>
+    <string name="gree_sdk_static_error_page_message_default">電波状況が悪い可能性があります。再度お試しください。</string>
+    <string name="gree_sdk_static_error_page_lang_tag">ja</string>
+    <string name="gree_sdk_static_error_page_button">再読み込み</string>
+
+    <!-- tutorial dialogs -->
+    <string name="gree_tutorial_universalmenu_message">メニューボタンから、SNS機能などに素早くアクセスしよう!</string>
+</resources>

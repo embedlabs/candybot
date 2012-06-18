@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="gree_popup_dialog_titlebar_text">#ffffff</color>
+	<color name="gree_notification_board_titlebar_text">#ffffff</color>
+	<color name="gree_webview_background">#e1e2e3</color>
+</resources>

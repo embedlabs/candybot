@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+
+    <!-- SDK -->
+    <string name="get_session">Get session ID</string>
+    <string name="show_share_dialog">Show Share Dialog</string>
+    <string name="show_share_noclose_dialog">Show Noclose Share Dialog</string>
+    <string name="show_share_mini_dialog">Show Mini Share Dialog</string>
+    <string name="show_invite_popup">Show Invite Popup</string>
+    <string name="update_session">Update session ID</string>
+
+    <!-- Common -->
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="loading">加载中</string>
+    <string name="loading_data">数据加载中…</string>
+    <string name="all_data_loaded">数据加载完毕</string>
+    <string name="sync_failed">获取数据失败</string>
+    <string name="logout">登出</string>
+    <string name="taking_snapshot">拍照中，请等待…</string>
+
+    <!-- Profile -->
+    <string name="load_profile_data_failed">载入用户信息失败</string>
+    <string name="load_profile_icon_failed">载入用户头像失败</string>
+    <string name="not_login">未登录</string>
+    <string name="please_login">请登陆</string>
+    <string name="login">登陆</string>
+
+    <!-- Root Page -->
+    <string name="leaderboard_title">高分榜</string>
+    <string name="achievement_title">成就榜</string>
+    <string name="share_title">分享</string>
+    <string name="requests_title">请求</string>
+    <string name="invite_title">邀请</string>
+    <string name="friends_title">朋友</string>
+    <string name="payment_title">支付</string>
+    <string name="gltest_title">3D测试</string>
+    <string name="activity_title">活动</string>
+    <string name="upgrade_title">升级</string>
+
+    <!-- achievement page -->
+    <string name="achievement_unlocked">成就解锁</string>
+    <string name="failed_to_unlock_achievement">成就解锁失败</string>
+    <string name="achievement_locked">成就上锁</string>
+    <string name="failed_to_lock_achievement">成就上锁成功</string>
+
+    <!-- high score page -->
+    <string name="get_rankings_failed">获取排名失败</string>
+    <string name="total">全部</string>
+    <string name="weekly">每周</string>
+    <string name="daily">每日</string>
+    <string name="my_score">我的得分:</string>
+    <string name="get_profile_score_fail">获取用户的高分失败</string>
+    <string name="set_new_score_popout_title">请设置新的高分..</string>
+    <string name="set_new_score_success">高分设置成功</string>
+    <string name="set_new_score_fail">高分设置失败</string>
+    <string name="set_new_score_cancel">高分设置取消</string>
+
+    <!-- friends page -->
+    <string name="no_friends">还没有好友!</string>
+
+    <!-- upgrade page -->
+    <string name="upgrade_button_text">升级</string>
+    <string name="current_grade_prefix">当前等级: </string>
+    <string name="grade_2">等级 2</string>
+    <string name="grade_3">等级 3</string>
+    <string name="upgrade_short_description">请选择升级的等级</string>
+    <string name="upgrade_validation_error_message">请选择升级的等级</string>
+
+    <!-- request page-->
+    <string name="request_title_hint">输入标题</string>
+    <string name="request_body_hint">输入消息</string>
+    <string name="request_image_hint">输入ImageURL</string>
+    <string name="request_callback_hint">输入Callback URL</string>
+
+</resources>
