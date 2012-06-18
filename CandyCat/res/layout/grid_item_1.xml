@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/button_grid" >
     
-    <ImageView
-	    android:id="@+id/imageView1"
+     <ImageView
+	    android:id="@+id/star1"
 	    android:layout_width="32px"
 	    android:layout_height="32px"
 	    android:layout_alignParentBottom="true"

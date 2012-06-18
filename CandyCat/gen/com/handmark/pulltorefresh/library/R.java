@@ -248,23 +248,24 @@ containing a value of this type.
         public static final int gree_tab_number_bg_right_pressed=0x7f020095;
         public static final int gree_tabbutton=0x7f020096;
         public static final int gree_tabbutton_right=0x7f020097;
-        public static final int gree_translucent_background=0x7f02009f;
+        public static final int gree_translucent_background=0x7f0200a0;
         public static final int gree_tutorial_universalmenu=0x7f020098;
         public static final int ic_launcher=0x7f020099;
         public static final int icon=0x7f02009a;
-        public static final int star=0x7f02009b;
-        public static final int t_button=0x7f02009c;
-        public static final int twitter=0x7f02009d;
-        public static final int twitter_bright=0x7f02009e;
+        public static final int lock=0x7f02009b;
+        public static final int star=0x7f02009c;
+        public static final int t_button=0x7f02009d;
+        public static final int twitter=0x7f02009e;
+        public static final int twitter_bright=0x7f02009f;
     }
     public static final class id {
         public static final int both=0x7f080002;
-        public static final int button_facebook=0x7f080078;
-        public static final int button_play=0x7f080077;
-        public static final int button_twitter=0x7f080079;
-        public static final int enclosing_rl=0x7f080073;
-        public static final int enclosing_rl_level=0x7f080071;
-        public static final int gallery_world=0x7f08007b;
+        public static final int button_facebook=0x7f08007c;
+        public static final int button_play=0x7f08007b;
+        public static final int button_twitter=0x7f08007d;
+        public static final int enclosing_rl=0x7f080077;
+        public static final int enclosing_rl_level=0x7f080075;
+        public static final int gallery_world=0x7f08007f;
         public static final int gree_cancelButton=0x7f08003f;
         public static final int gree_dashboard_button=0x7f080005;
         public static final int gree_dashboard_content_container=0x7f080013;
@@ -355,10 +356,10 @@ containing a value of this type.
         public static final int gree_sub_item_text=0x7f08006d;
         public static final int gree_sub_webview=0x7f08000d;
         public static final int gree_subbrowser_loading_indicator=0x7f08000e;
-        public static final int gree_subbrowser_menu_back=0x7f08007c;
-        public static final int gree_subbrowser_menu_close=0x7f08007f;
-        public static final int gree_subbrowser_menu_forward=0x7f08007d;
-        public static final int gree_subbrowser_menu_reload=0x7f08007e;
+        public static final int gree_subbrowser_menu_back=0x7f080080;
+        public static final int gree_subbrowser_menu_close=0x7f080083;
+        public static final int gree_subbrowser_menu_forward=0x7f080081;
+        public static final int gree_subbrowser_menu_reload=0x7f080082;
         public static final int gree_subbrowser_url=0x7f08000c;
         public static final int gree_tab_group=0x7f080017;
         public static final int gree_text=0x7f08003d;
@@ -378,14 +379,18 @@ containing a value of this type.
         public static final int gree_webview=0x7f080004;
         public static final int grid_item=0x7f08006f;
         public static final int grid_text=0x7f080070;
-        public static final int gridview_level=0x7f08007a;
+        public static final int gridview_level=0x7f08007e;
         public static final int imageView1=0x7f08006e;
-        public static final int mainmenu_rl=0x7f080075;
-        public static final int mainmenu_tv=0x7f080076;
+        public static final int lock=0x7f080074;
+        public static final int mainmenu_rl=0x7f080079;
+        public static final int mainmenu_tv=0x7f08007a;
         public static final int pullDownFromTop=0x7f080000;
         public static final int pullUpFromBottom=0x7f080001;
-        public static final int rsv=0x7f080074;
-        public static final int rsv_level=0x7f080072;
+        public static final int rsv=0x7f080078;
+        public static final int rsv_level=0x7f080076;
+        public static final int star1=0x7f080071;
+        public static final int star2=0x7f080072;
+        public static final int star3=0x7f080073;
     }
     public static final class integer {
         public static final int gree_loading_indicator_animation_duration=0x7f0b0006;

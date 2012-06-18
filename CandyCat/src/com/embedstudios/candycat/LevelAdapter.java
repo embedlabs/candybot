@@ -33,7 +33,7 @@ public class LevelAdapter extends BaseAdapter {
 	public View getView(final int position,View v,final ViewGroup parent) {
 		
 		if (v == null) {
-			v = li.inflate(R.layout.grid_item_1,null);
+			v = li.inflate(R.layout.grid_item_lock,null);
 			
 			final TextView tv = (TextView) v.findViewById(R.id.grid_text);
 			tv.setText(String.valueOf(position+1));

@@ -6,11 +6,18 @@
     android:background="@drawable/button_grid" >
     
     <ImageView
-	    android:id="@+id/imageView1"
+	    android:id="@+id/star1"
 	    android:layout_width="32px"
 	    android:layout_height="32px"
 	    android:layout_alignParentBottom="true"
 	    android:layout_alignParentRight="true"
+	    android:src="@drawable/star" />
+    <ImageView
+	    android:id="@+id/star2"
+	    android:layout_width="32px"
+	    android:layout_height="32px"
+	    android:layout_alignParentBottom="true"
+	    android:layout_toLeftOf="@id/star1"
 	    android:src="@drawable/star" />
 	<RelativeLayout 
 		android:layout_width="60px"
