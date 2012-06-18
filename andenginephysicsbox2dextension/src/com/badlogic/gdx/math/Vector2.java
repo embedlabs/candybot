@@ -63,7 +63,7 @@ public final class Vector2 {
 	 * @return The euclidian length
 	 */
 	public float len () {
-		return (float)Math.sqrt(x * x + y * y);
+		return android.util.FloatMath.sqrt(x * x + y * y);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public final class Vector2 {
 	public float dst (Vector2 v) {
 		float x_d = v.x - x;
 		float y_d = v.y - y;
-		return (float)Math.sqrt(x_d * x_d + y_d * y_d);
+		return android.util.FloatMath.sqrt(x_d * x_d + y_d * y_d);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public final class Vector2 {
 	public float dst (float x, float y) {
 		float x_d = x - this.x;
 		float y_d = y - this.y;
-		return (float)Math.sqrt(x_d * x_d + y_d * y_d);
+		return android.util.FloatMath.sqrt(x_d * x_d + y_d * y_d);
 	}
 
 	/**

@@ -75,7 +75,7 @@ public class Transform {
 	 * @param angle angle in radians
 	 */
 	public void setRotation (float angle) {
-		float c = (float)Math.cos(angle), s = (float)Math.sin(angle);
+		float c = android.util.FloatMath.cos(angle), s = android.util.FloatMath.sin(angle);
 		vals[COL1_X] = c;
 		vals[COL2_X] = -s;
 		vals[COL1_Y] = s;

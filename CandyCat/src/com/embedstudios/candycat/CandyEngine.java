@@ -485,18 +485,19 @@ public class CandyEngine {
 		/**
 		 * TODO SHRAV:
 		 * 
-		 * Award first star here because they won.
+		 * Award first star here because they won. Player must win all three stars in a single round.
+		 * Game will always show the most stars ever awarded on the level screen.
 		 * 
 		 * moves: stores the number of moves the player took
 		 * Add this variable to the existing stored number to keep a cumulative count of moves done.
-		 * Compare moves to candyLevel.movesForStar to award the second star.
+		 * Compare moves to candyLevel.movesForStar to award a star.
 		 * 
 		 * restarts: stores the number of restarts
 		 * Add this variable to the existing stored number to keep a cumulative count of game restarts.
 		 * 
 		 * milliseconds: stores milliseconds to complete the level
 		 * Add this variable to the existing stored number to keep a cumulative count of play time.
-		 * Compare milliseconds to candyLevel.timeForStar to award the third star.
+		 * Compare milliseconds to candyLevel.timeForStar to award a star.
 		 * 
 		 * enemiesDefeated: how many enemies died during the level
 		 * Add this variable to the existing stored number to keep a cumulative count of enemies defeated.
@@ -557,7 +558,7 @@ public class CandyEngine {
 			while (true) {
 				for (int i=0;i<gravityList.size();i++) {
 					if (!gravityList.get(i).hasModifier) {
-						Log.e(TAG,i+" "+spriteQueue.get(i).size());
+						Log.e(TAG,"gravityList item #"+i+": "+spriteQueue.get(i).size()+" remaining in spriteQueue");
 						
 						if (spriteQueue.get(i).size()>0&&!gravityList.get(i).blowUp) {
 							gravityList.get(i).doQueue(spriteQueue.get(i).remove());
