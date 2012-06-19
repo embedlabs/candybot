@@ -21,7 +21,7 @@ public class CandyCamera extends ZoomCamera {
 		this.mTargetCenterX = this.getCenterX();
 		this.mTargetCenterY = this.getCenterY();
 
-		this.mTargetZoomFactor = 1.0f;
+		this.mTargetZoomFactor = 1f;
 	}
 
 	@Override
