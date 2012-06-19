@@ -12,9 +12,9 @@ public class WorldAdapter extends BaseAdapter {
 	private final Context mContext;
 
 	private final Integer[] mImageIds = {
-			R.drawable.twitter,
-			R.drawable.twitter,
-			R.drawable.facebook
+			R.drawable.box1,
+			R.drawable.box2,
+			R.drawable.box3
 	};
 	
 	public WorldAdapter(final Context c) {
@@ -41,9 +41,9 @@ public class WorldAdapter extends BaseAdapter {
 
 		final ImageView i = new ImageView(mContext);
 		i.setImageResource(mImageIds[position]);
-		i.setBackgroundResource(R.drawable.button_normal);
+		// i.setBackgroundResource(R.drawable.button_normal);
 		i.setScaleType(ImageView.ScaleType.FIT_XY);
-		i.setPadding(50,50,50,50);
+		// i.setPadding(50,50,50,50);
 		i.setLayoutParams(new LayoutParams(200,200)); // To fill screen (view)
 		
 		final RelativeLayout border_rl = new RelativeLayout(mContext); // Add Image view to relative layout

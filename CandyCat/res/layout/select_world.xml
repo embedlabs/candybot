@@ -3,5 +3,5 @@
 	android:id="@+id/gallery_world"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:spacing="50dip"
-	android:background="@drawable/background_linear" />
+	android:spacing="125dip"
+	android:background="@drawable/background" />
