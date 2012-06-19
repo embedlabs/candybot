@@ -4,11 +4,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/button_grid" >
-    
-   
+
 	<RelativeLayout 
 		android:layout_width="60px"
-		android:layout_height="60px"
+		android:layout_height="90px"
 		android:layout_centerInParent="true">
 		<TextView android:id="@+id/grid_text"
 			android:layout_width="wrap_content"
@@ -19,8 +18,8 @@
 			android:layout_centerInParent="true" />	
 			 <ImageView
 	    android:id="@+id/lock"
-	    android:layout_width="48px"
-		android:layout_height="48px"
+	    android:layout_width="64px"
+		android:layout_height="64px"
 	    android:gravity="center_horizontal"
 	    android:layout_centerInParent="true"
 	    android:src="@drawable/lock" />
