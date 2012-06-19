@@ -23,6 +23,7 @@ public class WorldSelect extends Activity implements OnItemClickListener {
 		world_g = (Gallery) findViewById(R.id.gallery_world);
 		world_g.setAdapter(new WorldAdapter(this));
 		world_g.setOnItemClickListener(this);
+
 	}
 
 	@Override
