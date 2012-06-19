@@ -27,7 +27,6 @@ R.java
 *.apk
 *.ap_
 *.dex
-*.jar
 bin/
 gen/
 
