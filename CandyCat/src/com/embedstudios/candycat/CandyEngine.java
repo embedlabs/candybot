@@ -558,7 +558,7 @@ public class CandyEngine {
 			while (true) {
 				for (int i=0;i<gravityList.size();i++) {
 					if (!gravityList.get(i).hasModifier) {
-						Log.e(TAG,"gravityList item #"+i+": "+spriteQueue.get(i).size()+" remaining in spriteQueue");
+						Log.v(TAG,"gravityList item #"+i+": "+spriteQueue.get(i).size()+" remaining in spriteQueue");
 						
 						if (spriteQueue.get(i).size()>0&&!gravityList.get(i).blowUp) {
 							gravityList.get(i).doQueue(spriteQueue.get(i).remove());

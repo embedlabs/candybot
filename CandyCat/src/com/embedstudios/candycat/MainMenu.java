@@ -37,7 +37,6 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
