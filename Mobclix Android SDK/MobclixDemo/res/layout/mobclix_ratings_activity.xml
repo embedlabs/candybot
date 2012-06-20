@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF">
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="10dp">
+  	<TextView android:text="Usability"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#000000"/>
+	<RatingBar android:id="@+id/ratingbar0"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingBottom="10dp"
+		android:numStars="5"
+		android:stepSize="1"
+		android:rating="3"/>
+		
+	<TextView android:text="Appearance"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#000000"/>
+	<RatingBar android:id="@+id/ratingbar1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingBottom="10dp"
+		android:numStars="5"
+		android:stepSize="1"
+		android:rating="3"/>
+		
+	<TextView android:text="Recommend"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#000000"/>
+	<RatingBar android:id="@+id/ratingbar2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingBottom="10dp"
+		android:numStars="5"
+		android:stepSize="1"
+		android:rating="3"/>
+
+	<TextView android:text="Performance"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#000000"/>
+	<RatingBar android:id="@+id/ratingbar3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingBottom="10dp"
+		android:numStars="5"
+		android:stepSize="1"
+		android:rating="3"/>
+	
+	<TextView android:text="Overall"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#000000"/>
+	<RatingBar android:id="@+id/ratingbar4"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingBottom="10dp"
+		android:numStars="5"
+		android:stepSize="1"
+		android:rating="3"/>
+	
+	<Button android:id="@+id/submit"
+			android:text="Submit"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" />
+</LinearLayout>
+
+</ScrollView>

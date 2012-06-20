@@ -1,0 +1,16 @@
+<resources>
+
+    <string-array name="yes_no">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    
+    <string-array name="log_level">
+        <item>DEBUG</item>
+        <item>INFO</item>
+        <item>WARN</item>
+        <item>ERROR</item>
+        <item>FATAL</item>
+    </string-array>
+    
+</resources>
