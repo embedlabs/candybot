@@ -1,0 +1,664 @@
+<html>
+<head>
+<title>Mobclix for Android Software Development Kit</title>
+<link href="../files/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+[<a href="./../index.html">Mobclix for Android</a>] >> [Software Development Kit Documentation]<br>
+
+<h1>Software Development Kit Documentation</h1>
+
+<h2>Table of Contents</h2>
+
+<ol type="A">
+	<li><a href="#eclipse">Eclipse Environment Setup</a></li>
+
+	<li><a href="#ads">Advertising Classes</a> (MobclixIABRectangleMAdView.class, MobclixMMABannerXLAdView.class, MobclixAdViewListener.class)</li>
+	<li><a href="#feedback">Feedback Classes</a> (MobclixFeedback.class, MobclixFeedback.Listener.class, MobclixFeedback.Ratings.class, MobclixDemographics.class)</li>
+</ol>
+
+<h2><a name="eclipse">Eclipse Environment Setup</a></h2>
+
+<h3>Library Files</h3>
+
+<p>All required files can be found in the "<code>mobclix.jar</code>" library.
+
+<p><img src="../files/ec-mc-classes.png"></p>
+
+<h4>Advertising Library (<code>MobclixMMABannerXLAdView.class</code>, <code>MobclixIABRectangleMAdView.class</code>, <code>MobclixAdViewListener.class</code>)</h4> 
+<p>Mobclix advertising library. Used for displaying advertising views of sizes 320x50 and 300x250.</p>
+
+<h3>Mobclix Android Manifest Configuration</h3>
+
+<p>Place these settings in the AndroidManifest.xml file of your Android project.</p>
+<p>
+	<div class="codeblock text">
+	<code>
+		&#60;?xml version="1.0" encoding="utf-8"?&#62;<br>
+		&#60;manifest xmlns:android="http://schemas.android.com/apk/res/android"<br>
+		<span class="tab"></span><span class="tab"></span>package="com.mobclix.demo" android:versionName="1.0.0"<br>
+		<span class="tab"></span><span class="tab"></span>android:versionCode="1"&#62;<br>
+		<span class="tab"></span>&#60;application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true" <span class="green">android:hardwareAccelerated="true"</span>&#62;<br>
+		<span class="tab"></span><span class="tab"></span>&#60;activity android:name=".MobclixDemo" android:label="@string/app_name"&#62;<br>
+		<span class="tab"></span><span class="tab"></span><span class="tab"></span>...<br>
+		<span class="tab"></span><span class="tab"></span>&#60;/activity&#62;<br>
+		<span class="tab"></span><span class="tab"></span>...<br>
+		<br>
+		<span class="tab"></span><span class="tab"></span>&#60;!-- Mobclix Required Parameters --/&#62;</span><br>
+		<span class="tab"></span><span class="tab"></span><span class="green">&#60;meta-data android:name="com.mobclix.APPLICATION_ID" android:value="insert-your-application-key"/&#62;</span><br>
+        <span class="tab"></span><span class="tab"></span><span class="green">&lt;activity android:name="com.mobclix.android.sdk.MobclixBrowserActivity"</span><br>
+		<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="green">android:theme="@android:style/Theme.Translucent.NoTitleBar"</span><br>
+		<span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="green">android:hardwareAccelerated="true"/&gt;</span><br><br>
+		
+        <span class="tab"></span>&#60;/application&#62;<br>
+		
+		<span class="tab"></span>...<br>
+		<br>
+		<span class="tab"></span>&#60;!-- Mobclix Required Permissions --/&#62;</span><br>
+		<span class="tab"></span><span class="green">&#60;uses-permission android:name="android.permission.INTERNET"&#62;&#60;/uses-permission&#62;</span><br>
+		<span class="tab"></span><span class="green">&#60;uses-permission android:name="android.permission.READ_PHONE_STATE"&#62;&#60;/uses-permission&#62;</span><br>
+		<br>
+		<span class="tab"></span>&#60;!-- Mobclix Optional Permissions --/&#62;</span><br>
+		<span class="tab"></span><span class="green">&#60;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"&#62;&#60;/uses-permission&#62;</span><br>
+		<span class="tab"></span><span class="green">&#60;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"&#62;&#60;/uses-permission&#62;</span><br>
+		<span class="tab"></span><span class="green">&#60;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"&#62;&#60;/uses-permission&#62;</span><br>
+		&#60;/manifest&#62;
+	</code>
+	</div>
+</p>
+
+<h4><code>com.mobclix.APPLICATION_ID</code> (Required String)</h4> 
+<p>Your application's unique identifier on the Mobclix Mobile Platform.</p>
+
+<h4><code>android:hardwareAccelerated="true"</code> (Required for Apps on Android Tablets)</h4> 
+<p>For applications that support Android tablets (Android SDK Version 3.0+), also add 
+<code>android:hardwareAccelerated=”true”</code> to the application flag. If this causes issues with your 
+application, at least add the line to the MobclixBrowserActivity. This 
+flag is used to ensure that HTML5 Video ads play on Android tablet devices. This flag also requires that 
+you set the build target to Android SDK Version 3.0+. However, you can still set <code>minsdkversion</code> to the 
+oldest version that you want to support.</p>
+
+<h4><code>MobclixBrowserActivity</code></h4>
+<p>An activity that handles interstitials utilized by some ads.</p>
+
+
+<h4>Required Permissions</h4> 
+
+<p><code>android.permission.INTERNET</code> - Used to retrieve ads.<br>
+<code>android.permission.READ_PHONE_STATE</code> - Used to obtain a unique device identifier.</p>
+
+<h4>Optional Permissions</h4> 
+
+<p><code>android.permission.ACCESS_FINE_LOCATION</code> - Used for location targeting ads.<br>
+<code>android.permission.ACCESS_COARSE_LOCATION</code> - Used for location targeting ads.<br>
+<code>android.permission.ACCESS_NETWORK_STATE</code> - Used to determine the state of the network before requesting ads.</p>
+
+<h3>Recommended Target SDK</h3>
+
+<h4>Most Recent Release</h4>
+<p>It is recommended that the most recent android SDK be used with the Mobclix Android library. 2.2 at the time of this release, however, all versions of Android are currently supported.</p>
+
+<p><img src="../files/ec-active-sdk.png"></p>
+
+
+
+<h2><a name="ads">Advertising Classes</a></h2>
+<h2><a name="MobclixAdView"><code>import com.mobclix.android.sdk.MobclixAdView;</code></a></h2>
+
+<p>The Mobclix for Android Advertising plugin gives you access to a wealth of advertising options from the Mobclix Exchange. MobclixAdView is an abstract class that the following two classes extend.</p>
+
+<h3>
+	<code><b>import com.mobclix.android.sdk.MobclixIABRectangleMAdView;<br>
+	import com.mobclix.android.sdk.MobclixMMABannerXLAdView;</b></code>
+</h3>
+
+<p>Subclasses of <code>MobclixAdView</code> that display 320x50 (<code>MobclixMMABannerXLAdView</code>) and 300x250 (<code>MobclixIABRectangleMAdView</code>) advertising units. Simply define the one you want in the layout xml and use <code>findViewById</code> in your MobclixActivity to instantiate it. Call <code>getAd</code> or set <code>refreshTime</code> to display advertisements.</p>
+<p>Note: If you aren't using a layout to define the AdViews and are instead building them programmatically, be sure to build the AdView with its parent Activity, not the application context.</p>
+
+<h4><code>void getAd()</code></h4>
+<p>Requests an advertisement. Additional calls will cancel pending requests to the ad server.</p>
+
+<h4><code>void pause()</code></h4>
+<p>Pauses an AdView refresh timer. No new ads will load for the AdView until Resume() is called.</p>
+
+<h4><code>void resume()</code></h4>
+<p>Resumes an AdView refresh timer with the previously set refresh time.</p>
+
+<h4><code>void setRefreshTime(long refreshTime)</code></h4>
+<p>Automatic refresh rate for advertisements in milliseconds. Upon setting this property, a request for an advertisement will made at once. The <code>MobclixAdView</code> will then continually request an advertisement after the specified refresh time has enlapsed until <code>cancelAd</code> is sent, the application ends, or the <code>MobclixAdView</code> is released. This will override the refresh time defined on the Mobclix Dashboard.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>refreshTime</td><td>The automatic refresh rate for the AdView in milliseconds.</td></tr>
+</table>
+</p>
+
+<h4><code>void setAllowAutoplay(boolean allowAutoplay)</code></h4>
+<p>Some ads may have a fullscreen interstitial experience. If an AdView is allowed to autoplay, these interstitials will load immediately into a new Activity. By default, <code>MobclixMMABannerXLAdView</code> have this feature disabled while <code>MobclixIABRectangleMAdView</code> have this feature enabled.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>allowAutoplay</td><td>Whether the AdView is allowed to autoplay interstitial ads.</td></tr>
+</table>
+</p>
+
+<h4><code>void setRichMediaRequiresUserInteraction(boolean requiresUserInteraction)</code></h4>
+<p>If an AdView is set to require user interaction for rich media ads, rich media ads must be clicked before the ad has access
+to features of the phone that wouldn’t otherwise take the user away from your app such as vibrate, flash, etc.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>requiresUserInteraction</td><td>Whether the AdView requires user interaction for rich media ads to access certain features of the phone.</td></tr>
+</table>
+</p>
+
+<h4><code>boolean addMobclixAdViewListener(<a href="#MobclixAdViewListener">MobclixAdViewListener</a> listener)</code></h4>
+<p>Adds an optional <code>listener</code>. Returns true if the listener is successfully added. Returns false if the listener has already been added.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>listener</td><td>An object implementing the <code>MobclixAdViewListener</code> interface that recieves <code>MobclixAdView</code> callbacks.</td></tr>
+</table>
+<table><tr><th>Return</th></tr>
+<tr><td><code>true</code> if the listener is successfully added. <code>false</code> if the <code>MobclixAdView</code> already has this listener.</td></tr>
+</table>
+</p>
+
+<h4><code>boolean removeMobclixAdViewListener(<a href="#MobclixAdViewListener">MobclixAdViewListener</a> listener)</code></h4>
+<p>Removes a <code>listener</code>.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>listener</td><td>An object implementing the <code>MobclixAdViewListener</code> interface that recieves <code>MobclixAdView</code> callbacks.</td></tr>
+</table>
+<table><tr><th>Return</th></tr>
+<tr><td><code>true</code> if the listener is successfully removed. <code>false</code> if the <code>MobclixAdView</code> does not have this listener.</td></tr>
+</table>
+</p>
+
+<h4><code>void continueRequest()</code></h4>
+<p>Used in Open Allocation. If the developer manually handles an Open Allocation callback (such as Open Allocation: Other), but doesn't succeed in handling it
+(such as a third party SDK failing to return an ad), he should call this method. This will alert the Mobclix SDK that developer's attempt to manually handle the
+callback has failed and should try another network.
+</p>
+
+
+
+<h2><a name="MobclixAdViewListener"><code><b>import com.mobclix.android.sdk.MobclixAdViewListener;</b></code></a></h2>
+
+<p>Listener for <code>MobclixAdView</code>s can recieve two types of callbacks - status notifications for the <code>MobclixAdView</code> or requests for advertising targeting parameters. MobclixAdViewListener is an interface; all methods must be implemented.</p>
+
+<h3><code>// Advertisement Status Callbacks (optional)</code></h3>
+
+
+<h4><code>void onSuccessfulLoad(MobclixAdView adView)</code></h4>
+<p>Called when the <code>MobclixAdView</code> has finished loading an advertisement.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixAdView</b></code> object.</td></tr>
+</table>
+</p>
+
+<h4><code>void onFailedLoad(MobclixAdView adView, int errorCode)</code></h4>
+<p>Called when the <code>MobclixAdView</code> has failed to load an advertisement. Possible error codes:</p>
+
+<p>
+<table>
+	<tr>
+		<th>Error Code</th>
+		<th>Value</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code>MobclixAdViewListener.UNKNOWN_ERROR</code></td>
+		<td><code>0</code></td>
+		<td><code>// An unknown error has occurred.</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixAdViewListener.UNAVAILABLE</code></td>
+		<td><code>-503</code></td>
+		<td><code>// Advertisement is not available at this time.</code></td>
+	</tr>
+    <tr>
+		<td><code>MobclixAdViewListener.APP_NOT_IN_FOREGROUND</code></td>
+		<td><code>-777777</code></td>
+		<td><code>// Ad did not display because the app is not in the foreground.</code></td>
+	</tr>
+    <tr>
+		<td><code>MobclixAdViewListener.ADS_NOT_STARTED</code></td>
+		<td><code>-888888</code></td>
+		<td><code>// Ad request failed because ads have not yet been started.</code></td>
+	</tr>
+    <tr>
+		<td><code>MobclixAdViewListener.AD_REQUEST_CANCELED</code></td>
+		<td><code>-999998</code></td>
+		<td><code>// The ad request was canceled either by the developer or because the AdView has been
+				hidden.</code></td>
+	</tr>
+    <tr>
+		<td><code>MobclixAdViewListener.ADSIZE_DISABLED</code></td>
+		<td><code>-999999</code></td>
+		<td><code>// Ad size has been disabled on the Mobclix Developer Dashboard.</code></td>
+	</tr>
+</table>
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixAdView</b></code> object.</td></tr>
+<tr><td>errorCode</td><td>See Error Code table above.</td></tr>
+</table>
+</p>
+
+<h4><code>boolean onOpenAllocationLoad(MobclixAdView adView, int openAllocationCode)</code></h4>
+<p>Called when the <code>MobclixAdView</code> has loaded an open allocation. It is up to the developer to handle any or all open allocation events. Possible open allocation codes:</p>
+<p><table>
+	<tr>
+		<th>Open Allocation Code</th>
+		<th>Value</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code>MobclixAdViewListener.SUBALLOCATION_ADMOB</code></td>
+		<td><code>-750</code></td>
+		<td><code>// Open Allocation: AdMob Suballocation</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixAdViewListener.SUBALLOCATION_OTHER</code></td>
+		<td><code>-1006</code></td>
+		<td><code>// Open Allocation: Other Suballocation</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixAdViewListener.SUBALLOCATION_GOOGLE</code></td>
+		<td><code>-10100</code></td>
+		<td><code>// Open Allocation: Google Suballocation</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixAdViewListener.SUBALLOCATION_MILLENNIAL</code></td>
+		<td><code>-111111</code></td>
+		<td><code>// Open Allocation: Millennial Media Suballocation</code></td>
+	</tr>
+</table>
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixAdView</b></code> object.</td></tr>
+<tr><td>openAllocationCode</td><td>See Open Allocation Code table above.</td></tr>
+</table>
+<table><tr><th>Return</th></tr>
+<tr><td><code>true</code> if the open allocation event was consumed. <code>false</code> if the <code>MobclixAdView</code> should continue handling the open allocation. This currently only applies to oepn allocation AdMob. If false is returned, the MobclixAdView will automatically load an AdMob ad in the AdView. If you wish to handle AdMob ads yourself, you must set up a listener and return true to open allocation AdMob calls.</td></tr>
+</table>
+</p>
+
+<h3><code>// Advertisement Touchthrough Callbacks</code></h3>
+
+<h4><code>void onAdClick(MobclixAdView adView)</code></h4>
+<p>Called when the user has touched a Advertisement.</code>.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixAdView</b></code> object.</td></tr>
+</table>
+</p>
+
+<h4><code>void onCustomAdTouchThrough(MobclixAdView adView, String string)</code></h4>
+<p>Called when the user has touched a Custom Advertisement that links to a url with the format <code>mobclix://<i>foo</i></code>.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixAdView</b></code> object.</td></tr>
+<tr><td>string</td><td>String following <code>mobclix://</code> in the url. In the example above, it would be "foo".</td></tr>
+</table>
+</p>
+
+
+<h3><code>// Additional Filters Callbacks</code></h3>
+
+<h4><code>String keywords()</code></h4>
+<p>Called when the <code>MobclixAdView</code> is retrieving an ad.
+<table><tr><th>Return</th></tr>
+<tr><td>A comma separated list of keyword terms describing the application or <code>null</code>.</td></tr>
+</table>
+</p>
+
+<h4><code>String query()</code></h4>
+<p>Called when the <code>MobclixAdView</code> is retrieving an ad.
+<table><tr><th>Return</th></tr>
+<tr><td>A comma separated list of search terms or <code>null</code>.</td></tr>
+</table>
+</p>
+
+
+<h2><a name="MobclixFullScreenAdView"><code>import com.mobclix.android.sdk.MobclixFullScreenAdView;</code></a></h2>
+
+<p>To use the MobclixFullScreenAdView, you must instantiate the MobclixFullScreenAdView in your java code with a reference to your Activity. From there, you
+are provided the <code>requestAd</code>, <code>displayRequestedAd</code>, and <code>requestAndDisplayAd</code> to handle the state of the ad.</p>
+<p>Be sure to build the AdView with its parent Activity, not the application context.</p>
+<p>When using the MobclixFullScreenAdView, the easiest call to make is <code>requestAndDisplayAd</code>. This will simply request the ad and display the ad when
+it has been downloaded and rendered. However, this can mean that the ad can display at arbitrary times, even if the user has navigated to another Activity. The better
+solution is to use a MobclixFullScreenAdViewListener to monitor the state of the <code>MobclixFullScreenAdView</code> and use <code>requestAd</code> and <code>displayRequestedAd</code>.
+By requesting the ad separately from displaying it, you can, for example, request when you start an Activity and display it as the user leaves for the next Activity, provided
+the <code>MobclixFullScreenAdView</code> <code>hasAd</code>.
+
+<h4><code>void requestAd()</code></h4>
+<p>Requests an advertisement which will download and render the ad but not display it. Additional calls will cancel pending requests to the ad server.</p>
+
+<h4><code>boolean hasAd()</code></h4>
+<p>Returns if the <code>MobclixFullScreenAdView</code> has an ad loaded via the <code>requestAd</code> method.
+<table><tr><th>Return</th></tr>
+<tr><td><code>true</code> if the <code>MobclixFullScreenAdView</code> has an ad loaded. <code>false</code> if the <code>MobclixFullScreenAdView</code> does not have an ad loaded.</td></tr>
+</table>
+</p>
+
+<h4><code>boolean displayRequestedAd()</code></h4>
+<p>Displays an advertisement loaded by the <code>MobclixFullScreenAdView</code> if one exists. It is recommended to use the <code>hasAd</code> method to verify that an ad has
+loaded prior to calling this method.
+<table><tr><th>Return</th></tr>
+<tr><td><code>true</code> if the the loaded ad is displayed. <code>false</code> if the <code>MobclixFullScreenAdView</code> does not have an ad loaded.</td></tr>
+</table>
+</p>
+
+<h4><code>void requestAndDisplayAd()</code></h4>
+<p>Requests an advertisement and immediately displays it after it has downloaded and rendered. Since this is a full screen ad, it will take over the screen as soon as it finishes
+loading, even if the user has moved on to another Activity within your application.  Additional calls will cancel pending requests to the ad server.</p>
+
+<h4><code>boolean addMobclixAdViewListener(<a href="#MobclixFullScreenAdViewListener">MobclixFullScreenAdViewListener</a> listener)</code></h4>
+<p>Adds an optional <code>listener</code>. Returns true if the listener is successfully added. Returns false if the listener has already been added.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>listener</td><td>An object implementing the <code>MobclixFullScreenAdViewListener</code> interface that recieves <code>MobclixAdView</code> callbacks.</td></tr>
+</table>
+<table><tr><th>Return</th></tr>
+<tr><td><code>true</code> if the listener is successfully added. <code>false</code> if the <code>MobclixFullScreenAdView</code> already has this listener.</td></tr>
+</table>
+</p>
+
+<h4><code>boolean removeMobclixAdViewListener(<a href="#MobclixFullScreenAdViewListener">MobclixFullScreenAdViewListener</a> listener)</code></h4>
+<p>Removes a <code>listener</code>.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>listener</td><td>An object implementing the <code>MobclixFullScreenAdViewListener</code> interface that recieves <code>MobclixAdView</code> callbacks.</td></tr>
+</table>
+<table><tr><th>Return</th></tr>
+<tr><td><code>true</code> if the listener is successfully removed. <code>false</code> if the <code>MobclixFullScreenAdView</code> does not have this listener.</td></tr>
+</table>
+</p>
+
+
+
+<h2><a name="MobclixFullScreenAdViewListener"><code><b>import com.mobclix.android.sdk.MobclixFullScreenAdViewListener;</b></code></a></h2>
+
+<p>Listener for <code>MobclixFullScreenAdView</code>s can recieve two types of callbacks - status notifications for
+the <code>MobclixFullScreenAdView</code> or requests for advertising targeting parameters. MobclixAdViewListener is
+an interface; all methods must be implemented.</p>
+
+<h3><code>// Advertisement Status Callbacks (optional)</code></h3>
+
+
+<h4><code>void onFinishLoad(MobclixFullScreenAdView adView)</code></h4>
+<p>Called when the <code>MobclixFullScreenAdView</code> has finished loading an advertisement and is ready to display.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixFullScreenAdView</b></code> object.</td></tr>
+</table>
+</p>
+
+<h4><code>void onFailedLoad(MobclixFullScreenAdView adView, int errorCode)</code></h4>
+<p>Called when the <code>MobclixFullScreenAdView</code> has failed to load an advertisement. Possible error codes:</p>
+
+<p>
+<table>
+	<tr>
+		<th>Error Code</th>
+		<th>Value</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td><code>MobclixFullScreenAdView.UNKNOWN_ERROR</code></td>
+		<td><code>0</code></td>
+		<td><code>// An unknown error has occurred.</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixFullScreenAdView.UNAVAILABLE</code></td>
+		<td><code>-503</code></td>
+		<td><code>// Advertisement is not available at this time.</code></td>
+	</tr>
+    <tr>
+		<td><code>MobclixFullScreenAdView.ADSIZE_DISABLED</code></td>
+		<td><code>-999999</code></td>
+		<td><code>// Ad size has been disabled on the Mobclix Developer Dashboard.</code></td>
+	</tr>
+</table>
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixFullScreenAdView</b></code> object.</td></tr>
+<tr><td>errorCode</td><td>See Error Code table above.</td></tr>
+</table>
+</p>
+
+<h4><code>void onPresentAd(MobclixFullScreenAdView adView)</code></h4>
+<p>Called when the <code>MobclixFullScreenAdView</code> presents its loaded full screen advertisement, which will take over the full screen.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixFullScreenAdView</b></code> object.</td></tr>
+</table>
+</p>
+
+<h4><code>void onDismissAd(MobclixFullScreenAdView adView)</code></h4>
+<p>Called when the <code>MobclixFullScreenAdView</code> is dismissed and the application will regain focus.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>adView</td><td>Reference to specific <code><b>MobclixFullScreenAdView</b></code> object.</td></tr>
+</table>
+</p>
+
+<h3><code>// Additional Filters Callbacks</code></h3>
+
+<h4><code>String keywords()</code></h4>
+<p>Called when the <code>MobclixFullScreenAdView</code> is retrieving an ad.
+<table><tr><th>Return</th></tr>
+<tr><td>A comma separated list of keyword terms describing the application or <code>null</code>.</td></tr>
+</table>
+</p>
+
+<h4><code>String query()</code></h4>
+<p>Called when the <code>MobclixFullScreenAdView</code> is retrieving an ad.
+<table><tr><th>Return</th></tr>
+<tr><td>A comma separated list of search terms or <code>null</code>.</td></tr>
+</table>
+</p>
+
+
+
+
+<h2><a name="feedback">Feedback Classes</a></h2>
+<h2><code>import com.mobclix.android.sdk.MobclixFeedback;</code></h2>
+
+<p>The Mobclix for Android Feedback plugin allows you to get qualitative and quantitative feedback data from your users.</p>
+
+<h4><code>public static void sendComment(Activity activity, String comment)</code></h4>
+<p>Sends a qualitative comment from a user to your account on the Mobclix Mobile Platform.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>activity</td><td>The activity that is making this feedback call.</td></tr>
+<tr><td>comment</td><td>The comment to be sent.</td></tr>
+</table></p>
+
+<h4><code>public static void sendComment(Activity activity, String comment, <a href="#feedbacklistener">MobclixFeedback.Listener</a> listener)</code></h4>
+<p>Sends a qualitative comment from a user to your account on the Mobclix Mobile Platform, with a MobclixFeedback.Listener for getting callbacks regarding whether the data was sent successfully.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>activity</td><td>The activity that is making this feedback call.</td></tr>
+<tr><td>comment</td><td>The comment to be sent.</td></tr>
+<tr><td>listener</td><td>An implementation of MobclixFeedback.Listener with methods to call if the data was sent successfully or not.</td></tr>
+</table></p>
+
+<h4><code>public static void sendRatings(Activity activity, <a href="#ratings">MobclixFeedback.Ratings</a> ratings)</code></h4>
+<p>Sends quantitative ratings from your users to your account on the Mobclix Mobile Platform.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>activity</td><td>The activity that is making this feedback call.</td></tr>
+<tr><td>ratings</td><td>The ratings to be sent.</td></tr>
+</table></p>
+
+<h4><code>public static void sendRatings(Activity activity, <a href="#ratings">MobclixFeedback.Ratings</a> ratings, <a href="#feedbacklistener">MobclixFeedback.Listener</a> listener)</code></h4>
+<p>Sends quantitative ratings from your users to your account on the Mobclix Mobile Platform, with a MobclixFeedback.Listener for getting callbacks regarding whether the data was sent successfully.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>activity</td><td>The activity that is making this feedback call.</td></tr>
+<tr><td>ratings</td><td>The ratings to be sent.</td></tr>
+<tr><td>listener</td><td>An implementation of MobclixFeedback.Listener with methods to call if the data was sent successfully or not.</td></tr>
+</table></p>
+
+<h2><code><b><a name="ratings"></a>import com.mobclix.android.sdk.MobclixFeedback.Ratings;</b></code></h2>
+
+<p>A class that stores ratings to pass back to the Mobclix servers.</p>
+
+<h4><code>public void setCategoryA(int value)</code></h4>
+<p>Set the rating value of category A.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>value</td><td>Rating value of category A. Must be between 1 and 5 inclusive.</td></tr>
+</table></p>
+
+<h4><code>public void setCategoryB(int value)</code></h4>
+<p>Set the rating value of category B.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>value</td><td>Rating value of category B. Must be between 1 and 5 inclusive.</td></tr>
+</table></p>
+
+<h4><code>public void setCategoryC(int value)</code></h4>
+<p>Set the rating value of category C.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>value</td><td>Rating value of category C. Must be between 1 and 5 inclusive.</td></tr>
+</table></p>
+
+<h4><code>public void setCategoryD(int value)</code></h4>
+<p>Set the rating value of category D.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>value</td><td>Rating value of category D. Must be between 1 and 5 inclusive.</td></tr>
+</table></p>
+
+<h4><code>public void setCategoryE(int value)</code></h4>
+<p>Set the rating value of category E.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>value</td><td>Rating value of category E. Must be between 1 and 5 inclusive.</td></tr>
+</table></p>
+
+
+<h2><code><a name="feedbacklistener"></a>import com.mobclix.android.sdk.MobclixFeedback.Listener;</code></h2>
+
+<p>A listener for Mobclix Feedback calls used to indicate the success or failure of sent data.</p>
+
+<h4><code>public static void onSuccess()</code></h4>
+<p>Called if the data sent by a Mobclix Feedback call was successfully received.</p>
+
+<h4><code>public static void onFailure()</code></h4>
+<p>Called if the data of a Mobclix Feedback call failed to be sent.</p>
+
+
+<h2><code><a name="demographics"></a>import com.mobclix.android.sdk.MobclixDemographics;</code></h2>
+
+<p>The Mobclix for Android Demographics plugin allows you to get quantitative feedback demographics data from your users.</p>
+
+<h4><code>public static void sendDemographics(Activity activity, Map<String, Object> demographics)</code></h4>
+<p>Sends quantitative demographics data from your users to your account on the Mobclix Mobile Platform.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>activity</td><td>The activity that is making this feedback call.</td></tr>
+<tr><td>demographics</td><td>The demographics to be sent as a Map of data, as detailed below.</td></tr>
+</table></p>
+
+<h4><code>public static void sendDemographics(Activity activity, Map<String, Object> demographics, <a href="#feedbacklistener">MobclixFeedback.Listener</a> listener)</code></h4>
+<p>Sends quantitative demographics data from your users to your account on the Mobclix Mobile Platform, with a MobclixFeedback.Listener for getting callbacks regarding whether the data was sent successfully.
+<table><tr><th>Parameters</th><th></th></tr>
+<tr><td>activity</td><td>The activity that is making this feedback call.</td></tr>
+<tr><td>demographics</td><td>The demographics to be sent as a Map of data, as detailed below.</td></tr>
+<tr><td>listener</td><td>An implementation of MobclixFeedback.Listener with methods to call if the data was sent successfully or not.</td></tr>
+</table></p>
+
+<h3>Demographics Data Structure</h3>
+<p>
+<table>
+	<tr>
+		<th>Map Key</th>
+		<th>Description</th>
+		<th>Enum Values / Examples</th>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.Birthdate</code></td>
+		<td><code>Date - Date of birth of the user.</code></td>
+		<td><code>new Date(1970, 1, 1);</td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.Education</code></td>
+		<td><code>Enum - Highest level of education of the user.</code></td>
+		<td><code>MobclixDemographics.EducationUnknown<br>
+				  MobclixDemographics.EducationHighSchool<br>
+				  MobclixDemographics.EducationSomeCollege<br>
+				  MobclixDemographics.EducationInCollege<br>
+				  MobclixDemographics.EducationBachelorsDegree<br>
+				  MobclixDemographics.EducationMastersDegree<br>
+				  MobclixDemographics.EducationDoctoralDegree</code></td>
+	</tr>
+    <tr>
+		<td><code>MobclixDemographics.Ethnicity</code></td>
+		<td><code>Enum - Ethnicity of the user.</code></td>
+		<td><code>MobclixDemographics.EthnicityUnknown<br>
+				  MobclixDemographics.EthnicityMixed<br>
+				  MobclixDemographics.EthnicityAsian<br>
+				  MobclixDemographics.EthnicityBlack<br>
+				  MobclixDemographics.EthnicityHispanic<br>
+				  MobclixDemographics.EthnicityNativeAmerican<br>
+				  MobclixDemographics.EthnicityWhite</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.Gender</code></td>
+		<td><code>Enum - Gender of the user.</code></td>
+		<td><code>MobclixDemographics.GenderUnknown<br>
+				  MobclixDemographics.GenderMale<br>
+				  MobclixDemographics.GenderFemale</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.DatingGender</code></td>
+		<td><code>Enum - Gender that the user dates/would date.</code></td>
+		<td><code>MobclixDemographics.GenderUnknown<br>
+				  MobclixDemographics.GenderMale<br>
+				  MobclixDemographics.GenderFemale<br>
+				  MobclixDemographics.GenderBoth</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.Income</code></td>
+		<td><code>int - Amount a user makes in income.</code></td>
+		<td><code>50000</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.MaritalStatus</code></td>
+		<td><code>Enum - Marital status of the user.</code></td>
+		<td><code>MobclixDemographics.MaritalUnknown<br>
+				  MobclixDemographics.MaritalSingleAvailable<br>
+				  MobclixDemographics.MaritalSingleUnavailable<br>
+				  MobclixDemographics.MaritalMarried</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.Religion</code></td>
+		<td><code>Enum - Religion of the user.</code></td>
+		<td><code>MobclixDemographics.ReligionUnknown<br>
+				  MobclixDemographics.ReligionBuddhism<br>
+				  MobclixDemographics.ReligionChristianity<br>
+				  MobclixDemographics.ReligionHinduism<br>
+				  MobclixDemographics.ReligionIslam<br>
+				  MobclixDemographics.ReligionJudaism<br>
+				  MobclixDemographics.ReligionUnaffiliated<br>
+				  MobclixDemographics.ReligionOther</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.AreaCode</code></td>
+		<td><code>int - Telephone area code.</code></td>
+		<td><code>408</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.City</code></td>
+		<td><code>String - City.</code></td>
+		<td><code>Palo Alto</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.Country</code></td>
+		<td><code>String - Country. ISO 3166-1 country code. Must be length 2.</code></td>
+		<td><code>US</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.DMACode</code></td>
+		<td><code>int - DMA code. Nielsen Designated Market Area.</code></td>
+		<td><code>552</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.MetroCode</code></td>
+		<td><code>int - Metropolitan region code.</code></td>
+		<td><code>717</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.PostalCode</code></td>
+		<td><code>String - Postal code. 12 characters or less.</code></td>
+		<td><code>93432-3323</code></td>
+	</tr>
+	<tr>
+		<td><code>MobclixDemographics.Region</code></td>
+		<td><code>String - Region. ISO 3166-2 region code.</code></td>
+		<td><code>AU-NSW</code></td>
+	</tr>
+</table>
+</p>
+
+</body>
+</html>
+
