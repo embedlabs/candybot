@@ -3,10 +3,11 @@
     <string name="app_name">\u0020Candybot\u0020</string>
     <string name="button_play">Play!</string>
     <string name="facebook_link">http://m.facebook.com/pages/Candy-Cat/236289176391475</string>
-    <string name="twitter_link">https://mobile.twitter.com/#!/EmbedStudios</string>
+    <string name="twitter_name">EmbedLabs</string>
     <string name="pan">PAN/ZOOM</string>
     <string name="play">PLAY MODE</string>
     <string name="reset">RESET</string>
     <string name="twitterstring">Twitter Button that links to our twitter.</string>
     <string name="facebookstring">Facebook Button that links to our facebook.</string>
+    <string name="twitterUID">338692068</string>
 </resources>

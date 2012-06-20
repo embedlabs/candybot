@@ -85,10 +85,10 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			startActivity(new Intent(this,WorldSelect.class).putExtra("com.embedstudios.candycat.theme", theme));
 			break;
 		case R.id.button_facebook:
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebook_link))));
+			startActivity(CandyUtils.facebookIntent(this));
 			break;
 		case R.id.button_twitter:
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.twitter_link))));
+			CandyUtils.startTwitterActivity(this);
 			break;
 		}
 	}

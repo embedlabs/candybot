@@ -12,7 +12,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -149,6 +153,64 @@ public class CandyUtils {
 	public static void setClick(OnClickListener listener,View... views) {
 		for (View view:views) {
 			view.setOnClickListener(listener);
+		}
+	}
+	
+	public static Intent facebookIntent(final Context context) {
+		try {
+			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/236289176391475"));
+		} catch (Exception e) {
+			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.facebook.com/candybot?v=feed"));
+		}
+	}
+	
+	public static void startTwitterActivity(final Context context) {
+		final String twitter = context.getString(R.string.twitter_name);
+		final String url = "http://twitter.com/" + twitter;
+		final Uri uri = Uri.parse(url);
+		
+		try {
+			final Intent intent = new Intent();
+			intent.setData(uri);
+			intent.setClassName("com.twidroidpro", "com.twidroidpro.TwidroidProfile");
+			context.startActivity(intent);
+			return;
+		} catch (ActivityNotFoundException e) {
+			Log.e(TAG,"Twitter Intent error 1!");
+		}
+		try {
+			final Intent intent = new Intent();
+			intent.setData(uri);
+			intent.setClassName("com.twidroid", "com.twidroid.TwidroidProfile");
+			context.startActivity(intent);
+			return;
+		} catch (ActivityNotFoundException e) {
+			Log.e(TAG,"Twitter Intent error 2!");
+		}
+		
+		String twitterUid = context.getString(R.string.twitterUID);
+
+		try {
+			long longTwitterUid = Long.parseLong(twitterUid);
+			try {
+				Intent intent = new Intent();
+				intent.setClassName("com.twitter.android", "com.twitter.android.ProfileTabActivity");
+				intent.putExtra("user_id", longTwitterUid);
+				context.startActivity(intent);
+				return;
+			} catch (ActivityNotFoundException e) {
+				Log.e(TAG,"Twitter Intent error 3!");
+			}
+		} catch (NumberFormatException e) {
+			Log.e(TAG,"Twitter Intent error 3b!");
+		}
+
+		try {
+			context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mobile.twitter.com/" + twitter)));
+			return;
+		} catch (ActivityNotFoundException e) {
+			Log.e(TAG,"Twitter Intent error 4! Twitter unsuccessful!");
 		}
 	}
 }
