@@ -1,42 +1,28 @@
 package com.embed.candy;
 
-import org.anddev.andengine.engine.Engine;
-import org.anddev.andengine.engine.camera.Camera;
-import org.anddev.andengine.engine.options.EngineOptions;
-import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
-import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.background.AutoParallaxBackground;
-import org.anddev.andengine.entity.scene.background.ParallaxBackground.ParallaxEntity;
-import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
-import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.ui.activity.LayoutGameActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
-import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
-public class MainMenu extends LayoutGameActivity implements OnClickListener {
-	ViewFlipper enclosing_vf;
+public class MainMenu extends Activity implements View.OnClickListener {
+//	ViewFlipper enclosing_vf;
 	TextView mainmenu_tv;
 	Button button_play;
 	ImageView iv_facebook,iv_twitter;
@@ -46,15 +32,15 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener {
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 	
-	private static int WIDTH,HEIGHT;
+//	private static int WIDTH,HEIGHT;
 	
 //	private BitmapTextureAtlas mTexture;
 //	private TextureRegion mCandyFaceTextureRegion,mWallFaceTextureRegion,mBoxFaceTextureRegion,mInertiaFaceTextureRegion,mIceFaceTextureRegion;
-	
-	private BitmapTextureAtlas mAutoParallaxBackgroundTexture;
-	private TextureRegion mCloudsTextureRegion,mSeaTextureRegion,mHillsTextureRegion;
-	
-	private Scene mScene;
+//	
+//	private BitmapTextureAtlas mAutoParallaxBackgroundTexture;
+//	private TextureRegion mCloudsTextureRegion,mSeaTextureRegion,mHillsTextureRegion;
+//	
+//	private Scene mScene;
 //	private PhysicsWorld mPhysicsWorld;
 	
 	
@@ -97,10 +83,10 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public Engine onLoadEngine() {
-		Log.v(TAG,"MainMenu onLoadEngine()");
+	public void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.main, null));
 		
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		tracker = GoogleAnalyticsTracker.getInstance();
@@ -108,66 +94,88 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener {
 	    tracker.startNewSession("UA-32708172-1", this);
 		
 		// Display Adapter, don't attempt to simplify. Fixes the pan button from cutting off - Shrav
-		
-		if (android.os.Build.VERSION.SDK_INT>=13) {
-			Display display = getWindowManager().getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);
-			WIDTH = display.getWidth();
-			HEIGHT = display.getHeight();
-		} else {
-			Display display = getWindowManager().getDefaultDisplay(); 
-			WIDTH = display.getWidth();
-			HEIGHT = display.getHeight();
-		}
-		
-		final Camera camera = new Camera(0,0,WIDTH,HEIGHT);
-		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), camera);
+	    
+	    mainFont = Typeface.createFromAsset(getAssets(), getString(R.string.font_location)); // load font
 
-		return new Engine(engineOptions);
+		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
+		button_play = (Button)findViewById(R.id.button_play);
+		iv_facebook = (ImageView)findViewById(R.id.button_facebook);
+		iv_twitter = (ImageView)findViewById(R.id.button_twitter);
+		
+		CandyUtils.setMainFont(mainFont,mainmenu_tv,button_play); // changes font
+		CandyUtils.setClick(this,button_play,iv_facebook,iv_twitter);
 	}
+	
+//	@SuppressWarnings("deprecation")
+//	@Override
+//	public Engine onLoadEngine() {
+//		Log.v(TAG,"MainMenu onLoadEngine()");
+//		
+//		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//		tracker = GoogleAnalyticsTracker.getInstance();
+//	    // Start the tracker in manual dispatch mode...
+//	    tracker.startNewSession("UA-32708172-1", this);
+//		
+//		// Display Adapter, don't attempt to simplify. Fixes the pan button from cutting off - Shrav
+//		
+//		if (android.os.Build.VERSION.SDK_INT>=13) {
+//			Display display = getWindowManager().getDefaultDisplay();
+//			Point size = new Point();
+//			display.getSize(size);
+//			WIDTH = display.getWidth();
+//			HEIGHT = display.getHeight();
+//		} else {
+//			Display display = getWindowManager().getDefaultDisplay(); 
+//			WIDTH = display.getWidth();
+//			HEIGHT = display.getHeight();
+//		}
+//		
+//		final Camera camera = new Camera(0,0,WIDTH,HEIGHT);
+//		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(WIDTH, HEIGHT), camera);
+//
+//		return new Engine(engineOptions);
+//	}
 
 	
-	@Override
-	public void onLoadResources() {
-		Log.v(TAG,"MainMenu onLoadResources()");
-		
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		
+//	@Override
+//	public void onLoadResources() {
+//		Log.v(TAG,"MainMenu onLoadResources()");
+//		
+//		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+//		
 //		mTexture = new BitmapTextureAtlas(512,64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 //		mCandyFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "full_candy.png",0,0);
 //		mWallFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "movable_wall.png",65,0);
 //		mBoxFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "box.png",130,0);
 //		mInertiaFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "inertia_wall.png",195,0);
 //		mIceFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mTexture, this, "ice.png",260,0);
-		
-		mAutoParallaxBackgroundTexture = new BitmapTextureAtlas(1024,1024,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		mCloudsTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_clouds.png",0,0);
-		mSeaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_sea.png",0,132);
-		mHillsTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_hills.png",0,384);
-		
+//		
+//		mAutoParallaxBackgroundTexture = new BitmapTextureAtlas(1024,1024,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+//		mCloudsTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_clouds.png",0,0);
+//		mSeaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_sea.png",0,132);
+//		mHillsTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mAutoParallaxBackgroundTexture,this,"bg/menu_hills.png",0,384);
+//		
 //		mEngine.getTextureManager().loadTextures(mTexture,mAutoParallaxBackgroundTexture);
-		mEngine.getTextureManager().loadTextures(mAutoParallaxBackgroundTexture);
-	}
+//	}
 
-	@Override
-	public Scene onLoadScene() {
-		Log.v(TAG,"MainMenu onLoadScene()");
-		mEngine.registerUpdateHandler(new FPSLogger());
-		/**
-		 * BASIC STUFF
-		 */
-		mScene = new Scene();
-		
-		/**
-		 * PARALLAX BG
-		 */
-		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(0.07f,0.22f,0.51f,5);
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(1, new DitheredSprite(0, 0, mCloudsTextureRegion)));
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-2, new DitheredSprite(0, HEIGHT-mSeaTextureRegion.getHeight(), mSeaTextureRegion)));
-		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5, new DitheredSprite(0, HEIGHT-mHillsTextureRegion.getHeight(), mHillsTextureRegion)));
-		mScene.setBackground(autoParallaxBackground);
-		
+//	@Override
+//	public Scene onLoadScene() {
+//		Log.v(TAG,"MainMenu onLoadScene()");
+//		mEngine.registerUpdateHandler(new FPSLogger());
+//		/**
+//		 * BASIC STUFF
+//		 */
+//		mScene = new Scene();
+//		
+//		/**
+//		 * PARALLAX BG
+//		 */
+//		final AutoParallaxBackground autoParallaxBackground = new AutoParallaxBackground(0.07f,0.22f,0.51f,5);
+//		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(1, new DitheredSprite(0, 0, mCloudsTextureRegion)));
+//		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-2, new DitheredSprite(0, HEIGHT-mSeaTextureRegion.getHeight(), mSeaTextureRegion)));
+//		autoParallaxBackground.attachParallaxEntity(new ParallaxEntity(-5, new DitheredSprite(0, HEIGHT-mHillsTextureRegion.getHeight(), mHillsTextureRegion)));
+//		mScene.setBackground(autoParallaxBackground);
+//		
 //		/**
 //		 * CREATE PHYSICS WORLD
 //		 */
@@ -194,26 +202,31 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener {
 //		   
 //				
 //		mScene.registerUpdateHandler(mPhysicsWorld);		
-		return mScene;
-	}
+//		return mScene;
+//	}
 
+//	@Override
+//	public void onLoadComplete() {
+//		Log.v(TAG, "MainMenu onLoadComplete()");
+//		
+//		getWindow().setFormat(PixelFormat.RGBA_8888);
+//		
+//		mainFont = Typeface.createFromAsset(getAssets(), getString(R.string.font_location)); // load font
+//
+//		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
+//		button_play = (Button)findViewById(R.id.button_play);
+//		iv_facebook = (ImageView)findViewById(R.id.button_facebook);
+//		iv_twitter = (ImageView)findViewById(R.id.button_twitter);
+//		
+//		CandyUtils.setMainFont(mainFont,mainmenu_tv,button_play); // changes font
+//		CandyUtils.setClick(this,button_play,iv_facebook,iv_twitter);
+//
+//	}
+	
 	@Override
-	public void onLoadComplete() {
-		Log.v(TAG, "MainMenu onLoadComplete()");
-		
+	public void onAttachedToWindow() {
+		super.onAttachedToWindow();
 		getWindow().setFormat(PixelFormat.RGBA_8888);
-		
-
-		mainFont = Typeface.createFromAsset(getAssets(), getString(R.string.font_location)); // load font
-
-		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
-		button_play = (Button)findViewById(R.id.button_play);
-		iv_facebook = (ImageView)findViewById(R.id.button_facebook);
-		iv_twitter = (ImageView)findViewById(R.id.button_twitter);
-		
-		CandyUtils.setMainFont(mainFont,mainmenu_tv,button_play); // changes font
-		CandyUtils.setClick(this,button_play,iv_facebook,iv_twitter);
-
 	}
 	
 //	private void addFace(final int pX, final int pY,final int type,final int vX,final int vY) {
@@ -270,27 +283,27 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener {
 //		Vector2Pool.recycle(gravity);
 //	}
 
-	@Override
-	public void onResumeGame() {
-		super.onResumeGame();
+//	@Override
+//	public void onResumeGame() {
+//		super.onResumeGame();
 //		enableAccelerometerSensor(this);
-	}
+//	}
 
-	@Override
-	public void onPauseGame() {
-		super.onPauseGame();
+//	@Override
+//	public void onPauseGame() {
+//		super.onPauseGame();
 //		disableAccelerometerSensor();
-	}
+//	}
 
-	@Override
-	protected int getLayoutID() {
-		return R.layout.main;
-	}
-
-	@Override
-	protected int getRenderSurfaceViewID() {
-		return R.id.rsv;
-	}
+//	@Override
+//	protected int getLayoutID() {
+//		return R.layout.main;
+//	}
+//
+//	@Override
+//	protected int getRenderSurfaceViewID() {
+//		return R.id.rsv;
+//	}
 	
 	@Override
 	public void onDestroy() {

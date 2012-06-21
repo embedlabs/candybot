@@ -3,7 +3,6 @@ package com.embed.candy;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.source.AssetBitmapTextureAtlasSource;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSource;
-import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.ui.activity.BaseSplashActivity;
 
 import android.app.Activity;
@@ -13,7 +12,7 @@ public class SplashScreen extends BaseSplashActivity {
         // Constants
         // ================================================
         private final int SPLASH_DURATION_SEC = 3;
-        private final Class<? extends BaseGameActivity> nextActivity = MainMenu.class;
+        private final Class<? extends Activity> nextActivity = MainMenu.class;
         private final String backgroundImage = "gfx/normal/splash.png";
  
         // ================================================

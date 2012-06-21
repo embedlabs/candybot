@@ -3,11 +3,12 @@
 	android:id="@+id/enclosing_rl"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
+	android:background="@drawable/background"
 	android:fitsSystemWindows="false">
-	<org.anddev.andengine.opengl.view.RenderSurfaceView android:id="@+id/rsv"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_gravity="center" />
+<!-- 	<org.anddev.andengine.opengl.view.RenderSurfaceView android:id="@+id/rsv" -->
+<!-- 		android:layout_width="fill_parent" -->
+<!-- 		android:layout_height="fill_parent" -->
+<!-- 		android:layout_gravity="center" /> -->
 		<RelativeLayout android:id="@+id/mainmenu_rl"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
