@@ -39,11 +39,14 @@ import android.graphics.Typeface;
 import android.hardware.SensorManager;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.badlogic.gdx.math.Vector2;
@@ -60,7 +63,7 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 	GoogleAnalyticsTracker tracker;
 
 
-	public Typeface komika;
+	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 	
 	private static int WIDTH,HEIGHT;
@@ -90,6 +93,23 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 			CandyUtils.startTwitterActivity(this);
 			break;
 		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(final Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(final MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_main_item_about:
+			Toast.makeText(this, "You pressed \"About\".", Toast.LENGTH_LONG).show();break;
+		case R.id.menu_main_item_preferences:
+			Toast.makeText(this, "You pressed \"Preferences\".", Toast.LENGTH_LONG).show();break;
+		}
+		return true;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -209,14 +229,14 @@ public class MainMenu extends LayoutGameActivity implements OnClickListener, IAc
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 		
 
-		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
+		mainFont = Typeface.createFromAsset(getAssets(), getString(R.string.font_location)); // load font
 
 		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
 		button_play = (Button)findViewById(R.id.button_play);
 		iv_facebook = (ImageView)findViewById(R.id.button_facebook);
 		iv_twitter = (ImageView)findViewById(R.id.button_twitter);
 		
-		CandyUtils.setKomika(komika,mainmenu_tv,button_play); // changes font
+		CandyUtils.setMainFont(mainFont,mainmenu_tv,button_play); // changes font
 		CandyUtils.setClick(this,button_play,iv_facebook,iv_twitter);
 
 	}

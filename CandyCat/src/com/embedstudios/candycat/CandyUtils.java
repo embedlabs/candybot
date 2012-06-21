@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class CandyUtils {
 	public static final String TAG = "Candy Cat";
-	public static Typeface komika;
+	public static Typeface mainFont;
 	
 	/**
 	 * w: world
@@ -134,17 +134,17 @@ public class CandyUtils {
 		}
 	}
 
-	public static void setKomika(Typeface inputKomika,TextView... views) { // changes font
-		komika = inputKomika;
+	public static void setMainFont(final Typeface typeFace,final TextView... views) { // changes font
+		mainFont = typeFace;
 		for (TextView tv:views) {
-			tv.setTypeface(komika);
+			tv.setTypeface(mainFont);
 		}
 	}
 	
-	public static void setKomika(TextView... views) {
-		if (komika!=null) {
+	public static void setMainFont(final TextView... views) {
+		if (mainFont!=null) {
 			for (TextView tv:views) {
-				tv.setTypeface(komika);
+				tv.setTypeface(mainFont);
 			}
 		}
 	}

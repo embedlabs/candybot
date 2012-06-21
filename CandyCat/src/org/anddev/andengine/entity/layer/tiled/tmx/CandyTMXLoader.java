@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.content.Context;
+import com.embedstudios.candycat.R;
 
 public class CandyTMXLoader extends TMXLoader {
 	private final String beginning;

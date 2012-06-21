@@ -10,4 +10,7 @@
     <string name="twitterstring">Twitter Button that links to our twitter.</string>
     <string name="facebookstring">Facebook Button that links to our facebook.</string>
     <string name="twitterUID">338692068</string>
+    <string name="menu_main_preferences">Preferences</string>
+    <string name="menu_main_about">About</string>
+    <string name="font_location">fonts/UbuntuTitling-Bold.ttf</string>
 </resources>

@@ -37,7 +37,7 @@ public class LevelAdapter extends BaseAdapter {
 			
 			final TextView tv = (TextView) v.findViewById(R.id.grid_text);
 			tv.setText(String.valueOf(position+1));
-			CandyUtils.setKomika(tv);
+			CandyUtils.setMainFont(tv);
 		}
 		// TODO Auto-generated method stub
 		return v;

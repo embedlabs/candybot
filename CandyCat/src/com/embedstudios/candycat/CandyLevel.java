@@ -89,9 +89,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	private RectangleVertexBuffer boxRVB, /* no bombRVB or enemyRVB */  movableWallRVB, inertiaWallRVB;
 	
 	private BitmapTextureAtlas mFontTexture;
-	private Font andengine_komika;
+	private Font andengineMainFont;
 
-	public Typeface komika;
+	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 	
 	public CandyEngine candyEngine;
@@ -125,7 +125,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 		
-		komika = Typeface.createFromAsset(getAssets(), "fonts/Komika_display.ttf"); // load font
+		mainFont = Typeface.createFromAsset(getAssets(), getString(R.string.font_location)); // load font
 		
 		play = getString(R.string.play);
 		pan = getString(R.string.pan);
@@ -199,13 +199,13 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		 * FONT
 		 */
 		mFontTexture = new BitmapTextureAtlas(512,512, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		andengine_komika = new Font(mFontTexture, komika, 64, true, 0x80444444);
+		andengineMainFont = new Font(mFontTexture, mainFont, 64, true, 0x80444444);
 		
 		/**
 		 * ENGINE LOADING
 		 */
 		mEngine.getTextureManager().loadTextures(mObjectTexture,mFontTexture);
-		mEngine.getFontManager().loadFont(andengine_komika);
+		mEngine.getFontManager().loadFont(andengineMainFont);
 		
 		/**
 		 * XML PARSING
@@ -281,11 +281,11 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 //		final FPSCounter fpsCounter = new FPSCounter();
 //		mEngine.registerUpdateHandler(fpsCounter);
-//		final ChangeableText fpsText = new ChangeableText(PHONE_WIDTH,PHONE_HEIGHT, andengine_komika, "FPS: 00.00", "FPS: XXXXX".length());
+//		final ChangeableText fpsText = new ChangeableText(PHONE_WIDTH,PHONE_HEIGHT, andengineMainFont, "FPS: 00.00", "FPS: XXXXX".length());
 //		fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10, PHONE_HEIGHT-fpsText.getHeight()-10);
 //		hud.attachChild(fpsText);
 		
-		playChangeableText = new ChangeableText(PHONE_WIDTH,10, andengine_komika,playMode?play:pan,Math.max(play.length(),pan.length())) {
+		playChangeableText = new ChangeableText(PHONE_WIDTH,10, andengineMainFont,playMode?play:pan,Math.max(play.length(),pan.length())) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&gameStarted) {
@@ -309,7 +309,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		hud.attachChild(playChangeableText);
 		hud.registerTouchArea(playChangeableText);
 		
-		resetLevelText = new Text(10,10,andengine_komika,getString(R.string.reset)){
+		resetLevelText = new Text(10,10,andengineMainFont,getString(R.string.reset)){
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&&gameStarted) {
@@ -340,7 +340,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		for (String[] tutorialTextArray:inputTutorialList) {
 			final Text text = new Text(Float.parseFloat(tutorialTextArray[CandyEngine.COLUMN])*64,
 				Float.parseFloat(tutorialTextArray[CandyEngine.ROW])*64,
-				andengine_komika,
+				andengineMainFont,
 				tutorialTextArray[0].replace("\\n", "\n"));
 			mScene.attachChild(text);
 		}
