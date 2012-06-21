@@ -119,15 +119,15 @@
 		<stop
    id="stop41"
    style="stop-color:#5B7211"
-   offset="0.4118" />
+   offset="0.32352221" />
 		<stop
    id="stop43"
    style="stop-color:#85A11F"
-   offset="0.5294" />
+   offset="0.55023748" />
 		<stop
    id="stop45"
    style="stop-color:#88A420"
-   offset="0.5412" />
+   offset="0.68626666" />
 		<stop
    id="stop47"
    style="stop-color:#A7C62A"
@@ -691,15 +691,6 @@
      fx="838.09857"
      fy="383.85172" /><linearGradient
      inkscape:collect="always"
-     xlink:href="#path3459_1_"
-     id="linearGradient4228"
-     gradientUnits="userSpaceOnUse"
-     gradientTransform="matrix(1,0,0,-1,-205.999,425.448)"
-     x1="786.1963"
-     y1="-323.7139"
-     x2="774.3842"
-     y2="-149.3703" /><linearGradient
-     inkscape:collect="always"
      xlink:href="#path3455_1_"
      id="linearGradient4230"
      gradientUnits="userSpaceOnUse"
@@ -742,7 +733,17 @@
      x1="798.5986"
      y1="-176.0728"
      x2="683.4097"
-     y2="-97.1117" /></defs><sodipodi:namedview
+     y2="-97.1117" /><radialGradient
+     inkscape:collect="always"
+     xlink:href="#path3459_1_"
+     id="radialGradient4246"
+     cx="568.92255"
+     cy="1185.4525"
+     fx="568.92255"
+     fy="1185.4525"
+     r="483.21851"
+     gradientTransform="matrix(1.5699058,-0.0274041,0.0042801,0.24519489,-329.30612,449.35681)"
+     gradientUnits="userSpaceOnUse" /></defs><sodipodi:namedview
    pagecolor="#ffffff"
    bordercolor="#666666"
    borderopacity="1"
@@ -756,12 +757,12 @@
    id="namedview204"
    showgrid="false"
    inkscape:zoom="0.64523494"
-   inkscape:cx="559.12109"
-   inkscape:cy="445.12337"
+   inkscape:cx="645.34839"
+   inkscape:cy="343.83124"
    inkscape:window-x="-8"
    inkscape:window-y="-8"
    inkscape:window-maximized="1"
-   inkscape:current-layer="layer3" />
+   inkscape:current-layer="layer2" />
 
 <g
    inkscape:groupmode="layer"
@@ -829,7 +830,7 @@
      d="M 1282.943,622.214 V 720 H 1058.5129 C 1008.8402,692.854 911.11977,661.292 800,638.623 c 97.10249,-16.021 251.3574,-29.269 393.5352,-23.089 31.8815,1.385 61.7041,3.688 89.4078,6.68 l 0,0 z"
      id="path3457" /><path
      inkscape:connector-curvature="0"
-     style="fill:url(#linearGradient4228)"
+     style="fill:url(#radialGradient4246);fill-opacity:1"
      d="M 1061.44,720 H 95.003 C 135.197,648.552 326.838,603.446 553.675,608.342 746.703,612.509 975.872,672.902 1061.44,720 z"
      id="path3459" /><path
      style="fill:#1a1a1a"

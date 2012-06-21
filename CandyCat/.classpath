@@ -5,10 +5,10 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="src" path="/AndEngine"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AndEngineMultiTouchExtension"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/AndEnginePhysicsBox2DExtension"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="lib" path="libs/libGoogleAnalytics.jar"/>
 	<classpathentry kind="lib" path="libs/EasyTracker.jar"/>
 	<classpathentry kind="lib" path="libs/mobclix.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GreeSdk"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

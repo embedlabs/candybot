@@ -1,7 +1,5 @@
 package org.anddev.andengine.engine.camera;
 
-import com.badlogic.gdx.math.Vector2;
-import com.embed.candy.R;
 
 public class CandyCamera extends ZoomCamera {
 	private float mMaxVelocityX;
@@ -77,15 +75,18 @@ public class CandyCamera extends ZoomCamera {
 		final float targetCenterY = this.mTargetCenterY;
 
 		if(currentCenterX != targetCenterX || currentCenterY != targetCenterY) {
-			final float diffX = targetCenterX - currentCenterX;
+			float diffX = targetCenterX - currentCenterX;
 			final float dX = this.limitToMaxVelocityX(diffX, pSecondsElapsed);
 
-			final float diffY = targetCenterY - currentCenterY;
+			float diffY = targetCenterY - currentCenterY;
 			final float dY = this.limitToMaxVelocityY(diffY, pSecondsElapsed);
 			
-			final Vector2 normVector = new Vector2(diffX,diffY).nor();
+			final float vecLength = android.util.FloatMath.sqrt(diffX*diffX+diffY*diffY);
+			
+			diffX /= vecLength;
+			diffY /= vecLength;
 
-			super.setCenter(currentCenterX + (dX*Math.abs(normVector.x)), currentCenterY + (dY*Math.abs(normVector.y)));
+			super.setCenter(currentCenterX + (dX*diffX), currentCenterY + (dY*diffY));
 		}
 
 		/* Update zoom. */
