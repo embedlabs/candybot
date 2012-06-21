@@ -13,14 +13,14 @@ public class SplashScreen extends BaseSplashActivity {
         // ================================================
         private final int SPLASH_DURATION_SEC = 3;
         private final Class<? extends Activity> nextActivity = MainMenu.class;
-        private final String backgroundImage = "gfx/normal/splash.png";
+        private final String backgroundImage = "gfx/splash.png";
  
         // ================================================
         // Methods from Super Classes/Interfaces
         // ================================================
         @Override
         protected Class<? extends Activity> getFollowUpActivity() {
-                return this.nextActivity;
+                return nextActivity;
         }
  
         @Override
@@ -30,12 +30,12 @@ public class SplashScreen extends BaseSplashActivity {
  
         @Override
         protected float getSplashDuration() {
-                return this.SPLASH_DURATION_SEC;
+                return SPLASH_DURATION_SEC;
         }
 
 		@Override
 		protected IBitmapTextureAtlasSource onGetSplashTextureAtlasSource() {
 			// TODO Auto-generated method stub
-            return new AssetBitmapTextureAtlasSource (this, this.backgroundImage);
+            return new AssetBitmapTextureAtlasSource (this, backgroundImage);
 		}
 }

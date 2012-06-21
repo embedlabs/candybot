@@ -23,11 +23,11 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 public class MainMenu extends Activity implements View.OnClickListener {
 //	ViewFlipper enclosing_vf;
+	
 	TextView mainmenu_tv;
 	Button button_play;
 	ImageView iv_facebook,iv_twitter;
 	GoogleAnalyticsTracker tracker;
-
 
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;

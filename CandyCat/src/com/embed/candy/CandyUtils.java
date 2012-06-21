@@ -163,9 +163,9 @@ public class CandyUtils {
 	public static Intent facebookIntent(final Context context) {
 		try {
 			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/236289176391475"));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.facebook_protocol)));
 		} catch (Exception e) {
-			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.facebook.com/candybot?v=feed"));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.facebook_link)));
 		}
 	}
 	
@@ -222,7 +222,7 @@ public class CandyUtils {
 		final Builder aboutBuilder = new AlertDialog.Builder(context);
 		aboutBuilder.setTitle(R.string.dialog_about_title);
 		aboutBuilder.setIcon(android.R.drawable.ic_dialog_info);
-		aboutBuilder.setMessage("About us, font legal info, etc. goes here."); // TODO
+		aboutBuilder.setMessage(context.getString(R.string.dialog_about_message)); // TODO
 		aboutBuilder.setPositiveButton(R.string.dialog_about_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
