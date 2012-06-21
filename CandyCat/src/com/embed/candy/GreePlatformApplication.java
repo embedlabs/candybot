@@ -1,9 +1,10 @@
-package com.embedstudios.candycat;
+package com.embed.candy;
 
 import net.gree.asdk.api.GreePlatform;
 import net.gree.asdk.api.GreePlatformSettings;
 import android.app.Application;
 import android.util.Log;
+import com.embed.candy.R;
 
 /**
  * Sample App Application Class

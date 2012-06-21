@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.embedstudios.candycat"
+    package="com.embed.candy"
     android:installLocation="auto"
     android:versionCode="1"
     android:versionName="1.0.0" >
@@ -35,7 +35,7 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
         <activity
-            android:name=".SplashScreen"
+            android:name="com.embed.candy.SplashScreen"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
@@ -60,7 +60,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainMenu"
+            android:name="com.embed.candy.MainMenu"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
@@ -80,19 +80,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CandyLevel"
+            android:name="com.embed.candy.CandyLevel"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.NoBackground" />
         <activity
-            android:name=".WorldSelect"
+            android:name="com.embed.candy.WorldSelect"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <activity
-            android:name=".LevelSelect"
+            android:name="com.embed.candy.LevelSelect"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.embed.candy.CandyPreferences"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
@@ -196,7 +202,7 @@
             android:name="net.gree.asdk.core.dashboard.PostingMultipleActivity"
             android:configChanges="orientation" />
 
-        <service android:name=".C2DMReceiver" />
+        <service android:name="com.embed.candy.C2DMReceiver" />
 
         <receiver
             android:name="com.google.android.c2dm.C2DMBroadcastReceiver"

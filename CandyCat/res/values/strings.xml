@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">\u0020Candybot\u0020</string>
+    <string name="app_name">Candybot</string>
     <string name="button_play">Play!</string>
+    
     <string name="facebook_link">http://m.facebook.com/pages/Candy-Cat/236289176391475</string>
     <string name="twitter_name">EmbedLabs</string>
+    <string name="twitterstring">Twitter Button that links to our Twitter.</string>
+    <string name="facebookstring">Facebook Button that links to our Facebook.</string>
+    <string name="twitterUID">338692068</string>
+    
     <string name="pan">PAN/ZOOM</string>
     <string name="play">PLAY MODE</string>
     <string name="reset">RESET</string>
-    <string name="twitterstring">Twitter Button that links to our twitter.</string>
-    <string name="facebookstring">Facebook Button that links to our facebook.</string>
-    <string name="twitterUID">338692068</string>
+    
     <string name="menu_main_preferences">Preferences</string>
     <string name="menu_main_about">About</string>
+    
     <string name="font_location">fonts/UbuntuTitling-Bold.ttf</string>
+    
+    <string name="pref_category_general">General</string>
+    
+    <string name="pref_category_graphics">Graphics</string>
+    <string name="pref_graphics_quality">Quality</string>
+    <string name="pref_graphics_quality_summary">How accurately and quickly graphics are rendered.</string>
+    <string-array name="quality">
+        <item name="0">Low (No particles, rougher visuals)</item>
+        <item name="1">Medium (No particles, smooth visuals)</item>
+        <item name="2">High (Particles and smooth visuals)</item>
+    </string-array>
+    <string-array name="quality_values">
+        <item name="0">0</item>
+        <item name="1">1</item>
+        <item name="2">2</item>
+    </string-array>
+    
+    
+    <string name="dialog_about_title">About Embed Labs</string>
+    <string name="dialog_about_button">Return</string>
 </resources>

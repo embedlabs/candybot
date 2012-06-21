@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/pref_category_general"
+        android:key="category_general">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="test"
+            android:summary="Testing the preference screen."
+            android:title="Test" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_category_graphics"
+        android:key="category_graphics">
+        <ListPreference android:key="graphics_quality"
+            android:title="@string/pref_graphics_quality"
+            android:summary="@string/pref_graphics_quality_summary"
+            android:defaultValue="2"
+            android:entries="@array/quality"
+            android:entryValues="@array/quality_values" />
+    </PreferenceCategory>
+</PreferenceScreen>

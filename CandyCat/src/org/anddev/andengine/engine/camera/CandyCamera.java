@@ -1,7 +1,7 @@
 package org.anddev.andengine.engine.camera;
 
 import com.badlogic.gdx.math.Vector2;
-import com.embedstudios.candycat.R;
+import com.embed.candy.R;
 
 public class CandyCamera extends ZoomCamera {
 	private float mMaxVelocityX;
