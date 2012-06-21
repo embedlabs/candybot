@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import com.embed.candy.R;
 
 public class LevelSelect extends Activity implements OnItemClickListener {
 	
