@@ -38,6 +38,7 @@ import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -118,7 +119,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public int movesForStar;
 	public int timeForStar;
 	
+	/**
+	 * Preferences
+	 */
+	public SharedPreferences sp;
 	public int qualityInt;
+	public boolean zoomBoolean;
 	
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -137,7 +143,9 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		level = getIntent().getIntExtra("com.embed.candy.level", 0);
 		theme = getIntent().getStringExtra("com.embed.candy.theme");
 		
-		qualityInt = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(this).getString("graphics_quality","2"));
+		sp = PreferenceManager.getDefaultSharedPreferences(this);
+		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality","2"));
+		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", true);
 		
 		Log.i(TAG,"Level "+world+"_"+level);
 	}
@@ -391,19 +399,22 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 			
 			mCandyCamera.setMaxZoomFactorChange((1-PHONE_HEIGHT/HEIGHT));
 			mCandyCamera.setChaseEntity(candyEngine.cat);
-			
-			new Handler().post(new Runnable(){
-				@Override
-				public void run() { // TODO preference
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						Log.e(TAG,"Level start delay FAIL!",e);
+			if (zoomBoolean) {
+				new Handler().post(new Runnable(){
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							Log.e(TAG,"Level start delay FAIL!",e);
+						}
+						mCandyCamera.setZoomFactor(1);
+						gameStarted=true;
 					}
-					mCandyCamera.setZoomFactor(1);
-					gameStarted=true;
-				}
-			});
+				});
+			} else {
+				gameStarted=true;
+			}
 		}
 	}
 

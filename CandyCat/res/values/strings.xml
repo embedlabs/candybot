@@ -19,6 +19,8 @@
     <string name="font_location">fonts/UbuntuTitling-Bold.ttf</string>
     
     <string name="pref_category_general">General</string>
+    <string name="pref_general_zoom">Zoom</string>
+    <string name="pref_general_zoom_summary">Zoom in at the beginning of each level.</string>
     
     <string name="pref_category_graphics">Graphics</string>
     <string name="pref_graphics_quality">Quality</string>
@@ -32,6 +34,14 @@
         <item name="0">0</item>
         <item name="1">1</item>
         <item name="2">2</item>
+    </string-array>
+    <string name="pref_graphics_theme">Theme</string>
+    <string name="pref_graphics_theme_summary">The game\'s visual style.</string>
+    <string-array name="theme">
+        <item name="0">Normal</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item name="0">normal</item>
     </string-array>
     
     
