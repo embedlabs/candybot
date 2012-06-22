@@ -1,16 +1,24 @@
 package com.embed.candy;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.xmlpull.v1.XmlSerializer;
+
 import android.content.Context;
 import android.util.Log;
+import android.util.Xml;
+import android.widget.Toast;
 
 public class CandyEngine {
 	
@@ -488,7 +496,7 @@ public class CandyEngine {
 		Log.i(TAG,"Enemies defeated: "+enemiesDefeated);
 		
 
-		saveSettings();
+		saveSettings(candyLevel);
 		
 		/**
 		 * TODO SHRAV:
@@ -514,11 +522,43 @@ public class CandyEngine {
 		candyLevel.finish(); // TODO change this
 	}
 
-	
-	private void saveSettings() {
+	// Cont variable needed for openFileOutput attention, do not remove... 
+	public void saveSettings(Context cont) {
+			try {
+				FileOutputStream fos =  cont.getApplicationContext().openFileOutput("level.xml", Context.MODE_PRIVATE);
+		        XmlSerializer serializer = Xml.newSerializer();
+		        	try {
+		                        serializer.setOutput(fos, "UTF-8");
+		                        serializer.startDocument(null, Boolean.valueOf(true));
+		                        serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+		                        serializer.startTag(null, "Candybot");
+		                                
+		                        		serializer.startTag(null, "child1");
+		                                serializer.endTag(null, "child1");
+		                               
+		                                serializer.startTag(null, "child2");
+		                                serializer.attribute(null, "attribute", "value");
+		                                serializer.endTag(null, "child2");
+		                       
+		                                serializer.startTag(null, "child3");
+		                                serializer.text("some text inside child3");
+		                                serializer.endTag(null, "child3");
+		                               
+		                        serializer.endTag(null, "Candybot");
+		                        serializer.endDocument();
+		                        serializer.flush();
+		                        fos.close();
+		                        Log.i("Exception","XML file made");
+				
+			} catch (IOException e) {
+				Log.e("Exception","error occurred while creating xml file");
+			  }
+			} catch (Exception e) {
+                    Log.e("Exception","error occurred while creating xml file");
+              }
 
-       
-	}
+		}
+	
 	
 	private synchronized void logArray(final String message) {
 		Log.i(TAG,message);
