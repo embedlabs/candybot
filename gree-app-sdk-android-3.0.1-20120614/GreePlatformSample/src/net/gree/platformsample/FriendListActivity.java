@@ -105,7 +105,8 @@ public class FriendListActivity extends BaseActivity implements GreeUser.GreeUse
     Toast.makeText(FriendListActivity.this, R.string.sync_failed, Toast.LENGTH_SHORT).show();
   }
 
-  @Override
+  @SuppressWarnings("deprecation")
+@Override
   public void onSuccess(int index, int count, GreeUser[] users) {
     endLoading();
     startIndex += pageSize;

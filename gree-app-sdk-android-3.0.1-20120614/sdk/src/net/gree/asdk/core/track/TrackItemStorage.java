@@ -16,7 +16,8 @@ class TrackItemStorage {
   private static final String TAG = "TrackItemStorage";
   private static final String dbName = "gree_track.db";
   private static final String tableName = "track_items";
-  private static volatile TrackItemStorage instance;
+  @SuppressWarnings("unused")
+private static volatile TrackItemStorage instance;
   private DbHelper dbHelper;
 
   TrackItemStorage(Context context) {

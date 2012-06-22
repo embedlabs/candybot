@@ -355,7 +355,8 @@ public class Tracker {
         return uploader;
       }
 
-      private Uploader newUploaderInstance(String clz) {
+      @SuppressWarnings("rawtypes")
+	private Uploader newUploaderInstance(String clz) {
         try {
           GLog.v(TAG, "newUploaderInstance from " + clz);
           Class cls = Class.forName(clz);

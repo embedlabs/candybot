@@ -59,8 +59,8 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	public final float HEIGHT = 64*18;
 	public float PHONE_WIDTH;
 	public float PHONE_HEIGHT;
-	
-	 static int level, world;
+
+	public int level, world;
 	String theme;
 	
 	static final int CANDY = 1;
@@ -188,17 +188,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 		
 		return engine;
 	}
-
-	public static int sendWorld()
-    {
-        return world;
-    }
-	
-	
-	public static int sendLevel()
-    {
-        return level;
-    }
 	
 	@Override
 	public void onLoadResources() {

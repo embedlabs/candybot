@@ -278,7 +278,8 @@ public final class Payment {
         });
   }
   
-  private void dialogClose() {
+  @SuppressWarnings("unused")
+private void dialogClose() {
     if ((mPaymentDialog != null) && (mPaymentDialog.isShowing())) {
       mPaymentDialog.close(Payment.CANCELLED);
     }

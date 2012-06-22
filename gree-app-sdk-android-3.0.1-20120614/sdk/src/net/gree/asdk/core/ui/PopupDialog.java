@@ -17,7 +17,6 @@
 package net.gree.asdk.core.ui;
 
 import net.gree.asdk.core.Core;
-import net.gree.asdk.core.GLog;
 import net.gree.asdk.core.RR;
 import net.gree.asdk.core.ui.ConfigChangeListeningLayout.OnConfigurationChangedListener;
 import android.app.Activity;

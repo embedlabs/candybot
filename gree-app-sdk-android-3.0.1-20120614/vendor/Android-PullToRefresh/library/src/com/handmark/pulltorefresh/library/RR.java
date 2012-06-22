@@ -19,7 +19,6 @@ import java.lang.reflect.Method;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 
 public class RR {
 

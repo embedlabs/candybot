@@ -785,7 +785,8 @@ public abstract class BaseClient<T> {
     return ok;
   }
 
-  public static Object getRequestQueue(Context ctx) throws Exception {
+  @SuppressWarnings("rawtypes")
+public static Object getRequestQueue(Context ctx) throws Exception {
     Object ret = null;
     Class networkClass = Class.forName("android.webkit.Network");
     if (networkClass != null) {
@@ -813,7 +814,8 @@ public abstract class BaseClient<T> {
     field.set(obj, value);
   }
 
-  private static Object invoke(Object obj, String methodName, Object[] params, Class... types)
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+private static Object invoke(Object obj, String methodName, Object[] params, Class... types)
       throws Exception {
     Object ret = null;
     Class c = obj instanceof Class ? (Class) obj : obj.getClass();

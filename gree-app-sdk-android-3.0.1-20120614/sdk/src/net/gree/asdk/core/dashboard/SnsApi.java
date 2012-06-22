@@ -32,7 +32,8 @@ public class SnsApi {
   public SnsApi() {
   }
 
-  public void request(final JSONObject params, final SnsApiListener listener) {
+  @SuppressWarnings("deprecation")
+public void request(final JSONObject params, final SnsApiListener listener) {
     Request request = new Request();
     request.oauthSnsApi(params, null, false, new OnResponseCallback<String>() {
       @Override

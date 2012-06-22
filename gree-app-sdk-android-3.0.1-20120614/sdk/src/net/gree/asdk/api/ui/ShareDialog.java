@@ -71,7 +71,6 @@ import net.gree.asdk.core.ui.AuthorizableDialog;
  *
  */
 public class ShareDialog extends AuthorizableDialog {
-  @SuppressWarnings("unused")
   private static final String TAG = "ShareDialog";
 
 /**

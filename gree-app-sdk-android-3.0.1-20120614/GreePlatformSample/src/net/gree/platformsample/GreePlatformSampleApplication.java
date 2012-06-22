@@ -16,14 +16,11 @@
 
 package net.gree.platformsample;
 
-import java.util.TreeMap;
-
-import android.app.Application;
-import android.util.Log;
-
 import net.gree.asdk.api.GreePlatform;
 import net.gree.asdk.api.GreePlatformSettings;
 import net.gree.platformsample.util.AppSimpleCache;
+import android.app.Application;
+import android.util.Log;
 
 /**
  * Sample App Application Class

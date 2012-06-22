@@ -11,7 +11,8 @@ import java.util.List;
  */
 class TrackItem {
 
-  private final static String TAG = "TrackItem";
+  @SuppressWarnings("unused")
+private final static String TAG = "TrackItem";
   private TrackItemStorage storage;
 
   public TrackItem(String type, String key, String data, String mixer, String uploaderClzName) {

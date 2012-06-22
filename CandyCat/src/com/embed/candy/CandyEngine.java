@@ -1,12 +1,7 @@
 package com.embed.candy;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,7 +13,6 @@ import org.xmlpull.v1.XmlSerializer;
 import android.content.Context;
 import android.util.Log;
 import android.util.Xml;
-import android.widget.Toast;
 
 public class CandyEngine {
 	
@@ -483,25 +477,32 @@ public class CandyEngine {
 	}
 
 	private synchronized void win() {
-		int level = CandyLevel.sendLevel();
-		int world = CandyLevel.sendWorld();
-		
+		final int milliseconds = (int)(System.currentTimeMillis()-startTime);
 		candy.showCandyAnim();
 		pause(5,candyIndex);
 		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
-		pause(300);
 		
-		final int milliseconds = (int)(System.currentTimeMillis()-startTime);
 		Log.i(TAG,"Level Completion Info:");
 		Log.i(TAG,"Moves: "+moves);
 		Log.i(TAG,"Restarts: "+restarts);
 		Log.i(TAG,"Completion time (ms): "+milliseconds);
 		Log.i(TAG,"Enemies defeated: "+enemiesDefeated);
-		Log.i(TAG,"World:"+ world + "  Level:" + level);
+		Log.i(TAG,"World:"+ candyLevel.world + "  Level:" + candyLevel.level);
 		
+		starsEarned = 1;
+		if (milliseconds<=candyLevel.timeForStar) {
+			starsEarned++;
+		}
+		if (moves<=candyLevel.movesForStar) {
+			starsEarned++;
+		}
 
-
-		saveSettings(candyLevel, milliseconds, level, world);
+		/**
+		 *  TODO SHRAV REMEMBER TO ALWAYS STORE THE BEST STATISTICS IN THE XML FILE, MEANING
+		 *  LEAST NUMBER OF MOVES, FASTEST TIME, MOST STARS.
+		 *  DO NOT OVERRIDE EXISTING BETTER STATS, ONLY PUT NEW BETTER ONES IN
+		 */
+		saveSettings(candyLevel, milliseconds, candyLevel.level, candyLevel.world);
 		
 		/**
 		 * TODO SHRAV:
@@ -523,59 +524,60 @@ public class CandyEngine {
 		 * enemiesDefeated: how many enemies died during the level
 		 * Add this variable to the existing stored number to keep a cumulative count of enemies defeated.
 		 */
-		
+
+		pause(300);
 		candyLevel.finish(); // TODO change this
 	}
 
 	// Cont variable needed for openFileOutput attention, do not remove... 
 	public void saveSettings(Context cont, int milliseconds, int level, int world) {
+		try {
+			FileOutputStream fos =  cont.getApplicationContext().openFileOutput("level.xml", Context.MODE_PRIVATE);
+			XmlSerializer serializer = Xml.newSerializer();
 			try {
-				FileOutputStream fos =  cont.getApplicationContext().openFileOutput("level.xml", Context.MODE_PRIVATE);
-		        XmlSerializer serializer = Xml.newSerializer();
-		        	try {
-		                        serializer.setOutput(fos, "UTF-8");
-		                        serializer.startDocument(null, Boolean.valueOf(true));
-		                        serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-		                        serializer.startTag(null, "Candybot");
-		                                
-		                        		serializer.startTag(null, "world");
-		                        		serializer.attribute(null, "attribute", world + "");
-		                        		 	serializer.startTag(null, "level");
-			                                serializer.attribute(null, "attribute", level + "");
-			                                	serializer.startTag(null, "completion");
-			                                		serializer.text("1"); // 1 for completion, 0 or i guess it will be null for non completion, since it won't even reach this method
-			                                	serializer.endTag(null, "completion");
-			                                	serializer.startTag(null, "moves");
-		                                			serializer.text(moves + "");
-			                                	serializer.endTag(null, "moves");
-			                                	serializer.startTag(null, "restarts");
-			                                		serializer.text(restarts + "");	
-			                                	serializer.endTag(null, "restarts");
-			                                	serializer.startTag(null, "time");
-			                                		serializer.text(milliseconds + ""); // May want a private variable idk
-			                                	serializer.endTag(null, "time");
-			                                	serializer.startTag(null, "enemies defeated");
-			                                		serializer.text(enemiesDefeated + "");
-			                                	serializer.endTag(null, "enemies defeated");
-			                                serializer.endTag(null, "level");
-		                                serializer.endTag(null, "world");
-	
-		                        serializer.endTag(null, "Candybot");
-		                        serializer.endDocument();
-		                        serializer.flush();
-		                        fos.close();
-		                        Log.i("Exception","XML file made");
-				
+				serializer.setOutput(fos, "UTF-8");
+				serializer.startDocument(null, Boolean.valueOf(true));
+				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+				serializer.startTag(null, "Candybot");
+
+				serializer.startTag(null, "world");
+				serializer.attribute(null, "attribute", world + "");
+				serializer.startTag(null, "level");
+				serializer.attribute(null, "attribute", level + "");
+				serializer.startTag(null, "completion");
+				serializer.text("1"); // 1 for completion, 0 or i guess it will be null for non completion, since it won't even reach this method
+				serializer.endTag(null, "completion");
+				serializer.startTag(null, "moves");
+				serializer.text(moves + "");
+				serializer.endTag(null, "moves");
+				serializer.startTag(null, "restarts");
+				serializer.text(restarts + "");	
+				serializer.endTag(null, "restarts");
+				serializer.startTag(null, "time");
+				serializer.text(milliseconds + ""); // May want a private variable idk
+				serializer.endTag(null, "time");
+				serializer.startTag(null, "enemies defeated");
+				serializer.text(enemiesDefeated + "");
+				serializer.endTag(null, "enemies defeated");
+				serializer.endTag(null, "level");
+				serializer.endTag(null, "world");
+
+				serializer.endTag(null, "Candybot");
+				serializer.endDocument();
+				serializer.flush();
+				fos.close();
+				Log.i("Exception","XML file made");
+
 			} catch (IOException e) {
 				Log.e("Exception","error occurred while creating xml file");
-			  }
-			} catch (Exception e) {
-                    Log.e("Exception","error occurred while creating xml file");
-              }
-
+			}
+		} catch (Exception e) {
+			Log.e("Exception","error occurred while creating xml file");
 		}
-	
-	
+
+	}
+
+
 	private synchronized void logArray(final String message) {
 		Log.i(TAG,message);
 		for (int[] i:backgroundArray) {

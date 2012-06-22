@@ -246,7 +246,8 @@ public class HighScoreActivity extends BaseActivity implements ScoreListener {
     }
   }
 
-  @Override
+  @SuppressWarnings("deprecation")
+@Override
   public final void loadProfile() {
     if (profile != null) {
       Leaderboard.getScore(lid, Score.MY_SCORES, period, 0, pageSize, new ScoreListener() {

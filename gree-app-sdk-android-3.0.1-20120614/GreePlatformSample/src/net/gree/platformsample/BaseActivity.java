@@ -233,7 +233,8 @@ public abstract class BaseActivity extends Activity {
     }
   }
 
-  protected void showProfileIcon() {
+  @SuppressWarnings("deprecation")
+protected void showProfileIcon() {
     GreeUser me = AppSimpleCache.getMe();
     if (me != null) {
       Bitmap myIcon = me.getThumbnail();

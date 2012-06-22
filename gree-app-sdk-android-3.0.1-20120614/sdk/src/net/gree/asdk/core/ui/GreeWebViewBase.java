@@ -32,7 +32,8 @@ import android.webkit.WebViewClient;
  */
 public class GreeWebViewBase extends WebView {
   protected LocalStorage mLocalStorage;
-  private static final String TAG = "GreeWebViewBase";
+  @SuppressWarnings("unused")
+private static final String TAG = "GreeWebViewBase";
 
   public GreeWebViewBase(Context context) {
     super(context);

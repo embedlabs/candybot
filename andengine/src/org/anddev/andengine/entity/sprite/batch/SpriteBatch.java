@@ -125,11 +125,11 @@ public class SpriteBatch extends Entity {
 	// Methods
 	// ===========================================================
 
-	protected void begin(@SuppressWarnings("unused") final GL10 pGL) {
+	protected void begin(final GL10 pGL) {
 //		GLHelper.disableDepthMask(pGL);
 	}
 
-	protected void end(@SuppressWarnings("unused") final GL10 pGL) {
+	protected void end(final GL10 pGL) {
 //		GLHelper.enableDepthMask(pGL);
 	}
 
@@ -327,7 +327,7 @@ public class SpriteBatch extends Entity {
 		}
 	}
 
-	private void drawVertices(final GL10 pGL, @SuppressWarnings("unused") final Camera pCamera) {
+	private void drawVertices(final GL10 pGL, final Camera pCamera) {
 		pGL.glDrawArrays(GL10.GL_TRIANGLES, 0, this.mVertices);
 	}
 
