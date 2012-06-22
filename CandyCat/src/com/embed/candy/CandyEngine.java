@@ -483,10 +483,13 @@ public class CandyEngine {
 	}
 
 	private synchronized void win() {
+		int level = CandyLevel.sendLevel();
+		int world = CandyLevel.sendWorld();
+		
 		candy.showCandyAnim();
 		pause(5,candyIndex);
 		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
-		pause(2000);
+		pause(300);
 		
 		final int milliseconds = (int)(System.currentTimeMillis()-startTime);
 		Log.i(TAG,"Level Completion Info:");
@@ -494,9 +497,11 @@ public class CandyEngine {
 		Log.i(TAG,"Restarts: "+restarts);
 		Log.i(TAG,"Completion time (ms): "+milliseconds);
 		Log.i(TAG,"Enemies defeated: "+enemiesDefeated);
+		Log.i(TAG,"World:"+ world + "  Level:" + level);
 		
 
-		saveSettings(candyLevel);
+
+		saveSettings(candyLevel, milliseconds, level, world);
 		
 		/**
 		 * TODO SHRAV:
@@ -523,7 +528,7 @@ public class CandyEngine {
 	}
 
 	// Cont variable needed for openFileOutput attention, do not remove... 
-	public void saveSettings(Context cont) {
+	public void saveSettings(Context cont, int milliseconds, int level, int world) {
 			try {
 				FileOutputStream fos =  cont.getApplicationContext().openFileOutput("level.xml", Context.MODE_PRIVATE);
 		        XmlSerializer serializer = Xml.newSerializer();
@@ -533,17 +538,28 @@ public class CandyEngine {
 		                        serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 		                        serializer.startTag(null, "Candybot");
 		                                
-		                        		serializer.startTag(null, "child1");
-		                                serializer.endTag(null, "child1");
-		                               
-		                                serializer.startTag(null, "child2");
-		                                serializer.attribute(null, "attribute", "value");
-		                                serializer.endTag(null, "child2");
-		                       
-		                                serializer.startTag(null, "child3");
-		                                serializer.text("some text inside child3");
-		                                serializer.endTag(null, "child3");
-		                               
+		                        		serializer.startTag(null, "world");
+		                        		serializer.attribute(null, "attribute", world + "");
+		                        		 	serializer.startTag(null, "level");
+			                                serializer.attribute(null, "attribute", level + "");
+			                                	serializer.startTag(null, "completion");
+			                                		serializer.text("1"); // 1 for completion, 0 or i guess it will be null for non completion, since it won't even reach this method
+			                                	serializer.endTag(null, "completion");
+			                                	serializer.startTag(null, "moves");
+		                                			serializer.text(moves + "");
+			                                	serializer.endTag(null, "moves");
+			                                	serializer.startTag(null, "restarts");
+			                                		serializer.text(restarts + "");	
+			                                	serializer.endTag(null, "restarts");
+			                                	serializer.startTag(null, "time");
+			                                		serializer.text(milliseconds + ""); // May want a private variable idk
+			                                	serializer.endTag(null, "time");
+			                                	serializer.startTag(null, "enemies defeated");
+			                                		serializer.text(enemiesDefeated + "");
+			                                	serializer.endTag(null, "enemies defeated");
+			                                serializer.endTag(null, "level");
+		                                serializer.endTag(null, "world");
+	
 		                        serializer.endTag(null, "Candybot");
 		                        serializer.endDocument();
 		                        serializer.flush();
