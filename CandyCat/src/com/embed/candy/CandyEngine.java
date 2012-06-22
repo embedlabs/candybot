@@ -1,11 +1,15 @@
 package com.embed.candy;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.content.Context;
 import android.util.Log;
 
 public class CandyEngine {
@@ -127,6 +131,7 @@ public class CandyEngine {
 	private int restarts = 0;
 	private long startTime;
 	private int enemiesDefeated = 0;
+	private int starsEarned = 0;
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevel candyLevel) {
 		this.spriteList = spriteList;
@@ -482,6 +487,9 @@ public class CandyEngine {
 		Log.i(TAG,"Completion time (ms): "+milliseconds);
 		Log.i(TAG,"Enemies defeated: "+enemiesDefeated);
 		
+
+		saveSettings();
+		
 		/**
 		 * TODO SHRAV:
 		 * 
@@ -506,6 +514,12 @@ public class CandyEngine {
 		candyLevel.finish(); // TODO change this
 	}
 
+	
+	private void saveSettings() {
+
+       
+	}
+	
 	private synchronized void logArray(final String message) {
 		Log.i(TAG,message);
 		for (int[] i:backgroundArray) {
