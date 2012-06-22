@@ -626,17 +626,17 @@ public class CandyEngine {
 	}
 	
 	private synchronized void pauseFall(final int milliseconds) {
-		if (gravityList.size()>0) {
-			while (true) {
-				for (int i=0;i<gravityList.size();i++) {
-					if (!gravityList.get(i).hasModifier) {
+		if (gravityList.size()>0) { // If there are objects that we could potentially have fall (and at this point they already fell I think),
+			while (true) { // let's loop until all of them have finished moving.
+				for (int i=0;i<gravityList.size();i++) { // For every gravityList object,
+					if (!gravityList.get(i).hasModifier) { // if it is not currently moving,
 						Log.v(TAG,"gravityList item #"+i+": "+spriteQueue.get(i).size()+" remaining in spriteQueue");
 						
-						if (spriteQueue.get(i).size()>0&&!gravityList.get(i).blowUp) {
-							gravityList.get(i).doQueue(spriteQueue.get(i).remove());
+						if (spriteQueue.get(i).size()>0&&!gravityList.get(i).blowUp) { // if there is still stuff to do,
+							gravityList.get(i).doQueue(spriteQueue.get(i).remove()); // do it;
 						} else {
 							gravityList.get(i).lastDirectionalMove = 0;
-							if (i==gravityList.size()-1&&queueAllEmpty()) {
+							if (i==gravityList.size()-1&&queueAllEmpty()) { // otherwise if it's the last one and everything is empty
 								return;
 							}
 						}

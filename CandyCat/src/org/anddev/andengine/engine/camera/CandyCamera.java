@@ -86,7 +86,7 @@ public class CandyCamera extends ZoomCamera {
 			diffX /= vecLength;
 			diffY /= vecLength;
 
-			super.setCenter(currentCenterX + (dX*diffX), currentCenterY + (dY*diffY));
+			super.setCenter(currentCenterX + (dX*Math.abs(diffX)), currentCenterY + (dY*Math.abs(diffY)));
 		}
 
 		/* Update zoom. */
