@@ -190,6 +190,7 @@ public class CandyEngine {
 		
 		@Override
 		public synchronized void run() {
+			assert queueAllEmpty();
 			final int[] situationArray = situation(catIndex,rowDirection,columnDirection);
 			final int s = situationArray[SITUATION];
 			boolean shouldDie = false;
@@ -679,6 +680,7 @@ public class CandyEngine {
 		
 		candyLevel.gameStarted = false;
 		restarts++;
+		moves = 0;
 		
 		/**
 		 * RESET SPRITES
