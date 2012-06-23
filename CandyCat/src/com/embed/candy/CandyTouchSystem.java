@@ -25,10 +25,15 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 	private float mPinchZoomStartedCameraZoomFactor;
 
 	private float dragX,dragY;
-	public static float DRAG_DISTANCE_THRESHOLD = 37.5f;
-	public static final int TAP_THRESHOLD = 225;
-	public static final int DOUBLE_TAP_THRESHOLD = 300;
-	public static final int DOUBLE_TAP_LOCATION_THESHOLD = 15;
+	public static final float DRAG_DISTANCE_THRESHOLD_CONSTANT = 37.5f;
+	public static final int TAP_THRESHOLD_CONSTANT = 225;
+	public static final int DOUBLE_TAP_THRESHOLD_CONSTANT = 300;
+	public static final int DOUBLE_TAP_LOCATION_THRESHOLD_CONSTANT = 15;
+	
+	public final float DRAG_DISTANCE_THRESHOLD;
+	public final int TAP_THRESHOLD;
+	public final int DOUBLE_TAP_THRESHOLD;
+	public final int DOUBLE_TAP_LOCATION_THRESHOLD;
 	
 	private long time;
 	private boolean tapOptionEnabled = false;
@@ -37,6 +42,13 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 		this.candyLevel = candyLevel;
 		mCandyCamera  = this.candyLevel.mCandyCamera;
 		candyEngine = this.candyLevel.candyEngine;
+		
+		final float sensitivity = 0.01f*candyLevel.sp.getInt("com.embed.candy.general_sensitivity", 50) + 0.5f;
+		final float inverseSensitivity = 2 - sensitivity;
+		DRAG_DISTANCE_THRESHOLD = DRAG_DISTANCE_THRESHOLD_CONSTANT*inverseSensitivity;
+		TAP_THRESHOLD = TAP_THRESHOLD_CONSTANT*(int)sensitivity;
+		DOUBLE_TAP_THRESHOLD = DOUBLE_TAP_THRESHOLD_CONSTANT*(int)sensitivity;
+		DOUBLE_TAP_LOCATION_THRESHOLD = DOUBLE_TAP_LOCATION_THRESHOLD_CONSTANT*(int)sensitivity;
 		
 		mScrollDetector = new SurfaceScrollDetector(this);
 		
@@ -78,8 +90,8 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 			if (!candyLevel.playMode) {
 				if (pSceneTouchEvent.getMotionEvent().getAction()==MotionEvent.ACTION_DOWN) {
 					if (System.currentTimeMillis()-time<=DOUBLE_TAP_THRESHOLD
-							&&Math.abs(pSceneTouchEvent.getMotionEvent().getX()-dragX)<=DOUBLE_TAP_LOCATION_THESHOLD
-							&&Math.abs(pSceneTouchEvent.getMotionEvent().getY()-dragY)<=DOUBLE_TAP_LOCATION_THESHOLD) {
+							&&Math.abs(pSceneTouchEvent.getMotionEvent().getX()-dragX)<=DOUBLE_TAP_LOCATION_THRESHOLD
+							&&Math.abs(pSceneTouchEvent.getMotionEvent().getY()-dragY)<=DOUBLE_TAP_LOCATION_THRESHOLD) {
 						if (2*mCandyCamera.getZoomFactor()>=1+candyLevel.PHONE_HEIGHT/candyLevel.HEIGHT) {
 							mCandyCamera.setCenter(candyLevel.WIDTH/2,candyLevel.HEIGHT/2);
 							mCandyCamera.setZoomFactor(candyLevel.PHONE_HEIGHT/candyLevel.HEIGHT);

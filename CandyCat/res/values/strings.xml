@@ -22,29 +22,31 @@
     <string name="pref_category_general">General</string>
     <string name="pref_general_zoom">Zoom</string>
     <string name="pref_general_zoom_summary">Zoom in at the beginning of each level.</string>
+    <string name="pref_general_sensitivity">Sensitivity</string>
+    <string name="pref_general_sensitivity_summary">How sensitive the finger controls are.</string>
+    <string name="pref_general_sensitivity_dialog">The higher the sensitivity, the less you will have to drag your finger to move the Candybot.</string>
     
     <string name="pref_category_graphics">Graphics</string>
     <string name="pref_graphics_quality">Quality</string>
     <string name="pref_graphics_quality_summary">How accurately and quickly graphics are rendered.</string>
     <string-array name="quality">
-        <item name="0">Low (No particles, rougher visuals)</item>
-        <item name="1">Medium (No particles, smooth visuals)</item>
-        <item name="2">High (Particles and smooth visuals)</item>
+        <item>Low (No particles, rougher visuals)</item>
+        <item>Medium (No particles, smooth visuals)</item>
+        <item>High (Particles and smooth visuals)</item>
     </string-array>
     <string-array name="quality_values">
-        <item name="0">0</item>
-        <item name="1">1</item>
-        <item name="2">2</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
     <string name="pref_graphics_theme">Theme</string>
     <string name="pref_graphics_theme_summary">The game\'s visual style.</string>
     <string-array name="theme">
-        <item name="0">Normal</item>
+        <item>Normal</item>
     </string-array>
     <string-array name="theme_values">
-        <item name="0">normal</item>
+        <item>normal</item>
     </string-array>
-    
     
     <string name="dialog_about_title">About Embed Labs</string>
     <string name="dialog_about_button">Return</string>
