@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-public class LevelSelect extends Activity implements OnItemClickListener {
+public class LevelSelectActivity extends Activity implements OnItemClickListener {
 	
 	GridView level_gv;
 	
@@ -27,7 +27,7 @@ public class LevelSelect extends Activity implements OnItemClickListener {
 
 	@Override
 	public void onItemClick(AdapterView<?> av, View v, int position, long arg3) {
-		startActivity(new Intent(this,CandyLevel.class)
+		startActivity(new Intent(this,CandyLevelActivity.class)
 		.putExtra("com.embed.candy.world", getIntent().getIntExtra("com.embed.candy.world",1))
 		.putExtra("com.embed.candy.level", position+1)
 		.putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));

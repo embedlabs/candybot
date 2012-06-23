@@ -6,7 +6,7 @@
             android:key="com.embed.candy.general_zoom"
             android:title="@string/pref_general_zoom"
             android:summary="@string/pref_general_zoom_summary" />
-        <com.hlidskialf.android.preference.SeekBarPreference
+        <com.embed.candy.CandySliderPreference
             android:key="com.embed.candy.general_sensitivity"
             android:defaultValue="50"
             android:dialogMessage="@string/pref_general_sensitivity_dialog"

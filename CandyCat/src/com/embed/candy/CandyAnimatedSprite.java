@@ -55,9 +55,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		initialRow = row;
 		initialColumn = column;
 		
-		if (this.type==CandyLevel.CAT) {
+		if (this.type==CandyLevelActivity.CAT) {
 			animate(catDurations, catFrames, -1);
-		} else if (this.type==CandyLevel.ENEMY) {
+		} else if (this.type==CandyLevelActivity.ENEMY) {
 			animate(enemyDurations,enemyFrames,-1);
 		}
 	}
@@ -123,7 +123,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	}
 
 	public synchronized void showCandyAnim() {
-		if (type==CandyLevel.CANDY) {
+		if (type==CandyLevelActivity.CANDY) {
 			hasModifier = true;
 			Log.i(TAG,"Candy winning animation started.");
 			// TODO
@@ -153,7 +153,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		enemyDead=true;
 		
 		final float deathSpeed;
-		if (type==CandyLevel.CAT) {
+		if (type==CandyLevelActivity.CAT) {
 			deathSpeed = 1;
 		} else {
 			deathSpeed = 0.3f;
@@ -190,9 +190,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		setCurrentTileIndex(0);
 		setVisible(true);
 
-		if (type==CandyLevel.CAT) {
+		if (type==CandyLevelActivity.CAT) {
 			animate(catDurations, catFrames, -1);
-		} else if (type==CandyLevel.ENEMY) {
+		} else if (type==CandyLevelActivity.ENEMY) {
 			animate(enemyDurations,enemyFrames,-1);
 		}
 	}

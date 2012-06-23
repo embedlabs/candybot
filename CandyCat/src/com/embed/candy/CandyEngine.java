@@ -91,7 +91,7 @@ public class CandyEngine {
 	 * GAME VIEW REFERENCE
 	 */
 	
-	private final CandyLevel candyLevel;
+	private final CandyLevelActivity candyLevel;
 	
 	/**
 	 * EASE OF ACCESS
@@ -135,7 +135,7 @@ public class CandyEngine {
 	private int enemiesDefeated = 0;
 	private int starsEarned = 0;
 
-	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevel candyLevel) {
+	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevelActivity candyLevel) {
 		this.spriteList = spriteList;
 		this.objectArray = objectArray;
 		this.backgroundArray = backgroundArray;
@@ -151,20 +151,20 @@ public class CandyEngine {
 		
 		for (int i=0;i<objectArray.length;i++) {
 			switch (objectArray[i][TYPE]) {
-			case CandyLevel.ENEMY:
+			case CandyLevelActivity.ENEMY:
 				enemyList.add(spriteList.get(i));
 				break;
-			case CandyLevel.CAT:
+			case CandyLevelActivity.CAT:
 				catIndex = i;
 				cat = spriteList.get(i);
 				Log.i(TAG,"Cat located at row "+objectArray[i][ROW]+", column "+objectArray[i][COLUMN]);
 				break;
-			case CandyLevel.CANDY:
+			case CandyLevelActivity.CANDY:
 				candyIndex = i;
 				candy = spriteList.get(i);
 				Log.i(TAG,"Candy located at row "+objectArray[i][ROW]+", column "+objectArray[i][COLUMN]);
-			case CandyLevel.BOX:
-			case CandyLevel.BOMB:
+			case CandyLevelActivity.BOX:
+			case CandyLevelActivity.BOMB:
 				spriteQueue.add(new LinkedList<int[]>());
 				gravityList.add(spriteList.get(i));
 				break;
@@ -212,7 +212,7 @@ public class CandyEngine {
 				switch (s2) {			
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
-					if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
+					if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevelActivity.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevelActivity.INERTIA_WALL)) {
 						if (shouldDie) {death=true;}
 						catMoved = true;
 						maybeStartTimer();
@@ -257,7 +257,7 @@ public class CandyEngine {
 	
 	private synchronized void move(final int rowDirection,final int columnDirection,Integer... spriteIndexes) {
 		for (int spriteIndex:spriteIndexes) {
-			if (objectArray[spriteIndex][TYPE]!=CandyLevel.INERTIA_WALL) {
+			if (objectArray[spriteIndex][TYPE]!=CandyLevelActivity.INERTIA_WALL) {
 				spriteList.get(spriteIndex).move(rowDirection,columnDirection);
 			} else {
 				final int glideDistance=glideDistance(spriteIndex,rowDirection,columnDirection);
@@ -433,7 +433,7 @@ public class CandyEngine {
 		case SQUARE_LASER_OCCUPIED:
 			shouldDie = true;
 		case SQUARE_OCCUPIED:
-			if (objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.CAT) {
+			if (objectArray[situationArray[OBJECT]][TYPE]==CandyLevelActivity.CAT) {
 				death = true;
 				move(rowDirection,columnDirection,enemySprite.index);
 			} else {
@@ -442,7 +442,7 @@ public class CandyEngine {
 				switch (s2) {
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
-					if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevel.INERTIA_WALL)) {
+					if (rowDirection!=ROW_UP||(objectArray[situationArray[OBJECT]][TYPE]==CandyLevelActivity.MOVABLE_WALL||objectArray[situationArray[OBJECT]][TYPE]==CandyLevelActivity.INERTIA_WALL)) {
 						if (shouldDie) {enemySprite.enemyDead=true;
 							enemiesDefeated++;
 						}
@@ -748,7 +748,7 @@ public class CandyEngine {
 		} else {
 			if (Conditionals.isLaser(b)) {
 				s = SQUARE_LASER_OCCUPIED;
-			} else if (objectArray[o][TYPE]==CandyLevel.ENEMY) {
+			} else if (objectArray[o][TYPE]==CandyLevelActivity.ENEMY) {
 				s = SQUARE_ENEMY;
 			} else {
 				s = SQUARE_OCCUPIED;
@@ -823,7 +823,7 @@ public class CandyEngine {
 				}
 				break outer;
 			case SQUARE_WALL:
-				if (objectArray[index][TYPE]==CandyLevel.BOMB&&fallDistance>=1) {
+				if (objectArray[index][TYPE]==CandyLevelActivity.BOMB&&fallDistance>=1) {
 					spriteList.get(index).blowUp = true;
 				} else if (situationArray[BACKGROUND]==WALL_LAVA&&index==candyIndex) {
 					candyBurned = true;

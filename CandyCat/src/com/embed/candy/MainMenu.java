@@ -40,7 +40,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 			final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 			theme = sp.getString("com.embed.candy.graphics_theme", "normal");
 			Log.i(TAG,"THEME: "+theme);
-			startActivity(new Intent(this,WorldSelect.class).putExtra("com.embed.candy.theme", theme));
+			startActivity(new Intent(this,WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
 			break;
 		case R.id.button_facebook:
 			startActivity(CandyUtils.facebookIntent(this));
@@ -64,7 +64,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 			CandyUtils.aboutDialog(this);
 			break;
 		case R.id.menu_main_item_preferences:
-			startActivity(new Intent(this,CandyPreferences.class));
+			startActivity(new Intent(this,CandyPreferenceActivity.class));
 			break;
 		}
 		return true;

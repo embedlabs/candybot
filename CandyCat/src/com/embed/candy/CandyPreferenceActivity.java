@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import com.embed.candy.R;
 
-public class CandyPreferences extends PreferenceActivity {
+public class CandyPreferenceActivity extends PreferenceActivity {
 
 	@SuppressWarnings("deprecation")
 	@Override

@@ -40,7 +40,7 @@ public class CandyUtils {
 	 *         s: time requirement in milliseconds
 	 */
 	
-	public static void parseLevelObjectsFromXml(final CandyLevel candyLevel,
+	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel,
 			final int world,
 			final int level,
 			ArrayList<int[]> objectList,
@@ -115,7 +115,7 @@ public class CandyUtils {
 		}
 	}
 	
-	public static InputStream tmxFromXML(final CandyLevel candyLevel,final int world,final int level) {
+	public static InputStream tmxFromXML(final CandyLevelActivity candyLevel,final int world,final int level) {
 		// Load the XML into a DOM.
 		try {
 			final InputStream input = candyLevel.getAssets().open("levels/w"+world+".xml");

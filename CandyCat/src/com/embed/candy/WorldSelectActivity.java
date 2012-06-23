@@ -10,7 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Gallery;
 import com.embed.candy.R;
 
-public class WorldSelect extends Activity implements OnItemClickListener {
+public class WorldSelectActivity extends Activity implements OnItemClickListener {
 	
 	Gallery world_g;
 	
@@ -30,7 +30,7 @@ public class WorldSelect extends Activity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> av, View v, final int position, final long arg3) {
 		if (av.getSelectedItemPosition()==position) {
-			startActivity(new Intent(this,LevelSelect.class)
+			startActivity(new Intent(this,LevelSelectActivity.class)
 			.putExtra("com.embed.candy.world", position+1)
 			.putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
 		}

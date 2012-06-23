@@ -16,7 +16,7 @@ import android.view.MotionEvent;
 
 public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
 	
-	private final CandyLevel candyLevel;
+	private final CandyLevelActivity candyLevel;
 	private final SurfaceScrollDetector mScrollDetector;
 	private final CandyCamera mCandyCamera;
 	private final CandyEngine candyEngine;
@@ -38,7 +38,7 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 	private long time;
 	private boolean tapOptionEnabled = false;
 	
-	public CandyTouchSystem(CandyLevel candyLevel) {
+	public CandyTouchSystem(CandyLevelActivity candyLevel) {
 		this.candyLevel = candyLevel;
 		mCandyCamera  = this.candyLevel.mCandyCamera;
 		candyEngine = this.candyLevel.candyEngine;
@@ -121,7 +121,7 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 					mScrollDetector.onTouchEvent(pSceneTouchEvent);
 				}
 			} else {
-				mCandyCamera.setMaxVelocity(CandyLevel.CAMERA_SPEED,CandyLevel.CAMERA_SPEED);
+				mCandyCamera.setMaxVelocity(CandyLevelActivity.CAMERA_SPEED,CandyLevelActivity.CAMERA_SPEED);
 				final MotionEvent motionEvent = pSceneTouchEvent.getMotionEvent();
 				final float motionX = motionEvent.getX();
 				final float motionY = motionEvent.getY();

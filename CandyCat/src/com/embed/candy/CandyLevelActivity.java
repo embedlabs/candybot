@@ -51,7 +51,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
-public class CandyLevel extends LayoutGameActivity implements ITMXTilePropertiesListener {
+public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePropertiesListener {
 	/**
 	 * Some important phone/game dimensions.
 	 */
@@ -153,7 +153,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@SuppressWarnings("deprecation")
 	@Override
 	public Engine onLoadEngine() {
-		Log.v(TAG,"CandyLevel onLoadEngine()");
+		Log.v(TAG,"CandyLevelActivity onLoadEngine()");
 
 		if (android.os.Build.VERSION.SDK_INT>=13) {
 			Display display = getWindowManager().getDefaultDisplay();
@@ -191,7 +191,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	
 	@Override
 	public void onLoadResources() {
-		Log.v(TAG,"CandyLevel onLoadResources()");
+		Log.v(TAG,"CandyLevelActivity onLoadResources()");
 
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/"+theme+"/");
 		
@@ -247,7 +247,7 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 
 	@Override
 	public Scene onLoadScene() {
-		Log.v(TAG,"CandyLevel onLoadScene()");
+		Log.v(TAG,"CandyLevelActivity onLoadScene()");
 		
 		/**
 		 * BASICS
@@ -387,12 +387,12 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 
 	@Override
 	public void onLoadComplete() {
-		Log.v(TAG,"CandyLevel onLoadComplete()");
+		Log.v(TAG,"CandyLevelActivity onLoadComplete()");
 	}
 	
 	@Override
 	public void onResumeGame() {
-		Log.v(TAG,"CandyLevel onResumeGame()");
+		Log.v(TAG,"CandyLevelActivity onResumeGame()");
 		
 		if (!resumeHasRun) {
 			resumeHasRun=true;
@@ -449,6 +449,6 @@ public class CandyLevel extends LayoutGameActivity implements ITMXTileProperties
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Log.i(TAG,"CandyLevel onDestroy()");
+		Log.i(TAG,"CandyLevelActivity onDestroy()");
 	}
 }
