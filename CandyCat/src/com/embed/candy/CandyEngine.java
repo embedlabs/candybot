@@ -632,15 +632,19 @@ public class CandyEngine {
 				for (int i=0;i<gravityList.size();i++) { // For every gravityList object,
 					if (!gravityList.get(i).hasModifier) { // if it is not currently moving,
 						Log.v(TAG,"gravityList item #"+i+": "+spriteQueue.get(i).size()+" remaining in spriteQueue");
-						
 						if (spriteQueue.get(i).size()>0&&!gravityList.get(i).blowUp) { // if there is still stuff to do,
 							gravityList.get(i).doQueue(spriteQueue.get(i).remove()); // do it;
+							break;
 						} else {
 							gravityList.get(i).lastDirectionalMove = 0;
+							final int index = gravityList.get(i).index;
+							Log.i(TAG,"Item "+i+"(index "+index+"): "+objectArray[index][CandyEngine.ROW]+" "+objectArray[index][CandyEngine.COLUMN]);
 							if (i==gravityList.size()-1&&queueAllEmpty()) { // otherwise if it's the last one and everything is empty
 								return;
 							}
 						}
+					} else {
+						break;
 					}
 				}
 				try {
@@ -790,13 +794,19 @@ public class CandyEngine {
 						column+=columnDirection;
 						break;
 					default:
+						if (slideDistance==0) {
+							assert !slidingOnIceRequired;
+//							slidingOnIceRequired = false; // TODO necessary?
+						}
 						return slideDistance;
 					}
 				} else {
+					assert !slidingOnIceRequired;
 					return slideDistance;
 				}
 			}
 		} else {
+			assert !slidingOnIceRequired;
 			return slideDistance;
 		}
 	}
