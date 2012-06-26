@@ -87,7 +87,7 @@ public class CandyUtils {
 					final NodeList moveNodeList = currentLevelElement.getElementsByTagName("m");
 					if (moveNodeList.getLength() == 0) {
 						candyLevel.movesForStar = 1;
-						Log.e(TAG,"Level "+world+"-"+level+" lacks moves requirement.");
+						Log.w(TAG,"Level "+world+"-"+level+" lacks moves requirement.");
 					} else {
 						candyLevel.movesForStar = Integer.valueOf(((Element)moveNodeList.item(0)).getTextContent());
 						Log.i(TAG,"Move requirement: "+candyLevel.movesForStar);
@@ -96,7 +96,7 @@ public class CandyUtils {
 					final NodeList timeNodeList = currentLevelElement.getElementsByTagName("t");
 					if (timeNodeList.getLength() == 0) {
 						candyLevel.timeForStar = 1000;
-						Log.e(TAG,"Level "+world+"-"+level+" lacks time requirement.");
+						Log.w(TAG,"Level "+world+"-"+level+" lacks time requirement.");
 					} else {
 						candyLevel.timeForStar = Integer.valueOf(((Element)timeNodeList.item(0)).getTextContent());
 						Log.i(TAG,"Time requirement: "+candyLevel.timeForStar);

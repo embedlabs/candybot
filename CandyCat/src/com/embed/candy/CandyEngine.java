@@ -481,7 +481,6 @@ public class CandyEngine {
 		final int milliseconds = (int)(System.currentTimeMillis()-startTime);
 		candy.showCandyAnim();
 		pause(5,candyIndex);
-		Log.i(TAG,"Level " + candyLevel.world + "_" + candyLevel.level + " won!");
 		
 		Log.i(TAG,"Level Completion Info:");
 		Log.i(TAG,"Moves: "+moves);

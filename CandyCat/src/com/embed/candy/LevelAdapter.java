@@ -9,6 +9,7 @@ import java.io.Reader;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.Attributes;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -16,6 +17,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +26,17 @@ import android.widget.TextView;
 
 public class LevelAdapter extends BaseAdapter {
 	private final LayoutInflater li;
+	private int[] worldData = new int[60];
+	private int[] levelData = new int[60]; // 2D Array to store world/level data
+	private int[] starData = new int[60];
+	private int worldNum;
 	
 	public LevelAdapter(final Activity a) {
 		li = a.getLayoutInflater();
+		
+        worldNum = (WorldAdapter.getPos()) + 1;   
+		System.out.println("this is a numero" + worldNum);
+		
 		readData(a);
 	}
 	
@@ -46,93 +56,112 @@ public class LevelAdapter extends BaseAdapter {
 	}
 
 	public void readData(Context cont){
-		Integer[][] lvl=new Integer[3][20];
-		
 		try {
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		SAXParser saxParser = factory.newSAXParser();
-		DefaultHandler handler = new DefaultHandler() {
-		private boolean getWorld = false;
-		private boolean getLevel = false;
-		private boolean getStars = false;
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser saxParser = factory.newSAXParser();
+			DefaultHandler handler = new DefaultHandler() {
+				
+								boolean getWorld, getLevel, getStars = false;
+				int count = 0;
 
-		public void endElement(String uri, String localName,
-		String qName) throws SAXException {
-		System.out.print("End Element: " + qName);
-		
-		if (localName.equalsIgnoreCase("world")) {
-			getWorld = true;
-		}
-		if (localName.equalsIgnoreCase("level")) {
-			getLevel = true;
-		}
-		if (localName.equalsIgnoreCase("stars")) {
-			getStars = true;
-		} 
-		}
+				public void startElement(String uri, String localName,
+						String qName, Attributes attributes)
+								throws SAXException {
+					System.out.println("Start Element: " + qName);
+					if (qName.equalsIgnoreCase("world")) {
+						getWorld = true;
+					}
+					if (qName.equalsIgnoreCase("level")) {
+						getLevel = true;
+					}
+					if (qName.equalsIgnoreCase("stars")) {
+						getStars = true;
+					}
+				}
 
-		public void characters(char ch[], int start, int length)
-		throws SAXException {
-		System.out.println(new String(ch, start, length));
+				public void endElement(String uri, String localName,
+						String qName) throws SAXException {
+					System.out.println("End Element: " + qName);
+				}
 
-		if (getWorld) {
-		String worldy = new String(ch, start, length);
-		System.out.print("Worldy: " + worldy);
-		getWorld = false;
-		}
+				public void characters(char ch[], int start, int length)
+						throws SAXException {
+					System.out.println(new String(ch, start, length));
 
-		if (getLevel) {
-		String levely = new String(ch, start, length);
-		System.out.print("Level: " + levely);
-		getLevel = false;
-		}
-		
-		if (getStars) {
-			String starsy = new String(ch, start, length);
-			System.out.print("Stars: " + starsy);
-			getStars = false;
+					if (getWorld) {
+						int world = Integer.parseInt(new String(ch, start,length));
+						System.out.println("World: " + world);
+						
+						// Add to array
+						worldData[count] = world;
+						
+						getWorld = false;
+					}
+					if (getLevel) {
+						int level = Integer.parseInt(new String(ch, start,length));
+						System.out.println("Level: " + level);
+						
+						// Add to array
+						levelData[count] = level;
+						
+						getLevel = false;
+					}
+					if (getStars) {
+						int stars = Integer.parseInt(new String(ch, start,length));
+						System.out.println("Stars: " + stars);
+						
+						// Add to array
+						starData[(levelData[count]*worldData[count])-1] = stars;
+						count++;
+						
+						getStars = false;
+					}
+				}
+			};
+
+			FileInputStream is = cont.openFileInput("level.xml");
+			byte[] byIn = new byte[is.available()];
+			while ( is.read(byIn) != -1 ){
+				System.out.println(new String (byIn));
 			}
-		}
-		};
-
-		FileInputStream is = cont.openFileInput( "level.xml");
-		byte[] byIn = new byte[is.available()];
-		while ( is.read(byIn) != -1 ){
-		System.out.print(new String (byIn));
-		}
-		InputStream inputStream = new ByteArrayInputStream( byIn );
-		Reader reader = new InputStreamReader(inputStream,"UTF-8");
-		InputSource isrc = new InputSource(reader);
-		isrc.setEncoding("UTF-8");
-		saxParser.parse(isrc, handler);
-		is.close();
+			InputStream inputStream = new ByteArrayInputStream( byIn );
+			Reader reader = new InputStreamReader(inputStream,"UTF-8");
+			InputSource isrc = new InputSource(reader);
+			isrc.setEncoding("UTF-8");
+			saxParser.parse(isrc, handler);
+			is.close();
 
 		} catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
-		
 	}
 	
 	@Override
 	public View getView(int position,View v,ViewGroup parent) {
+		int ArrayLvlValue = (position) * worldNum;
 		if (v == null) {
-		    if(position < 1){//whatever condition you want here    
-		        v = li.inflate(R.layout.grid_item_1,null);
-		    }
-		    else{
-		        v = li.inflate(R.layout.grid_item_lock,null);
-		    }
+		  	// 1,2,3 stars and 4 is a lock   
+		    	switch (starData[ArrayLvlValue]) {
+	            case 1:  v = li.inflate(R.layout.grid_item_1,null);
+	                     break;
+	            case 2:  v = li.inflate(R.layout.grid_item_2,null);
+	                     break;
+	            case 3:  v = li.inflate(R.layout.grid_item_3,null);
+	                     break;
+	            case 4:  v = li.inflate(R.layout.grid_item_lock,null);
+	            		 break;
+	            default: v = li.inflate(R.layout.grid_item_lock,null);
+       		 			 break;
+		    	}
+		   
 		
-			
+		}
 			final TextView tv = (TextView) v.findViewById(R.id.grid_text);
 			tv.setText(String.valueOf(position+1));
 			CandyUtils.setMainFont(tv);
 		
-			
-			
-		}
-		// TODO Auto-generated method stub
-		return v;
+			return v;
 	}
 
 }
+	

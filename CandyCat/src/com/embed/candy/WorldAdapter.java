@@ -1,6 +1,7 @@
 package com.embed.candy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -11,6 +12,7 @@ import com.embed.candy.R;
 
 public class WorldAdapter extends BaseAdapter {
 	private final Context mContext;
+    private static int position;
 
 	private final Integer[] mImageIds = {
 			R.drawable.box1,
@@ -32,6 +34,14 @@ public class WorldAdapter extends BaseAdapter {
 		return position;
 	}
 
+	public void setPos(final int position) {
+        this.position = position;
+    }
+	
+	public static int getPos() {
+		return position;
+	}
+	
 	@Override
 	public long getItemId(final int position) {
 		return position;
