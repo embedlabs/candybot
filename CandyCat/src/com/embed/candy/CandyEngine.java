@@ -542,12 +542,21 @@ public class CandyEngine {
 				serializer.startTag(null, "Candybot");
 
 				serializer.startTag(null, "world");
-				serializer.attribute(null, "attribute", world + "");
+				serializer.text(world + "");
+				serializer.endTag(null, "world");
 				serializer.startTag(null, "level");
-				serializer.attribute(null, "attribute", level + "");
+				serializer.text(level + "");
+				serializer.endTag(null, "level");
 				serializer.startTag(null, "completion");
 				serializer.text("1"); // 1 for completion, 0 or i guess it will be null for non completion, since it won't even reach this method
 				serializer.endTag(null, "completion");
+				
+				// Code in stars here
+				serializer.startTag(null, "stars");
+				serializer.text("1"); // 1, 2, 3, 4 (lock)
+				serializer.endTag(null, "stars");
+				
+				
 				serializer.startTag(null, "moves");
 				serializer.text(moves + "");
 				serializer.endTag(null, "moves");
@@ -560,8 +569,7 @@ public class CandyEngine {
 				serializer.startTag(null, "enemies defeated");
 				serializer.text(enemiesDefeated + "");
 				serializer.endTag(null, "enemies defeated");
-				serializer.endTag(null, "level");
-				serializer.endTag(null, "world");
+				
 
 				serializer.endTag(null, "Candybot");
 				serializer.endDocument();
