@@ -1,7 +1,6 @@
 package com.embed.candy;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -35,7 +34,7 @@ public class WorldAdapter extends BaseAdapter {
 	}
 
 	public void setPos(final int position) {
-        this.position = position;
+        WorldAdapter.position = position;
     }
 	
 	public static int getPos() {

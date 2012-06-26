@@ -8,7 +8,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="lib" path="libs/libGoogleAnalytics.jar"/>
 	<classpathentry kind="lib" path="libs/EasyTracker.jar"/>
-	<classpathentry kind="lib" path="libs/mobclix.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/GreeSdk"/>
+	<classpathentry kind="lib" path="libs/Swarm.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

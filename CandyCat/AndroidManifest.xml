@@ -26,8 +26,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
 
@@ -54,13 +52,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Make sure to replace XXX by your application id -->
-                <data
-                    android:host="start"
-                    android:scheme="greeappXXX" />
-                <data
-                    android:host="start"
-                    android:scheme="greeappopenXXX" />
             </intent-filter>
         </activity>
         <activity
@@ -73,14 +64,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Make sure to replace XXX by your application id -->
-                <data
-                    android:host="start"
-                    android:scheme="greeappXXX" />
-                <data
-                    android:host="start"
-                    android:scheme="greeappopenXXX" />
-            </intent-filter>
+                </intent-filter>
         </activity>
         <activity
             android:name="com.embed.candy.CandyLevelActivity"
@@ -107,139 +91,6 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
 
-        <!-- SDK -->
-        <activity
-            android:name="net.gree.asdk.core.dashboard.DashboardActivity"
-            android:configChanges="orientation" >
-        </activity>
-        <activity
-            android:name="net.gree.asdk.core.notifications.ui.NotificationBoardActivity"
-            android:configChanges="orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="net.gree.asdk.core.dashboard.ModalActivity"
-            android:configChanges="orientation" >
-        </activity>
-        <activity
-            android:name="net.gree.asdk.core.notifications.ui.PopupActivity"
-            android:configChanges="orientation"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:noHistory="true"
-            android:taskAffinity=""
-            android:theme="@style/GreeNotificationDialog" >
-        </activity>
-        <activity
-            android:name="net.gree.asdk.core.auth.SetupActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <!-- Make sure to replace XXX by your application id -->
-                <data
-                    android:host="reopen"
-                    android:scheme="greeapp14930" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <!-- Make sure to replace XXX by your application id -->
-                <data
-                    android:host="get-accesstoken"
-                    android:scheme="greeapp14930" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="net.gree.asdk.core.notifications.RelayActivity"
-            android:configChanges="orientation"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:noHistory="true"
-            android:taskAffinity="" >
-        </activity>
-        <activity
-            android:name="net.gree.asdk.core.ui.SSOAuthReceiverActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="GREEApp/SSOAuthResponse" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="net.gree.asdk.core.ui.ServiceResultreceiverActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Make sure to replace XXX by your application id -->
-                <data
-                    android:host="serviceresponse"
-                    android:scheme="greeappXXX" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="net.gree.asdk.core.dashboard.PostingActivity"
-            android:configChanges="orientation" />
-        <activity
-            android:name="net.gree.asdk.core.dashboard.SubBrowserActivity"
-            android:configChanges="orientation" />
-        <activity
-            android:name="net.gree.asdk.core.dashboard.PostingMultipleActivity"
-            android:configChanges="orientation" />
-
-        <service android:name="com.embed.candy.C2DMReceiver" />
-
-        <receiver
-            android:name="com.google.android.c2dm.C2DMBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <category android:name="net.gree.platformsample" />
- <!-- This is the registered package name in google cd2m server (different for each appli using push) -->
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <category android:name="net.gree.platformsample" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name="com.google.android.c2dm.intent.REGISTER" />
-
-        <receiver
-            android:name="net.gree.asdk.api.ConnectionChangeReceiver"
-            android:label="NetworkConnection" >
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-
-        <meta-data
-            android:name="com.mobclix.APPLICATION_ID"
-            android:value="EA515CE0-350E-4775-8B42-BD29EFB6B0AD" />
-
-        <activity
-            android:name="com.mobclix.android.sdk.MobclixBrowserActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-    </application>
-
+        
+</application>
 </manifest>

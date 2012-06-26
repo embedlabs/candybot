@@ -17,7 +17,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +63,7 @@ public class LevelAdapter extends BaseAdapter {
 								boolean getWorld, getLevel, getStars = false;
 				int count = 0;
 
+				@Override
 				public void startElement(String uri, String localName,
 						String qName, Attributes attributes)
 								throws SAXException {
@@ -79,11 +79,13 @@ public class LevelAdapter extends BaseAdapter {
 					}
 				}
 
+				@Override
 				public void endElement(String uri, String localName,
 						String qName) throws SAXException {
 					System.out.println("End Element: " + qName);
 				}
 
+				@Override
 				public void characters(char ch[], int start, int length)
 						throws SAXException {
 					System.out.println(new String(ch, start, length));

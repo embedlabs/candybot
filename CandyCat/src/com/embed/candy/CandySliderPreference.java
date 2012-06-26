@@ -5,6 +5,7 @@ import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -47,13 +48,13 @@ public class CandySliderPreference extends DialogPreference implements SeekBar.O
 		mValueText.setGravity(Gravity.CENTER_HORIZONTAL);
 		mValueText.setTextSize(32);
 		params = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.FILL_PARENT, 
-				LinearLayout.LayoutParams.WRAP_CONTENT);
+				LayoutParams.FILL_PARENT, 
+				LayoutParams.WRAP_CONTENT);
 		layout.addView(mValueText, params);
 
 		mSeekBar = new SeekBar(mContext);
 		mSeekBar.setOnSeekBarChangeListener(this);
-		layout.addView(mSeekBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+		layout.addView(mSeekBar, new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
 		if (shouldPersist()) {
 			mValue = getPersistedInt(mDefault);
@@ -81,6 +82,7 @@ public class CandySliderPreference extends DialogPreference implements SeekBar.O
 		}
 	}
 
+	@Override
 	public void onProgressChanged(SeekBar seek, int value, boolean fromTouch) {
 		String t = String.valueOf(value);
 		mValueText.setText(mSuffix == null ? t : t.concat(mSuffix));
@@ -89,7 +91,9 @@ public class CandySliderPreference extends DialogPreference implements SeekBar.O
 		callChangeListener(new Integer(value));
 	}
 	
+	@Override
 	public void onStartTrackingTouch(SeekBar seek) {}
+	@Override
 	public void onStopTrackingTouch(SeekBar seek) {}
 
 	public void setMax(int max) {mMax = max;}
