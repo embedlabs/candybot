@@ -1,6 +1,8 @@
 package com.embed.candy;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -11,6 +13,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xmlpull.v1.XmlSerializer;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -21,6 +24,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -217,5 +221,52 @@ public class CandyUtils {
 			}
 		});
 		aboutBuilder.show();
+	}
+
+	// Cont variable needed for openFileOutput attention, do not remove...
+	public static void saveSettings(final CandyEngine candyEngine) {
+		try {
+			FileOutputStream fos = candyEngine.candyLevel.getApplicationContext().openFileOutput("level.xml", Context.MODE_PRIVATE);
+			XmlSerializer serializer = Xml.newSerializer();
+			try {
+				serializer.setOutput(fos, "UTF-8");
+				serializer.startDocument(null, Boolean.valueOf(true));
+				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output",true);
+				serializer.startTag(null, "Candybot");
+
+				serializer.startTag(null, "world"); // TODO SHRAV WTF IS THIS shouldn't all the other stuff be inside the world tag, inside which should be a level tag containing all the level info?
+				serializer.text(candyEngine.candyLevel.world + "");
+				serializer.endTag(null, "world");
+				serializer.startTag(null, "level");
+				serializer.text(candyEngine.candyLevel.level + "");
+				serializer.endTag(null, "level");
+				intTag(serializer,"completion",1); // 1 for completion, 0 or i guess it will be null for non completion, since it won't even reach this method
+
+				// Code in stars here
+				intTag(serializer,"stars",candyEngine.starsEarned); // 1,2,3
+
+				intTag(serializer,"moves",candyEngine.moves);
+				intTag(serializer,"restarts",candyEngine.restarts);
+				//				serializer.startTag(null, "time");
+				//				serializer.text(milliseconds + ""); // May want a private variable idk
+				//				serializer.endTag(null, "time");
+				intTag(serializer,"enemies defeated",candyEngine.enemiesDefeated);
+
+				serializer.endTag(null, "Candybot");
+				serializer.endDocument();
+				serializer.flush();
+				fos.close();
+				Log.i("Exception", "XML file made");
+
+			} catch (IOException e) {
+				Log.e("Exception", "error occurred while creating xml file");
+			}
+		} catch (Exception e) {
+			Log.e("Exception", "error occurred while creating xml file");
+		}
+	}
+
+	public static void intTag (final XmlSerializer s,final String tag,final int input) throws IllegalArgumentException, IllegalStateException, IOException {
+		s.startTag(null, tag).text(Integer.toString(input)).endTag(null, tag);
 	}
 }

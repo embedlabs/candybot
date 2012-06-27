@@ -14,8 +14,7 @@ import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 
 import android.view.MotionEvent;
 
-public class CandyTouchSystem implements IPinchZoomDetectorListener,
-		IScrollDetectorListener, IOnSceneTouchListener {
+public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
 
 	private final CandyLevelActivity candyLevel;
 	private final SurfaceScrollDetector mScrollDetector;
@@ -44,16 +43,12 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener,
 		mCandyCamera = this.candyLevel.mCandyCamera;
 		candyEngine = this.candyLevel.candyEngine;
 
-		final float sensitivity = 0.01f * candyLevel.sp.getInt(
-				"com.embed.candy.general_sensitivity", 50) + 0.5f;
+		final float sensitivity = 0.01f * candyLevel.sp.getInt("com.embed.candy.general_sensitivity", 50) + 0.5f;
 		final float inverseSensitivity = 2 - sensitivity;
-		DRAG_DISTANCE_THRESHOLD = DRAG_DISTANCE_THRESHOLD_CONSTANT
-				* inverseSensitivity;
+		DRAG_DISTANCE_THRESHOLD = DRAG_DISTANCE_THRESHOLD_CONSTANT * inverseSensitivity;
 		TAP_THRESHOLD = TAP_THRESHOLD_CONSTANT * (int) sensitivity;
-		DOUBLE_TAP_THRESHOLD = DOUBLE_TAP_THRESHOLD_CONSTANT
-				* (int) sensitivity;
-		DOUBLE_TAP_LOCATION_THRESHOLD = DOUBLE_TAP_LOCATION_THRESHOLD_CONSTANT
-				* (int) sensitivity;
+		DOUBLE_TAP_THRESHOLD = DOUBLE_TAP_THRESHOLD_CONSTANT * (int) sensitivity;
+		DOUBLE_TAP_LOCATION_THRESHOLD = DOUBLE_TAP_LOCATION_THRESHOLD_CONSTANT * (int) sensitivity;
 
 		mScrollDetector = new SurfaceScrollDetector(this);
 
@@ -69,34 +64,24 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener,
 	}
 
 	@Override
-	public void onScroll(final ScrollDetector pScollDetector,
-			final TouchEvent pTouchEvent, final float pDistanceX,
-			final float pDistanceY) {
+	public void onScroll(final ScrollDetector pScollDetector, final TouchEvent pTouchEvent, final float pDistanceX, final float pDistanceY) {
 		final float zoomFactor = mCandyCamera.getZoomFactor();
-		mCandyCamera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY
-				/ zoomFactor);
+		mCandyCamera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY / zoomFactor);
 	}
 
 	@Override
-	public void onPinchZoomStarted(final PinchZoomDetector pPinchZoomDetector,
-			final TouchEvent pTouchEvent) {
+	public void onPinchZoomStarted(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent) {
 		mPinchZoomStartedCameraZoomFactor = mCandyCamera.getZoomFactor();
 	}
 
 	@Override
-	public void onPinchZoom(final PinchZoomDetector pPinchZoomDetector,
-			final TouchEvent pTouchEvent, final float pZoomFactor) {
-		mCandyCamera.setZoomFactor(Math.min(1, Math.max(
-				mPinchZoomStartedCameraZoomFactor * pZoomFactor,
-				candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT)));
+	public void onPinchZoom(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
+		mCandyCamera.setZoomFactor(Math.min(1, Math.max(mPinchZoomStartedCameraZoomFactor * pZoomFactor, candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT)));
 	}
 
 	@Override
-	public void onPinchZoomFinished(final PinchZoomDetector pPinchZoomDetector,
-			final TouchEvent pTouchEvent, final float pZoomFactor) {
-		mCandyCamera.setZoomFactor(Math.min(1, Math.max(
-				mPinchZoomStartedCameraZoomFactor * pZoomFactor,
-				candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT)));
+	public void onPinchZoomFinished(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
+		mCandyCamera.setZoomFactor(Math.min(1, Math.max(mPinchZoomStartedCameraZoomFactor * pZoomFactor, candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT)));
 	}
 
 	@Override
@@ -105,23 +90,13 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener,
 		if (candyLevel.gameStarted) {
 			if (!candyLevel.playMode) {
 				if (pSceneTouchEvent.getMotionEvent().getAction() == MotionEvent.ACTION_DOWN) {
-					if (System.currentTimeMillis() - time <= DOUBLE_TAP_THRESHOLD
-							&& Math.abs(pSceneTouchEvent.getMotionEvent()
-									.getX() - dragX) <= DOUBLE_TAP_LOCATION_THRESHOLD
-							&& Math.abs(pSceneTouchEvent.getMotionEvent()
-									.getY() - dragY) <= DOUBLE_TAP_LOCATION_THRESHOLD) {
-						if (2 * mCandyCamera.getZoomFactor() >= 1
-								+ candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT) {
-							mCandyCamera.setCenter(candyLevel.WIDTH / 2,
-									candyLevel.HEIGHT / 2);
-							mCandyCamera.setZoomFactor(candyLevel.PHONE_HEIGHT
-									/ candyLevel.HEIGHT);
+					if (System.currentTimeMillis() - time <= DOUBLE_TAP_THRESHOLD && Math.abs(pSceneTouchEvent.getMotionEvent().getX() - dragX) <= DOUBLE_TAP_LOCATION_THRESHOLD && Math.abs(pSceneTouchEvent.getMotionEvent().getY() - dragY) <= DOUBLE_TAP_LOCATION_THRESHOLD) {
+						if (2 * mCandyCamera.getZoomFactor() >= 1 + candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT) {
+							mCandyCamera.setCenter(candyLevel.WIDTH / 2, candyLevel.HEIGHT / 2);
+							mCandyCamera.setZoomFactor(candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT);
 						} else {
-							mCandyCamera
-									.convertCameraSceneToSceneTouchEvent(pSceneTouchEvent);
-							mCandyCamera.setCenterDirect(
-									pSceneTouchEvent.getX(),
-									pSceneTouchEvent.getY());
+							mCandyCamera.convertCameraSceneToSceneTouchEvent(pSceneTouchEvent);
+							mCandyCamera.setCenterDirect(pSceneTouchEvent.getX(),pSceneTouchEvent.getY());
 							mCandyCamera.setZoomFactor(1);
 							return true;
 						}
@@ -145,10 +120,8 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener,
 					mScrollDetector.onTouchEvent(pSceneTouchEvent);
 				}
 			} else {
-				mCandyCamera.setMaxVelocity(CandyLevelActivity.CAMERA_SPEED,
-						CandyLevelActivity.CAMERA_SPEED);
-				final MotionEvent motionEvent = pSceneTouchEvent
-						.getMotionEvent();
+				mCandyCamera.setMaxVelocity(CandyLevelActivity.CAMERA_SPEED, CandyLevelActivity.CAMERA_SPEED);
+				final MotionEvent motionEvent = pSceneTouchEvent.getMotionEvent();
 				final float motionX = motionEvent.getX();
 				final float motionY = motionEvent.getY();
 
@@ -190,8 +163,7 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener,
 					break;
 
 				case MotionEvent.ACTION_UP:
-					if (tapOptionEnabled
-							&& System.currentTimeMillis() - time <= TAP_THRESHOLD) {
+					if (tapOptionEnabled && System.currentTimeMillis() - time <= TAP_THRESHOLD) {
 						if (motionX <= candyLevel.PHONE_WIDTH / 3
 								&& motionY >= candyLevel.PHONE_HEIGHT / 6
 								&& motionY <= candyLevel.PHONE_HEIGHT * 5 / 6) {
@@ -216,4 +188,4 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener,
 		}
 		return true;
 	}
-}
+} // TODO FUCK YOU SHRAV I HAD TO REFORMAT ALL MY SHIT AFTER YOU TRIED TO FIX THE CONFLICT

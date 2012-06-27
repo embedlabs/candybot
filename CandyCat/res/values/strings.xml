@@ -45,9 +45,11 @@
     <string name="pref_graphics_theme_summary">The game\'s visual style.</string>
     <string-array name="theme">
         <item>Normal</item>
+        <item>Pseudo-Inverted</item>
     </string-array>
     <string-array name="theme_values">
         <item>normal</item>
+        <item>inverted</item>
     </string-array>
     
     <string name="dialog_about_title">About Embed Labs</string>

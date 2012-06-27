@@ -13,6 +13,7 @@ import com.swarmconnect.SwarmActivity;
 public class LevelSelectActivity extends SwarmActivity implements OnItemClickListener {
 
 	GridView level_gv;
+	LevelAdapter la;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,8 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 
 		level_gv = (GridView) findViewById(R.id.gridview_level);
-		level_gv.setAdapter(new LevelAdapter(this));
+		la = new LevelAdapter(this);
+		level_gv.setAdapter(la);
 		level_gv.setOnItemClickListener(this);
 	}
 
@@ -32,5 +34,12 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 		.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
 		.putExtra("com.embed.candy.level", position + 1)
 		.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		la.readData(this);
+		level_gv.invalidate();
 	}
 }

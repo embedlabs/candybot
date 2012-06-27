@@ -130,7 +130,7 @@ public class MainMenu extends SwarmActivity implements View.OnClickListener {
 		iv_twitter = (ImageView) findViewById(R.id.button_twitter);
 		my_swarm_button = (ImageView)findViewById(R.id.my_swarm_button);
 
-		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play); // changes
+		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve, button_lead); // changes
 																	// font
 		CandyUtils.setClick(this,button_achieve, button_lead, button_play, iv_facebook, iv_twitter, my_swarm_button);
 		Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);

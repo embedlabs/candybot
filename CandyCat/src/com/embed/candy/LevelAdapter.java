@@ -25,9 +25,9 @@ import android.widget.TextView;
 
 public class LevelAdapter extends BaseAdapter {
 	private final LayoutInflater li;
-	private int[] worldData = new int[60];
-	private int[] levelData = new int[60]; // 2D Array to store world/level data
-	private int[] starData = new int[60];
+	private int[] worldData = new int[20*WorldAdapter.imageIDs.length];
+	private int[] levelData = new int[20*WorldAdapter.imageIDs.length]; // 2D Array to store world/level data
+	private int[] starData = new int[20*WorldAdapter.imageIDs.length];
 	private final int worldNum;
 
 	private static String TAG = CandyUtils.TAG;
@@ -127,7 +127,7 @@ public class LevelAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View v, ViewGroup parent) {
-		int ArrayLvlValue = (position) * worldNum;
+		int ArrayLvlValue = (position) * worldNum; // TODO along with the first one, shouldn't it be like (worldNum-1)*20+position?
 		if (v == null) {
 			// 1,2,3 stars and 4 is a lock
 			switch (starData[ArrayLvlValue]) {
