@@ -5,9 +5,9 @@
 	android:layout_height="fill_parent"
 	android:background="@drawable/background"
 	android:fitsSystemWindows="false">
-		<RelativeLayout android:id="@+id/mainmenu_rl"
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent">
+<!-- 		<RelativeLayout android:id="@+id/mainmenu_rl" -->
+<!-- 			android:layout_width="fill_parent" -->
+<!-- 			android:layout_height="fill_parent"> -->
 			<TextView android:id="@+id/mainmenu_tv"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
 				style="@style/menuButton"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Achievements"
+				android:text="@string/button_achieve"
 				android:layout_below="@id/button_play"
 				android:layout_centerHorizontal="true"
 				android:layout_marginBottom="7dip"
@@ -40,7 +40,7 @@
 				style="@style/menuButton"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Leaderboards"
+				android:text="@string/button_lead"
 				android:layout_below="@id/button_achieve"
 				android:layout_centerHorizontal="true"
 				android:focusable="true" />
@@ -75,6 +75,5 @@
 				android:layout_marginRight="4dip"
 				android:layout_alignParentBottom="true"
 				android:layout_toLeftOf="@id/button_twitter" />
-			
-		</RelativeLayout>
+<!-- 		</RelativeLayout> -->
 </RelativeLayout>

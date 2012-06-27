@@ -79,20 +79,14 @@ public class CandyUtils {
 
 					final NodeList moveNodeList = currentLevelElement.getElementsByTagName("m");
 					if (moveNodeList.getLength() == 0) {
-						candyLevel.movesForStar = 1;
-						Log.w(TAG, "Level " + world + "-" + level + " lacks moves requirement.");
+						candyLevel.advancedMovesFor3Stars = 1;
+						candyLevel.basicMovesFor2Stars = 1;
+						Log.w(TAG, "Level " + world + "-" + level + " lacks moves requirements.");
 					} else {
-						candyLevel.movesForStar = Integer.valueOf(((Element) moveNodeList.item(0)).getTextContent());
-						Log.i(TAG, "Move requirement: " + candyLevel.movesForStar);
-					}
-
-					final NodeList timeNodeList = currentLevelElement.getElementsByTagName("t");
-					if (timeNodeList.getLength() == 0) {
-						candyLevel.timeForStar = 1000;
-						Log.w(TAG, "Level " + world + "-" + level + " lacks time requirement.");
-					} else {
-						candyLevel.timeForStar = Integer.valueOf(((Element) timeNodeList.item(0)).getTextContent());
-						Log.i(TAG, "Time requirement: " + candyLevel.timeForStar);
+						final Element currentMoveElement = (Element)moveNodeList.item(0);
+						candyLevel.advancedMovesFor3Stars = Integer.valueOf(currentMoveElement.getAttribute("a"));
+						candyLevel.basicMovesFor2Stars = Integer.valueOf(currentMoveElement.getAttribute("b"));
+						Log.i(TAG, "Move requirements: " + candyLevel.advancedMovesFor3Stars + ", " + candyLevel.basicMovesFor2Stars);
 					}
 					break;
 				} else if (i + 1 == levelNodeList.getLength()) {

@@ -131,7 +131,7 @@ public class CandyEngine {
 	// TODO EXPAND
 	private int moves = 0;
 	private int restarts = 0;
-	private long startTime;
+//	private long startTime;
 	private int enemiesDefeated = 0;
 	private int starsEarned = 0;
 
@@ -206,7 +206,7 @@ public class CandyEngine {
 				death = true;
 			case SQUARE_EMPTY:
 				catMoved = true;
-				maybeStartTimer();
+//				maybeStartTimer();
 				move(rowDirection, columnDirection, catIndex);
 				break;
 
@@ -225,7 +225,7 @@ public class CandyEngine {
 							death = true;
 						}
 						catMoved = true;
-						maybeStartTimer();
+//						maybeStartTimer();
 						move(rowDirection, columnDirection, catIndex,
 								situationArray[OBJECT]);
 					}
@@ -242,7 +242,7 @@ public class CandyEngine {
 						death = true;
 					case SQUARE_EMPTY:
 						catMoved = true;
-						maybeStartTimer();
+//						maybeStartTimer();
 						teleport(candyLevel.teleporter2row + ROW_DOWN,
 								candyLevel.teleporter2column, catIndex);
 						break;
@@ -255,7 +255,7 @@ public class CandyEngine {
 						death = true;
 					case SQUARE_EMPTY:
 						catMoved = true;
-						maybeStartTimer();
+//						maybeStartTimer();
 						teleport(candyLevel.teleporter1row + ROW_UP,
 								candyLevel.teleporter1column, catIndex);
 						break;
@@ -267,11 +267,11 @@ public class CandyEngine {
 			settle();
 		}
 
-		private void maybeStartTimer() {
-			if (moves == 0) {
-				CandyEngine.this.startTime = System.currentTimeMillis();
-			}
-		}
+//		private void maybeStartTimer() {
+//			if (moves == 0) {
+//				CandyEngine.this.startTime = System.currentTimeMillis();
+//			}
+//		}
 	}
 
 	private synchronized void move(final int rowDirection,
@@ -537,23 +537,30 @@ public class CandyEngine {
 	}
 
 	private synchronized void win() {
-		final int milliseconds = (int) (System.currentTimeMillis() - startTime);
+//		final int milliseconds = (int) (System.currentTimeMillis() - startTime);
 		candy.showCandyAnim();
 		pause(5, candyIndex);
 
 		Log.i(TAG, "Level Completion Info:");
 		Log.i(TAG, "Moves: " + moves);
 		Log.i(TAG, "Restarts: " + restarts);
-		Log.i(TAG, "Completion time (ms): " + milliseconds);
+//		Log.i(TAG, "Completion time (ms): " + milliseconds);
 		Log.i(TAG, "Enemies defeated: " + enemiesDefeated);
 		Log.i(TAG, "World:" + candyLevel.world + "  Level:" + candyLevel.level);
 
-		starsEarned = 1;
-		if (milliseconds <= candyLevel.timeForStar) {
-			starsEarned++;
-		}
-		if (moves <= candyLevel.movesForStar) {
-			starsEarned++;
+//		starsEarned = 1;
+//		if (milliseconds <= candyLevel.timeForStar) {
+//			starsEarned++;
+//		}
+//		if (moves <= candyLevel.movesForStar) {
+//			starsEarned++;
+//		}
+		if (moves <= candyLevel.advancedMovesFor3Stars) {
+			starsEarned = 3;
+		} else if (moves <= candyLevel.basicMovesFor2Stars) {
+			starsEarned = 2;
+		} else {
+			starsEarned = 1;
 		}
 
 		/**
@@ -561,8 +568,7 @@ public class CandyEngine {
 		 * FILE, MEANING LEAST NUMBER OF MOVES, FASTEST TIME, MOST STARS. DO NOT
 		 * OVERRIDE EXISTING BETTER STATS, ONLY PUT NEW BETTER ONES IN
 		 */
-		saveSettings(candyLevel, milliseconds, candyLevel.level,
-				candyLevel.world);
+		saveSettings();
 
 		/**
 		 * TODO SHRAV:
@@ -593,51 +599,33 @@ public class CandyEngine {
 	}
 
 	// Cont variable needed for openFileOutput attention, do not remove...
-	public void saveSettings(Context cont, int milliseconds, int level,
-			int world) {
+	public void saveSettings() {
 		try {
-			FileOutputStream fos = cont.getApplicationContext().openFileOutput(
-					"level.xml", Context.MODE_PRIVATE);
+			FileOutputStream fos = candyLevel.getApplicationContext().openFileOutput("level.xml", Context.MODE_PRIVATE);
 			XmlSerializer serializer = Xml.newSerializer();
 			try {
 				serializer.setOutput(fos, "UTF-8");
 				serializer.startDocument(null, Boolean.valueOf(true));
-				serializer
-						.setFeature(
-								"http://xmlpull.org/v1/doc/features.html#indent-output",
-								true);
+				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output",true);
 				serializer.startTag(null, "Candybot");
-
-				serializer.startTag(null, "world");
-				serializer.text(world + "");
+				
+				serializer.startTag(null, "world"); // TODO SHRAV WTF IS THIS shouldn't all the other stuff be inside the world tag, inside which should be a level tag containing all the level info?
+				serializer.text(candyLevel.world + "");
 				serializer.endTag(null, "world");
 				serializer.startTag(null, "level");
-				serializer.text(level + "");
+				serializer.text(candyLevel.level + "");
 				serializer.endTag(null, "level");
-				serializer.startTag(null, "completion");
-				serializer.text("1"); // 1 for completion, 0 or i guess it will
-										// be null for non completion, since it
-										// won't even reach this method
-				serializer.endTag(null, "completion");
+				intTag(serializer,"completion",1); // 1 for completion, 0 or i guess it will be null for non completion, since it won't even reach this method
 
 				// Code in stars here
-				serializer.startTag(null, "stars");
-				serializer.text("1"); // 1, 2, 3, 4 (lock)
-				serializer.endTag(null, "stars");
+				intTag(serializer,"stars",starsEarned); // 1,2,3
 
-				serializer.startTag(null, "moves");
-				serializer.text(moves + "");
-				serializer.endTag(null, "moves");
-				serializer.startTag(null, "restarts");
-				serializer.text(restarts + "");
-				serializer.endTag(null, "restarts");
-				serializer.startTag(null, "time");
-				serializer.text(milliseconds + ""); // May want a private
-													// variable idk
-				serializer.endTag(null, "time");
-				serializer.startTag(null, "enemies defeated");
-				serializer.text(enemiesDefeated + "");
-				serializer.endTag(null, "enemies defeated");
+				intTag(serializer,"moves",moves);
+				intTag(serializer,"restarts",restarts);
+//				serializer.startTag(null, "time");
+//				serializer.text(milliseconds + ""); // May want a private variable idk
+//				serializer.endTag(null, "time");
+				intTag(serializer,"enemies defeated",enemiesDefeated);
 
 				serializer.endTag(null, "Candybot");
 				serializer.endDocument();
@@ -652,6 +640,10 @@ public class CandyEngine {
 			Log.e("Exception", "error occurred while creating xml file");
 		}
 
+	}
+	
+	public static void intTag (final XmlSerializer s,final String tag,final int input) throws IllegalArgumentException, IllegalStateException, IOException {
+		s.startTag(null, tag).text(Integer.toString(input)).endTag(null, tag);
 	}
 
 	private synchronized void logArray(final String message) {

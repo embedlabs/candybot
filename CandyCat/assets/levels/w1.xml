@@ -5,8 +5,7 @@
 		<o n="1" r="7" c="8" />
 		<o n="2" r="7" c="7" />
 		<h r="10" c="5">Help the Cat move the candy&#10;into the hole!</h>
-		<m>25</m>
-		<t>25000</t>
+		<m a="25" b="29" />
 	</l>
 	<l id="2">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRgM5lPid3q7nxR3EqOWVPcPVvXUSLPUMIsW6vHFFznpkxT/EZt+iPUzNeMXX5rHpZdc95CTJgiFFzlpbKDKZ2pjJiBmhrIBxL8siMAGAAA=</c>

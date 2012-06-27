@@ -133,8 +133,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	public int teleporter2column = -1;
 	public int teleporter2row = -1;
 
-	public int movesForStar;
-	public int timeForStar;
+	public int advancedMovesFor3Stars;
+	public int basicMovesFor2Stars;
 
 	/**
 	 * Preferences
