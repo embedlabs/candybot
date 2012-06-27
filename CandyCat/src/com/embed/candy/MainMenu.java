@@ -2,7 +2,6 @@ package com.embed.candy;
 
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,14 +29,10 @@ public class MainMenu extends SwarmActivity implements View.OnClickListener {
 	ImageView iv_facebook, iv_twitter, my_swarm_button;
 	GoogleAnalyticsTracker tracker;
 	
-
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 
 	private String theme;
-
-	
-	
 
 	@Override
 	public void onClick(View view) {
