@@ -20,7 +20,9 @@ import android.widget.TextView;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import com.swarmconnect.Swarm;
+import com.swarmconnect.SwarmActiveUser;
 import com.swarmconnect.SwarmActivity;
+import com.swarmconnect.delegates.SwarmLoginListener;
 
 public class MainMenu extends SwarmActivity implements View.OnClickListener {
 
@@ -75,11 +77,31 @@ public class MainMenu extends SwarmActivity implements View.OnClickListener {
 		}
 		return true;
 	}
+	
+	private SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
+
+		// This method is called when the login process has started
+		// (when a login dialog is displayed to the user).
+		public void loginStarted() {
+		}
+
+		// This method is called if the user cancels the login process.
+		public void loginCanceled() {
+		}
+
+		// This method is called when the user has successfully logged in.
+		public void userLoggedIn(SwarmActiveUser user) {
+		}
+
+		// This method is called when the user logs out.
+		public void userLoggedOut() {
+		}
+
+	};
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3");
 		setContentView(((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE))
 				.inflate(R.layout.main, null));
 
@@ -103,6 +125,8 @@ public class MainMenu extends SwarmActivity implements View.OnClickListener {
 		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play); // changes
 																	// font
 		CandyUtils.setClick(this, button_play, iv_facebook, iv_twitter, my_swarm_button);
+		Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
+
 	}
 
 	@Override
