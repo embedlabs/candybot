@@ -28,7 +28,7 @@ public class LevelAdapter extends BaseAdapter {
 	private int[] worldData = new int[60];
 	private int[] levelData = new int[60]; // 2D Array to store world/level data
 	private int[] starData = new int[60];
-	private int worldNum;
+	private final int worldNum;
 
 	private static String TAG = CandyUtils.TAG;
 
@@ -36,7 +36,7 @@ public class LevelAdapter extends BaseAdapter {
 		li = a.getLayoutInflater();
 
 		worldNum = (WorldAdapter.getPos()) + 1;
-		Log.d(TAG, "this is a numero" + worldNum);
+		Log.d(TAG, "Current world:" + worldNum);
 
 		readData(a);
 	}
@@ -101,7 +101,7 @@ public class LevelAdapter extends BaseAdapter {
 					if (getStars) {
 						int stars = Integer.parseInt(new String(ch, start, length));
 						Log.d(TAG, "Stars: " + stars);
-						starData[(levelData[count] * worldData[count]) - 1] = stars;
+						starData[(levelData[count] * worldData[count]) - 1] = stars; // TODO i'm pretty sure this might be wrong -Prem
 						count++;
 						getStars = false;
 					}
