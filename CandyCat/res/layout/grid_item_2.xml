@@ -21,7 +21,7 @@
 	    android:src="@drawable/star" />
 	<RelativeLayout 
 		android:layout_width="60px"
-		android:layout_height="60px"
+		android:layout_height="90px"
 		android:layout_centerInParent="true">
 		<TextView android:id="@+id/grid_text"
 			android:layout_width="wrap_content"

@@ -50,12 +50,7 @@ public class WorldAdapter extends BaseAdapter {
 		i.setScaleType(ImageView.ScaleType.FIT_XY);
 		i.setLayoutParams(new LayoutParams(350, 350)); // To fill screen (view)
 
-		final RelativeLayout border_rl = new RelativeLayout(mContext); // Add
-																		// Image
-																		// view
-																		// to
-																		// relative
-																		// layout
+		final RelativeLayout border_rl = new RelativeLayout(mContext); // Add ImageView to relative layout
 		border_rl.addView(i);
 
 		return border_rl;

@@ -10,8 +10,7 @@ import android.widget.GridView;
 
 import com.swarmconnect.SwarmActivity;
 
-public class LevelSelectActivity extends SwarmActivity implements
-		OnItemClickListener {
+public class LevelSelectActivity extends SwarmActivity implements OnItemClickListener {
 
 	GridView level_gv;
 
@@ -30,10 +29,8 @@ public class LevelSelectActivity extends SwarmActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> av, View v, int position, long arg3) {
 		startActivity(new Intent(this, CandyLevelActivity.class)
-				.putExtra("com.embed.candy.world",
-						getIntent().getIntExtra("com.embed.candy.world", 1))
-				.putExtra("com.embed.candy.level", position + 1)
-				.putExtra("com.embed.candy.theme",
-						getIntent().getStringExtra("com.embed.candy.theme")));
+		.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
+		.putExtra("com.embed.candy.level", position + 1)
+		.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
 	}
 }

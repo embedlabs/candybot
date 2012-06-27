@@ -16,6 +16,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +30,13 @@ public class LevelAdapter extends BaseAdapter {
 	private int[] starData = new int[60];
 	private int worldNum;
 
+	private static String TAG = CandyUtils.TAG;
+
 	public LevelAdapter(final Activity a) {
 		li = a.getLayoutInflater();
 
 		worldNum = (WorldAdapter.getPos()) + 1;
-		System.out.println("this is a numero" + worldNum);
+		Log.d(TAG, "this is a numero" + worldNum);
 
 		readData(a);
 	}
@@ -63,61 +66,43 @@ public class LevelAdapter extends BaseAdapter {
 				int count = 0;
 
 				@Override
-				public void startElement(String uri, String localName,
-						String qName, Attributes attributes)
-						throws SAXException {
-					System.out.println("Start Element: " + qName);
+				public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+					Log.d(TAG, "Start Element: " + qName);
 					if (qName.equalsIgnoreCase("world")) {
 						getWorld = true;
-					}
-					if (qName.equalsIgnoreCase("level")) {
+					} else if (qName.equalsIgnoreCase("level")) {
 						getLevel = true;
-					}
-					if (qName.equalsIgnoreCase("stars")) {
+					} else if (qName.equalsIgnoreCase("stars")) {
 						getStars = true;
 					}
 				}
 
 				@Override
-				public void endElement(String uri, String localName,
-						String qName) throws SAXException {
-					System.out.println("End Element: " + qName);
+				public void endElement(String uri, String localName, String qName) throws SAXException {
+					Log.d(TAG, "End Element: " + qName);
 				}
 
 				@Override
-				public void characters(char ch[], int start, int length)
-						throws SAXException {
-					System.out.println(new String(ch, start, length));
+				public void characters(char ch[], int start, int length) throws SAXException {
+					Log.d(TAG, new String(ch, start, length));
 
 					if (getWorld) {
-						int world = Integer.parseInt(new String(ch, start,
-								length));
-						System.out.println("World: " + world);
-
-						// Add to array
+						int world = Integer.parseInt(new String(ch, start, length));
+						Log.d(TAG, "World: " + world);
 						worldData[count] = world;
-
 						getWorld = false;
 					}
 					if (getLevel) {
-						int level = Integer.parseInt(new String(ch, start,
-								length));
-						System.out.println("Level: " + level);
-
-						// Add to array
+						int level = Integer.parseInt(new String(ch, start, length));
+						Log.d(TAG, "Level: " + level);
 						levelData[count] = level;
-
 						getLevel = false;
 					}
 					if (getStars) {
-						int stars = Integer.parseInt(new String(ch, start,
-								length));
-						System.out.println("Stars: " + stars);
-
-						// Add to array
+						int stars = Integer.parseInt(new String(ch, start, length));
+						Log.d(TAG, "Stars: " + stars);
 						starData[(levelData[count] * worldData[count]) - 1] = stars;
 						count++;
-
 						getStars = false;
 					}
 				}
@@ -126,7 +111,7 @@ public class LevelAdapter extends BaseAdapter {
 			FileInputStream is = cont.openFileInput("level.xml");
 			byte[] byIn = new byte[is.available()];
 			while (is.read(byIn) != -1) {
-				System.out.println(new String(byIn));
+				Log.d(TAG, new String(byIn));
 			}
 			InputStream inputStream = new ByteArrayInputStream(byIn);
 			Reader reader = new InputStreamReader(inputStream, "UTF-8");
@@ -156,8 +141,6 @@ public class LevelAdapter extends BaseAdapter {
 				v = li.inflate(R.layout.grid_item_3, null);
 				break;
 			case 4:
-				v = li.inflate(R.layout.grid_item_lock, null);
-				break;
 			default:
 				v = li.inflate(R.layout.grid_item_lock, null);
 				break;
