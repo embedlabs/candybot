@@ -1,6 +1,5 @@
 package com.embed.candy;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -8,12 +7,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Gallery;
-import com.embed.candy.R;
 
-public class WorldSelectActivity extends Activity implements OnItemClickListener {
-	
+import com.swarmconnect.SwarmActivity;
+
+public class WorldSelectActivity extends SwarmActivity implements
+		OnItemClickListener {
+
 	Gallery world_g;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,11 +29,13 @@ public class WorldSelectActivity extends Activity implements OnItemClickListener
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> av, View v, final int position, final long arg3) {
-		if (av.getSelectedItemPosition()==position) {
-			startActivity(new Intent(this,LevelSelectActivity.class)
-			.putExtra("com.embed.candy.world", position+1)
-			.putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
+	public void onItemClick(AdapterView<?> av, View v, final int position,
+			final long arg3) {
+		if (av.getSelectedItemPosition() == position) {
+			startActivity(new Intent(this, LevelSelectActivity.class).putExtra(
+					"com.embed.candy.world", position + 1).putExtra(
+					"com.embed.candy.theme",
+					getIntent().getStringExtra("com.embed.candy.theme")));
 		}
 	}
 }

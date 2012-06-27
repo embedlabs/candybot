@@ -6,11 +6,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import org.xml.sax.Attributes;
 
+import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -29,16 +28,16 @@ public class LevelAdapter extends BaseAdapter {
 	private int[] levelData = new int[60]; // 2D Array to store world/level data
 	private int[] starData = new int[60];
 	private int worldNum;
-	
+
 	public LevelAdapter(final Activity a) {
 		li = a.getLayoutInflater();
-		
-        worldNum = (WorldAdapter.getPos()) + 1;   
+
+		worldNum = (WorldAdapter.getPos()) + 1;
 		System.out.println("this is a numero" + worldNum);
-		
+
 		readData(a);
 	}
-	
+
 	@Override
 	public int getCount() {
 		return 20;
@@ -54,19 +53,19 @@ public class LevelAdapter extends BaseAdapter {
 		return position;
 	}
 
-	public void readData(Context cont){
+	public void readData(Context cont) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler() {
-				
-								boolean getWorld, getLevel, getStars = false;
+
+				boolean getWorld, getLevel, getStars = false;
 				int count = 0;
 
 				@Override
 				public void startElement(String uri, String localName,
 						String qName, Attributes attributes)
-								throws SAXException {
+						throws SAXException {
 					System.out.println("Start Element: " + qName);
 					if (qName.equalsIgnoreCase("world")) {
 						getWorld = true;
@@ -91,31 +90,34 @@ public class LevelAdapter extends BaseAdapter {
 					System.out.println(new String(ch, start, length));
 
 					if (getWorld) {
-						int world = Integer.parseInt(new String(ch, start,length));
+						int world = Integer.parseInt(new String(ch, start,
+								length));
 						System.out.println("World: " + world);
-						
+
 						// Add to array
 						worldData[count] = world;
-						
+
 						getWorld = false;
 					}
 					if (getLevel) {
-						int level = Integer.parseInt(new String(ch, start,length));
+						int level = Integer.parseInt(new String(ch, start,
+								length));
 						System.out.println("Level: " + level);
-						
+
 						// Add to array
 						levelData[count] = level;
-						
+
 						getLevel = false;
 					}
 					if (getStars) {
-						int stars = Integer.parseInt(new String(ch, start,length));
+						int stars = Integer.parseInt(new String(ch, start,
+								length));
 						System.out.println("Stars: " + stars);
-						
+
 						// Add to array
-						starData[(levelData[count]*worldData[count])-1] = stars;
+						starData[(levelData[count] * worldData[count]) - 1] = stars;
 						count++;
-						
+
 						getStars = false;
 					}
 				}
@@ -123,11 +125,11 @@ public class LevelAdapter extends BaseAdapter {
 
 			FileInputStream is = cont.openFileInput("level.xml");
 			byte[] byIn = new byte[is.available()];
-			while ( is.read(byIn) != -1 ){
-				System.out.println(new String (byIn));
+			while (is.read(byIn) != -1) {
+				System.out.println(new String(byIn));
 			}
-			InputStream inputStream = new ByteArrayInputStream( byIn );
-			Reader reader = new InputStreamReader(inputStream,"UTF-8");
+			InputStream inputStream = new ByteArrayInputStream(byIn);
+			Reader reader = new InputStreamReader(inputStream, "UTF-8");
 			InputSource isrc = new InputSource(reader);
 			isrc.setEncoding("UTF-8");
 			saxParser.parse(isrc, handler);
@@ -137,33 +139,36 @@ public class LevelAdapter extends BaseAdapter {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
-	public View getView(int position,View v,ViewGroup parent) {
+	public View getView(int position, View v, ViewGroup parent) {
 		int ArrayLvlValue = (position) * worldNum;
 		if (v == null) {
-		  	// 1,2,3 stars and 4 is a lock   
-		    	switch (starData[ArrayLvlValue]) {
-	            case 1:  v = li.inflate(R.layout.grid_item_1,null);
-	                     break;
-	            case 2:  v = li.inflate(R.layout.grid_item_2,null);
-	                     break;
-	            case 3:  v = li.inflate(R.layout.grid_item_3,null);
-	                     break;
-	            case 4:  v = li.inflate(R.layout.grid_item_lock,null);
-	            		 break;
-	            default: v = li.inflate(R.layout.grid_item_lock,null);
-       		 			 break;
-		    	}
-		   
-		
+			// 1,2,3 stars and 4 is a lock
+			switch (starData[ArrayLvlValue]) {
+			case 1:
+				v = li.inflate(R.layout.grid_item_1, null);
+				break;
+			case 2:
+				v = li.inflate(R.layout.grid_item_2, null);
+				break;
+			case 3:
+				v = li.inflate(R.layout.grid_item_3, null);
+				break;
+			case 4:
+				v = li.inflate(R.layout.grid_item_lock, null);
+				break;
+			default:
+				v = li.inflate(R.layout.grid_item_lock, null);
+				break;
+			}
+
 		}
-			final TextView tv = (TextView) v.findViewById(R.id.grid_text);
-			tv.setText(String.valueOf(position+1));
-			CandyUtils.setMainFont(tv);
-		
-			return v;
+		final TextView tv = (TextView) v.findViewById(R.id.grid_text);
+		tv.setText(String.valueOf(position + 1));
+		CandyUtils.setMainFont(tv);
+
+		return v;
 	}
 
 }
-	

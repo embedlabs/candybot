@@ -1,6 +1,5 @@
 package org.anddev.andengine.engine.camera;
 
-
 public class CandyCamera extends ZoomCamera {
 	private float mMaxVelocityX;
 	private float mMaxVelocityY;
@@ -11,7 +10,9 @@ public class CandyCamera extends ZoomCamera {
 
 	private float mTargetZoomFactor;
 
-	public CandyCamera(final float pX, final float pY, final float pWidth, final float pHeight, final float pMaxVelocityX, final float pMaxVelocityY, final float pMaxZoomFactorChange) {
+	public CandyCamera(final float pX, final float pY, final float pWidth,
+			final float pHeight, final float pMaxVelocityX,
+			final float pMaxVelocityY, final float pMaxZoomFactorChange) {
 		super(pX, pY, pWidth, pHeight);
 		this.mMaxVelocityX = pMaxVelocityX;
 		this.mMaxVelocityY = pMaxVelocityY;
@@ -37,7 +38,7 @@ public class CandyCamera extends ZoomCamera {
 
 	@Override
 	public void setZoomFactor(final float pZoomFactor) {
-		if(this.mTargetZoomFactor != pZoomFactor) {
+		if (this.mTargetZoomFactor != pZoomFactor) {
 			this.mTargetZoomFactor = pZoomFactor;
 		}
 	}
@@ -55,7 +56,8 @@ public class CandyCamera extends ZoomCamera {
 		this.mMaxVelocityY = pMaxVelocityY;
 	}
 
-	public void setMaxVelocity(final float pMaxVelocityX, final float pMaxVelocityY) {
+	public void setMaxVelocity(final float pMaxVelocityX,
+			final float pMaxVelocityY) {
 		this.mMaxVelocityX = pMaxVelocityX;
 		this.mMaxVelocityY = pMaxVelocityY;
 	}
@@ -74,19 +76,21 @@ public class CandyCamera extends ZoomCamera {
 		final float targetCenterX = this.mTargetCenterX;
 		final float targetCenterY = this.mTargetCenterY;
 
-		if(currentCenterX != targetCenterX || currentCenterY != targetCenterY) {
+		if (currentCenterX != targetCenterX || currentCenterY != targetCenterY) {
 			float diffX = targetCenterX - currentCenterX;
 			final float dX = this.limitToMaxVelocityX(diffX, pSecondsElapsed);
 
 			float diffY = targetCenterY - currentCenterY;
 			final float dY = this.limitToMaxVelocityY(diffY, pSecondsElapsed);
-			
-			final float vecLength = android.util.FloatMath.sqrt(diffX*diffX+diffY*diffY);
-			
+
+			final float vecLength = android.util.FloatMath.sqrt(diffX * diffX
+					+ diffY * diffY);
+
 			diffX /= vecLength;
 			diffY /= vecLength;
 
-			super.setCenter(currentCenterX + (dX*Math.abs(diffX)), currentCenterY + (dY*Math.abs(diffY)));
+			super.setCenter(currentCenterX + (dX * Math.abs(diffX)),
+					currentCenterY + (dY * Math.abs(diffY)));
 		}
 
 		/* Update zoom. */
@@ -94,34 +98,40 @@ public class CandyCamera extends ZoomCamera {
 
 		final float targetZoomFactor = this.mTargetZoomFactor;
 
-		if(currentZoom != targetZoomFactor) {
+		if (currentZoom != targetZoomFactor) {
 			final float absoluteZoomDifference = targetZoomFactor - currentZoom;
-			final float zoomChange = this.limitToMaxZoomFactorChange(absoluteZoomDifference, pSecondsElapsed);
+			final float zoomChange = this.limitToMaxZoomFactorChange(
+					absoluteZoomDifference, pSecondsElapsed);
 			super.setZoomFactor(currentZoom + zoomChange);
 		}
 	}
 
-	private float limitToMaxVelocityX(final float pValue, final float pSecondsElapsed) {
-		if(pValue > 0) {
+	private float limitToMaxVelocityX(final float pValue,
+			final float pSecondsElapsed) {
+		if (pValue > 0) {
 			return Math.min(pValue, this.mMaxVelocityX * pSecondsElapsed);
 		} else {
 			return Math.max(pValue, -this.mMaxVelocityX * pSecondsElapsed);
 		}
 	}
 
-	private float limitToMaxVelocityY(final float pValue, final float pSecondsElapsed) {
-		if(pValue > 0) {
+	private float limitToMaxVelocityY(final float pValue,
+			final float pSecondsElapsed) {
+		if (pValue > 0) {
 			return Math.min(pValue, this.mMaxVelocityY * pSecondsElapsed);
 		} else {
 			return Math.max(pValue, -this.mMaxVelocityY * pSecondsElapsed);
 		}
 	}
 
-	private float limitToMaxZoomFactorChange(final float pValue, final float pSecondsElapsed) {
-		if(pValue > 0) {
-			return Math.min(pValue, this.mMaxZoomFactorChange * pSecondsElapsed);
+	private float limitToMaxZoomFactorChange(final float pValue,
+			final float pSecondsElapsed) {
+		if (pValue > 0) {
+			return Math
+					.min(pValue, this.mMaxZoomFactorChange * pSecondsElapsed);
 		} else {
-			return Math.max(pValue, -this.mMaxZoomFactorChange * pSecondsElapsed);
+			return Math.max(pValue, -this.mMaxZoomFactorChange
+					* pSecondsElapsed);
 		}
 	}
 }

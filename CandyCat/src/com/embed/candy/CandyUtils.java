@@ -25,163 +25,202 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.embed.candy.R;
 
 public class CandyUtils {
 	public static final String TAG = "Candy Cat";
 	public static Typeface mainFont;
-	
+
 	/**
-	 * w: world
-	 *     l: level
-	 *         o: object
-	 *         t: tutorial text
-	 *         m: move requirement
-	 *         s: time requirement in milliseconds
+	 * w: world l: level o: object t: tutorial text m: move requirement s: time
+	 * requirement in milliseconds
 	 */
-	
-	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel,
-			final int world,
-			final int level,
-			ArrayList<int[]> objectList,
+
+	public static void parseLevelObjectsFromXml(
+			final CandyLevelActivity candyLevel, final int world,
+			final int level, ArrayList<int[]> objectList,
 			final ArrayList<String[]> tutorialList) {
 		try {
 			// Load the XML into a DOM.
-			final InputStream input = candyLevel.getAssets().open("levels/w"+world+".xml");
-			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			final InputStream input = candyLevel.getAssets().open(
+					"levels/w" + world + ".xml");
+			final DocumentBuilderFactory dbf = DocumentBuilderFactory
+					.newInstance();
 			final DocumentBuilder db = dbf.newDocumentBuilder();
 			final Document doc = db.parse(new InputSource(input));
 			doc.getDocumentElement().normalize();
-			
+
 			// Get all elements named level.
-			final NodeList levelNodeList = doc.getElementsByTagName("l"); // l = level
-			
+			final NodeList levelNodeList = doc.getElementsByTagName("l"); // l =
+																			// level
+
 			// Select the correct level in the world.
-			for (int i=0;i<levelNodeList.getLength();i++) {
-				if (Integer.valueOf(((Element)levelNodeList.item(i)).getAttribute("id"))==level) {
-					final Element currentLevelElement = (Element)levelNodeList.item(i);
+			for (int i = 0; i < levelNodeList.getLength(); i++) {
+				if (Integer.valueOf(((Element) levelNodeList.item(i))
+						.getAttribute("id")) == level) {
+					final Element currentLevelElement = (Element) levelNodeList
+							.item(i);
 
 					// Make a list of all child objects.
-					final NodeList objectNodeList = currentLevelElement.getElementsByTagName("o"); // o = object
-					
-					// Load attributes into an Object[3], then append to objectArrayList.
-					for (int j=0;j<objectNodeList.getLength();j++) {
-						final Element currentObjectElement = (Element)objectNodeList.item(j);
-						objectList.add(new int[]{
-							Integer.valueOf(currentObjectElement.getAttribute("n")), // n = number indicating type of object
-							Integer.valueOf(currentObjectElement.getAttribute("r")), // r = row
-							Integer.valueOf(currentObjectElement.getAttribute("c")) // c = column
-						});
+					final NodeList objectNodeList = currentLevelElement
+							.getElementsByTagName("o"); // o = object
+
+					// Load attributes into an Object[3], then append to
+					// objectArrayList.
+					for (int j = 0; j < objectNodeList.getLength(); j++) {
+						final Element currentObjectElement = (Element) objectNodeList
+								.item(j);
+						objectList.add(new int[] {
+								Integer.valueOf(currentObjectElement
+										.getAttribute("n")), // n = number
+																// indicating
+																// type of
+																// object
+								Integer.valueOf(currentObjectElement
+										.getAttribute("r")), // r = row
+								Integer.valueOf(currentObjectElement
+										.getAttribute("c")) // c = column
+								});
 					}
-					
-					final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("h"); // h = help = tutorial
-					for (int j=0;j<tutorialNodeList.getLength();j++) {
-						final Element currentTutorialElement = (Element)tutorialNodeList.item(j);
-						tutorialList.add(new String[]{
-							currentTutorialElement.getTextContent(),
-							currentTutorialElement.getAttribute("r"), // r = row
-							currentTutorialElement.getAttribute("c") // c = column
-						});
+
+					final NodeList tutorialNodeList = currentLevelElement
+							.getElementsByTagName("h"); // h = help = tutorial
+					for (int j = 0; j < tutorialNodeList.getLength(); j++) {
+						final Element currentTutorialElement = (Element) tutorialNodeList
+								.item(j);
+						tutorialList.add(new String[] {
+								currentTutorialElement.getTextContent(),
+								currentTutorialElement.getAttribute("r"), // r =
+																			// row
+								currentTutorialElement.getAttribute("c") // c =
+																			// column
+								});
 					}
-					
-					final NodeList moveNodeList = currentLevelElement.getElementsByTagName("m");
+
+					final NodeList moveNodeList = currentLevelElement
+							.getElementsByTagName("m");
 					if (moveNodeList.getLength() == 0) {
 						candyLevel.movesForStar = 1;
-						Log.w(TAG,"Level "+world+"-"+level+" lacks moves requirement.");
+						Log.w(TAG, "Level " + world + "-" + level
+								+ " lacks moves requirement.");
 					} else {
-						candyLevel.movesForStar = Integer.valueOf(((Element)moveNodeList.item(0)).getTextContent());
-						Log.i(TAG,"Move requirement: "+candyLevel.movesForStar);
+						candyLevel.movesForStar = Integer
+								.valueOf(((Element) moveNodeList.item(0))
+										.getTextContent());
+						Log.i(TAG, "Move requirement: "
+								+ candyLevel.movesForStar);
 					}
-					
-					final NodeList timeNodeList = currentLevelElement.getElementsByTagName("t");
+
+					final NodeList timeNodeList = currentLevelElement
+							.getElementsByTagName("t");
 					if (timeNodeList.getLength() == 0) {
 						candyLevel.timeForStar = 1000;
-						Log.w(TAG,"Level "+world+"-"+level+" lacks time requirement.");
+						Log.w(TAG, "Level " + world + "-" + level
+								+ " lacks time requirement.");
 					} else {
-						candyLevel.timeForStar = Integer.valueOf(((Element)timeNodeList.item(0)).getTextContent());
-						Log.i(TAG,"Time requirement: "+candyLevel.timeForStar);
+						candyLevel.timeForStar = Integer
+								.valueOf(((Element) timeNodeList.item(0))
+										.getTextContent());
+						Log.i(TAG, "Time requirement: "
+								+ candyLevel.timeForStar);
 					}
 					break;
-				} else if (i+1 == levelNodeList.getLength()) {
-					throw new Exception("Missing level "+world+"-"+level+"!");
+				} else if (i + 1 == levelNodeList.getLength()) {
+					throw new Exception("Missing level " + world + "-" + level
+							+ "!");
 				}
 			}
 		} catch (Exception e) {
-			Log.e(TAG,"XML FAIL!",e);
-			Toast.makeText(candyLevel, "Failed to load level.", Toast.LENGTH_LONG);
-			if (!(world==1&level==1)) {
-				parseLevelObjectsFromXml(candyLevel,1,1,objectList,tutorialList);
+			Log.e(TAG, "XML FAIL!", e);
+			Toast.makeText(candyLevel, "Failed to load level.",
+					Toast.LENGTH_LONG);
+			if (!(world == 1 & level == 1)) {
+				parseLevelObjectsFromXml(candyLevel, 1, 1, objectList,
+						tutorialList);
 			}
 		}
 	}
-	
-	public static InputStream tmxFromXML(final CandyLevelActivity candyLevel,final int world,final int level) {
+
+	public static InputStream tmxFromXML(final CandyLevelActivity candyLevel,
+			final int world, final int level) {
 		// Load the XML into a DOM.
 		try {
-			final InputStream input = candyLevel.getAssets().open("levels/w"+world+".xml");
-			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			final InputStream input = candyLevel.getAssets().open(
+					"levels/w" + world + ".xml");
+			final DocumentBuilderFactory dbf = DocumentBuilderFactory
+					.newInstance();
 			final DocumentBuilder db = dbf.newDocumentBuilder();
 			final Document doc = db.parse(new InputSource(input));
 			doc.getDocumentElement().normalize();
 			final NodeList levelNodeList = doc.getElementsByTagName("l");
-			for (int i=0;i<levelNodeList.getLength();i++) {
-				if (Integer.valueOf(((Element)levelNodeList.item(i)).getAttribute("id"))==level) {
-					final Element currentLevelElement = (Element)levelNodeList.item(i);
-					final NodeList nodeList = currentLevelElement.getElementsByTagName("c");
-					return new ByteArrayInputStream(((Element)nodeList.item(0)).getTextContent().getBytes());
+			for (int i = 0; i < levelNodeList.getLength(); i++) {
+				if (Integer.valueOf(((Element) levelNodeList.item(i))
+						.getAttribute("id")) == level) {
+					final Element currentLevelElement = (Element) levelNodeList
+							.item(i);
+					final NodeList nodeList = currentLevelElement
+							.getElementsByTagName("c");
+					return new ByteArrayInputStream(
+							((Element) nodeList.item(0)).getTextContent()
+									.getBytes());
 				}
 			}
-			throw new Exception("Missing level "+world+"-"+level+"!");
+			throw new Exception("Missing level " + world + "-" + level + "!");
 		} catch (Exception e) {
-			Log.e(TAG,"Failed to load TMX, loading default.",e);
-			return new ByteArrayInputStream("H4sIAAAAAAAAA2NkYGBgpDGmFRg1f9R8aptPzXQ9HMNn1PxR80k1n5qYCYiZkfgAkQjLUsAGAAA=".getBytes());
+			Log.e(TAG, "Failed to load TMX, loading default.", e);
+			return new ByteArrayInputStream(
+					"H4sIAAAAAAAAA2NkYGBgpDGmFRg1f9R8aptPzXQ9HMNn1PxR80k1n5qYCYiZkfgAkQjLUsAGAAA="
+							.getBytes());
 		}
 	}
 
-	public static void setMainFont(final Typeface typeFace,final TextView... views) { // changes font
+	public static void setMainFont(final Typeface typeFace,
+			final TextView... views) { // changes font
 		mainFont = typeFace;
-		for (TextView tv:views) {
+		for (TextView tv : views) {
 			tv.setTypeface(mainFont);
 		}
 	}
-	
+
 	public static void setMainFont(final TextView... views) {
-		if (mainFont!=null) {
-			for (TextView tv:views) {
+		if (mainFont != null) {
+			for (TextView tv : views) {
 				tv.setTypeface(mainFont);
 			}
 		}
 	}
-	
 
-	public static void setClick(OnClickListener listener,View... views) {
-		for (View view:views) {
+	public static void setClick(OnClickListener listener, View... views) {
+		for (View view : views) {
 			view.setOnClickListener(listener);
 		}
 	}
-	
+
 	public static Intent facebookIntent(final Context context) {
 		try {
-			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-			return new Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.facebook_protocol)));
+			context.getPackageManager()
+					.getPackageInfo("com.facebook.katana", 0);
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(context
+					.getString(R.string.facebook_protocol)));
 		} catch (Exception e) {
-			return new Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.facebook_link)));
+			return new Intent(Intent.ACTION_VIEW, Uri.parse(context
+					.getString(R.string.facebook_link)));
 		}
 	}
-	
+
 	public static void startTwitterActivity(final Context context) {
 		final String twitter = context.getString(R.string.twitter_name);
 		final String url = "http://twitter.com/" + twitter;
 		final Uri uri = Uri.parse(url);
-		
+
 		try {
 			final Intent intent = new Intent();
 			intent.setData(uri);
-			intent.setClassName("com.twidroidpro", "com.twidroidpro.TwidroidProfile");
+			intent.setClassName("com.twidroidpro",
+					"com.twidroidpro.TwidroidProfile");
 			context.startActivity(intent);
 			return;
 		} catch (ActivityNotFoundException e) {
-			Log.e(TAG,"Twitter Intent error 1!");
+			Log.e(TAG, "Twitter Intent error 1!");
 		}
 		try {
 			final Intent intent = new Intent();
@@ -190,45 +229,50 @@ public class CandyUtils {
 			context.startActivity(intent);
 			return;
 		} catch (ActivityNotFoundException e) {
-			Log.e(TAG,"Twitter Intent error 2!");
+			Log.e(TAG, "Twitter Intent error 2!");
 		}
-		
+
 		String twitterUid = context.getString(R.string.twitterUID);
 
 		try {
 			long longTwitterUid = Long.parseLong(twitterUid);
 			try {
 				Intent intent = new Intent();
-				intent.setClassName("com.twitter.android", "com.twitter.android.ProfileTabActivity");
+				intent.setClassName("com.twitter.android",
+						"com.twitter.android.ProfileTabActivity");
 				intent.putExtra("user_id", longTwitterUid);
 				context.startActivity(intent);
 				return;
 			} catch (ActivityNotFoundException e) {
-				Log.e(TAG,"Twitter Intent error 3!");
+				Log.e(TAG, "Twitter Intent error 3!");
 			}
 		} catch (NumberFormatException e) {
-			Log.e(TAG,"Twitter Intent error 3b!");
+			Log.e(TAG, "Twitter Intent error 3b!");
 		}
 
 		try {
-			context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mobile.twitter.com/" + twitter)));
+			context.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+					.parse("http://mobile.twitter.com/" + twitter)));
 			return;
 		} catch (ActivityNotFoundException e) {
-			Log.e(TAG,"Twitter Intent error 4! Twitter unsuccessful!");
+			Log.e(TAG, "Twitter Intent error 4! Twitter unsuccessful!");
 		}
 	}
-	
+
 	public static void aboutDialog(final Context context) {
 		final Builder aboutBuilder = new AlertDialog.Builder(context);
 		aboutBuilder.setTitle(R.string.dialog_about_title);
 		aboutBuilder.setIcon(android.R.drawable.ic_dialog_info);
-		aboutBuilder.setMessage(context.getString(R.string.dialog_about_message)); // TODO
-		aboutBuilder.setPositiveButton(R.string.dialog_about_button, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				dialog.dismiss();
-			}
-		});
+		aboutBuilder.setMessage(context
+				.getString(R.string.dialog_about_message)); // TODO
+		aboutBuilder.setPositiveButton(R.string.dialog_about_button,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog,
+							final int which) {
+						dialog.dismiss();
+					}
+				});
 		aboutBuilder.show();
 	}
 }

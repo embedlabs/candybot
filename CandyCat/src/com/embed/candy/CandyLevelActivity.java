@@ -50,19 +50,22 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import com.swarmconnect.Swarm;
+
 @SuppressLint("NewApi")
-public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePropertiesListener {
+public class CandyLevelActivity extends LayoutGameActivity implements
+		ITMXTilePropertiesListener {
 	/**
 	 * Some important phone/game dimensions.
 	 */
-	public final float WIDTH = 64*24;
-	public final float HEIGHT = 64*18;
+	public final float WIDTH = 64 * 24;
+	public final float HEIGHT = 64 * 18;
 	public float PHONE_WIDTH;
 	public float PHONE_HEIGHT;
 
 	public int level, world;
 	String theme;
-	
+
 	static final int CANDY = 1;
 	static final int CAT = 2;
 	static final int BOX = 3;
@@ -70,198 +73,237 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	static final int ENEMY = 5;
 	static final int MOVABLE_WALL = 6;
 	static final int INERTIA_WALL = 7;
-	
+
 	/**
 	 * Gotta keep track of all your variables and objects and stuff...
 	 */
-	private final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
-	private final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list of all tutorial text
-	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
+	private final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary
+																		// placeholder
+																		// for
+																		// objects
+	private final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list
+																				// of
+																				// all
+																				// tutorial
+																				// text
+	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds
+																									// references
+																									// to
+																									// all
+																									// sprites
 	private int[][] backgroundArray = new int[18][24]; // holds tmx array
 	public TextureRegion[][] trArray = new TextureRegion[18][24];
-	private int[][] objectArray; // stores locations and types of all objects, correlates to spriteList
-	
+	private int[][] objectArray; // stores locations and types of all objects,
+									// correlates to spriteList
+
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
 	public CandyCamera mCandyCamera;
 	private HUD hud;
-	
+
 	private BitmapTextureAtlas mObjectTexture;
-	private TiledTextureRegion candyTTR, catTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
-	private RectangleVertexBuffer boxRVB, /* no bombRVB or enemyRVB */  movableWallRVB, inertiaWallRVB;
-	
+	private TiledTextureRegion candyTTR, catTTR, boxTTR, bombTTR, enemyTTR,
+			movableWallTTR, inertiaWallTTR;
+	private RectangleVertexBuffer boxRVB, /* no bombRVB or enemyRVB */
+			movableWallRVB, inertiaWallRVB;
+
 	private BitmapTextureAtlas mFontTexture;
 	private Font andengineMainFont;
 
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
-	
+
 	public CandyEngine candyEngine;
 	public TMXLayer tmxLayer;
-	
-	private String play,pan;
-	public boolean playMode=true;
-	public boolean gameStarted=false;
-	private boolean resumeHasRun=false;
+
+	private String play, pan;
+	public boolean playMode = true;
+	public boolean gameStarted = false;
+	private boolean resumeHasRun = false;
 	public boolean resetDragDistance = false;
-	
+
 	private ChangeableText playChangeableText;
 	private Text resetLevelText;
-	
+
 	public static final int CAMERA_SPEED = 200;
-	
+
 	public int teleporter1column = -1;
 	public int teleporter1row = -1;
-	
+
 	public int teleporter2column = -1;
 	public int teleporter2row = -1;
-	
+
 	public int movesForStar;
 	public int timeForStar;
-	
+
 	/**
 	 * Preferences
 	 */
 	public SharedPreferences sp;
 	public int qualityInt;
 	public boolean zoomBoolean;
-	
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
-				
 		super.onCreate(savedInstanceState);
+	    Swarm.setActive(this);
 		getWindow().setWindowAnimations(android.R.style.Animation);
 
 		getWindow().setFormat(PixelFormat.RGBA_8888);
-		
-		mainFont = Typeface.createFromAsset(getAssets(), getString(R.string.font_location)); // load font
-		
+
+		mainFont = Typeface.createFromAsset(getAssets(),
+				getString(R.string.font_location)); // load font
+
 		play = getString(R.string.play);
 		pan = getString(R.string.pan);
-		
+
 		world = getIntent().getIntExtra("com.embed.candy.world", 0);
 		level = getIntent().getIntExtra("com.embed.candy.level", 0);
 		theme = getIntent().getStringExtra("com.embed.candy.theme");
-		
+
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
-		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality","2"));
+		qualityInt = Integer.valueOf(sp.getString(
+				"com.embed.candy.graphics_quality", "2"));
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", true);
-		
-		Log.i(TAG,"Level "+world+"_"+level);
+
+		Log.i(TAG, "Level " + world + "_" + level);
 	}
 	
+	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public Engine onLoadEngine() {
-		Log.v(TAG,"CandyLevelActivity onLoadEngine()");
+		Log.v(TAG, "CandyLevelActivity onLoadEngine()");
 
-		if (android.os.Build.VERSION.SDK_INT>=13) {
+		if (android.os.Build.VERSION.SDK_INT >= 13) {
 			Display display = getWindowManager().getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
 			PHONE_WIDTH = display.getWidth();
 			PHONE_HEIGHT = display.getHeight();
-			Log.i(TAG,String.valueOf(PHONE_WIDTH));
+			Log.i(TAG, String.valueOf(PHONE_WIDTH));
 		} else {
-			Display display = getWindowManager().getDefaultDisplay(); 
+			Display display = getWindowManager().getDefaultDisplay();
 			PHONE_WIDTH = display.getWidth();
 			PHONE_HEIGHT = display.getHeight();
 		}
-		
-		mCandyCamera = new CandyCamera((WIDTH-PHONE_WIDTH)/2,(HEIGHT-PHONE_HEIGHT)/2,PHONE_WIDTH,PHONE_HEIGHT,CAMERA_SPEED*2,CAMERA_SPEED*2,100000);
-		mCandyCamera.setZoomFactorDirect(PHONE_HEIGHT/HEIGHT);
+
+		mCandyCamera = new CandyCamera((WIDTH - PHONE_WIDTH) / 2,
+				(HEIGHT - PHONE_HEIGHT) / 2, PHONE_WIDTH, PHONE_HEIGHT,
+				CAMERA_SPEED * 2, CAMERA_SPEED * 2, 100000);
+		mCandyCamera.setZoomFactorDirect(PHONE_HEIGHT / HEIGHT);
 		mCandyCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		mCandyCamera.setBoundsEnabled(true);
-		
-		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mCandyCamera);
+
+		final EngineOptions engineOptions = new EngineOptions(true,
+				ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(
+						PHONE_WIDTH, PHONE_HEIGHT), mCandyCamera);
 		final Engine engine = new Engine(engineOptions);
-		
+
 		try {
-			if(MultiTouch.isSupported(this)) {
+			if (MultiTouch.isSupported(this)) {
 				engine.setTouchController(new MultiTouchController());
 			} else {
-				Log.i(TAG,"MultiTouch not supported. (phone model)");
+				Log.i(TAG, "MultiTouch not supported. (phone model)");
 			}
 		} catch (final MultiTouchException e) {
-			Log.i(TAG,"MultiTouch not supported. (Android version)");
+			Log.i(TAG, "MultiTouch not supported. (Android version)");
 		}
-		
+
 		return engine;
 	}
-	
+
 	@Override
 	public void onLoadResources() {
-		Log.v(TAG,"CandyLevelActivity onLoadResources()");
+		Log.v(TAG, "CandyLevelActivity onLoadResources()");
 
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/"+theme+"/");
-		
-		final TextureOptions quality = (qualityInt>0)?TextureOptions.BILINEAR_PREMULTIPLYALPHA:TextureOptions.NEAREST_PREMULTIPLYALPHA;
-		
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/" + theme
+				+ "/");
+
+		final TextureOptions quality = (qualityInt > 0) ? TextureOptions.BILINEAR_PREMULTIPLYALPHA
+				: TextureOptions.NEAREST_PREMULTIPLYALPHA;
+
 		if (quality.equals(TextureOptions.BILINEAR_PREMULTIPLYALPHA)) {
 			Log.i(TAG, "High or medium quality, using BILINEAR.");
 		} else if (quality.equals(TextureOptions.NEAREST_PREMULTIPLYALPHA)) {
 			Log.i(TAG, "Low quality, using NEAREST.");
 		}
-		
+
 		/**
 		 * OBJECT TEXTURE
 		 */
-		mObjectTexture = new BitmapTextureAtlas(256,1024,quality);
-		candyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png",0,0,4,3);
-		catTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "cat.png", 0,193,4,2);
-		boxTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "box.png",0,580,1,1);
-		bombTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bomb.png",0,322,4,2);
-		enemyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "enemy.png",0,451,4,2);
-		movableWallTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "movable_wall.png",65,580,1,1);
-		inertiaWallTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "inertia_wall.png",130,580,1,1);
-		
+		mObjectTexture = new BitmapTextureAtlas(256, 1024, quality);
+		candyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(
+				mObjectTexture, this, "candy.png", 0, 0, 4, 3);
+		catTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(
+				mObjectTexture, this, "cat.png", 0, 193, 4, 2);
+		boxTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(
+				mObjectTexture, this, "box.png", 0, 580, 1, 1);
+		bombTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(
+				mObjectTexture, this, "bomb.png", 0, 322, 4, 2);
+		enemyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(
+				mObjectTexture, this, "enemy.png", 0, 451, 4, 2);
+		movableWallTTR = BitmapTextureAtlasTextureRegionFactory
+				.createTiledFromAsset(mObjectTexture, this, "movable_wall.png",
+						65, 580, 1, 1);
+		inertiaWallTTR = BitmapTextureAtlasTextureRegionFactory
+				.createTiledFromAsset(mObjectTexture, this, "inertia_wall.png",
+						130, 580, 1, 1);
+
 		/**
 		 * FONT
 		 */
-		mFontTexture = new BitmapTextureAtlas(512,512,quality);
-		andengineMainFont = new Font(mFontTexture, mainFont, 64, true, 0x80444444);
-		
+		mFontTexture = new BitmapTextureAtlas(512, 512, quality);
+		andengineMainFont = new Font(mFontTexture, mainFont, 64, true,
+				0x80444444);
+
 		/**
 		 * ENGINE LOADING
 		 */
-		mEngine.getTextureManager().loadTextures(mObjectTexture,mFontTexture);
+		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture);
 		mEngine.getFontManager().loadFont(andengineMainFont);
-		
+
 		/**
 		 * XML PARSING
 		 */
-		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList);
+		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList,
+				tutorialList);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
-		
+
 		/**
 		 * RECTANGE VERTEX BUFFERS
 		 */
 		boxRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		movableWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		inertiaWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
-		
-		boxRVB.update(64,64);
-		movableWallRVB.update(64,64);
-		inertiaWallRVB.update(64,64);
+
+		boxRVB.update(64, 64);
+		movableWallRVB.update(64, 64);
+		inertiaWallRVB.update(64, 64);
 	}
 
 	@Override
 	public Scene onLoadScene() {
-		Log.v(TAG,"CandyLevelActivity onLoadScene()");
-		
+		Log.v(TAG, "CandyLevelActivity onLoadScene()");
+
 		/**
 		 * BASICS
 		 */
 		mEngine.registerUpdateHandler(new FPSLogger());
 		mScene = new Scene();
-		mScene.setBackground(new ColorBackground(1,1,1));
-		
+		mScene.setBackground(new ColorBackground(1, 1, 1));
+
 		/**
 		 * BACKGROUND
 		 */
-		final CandyTMXLoader tmxLoader = new CandyTMXLoader((theme==null)?"normal":theme,this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA,this);
+		final CandyTMXLoader tmxLoader = new CandyTMXLoader(
+				(theme == null) ? "normal" : theme, this,
+				mEngine.getTextureManager(),
+				TextureOptions.BILINEAR_PREMULTIPLYALPHA, this);
 		try {
-			mTMXTiledMap = tmxLoader.load(CandyUtils.tmxFromXML(this, world, level));
+			mTMXTiledMap = tmxLoader.load(CandyUtils.tmxFromXML(this, world,
+					level));
 		} catch (final TMXLoadException tmxle) {
 			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
 			Debug.e(tmxle);
@@ -273,10 +315,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				finish();
 			}
 		}
-		
+
 		tmxLayer = mTMXTiledMap.getTMXLayers().get(0);
-		mScene.attachChild(tmxLayer); //background layer
-		
+		mScene.attachChild(tmxLayer); // background layer
+
 		/**
 		 * TUTORIAL TEXT
 		 */
@@ -285,54 +327,68 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		/**
 		 * SPRITES
 		 */
-		for (int i=0;i<objectArray.length;i++) {
-			createSprite(objectArray[i][CandyEngine.TYPE],objectArray[i][CandyEngine.ROW],objectArray[i][CandyEngine.COLUMN],i);
+		for (int i = 0; i < objectArray.length; i++) {
+			createSprite(objectArray[i][CandyEngine.TYPE],
+					objectArray[i][CandyEngine.ROW],
+					objectArray[i][CandyEngine.COLUMN], i);
 		}
-		
+
 		/**
 		 * LOGIC ENGINE
 		 */
-		candyEngine = new CandyEngine(spriteList,objectArray,backgroundArray,this);
-		
+		candyEngine = new CandyEngine(spriteList, objectArray, backgroundArray,
+				this);
+
 		/**
 		 * HUD
 		 */
 		hud = new HUD();
-		
-//		final FPSCounter fpsCounter = new FPSCounter();
-//		mEngine.registerUpdateHandler(fpsCounter);
-//		final ChangeableText fpsText = new ChangeableText(PHONE_WIDTH,PHONE_HEIGHT, andengineMainFont, "FPS: 00.00", "FPS: XXXXX".length());
-//		fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10, PHONE_HEIGHT-fpsText.getHeight()-10);
-//		hud.attachChild(fpsText);
-		
-		playChangeableText = new ChangeableText(PHONE_WIDTH,10, andengineMainFont,playMode?play:pan,Math.max(play.length(),pan.length())) {
+
+		// final FPSCounter fpsCounter = new FPSCounter();
+		// mEngine.registerUpdateHandler(fpsCounter);
+		// final ChangeableText fpsText = new
+		// ChangeableText(PHONE_WIDTH,PHONE_HEIGHT, andengineMainFont,
+		// "FPS: 00.00", "FPS: XXXXX".length());
+		// fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10,
+		// PHONE_HEIGHT-fpsText.getHeight()-10);
+		// hud.attachChild(fpsText);
+
+		playChangeableText = new ChangeableText(PHONE_WIDTH, 10,
+				andengineMainFont, playMode ? play : pan, Math.max(
+						play.length(), pan.length())) {
 			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&gameStarted) {
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,
+					final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				if (pSceneTouchEvent.getAction() == MotionEvent.ACTION_DOWN
+						& gameStarted) {
 					if (!playMode) {
 						setText(play);
 						mCandyCamera.setChaseEntity(candyEngine.cat);
-						playMode=true;
+						playMode = true;
 					} else {
 						setText(pan);
 						mCandyCamera.setMaxZoomFactorChange(2);
-						mCandyCamera.setMaxVelocity(1000,1000);
+						mCandyCamera.setMaxVelocity(1000, 1000);
 						mCandyCamera.setChaseEntity(null);
-						playMode=false;
-						resetDragDistance=true;
+						playMode = false;
+						resetDragDistance = true;
 					}
 				}
 				return true;
 			}
 		};
-		playChangeableText.setPosition(PHONE_WIDTH-playChangeableText.getWidth()-10,10);
+		playChangeableText.setPosition(
+				PHONE_WIDTH - playChangeableText.getWidth() - 10, 10);
 		hud.attachChild(playChangeableText);
 		hud.registerTouchArea(playChangeableText);
-		
-		resetLevelText = new Text(10,10,andengineMainFont,getString(R.string.reset)){
+
+		resetLevelText = new Text(10, 10, andengineMainFont,
+				getString(R.string.reset)) {
 			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,final float pTouchAreaLocalX,final float pTouchAreaLocalY) {
-				if (pSceneTouchEvent.getAction()==MotionEvent.ACTION_DOWN&&gameStarted) {
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,
+					final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				if (pSceneTouchEvent.getAction() == MotionEvent.ACTION_DOWN
+						&& gameStarted) {
 					candyEngine.resetLevel(true);
 				}
 				return true;
@@ -343,97 +399,133 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		hud.setTouchAreaBindingEnabled(true);
 		hud.setOnSceneTouchListener(new CandyTouchSystem(this));
-		
+
 		mCandyCamera.setHUD(hud);
-		
-//		hud.registerUpdateHandler(new TimerHandler(0.2f,true,new ITimerCallback(){
-//			@Override
-//			public void onTimePassed(final TimerHandler pTimerHandler) {
-//				fpsText.setText("FPS: " + fpsCounter.getFPS());
-//			}
-//		}));
-		
+
+		// hud.registerUpdateHandler(new TimerHandler(0.2f,true,new
+		// ITimerCallback(){
+		// @Override
+		// public void onTimePassed(final TimerHandler pTimerHandler) {
+		// fpsText.setText("FPS: " + fpsCounter.getFPS());
+		// }
+		// }));
+
 		return mScene;
 	}
 
 	public void addTutorialText(ArrayList<String[]> inputTutorialList) {
-		for (String[] tutorialTextArray:inputTutorialList) {
-			final Text text = new Text(Float.parseFloat(tutorialTextArray[CandyEngine.COLUMN])*64,
-				Float.parseFloat(tutorialTextArray[CandyEngine.ROW])*64,
-				andengineMainFont,
-				tutorialTextArray[0].replace("\\n", "\n"));
+		for (String[] tutorialTextArray : inputTutorialList) {
+			final Text text = new Text(
+					Float.parseFloat(tutorialTextArray[CandyEngine.COLUMN]) * 64,
+					Float.parseFloat(tutorialTextArray[CandyEngine.ROW]) * 64,
+					andengineMainFont, tutorialTextArray[0]
+							.replace("\\n", "\n"));
 			mScene.attachChild(text);
 		}
 	}
 
-	private void createSprite(final int type,final int row,final int column,final int index) {
+	private void createSprite(final int type, final int row, final int column,
+			final int index) {
 		final CandyAnimatedSprite face;
-		
-		switch (type){
-		case CANDY: face = new CandyAnimatedSprite(row,column,candyTTR,index,CANDY,tmxLayer,objectArray,backgroundArray); break;
-		case CAT: face = new CandyAnimatedSprite(row,column,catTTR,index,CAT,tmxLayer,objectArray,backgroundArray); break;
-		case BOMB: face = new CandyAnimatedSprite(row,column,bombTTR,index,BOMB,tmxLayer,objectArray,backgroundArray); break;
-		case ENEMY: face = new CandyAnimatedSprite(row,column,enemyTTR,index,ENEMY,tmxLayer,objectArray,backgroundArray); break;
-		case MOVABLE_WALL: face = new CandyAnimatedSprite(row,column,movableWallTTR,movableWallRVB,index,MOVABLE_WALL,tmxLayer,objectArray,backgroundArray); break;
-		case INERTIA_WALL: face = new CandyAnimatedSprite(row,column,inertiaWallTTR,inertiaWallRVB,index,INERTIA_WALL,tmxLayer,objectArray,backgroundArray); break;
+
+		switch (type) {
+		case CANDY:
+			face = new CandyAnimatedSprite(row, column, candyTTR, index, CANDY,
+					tmxLayer, objectArray, backgroundArray);
+			break;
+		case CAT:
+			face = new CandyAnimatedSprite(row, column, catTTR, index, CAT,
+					tmxLayer, objectArray, backgroundArray);
+			break;
+		case BOMB:
+			face = new CandyAnimatedSprite(row, column, bombTTR, index, BOMB,
+					tmxLayer, objectArray, backgroundArray);
+			break;
+		case ENEMY:
+			face = new CandyAnimatedSprite(row, column, enemyTTR, index, ENEMY,
+					tmxLayer, objectArray, backgroundArray);
+			break;
+		case MOVABLE_WALL:
+			face = new CandyAnimatedSprite(row, column, movableWallTTR,
+					movableWallRVB, index, MOVABLE_WALL, tmxLayer, objectArray,
+					backgroundArray);
+			break;
+		case INERTIA_WALL:
+			face = new CandyAnimatedSprite(row, column, inertiaWallTTR,
+					inertiaWallRVB, index, INERTIA_WALL, tmxLayer, objectArray,
+					backgroundArray);
+			break;
 		case BOX:
 		default:
-			face = new CandyAnimatedSprite(row,column,boxTTR,boxRVB,index,BOX,tmxLayer,objectArray,backgroundArray); break;
+			face = new CandyAnimatedSprite(row, column, boxTTR, boxRVB, index,
+					BOX, tmxLayer, objectArray, backgroundArray);
+			break;
 		}
-		
+
 		spriteList.add(face);
 		mScene.attachChild(face);
 	}
 
 	@Override
 	public void onLoadComplete() {
-		Log.v(TAG,"CandyLevelActivity onLoadComplete()");
+		Log.v(TAG, "CandyLevelActivity onLoadComplete()");
 	}
-	
+
 	@Override
 	public void onResumeGame() {
-		Log.v(TAG,"CandyLevelActivity onResumeGame()");
+		Log.v(TAG, "CandyLevelActivity onResumeGame()");
+
+		super.onResume();
+	    Swarm.setActive(this);
 		
 		if (!resumeHasRun) {
-			resumeHasRun=true;
-			
-			mCandyCamera.setMaxZoomFactorChange((1-PHONE_HEIGHT/HEIGHT));
+			resumeHasRun = true;
+
+			mCandyCamera.setMaxZoomFactorChange((1 - PHONE_HEIGHT / HEIGHT));
 			mCandyCamera.setChaseEntity(candyEngine.cat);
 			if (zoomBoolean) {
-				new Handler().post(new Runnable(){
+				new Handler().post(new Runnable() {
 					@Override
 					public void run() {
 						try {
 							Thread.sleep(2000);
 						} catch (InterruptedException e) {
-							Log.e(TAG,"Level start delay FAIL!",e);
+							Log.e(TAG, "Level start delay FAIL!", e);
 						}
 						mCandyCamera.setZoomFactor(1);
-						gameStarted=true;
+						gameStarted = true;
 					}
 				});
 			} else {
-				gameStarted=true;
+				gameStarted = true;
 			}
 		}
 	}
 
+	public void onPause() {
+	    super.onPause();
+	    Swarm.setInactive(this);
+	}
+	    
 	@Override
-	public synchronized void onTMXTileWithPropertiesCreated(final TMXTiledMap pTMXTiledMap,final TMXLayer pTMXLayer,final TMXTile pTMXTile,final TMXProperties<TMXTileProperty> pTMXTileProperties) {
+	public synchronized void onTMXTileWithPropertiesCreated(
+			final TMXTiledMap pTMXTiledMap, final TMXLayer pTMXLayer,
+			final TMXTile pTMXTile,
+			final TMXProperties<TMXTileProperty> pTMXTileProperties) {
 		final int row = pTMXTile.getTileRow();
 		final int column = pTMXTile.getTileColumn();
-		backgroundArray[row][column]=pTMXTile.getGlobalTileID();
+		backgroundArray[row][column] = pTMXTile.getGlobalTileID();
 		// keeps track of the background tiles
-		
-		if (backgroundArray[row][column]==CandyEngine.TELEPORTER_IN) {
-			teleporter1column=column;
-			teleporter1row=row;
-		} else if (backgroundArray[row][column]==CandyEngine.TELEPORTER_OUT) {
-			teleporter2column=column;
-			teleporter2row=row;
+
+		if (backgroundArray[row][column] == CandyEngine.TELEPORTER_IN) {
+			teleporter1column = column;
+			teleporter1row = row;
+		} else if (backgroundArray[row][column] == CandyEngine.TELEPORTER_OUT) {
+			teleporter2column = column;
+			teleporter2row = row;
 		}
-		
-		trArray[row][column]=pTMXTile.getTextureRegion();
+
+		trArray[row][column] = pTMXTile.getTextureRegion();
 	}
 
 	@Override
@@ -445,10 +537,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	protected int getRenderSurfaceViewID() {
 		return R.id.rsv_level;
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Log.i(TAG,"CandyLevelActivity onDestroy()");
+		Log.i(TAG, "CandyLevelActivity onDestroy()");
 	}
 }

@@ -18,96 +18,119 @@ import org.anddev.andengine.util.modifier.ease.EaseQuadIn;
 import android.util.Log;
 
 public class CandyAnimatedSprite extends AnimatedSprite {
-	public final int index,type;
+	public final int index, type;
 	private final TMXLayer tmxLayer;
-	private final int[][] objectArray,backgroundArray;
+	private final int[][] objectArray, backgroundArray;
 	public int candyLastMove = 0;
 	public int candyRotationState = 0;
 	public int lastDirectionalMove = 0;
-	
-	public boolean hasModifier = false;
-	
-	public boolean blowUp = false;
-	
-	public boolean enemyDead = false;
-	
-	public static final long[] catDurations = new long[]{3000,100,1000,100,5000,100,1000,100,5000,100,100,100,5000,500};
-	public static final int[] catFrames = new int[]{0,1,2,1,0,3,4,3,0,5,6,5,0,7};
-	
-	public static final long[] enemyDurations = new long[]{3000,100,2000,100,2000,100,1000,100,2000,300,2000,100,2000,100};
-	public static final int[] enemyFrames = new int[]{0,1,2,1,0,3,4,3,0,5,0,6,7,6};
-	
-	public static int SPEED = 10;
-	public static final long[] frameArray = new long[]{250/SPEED,250/SPEED,250/SPEED,250/SPEED};
-	public static final String TAG = CandyUtils.TAG;
-	
-	public final int initialRow,initialColumn;
 
-	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final RectangleVertexBuffer RVB,final int index,final int type,final TMXLayer tmxLayer,final int[][] objectArray,final int[][] backgroundArray) {
-		super(column*64, row*64, pTiledTextureRegion, RVB);
+	public boolean hasModifier = false;
+
+	public boolean blowUp = false;
+
+	public boolean enemyDead = false;
+
+	public static final long[] catDurations = new long[] { 3000, 100, 1000,
+			100, 5000, 100, 1000, 100, 5000, 100, 100, 100, 5000, 500 };
+	public static final int[] catFrames = new int[] { 0, 1, 2, 1, 0, 3, 4, 3,
+			0, 5, 6, 5, 0, 7 };
+
+	public static final long[] enemyDurations = new long[] { 3000, 100, 2000,
+			100, 2000, 100, 1000, 100, 2000, 300, 2000, 100, 2000, 100 };
+	public static final int[] enemyFrames = new int[] { 0, 1, 2, 1, 0, 3, 4, 3,
+			0, 5, 0, 6, 7, 6 };
+
+	public static int SPEED = 10;
+	public static final long[] frameArray = new long[] { 250 / SPEED,
+			250 / SPEED, 250 / SPEED, 250 / SPEED };
+	public static final String TAG = CandyUtils.TAG;
+
+	public final int initialRow, initialColumn;
+
+	public CandyAnimatedSprite(final int row, final int column,
+			final TiledTextureRegion pTiledTextureRegion,
+			final RectangleVertexBuffer RVB, final int index, final int type,
+			final TMXLayer tmxLayer, final int[][] objectArray,
+			final int[][] backgroundArray) {
+		super(column * 64, row * 64, pTiledTextureRegion, RVB);
 		this.setCullingEnabled(true);
 		this.index = index;
 		this.type = type;
 		this.tmxLayer = tmxLayer;
 		this.objectArray = objectArray;
 		this.backgroundArray = backgroundArray;
-		
+
 		initialRow = row;
 		initialColumn = column;
-		
-		if (this.type==CandyLevelActivity.CAT) {
+
+		if (this.type == CandyLevelActivity.CAT) {
 			animate(catDurations, catFrames, -1);
-		} else if (this.type==CandyLevelActivity.ENEMY) {
-			animate(enemyDurations,enemyFrames,-1);
+		} else if (this.type == CandyLevelActivity.ENEMY) {
+			animate(enemyDurations, enemyFrames, -1);
 		}
 	}
-	
+
 	/**
 	 * FOR BOMBS
 	 */
-	
-	public CandyAnimatedSprite(final int row,final int column,final TiledTextureRegion pTiledTextureRegion,final int index,final int type,final TMXLayer tmxLayer,final int[][] objectArray,final int[][] backgroundArray) {
-		this(row,column,pTiledTextureRegion.deepCopy(),rvbGen(),index,type,tmxLayer,objectArray,backgroundArray);
+
+	public CandyAnimatedSprite(final int row, final int column,
+			final TiledTextureRegion pTiledTextureRegion, final int index,
+			final int type, final TMXLayer tmxLayer, final int[][] objectArray,
+			final int[][] backgroundArray) {
+		this(row, column, pTiledTextureRegion.deepCopy(), rvbGen(), index,
+				type, tmxLayer, objectArray, backgroundArray);
 	}
-	
+
 	private static RectangleVertexBuffer rvbGen() {
-		final RectangleVertexBuffer rvb = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW,true);
+		final RectangleVertexBuffer rvb = new RectangleVertexBuffer(
+				GL11.GL_STATIC_DRAW, true);
 		rvb.update(64, 64);
 		return rvb;
 	}
 
-	public synchronized boolean move(final int rowDelta, final int columnDelta, final boolean rotate) {
+	public synchronized boolean move(final int rowDelta, final int columnDelta,
+			final boolean rotate) {
 		if (!hasModifier) {
-			hasModifier=true;
+			hasModifier = true;
 			candyLastMove = columnDelta;
 			if (columnDelta != 0) {
 				lastDirectionalMove = columnDelta;
 			}
 			objectArray[index][CandyEngine.ROW] += rowDelta;
 			objectArray[index][CandyEngine.COLUMN] += columnDelta;
-			registerEntityModifier(new PathModifier(1/(float)SPEED*((rowDelta!=0)?Math.abs(rowDelta):1)*((columnDelta!=0)?Math.abs(columnDelta):1),
-					new Path(2).to(getX(),getY())
-						.to(getX()+(columnDelta*64),getY()+(rowDelta*64)),
-					new CandyPathModifierListener(this,rotate), EaseLinear.getInstance()));
-			Log.d(TAG, "Item " + index + " to: " + objectArray[index][CandyEngine.ROW] + ", " + objectArray[index][CandyEngine.COLUMN]);
+			registerEntityModifier(new PathModifier(1 / (float) SPEED
+					* ((rowDelta != 0) ? Math.abs(rowDelta) : 1)
+					* ((columnDelta != 0) ? Math.abs(columnDelta) : 1),
+					new Path(2).to(getX(), getY()).to(
+							getX() + (columnDelta * 64),
+							getY() + (rowDelta * 64)),
+					new CandyPathModifierListener(this, rotate),
+					EaseLinear.getInstance()));
+			Log.d(TAG, "Item " + index + " to: "
+					+ objectArray[index][CandyEngine.ROW] + ", "
+					+ objectArray[index][CandyEngine.COLUMN]);
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public synchronized boolean move(final int rowDelta, final int columnDelta) {
-		return move(rowDelta,columnDelta,true);
+		return move(rowDelta, columnDelta, true);
 	}
-	
-	public synchronized boolean teleport(final int newRow,final int newColumn) {
+
+	public synchronized boolean teleport(final int newRow, final int newColumn) {
 		if (!hasModifier) {
-			hasModifier=true;
+			hasModifier = true;
 			objectArray[index][CandyEngine.ROW] = newRow;
 			objectArray[index][CandyEngine.COLUMN] = newColumn;
-			setPosition(64*newColumn, 64*newRow);
-			hasModifier=false;
-			Log.d(TAG, "Item " + index + " to: " + objectArray[index][CandyEngine.ROW] + ", " + objectArray[index][CandyEngine.COLUMN]);
+			setPosition(64 * newColumn, 64 * newRow);
+			hasModifier = false;
+			Log.d(TAG, "Item " + index + " to: "
+					+ objectArray[index][CandyEngine.ROW] + ", "
+					+ objectArray[index][CandyEngine.COLUMN]);
 			return true;
 		} else {
 			return false;
@@ -115,7 +138,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	}
 
 	public synchronized boolean fall(final int distance) {
-		if (distance>0) {
+		if (distance > 0) {
 			return move(distance, 0);
 		} else {
 			return true;
@@ -123,56 +146,62 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	}
 
 	public synchronized void showCandyAnim() {
-		if (type==CandyLevelActivity.CANDY) {
+		if (type == CandyLevelActivity.CANDY) {
 			hasModifier = true;
-			Log.i(TAG,"Candy winning animation started.");
+			Log.i(TAG, "Candy winning animation started.");
 			// TODO
 			hasModifier = false;
 		}
 	}
 
 	public synchronized void showBombAnim() {
-		animate(50,false, new IAnimationListener(){
+		animate(50, false, new IAnimationListener() {
 			@Override
 			public void onAnimationEnd(AnimatedSprite pAnimatedSprite) {
 				setVisible(false);
-				tmxLayer.getTMXTile(objectArray[index][CandyEngine.COLUMN], objectArray[index][CandyEngine.ROW]+1).setTextureRegion(null);
-				backgroundArray[objectArray[index][CandyEngine.ROW]+1][objectArray[index][CandyEngine.COLUMN]]=CandyEngine.EMPTY_TILE;
-				objectArray[index][CandyEngine.ROW]=-1;
+				tmxLayer.getTMXTile(objectArray[index][CandyEngine.COLUMN],
+						objectArray[index][CandyEngine.ROW] + 1)
+						.setTextureRegion(null);
+				backgroundArray[objectArray[index][CandyEngine.ROW] + 1][objectArray[index][CandyEngine.COLUMN]] = CandyEngine.EMPTY_TILE;
+				objectArray[index][CandyEngine.ROW] = -1;
 
 				hasModifier = false;
-				Log.i(TAG,"Bomb explosion ended.");
+				Log.i(TAG, "Bomb explosion ended.");
 			}
 		});
-		Log.i(TAG,"Bomb explosion started.");
+		Log.i(TAG, "Bomb explosion started.");
 	}
 
 	public synchronized void showDeadSprite() {
-		hasModifier=true;
-		objectArray[index][CandyEngine.ROW]=-1;
-		enemyDead=true;
-		
+		hasModifier = true;
+		objectArray[index][CandyEngine.ROW] = -1;
+		enemyDead = true;
+
 		final float deathSpeed;
-		if (type==CandyLevelActivity.CAT) {
+		if (type == CandyLevelActivity.CAT) {
 			deathSpeed = 1;
 		} else {
 			deathSpeed = 0.3f;
 		}
-		
-		registerEntityModifier(new ColorModifier(deathSpeed,1,1,1,0.5f,1,0.5f,new IEntityModifierListener(){
 
-			@Override
-			public void onModifierStarted(IModifier<IEntity> pModifier, IEntity pItem) {}
+		registerEntityModifier(new ColorModifier(deathSpeed, 1, 1, 1, 0.5f, 1,
+				0.5f, new IEntityModifierListener() {
 
-			@Override
-			public void onModifierFinished(IModifier<IEntity> pModifier, IEntity pItem) {
-				setVisible(false);
-				hasModifier=false;
-			}
-			
-		}, EaseQuadIn.getInstance()));
+					@Override
+					public void onModifierStarted(IModifier<IEntity> pModifier,
+							IEntity pItem) {
+					}
+
+					@Override
+					public void onModifierFinished(
+							IModifier<IEntity> pModifier, IEntity pItem) {
+						setVisible(false);
+						hasModifier = false;
+					}
+
+				}, EaseQuadIn.getInstance()));
 	}
-	
+
 	@Override
 	public synchronized void reset() {
 		super.reset();
@@ -184,25 +213,27 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		candyRotationState = 0;
 		lastDirectionalMove = 0;
 		stopAnimation();
-		setPosition(initialColumn*64,initialRow*64);
+		setPosition(initialColumn * 64, initialRow * 64);
 		objectArray[index][CandyEngine.ROW] = initialRow;
 		objectArray[index][CandyEngine.COLUMN] = initialColumn;
 		setCurrentTileIndex(0);
 		setVisible(true);
 
-		if (type==CandyLevelActivity.CAT) {
+		if (type == CandyLevelActivity.CAT) {
 			animate(catDurations, catFrames, -1);
-		} else if (type==CandyLevelActivity.ENEMY) {
-			animate(enemyDurations,enemyFrames,-1);
+		} else if (type == CandyLevelActivity.ENEMY) {
+			animate(enemyDurations, enemyFrames, -1);
 		}
 	}
 
 	public synchronized boolean doQueue(final int[] command) {
 		switch (command[CandyEngine.COMMAND]) {
 		case CandyEngine.TELEPORT:
-			return teleport(command[CandyEngine.ROW],command[CandyEngine.COLUMN]);
+			return teleport(command[CandyEngine.ROW],
+					command[CandyEngine.COLUMN]);
 		case CandyEngine.SLIDE_ICE:
-			return move(command[CandyEngine.ROW],command[CandyEngine.COLUMN],false);
+			return move(command[CandyEngine.ROW], command[CandyEngine.COLUMN],
+					false);
 		case CandyEngine.FALL:
 			return fall(command[CandyEngine.ROW]);
 		default:

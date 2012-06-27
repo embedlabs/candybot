@@ -9,51 +9,57 @@ import android.util.Log;
 public class CandyPathModifierListener implements IPathModifierListener {
 	final CandyAnimatedSprite cas;
 	final boolean rotate;
-	
-	public CandyPathModifierListener(final CandyAnimatedSprite cas,final boolean rotate) {
-		this.cas=cas;
-		this.rotate=rotate;
+
+	public CandyPathModifierListener(final CandyAnimatedSprite cas,
+			final boolean rotate) {
+		this.cas = cas;
+		this.rotate = rotate;
 	}
-	
+
 	@Override
 	public void onPathStarted(PathModifier pPathModifier, IEntity pEntity) {
-		if (cas.type==CandyLevelActivity.CANDY&&rotate) {
+		if (cas.type == CandyLevelActivity.CANDY && rotate) {
 			if (cas.candyLastMove == -1) {
-				cas.animate(CandyAnimatedSprite.frameArray, cas.candyRotationState*4, cas.candyRotationState*4+3, false);
+				cas.animate(CandyAnimatedSprite.frameArray,
+						cas.candyRotationState * 4,
+						cas.candyRotationState * 4 + 3, false);
 			} else if (cas.candyLastMove == 1) {
 				cas.animate(CandyAnimatedSprite.frameArray, new int[] {
-					((cas.candyRotationState + 1) * 4) % 12,
-					cas.candyRotationState * 4 + 3,
-					cas.candyRotationState * 4 + 2,
-					cas.candyRotationState * 4 + 1
-				}, 0);
+						((cas.candyRotationState + 1) * 4) % 12,
+						cas.candyRotationState * 4 + 3,
+						cas.candyRotationState * 4 + 2,
+						cas.candyRotationState * 4 + 1 }, 0);
 			}
 		}
 	}
 
 	@Override
-	public void onPathWaypointStarted(PathModifier pPathModifier, IEntity pEntity, int pWaypointIndex) {}
+	public void onPathWaypointStarted(PathModifier pPathModifier,
+			IEntity pEntity, int pWaypointIndex) {
+	}
 
 	@Override
-	public void onPathWaypointFinished(PathModifier pPathModifier, IEntity pEntity, int pWaypointIndex) {}
+	public void onPathWaypointFinished(PathModifier pPathModifier,
+			IEntity pEntity, int pWaypointIndex) {
+	}
 
 	@Override
 	public void onPathFinished(PathModifier pPathModifier, IEntity pEntity) {
-		if (cas.type==CandyLevelActivity.CANDY&&rotate) {
-			if (cas.candyLastMove==-1) {
+		if (cas.type == CandyLevelActivity.CANDY && rotate) {
+			if (cas.candyLastMove == -1) {
 				cas.candyRotationState = (cas.candyRotationState + 1) % 3;
-			} else if (cas.candyLastMove==1) {
+			} else if (cas.candyLastMove == 1) {
 				cas.candyRotationState = (cas.candyRotationState + 2) % 3;
 			}
 			cas.setCurrentTileIndex(cas.candyRotationState * 4);
 		}
-		if (cas.blowUp&&cas.type==CandyLevelActivity.BOMB) {
+		if (cas.blowUp && cas.type == CandyLevelActivity.BOMB) {
 			cas.showBombAnim();
-		} else if (cas.enemyDead&&cas.type==CandyLevelActivity.ENEMY) {
+		} else if (cas.enemyDead && cas.type == CandyLevelActivity.ENEMY) {
 			cas.showDeadSprite();
 		} else {
-			cas.hasModifier=false;
+			cas.hasModifier = false;
 		}
-		Log.d(CandyUtils.TAG,"Item " + cas.index + "'s path finished.");
+		Log.d(CandyUtils.TAG, "Item " + cas.index + "'s path finished.");
 	}
 }

@@ -20,27 +20,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+import com.swarmconnect.Swarm;
+import com.swarmconnect.SwarmActivity;
 
-public class MainMenu extends Activity implements View.OnClickListener {
-	
+public class MainMenu extends SwarmActivity implements View.OnClickListener {
+
 	TextView mainmenu_tv;
 	Button button_play;
-	ImageView iv_facebook,iv_twitter;
+	ImageView iv_facebook, iv_twitter, my_swarm_button;
 	GoogleAnalyticsTracker tracker;
+	
 
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
-	
+
 	private String theme;
+
 	
+	
+
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
-			final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+			final SharedPreferences sp = PreferenceManager
+					.getDefaultSharedPreferences(this);
 			theme = sp.getString("com.embed.candy.graphics_theme", "normal");
-			Log.i(TAG,"THEME: "+theme);
-			startActivity(new Intent(this,WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
+			Log.i(TAG, "THEME: " + theme);
+			startActivity(new Intent(this, WorldSelectActivity.class).putExtra(
+					"com.embed.candy.theme", theme));
 			break;
 		case R.id.button_facebook:
 			startActivity(CandyUtils.facebookIntent(this));
@@ -48,9 +56,12 @@ public class MainMenu extends Activity implements View.OnClickListener {
 		case R.id.button_twitter:
 			CandyUtils.startTwitterActivity(this);
 			break;
+		case R.id.my_swarm_button:
+			Swarm.showDashboard();
+			break;
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -64,7 +75,7 @@ public class MainMenu extends Activity implements View.OnClickListener {
 			CandyUtils.aboutDialog(this);
 			break;
 		case R.id.menu_main_item_preferences:
-			startActivity(new Intent(this,CandyPreferenceActivity.class));
+			startActivity(new Intent(this, CandyPreferenceActivity.class));
 			break;
 		}
 		return true;
@@ -73,42 +84,48 @@ public class MainMenu extends Activity implements View.OnClickListener {
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.main, null));
-		
+		Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3");
+		setContentView(((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+				.inflate(R.layout.main, null));
+
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		tracker = GoogleAnalyticsTracker.getInstance();
-	    // Start the tracker in manual dispatch mode...
-	    tracker.startNewSession("UA-32708172-1", this);
-		
-		// Display Adapter, don't attempt to simplify. Fixes the pan button from cutting off - Shrav
-	    
-	    mainFont = Typeface.createFromAsset(getAssets(), getString(R.string.font_location)); // load font
+		// Start the tracker in manual dispatch mode...
+		tracker.startNewSession("UA-32708172-1", this);
 
-		mainmenu_tv = (TextView)findViewById(R.id.mainmenu_tv);
-		button_play = (Button)findViewById(R.id.button_play);
-		iv_facebook = (ImageView)findViewById(R.id.button_facebook);
-		iv_twitter = (ImageView)findViewById(R.id.button_twitter);
-		
-		CandyUtils.setMainFont(mainFont,mainmenu_tv,button_play); // changes font
-		CandyUtils.setClick(this,button_play,iv_facebook,iv_twitter);
+		// Display Adapter, don't attempt to simplify. Fixes the pan button from
+		// cutting off - Shrav
+
+		mainFont = Typeface.createFromAsset(getAssets(),
+				getString(R.string.font_location)); // load font
+
+		mainmenu_tv = (TextView) findViewById(R.id.mainmenu_tv);
+		button_play = (Button) findViewById(R.id.button_play);
+		iv_facebook = (ImageView) findViewById(R.id.button_facebook);
+		iv_twitter = (ImageView) findViewById(R.id.button_twitter);
+		my_swarm_button = (ImageView)findViewById(R.id.my_swarm_button);
+
+		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play); // changes
+																	// font
+		CandyUtils.setClick(this, button_play, iv_facebook, iv_twitter, my_swarm_button);
 	}
-	
+
 	@Override
 	public void onAttachedToWindow() {
 		super.onAttachedToWindow();
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
+
 		/**
 		 * DESTROY SINGLETONS
 		 */
 		BufferObjectManager.getActiveInstance().clear();
-	    tracker.stopSession();
-		Log.i(TAG,"MainMenu onDestroy()");
+		tracker.stopSession();
+		Log.i(TAG, "MainMenu onDestroy()");
 	}
-	
+
 }
