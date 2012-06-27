@@ -5,10 +5,6 @@
 	android:layout_height="fill_parent"
 	android:background="@drawable/background"
 	android:fitsSystemWindows="false">
-<!-- 	<org.anddev.andengine.opengl.view.RenderSurfaceView android:id="@+id/rsv" -->
-<!-- 		android:layout_width="fill_parent" -->
-<!-- 		android:layout_height="fill_parent" -->
-<!-- 		android:layout_gravity="center" /> -->
 		<RelativeLayout android:id="@+id/mainmenu_rl"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
@@ -63,13 +59,4 @@
 				android:layout_toLeftOf="@id/button_twitter" />
 			
 		</RelativeLayout>
-<<<<<<< HEAD
-
-=======
-<!-- 		 <com.mobclix.android.sdk.MobclixMMABannerXLAdView -->
-<!--             android:id="@+id/banner_adview" -->
-<!--             android:layout_width="320dip" -->
-<!--             android:layout_height="50dip" -->
-<!--             android:layout_gravity="center" /> -->
->>>>>>> 00bb5c38dc441317e940fb6bde8dace5c2eee2ac
 </RelativeLayout>
