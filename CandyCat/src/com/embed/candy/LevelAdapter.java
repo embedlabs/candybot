@@ -145,7 +145,6 @@ public class LevelAdapter extends BaseAdapter {
 				v = li.inflate(R.layout.grid_item_lock, null);
 				break;
 			}
-
 		}
 		final TextView tv = (TextView) v.findViewById(R.id.grid_text);
 		tv.setText(String.valueOf(position + 1));
