@@ -40,12 +40,10 @@ public class MainMenu extends SwarmActivity implements View.OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
-			final SharedPreferences sp = PreferenceManager
-					.getDefaultSharedPreferences(this);
+			final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 			theme = sp.getString("com.embed.candy.graphics_theme", "normal");
 			Log.i(TAG, "THEME: " + theme);
-			startActivity(new Intent(this, WorldSelectActivity.class).putExtra(
-					"com.embed.candy.theme", theme));
+			startActivity(new Intent(this, WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
 			break;
 		case R.id.button_facebook:
 			startActivity(CandyUtils.facebookIntent(this));
@@ -108,8 +106,7 @@ public class MainMenu extends SwarmActivity implements View.OnClickListener {
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE))
-				.inflate(R.layout.main, null));
+		setContentView(((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.main, null));
 
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		tracker = GoogleAnalyticsTracker.getInstance();
@@ -119,8 +116,7 @@ public class MainMenu extends SwarmActivity implements View.OnClickListener {
 		// Display Adapter, don't attempt to simplify. Fixes the pan button from
 		// cutting off - Shrav
 
-		mainFont = Typeface.createFromAsset(getAssets(),
-				getString(R.string.font_location)); // load font
+		mainFont = Typeface.createFromAsset(getAssets(),getString(R.string.font_location)); // load font
 
 		mainmenu_tv = (TextView) findViewById(R.id.mainmenu_tv);
 		button_play = (Button) findViewById(R.id.button_play);
@@ -130,8 +126,7 @@ public class MainMenu extends SwarmActivity implements View.OnClickListener {
 		iv_twitter = (ImageView) findViewById(R.id.button_twitter);
 		my_swarm_button = (ImageView)findViewById(R.id.my_swarm_button);
 
-		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve, button_lead); // changes
-																	// font
+		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve, button_lead); // changes font
 		CandyUtils.setClick(this,button_achieve, button_lead, button_play, iv_facebook, iv_twitter, my_swarm_button);
 		Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
 
