@@ -10,12 +10,12 @@ import com.swarmconnect.Swarm;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class SplashScreen extends BaseSplashActivity {
+public class SplashScreenActivity extends BaseSplashActivity {
 	// ================================================
 	// Constants
 	// ================================================
 	private final int SPLASH_DURATION_SEC = 3;
-	private final Class<? extends Activity> nextActivity = MainMenu.class;
+	private final Class<? extends Activity> nextActivity = MainMenuActivity.class;
 	private final String backgroundImage = "gfx/splash.png";
 
 	// ================================================

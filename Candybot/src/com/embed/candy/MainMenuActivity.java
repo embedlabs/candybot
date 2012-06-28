@@ -24,7 +24,7 @@ import com.swarmconnect.SwarmActiveUser;
 import com.swarmconnect.SwarmActivity;
 import com.swarmconnect.delegates.SwarmLoginListener;
 
-public class MainMenu extends SwarmActivity implements View.OnClickListener {
+public class MainMenuActivity extends SwarmActivity implements View.OnClickListener {
 
 	TextView mainmenu_tv;
 	Button button_play, button_achieve, button_lead;
