@@ -25,10 +25,9 @@ import android.widget.TextView;
 
 public class LevelAdapter extends BaseAdapter {
 	private final LayoutInflater li;
-	private int[] worldData = new int[20*WorldAdapter.imageIDs.length];
-	private int[] levelData = new int[20*WorldAdapter.imageIDs.length]; // 2D Array to store world/level data
-	private int[] starData = new int[20*WorldAdapter.imageIDs.length];
+	private int[] starData = new int[20];
 	private final int worldNum;
+	int world,level;
 
 	private static String TAG = CandyUtils.TAG;
 
@@ -62,15 +61,12 @@ public class LevelAdapter extends BaseAdapter {
 			SAXParser saxParser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler() {
 
-				boolean getWorld, getLevel, getStars = false;
-				int count = 0;
+				boolean getLevel, getStars = false;
 
 				@Override
 				public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 					Log.d(TAG, "Start Element: " + qName);
-					if (qName.equalsIgnoreCase("world")) {
-						getWorld = true;
-					} else if (qName.equalsIgnoreCase("level")) {
+					if (qName.equalsIgnoreCase("level")) {
 						getLevel = true;
 					} else if (qName.equalsIgnoreCase("stars")) {
 						getStars = true;
@@ -85,30 +81,21 @@ public class LevelAdapter extends BaseAdapter {
 				@Override
 				public void characters(char ch[], int start, int length) throws SAXException {
 					Log.d(TAG, new String(ch, start, length));
-
-					if (getWorld) {
-						int world = Integer.parseInt(new String(ch, start, length));
-						Log.d(TAG, "World: " + world);
-						worldData[count] = world;
-						getWorld = false;
-					}
 					if (getLevel) {
-						int level = Integer.parseInt(new String(ch, start, length));
+						level = Integer.parseInt(new String(ch, start, length));
 						Log.d(TAG, "Level: " + level);
-						levelData[count] = level;
 						getLevel = false;
 					}
 					if (getStars) {
 						int stars = Integer.parseInt(new String(ch, start, length));
 						Log.d(TAG, "Stars: " + stars);
-						starData[(levelData[count] * worldData[count]) - 1] = stars; // TODO i'm pretty sure this might be wrong -Prem
-						count++;
+						starData[level-1] = stars; // TODO i'm pretty sure this might be wrong -Prem
 						getStars = false;
 					}
 				}
 			};
 
-			FileInputStream is = cont.openFileInput("level.xml");
+			FileInputStream is = cont.openFileInput("world"+worldNum+".xml");
 			byte[] byIn = new byte[is.available()];
 			while (is.read(byIn) != -1) {
 				Log.d(TAG, new String(byIn));
@@ -127,10 +114,9 @@ public class LevelAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View v, ViewGroup parent) {
-		int ArrayLvlValue = (position) * worldNum; // TODO along with the first one, shouldn't it be like (worldNum-1)*20+position?
 		if (v == null) {
 			// 1,2,3 stars and 4 is a lock
-			switch (starData[ArrayLvlValue]) {
+			switch (starData[position]) {
 			case 1:
 				v = li.inflate(R.layout.grid_item_1, null);
 				break;

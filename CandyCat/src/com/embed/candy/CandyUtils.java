@@ -226,7 +226,7 @@ public class CandyUtils {
 	// Cont variable needed for openFileOutput attention, do not remove...
 	public static void saveSettings(final CandyEngine candyEngine) {
 		try {
-			FileOutputStream fos = candyEngine.candyLevel.getApplicationContext().openFileOutput("level.xml", Context.MODE_PRIVATE);
+			FileOutputStream fos = candyEngine.candyLevel.getApplicationContext().openFileOutput("world"+candyEngine.candyLevel.world+".xml", Context.MODE_PRIVATE);
 			XmlSerializer serializer = Xml.newSerializer();
 			try {
 				serializer.setOutput(fos, "UTF-8");
@@ -234,9 +234,9 @@ public class CandyUtils {
 				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output",true);
 				serializer.startTag(null, "Candybot");
 
-				serializer.startTag(null, "world"); // TODO SHRAV WTF IS THIS shouldn't all the other stuff be inside the world tag, inside which should be a level tag containing all the level info?
-				serializer.text(candyEngine.candyLevel.world + "");
-				serializer.endTag(null, "world");
+//				serializer.startTag(null, "world"); // TODO SHRAV WTF IS THIS shouldn't all the other stuff be inside the world tag, inside which should be a level tag containing all the level info?
+//				serializer.text(candyEngine.candyLevel.world + "");
+//				serializer.endTag(null, "world");
 				serializer.startTag(null, "level");
 				serializer.text(candyEngine.candyLevel.level + "");
 				serializer.endTag(null, "level");
