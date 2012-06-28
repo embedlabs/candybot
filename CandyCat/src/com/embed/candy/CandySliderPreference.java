@@ -10,8 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class CandySliderPreference extends DialogPreference implements
-		SeekBar.OnSeekBarChangeListener {
+public class CandySliderPreference extends DialogPreference implements SeekBar.OnSeekBarChangeListener {
 	private static final String androidns = "http://schemas.android.com/apk/res/android";
 
 	private SeekBar mSeekBar;
@@ -21,12 +20,11 @@ public class CandySliderPreference extends DialogPreference implements
 	private String mDialogMessage, mSuffix;
 	private int mDefault, mMax, mValue = 0;
 
-	public CandySliderPreference(Context context, AttributeSet attrs) {
+	public CandySliderPreference(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
 
-		mDialogMessage = context.getString(Integer.valueOf(attrs
-				.getAttributeValue(androidns, "dialogMessage").substring(1)));
+		mDialogMessage = context.getString(Integer.valueOf(attrs.getAttributeValue(androidns, "dialogMessage").substring(1)));
 		mSuffix = attrs.getAttributeValue(androidns, "text");
 		mDefault = attrs.getAttributeIntValue(androidns, "defaultValue", 0);
 		mMax = attrs.getAttributeIntValue(androidns, "max", 100);
@@ -49,14 +47,12 @@ public class CandySliderPreference extends DialogPreference implements
 		mValueText = new TextView(mContext);
 		mValueText.setGravity(Gravity.CENTER_HORIZONTAL);
 		mValueText.setTextSize(32);
-		params = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.WRAP_CONTENT);
+		params = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		layout.addView(mValueText, params);
 
 		mSeekBar = new SeekBar(mContext);
 		mSeekBar.setOnSeekBarChangeListener(this);
-		layout.addView(mSeekBar, new LinearLayout.LayoutParams(
-				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		layout.addView(mSeekBar, new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
 		if (shouldPersist()) {
 			mValue = getPersistedInt(mDefault);
@@ -68,14 +64,14 @@ public class CandySliderPreference extends DialogPreference implements
 	}
 
 	@Override
-	protected void onBindDialogView(View v) {
+	protected void onBindDialogView(final View v) {
 		super.onBindDialogView(v);
 		mSeekBar.setMax(mMax);
 		mSeekBar.setProgress(mValue);
 	}
 
 	@Override
-	protected void onSetInitialValue(boolean restore, Object defaultValue) {
+	protected void onSetInitialValue(final boolean restore, final Object defaultValue) {
 		super.onSetInitialValue(restore, defaultValue);
 		if (restore) {
 			mValue = shouldPersist() ? getPersistedInt(mDefault) : 0;
@@ -85,23 +81,20 @@ public class CandySliderPreference extends DialogPreference implements
 	}
 
 	@Override
-	public void onProgressChanged(SeekBar seek, int value, boolean fromTouch) {
+	public void onProgressChanged(final SeekBar seek, final int value, final boolean fromTouch) {
 		String t = String.valueOf(value);
 		mValueText.setText(mSuffix == null ? t : t.concat(mSuffix));
-		if (shouldPersist())
-			persistInt(value);
-		callChangeListener(new Integer(value));
+		if (shouldPersist()) persistInt(value);
+		callChangeListener(value);
 	}
 
 	@Override
-	public void onStartTrackingTouch(SeekBar seek) {
-	}
+	public void onStartTrackingTouch(final SeekBar seek) {}
 
 	@Override
-	public void onStopTrackingTouch(SeekBar seek) {
-	}
+	public void onStopTrackingTouch(final SeekBar seek) {}
 
-	public void setMax(int max) {
+	public void setMax(final int max) {
 		mMax = max;
 	}
 
@@ -109,7 +102,7 @@ public class CandySliderPreference extends DialogPreference implements
 		return mMax;
 	}
 
-	public void setProgress(int progress) {
+	public void setProgress(final int progress) {
 		mValue = progress;
 		if (mSeekBar != null) {
 			mSeekBar.setProgress(progress);

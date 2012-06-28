@@ -152,8 +152,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 
 		Log.i(TAG, "Level " + world + "_" + level);
 	}
-	
-	
+
+
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -268,12 +268,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		try {
 			mTMXTiledMap = tmxLoader.load(CandyUtils.tmxFromXML(this, world, level));
 		} catch (final TMXLoadException tmxle) {
-			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
+			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG).show();
 			Debug.e(tmxle);
 			try {
 				mTMXTiledMap = tmxLoader.loadFromAsset(this, "levels/1_1.ccl");
 			} catch (TMXLoadException e) {
-				Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG);
+				Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG).show();
 				Debug.e(tmxle);
 				finish();
 			}
@@ -365,7 +365,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		return mScene;
 	}
 
-	public void addTutorialText(ArrayList<String[]> inputTutorialList) {
+	public void addTutorialText(final ArrayList<String[]> inputTutorialList) {
 		for (String[] tutorialTextArray : inputTutorialList) {
 			final Text text = new Text(Float.parseFloat(tutorialTextArray[CandyEngine.COLUMN]) * 64, Float.parseFloat(tutorialTextArray[CandyEngine.ROW]) * 64, andengineMainFont, tutorialTextArray[0].replace("\\n", "\n"));
 			mScene.attachChild(text);
@@ -416,7 +416,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 
 		super.onResume();
 	    Swarm.setActive(this);
-		
+
 		if (!resumeHasRun) {
 			resumeHasRun = true;
 
@@ -441,11 +441,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		}
 	}
 
+	@Override
 	public void onPause() {
 	    super.onPause();
 	    Swarm.setInactive(this);
 	}
-	    
+
 	@Override
 	public synchronized void onTMXTileWithPropertiesCreated(final TMXTiledMap pTMXTiledMap, final TMXLayer pTMXLayer, final TMXTile pTMXTile, final TMXProperties<TMXTileProperty> pTMXTileProperties) {
 		final int row = pTMXTile.getTileRow();

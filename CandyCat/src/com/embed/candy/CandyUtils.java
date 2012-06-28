@@ -43,7 +43,7 @@ public class CandyUtils {
 	 * s: time requirement in milliseconds
 	 */
 
-	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel, final int world,final int level, ArrayList<int[]> objectList,final ArrayList<String[]> tutorialList) {
+	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel, final int world,final int level, final ArrayList<int[]> objectList,final ArrayList<String[]> tutorialList) {
 		try {
 			// Load the XML into a DOM.
 			final InputStream input = candyLevel.getAssets().open("levels/w" + world + ".xml");
@@ -99,7 +99,7 @@ public class CandyUtils {
 			}
 		} catch (Exception e) {
 			Log.e(TAG, "XML FAIL!", e);
-			Toast.makeText(candyLevel, "Failed to load level.", Toast.LENGTH_LONG);
+			Toast.makeText(candyLevel, "Failed to load level.", Toast.LENGTH_LONG).show();
 			if (!(world == 1 & level == 1)) {
 				parseLevelObjectsFromXml(candyLevel, 1, 1, objectList, tutorialList);
 			}
@@ -145,7 +145,7 @@ public class CandyUtils {
 		}
 	}
 
-	public static void setClick(OnClickListener listener, View... views) {
+	public static void setClick(final OnClickListener listener, final View... views) {
 		for (View view : views) {
 			view.setOnClickListener(listener);
 		}
