@@ -6,6 +6,10 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.util.FloatMath;
 
@@ -119,13 +123,12 @@ public class CandyEngine {
 	 */
 
 	private Thread currentThread;
-
+	private static Context cont;
 	/**
 	 * GAME STATISTICS
 	 */
-	// TODO EXPAND
-	int moves = 0;
-	int restarts = 0;
+	static int moves = 0;
+	static int restarts = 0;
 //	private long startTime;
 	int enemiesDefeated = 0;
 	int starsEarned = 0;
@@ -461,24 +464,15 @@ public class CandyEngine {
 	}
 
 	private synchronized void win() {
-//		final int milliseconds = (int) (System.currentTimeMillis() - startTime);
 		candy.showCandyAnim();
 		pause(5, candyIndex);
 
 		Log.i(TAG, "Level Completion Info:");
 		Log.i(TAG, "Moves: " + moves);
 		Log.i(TAG, "Restarts: " + restarts);
-//		Log.i(TAG, "Completion time (ms): " + milliseconds);
 		Log.i(TAG, "Enemies defeated: " + enemiesDefeated);
 		Log.i(TAG, "World:" + candyLevel.world + "  Level:" + candyLevel.level);
 
-//		starsEarned = 1;
-//		if (milliseconds <= candyLevel.timeForStar) {
-//			starsEarned++;
-//		}
-//		if (moves <= candyLevel.movesForStar) {
-//			starsEarned++;
-//		}
 		if (moves <= candyLevel.advancedMovesFor3Stars) {starsEarned = 3;}
 		else if (moves <= candyLevel.basicMovesFor2Stars) {starsEarned = 2;}
 		else {starsEarned = 1;}
@@ -489,35 +483,10 @@ public class CandyEngine {
 		 * OVERRIDE EXISTING BETTER STATS, ONLY PUT NEW BETTER ONES IN
 		 */
 		CandyUtils.saveSettings(this);
-
-		/**
-		 * TODO SHRAV:
-		 * 
-		 * Award first star here because they won. Player must win all three
-		 * stars in a single round. Game will always show the most stars ever
-		 * awarded on the level screen.
-		 * 
-		 * moves: stores the number of moves the player took Add this variable
-		 * to the existing stored number to keep a cumulative count of moves
-		 * done. Compare moves to candyLevel.movesForStar to award a star.
-		 * 
-		 * restarts: stores the number of restarts Add this variable to the
-		 * existing stored number to keep a cumulative count of game restarts.
-		 * 
-		 * milliseconds: stores milliseconds to complete the level Add this
-		 * variable to the existing stored number to keep a cumulative count of
-		 * play time. Compare milliseconds to candyLevel.timeForStar to award a
-		 * star.
-		 * 
-		 * enemiesDefeated: how many enemies died during the level Add this
-		 * variable to the existing stored number to keep a cumulative count of
-		 * enemies defeated.
-		 */
-
-		pause(300);
 		candyLevel.finish(); // TODO change this
-	}
 
+	}
+	
 	private synchronized void logArray(final String message) {
 		Log.i(TAG, message);
 		for (int[] i : backgroundArray) {

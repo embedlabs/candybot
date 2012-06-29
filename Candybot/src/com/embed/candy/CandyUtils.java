@@ -15,6 +15,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xmlpull.v1.XmlSerializer;
 
+import com.swarmconnect.Swarm;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
@@ -30,10 +33,12 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class CandyUtils {
 	public static final String TAG = "Candy Cat";
 	public static Typeface mainFont;
 
+	
 	/**
 	 * w: world
 	 * l: level
@@ -223,7 +228,8 @@ public class CandyUtils {
 		aboutBuilder.show();
 	}
 
-	// Cont variable needed for openFileOutput attention, do not remove...
+	// CandyEngine.moves + "\n Restarts: " + CandyEngine.restarts
+	
 	public static void saveSettings(final CandyEngine candyEngine) {
 		try {
 			FileOutputStream fos = candyEngine.candyLevel.getApplicationContext().openFileOutput("world"+candyEngine.candyLevel.world+".xml", Context.MODE_PRIVATE);
@@ -234,7 +240,7 @@ public class CandyUtils {
 				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output",true);
 				serializer.startTag(null, "Candybot");
 
-//				serializer.startTag(null, "world"); // TODO SHRAV WTF IS THIS shouldn't all the other stuff be inside the world tag, inside which should be a level tag containing all the level info?
+//				serializer.startTag(null, "world"); // TODO  shouldn't all the other stuff be inside the world tag, inside which should be a level tag containing all the level info?
 //				serializer.text(candyEngine.candyLevel.world + "");
 //				serializer.endTag(null, "world");
 				serializer.startTag(null, "level");
@@ -247,9 +253,6 @@ public class CandyUtils {
 
 				intTag(serializer,"moves",candyEngine.moves);
 				intTag(serializer,"restarts",candyEngine.restarts);
-				//				serializer.startTag(null, "time");
-				//				serializer.text(milliseconds + ""); // May want a private variable idk
-				//				serializer.endTag(null, "time");
 				intTag(serializer,"enemies defeated",candyEngine.enemiesDefeated);
 
 				serializer.endTag(null, "Candybot");
