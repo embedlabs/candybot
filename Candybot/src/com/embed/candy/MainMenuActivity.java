@@ -52,12 +52,15 @@ public class MainMenuActivity extends SwarmActivity implements View.OnClickListe
 			CandyUtils.startTwitterActivity(this);
 			break;
 		case R.id.my_swarm_button:
+			Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
 			Swarm.showDashboard();
 			break;
 		case R.id.button_achieve:
+			Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
 			Swarm.showAchievements();
 			break;
 		case R.id.button_lead:
+			Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
 			Swarm.showLeaderboards();
 			break;
 		}
@@ -128,7 +131,6 @@ public class MainMenuActivity extends SwarmActivity implements View.OnClickListe
 
 		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve, button_lead); // changes font
 		CandyUtils.setClick(this,button_achieve, button_lead, button_play, iv_facebook, iv_twitter, my_swarm_button);
-		Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
 
 	}
 
