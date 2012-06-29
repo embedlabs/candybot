@@ -110,6 +110,7 @@
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="4" r="10" c="19" />
+		<m a="100" b="104" /> <!-- Two for a, six for b || really straightforward -->
 	</l>
 	<l id="13">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCW+bjMINY/hMRw6SfW/eSGJzb1lMYRLeKXUPgTUofLPEJhTYn7sdmBTQ2h8McmRmwYk2oGqXFHzfxL6/ICVx6kVvok1nxq54uhUH4SMp/amAmImaFsAAV+u/DABgAA</c>
@@ -120,6 +121,7 @@
 		<o n="3" r="2" c="19" />
 		<o n="4" r="6" c="13" />
 		<o n="4" r="6" c="15" />
+		<m a="140" b="146" /> <!-- Four for a, ten for b -->
 	</l>
 	<l id="14">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGGAUYCNAOJatHNpzbA5n5ksaHofmRxbG4j5O7B4n50Gle6o7X78eknxv3E5p+BDH9y8jkhfzBg0Uese8hVT4zbSVFLz/RPbJgyoIkR0jeY0g+xmAmImaFsAIoNdezABgAA</c>
@@ -127,6 +129,7 @@
 		<o n="2" r="4" c="12" />
 		<o n="3" r="2" c="4" />
 		<o n="4" r="10" c="17" />
+		<m a="136" b="142" /> <!-- Four for a, ten for b || there are hella ways to do this -->
 	</l>
 	<l id="15">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaC1e+nlfnQ+tfxAb/fjkic2XZDqN1Lcic98dHWkugmXfmLMJxbgcxs2t2ITo2b+pUbaGgz5i5rmUxtQmr8GS/lATcwExMxIfAAeKlKTwAYAAA==</c>
@@ -135,17 +138,20 @@
 		<o n="3" r="5" c="8" />
 		<o n="4" r="5" c="21" />
 		<o n="4" r="9" c="21" />
+		<m a="157" b="161" /> <!-- Four for a, eight for b -->
 	</l>
 	<l id="16">
 	    <c>H4sIAAAAAAAAC8VV0Q6AIAjUsv7/k6utB3Y75NRYbExSOE9Aq6WUmqye9NYUifAP8Hu0id8Yx/ay+MjrhHlmj/BHfIz9Gt/DxDilviy/dmS2gr8qf+BjPzWi9vxs3fp5PZnF39Ye785oLpX3YuU8CieLH9VFyb/3lrA9I26z/anWQ/WZlaz/yXbr/toXN5DhQ8AGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
+		<m a="76" b="78" /> <!-- Two for a, four for b || straightforward -->
 	</l>
 	<l id="17">
 	    <c>H4sIAAAAAAAAC8VSgQmAMAxbde7/k3WwgoRtSadiISC0TUw6SynZx2BVZ7I4i3tsp/ZL4y9BDcVLlP/PfFRd18tkZ5YJ+y+lnvCrPhE9z/c8RuhpzvQP4kEphV99w8p9ezxRH9H3j/yRXbwF9nDG9RysVu5rrYe5qvzMv3Pj/VV+5nsln7exXdjb9wn6b6YOwAYAAA==</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="2" c="21" />
+		<!-- No solution -> yet -->
 	</l>
 	<l id="18">
 	    <c>H4sIAAAAAAAAC7VUAQqAIBDzKvv/k0sokGN3u0UejE6bawvVWmu2GIfDmDsJBgeVOQ7irdBHvbX4W5asYf6VLJbwvL73Xcmi6LP6qo98e+8oC3qH9OdxF/KwfJm+cn5QXsZHXtA5ZHkyTuSTcSP9ipZy3yha81x2PzAvlTXdjecn0vV+Knvk7bP/EOn/VcoeV7Dd2J/+ArkNhlbABgAA</c>
@@ -153,6 +159,7 @@
 		<o n="2" r="2" c="2" />
 		<o n="3" r="2" c="18" />
 		<o n="4" r="2" c="16" />
+		<!-- Not done for now, need to change this mofo shiitake -->
 	</l>
 	<l id="19">
 	    <c>H4sIAAAAAAAAC72U4QqAMAiEtVrv/8j1w8GQu81kJhyNmd/0iqmIaLGqgvF147Nylh1MX69uzfKRc9HcyJPLlPULvds+MhDTszJ8lmeeID7zJLLP+hj5bTFDJPp3RP0iPuttNl/n3ybEZzXof0OK9r8j/uJn79tofuYn8nesX+UrdLw6bf0AlvvSxsAGAAA=</c>
@@ -172,6 +179,7 @@
 		<o n="4" r="1" c="17" />
 		<o n="4" r="1" c="19" />
 		<o n="4" r="1" c="21" />
+		<!-- Author (Anshul) needs to show correct least moves way -->
 	</l>
 	<l id="20">
 	    <c>H4sIAAAAAAAAC7WT4Q6AIAiEsfL9Xzl/1MZuB5yWbEzX5OM6sZlZ25y7IuqFe6zBNdK4qr/izfqD5y9SxzjIV/p5/rtGehXvmG6mX2H473iO6Vf5Wc/K6z/mn82kEtl9VPOw4j97Yyqzeqcrocxydr9MV/XPuCK/P+lru5CqfoUV8RX/v/Aj/cfI03SvZ/IG8lalxcAGAAA=</c>
@@ -188,5 +196,6 @@
 		<o n="4" r="1" c="16" />
 		<o n="4" r="3" c="9" />
 		<o n="4" r="4" c="4" />
+		<!-- Author (Anshul) needs to show correct least moves way -->
 	</l>
 </w>
