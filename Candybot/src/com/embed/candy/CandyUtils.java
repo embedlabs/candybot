@@ -15,9 +15,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xmlpull.v1.XmlSerializer;
 
-import com.swarmconnect.Swarm;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
@@ -38,7 +35,7 @@ public class CandyUtils {
 	public static final String TAG = "Candy Cat";
 	public static Typeface mainFont;
 
-	
+
 	/**
 	 * w: world
 	 * l: level
@@ -111,8 +108,7 @@ public class CandyUtils {
 		}
 	}
 
-	public static InputStream tmxFromXML(final CandyLevelActivity candyLevel,
-			final int world, final int level) {
+	public static InputStream tmxFromXML(final CandyLevelActivity candyLevel, final int world, final int level) {
 		// Load the XML into a DOM.
 		try {
 			final InputStream input = candyLevel.getAssets().open("levels/w" + world + ".xml");
@@ -229,7 +225,7 @@ public class CandyUtils {
 	}
 
 	// CandyEngine.moves + "\n Restarts: " + CandyEngine.restarts
-	
+
 	public static void saveSettings(final CandyEngine candyEngine) {
 		try {
 			FileOutputStream fos = candyEngine.candyLevel.getApplicationContext().openFileOutput("world"+candyEngine.candyLevel.world+".xml", Context.MODE_PRIVATE);

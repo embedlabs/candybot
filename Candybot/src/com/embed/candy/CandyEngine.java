@@ -6,12 +6,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.util.Log;
 import android.util.FloatMath;
+import android.util.Log;
 
 public class CandyEngine {
 
@@ -123,12 +119,11 @@ public class CandyEngine {
 	 */
 
 	private Thread currentThread;
-	private static Context cont;
 	/**
 	 * GAME STATISTICS
 	 */
-	static int moves = 0;
-	static int restarts = 0;
+	int moves = 0;
+	int restarts = 0;
 //	private long startTime;
 	int enemiesDefeated = 0;
 	int starsEarned = 0;
@@ -252,7 +247,7 @@ public class CandyEngine {
 //		}
 	}
 
-	private synchronized void move(final int rowDirection, final int columnDirection, Integer... spriteIndexes) {
+	private synchronized void move(final int rowDirection, final int columnDirection, final Integer... spriteIndexes) {
 		for (int spriteIndex : spriteIndexes) {
 			if (objectArray[spriteIndex][TYPE] != CandyLevelActivity.INERTIA_WALL) {
 				spriteList.get(spriteIndex).move(rowDirection, columnDirection);
@@ -264,7 +259,7 @@ public class CandyEngine {
 		pause(5, spriteIndexes);
 	}
 
-	private synchronized void teleport(final int row, final int column, Integer... spriteIndexes) {
+	private synchronized void teleport(final int row, final int column, final Integer... spriteIndexes) {
 		for (int spriteIndex : spriteIndexes) {
 			spriteList.get(spriteIndex).teleport(row, column);
 			if (spriteIndex == catIndex) {
@@ -381,7 +376,7 @@ public class CandyEngine {
 		}
 	}
 
-	private synchronized void enemyMove(CandyAnimatedSprite enemySprite) {
+	private synchronized void enemyMove(final CandyAnimatedSprite enemySprite) {
 		final int enemyRow = objectArray[enemySprite.index][ROW];
 		final int enemyColumn = objectArray[enemySprite.index][COLUMN];
 		final int catRow = objectArray[catIndex][ROW];
@@ -486,7 +481,7 @@ public class CandyEngine {
 		candyLevel.finish(); // TODO change this
 
 	}
-	
+
 	private synchronized void logArray(final String message) {
 		Log.i(TAG, message);
 		for (int[] i : backgroundArray) {
@@ -813,7 +808,7 @@ public class CandyEngine {
 
 	private static class Conditionals {
 
-		private static boolean isLaser(int type) {
+		private static boolean isLaser(final int type) {
 			switch (type) {
 			case LASER_HORIZONTAL:
 			case LASER_VERTICAL:
@@ -824,7 +819,7 @@ public class CandyEngine {
 			}
 		}
 
-		private static boolean isPipe(int type) {
+		private static boolean isPipe(final int type) {
 			switch (type) {
 			case PIPE_LEFT:
 			case PIPE_RIGHT:
@@ -857,8 +852,8 @@ public class CandyEngine {
 
 	private class GravityComparator implements Comparator<CandyAnimatedSprite> {
 		@Override
-		public synchronized int compare(CandyAnimatedSprite object1,
-				CandyAnimatedSprite object2) {
+		public synchronized int compare(final CandyAnimatedSprite object1,
+				final CandyAnimatedSprite object2) {
 			return objectArray[object2.index][ROW]
 					+ ((objectArray[object2.index][COLUMN] == candyLevel.teleporter2column) ? 100 : 0)
 					- objectArray[object1.index][ROW]
@@ -871,7 +866,7 @@ public class CandyEngine {
 		final int catColumn = objectArray[catIndex][COLUMN];
 
 		@Override
-		public synchronized int compare(CandyAnimatedSprite enemy1, CandyAnimatedSprite enemy2) {
+		public synchronized int compare(final CandyAnimatedSprite enemy1, final CandyAnimatedSprite enemy2) {
 			final int enemy1row = objectArray[enemy1.index][ROW];
 			final int enemy1column = objectArray[enemy1.index][COLUMN];
 			final int enemy2row = objectArray[enemy2.index][ROW];
