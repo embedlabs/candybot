@@ -22,6 +22,7 @@ proguard/
 
 # android stuff
 R.java
+BuildConfig.java
 
 # any bin stuff
 *.apk
