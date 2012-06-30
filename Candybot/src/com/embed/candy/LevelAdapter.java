@@ -90,7 +90,7 @@ public class LevelAdapter extends BaseAdapter {
 					if (getStars) {
 						int stars = Integer.parseInt(new String(ch, start, length));
 						Log.d(TAG, "Stars: " + stars);
-						starData[level-1] = stars;
+						getStarData()[level-1] = stars;
 						getStars = false;
 					}
 				}
@@ -121,7 +121,7 @@ public class LevelAdapter extends BaseAdapter {
 			 * -1: unlocked
 			 * 1-3: stars
 			 */
-			switch (starData[position]) {
+			switch (getStarData()[position]) {
 			case -1:
 				v = li.inflate(R.layout.grid_item_star, null);
 				final RelativeLayout rl0 = (RelativeLayout)v;
@@ -156,7 +156,7 @@ public class LevelAdapter extends BaseAdapter {
 					rl_default.removeView(v.findViewById(R.id.star2));
 					rl_default.removeView(v.findViewById(R.id.star1));
 					changeFont(v,position);
-				} else if (starData[position-1]!=0) {
+				} else if (getStarData()[position-1]!=0) {
 					v = li.inflate(R.layout.grid_item_star, null);
 					final RelativeLayout rl_default2 = (RelativeLayout)v;
 					rl_default2.removeView(v.findViewById(R.id.star3));
@@ -165,6 +165,7 @@ public class LevelAdapter extends BaseAdapter {
 					changeFont(v,position);
 				} else {
 					v = li.inflate(R.layout.grid_item_lock, null);
+					
 				}
 				break;
 			}
@@ -173,10 +174,17 @@ public class LevelAdapter extends BaseAdapter {
 		return v;
 	}
 
+
 	public void changeFont(final View v, final int position) {
 		final TextView tv = (TextView) v.findViewById(R.id.grid_text);
 		tv.setText(String.valueOf(position + 1));
 		CandyUtils.setMainFont(tv);
 	}
+
+	public int[] getStarData() {
+		return starData;
+	}
+
+	
 
 }
