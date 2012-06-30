@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:background="@drawable/background" >
+	android:layout_height="fill_parent" >
+	<ImageView android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_centerInParent="true"
+		android:scaleType="centerCrop"
+		android:src="@drawable/background" />
 	<GridView android:id="@+id/gridview_level"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-	    android:verticalSpacing="10dip"
-	    android:horizontalSpacing="0dip"
-	    android:numColumns="5"
-	    android:columnWidth="70dp"
-	    android:rowHeight="120dp"
-	    android:stretchMode="spacingWidthUniform"
-	    android:gravity="center"
 		android:layout_centerInParent="true"
-		android:listSelector="@android:color/transparent" />
+		android:columnWidth="70dp"
+		android:gravity="center"
+		android:horizontalSpacing="0dip"
+		android:listSelector="@android:color/transparent"
+		android:numColumns="5"
+		android:rowHeight="120dp"
+		android:stretchMode="spacingWidthUniform"
+		android:verticalSpacing="10dip" />
 </RelativeLayout>

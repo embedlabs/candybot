@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Gallery xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/gallery_world"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:spacing="100dip"
-	android:background="@drawable/background"
-	android:unselectedAlpha="1.0" />
+	android:layout_height="fill_parent" >
+	<ImageView android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_centerInParent="true"
+		android:scaleType="centerCrop"
+		android:src="@drawable/background" />
+	<Gallery android:id="@+id/gallery_world"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="@android:color/transparent"
+		android:fadingEdgeLength="0dip"
+		android:spacing="100dip"
+		android:unselectedAlpha="1.0" />
+</RelativeLayout>

@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class LevelAdapter extends BaseAdapter {
@@ -89,7 +90,7 @@ public class LevelAdapter extends BaseAdapter {
 					if (getStars) {
 						int stars = Integer.parseInt(new String(ch, start, length));
 						Log.d(TAG, "Stars: " + stars);
-						starData[level-1] = stars; // TODO i'm pretty sure this might be wrong -Prem
+						starData[level-1] = stars;
 						getStars = false;
 					}
 				}
@@ -115,28 +116,67 @@ public class LevelAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View v, final ViewGroup parent) {
 		if (v == null) {
-			// 1,2,3 stars and 4 is a lock
+			/**
+			 * 0: lock
+			 * -1: unlocked
+			 * 1-3: stars
+			 */
 			switch (starData[position]) {
+			case -1:
+				v = li.inflate(R.layout.grid_item_star, null);
+				final RelativeLayout rl0 = (RelativeLayout)v;
+				rl0.removeView(v.findViewById(R.id.star3));
+				rl0.removeView(v.findViewById(R.id.star2));
+				rl0.removeView(v.findViewById(R.id.star1));
+				changeFont(v,position);
+				break;
 			case 1:
-				v = li.inflate(R.layout.grid_item_1, null);
+				v = li.inflate(R.layout.grid_item_star, null);
+				final RelativeLayout rl1 = (RelativeLayout)v;
+				rl1.removeView(v.findViewById(R.id.star3));
+				rl1.removeView(v.findViewById(R.id.star2));
+				changeFont(v,position);
 				break;
 			case 2:
-				v = li.inflate(R.layout.grid_item_2, null);
+				v = li.inflate(R.layout.grid_item_star, null);
+				final RelativeLayout r2 = (RelativeLayout)v;
+				changeFont(v,position);
+				r2.removeView(v.findViewById(R.id.star3));
 				break;
 			case 3:
-				v = li.inflate(R.layout.grid_item_3, null);
+				v = li.inflate(R.layout.grid_item_star, null);
+				changeFont(v,position);
 				break;
-			case 4:
+			case 0:
 			default:
-				v = li.inflate(R.layout.grid_item_lock, null);
+				if (position==0) {
+					v = li.inflate(R.layout.grid_item_star, null);
+					final RelativeLayout rl_default = (RelativeLayout)v;
+					rl_default.removeView(v.findViewById(R.id.star3));
+					rl_default.removeView(v.findViewById(R.id.star2));
+					rl_default.removeView(v.findViewById(R.id.star1));
+					changeFont(v,position);
+				} else if (starData[position-1]!=0) {
+					v = li.inflate(R.layout.grid_item_star, null);
+					final RelativeLayout rl_default2 = (RelativeLayout)v;
+					rl_default2.removeView(v.findViewById(R.id.star3));
+					rl_default2.removeView(v.findViewById(R.id.star2));
+					rl_default2.removeView(v.findViewById(R.id.star1));
+					changeFont(v,position);
+				} else {
+					v = li.inflate(R.layout.grid_item_lock, null);
+				}
 				break;
 			}
 		}
+
+		return v;
+	}
+
+	public void changeFont(final View v, final int position) {
 		final TextView tv = (TextView) v.findViewById(R.id.grid_text);
 		tv.setText(String.valueOf(position + 1));
 		CandyUtils.setMainFont(tv);
-
-		return v;
 	}
 
 }

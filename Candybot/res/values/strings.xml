@@ -12,6 +12,8 @@
     <string name="facebookstring">Facebook Button that links to our Facebook.</string>
     <string name="twitterUID">338692068</string>
     
+    <string name="swarmstring">Swarm Button that opens Swarm.</string>
+    
     <string name="pan">PAN/ZOOM</string>
     <string name="play">PLAY MODE</string>
     <string name="reset">RESET</string>

@@ -9,5 +9,5 @@
 		android:shape="rectangle" />
 	<corners android:radius="5dip" />
 	<stroke android:width="3dip"
-		android:color="@color/button_normal_stroke"/>
+		android:color="@android:color/white"/>
 </shape>

@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:id="@+id/enclosing_rl_level"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-	<org.anddev.andengine.opengl.view.RenderSurfaceView android:id="@+id/rsv_level"
+	android:id="@+id/enclosing_rl_level"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" >
+	<org.anddev.andengine.opengl.view.RenderSurfaceView
+		android:id="@+id/rsv_level"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
-<!-- 	<RelativeLayout android:id="@+id/loading_rl_level" -->
-<!-- 		android:layout_width="fill_parent" -->
-<!-- 		android:layout_height="fill_parent" -->
-<!-- 		android:background="@drawable/background_linear"> -->
-<!-- 		<ImageView android:id="@+id/loading_iv_level" -->
-<!-- 			android:layout_width="64px" -->
-<!-- 			android:layout_height="64px" -->
-<!-- 			android:src="@drawable/full_candy" -->
-<!-- 			android:scaleType="fitXY" -->
-<!-- 			android:layout_centerInParent="true" /> -->
-<!-- 		<TextView android:id="@+id/loading_tv_level" -->
-<!-- 			android:layout_width="wrap_content" -->
-<!-- 			android:layout_height="wrap_content" -->
-<!-- 			android:text="@string/loading" -->
-<!-- 			android:textSize="40dip" -->
-<!-- 			android:textColor="@color/normal_text" -->
-<!-- 			android:layout_marginBottom="10dip" -->
-<!-- 			android:layout_above="@id/loading_iv_level" -->
-<!-- 			android:layout_centerHorizontal="true" /> -->
-<!-- 	</RelativeLayout> -->
 </RelativeLayout>

@@ -227,6 +227,9 @@ public class CandyUtils {
 
 	public static void saveSettings(final CandyEngine candyEngine) {
 		try {
+			/** TODO
+			 * STORE STATS IN SWARM
+			 */
 			FileOutputStream fos = candyEngine.candyLevel.getApplicationContext().openFileOutput("world"+candyEngine.candyLevel.world+".xml", Context.MODE_PRIVATE);
 			XmlSerializer serializer = Xml.newSerializer();
 			try {
