@@ -1,8 +1,10 @@
 package com.embed.candy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +33,7 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 
 	@Override
 	public void onItemClick(final AdapterView<?> av, final View v, final int position, final long arg3) {
+		Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);  
 		switch (la.starData[position]) {
 		case -1:
 		case 1:
@@ -55,6 +58,7 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 				.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
 			} else {
 				textToast("Level not unlocked!");
+				vib.vibrate(100);
 			}
 			break;
 		}
