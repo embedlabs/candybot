@@ -15,9 +15,13 @@
 				android:text="@string/app_name"
 				android:layout_marginTop="15dip"
 				android:layout_marginBottom="10dip"
-				android:textColor="@android:color/darker_gray"
+				android:textColor="@android:color/white"
 				android:layout_alignParentTop="true"
-				android:layout_centerHorizontal="true" />
+				android:layout_centerHorizontal="true"
+				android:shadowColor="@android:color/black"
+				android:shadowDx="0"
+				android:shadowDy="0"
+				android:shadowRadius="5" />
 			<LinearLayout android:id="@+id/mainmenu_ll"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
