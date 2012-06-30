@@ -40,9 +40,8 @@ public class CandyUtils {
 	 * w: world
 	 * l: level
 	 * o: object
-	 * t: tutorial text
+	 * h: tutorial text
 	 * m: move requirement
-	 * s: time requirement in milliseconds
 	 */
 
 	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel, final int world,final int level, final ArrayList<int[]> objectList,final ArrayList<String[]> tutorialList) {
