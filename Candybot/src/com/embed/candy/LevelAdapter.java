@@ -26,7 +26,7 @@ import android.widget.TextView;
 
 public class LevelAdapter extends BaseAdapter {
 	private final LayoutInflater li;
-	private int[] starData = new int[20];
+	int[] starData = new int[20];
 	private final int worldNum;
 	int world,level;
 
@@ -165,7 +165,7 @@ public class LevelAdapter extends BaseAdapter {
 					changeFont(v,position);
 				} else {
 					v = li.inflate(R.layout.grid_item_lock, null);
-					
+
 				}
 				break;
 			}
@@ -185,6 +185,6 @@ public class LevelAdapter extends BaseAdapter {
 		return starData;
 	}
 
-	
+
 
 }
