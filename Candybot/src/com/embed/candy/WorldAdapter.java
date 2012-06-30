@@ -28,7 +28,7 @@ public class WorldAdapter extends BaseAdapter {
 		return position;
 	}
 
-	public void setPos(final int position) {
+	public static void setPos(final int position) {
 		WorldAdapter.position = position;
 	}
 
@@ -42,7 +42,7 @@ public class WorldAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, final View convertView, final ViewGroup parent) {
 
 		final ImageView i = new ImageView(mContext);
 		i.setImageResource(imageIDs[position]);
