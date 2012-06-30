@@ -29,7 +29,7 @@ public class WorldSelectActivity extends SwarmActivity implements OnItemClickLis
 
 	@Override
 	public void onItemClick(final AdapterView<?> av, final View v, final int position, final long arg3) {
-		if (av.getSelectedItemPosition() == position) {
+		if (av.getSelectedItemPosition() == position) { // isn't this redundant or not? :-o i'm confused -Prem
 			WorldAdapter.setPos(position);
 			startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
 		}

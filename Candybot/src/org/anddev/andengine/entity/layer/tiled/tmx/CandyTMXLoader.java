@@ -70,7 +70,6 @@ public class CandyTMXLoader extends TMXLoader {
 		} catch (final SAXException e) {
 			throw new TMXLoadException(e);
 		} catch (final ParserConfigurationException pe) {
-			/* Doesn't happen. */
 			return null;
 		} catch (final IOException e) {
 			throw new TMXLoadException(e);
