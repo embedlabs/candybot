@@ -147,14 +147,14 @@
 		<m a="76" b="78" /> <!-- Two for a, four for b || straightforward -->
 	</l>
 	<l id="17">
-	    <c>H4sIAAAAAAAAC8VSgQmAMAxbde7/k3WwgoRtSadiISC0TUw6SynZx2BVZ7I4i3tsp/ZL4y9BDcVLlP/PfFRd18tkZ5YJ+y+lnvCrPhE9z/c8RuhpzvQP4kEphV99w8p9ezxRH9H3j/yRXbwF9nDG9RysVu5rrYe5qvzMv3Pj/VV+5nsln7exXdjb9wn6b6YOwAYAAA==</c>
+	    <c>H4sIAAAAAAAAC8VSAQqAIBDTMv//ZBM8kKFuZ0UHg+DutrYzhhDix2BVZ5I4i3tsp/Zz489OjZ5/puXl/zMfVdf0EtlZZcL+S6kn/KpPxMhzn8cMI82V/kU8KKXwK+9Nve+Ix+vD+/6R37OLt8AezpiegdXOfWPrYa4qP/Nv3Hh/lZ/53snnbRw3zvZdALfrs+bABgAA</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="2" c="21" />
 		<!-- No solution -> yet -->
 	</l>
 	<l id="18">
-	    <c>H4sIAAAAAAAAC7VUAQqAIBDzKvv/k0sokGN3u0UejE6bawvVWmu2GIfDmDsJBgeVOQ7irdBHvbX4W5asYf6VLJbwvL73Xcmi6LP6qo98e+8oC3qH9OdxF/KwfJm+cn5QXsZHXtA5ZHkyTuSTcSP9ipZy3yha81x2PzAvlTXdjecn0vV+Knvk7bP/EOn/VcoeV7Dd2J/+ArkNhlbABgAA</c>
+	    <c>H4sIAAAAAAAAC7VUWw6AMAxqfd3/yLrEj4WwMoxrQpwTEUy7jIhcjAPQ9i6BxmGVwGG8FfpsnTH+VhbvKP9Olix4qI++Z7I4+qq+6jPf6J1lYc+Yfn9/GnlUvkrfmR+WV/GZFzaHKk/FGflUXKY/q+WcN45Wv1edD5WXmcIeS7gyXZwTpweq/8D0/yynxx1sD/Z3fQOobaAfwAYAAA==</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="2" c="18" />
