@@ -35,7 +35,7 @@ public class LevelAdapter extends BaseAdapter {
 		li = a.getLayoutInflater();
 
 		worldNum = (WorldAdapter.getPos()) + 1;
-		Log.d(TAG, "Current world:" + worldNum);
+		Log.d(TAG, "Current world: " + worldNum);
 
 		readData(a);
 	}
@@ -55,7 +55,7 @@ public class LevelAdapter extends BaseAdapter {
 		return position;
 	}
 
-	public void readData(Context cont) {
+	public void readData(final Context cont) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
@@ -64,7 +64,7 @@ public class LevelAdapter extends BaseAdapter {
 				boolean getLevel, getStars = false;
 
 				@Override
-				public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+				public void startElement(final String uri, final String localName, final String qName, final Attributes attributes) throws SAXException {
 					Log.d(TAG, "Start Element: " + qName);
 					if (qName.equalsIgnoreCase("level")) {
 						getLevel = true;
@@ -74,12 +74,12 @@ public class LevelAdapter extends BaseAdapter {
 				}
 
 				@Override
-				public void endElement(String uri, String localName, String qName) throws SAXException {
+				public void endElement(final String uri, final String localName, final String qName) throws SAXException {
 					Log.d(TAG, "End Element: " + qName);
 				}
 
 				@Override
-				public void characters(char ch[], int start, int length) throws SAXException {
+				public void characters(final char ch[], final int start, final int length) throws SAXException {
 					Log.d(TAG, new String(ch, start, length));
 					if (getLevel) {
 						level = Integer.parseInt(new String(ch, start, length));
@@ -113,7 +113,7 @@ public class LevelAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View v, ViewGroup parent) {
+	public View getView(final int position, View v, final ViewGroup parent) {
 		if (v == null) {
 			// 1,2,3 stars and 4 is a lock
 			switch (starData[position]) {

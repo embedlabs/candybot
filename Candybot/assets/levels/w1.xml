@@ -4,7 +4,7 @@
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRg1f9R8aptPzXQ9HMNn1PxR80k1n5qYCYiZkfgAkQjLUsAGAAA=</c>
 		<o n="1" r="7" c="8" />
 		<o n="2" r="7" c="7" />
-		<h r="10" c="5">Help the Cat move the candy&#10;into the hole!</h>
+		<h r="10" c="5">Help Candybot move the candy&#10;into the hole!</h>
 		<m a="23" b="27" /> <!-- None for a, four for b -->
 	</l>
 	<l id="2">

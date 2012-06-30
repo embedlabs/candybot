@@ -67,7 +67,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	String theme;
 
 	static final int CANDY = 1;
-	static final int CAT = 2;
+	static final int BOT = 2;
 	static final int BOX = 3;
 	static final int BOMB = 4;
 	static final int ENEMY = 5;
@@ -90,7 +90,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	private HUD hud;
 
 	private BitmapTextureAtlas mObjectTexture;
-	private TiledTextureRegion candyTTR, catTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
+	private TiledTextureRegion candyTTR, botTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
 	private RectangleVertexBuffer boxRVB, /* no bombRVB or enemyRVB */ movableWallRVB, inertiaWallRVB;
 
 	private BitmapTextureAtlas mFontTexture;
@@ -213,7 +213,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		 */
 		mObjectTexture = new BitmapTextureAtlas(256, 1024, quality);
 		candyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png", 0, 0, 4, 3);
-		catTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "cat.png", 0, 193, 4, 2);
+		botTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bot.png", 0, 193, 4, 2);
 		boxTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "box.png", 0, 580, 1, 1);
 		bombTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bomb.png", 0, 322, 4, 2);
 		enemyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "enemy.png", 0, 451, 4, 2);
@@ -319,7 +319,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 				if (pSceneTouchEvent.getAction() == MotionEvent.ACTION_DOWN & gameStarted) {
 					if (!playMode) {
 						setText(play);
-						mCandyCamera.setChaseEntity(candyEngine.cat);
+						mCandyCamera.setChaseEntity(candyEngine.bot);
 						playMode = true;
 					} else {
 						setText(pan);
@@ -380,8 +380,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		case CANDY:
 			face = new CandyAnimatedSprite(row, column, candyTTR, index, CANDY, tmxLayer, objectArray, backgroundArray);
 			break;
-		case CAT:
-			face = new CandyAnimatedSprite(row, column, catTTR, index, CAT, tmxLayer, objectArray, backgroundArray);
+		case BOT:
+			face = new CandyAnimatedSprite(row, column, botTTR, index, BOT, tmxLayer, objectArray, backgroundArray);
 			break;
 		case BOMB:
 			face = new CandyAnimatedSprite(row, column, bombTTR, index, BOMB, tmxLayer, objectArray, backgroundArray);
@@ -421,7 +421,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 			resumeHasRun = true;
 
 			mCandyCamera.setMaxZoomFactorChange((1 - PHONE_HEIGHT / HEIGHT));
-			mCandyCamera.setChaseEntity(candyEngine.cat);
+			mCandyCamera.setChaseEntity(candyEngine.bot);
 			if (zoomBoolean) {
 				new Handler().post(new Runnable() {
 					@Override

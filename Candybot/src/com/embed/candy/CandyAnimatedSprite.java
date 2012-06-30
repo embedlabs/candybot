@@ -31,9 +31,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 
 	public boolean enemyDead = false;
 
-	public static final long[] catDurations = new long[] { 3000, 100, 1000,
+	public static final long[] botDurations = new long[] { 3000, 100, 1000,
 			100, 5000, 100, 1000, 100, 5000, 100, 100, 100, 5000, 500 };
-	public static final int[] catFrames = new int[] { 0, 1, 2, 1, 0, 3, 4, 3,
+	public static final int[] botFrames = new int[] { 0, 1, 2, 1, 0, 3, 4, 3,
 			0, 5, 6, 5, 0, 7 };
 
 	public static final long[] enemyDurations = new long[] { 3000, 100, 2000,
@@ -48,11 +48,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 
 	public final int initialRow, initialColumn;
 
-	public CandyAnimatedSprite(final int row, final int column,
-			final TiledTextureRegion pTiledTextureRegion,
-			final RectangleVertexBuffer RVB, final int index, final int type,
-			final TMXLayer tmxLayer, final int[][] objectArray,
-			final int[][] backgroundArray) {
+	public CandyAnimatedSprite(final int row, final int column, final TiledTextureRegion pTiledTextureRegion, final RectangleVertexBuffer RVB, final int index, final int type, final TMXLayer tmxLayer, final int[][] objectArray, final int[][] backgroundArray) {
 		super(column * 64, row * 64, pTiledTextureRegion, RVB);
 		this.setCullingEnabled(true);
 		this.index = index;
@@ -64,8 +60,8 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		initialRow = row;
 		initialColumn = column;
 
-		if (this.type == CandyLevelActivity.CAT) {
-			animate(catDurations, catFrames, -1);
+		if (this.type == CandyLevelActivity.BOT) {
+			animate(botDurations, botFrames, -1);
 		} else if (this.type == CandyLevelActivity.ENEMY) {
 			animate(enemyDurations, enemyFrames, -1);
 		}
@@ -157,7 +153,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	public synchronized void showBombAnim() {
 		animate(50, false, new IAnimationListener() {
 			@Override
-			public void onAnimationEnd(AnimatedSprite pAnimatedSprite) {
+			public void onAnimationEnd(final AnimatedSprite pAnimatedSprite) {
 				setVisible(false);
 				tmxLayer.getTMXTile(objectArray[index][CandyEngine.COLUMN],
 						objectArray[index][CandyEngine.ROW] + 1)
@@ -178,7 +174,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		enemyDead = true;
 
 		final float deathSpeed;
-		if (type == CandyLevelActivity.CAT) {
+		if (type == CandyLevelActivity.BOT) {
 			deathSpeed = 1;
 		} else {
 			deathSpeed = 0.3f;
@@ -188,13 +184,13 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 				0.5f, new IEntityModifierListener() {
 
 					@Override
-					public void onModifierStarted(IModifier<IEntity> pModifier,
-							IEntity pItem) {
+					public void onModifierStarted(final IModifier<IEntity> pModifier,
+							final IEntity pItem) {
 					}
 
 					@Override
 					public void onModifierFinished(
-							IModifier<IEntity> pModifier, IEntity pItem) {
+							final IModifier<IEntity> pModifier, final IEntity pItem) {
 						setVisible(false);
 						hasModifier = false;
 					}
@@ -219,8 +215,8 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		setCurrentTileIndex(0);
 		setVisible(true);
 
-		if (type == CandyLevelActivity.CAT) {
-			animate(catDurations, catFrames, -1);
+		if (type == CandyLevelActivity.BOT) {
+			animate(botDurations, botFrames, -1);
 		} else if (type == CandyLevelActivity.ENEMY) {
 			animate(enemyDurations, enemyFrames, -1);
 		}

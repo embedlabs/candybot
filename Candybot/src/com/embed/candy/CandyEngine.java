@@ -92,8 +92,8 @@ public class CandyEngine {
 	 * EASE OF ACCESS
 	 */
 
-	CandyAnimatedSprite cat, candy;
-	int catIndex = -1;
+	CandyAnimatedSprite bot, candy;
+	int botIndex = -1;
 	int candyIndex = -1;
 
 	/**
@@ -108,7 +108,7 @@ public class CandyEngine {
 
 	public boolean win = false;
 	public boolean death = false;
-	public boolean catMoved = false;
+	public boolean botMoved = false;
 	public boolean candyBurned = false;
 
 	private boolean teleportationRequired = false;
@@ -146,9 +146,9 @@ public class CandyEngine {
 			case CandyLevelActivity.ENEMY:
 				enemyList.add(spriteList.get(i));
 				break;
-			case CandyLevelActivity.CAT:
-				catIndex = i;
-				cat = spriteList.get(i);
+			case CandyLevelActivity.BOT:
+				botIndex = i;
+				bot = spriteList.get(i);
 				Log.i(TAG, "Cat located at row " + objectArray[i][ROW] + ", column " + objectArray[i][COLUMN]);
 				break;
 			case CandyLevelActivity.CANDY:
@@ -183,7 +183,7 @@ public class CandyEngine {
 		@Override
 		public synchronized void run() {
 			assert queueAllEmpty();
-			final int[] situationArray = situation(catIndex, rowDirection, columnDirection);
+			final int[] situationArray = situation(botIndex, rowDirection, columnDirection);
 			final int s = situationArray[SITUATION];
 			boolean shouldDie = false;
 			switch (s) {
@@ -191,9 +191,9 @@ public class CandyEngine {
 			case SQUARE_LASER:
 				death = true;
 			case SQUARE_EMPTY:
-				catMoved = true;
+				botMoved = true;
 //				maybeStartTimer();
-				move(rowDirection, columnDirection, catIndex);
+				move(rowDirection, columnDirection, botIndex);
 				break;
 			case SQUARE_LASER_OCCUPIED:
 				shouldDie = true;
@@ -205,9 +205,9 @@ public class CandyEngine {
 				case SQUARE_EMPTY:
 					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.INERTIA_WALL)) {
 						if (shouldDie) {death = true;}
-						catMoved = true;
+						botMoved = true;
 //						maybeStartTimer();
-						move(rowDirection, columnDirection, catIndex, situationArray[OBJECT]);
+						move(rowDirection, columnDirection, botIndex, situationArray[OBJECT]);
 					}
 					break;
 				}
@@ -219,9 +219,9 @@ public class CandyEngine {
 					case SQUARE_LASER:
 						death = true;
 					case SQUARE_EMPTY:
-						catMoved = true;
+						botMoved = true;
 //						maybeStartTimer();
-						teleport(candyLevel.teleporter2row + ROW_DOWN, candyLevel.teleporter2column, catIndex);
+						teleport(candyLevel.teleporter2row + ROW_DOWN, candyLevel.teleporter2column, botIndex);
 						break;
 					}
 				} else if (rowDirection == -1) {
@@ -229,9 +229,9 @@ public class CandyEngine {
 					case SQUARE_LASER:
 						death = true;
 					case SQUARE_EMPTY:
-						catMoved = true;
+						botMoved = true;
 //						maybeStartTimer();
-						teleport(candyLevel.teleporter1row + ROW_UP, candyLevel.teleporter1column, catIndex);
+						teleport(candyLevel.teleporter1row + ROW_UP, candyLevel.teleporter1column, botIndex);
 						break;
 					}
 				}
@@ -262,7 +262,7 @@ public class CandyEngine {
 	private synchronized void teleport(final int row, final int column, final Integer... spriteIndexes) {
 		for (int spriteIndex : spriteIndexes) {
 			spriteList.get(spriteIndex).teleport(row, column);
-			if (spriteIndex == catIndex) {
+			if (spriteIndex == botIndex) {
 				candyLevel.mCandyCamera.setMaxVelocity(3000, 3000);
 			}
 		}
@@ -275,7 +275,7 @@ public class CandyEngine {
 		 * ENEMIES MOVE
 		 */
 
-		if (catMoved) {
+		if (botMoved) {
 			if (enemyList.size() != 0 && !death && enemyList.size() > 0) {
 				Collections.sort(enemyList, new EnemyComparator());
 				for (CandyAnimatedSprite enemySprite : enemyList) {
@@ -285,7 +285,7 @@ public class CandyEngine {
 				}
 			}
 			moves++;
-			catMoved = false;
+			botMoved = false;
 		}
 
 		/**
@@ -356,8 +356,8 @@ public class CandyEngine {
 			logArray("End array:");
 			win();
 		} else if (death && !candyBurned) {
-			cat.showDeadSprite();
-			pause(5, catIndex);
+			bot.showDeadSprite();
+			pause(5, botIndex);
 			pause(1500);
 			resetLevel(false);
 		} else if (candyBurned && !death) {
@@ -366,9 +366,9 @@ public class CandyEngine {
 			pause(1500);
 			resetLevel(false);
 		} else if (death && candyBurned) {
-			cat.showDeadSprite();
+			bot.showDeadSprite();
 			candy.showDeadSprite();
-			pause(5, catIndex, candyIndex);
+			pause(5, botIndex, candyIndex);
 			pause(1500);
 			resetLevel(false);
 		} else {
@@ -379,8 +379,8 @@ public class CandyEngine {
 	private synchronized void enemyMove(final CandyAnimatedSprite enemySprite) {
 		final int enemyRow = objectArray[enemySprite.index][ROW];
 		final int enemyColumn = objectArray[enemySprite.index][COLUMN];
-		final int catRow = objectArray[catIndex][ROW];
-		final int catColumn = objectArray[catIndex][COLUMN];
+		final int catRow = objectArray[botIndex][ROW];
+		final int catColumn = objectArray[botIndex][COLUMN];
 
 		final int verticalDiff = Math.abs(catRow - enemyRow);
 		final int horizontalDiff = Math.abs(catColumn - enemyColumn);
@@ -413,7 +413,7 @@ public class CandyEngine {
 		case SQUARE_LASER_OCCUPIED:
 			shouldDie = true;
 		case SQUARE_OCCUPIED:
-			if (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.CAT) {
+			if (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.BOT) {
 				death = true;
 				move(rowDirection, columnDirection, enemySprite.index);
 			} else {
@@ -612,8 +612,8 @@ public class CandyEngine {
 		win = false;
 		death = false;
 		candyBurned = false;
-		assert !catMoved;
-		// catMoved = false; // this variable should be false anyway if this
+		assert !botMoved;
+		// botMoved = false; // this variable should be false anyway if this
 		// method is being called, just in case
 
 		candyLevel.resetDragDistance = true;
@@ -862,8 +862,8 @@ public class CandyEngine {
 	}
 
 	private class EnemyComparator implements Comparator<CandyAnimatedSprite> {
-		final int catRow = objectArray[catIndex][ROW];
-		final int catColumn = objectArray[catIndex][COLUMN];
+		final int catRow = objectArray[botIndex][ROW];
+		final int catColumn = objectArray[botIndex][COLUMN];
 
 		@Override
 		public synchronized int compare(final CandyAnimatedSprite enemy1, final CandyAnimatedSprite enemy2) {

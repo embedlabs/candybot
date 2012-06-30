@@ -32,7 +32,7 @@ import android.widget.Toast;
 
 
 public class CandyUtils {
-	public static final String TAG = "Candy Cat";
+	public static final String TAG = "Candybot";
 	public static Typeface mainFont;
 
 
