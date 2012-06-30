@@ -27,9 +27,9 @@ import org.anddev.andengine.util.StreamUtils;
 import org.xml.sax.Attributes;
 
 /**
- * (c) 2010 Nicolas Gramlich 
+ * (c) 2010 Nicolas Gramlich
  * (c) 2011 Zynga Inc.
- * 
+ *
  * @author Nicolas Gramlich
  * @since 20:27:31 - 20.07.2010
  */
@@ -245,6 +245,7 @@ public class TMXLayer extends RectangularShape implements TMXConstants {
 		this.addTileByGlobalTileID(SAXUtils.getIntAttributeOrThrow(pAttributes, TAG_TILE_ATTRIBUTE_GID), pTMXTilePropertyListener);
 	}
 
+	@SuppressWarnings("resource")
 	void initializeTMXTilesFromDataString(final String pDataString, final String pDataEncoding, final String pDataCompression, final ITMXTilePropertiesListener pTMXTilePropertyListener) throws IOException, IllegalArgumentException {
 		DataInputStream dataIn = null;
 		try{
