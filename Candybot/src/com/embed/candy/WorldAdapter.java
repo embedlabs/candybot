@@ -1,23 +1,28 @@
 package com.embed.candy;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class WorldAdapter extends BaseAdapter {
-	private final Context mContext;
 	private static int position;
+	private final LayoutInflater li;
+	private Context mContext;
 
 	public static final Integer[] imageIDs = { R.drawable.box1, R.drawable.box2, R.drawable.box3 };
 	public static final String[] worldName = {"Easy", "Better", "Medium"};
 
-	public WorldAdapter(final Context c) {
-		mContext = c;
+	
+	
+	public WorldAdapter(final Activity a, final Context context) {
+		li = a.getLayoutInflater();
+        this.mContext = context;
+
 	}
 
 	@Override
@@ -44,39 +49,38 @@ public class WorldAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(final int position, final View convertView, final ViewGroup parent) {
+	public View getView(final int position, View v, final ViewGroup parent) {
+		if (v == null) {
+			switch (position + 1) {
+			case 1:
+				v = li.inflate(R.layout.world_item, null);
+				setInfo(v,position);
+				break;
+			case 2:
+				v = li.inflate(R.layout.world_item, null);
+				setInfo(v,position);
+				break;
+			case 3:
+				v = li.inflate(R.layout.world_item, null);
+				setInfo(v,position);
+				break;
+			}
+		}
 
-		final RelativeLayout border_rl = new RelativeLayout(mContext); // Add ImageView to relative layout
+		return v;
 
-		RelativeLayout.LayoutParams ls = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		ls.addRule(RelativeLayout.CENTER_HORIZONTAL);
-
-		final TextView t = new TextView(mContext);
-		t.setText(worldName[position]);
-		t.setTextSize(30);
-		CandyUtils.setMainFont(t);
-		border_rl.addView(t, ls);
-
-		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(350,350);
-		lp.setMargins(0, 100, 0, 0);
-
-		final ImageView i = new ImageView(mContext);
-		i.setImageResource(imageIDs[position]);
-		i.setScaleType(ImageView.ScaleType.FIT_XY);
-		i.setLayoutParams(new LayoutParams(300, 300)); // To fill screen (view)
-		border_rl.addView(i, lp);
-
-		RelativeLayout.LayoutParams lr = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		lr.setMargins(0, 470, 0, 0);
-		lr.addRule(RelativeLayout.CENTER_HORIZONTAL);
-
-
-		final TextView a = new TextView(mContext);
-		a.setText(CandyUtils.readLines("world" + (position+1) + ".cls", mContext)[20][CandyUtils.STATUS] + "/60");
-		a.setTextSize(12);
-		CandyUtils.setMainFont(a);
-		border_rl.addView(a, lr);
-
-		return border_rl;
+	}
+	
+	// CandyUtils.readLines("world" + (position+1) + ".cls", mContext)[20][CandyUtils.STATUS] + "/60"
+	
+	public void setInfo(final View v, final int position) {
+		final TextView tv = (TextView) v.findViewById(R.id.worldNam);
+		tv.setText(worldName[position]);
+		CandyUtils.setMainFont(tv);
+		final TextView tv2 = (TextView) v.findViewById(R.id.worldStars);
+		tv2.setText("Bottom");
+		CandyUtils.setMainFont(tv2);
+		ImageView img = (ImageView)v.findViewById(R.id.worldImg);
+		img.setBackgroundResource(imageIDs[position]);
 	}
 }

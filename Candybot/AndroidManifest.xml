@@ -28,14 +28,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:backupAgent="MyBackupAgent"
         android:hardwareAccelerated="false"
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
-        <meta-data
-            android:name="com.google.android.backup.api_key"
-            android:value="AEdPqrEAAAAIMZyTdRE5Spfa2QG7ZWQ7-_5R_wVifv_9IcBAGw" />
-
+       
         <activity
             android:name=".SplashScreenActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"

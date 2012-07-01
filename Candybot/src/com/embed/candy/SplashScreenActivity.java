@@ -14,7 +14,7 @@ public class SplashScreenActivity extends BaseSplashActivity {
 	// ================================================
 	// Constants
 	// ================================================
-	private final int SPLASH_DURATION_SEC = 3;
+	private final int SPLASH_DURATION_SEC = 1;
 	private final Class<? extends Activity> nextActivity = MainMenuActivity.class;
 	private final String backgroundImage = "gfx/splash.png";
 

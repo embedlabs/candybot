@@ -300,47 +300,6 @@ public class CandyUtils {
 
 		// Write the file back.
 		writeLines(filename,masterArray,candyEngine.candyLevel);
-
-//		try {
-//			/**
-//			 * TODO STORE STATS IN SWARM
-//			 */
-//
-//			FileOutputStream fos = candyEngine.candyLevel.getApplicationContext().openFileOutput("world" + candyEngine.candyLevel.world + ".xml", Context.MODE_PRIVATE);
-//			XmlSerializer serializer = Xml.newSerializer();
-//			try {
-//				serializer.setOutput(fos, "UTF-8");
-//				serializer.startDocument(null, Boolean.valueOf(true));
-//				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-//				serializer.startTag(null, "Candybot");
-//
-//				// serializer.startTag(null, "world"); // TODO shouldn't all the other stuff be inside the world tag, inside which should be a level tag containing all the level info?
-//				// serializer.text(candyEngine.candyLevel.world + "");
-//				// serializer.endTag(null, "world");
-//				serializer.startTag(null, "level");
-//				serializer.text(candyEngine.candyLevel.level + "");
-//				serializer.endTag(null, "level");
-//				intTag(serializer, "completion", 1); // 1 for completion, 0 or i guess it will be null for non completion, since it won't even reach this method
-//
-//				// Code in stars here
-//				intTag(serializer, "stars", candyEngine.starsEarned); // 1,2,3
-//
-//				intTag(serializer, "moves", candyEngine.moves);
-//				intTag(serializer, "restarts", candyEngine.restarts);
-//				intTag(serializer, "enemies defeated", candyEngine.enemiesDefeated);
-//
-//				serializer.endTag(null, "Candybot");
-//				serializer.endDocument();
-//				serializer.flush();
-//				fos.close();
-//				Log.i("Exception", "XML file made");
-//
-//			} catch (IOException e) {
-//				Log.e("Exception", "error occurred while creating xml file");
-//			}
-//		} catch (Exception e) {
-//			Log.e("Exception", "error occurred while creating xml file");
-//		}
 	}
 
 	public static int[][] readLines(final String filename,final Context context) {

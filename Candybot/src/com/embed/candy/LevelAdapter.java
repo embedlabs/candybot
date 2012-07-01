@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 public class LevelAdapter extends BaseAdapter {
 	private final LayoutInflater li;
-//	int[] starData = new int[20];
 	int[][] entireWorldData;
 	private final int worldNum;
 	int world,level;
@@ -41,63 +40,6 @@ public class LevelAdapter extends BaseAdapter {
 	public long getItemId(final int position) {
 		return position;
 	}
-
-//	public void readData(final Context cont) {
-//		try {
-//			SAXParserFactory factory = SAXParserFactory.newInstance();
-//			SAXParser saxParser = factory.newSAXParser();
-//			DefaultHandler handler = new DefaultHandler() {
-//
-//				boolean getLevel, getStars = false;
-//
-//				@Override
-//				public void startElement(final String uri, final String localName, final String qName, final Attributes attributes) throws SAXException {
-//					Log.d(TAG, "Start Element: " + qName);
-//					if (qName.equalsIgnoreCase("level")) {
-//						getLevel = true;
-//					} else if (qName.equalsIgnoreCase("stars")) {
-//						getStars = true;
-//					}
-//				}
-//
-//				@Override
-//				public void endElement(final String uri, final String localName, final String qName) throws SAXException {
-//					Log.d(TAG, "End Element: " + qName);
-//				}
-//
-//				@Override
-//				public void characters(final char ch[], final int start, final int length) throws SAXException {
-//					Log.d(TAG, new String(ch, start, length));
-//					if (getLevel) {
-//						level = Integer.parseInt(new String(ch, start, length));
-//						Log.d(TAG, "Level: " + level);
-//						getLevel = false;
-//					}
-//					if (getStars) {
-//						int stars = Integer.parseInt(new String(ch, start, length));
-//						Log.d(TAG, "Stars: " + stars);
-//						getStarData()[level-1] = stars;
-//						getStars = false;
-//					}
-//				}
-//			};
-//
-//			FileInputStream is = cont.openFileInput("world"+worldNum+".xml");
-//			byte[] byIn = new byte[is.available()];
-//			while (is.read(byIn) != -1) {
-//				Log.d(TAG, new String(byIn));
-//			}
-//			InputStream inputStream = new ByteArrayInputStream(byIn);
-//			Reader reader = new InputStreamReader(inputStream, "UTF-8");
-//			InputSource isrc = new InputSource(reader);
-//			isrc.setEncoding("UTF-8");
-//			saxParser.parse(isrc, handler);
-//			is.close();
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	@Override
 	public View getView(final int position, View v, final ViewGroup parent) {
