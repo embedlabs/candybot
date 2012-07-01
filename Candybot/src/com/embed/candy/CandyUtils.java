@@ -132,8 +132,8 @@ public class CandyUtils {
 		}
 	}
 
-	public static void setMainFont(final Typeface typeFace, final TextView... views) { // changes font
-		mainFont = typeFace;
+	public static void setMainFont(final Typeface typeface, final TextView... views) { // changes font
+		mainFont = typeface;
 		for (TextView tv : views) {
 			tv.setTypeface(mainFont);
 		}
@@ -318,7 +318,7 @@ public class CandyUtils {
 			}
 			return lines.toArray(new int[lines.size()][]);
 		} catch (FileNotFoundException e) {
-			Log.e(TAG, "Unable to find level completion info file!");
+			Log.w(TAG, "Unable to find level completion info file!");
 		} catch (IOException e) {
 			Log.e(TAG, "Error opening level completion info file!");
 		} finally {

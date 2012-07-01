@@ -6,6 +6,9 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.anddev.andengine.entity.modifier.AlphaModifier;
+import org.anddev.andengine.entity.text.Text;
+
 import android.util.FloatMath;
 import android.util.Log;
 
@@ -285,6 +288,13 @@ public class CandyEngine {
 				}
 			}
 			moves++;
+
+			if (moves==5) {
+				for (final Text text:candyLevel.textReferences) {
+					text.registerEntityModifier(new AlphaModifier(1,1,0));
+				}
+			}
+
 			botMoved = false;
 		}
 

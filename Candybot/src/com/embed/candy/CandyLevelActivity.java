@@ -79,6 +79,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	 */
 	private final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
 	private final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list of all tutorial text
+	final ArrayList<Text> textReferences = new ArrayList<Text>();
 	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
 	private int[][] backgroundArray = new int[18][24]; // holds tmx array
 	public TextureRegion[][] trArray = new TextureRegion[18][24];
@@ -368,6 +369,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	public void addTutorialText(final ArrayList<String[]> inputTutorialList) {
 		for (String[] tutorialTextArray : inputTutorialList) {
 			final Text text = new Text(Float.parseFloat(tutorialTextArray[CandyEngine.COLUMN]) * 64, Float.parseFloat(tutorialTextArray[CandyEngine.ROW]) * 64, andengineMainFont, tutorialTextArray[0].replace("\\n", "\n"));
+			textReferences.add(text);
 			mScene.attachChild(text);
 		}
 	}
