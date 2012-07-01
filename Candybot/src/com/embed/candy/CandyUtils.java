@@ -256,32 +256,41 @@ public class CandyUtils {
 			masterArray[0][0]=UNLOCKED;
 		}
 
+		// The level in question is one off because of the index.
 		int[] levelArray = masterArray[candyEngine.candyLevel.level-1];
 
-		levelArray[STATUS] = candyEngine.starsEarned; // 0
+		// The new number of stars is the maximum between these two numbers (0)
+		levelArray[STATUS] = Math.max(levelArray[STATUS],candyEngine.starsEarned);
+
+		// Unlock the next level if there is one to unlock.
 		if (candyEngine.candyLevel.level!=20) {
 			if (masterArray[candyEngine.candyLevel.level][STATUS]==LOCKED) {
 				masterArray[candyEngine.candyLevel.level][STATUS]=UNLOCKED;
 			}
 		}
 
-		if (levelArray[MIN_MOVES]==0) { // 1
+		// If there is no minimum move recording, then create one, otherwise find the minimum. (1)
+		if (levelArray[MIN_MOVES]==0) {
 			levelArray[MIN_MOVES]=candyEngine.moves;
 		} else {
 			levelArray[MIN_MOVES]=Math.min(levelArray[MIN_MOVES], candyEngine.moves);
 		}
 
+		// Update the other stats (2, 3, 4, 5)
 		levelArray[TOTAL_MOVES]+=candyEngine.moves; // 2
 		levelArray[TOTAL_RESTARTS]+=candyEngine.restarts; // 3
 		levelArray[TOTAL_DEFEATED]+=candyEngine.enemiesDefeated; // 4
-		levelArray[TOTAL_WINS]++; // 6
+		levelArray[TOTAL_WINS]++; // 5
 
-		for (int i=0;i<6;i++) { // WORLD
+		// Reset the WORLD line in the file to zero.
+		for (int i=0;i<6;i++) {
 			masterArray[20][i]=0;
 		}
+		// Make it the sum of the other stats.
 		for (int i=0;i<20;i++) {
 			for (int j=0;j<6;j++) {
 				if (j==STATUS) {
+					// In the case of the stars, only accept unlocked level star counts.
 					masterArray[20][j]+=(masterArray[i][j]>0)?masterArray[i][j]:0;
 				} else {
 					masterArray[20][j]+=masterArray[i][j];
@@ -289,6 +298,7 @@ public class CandyUtils {
 			}
 		}
 
+		// Write the file back.
 		writeLines(filename,masterArray,candyEngine.candyLevel);
 
 //		try {
