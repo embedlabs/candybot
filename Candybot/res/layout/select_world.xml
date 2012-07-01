@@ -10,8 +10,8 @@
 	<Gallery android:id="@+id/gallery_world"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:spacing="100dip"
+		android:spacing="50dip"
 		android:fadingEdgeLength="0dip"
-		android:unselectedAlpha = "1.0"
+		android:unselectedAlpha="1.0"
 		android:background="@android:color/transparent" />
 </RelativeLayout>

@@ -1,6 +1,5 @@
 package com.embed.candy;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import com.swarmconnect.SwarmActivity;
 public class WorldSelectActivity extends SwarmActivity implements OnItemClickListener {
 
 	Gallery world_g;
-	Context context;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -24,11 +22,11 @@ public class WorldSelectActivity extends SwarmActivity implements OnItemClickLis
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 
 		world_g = (Gallery) findViewById(R.id.gallery_world);
-		world_g.setAdapter(new WorldAdapter(this, context));
+		world_g.setAdapter(new WorldAdapter(this));
 		world_g.setOnItemClickListener(this);
 	}
-	 
-	
+
+
 	@Override
 	public void onItemClick(final AdapterView<?> av, final View v, final int position, final long arg3) {
 		if (av.getSelectedItemPosition() == position) { // isn't this redundant or not? :-o i'm confused -Prem

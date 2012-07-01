@@ -15,13 +15,11 @@ public class WorldAdapter extends BaseAdapter {
 	private Context mContext;
 
 	public static final Integer[] imageIDs = { R.drawable.box1, R.drawable.box2, R.drawable.box3 };
-	public static final String[] worldName = {"Easy", "Better", "Medium"};
+	public static final int[] worldNameIDs = {R.string.world1,R.string.world2,R.string.world3,R.string.world4,R.string.world5};
 
-	
-	
-	public WorldAdapter(final Activity a, final Context context) {
+	public WorldAdapter(final Activity a) {
 		li = a.getLayoutInflater();
-        this.mContext = context;
+        this.mContext = a.getApplicationContext();
 
 	}
 
@@ -51,34 +49,20 @@ public class WorldAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View v, final ViewGroup parent) {
 		if (v == null) {
-			switch (position + 1) {
-			case 1:
-				v = li.inflate(R.layout.world_item, null);
-				setInfo(v,position);
-				break;
-			case 2:
-				v = li.inflate(R.layout.world_item, null);
-				setInfo(v,position);
-				break;
-			case 3:
-				v = li.inflate(R.layout.world_item, null);
-				setInfo(v,position);
-				break;
-			}
+			v = li.inflate(R.layout.world_item, null);
+			setInfo(v,position);
 		}
 
 		return v;
 
 	}
-	
-	// CandyUtils.readLines("world" + (position+1) + ".cls", mContext)[20][CandyUtils.STATUS] + "/60"
-	
+
 	public void setInfo(final View v, final int position) {
 		final TextView tv = (TextView) v.findViewById(R.id.worldNam);
-		tv.setText(worldName[position]);
+		tv.setText(mContext.getString(worldNameIDs[position]));
 		CandyUtils.setMainFont(tv);
 		final TextView tv2 = (TextView) v.findViewById(R.id.worldStars);
-		tv2.setText("Bottom");
+		tv2.setText(CandyUtils.readLines("world" + (position+1) + ".cls", mContext)[20][CandyUtils.STATUS] + "/60");
 		CandyUtils.setMainFont(tv2);
 		ImageView img = (ImageView)v.findViewById(R.id.worldImg);
 		img.setBackgroundResource(imageIDs[position]);

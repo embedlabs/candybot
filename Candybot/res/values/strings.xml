@@ -57,4 +57,10 @@
     <string name="dialog_about_title">About Embed Labs</string>
     <string name="dialog_about_button">Return</string>
 	<string name="dialog_about_message">Candybot by Embed Labs is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.\n\nwww.embedlabs.com\nMade by Prem Qu Nair, Shrav Mehta, Anshul Ramachandran, Ameya Khare, and Tej Qu Nair. \n\nMade with the help of AndEngine for Android. http://www.andengine.org/\n\nhttp://www.fontsquirrel.com/license/Ubuntu-Title\n</string>
+	
+	<string name="world1">World 1 Placeholder</string>
+	<string name="world2">World 2 Placeholder</string>
+	<string name="world3">World 3 Placeholder</string>
+	<string name="world4">World 4 Placeholder</string>
+	<string name="world5">World 5 Placeholder</string>
 </resources>
