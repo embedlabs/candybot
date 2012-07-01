@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,18 +34,18 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 
 	@Override
 	public void onItemClick(final AdapterView<?> av, final View v, final int position, final long arg3) {
-		Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);  
+		final Vibrator vib = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 		switch (la.starData[position]) {
-		case -1:
-		case 1:
-		case 2:
-		case 3:
+		case CandyUtils.UNLOCKED:
+		case CandyUtils.STARS1:
+		case CandyUtils.STARS2:
+		case CandyUtils.STARS3:
 			startActivity(new Intent(this, CandyLevelActivity.class)
 			.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
 			.putExtra("com.embed.candy.level", position + 1)
 			.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
 			break;
-		case 0:
+		case CandyUtils.LOCKED:
 		default:
 			if (position==0) {
 				startActivity(new Intent(this, CandyLevelActivity.class)
@@ -52,6 +53,7 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 				.putExtra("com.embed.candy.level", position + 1)
 				.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
 			} else if (la.starData[position-1]!=0) {
+				Log.w(CandyUtils.TAG,"Code should not reach here, CSV should have taken care of this.");
 				startActivity(new Intent(this, CandyLevelActivity.class)
 				.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
 				.putExtra("com.embed.candy.level", position + 1)
