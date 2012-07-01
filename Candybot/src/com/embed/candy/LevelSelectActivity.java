@@ -1,5 +1,6 @@
 package com.embed.candy;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -20,7 +21,9 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 	GridView level_gv;
 	private LevelAdapter la;
 
+	Toast mToast;
 
+	@SuppressLint("ShowToast")
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,6 +33,9 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 
 		level_gv = (GridView) findViewById(R.id.gridview_level);
 		level_gv.setOnItemClickListener(this);
+
+		mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
+		mToast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 30);
 	}
 
 	@Override
@@ -67,9 +73,8 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 	}
 
 	public void textToast(final String textToDisplay) {
-		Toast toast = Toast.makeText(this, textToDisplay, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 30);
-		toast.show();
+		mToast.setText(textToDisplay);
+		mToast.show();
 	}
 
 	@Override

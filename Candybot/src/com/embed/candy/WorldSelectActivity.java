@@ -1,9 +1,13 @@
 package com.embed.candy;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
@@ -12,6 +16,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Gallery;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.swarmconnect.SwarmActivity;
 
@@ -23,6 +28,9 @@ public class WorldSelectActivity extends SwarmActivity implements OnItemClickLis
 	TextSwitcher world_name,star_count;
 	TextView wn_1,wn_2,sc_1,sc_2;
 
+	Toast mToast;
+
+	@SuppressLint("ShowToast")
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,17 +55,34 @@ public class WorldSelectActivity extends SwarmActivity implements OnItemClickLis
 		world_g = (Gallery)findViewById(R.id.gallery_world);
 		world_g.setOnItemClickListener(this);
 		world_g.setOnItemSelectedListener(this);
+
+		mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
+		mToast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 30);
 	}
 
 	@Override
 	public void onItemClick(final AdapterView<?> av, final View v, final int position, final long arg3) {
 		if (av.getSelectedItemPosition() == position) {
 			WorldAdapter.setPos(position);
-			startActivity(new Intent(this, LevelSelectActivity.class).
-					putExtra("com.embed.candy.world", position + 1).
-					putExtra("com.embed.candy.theme", getIntent().
-					getStringExtra("com.embed.candy.theme")));
+			if (position!=0) {
+				final int stars = CandyUtils.readLines("world" + (position) + ".cls", this)[20][CandyUtils.STATUS];
+				if (stars<30) {
+					final Vibrator vib = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+					textToast("30 stars in World "+position+" needed! "+(30-stars)+" to go!");
+					vib.vibrate(100);
+				} else {
+					startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
+				}
+			} else {
+				startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
+			}
 		}
+	}
+
+
+	public void textToast(final String textToDisplay) {
+		mToast.setText(textToDisplay);
+		mToast.show();
 	}
 
 	@Override

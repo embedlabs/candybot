@@ -22,7 +22,8 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_centerHorizontal="true"
-		android:layout_marginTop="20dip" >
+		android:layout_marginTop="20dip"
+		android:animateFirstView="false" >
 		<TextView
 			android:id="@+id/wn_1"
 			android:layout_width="wrap_content"
@@ -55,7 +56,8 @@
 			android:id="@+id/star_count"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginRight="8px" >
+			android:layout_marginRight="8px"
+			android:animateFirstView="false" >
 			<TextView
 				android:id="@+id/sc_1"
 				android:layout_width="wrap_content"

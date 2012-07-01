@@ -1,6 +1,10 @@
 package com.embed.candy;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +14,14 @@ import android.widget.ImageView;
 public class WorldAdapter extends BaseAdapter {
 	private static int position;
 	private final LayoutInflater li;
+	private Context context;
 
 	public static final Integer[] imageIDs = { R.drawable.box1, R.drawable.box2, R.drawable.box3 };
 	public static final int[] worldNameIDs = { R.string.world1, R.string.world2, R.string.world3, R.string.world4, R.string.world5 };
 
 	public WorldAdapter(final Activity a) {
 		li = a.getLayoutInflater();
+		context=a.getApplicationContext();
 	}
 
 	@Override
@@ -57,6 +63,20 @@ public class WorldAdapter extends BaseAdapter {
 		// final TextView tv2 = (TextView) v.findViewById(R.id.worldStars);
 		// tv2.setText(CandyUtils.readLines("world" + (position+1) + ".cls", mContext)[20][CandyUtils.STATUS] + "/60");
 		// CandyUtils.setMainFont(tv2);
-		((ImageView)v.findViewById(R.id.world_image)).setBackgroundResource(imageIDs[position]);
+		final ImageView iv = (ImageView)v.findViewById(R.id.world_image);
+		iv.setBackgroundResource(imageIDs[position]);
+		if (position!=0) {
+			if (CandyUtils.readLines("world" + (position) + ".cls", context)[20][CandyUtils.STATUS]<30) { // 30 stars to unlock next world
+				iv.setBackgroundDrawable(convertToGrayscale(iv.getBackground()));
+			}
+		}
+	}
+
+	public Drawable convertToGrayscale(final Drawable d) {
+		ColorMatrix matrix = new ColorMatrix();
+	    matrix.setSaturation(0);
+	    ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+	    d.setColorFilter(filter);
+	    return d;
 	}
 }
