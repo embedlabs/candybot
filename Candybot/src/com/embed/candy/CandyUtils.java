@@ -336,7 +336,7 @@ public class CandyUtils {
 	public static int[][] readLines(final String filename,final Context context) {
 		BufferedReader bufferedReader = null;
 		try {
-			bufferedReader = new BufferedReader(new InputStreamReader(context.openFileInput(filename)));
+			bufferedReader = new BufferedReader(new InputStreamReader(context.getApplicationContext().openFileInput(filename)));
 			final List<int[]> lines = new ArrayList<int[]>();
 			String line = null;
 			while ((line = bufferedReader.readLine()) != null) {
@@ -367,7 +367,7 @@ public class CandyUtils {
 	public static void writeLines(final String filename, final int[][] lines, final Context context) {
 		assert lines.length == 21;
 		try {
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE)));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(context.getApplicationContext().openFileOutput(filename, Context.MODE_PRIVATE)));
 			bw.write(writeLinesHelper(lines));
 			bw.flush();
 			bw.close();

@@ -35,7 +35,7 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 	@Override
 	public void onItemClick(final AdapterView<?> av, final View v, final int position, final long arg3) {
 		final Vibrator vib = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-		switch (la.starData[position]) {
+		switch (la.entireWorldData[position][CandyUtils.STATUS]) {
 		case CandyUtils.UNLOCKED:
 		case CandyUtils.STARS1:
 		case CandyUtils.STARS2:
@@ -52,8 +52,8 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 				.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
 				.putExtra("com.embed.candy.level", position + 1)
 				.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
-			} else if (la.starData[position-1]!=0) {
-				Log.w(CandyUtils.TAG,"Code should not reach here, CSV should have taken care of this.");
+			} else if (la.entireWorldData[position][CandyUtils.STATUS]!=0) {
+				Log.w(CandyUtils.TAG,"Code should not reach here, CSV should have taken care of this maybe after a while or something.");
 				startActivity(new Intent(this, CandyLevelActivity.class)
 				.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
 				.putExtra("com.embed.candy.level", position + 1)
