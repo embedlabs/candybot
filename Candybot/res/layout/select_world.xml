@@ -10,8 +10,5 @@
 	<Gallery android:id="@+id/gallery_world"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:background="@android:color/transparent"
-		android:fadingEdgeLength="0dip"
-		android:spacing="100dip"
-		android:unselectedAlpha="1.0" />
+		android:spacing="100dip" />
 </RelativeLayout>
