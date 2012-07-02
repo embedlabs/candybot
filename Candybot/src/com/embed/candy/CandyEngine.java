@@ -187,7 +187,6 @@ public class CandyEngine {
 
 		@Override
 		public synchronized void run() {
-			assert queueAllEmpty();
 			final int[] situationArray = situation(botIndex, rowDirection, columnDirection);
 			final int s = situationArray[SITUATION];
 			boolean shouldDie = false;
@@ -619,9 +618,8 @@ public class CandyEngine {
 		win = false;
 		death = false;
 		candyBurned = false;
-		assert !botMoved;
-		// botMoved = false; // this variable should be false anyway if this
-		// method is being called, just in case
+		//assert !botMoved;
+		botMoved = false; // this variable should be false anyway if this method is being called, just in case
 
 		candyLevel.resetDragDistance = true;
 		candyLevel.gameStarted = true;
@@ -707,18 +705,15 @@ public class CandyEngine {
 						break;
 					default:
 						if (slideDistance == 0) {
-							assert !slidingOnIceRequired;
-							// slidingOnIceRequired = false; // FIXME necessary?
+							slidingOnIceRequired = false; // FIXME necessary?
 						}
 						return slideDistance;
 					}
 				} else {
-					assert !slidingOnIceRequired;
 					return slideDistance;
 				}
 			}
 		} else {
-			assert !slidingOnIceRequired;
 			return slideDistance;
 		}
 	}

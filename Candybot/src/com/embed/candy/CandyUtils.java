@@ -357,7 +357,6 @@ public class CandyUtils {
 	}
 
 	public static void writeLines(final String filename, final int[][] lines, final Context context) {
-		assert lines.length == 21;
 		try {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(context.getApplicationContext().openFileOutput(filename, Context.MODE_PRIVATE)));
 			bw.write(writeLinesHelper(lines));
@@ -381,8 +380,4 @@ public class CandyUtils {
 		}
 		return sb.toString();
 	}
-
-	// public static void intTag (final XmlSerializer s,final String tag,final int input) throws IllegalArgumentException, IllegalStateException, IOException {
-	// s.startTag(null, tag).text(Integer.toString(input)).endTag(null, tag);
-	// }
 }
