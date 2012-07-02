@@ -18,3 +18,16 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-allowaccessmodification
+-libraryjars libs/Swarm.jar
+
+# Note to self: Change both AndEngine DEBUG and Candybot DEBUG to false for release.
+-assumenosideeffects class android.util.Log {
+    public static *** i(...);
+    public static *** d(...);
+    public static *** v(...);
+    public static *** e(...);
+    public static *** w(...);
+    public static *** wtf(...);
+}

@@ -154,12 +154,12 @@ public class CandyEngine {
 			case CandyLevelActivity.BOT:
 				botIndex = i;
 				bot = spriteList.get(i);
-				Log.i(TAG, "Cat located at row " + objectArray[i][ROW] + ", column " + objectArray[i][COLUMN]);
+				if (CandyUtils.DEBUG) Log.i(TAG, "Cat located at row " + objectArray[i][ROW] + ", column " + objectArray[i][COLUMN]);
 				break;
 			case CandyLevelActivity.CANDY:
 				candyIndex = i;
 				candy = spriteList.get(i);
-				Log.i(TAG, "Candy located at row " + objectArray[i][ROW] + ", column " + objectArray[i][COLUMN]);
+				if (CandyUtils.DEBUG) Log.i(TAG, "Candy located at row " + objectArray[i][ROW] + ", column " + objectArray[i][COLUMN]);
 			case CandyLevelActivity.BOX:
 			case CandyLevelActivity.BOMB:
 				spriteQueue.add(new LinkedList<int[]>());
@@ -167,7 +167,7 @@ public class CandyEngine {
 				break;
 			}
 		}
-		Log.i(TAG, "spriteQueue.size(): " + spriteQueue.size());
+		if (CandyUtils.DEBUG) Log.i(TAG, "spriteQueue.size(): " + spriteQueue.size());
 		logArray("Start array:");
 	}
 
@@ -321,15 +321,15 @@ public class CandyEngine {
 						if (!gSprite.blowUp) {
 							tempRow = candyLevel.teleporter2row + ROW_DOWN;
 							tempColumn = candyLevel.teleporter2column;
-							Log.d(TAG, "Adding to queue...");
+							if (CandyUtils.DEBUG) Log.d(TAG, "Adding to queue...");
 							spriteQueue.get(gIndex).add(new int[] {TELEPORT, candyLevel.teleporter2row + ROW_DOWN, candyLevel.teleporter2column });
-							Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
+							if (CandyUtils.DEBUG) Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
 
 							final int fallDistance2 = fallDistance(gSprite.index, gIndex, candyLevel.teleporter2row + ROW_DOWN, candyLevel.teleporter2column);
 							tempRow += fallDistance2;
-							Log.d(TAG, "Adding to queue...");
+							if (CandyUtils.DEBUG) Log.d(TAG, "Adding to queue...");
 							spriteQueue.get(gIndex).add(new int[] {FALL, fallDistance2, 0});
-							Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
+							if (CandyUtils.DEBUG) Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
 						}
 						continue;
 					} else if (slidingOnIceRequired) {
@@ -339,15 +339,15 @@ public class CandyEngine {
 
 						if (slideDistance != 0 && !gSprite.blowUp) {
 							tempColumn += (slideDistance * gSprite.lastDirectionalMove);
-							Log.d(TAG, "Adding to queue...");
+							if (CandyUtils.DEBUG) Log.d(TAG, "Adding to queue...");
 							spriteQueue.get(gIndex).add(new int[] {SLIDE_ICE, 0, slideDistance * gSprite.lastDirectionalMove });
-							Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
+							if (CandyUtils.DEBUG) Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
 
 							final int fallDistance2 = fallDistance(gSprite.index, gIndex, tempRow, tempColumn);
 							tempRow += fallDistance2;
-							Log.d(TAG, "Adding to queue...");
+							if (CandyUtils.DEBUG) Log.d(TAG, "Adding to queue...");
 							spriteQueue.get(gIndex).add(new int[] {FALL, fallDistance2, 0});
-							Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
+							if (CandyUtils.DEBUG) Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
 						}
 						continue;
 					} else {
@@ -359,7 +359,7 @@ public class CandyEngine {
 
 		pauseFall(5);
 
-		Log.v(TAG, "Settled.");
+		if (CandyUtils.DEBUG) Log.v(TAG, "Settled.");
 
 		/**
 		 * SPECIAL CIRCUMSTANCES
@@ -476,11 +476,11 @@ public class CandyEngine {
 		candy.showCandyAnim();
 		pause(5, candyIndex);
 
-		Log.i(TAG, "Level Completion Info:");
-		Log.i(TAG, "Moves: " + moves);
-		Log.i(TAG, "Restarts: " + restarts);
-		Log.i(TAG, "Enemies defeated: " + enemiesDefeated);
-		Log.i(TAG, "World:" + candyLevel.world + "  Level:" + candyLevel.level);
+		if (CandyUtils.DEBUG) Log.i(TAG, "Level Completion Info:");
+		if (CandyUtils.DEBUG) Log.i(TAG, "Moves: " + moves);
+		if (CandyUtils.DEBUG) Log.i(TAG, "Restarts: " + restarts);
+		if (CandyUtils.DEBUG) Log.i(TAG, "Enemies defeated: " + enemiesDefeated);
+		if (CandyUtils.DEBUG) Log.i(TAG, "World:" + candyLevel.world + "  Level:" + candyLevel.level);
 
 		if (moves <= candyLevel.advancedMovesFor3Stars) {starsEarned = 3;}
 		else if (moves <= candyLevel.basicMovesFor2Stars) {starsEarned = 2;}
@@ -490,14 +490,14 @@ public class CandyEngine {
 	}
 
 	private synchronized void logArray(final String message) {
-		Log.i(TAG, message);
+		if (CandyUtils.DEBUG) Log.i(TAG, message);
 		for (int[] i : backgroundArray) {
 			final StringBuilder sBuilder = new StringBuilder();
 			for (int j : i) {
 				sBuilder.append(j);
 				sBuilder.append(" ");
 			}
-			Log.i(TAG, sBuilder.toString());
+			if (CandyUtils.DEBUG) Log.i(TAG, sBuilder.toString());
 		}
 	}
 
@@ -512,7 +512,7 @@ public class CandyEngine {
 			try {
 				Thread.sleep(milliseconds);
 			} catch (InterruptedException e) {
-				Log.e(TAG, "Thread.sleep() failed.", e);
+				if (CandyUtils.DEBUG) Log.e(TAG, "Thread.sleep() failed.", e);
 			}
 		}
 	}
@@ -530,7 +530,7 @@ public class CandyEngine {
 				try {
 					Thread.sleep(milliseconds);
 				} catch (InterruptedException e) {
-					Log.e(TAG, "Thread.sleep() failed.", e);
+					if (CandyUtils.DEBUG) Log.e(TAG, "Thread.sleep() failed.", e);
 				}
 			}
 		}
@@ -541,14 +541,14 @@ public class CandyEngine {
 			while (true) { // let's loop until all of them have finished moving.
 				for (int i = 0; i < gravityList.size(); i++) { // For every gravityList object,
 					if (!gravityList.get(i).hasModifier) { // if it is not currently moving,
-						Log.v(TAG, "gravityList item #" + i + ": " + spriteQueue.get(i).size() + " remaining in spriteQueue");
+						if (CandyUtils.DEBUG) Log.v(TAG, "gravityList item #" + i + ": " + spriteQueue.get(i).size() + " remaining in spriteQueue");
 						if (spriteQueue.get(i).size() > 0 && !gravityList.get(i).blowUp) { // if there is still stuff to do,
 							gravityList.get(i).doQueue(spriteQueue.get(i).remove()); // do it;
 							break;
 						} else {
 							gravityList.get(i).lastDirectionalMove = 0;
 							final int index = gravityList.get(i).index;
-							Log.i(TAG, "Item " + i + "(index " + index + "): " + objectArray[index][CandyEngine.ROW] + " " + objectArray[index][CandyEngine.COLUMN]);
+							if (CandyUtils.DEBUG) Log.i(TAG, "Item " + i + "(index " + index + "): " + objectArray[index][CandyEngine.ROW] + " " + objectArray[index][CandyEngine.COLUMN]);
 							if (i == gravityList.size() - 1 && queueAllEmpty()) { // otherwise if it's the last one and everything is empty
 								return;
 							}
@@ -560,7 +560,7 @@ public class CandyEngine {
 				try {
 					Thread.sleep(milliseconds);
 				} catch (InterruptedException e) {
-					Log.e(TAG, "Thread.sleep() failed.", e);
+					if (CandyUtils.DEBUG) Log.e(TAG, "Thread.sleep() failed.", e);
 				}
 			}
 		}
@@ -576,7 +576,7 @@ public class CandyEngine {
 	}
 
 	public synchronized void resetLevel(final boolean shouldJoin) {
-		Log.i(TAG, "CandyEngine reset.");
+		if (CandyUtils.DEBUG) Log.i(TAG, "CandyEngine reset.");
 
 		if (shouldJoin) {
 			while (true) {
@@ -589,7 +589,7 @@ public class CandyEngine {
 					break;
 				}
 			}
-			Log.i(TAG, "Joined \"currentThread\".");
+			if (CandyUtils.DEBUG) Log.i(TAG, "Joined \"currentThread\".");
 		}
 
 		candyLevel.gameStarted = false;
@@ -625,7 +625,7 @@ public class CandyEngine {
 
 		candyLevel.resetDragDistance = true;
 		candyLevel.gameStarted = true;
-		Log.i(TAG, "CandyEngine finished resetting.");
+		if (CandyUtils.DEBUG) Log.i(TAG, "CandyEngine finished resetting.");
 	}
 
 	private synchronized int[] situation(final int index, final int rowDirection, final int columnDirection) {

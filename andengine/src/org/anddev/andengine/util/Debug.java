@@ -5,13 +5,14 @@ import org.anddev.andengine.util.constants.Constants;
 import android.util.Log;
 
 /**
- * (c) 2010 Nicolas Gramlich 
+ * (c) 2010 Nicolas Gramlich
  * (c) 2011 Zynga Inc.
- * 
+ *
  * @author Nicolas Gramlich
  * @since 13:29:16 - 08.03.2010
  */
 public class Debug implements Constants {
+	public static boolean DEBUG = true;
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -64,7 +65,7 @@ public class Debug implements Constants {
 
 	public static void v(final String pMessage, final Throwable pThrowable) {
 		if(sDebugLevel.isSameOrLessThan(DebugLevel.VERBOSE)) {
-			Log.v(sDebugTag, pMessage, pThrowable);
+			if (DEBUG) Log.v(sDebugTag, pMessage, pThrowable);
 		}
 	}
 
@@ -74,7 +75,7 @@ public class Debug implements Constants {
 
 	public static void d(final String pMessage, final Throwable pThrowable) {
 		if(sDebugLevel.isSameOrLessThan(DebugLevel.DEBUG)) {
-			Log.d(sDebugTag, pMessage, pThrowable);
+			if (DEBUG) Log.d(sDebugTag, pMessage, pThrowable);
 		}
 	}
 
@@ -84,7 +85,7 @@ public class Debug implements Constants {
 
 	public static void i(final String pMessage, final Throwable pThrowable) {
 		if(sDebugLevel.isSameOrLessThan(DebugLevel.INFO)) {
-			Log.i(sDebugTag, pMessage, pThrowable);
+			if (DEBUG) Log.i(sDebugTag, pMessage, pThrowable);
 		}
 	}
 
@@ -99,9 +100,9 @@ public class Debug implements Constants {
 	public static void w(final String pMessage, final Throwable pThrowable) {
 		if(sDebugLevel.isSameOrLessThan(DebugLevel.WARNING)) {
 			if(pThrowable == null) {
-				Log.w(sDebugTag, pMessage, new Exception());
+				if (DEBUG) Log.w(sDebugTag, pMessage, new Exception());
 			} else {
-				Log.w(sDebugTag, pMessage, pThrowable);
+				if (DEBUG) Log.w(sDebugTag, pMessage, pThrowable);
 			}
 		}
 	}
@@ -117,9 +118,9 @@ public class Debug implements Constants {
 	public static void e(final String pMessage, final Throwable pThrowable) {
 		if(sDebugLevel.isSameOrLessThan(DebugLevel.ERROR)) {
 			if(pThrowable == null) {
-				Log.e(sDebugTag, pMessage, new Exception());
+				if (DEBUG) Log.e(sDebugTag, pMessage, new Exception());
 			} else {
-				Log.e(sDebugTag, pMessage, pThrowable);
+				if (DEBUG) Log.e(sDebugTag, pMessage, pThrowable);
 			}
 		}
 	}

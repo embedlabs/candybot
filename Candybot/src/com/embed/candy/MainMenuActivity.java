@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import com.swarmconnect.Swarm;
 import com.swarmconnect.SwarmActiveUser;
 import com.swarmconnect.SwarmActivity;
@@ -29,20 +28,19 @@ public class MainMenuActivity extends SwarmActivity implements View.OnClickListe
 	TextView mainmenu_tv;
 	Button button_play, button_achieve, button_lead;
 	ImageView iv_facebook, iv_twitter, my_swarm_button;
-	GoogleAnalyticsTracker tracker;
-	
+
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 
 	private String theme;
 
 	@Override
-	public void onClick(View view) {
+	public void onClick(final View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
 			final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 			theme = sp.getString("com.embed.candy.graphics_theme", "normal");
-			Log.i(TAG, "THEME: " + theme);
+			if (CandyUtils.DEBUG) Log.i(TAG, "THEME: " + theme);
 			startActivity(new Intent(this, WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
 			break;
 		case R.id.button_facebook:
@@ -84,23 +82,27 @@ public class MainMenuActivity extends SwarmActivity implements View.OnClickListe
 		}
 		return true;
 	}
-	
+
 	private SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
 
 		// This method is called when the login process has started
 		// (when a login dialog is displayed to the user).
+		@Override
 		public void loginStarted() {
 		}
 
 		// This method is called if the user cancels the login process.
+		@Override
 		public void loginCanceled() {
 		}
 
 		// This method is called when the user has successfully logged in.
-		public void userLoggedIn(SwarmActiveUser user) {
+		@Override
+		public void userLoggedIn(final SwarmActiveUser user) {
 		}
 
 		// This method is called when the user logs out.
+		@Override
 		public void userLoggedOut() {
 		}
 
@@ -112,9 +114,7 @@ public class MainMenuActivity extends SwarmActivity implements View.OnClickListe
 		setContentView(((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.main, null));
 
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-		tracker = GoogleAnalyticsTracker.getInstance();
 		// Start the tracker in manual dispatch mode...
-		tracker.startNewSession("UA-32708172-1", this);
 
 		// Display Adapter, don't attempt to simplify. Fixes the pan button from
 		// cutting off - Shrav
@@ -148,8 +148,7 @@ public class MainMenuActivity extends SwarmActivity implements View.OnClickListe
 		 * DESTROY SINGLETONS
 		 */
 		BufferObjectManager.getActiveInstance().clear();
-		tracker.stopSession();
-		Log.i(TAG, "MainMenu onDestroy()");
+		if (CandyUtils.DEBUG) Log.i(TAG, "MainMenu onDestroy()");
 	}
 
 }

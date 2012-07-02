@@ -60,6 +60,6 @@ public class CandyPathModifierListener implements IPathModifierListener {
 		} else {
 			cas.hasModifier = false;
 		}
-		Log.d(CandyUtils.TAG, "Item " + cas.index + "'s path finished.");
+		if (CandyUtils.DEBUG) Log.d(CandyUtils.TAG, "Item " + cas.index + "'s path finished.");
 	}
 }

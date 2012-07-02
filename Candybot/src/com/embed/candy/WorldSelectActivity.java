@@ -95,9 +95,9 @@ public class WorldSelectActivity extends SwarmActivity implements OnItemClickLis
 
 	@Override
 	public void onItemSelected(final AdapterView<?> av, final View v, final int position, final long id) {
-		Log.i(CandyUtils.TAG,""+position);
+		if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,""+position);
 		if (world_name==null||star_count==null) {
-			Log.wtf(CandyUtils.TAG,"WTF!");
+			if (CandyUtils.DEBUG) Log.wtf(CandyUtils.TAG,"WTF!");
 		}
 		world_name.setText(getString(WorldAdapter.worldNameIDs[position]));
 		star_count.setText(CandyUtils.readLines("world" + (position+1) + ".cls", this)[20][CandyUtils.STATUS] + "/60");

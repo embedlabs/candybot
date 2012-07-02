@@ -155,7 +155,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality", "2"));
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", true);
 
-		Log.i(TAG, "Level " + world + "_" + level);
+		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
 
 
@@ -163,7 +163,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	@SuppressWarnings("deprecation")
 	@Override
 	public Engine onLoadEngine() {
-		Log.v(TAG, "CandyLevelActivity onLoadEngine()");
+		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadEngine()");
 
 		if (android.os.Build.VERSION.SDK_INT >= 13) {
 			Display display = getWindowManager().getDefaultDisplay();
@@ -171,7 +171,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 			display.getSize(size);
 			PHONE_WIDTH = display.getWidth();
 			PHONE_HEIGHT = display.getHeight();
-			Log.i(TAG, String.valueOf(PHONE_WIDTH));
+			if (CandyUtils.DEBUG) Log.i(TAG, String.valueOf(PHONE_WIDTH));
 		} else {
 			Display display = getWindowManager().getDefaultDisplay();
 			PHONE_WIDTH = display.getWidth();
@@ -190,10 +190,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 			if (MultiTouch.isSupported(this)) {
 				engine.setTouchController(new MultiTouchController());
 			} else {
-				Log.i(TAG, "MultiTouch not supported. (phone model)");
+				if (CandyUtils.DEBUG) Log.i(TAG, "MultiTouch not supported. (phone model)");
 			}
 		} catch (final MultiTouchException e) {
-			Log.i(TAG, "MultiTouch not supported. (Android version)");
+			if (CandyUtils.DEBUG) Log.i(TAG, "MultiTouch not supported. (Android version)");
 		}
 
 		return engine;
@@ -201,16 +201,16 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 
 	@Override
 	public void onLoadResources() {
-		Log.v(TAG, "CandyLevelActivity onLoadResources()");
+		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadResources()");
 
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/" + theme + "/");
 
 		final TextureOptions quality = (qualityInt > 0) ? TextureOptions.BILINEAR_PREMULTIPLYALPHA : TextureOptions.NEAREST_PREMULTIPLYALPHA;
 
 		if (quality.equals(TextureOptions.BILINEAR_PREMULTIPLYALPHA)) {
-			Log.i(TAG, "High or medium quality, using BILINEAR.");
+			if (CandyUtils.DEBUG) Log.i(TAG, "High or medium quality, using BILINEAR.");
 		} else if (quality.equals(TextureOptions.NEAREST_PREMULTIPLYALPHA)) {
-			Log.i(TAG, "Low quality, using NEAREST.");
+			if (CandyUtils.DEBUG) Log.i(TAG, "Low quality, using NEAREST.");
 		}
 
 		/**
@@ -257,7 +257,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 
 	@Override
 	public Scene onLoadScene() {
-		Log.v(TAG, "CandyLevelActivity onLoadScene()");
+		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadScene()");
 
 		/**
 		 * BASICS
@@ -413,12 +413,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 
 	@Override
 	public void onLoadComplete() {
-		Log.v(TAG, "CandyLevelActivity onLoadComplete()");
+		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadComplete()");
 	}
 
 	@Override
 	public void onResumeGame() {
-		Log.v(TAG, "CandyLevelActivity onResumeGame()");
+		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onResumeGame()");
 
 		super.onResumeGame();
 	    Swarm.setActive(this);
@@ -435,7 +435,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 						try {
 							Thread.sleep(2000);
 						} catch (InterruptedException e) {
-							Log.e(TAG, "Level start delay FAIL!", e);
+							if (CandyUtils.DEBUG) Log.e(TAG, "Level start delay FAIL!", e);
 						}
 						mCandyCamera.setZoomFactor(1);
 						gameStarted = true;
@@ -486,7 +486,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Log.i(TAG, "CandyLevelActivity onDestroy()");
+		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
 	}
 
 	@Override

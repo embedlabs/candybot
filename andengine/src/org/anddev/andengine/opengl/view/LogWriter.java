@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.anddev.andengine.opengl.view;
 
@@ -8,9 +8,9 @@ import java.io.Writer;
 import android.util.Log;
 
 /**
- * (c) 2010 Nicolas Gramlich 
+ * (c) 2010 Nicolas Gramlich
  * (c) 2011 Zynga Inc.
- * 
+ *
  * @author Nicolas Gramlich
  * @since 20:42:02 - 28.06.2010
  */
@@ -65,7 +65,7 @@ class LogWriter extends Writer {
 
 	private void flushBuilder() {
 		if(this.mBuilder.length() > 0) {
-			Log.v("GLSurfaceView", this.mBuilder.toString());
+			if (org.anddev.andengine.util.Debug.DEBUG) Log.v("GLSurfaceView", this.mBuilder.toString());
 			this.mBuilder.delete(0, this.mBuilder.length());
 		}
 	}

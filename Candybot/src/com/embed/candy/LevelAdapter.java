@@ -21,7 +21,7 @@ public class LevelAdapter extends BaseAdapter {
 		li = a.getLayoutInflater();
 
 		worldNum = (WorldAdapter.getPos()) + 1;
-		Log.d(TAG, "Current world: " + worldNum);
+		if (CandyUtils.DEBUG) Log.d(TAG, "Current world: " + worldNum);
 
 		entireWorldData=CandyUtils.readLines("world" + worldNum + ".cls", a);
 	}

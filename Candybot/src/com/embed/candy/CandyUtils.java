@@ -37,6 +37,7 @@ import android.widget.Toast;
 public class CandyUtils {
 	public static final String TAG = "Candybot";
 	public static Typeface mainFont;
+	public static final boolean DEBUG = true;
 
 	/**
 	 * w: world
@@ -88,12 +89,12 @@ public class CandyUtils {
 					if (moveNodeList.getLength() == 0) {
 						candyLevel.advancedMovesFor3Stars = 1;
 						candyLevel.basicMovesFor2Stars = 1;
-						Log.w(TAG, "Level " + world + "-" + level + " lacks moves requirements.");
+						if (CandyUtils.DEBUG) Log.w(TAG, "Level " + world + "-" + level + " lacks moves requirements.");
 					} else {
 						final Element currentMoveElement = (Element)moveNodeList.item(0);
 						candyLevel.advancedMovesFor3Stars = Integer.valueOf(currentMoveElement.getAttribute("a"));
 						candyLevel.basicMovesFor2Stars = Integer.valueOf(currentMoveElement.getAttribute("b"));
-						Log.i(TAG, "Move requirements: " + candyLevel.advancedMovesFor3Stars + ", " + candyLevel.basicMovesFor2Stars);
+						if (CandyUtils.DEBUG) Log.i(TAG, "Move requirements: " + candyLevel.advancedMovesFor3Stars + ", " + candyLevel.basicMovesFor2Stars);
 					}
 					break;
 				} else if (i + 1 == levelNodeList.getLength()) {
@@ -101,7 +102,7 @@ public class CandyUtils {
 				}
 			}
 		} catch (Exception e) {
-			Log.e(TAG, "XML FAIL!", e);
+			if (CandyUtils.DEBUG) Log.e(TAG, "XML FAIL!", e);
 			Toast.makeText(candyLevel, "Failed to load level.", Toast.LENGTH_LONG).show();
 			if (!(world == 1 & level == 1)) {
 				parseLevelObjectsFromXml(candyLevel, 1, 1, objectList, tutorialList);
@@ -127,7 +128,7 @@ public class CandyUtils {
 			}
 			throw new Exception("Missing level " + world + "-" + level + "!");
 		} catch (Exception e) {
-			Log.e(TAG, "Failed to load TMX, loading default.", e);
+			if (CandyUtils.DEBUG) Log.e(TAG, "Failed to load TMX, loading default.", e);
 			return new ByteArrayInputStream("H4sIAAAAAAAAA2NkYGBgpDGmFRg1f9R8aptPzXQ9HMNn1PxR80k1n5qYCYiZkfgAkQjLUsAGAAA=".getBytes());
 		}
 	}
@@ -174,7 +175,7 @@ public class CandyUtils {
 			context.startActivity(intent);
 			return;
 		} catch (ActivityNotFoundException e) {
-			Log.w(TAG, "Twitter: Not Droid Pro!");
+			if (CandyUtils.DEBUG) Log.w(TAG, "Twitter: Not Droid Pro!");
 		}
 		try {
 			final Intent intent = new Intent();
@@ -183,7 +184,7 @@ public class CandyUtils {
 			context.startActivity(intent);
 			return;
 		} catch (ActivityNotFoundException e) {
-			Log.w(TAG, "Twitter: Not Droid!");
+			if (CandyUtils.DEBUG) Log.w(TAG, "Twitter: Not Droid!");
 		}
 
 		String twitterUid = context.getString(R.string.twitterUID);
@@ -197,17 +198,17 @@ public class CandyUtils {
 				context.startActivity(intent);
 				return;
 			} catch (ActivityNotFoundException e) {
-				Log.w(TAG, "Twitter: No other app!");
+				if (CandyUtils.DEBUG) Log.w(TAG, "Twitter: No other app!");
 			}
 		} catch (NumberFormatException e) {
-			Log.e(TAG, "Twitter: UID incorrect!");
+			if (CandyUtils.DEBUG) Log.e(TAG, "Twitter: UID incorrect!");
 		}
 
 		try {
 			context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mobile.twitter.com/" + twitter)));
 			return;
 		} catch (ActivityNotFoundException e) {
-			Log.e(TAG, "Twitter Intent error! Twitter unsuccessful!");
+			if (CandyUtils.DEBUG) Log.e(TAG, "Twitter Intent error! Twitter unsuccessful!");
 		}
 	}
 
@@ -340,15 +341,15 @@ public class CandyUtils {
 			}
 			return lines.toArray(new int[lines.size()][]);
 		} catch (FileNotFoundException e) {
-			Log.w(TAG, "Unable to find level completion info file!");
+			if (CandyUtils.DEBUG) Log.w(TAG, "Unable to find level completion info file!");
 		} catch (IOException e) {
-			Log.e(TAG, "Error opening level completion info file!");
+			if (CandyUtils.DEBUG) Log.e(TAG, "Error opening level completion info file!");
 		} finally {
 			if (bufferedReader != null) {
 				try {
 					bufferedReader.close();
 				} catch (IOException e) {
-					Log.e(TAG, "Could not close file reader!");
+					if (CandyUtils.DEBUG) Log.e(TAG, "Could not close file reader!");
 				}
 			}
 		}
@@ -362,9 +363,9 @@ public class CandyUtils {
 			bw.write(writeLinesHelper(lines));
 			bw.flush();
 			bw.close();
-			Log.i(TAG,"Output to "+filename+":\n"+writeLinesHelper(lines));
+			if (CandyUtils.DEBUG) Log.i(TAG,"Output to "+filename+":\n"+writeLinesHelper(lines));
 		} catch (IOException e) {
-			Log.e(TAG, "Unable to create level file.");
+			if (CandyUtils.DEBUG) Log.e(TAG, "Unable to create level file.");
 		}
 	}
 

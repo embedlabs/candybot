@@ -59,7 +59,7 @@ public class LevelSelectActivity extends SwarmActivity implements OnItemClickLis
 				.putExtra("com.embed.candy.level", position + 1)
 				.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
 			} else if (la.entireWorldData[position][CandyUtils.STATUS]!=0) {
-				Log.w(CandyUtils.TAG,"Code should not reach here, CSV should have taken care of this maybe after a while or something.");
+				if (CandyUtils.DEBUG) Log.w(CandyUtils.TAG,"Code should not reach here, CSV should have taken care of this maybe after a while or something.");
 				startActivity(new Intent(this, CandyLevelActivity.class)
 				.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
 				.putExtra("com.embed.candy.level", position + 1)
