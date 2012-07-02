@@ -16,7 +16,7 @@ public class WorldAdapter extends BaseAdapter {
 	private final LayoutInflater li;
 	private Context context;
 
-	public static final Integer[] imageIDs = { R.drawable.box1, R.drawable.box2, R.drawable.box3 };
+	public static final Integer[] imageIDs = { R.drawable.world1, R.drawable.world2, R.drawable.world3, R.drawable.world2, R.drawable.world3 };
 	public static final int[] worldNameIDs = { R.string.world1, R.string.world2, R.string.world3, R.string.world4, R.string.world5 };
 
 	public WorldAdapter(final Activity a) {
@@ -57,12 +57,6 @@ public class WorldAdapter extends BaseAdapter {
 	}
 
 	public void setInfo(final View v, final int position) {
-		// final TextView tv = (TextView) v.findViewById(R.id.worldName);
-		// tv.setText(mContext.getString(worldNameIDs[position]));
-		// CandyUtils.setMainFont(tv);
-		// final TextView tv2 = (TextView) v.findViewById(R.id.worldStars);
-		// tv2.setText(CandyUtils.readLines("world" + (position+1) + ".cls", mContext)[20][CandyUtils.STATUS] + "/60");
-		// CandyUtils.setMainFont(tv2);
 		final ImageView iv = (ImageView)v.findViewById(R.id.world_image);
 		iv.setBackgroundResource(imageIDs[position]);
 		if (position!=0) {
