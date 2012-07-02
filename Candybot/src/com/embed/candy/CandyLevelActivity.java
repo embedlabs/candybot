@@ -47,6 +47,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -129,6 +130,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	public SharedPreferences sp;
 	public int qualityInt;
 	public boolean zoomBoolean;
+
+	private long totalTime = 0;
+	private long referenceTime;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -416,7 +420,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	public void onResumeGame() {
 		Log.v(TAG, "CandyLevelActivity onResumeGame()");
 
-		super.onResume();
+		super.onResumeGame();
 	    Swarm.setActive(this);
 
 		if (!resumeHasRun) {
@@ -441,12 +445,14 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 				gameStarted = true;
 			}
 		}
+	    referenceTime = System.currentTimeMillis();
 	}
 
 	@Override
 	public void onPause() {
-	    super.onPause();
-	    Swarm.setInactive(this);
+		super.onPause();
+		Swarm.setInactive(this);
+		totalTime += (System.currentTimeMillis() - referenceTime);
 	}
 
 	@Override
@@ -481,5 +487,25 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	public void onDestroy() {
 		super.onDestroy();
 		Log.i(TAG, "CandyLevelActivity onDestroy()");
+	}
+
+	@Override
+	public void finish() {
+		totalTime += (System.currentTimeMillis() - referenceTime);
+		candyEngine.totalTime = totalTime;
+		CandyUtils.saveSettings(candyEngine);
+		super.finish();
+	}
+
+	@Override
+	public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (candyEngine.winning) {
+				return true;
+			} else {
+				// TODO menu to quit code goes here.
+			}
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

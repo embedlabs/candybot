@@ -113,6 +113,7 @@ public class CandyEngine {
 	public boolean death = false;
 	public boolean botMoved = false;
 	public boolean candyBurned = false;
+	public boolean winning = false; // means actually winning and now cleaning up and finishing
 
 	private boolean teleportationRequired = false;
 	private boolean slidingOnIceRequired = false;
@@ -130,6 +131,7 @@ public class CandyEngine {
 //	private long startTime;
 	int enemiesDefeated = 0;
 	int starsEarned = 0;
+	long totalTime = 0;
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevelActivity candyLevel) {
 		this.spriteList = spriteList;
@@ -469,6 +471,8 @@ public class CandyEngine {
 	}
 
 	private synchronized void win() {
+		winning=true;
+
 		candy.showCandyAnim();
 		pause(5, candyIndex);
 
@@ -482,14 +486,7 @@ public class CandyEngine {
 		else if (moves <= candyLevel.basicMovesFor2Stars) {starsEarned = 2;}
 		else {starsEarned = 1;}
 
-		/**
-		 * TODO SHRAV REMEMBER TO ALWAYS STORE THE BEST STATISTICS IN THE XML
-		 * FILE, MEANING LEAST NUMBER OF MOVES, FASTEST TIME, MOST STARS. DO NOT
-		 * OVERRIDE EXISTING BETTER STATS, ONLY PUT NEW BETTER ONES IN
-		 */
-		CandyUtils.saveSettings(this);
-		candyLevel.finish(); // TODO change this
-
+		candyLevel.finish(); // TODO change this, add the pop up menu thingy
 	}
 
 	private synchronized void logArray(final String message) {
@@ -711,7 +708,7 @@ public class CandyEngine {
 					default:
 						if (slideDistance == 0) {
 							assert !slidingOnIceRequired;
-							// slidingOnIceRequired = false; // TODO necessary?
+							// slidingOnIceRequired = false; // FIXME necessary?
 						}
 						return slideDistance;
 					}

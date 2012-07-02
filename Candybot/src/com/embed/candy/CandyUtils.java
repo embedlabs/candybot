@@ -215,7 +215,7 @@ public class CandyUtils {
 		final Builder aboutBuilder = new AlertDialog.Builder(context);
 		aboutBuilder.setTitle(R.string.dialog_about_title);
 		aboutBuilder.setIcon(android.R.drawable.ic_dialog_info);
-		aboutBuilder.setMessage(context.getString(R.string.dialog_about_message)); // TODO
+		aboutBuilder.setMessage(context.getString(R.string.dialog_about_message));
 		aboutBuilder.setPositiveButton(R.string.dialog_about_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int which) {
@@ -233,6 +233,9 @@ public class CandyUtils {
 	public static final int TOTAL_RESTARTS = 3;
 	public static final int TOTAL_DEFEATED = 4;
 	public static final int TOTAL_WINS = 5;
+	public static final int TOTAL_TIME_MILLIS = 6;
+	public static final int TOTAL_QUITS = 7;
+	public static final int MIN_TIME_MILLIS = 8;
 
 	public static final int UNLOCKED = -1;
 	public static final int LOCKED = 0;
@@ -248,47 +251,66 @@ public class CandyUtils {
 		 * 3: restarts total, sum of the other ones in the world line
 		 * 4: enemies defeated total, sum of the other ones in the world line
 		 * 5: total wins
+		 * 6: total time
+		 * 7: total quits
 		 */
 		final String filename = "world" + candyEngine.candyLevel.world + ".cls"; // CandyLevelSave
 		final int[][] masterArray = readLines(filename,candyEngine.candyLevel);
 
-		if (masterArray[0][0]==LOCKED) { // Level 1 of the world should be unlocked.
-			masterArray[0][0]=UNLOCKED;
+		if (masterArray[0][STATUS]==LOCKED) { // Level 1 of the world should be unlocked. || WORKS EVEN IF QUIT
+			masterArray[0][STATUS]=UNLOCKED;
 		}
 
-		// The level in question is one off because of the index.
+		// The level in question is one off because of the index. || WORKS EVEN IF QUIT
 		int[] levelArray = masterArray[candyEngine.candyLevel.level-1];
 
-		// The new number of stars is the maximum between these two numbers (0)
+		// The new number of stars is the maximum between these two numbers (0) || WORKS EVEN IF QUIT
 		levelArray[STATUS] = Math.max(levelArray[STATUS],candyEngine.starsEarned);
 
-		// Unlock the next level if there is one to unlock.
-		if (candyEngine.candyLevel.level!=20) {
+		// Unlock the next level if there is one to unlock. || WORKS EVEN IF QUIT
+		if (candyEngine.candyLevel.level!=20 && candyEngine.starsEarned>=1) {
 			if (masterArray[candyEngine.candyLevel.level][STATUS]==LOCKED) {
 				masterArray[candyEngine.candyLevel.level][STATUS]=UNLOCKED;
 			}
 		}
 
-		// If there is no minimum move recording, then create one, otherwise find the minimum. (1)
-		if (levelArray[MIN_MOVES]==0) {
-			levelArray[MIN_MOVES]=candyEngine.moves;
-		} else {
-			levelArray[MIN_MOVES]=Math.min(levelArray[MIN_MOVES], candyEngine.moves);
+		// If there is no minimum move recording, then create one, otherwise find the minimum. (1) || WORKS EVEN IF QUIT
+		if (candyEngine.starsEarned>=1) {
+			if (levelArray[MIN_MOVES]==0) {
+				levelArray[MIN_MOVES]=candyEngine.moves;
+			} else {
+				levelArray[MIN_MOVES]=Math.min(levelArray[MIN_MOVES], candyEngine.moves);
+			}
+		}
+
+		// If there is no minimum move recording, then create one, otherwise find the minimum. (8) || WORKS EVEN IF QUIT
+		if (candyEngine.starsEarned>=1) {
+			if (levelArray[MIN_TIME_MILLIS]==0) {
+				levelArray[MIN_TIME_MILLIS]=(int)candyEngine.totalTime;
+			} else {
+				levelArray[MIN_TIME_MILLIS]=(int)Math.min(levelArray[MIN_TIME_MILLIS], candyEngine.totalTime);
+			}
 		}
 
 		// Update the other stats (2, 3, 4, 5)
-		levelArray[TOTAL_MOVES]+=candyEngine.moves; // 2
-		levelArray[TOTAL_RESTARTS]+=candyEngine.restarts; // 3
-		levelArray[TOTAL_DEFEATED]+=candyEngine.enemiesDefeated; // 4
-		levelArray[TOTAL_WINS]++; // 5
+		levelArray[TOTAL_MOVES]+=candyEngine.moves; // 2 || WORKS EVEN IF QUIT
+		levelArray[TOTAL_RESTARTS]+=candyEngine.restarts; // 3 || WORKS EVEN IF QUIT
+		levelArray[TOTAL_DEFEATED]+=candyEngine.enemiesDefeated; // 4 || WORKS EVEN IF QUIT
+		if (candyEngine.starsEarned>=1) {
+			levelArray[TOTAL_WINS]++; // 5 || WORKS EVEN IF QUIT
+		} else {
+			levelArray[TOTAL_QUITS]++; // 7 || WORKS EVEN IF QUIT
+		}
+		levelArray[TOTAL_TIME_MILLIS]+=candyEngine.totalTime; // 6 || WORKS EVEN IF QUIT
 
-		// Reset the WORLD line in the file to zero.
-		for (int i=0;i<6;i++) {
+
+		// Reset the WORLD line in the file to zero. || WORKS EVEN IF QUIT
+		for (int i=0;i<9;i++) {
 			masterArray[20][i]=0;
 		}
 		// Make it the sum of the other stats.
 		for (int i=0;i<20;i++) {
-			for (int j=0;j<6;j++) {
+			for (int j=0;j<9;j++) {
 				if (j==STATUS) {
 					// In the case of the stars, only accept unlocked level star counts.
 					masterArray[20][j]+=(masterArray[i][j]>0)?masterArray[i][j]:0;
@@ -330,7 +352,7 @@ public class CandyUtils {
 				}
 			}
 		}
-		return new int[21][6];
+		return new int[21][9];
 	}
 
 	public static void writeLines(final String filename, final int[][] lines, final Context context) {
@@ -340,6 +362,7 @@ public class CandyUtils {
 			bw.write(writeLinesHelper(lines));
 			bw.flush();
 			bw.close();
+			Log.i(TAG,"Output to "+filename+":\n"+writeLinesHelper(lines));
 		} catch (IOException e) {
 			Log.e(TAG, "Unable to create level file.");
 		}
@@ -348,11 +371,11 @@ public class CandyUtils {
 	private static String writeLinesHelper(final int[][] lines) {
 		final StringBuilder sb = new StringBuilder();
 		for (int[] line : lines) {
-			for (int i = 0; i <= 4; i++) {
+			for (int i = 0; i <= 7; i++) {
 				sb.append(line[i]);
 				sb.append(',');
 			}
-			sb.append(line[5]);
+			sb.append(line[8]);
 			sb.append('\n');
 		}
 		return sb.toString();
