@@ -18,9 +18,7 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.swarmconnect.SwarmActivity;
-
-public class WorldSelectActivity extends SwarmActivity implements OnItemClickListener, OnItemSelectedListener {
+public class WorldSelectActivity extends BetterSwarmActivity implements OnItemClickListener, OnItemSelectedListener {
 
 	Gallery world_g;
 	private WorldAdapter wa;

@@ -20,10 +20,9 @@ import android.widget.TextView;
 
 import com.swarmconnect.Swarm;
 import com.swarmconnect.SwarmActiveUser;
-import com.swarmconnect.SwarmActivity;
 import com.swarmconnect.delegates.SwarmLoginListener;
 
-public class MainMenuActivity extends SwarmActivity implements View.OnClickListener {
+public class MainMenuActivity extends BetterSwarmActivity implements View.OnClickListener {
 
 	TextView mainmenu_tv;
 	Button button_play, button_achieve, button_lead;
@@ -78,6 +77,9 @@ public class MainMenuActivity extends SwarmActivity implements View.OnClickListe
 			break;
 		case R.id.menu_main_item_preferences:
 			startActivity(new Intent(this, CandyPreferenceActivity.class));
+			break;
+		case R.id.menu_main_item_stats:
+			startActivity(new Intent(this, StatisticsActivity.class));
 			break;
 		}
 		return true;

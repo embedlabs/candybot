@@ -14,9 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.swarmconnect.SwarmActivity;
-
-public class LevelSelectActivity extends SwarmActivity implements OnItemClickListener {
+public class LevelSelectActivity extends BetterSwarmActivity implements OnItemClickListener {
 
 	GridView level_gv;
 	private LevelAdapter la;
