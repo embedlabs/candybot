@@ -21,9 +21,19 @@ public class StatisticsAdapter extends ArrayAdapter<String> {
 	@Override
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		final TextView tv = (TextView)inflater.inflate(R.layout.stats_list_item, parent, false);
+		final TextView tv = (TextView) inflater.inflate(R.layout.stats_list_item, parent, false);
 		CandyUtils.setMainFont(tv);
 		tv.setText(values[position]);
 		return tv;
+	}
+
+	@Override
+	public boolean areAllItemsEnabled() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled(final int position) {
+		return false;
 	}
 }
