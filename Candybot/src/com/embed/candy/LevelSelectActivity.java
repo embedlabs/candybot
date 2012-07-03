@@ -44,30 +44,28 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 		case CandyUtils.STARS1:
 		case CandyUtils.STARS2:
 		case CandyUtils.STARS3:
-			startActivity(new Intent(this, CandyLevelActivity.class)
-			.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
-			.putExtra("com.embed.candy.level", position + 1)
-			.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
+			startLevel(position);
 			break;
 		case CandyUtils.LOCKED:
 		default:
 			if (position==0) {
-				startActivity(new Intent(this, CandyLevelActivity.class)
-				.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
-				.putExtra("com.embed.candy.level", position + 1)
-				.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
+				startLevel(position);
 			} else if (la.entireWorldData[position][CandyUtils.STATUS]!=0) {
 				if (CandyUtils.DEBUG) Log.w(CandyUtils.TAG,"Code should not reach here, CSV should have taken care of this maybe after a while or something.");
-				startActivity(new Intent(this, CandyLevelActivity.class)
-				.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
-				.putExtra("com.embed.candy.level", position + 1)
-				.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
+				startLevel(position);
 			} else {
 				textToast("Level not unlocked!");
 				vib.vibrate(100);
 			}
 			break;
 		}
+	}
+
+	public void startLevel(final int position) {
+		startActivity(new Intent(this, CandyLevelActivity.class)
+		.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
+		.putExtra("com.embed.candy.level", position + 1)
+		.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
 	}
 
 	public void textToast(final String textToDisplay) {
