@@ -3,7 +3,6 @@
     <string name="app_name">Candybot</string>
     <string name="button_play">Play</string>
     <string name="button_achieve">Achievements</string>
-    <string name="button_lead">Leaderboards</string>
     
     <string name="facebook_link">https://m.facebook.com/candybot?v=feed</string>
     <string name="facebook_protocol">fb://profile/236289176391475</string>

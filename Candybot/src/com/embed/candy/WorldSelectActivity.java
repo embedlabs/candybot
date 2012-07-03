@@ -54,7 +54,7 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 		world_g.setOnItemClickListener(this);
 		world_g.setOnItemSelectedListener(this);
 
-		mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
+		mToast = Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT);
 		mToast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 30);
 	}
 

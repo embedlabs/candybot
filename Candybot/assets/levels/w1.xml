@@ -5,6 +5,7 @@
 		<o n="1" r="7" c="8" />
 		<o n="2" r="7" c="7" />
 		<h r="10" c="5">Help Candybot move the candy&#10;into the hole!</h>
+		<t>Help Candybot move the candy&#10;into the hole!</t>
 		<m a="23" b="27" /> <!-- None for a, four for b -->
 	</l>
 	<l id="2">

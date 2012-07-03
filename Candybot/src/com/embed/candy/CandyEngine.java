@@ -5,9 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.anddev.andengine.entity.modifier.AlphaModifier;
-import org.anddev.andengine.entity.text.Text;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.util.FloatMath;
 import android.util.Log;
@@ -132,6 +130,8 @@ public class CandyEngine {
 	int enemiesDefeated = 0;
 	int starsEarned = 0;
 	long totalTime = 0;
+
+	final AtomicBoolean eliminateToasts = new AtomicBoolean();
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevelActivity candyLevel) {
 		this.spriteList = spriteList;
@@ -291,9 +291,10 @@ public class CandyEngine {
 			moves++;
 
 			if (moves==5) {
-				for (final Text text:candyLevel.textReferences) {
-					text.registerEntityModifier(new AlphaModifier(1,1,0));
-				}
+//				for (final Text text:candyLevel.textReferences) {
+//					text.registerEntityModifier(new AlphaModifier(1,1,0));
+//				}
+				eliminateToasts.set(true);
 			}
 
 			botMoved = false;

@@ -47,10 +47,10 @@ public class CandyUtils {
 	 * m: move requirement
 	 */
 
-	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel, final int world,final int level, final ArrayList<int[]> objectList,final ArrayList<String[]> tutorialList) {
+	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel) {
 		try {
 			// Load the XML into a DOM.
-			final InputStream input = candyLevel.getAssets().open("levels/w" + world + ".xml");
+			final InputStream input = candyLevel.getAssets().open("levels/w" + candyLevel.world + ".xml");
 			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			final DocumentBuilder db = dbf.newDocumentBuilder();
 			final Document doc = db.parse(new InputSource(input));
@@ -61,7 +61,7 @@ public class CandyUtils {
 
 			// Select the correct level in the world.
 			for (int i = 0; i < levelNodeList.getLength(); i++) {
-				if (Integer.valueOf(((Element) levelNodeList.item(i)).getAttribute("id")) == level) {
+				if (Integer.valueOf(((Element) levelNodeList.item(i)).getAttribute("id")) == candyLevel.level) {
 					final Element currentLevelElement = (Element) levelNodeList.item(i);
 
 					// Make a list of all child objects.
@@ -70,7 +70,7 @@ public class CandyUtils {
 					// Load attributes into an Object[3], then append to objectArrayList.
 					for (int j = 0; j < objectNodeList.getLength(); j++) {
 						final Element currentObjectElement = (Element) objectNodeList.item(j);
-						objectList.add(new int[] {Integer.valueOf(currentObjectElement.getAttribute("n")), // n = number indicating type of object
+						candyLevel.objectList.add(new int[] {Integer.valueOf(currentObjectElement.getAttribute("n")), // n = number indicating type of object
 								Integer.valueOf(currentObjectElement.getAttribute("r")), // r = row
 								Integer.valueOf(currentObjectElement.getAttribute("c")) // c = column
 						});
@@ -79,17 +79,22 @@ public class CandyUtils {
 					final NodeList tutorialNodeList = currentLevelElement.getElementsByTagName("h"); // h = help = tutorial
 					for (int j = 0; j < tutorialNodeList.getLength(); j++) {
 						final Element currentTutorialElement = (Element) tutorialNodeList.item(j);
-						tutorialList.add(new String[] {currentTutorialElement.getTextContent(),
+						candyLevel.tutorialList.add(new String[] {currentTutorialElement.getTextContent(),
 								currentTutorialElement.getAttribute("r"), // r = row
 								currentTutorialElement.getAttribute("c") // c = column
 						});
+					}
+
+					final NodeList toastNodeList = currentLevelElement.getElementsByTagName("t"); // t toast
+					if (toastNodeList.getLength()==1) {
+						candyLevel.helpToastText = ((Element)toastNodeList.item(0)).getTextContent();
 					}
 
 					final NodeList moveNodeList = currentLevelElement.getElementsByTagName("m");
 					if (moveNodeList.getLength() == 0) {
 						candyLevel.advancedMovesFor3Stars = 1;
 						candyLevel.basicMovesFor2Stars = 1;
-						if (CandyUtils.DEBUG) Log.w(TAG, "Level " + world + "-" + level + " lacks moves requirements.");
+						if (CandyUtils.DEBUG) Log.w(TAG, "Level " + candyLevel.world + "-" + candyLevel.level + " lacks moves requirements.");
 					} else {
 						final Element currentMoveElement = (Element)moveNodeList.item(0);
 						candyLevel.advancedMovesFor3Stars = Integer.valueOf(currentMoveElement.getAttribute("a"));
@@ -98,14 +103,16 @@ public class CandyUtils {
 					}
 					break;
 				} else if (i + 1 == levelNodeList.getLength()) {
-					throw new Exception("Missing level " + world + "-" + level + "!");
+					throw new Exception("Missing level " + candyLevel.world + "-" + candyLevel.level + "!");
 				}
 			}
 		} catch (Exception e) {
 			if (CandyUtils.DEBUG) Log.e(TAG, "XML FAIL!", e);
-			Toast.makeText(candyLevel, "Failed to load level.", Toast.LENGTH_LONG).show();
-			if (!(world == 1 & level == 1)) {
-				parseLevelObjectsFromXml(candyLevel, 1, 1, objectList, tutorialList);
+			Toast.makeText(candyLevel.getApplicationContext(), "Failed to load level.", Toast.LENGTH_LONG).show();
+			if (!(candyLevel.world == 1 & candyLevel.level == 1)) {
+				candyLevel.world = 1;
+				candyLevel.level = 1;
+				parseLevelObjectsFromXml(candyLevel);
 			}
 		}
 	}

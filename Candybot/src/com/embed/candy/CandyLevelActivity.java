@@ -78,13 +78,14 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	/**
 	 * Gotta keep track of all your variables and objects and stuff...
 	 */
-	private final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
-	private final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list of all tutorial text
+	final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
+	final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list of all tutorial text
 	final ArrayList<Text> textReferences = new ArrayList<Text>();
 	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
 	private int[][] backgroundArray = new int[18][24]; // holds tmx array
 	public TextureRegion[][] trArray = new TextureRegion[18][24];
 	private int[][] objectArray; // stores locations and types of all objects, correlates to spriteList
+	public String helpToastText = null;
 
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
@@ -240,7 +241,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		/**
 		 * XML PARSING
 		 */
-		CandyUtils.parseLevelObjectsFromXml(this, world, level, objectList, tutorialList);
+		CandyUtils.parseLevelObjectsFromXml(this);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
 
 		/**
@@ -273,12 +274,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		try {
 			mTMXTiledMap = tmxLoader.load(CandyUtils.tmxFromXML(this, world, level));
 		} catch (final TMXLoadException tmxle) {
-			Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Failed to load level.", Toast.LENGTH_LONG).show();
 			Debug.e(tmxle);
 			try {
 				mTMXTiledMap = tmxLoader.loadFromAsset(this, "levels/1_1.ccl");
 			} catch (TMXLoadException e) {
-				Toast.makeText(this, "Failed to load level.", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Failed to load level.", Toast.LENGTH_LONG).show();
 				Debug.e(tmxle);
 				finish();
 			}
@@ -416,6 +417,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadComplete()");
 	}
 
+	@SuppressLint("ShowToast")
 	@Override
 	public void onResumeGame() {
 		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onResumeGame()");
@@ -444,6 +446,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 			} else {
 				gameStarted = true;
 			}
+			final Toast t = Toast.makeText(getApplicationContext(), helpToastText, Toast.LENGTH_SHORT);
+			ExtendedToast.showUntilDone(t, candyEngine.eliminateToasts);
 		}
 	    referenceTime = System.currentTimeMillis();
 	}

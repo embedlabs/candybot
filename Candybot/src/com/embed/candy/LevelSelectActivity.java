@@ -32,7 +32,7 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 		level_gv = (GridView) findViewById(R.id.gridview_level);
 		level_gv.setOnItemClickListener(this);
 
-		mToast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
+		mToast = Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT);
 		mToast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 30);
 	}
 

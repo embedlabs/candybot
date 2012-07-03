@@ -25,7 +25,7 @@ import com.swarmconnect.delegates.SwarmLoginListener;
 public class MainMenuActivity extends BetterSwarmActivity implements View.OnClickListener {
 
 	TextView mainmenu_tv;
-	Button button_play, button_achieve, button_lead;
+	Button button_play, button_achieve;
 	ImageView iv_facebook, iv_twitter, my_swarm_button;
 
 	public Typeface mainFont;
@@ -55,10 +55,6 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		case R.id.button_achieve:
 			Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
 			Swarm.showAchievements();
-			break;
-		case R.id.button_lead:
-			Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
-			Swarm.showLeaderboards();
 			break;
 		}
 	}
@@ -126,13 +122,12 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		mainmenu_tv = (TextView) findViewById(R.id.mainmenu_tv);
 		button_play = (Button) findViewById(R.id.button_play);
 		button_achieve = (Button) findViewById(R.id.button_achieve);
-		button_lead = (Button) findViewById(R.id.button_lead);
 		iv_facebook = (ImageView) findViewById(R.id.button_facebook);
 		iv_twitter = (ImageView) findViewById(R.id.button_twitter);
 		my_swarm_button = (ImageView)findViewById(R.id.my_swarm_button);
 
-		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve, button_lead); // changes font
-		CandyUtils.setClick(this,button_achieve, button_lead, button_play, iv_facebook, iv_twitter, my_swarm_button);
+		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
+		CandyUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
 
 	}
 
