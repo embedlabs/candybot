@@ -64,4 +64,6 @@
 	<string name="world3">Nougat</string>
 	<string name="world4">Donut</string>
 	<string name="world5">Yogurt</string>
+	
+	<string name="statistics">Statistics</string>
 </resources>

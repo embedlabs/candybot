@@ -66,8 +66,7 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 				final int stars = CandyUtils.readLines("world" + (position) + ".cls", this)[20][CandyUtils.STATUS];
 				if (stars<30) {
 					final Vibrator vib = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-					textToast("30 stars in World "+position+" needed! "+(30-stars)+" to go!");
-					textToast((30-stars)+" more stars in World "+position+" needed!");
+					textToast((30-stars)+" more stars in World \""+getString(WorldAdapter.worldNameIDs[position-1])+"\" needed!");
 					vib.vibrate(100);
 				} else {
 					startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
