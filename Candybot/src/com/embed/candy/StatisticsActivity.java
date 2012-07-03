@@ -1,5 +1,13 @@
 package com.embed.candy;
 
-public class StatisticsActivity extends BetterSwarmActivity {
+import android.app.ListActivity;
+import android.os.Bundle;
 
+public class StatisticsActivity extends ListActivity {
+
+	@Override
+	public void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// TODO
+	}
 }
