@@ -18,7 +18,7 @@
 		android:unselectedAlpha="1.0" />
 	<TextSwitcher
 		android:id="@+id/world_name"
-		android:layout_width="wrap_content"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_centerHorizontal="true"
@@ -26,18 +26,23 @@
 		android:animateFirstView="false" >
 		<TextView
 			android:id="@+id/wn_1"
-			android:layout_width="wrap_content"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:padding="5dip"
 			android:shadowColor="@android:color/black"
 			android:shadowDx="0"
 			android:shadowDy="0"
 			android:shadowRadius="2"
 			android:textColor="@android:color/white"
 			android:textSize="30dip" />
+"
 		<TextView
 			android:id="@+id/wn_2"
-			android:layout_width="wrap_content"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:padding="5dip"
 			android:shadowColor="@android:color/black"
 			android:shadowDx="0"
 			android:shadowDy="0"
@@ -56,12 +61,14 @@
 			android:id="@+id/star_count"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginRight="8px"
+			android:layout_gravity="center_vertical"
 			android:animateFirstView="false" >
 			<TextView
 				android:id="@+id/sc_1"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:gravity="right|center_vertical"
+				android:padding="8px"
 				android:shadowColor="@android:color/black"
 				android:shadowDx="0"
 				android:shadowDy="0"
@@ -72,6 +79,8 @@
 				android:id="@+id/sc_2"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:gravity="right|center_vertical"
+				android:padding="8px"
 				android:shadowColor="@android:color/black"
 				android:shadowDx="0"
 				android:shadowDy="0"
@@ -82,7 +91,8 @@
 		<ImageView
 			android:layout_width="32px"
 			android:layout_height="32px"
-			android:src="@drawable/star"
-			android:scaleType="fitXY" />
+			android:layout_gravity="center_vertical"
+			android:scaleType="fitXY"
+			android:src="@drawable/star" />
 	</LinearLayout>
 </RelativeLayout>

@@ -497,6 +497,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 	public void finish() {
 		totalTime += (System.currentTimeMillis() - referenceTime);
 		candyEngine.totalTime = totalTime;
+		candyEngine.eliminateToasts.set(true);
 		CandyUtils.saveSettings(candyEngine);
 		super.finish();
 	}
