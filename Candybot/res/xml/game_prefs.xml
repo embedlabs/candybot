@@ -2,6 +2,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <PreferenceCategory android:title="@string/pref_category_general"
         android:key="com.embed.candy.category_general">
+       <CheckBoxPreference android:defaultValue="true"
+            android:key="pref_swarm"
+            android:title="@string/pref_swarm"
+            android:summary="@string/pref_swarm_summary" />
         <CheckBoxPreference android:defaultValue="true"
             android:key="com.embed.candy.general_zoom"
             android:title="@string/pref_general_zoom"

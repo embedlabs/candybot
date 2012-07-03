@@ -22,16 +22,19 @@ public class SplashScreenActivity extends BaseSplashActivity {
 	// Methods from Super Classes/Interfaces
 	// ================================================
 	
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    Swarm.setActive(this);
 	}
 
+	@Override
 	public void onResume() {
 	    super.onResume();
 	    Swarm.setActive(this);
 	}
 
+	@Override
 	public void onPause() {
 	    super.onPause();
 	    Swarm.setInactive(this);

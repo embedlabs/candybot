@@ -53,7 +53,6 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			Swarm.showDashboard();
 			break;
 		case R.id.button_achieve:
-			Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
 			Swarm.showAchievements();
 			break;
 		}
@@ -112,10 +111,6 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		setContentView(((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.main, null));
 
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-		// Start the tracker in manual dispatch mode...
-
-		// Display Adapter, don't attempt to simplify. Fixes the pan button from
-		// cutting off - Shrav
 
 		mainFont = Typeface.createFromAsset(getAssets(),getString(R.string.font_location)); // load font
 

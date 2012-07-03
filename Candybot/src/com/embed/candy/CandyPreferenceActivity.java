@@ -15,11 +15,13 @@ public class CandyPreferenceActivity extends PreferenceActivity {
 		Swarm.setActive(this);
 	}
 
+	@Override
 	public void onResume() {
 	    super.onResume();
 	    Swarm.setActive(this);
 	}
 
+	@Override
 	public void onPause() {
 	    super.onPause();
 	    Swarm.setInactive(this);
