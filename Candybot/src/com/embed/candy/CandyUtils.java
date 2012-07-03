@@ -244,6 +244,8 @@ public class CandyUtils {
 	public static final int TOTAL_TIME_MILLIS = 6;
 	public static final int TOTAL_QUITS = 7;
 	public static final int MIN_TIME_MILLIS = 8;
+	public static final int TOTAL_DEATHS = 9;
+	public static final int TOTAL_BURNS = 10;
 
 	public static final int UNLOCKED = -1;
 	public static final int LOCKED = 0;
@@ -304,6 +306,9 @@ public class CandyUtils {
 		levelArray[TOTAL_MOVES]+=candyEngine.moves; // 2 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_RESTARTS]+=candyEngine.restarts; // 3 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_DEFEATED]+=candyEngine.enemiesDefeated; // 4 || WORKS EVEN IF QUIT
+		levelArray[TOTAL_DEATHS]+=candyEngine.deathCounter; // 9 || WORKS EVEN IF QUIT
+		levelArray[TOTAL_BURNS]+=candyEngine.candyBurnedCounter; // 10 || WORKS EVEN IF QUIT
+
 		if (candyEngine.starsEarned>=1) {
 			levelArray[TOTAL_WINS]++; // 5 || WORKS EVEN IF QUIT
 		} else {
@@ -313,12 +318,12 @@ public class CandyUtils {
 
 
 		// Reset the WORLD line in the file to zero. || WORKS EVEN IF QUIT
-		for (int i=0;i<9;i++) {
+		for (int i=0;i<11;i++) {
 			masterArray[20][i]=0;
 		}
 		// Make it the sum of the other stats.
 		for (int i=0;i<20;i++) {
-			for (int j=0;j<9;j++) {
+			for (int j=0;j<11;j++) {
 				if (j==STATUS) {
 					// In the case of the stars, only accept unlocked level star counts.
 					masterArray[20][j]+=(masterArray[i][j]>0)?masterArray[i][j]:0;
@@ -360,7 +365,7 @@ public class CandyUtils {
 				}
 			}
 		}
-		return new int[21][9];
+		return new int[21][11];
 	}
 
 	public static void writeLines(final String filename, final int[][] lines, final Context context) {
@@ -378,11 +383,11 @@ public class CandyUtils {
 	private static String writeLinesHelper(final int[][] lines) {
 		final StringBuilder sb = new StringBuilder();
 		for (int[] line : lines) {
-			for (int i = 0; i <= 7; i++) {
+			for (int i = 0; i <= 9; i++) {
 				sb.append(line[i]);
 				sb.append(',');
 			}
-			sb.append(line[8]);
+			sb.append(line[10]);
 			sb.append('\n');
 		}
 		return sb.toString();

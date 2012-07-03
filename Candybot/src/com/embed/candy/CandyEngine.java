@@ -130,6 +130,8 @@ public class CandyEngine {
 	int enemiesDefeated = 0;
 	int starsEarned = 0;
 	long totalTime = 0;
+	int deathCounter = 0;
+	int candyBurnedCounter = 0;
 
 	final AtomicBoolean eliminateToasts = new AtomicBoolean();
 
@@ -193,7 +195,7 @@ public class CandyEngine {
 			switch (s) {
 			case SQUARE_ENEMY:
 			case SQUARE_LASER:
-				death = true;
+				death = true; deathCounter++;
 			case SQUARE_EMPTY:
 				botMoved = true;
 //				maybeStartTimer();
@@ -208,7 +210,7 @@ public class CandyEngine {
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
 					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.INERTIA_WALL)) {
-						if (shouldDie) {death = true;}
+						if (shouldDie) {death = true; deathCounter++;}
 						botMoved = true;
 //						maybeStartTimer();
 						move(rowDirection, columnDirection, botIndex, situationArray[OBJECT]);
@@ -221,7 +223,7 @@ public class CandyEngine {
 				if (rowDirection == 1) {
 					switch (situation(candyLevel.teleporter2row, candyLevel.teleporter2column, rowDirection, columnDirection)[SITUATION]) {
 					case SQUARE_LASER:
-						death = true;
+						death = true; deathCounter++;
 					case SQUARE_EMPTY:
 						botMoved = true;
 //						maybeStartTimer();
@@ -231,7 +233,7 @@ public class CandyEngine {
 				} else if (rowDirection == -1) {
 					switch (situation(candyLevel.teleporter1row, candyLevel.teleporter1column, rowDirection, columnDirection)[SITUATION]) {
 					case SQUARE_LASER:
-						death = true;
+						death = true; deathCounter++;
 					case SQUARE_EMPTY:
 						botMoved = true;
 //						maybeStartTimer();
@@ -426,7 +428,7 @@ public class CandyEngine {
 			shouldDie = true;
 		case SQUARE_OCCUPIED:
 			if (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.BOT) {
-				death = true;
+				death = true; deathCounter++;
 				move(rowDirection, columnDirection, enemySprite.index);
 			} else {
 				final int[] situationArray2 = situation(situationArray[OBJECT], rowDirection, columnDirection);
@@ -744,6 +746,7 @@ public class CandyEngine {
 					spriteList.get(index).blowUp = true;
 				} else if (situationArray[BACKGROUND] == WALL_LAVA && index == candyIndex) {
 					candyBurned = true;
+					candyBurnedCounter++;
 				} else if (situationArray[BACKGROUND] == WALL_ICE && spriteList.get(index).lastDirectionalMove != 0) {
 					slidingOnIceRequired = true;
 				}

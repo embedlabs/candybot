@@ -66,4 +66,11 @@
 	<string name="world5">Yogurt</string>
 	
 	<string name="statistics">Statistics</string>
+	<string name="stats_time_played">Time played</string>
+	<string name="stats_moves_taken">Moves taken</string>
+	<string name="stats_total_restarts">Total restarts</string>
+	<string name="stats_enemies_defeated">Enemies defeated</string>
+	<string name="stats_candies_burned">Candies burned</string>
+	<string name="stats_number_of_candybot_deaths">Number of Candybot deaths</string>
+	<string name="stats_stars_earned">Stars earned</string>
 </resources>
