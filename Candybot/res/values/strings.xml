@@ -73,4 +73,6 @@
 	<string name="stats_candies_burned">Candies burned</string>
 	<string name="stats_number_of_candybot_deaths">Number of Candybot deaths</string>
 	<string name="stats_stars_earned">Stars earned</string>
+	<string name="stats_levels_completed">Levels completed</string>
+	<string name="stats_worlds_completed">Worlds completed</string>
 </resources>

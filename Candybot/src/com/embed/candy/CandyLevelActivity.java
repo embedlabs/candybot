@@ -154,7 +154,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements
 
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality", "2"));
-		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", true);
+		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", false);
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}

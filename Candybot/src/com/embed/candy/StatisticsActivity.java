@@ -43,10 +43,30 @@ public class StatisticsActivity extends ListActivity {
 		stats.add(getString(R.string.stats_total_restarts) + ": " + f.format(restarts));
 
 		// LEVELS COMPLETED
-		// TODO
+		int levelsCompleted = 0;
+		for (int[][] world:worlds) {
+			for (int i=0;i<20;i++) {
+				if (world[i][CandyUtils.STATUS]>0) {
+					levelsCompleted++;
+				}
+			}
+		}
+		stats.add(getString(R.string.stats_levels_completed)+": "+levelsCompleted);
 
 		// WORLDS COMPLETED
-		// TODO
+		int worldsCompleted = 0;
+		for (int[][] world:worlds) {
+			int temp = 0;
+			for (int i=0;i<20;i++) {
+				if (world[i][CandyUtils.STATUS]>0) {
+					temp++;
+				}
+			}
+			if (temp==20) {
+				worldsCompleted++;
+			}
+		}
+		stats.add(getString(R.string.stats_worlds_completed)+": "+worldsCompleted);
 
 		// STARS EARNED
 		final int stars = statisticObtainer(worlds, CandyUtils.STATUS);

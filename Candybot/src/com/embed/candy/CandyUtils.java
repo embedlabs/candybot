@@ -247,6 +247,8 @@ public class CandyUtils {
 	public static final int TOTAL_DEATHS = 9;
 	public static final int TOTAL_BURNS = 10;
 
+	public static final int SAVE_SIZE = 25; // add extra spots in case we want to modify in the future, must be at least 11 now
+
 	public static final int UNLOCKED = -1;
 	public static final int LOCKED = 0;
 	public static final int STARS1 = 1;
@@ -285,7 +287,7 @@ public class CandyUtils {
 		}
 
 		// If there is no minimum move recording, then create one, otherwise find the minimum. (1) || WORKS EVEN IF QUIT
-		if (candyEngine.starsEarned>=1) {
+		if (candyEngine.starsEarned>=STARS1) {
 			if (levelArray[MIN_MOVES]==0) {
 				levelArray[MIN_MOVES]=candyEngine.moves;
 			} else {
@@ -294,7 +296,7 @@ public class CandyUtils {
 		}
 
 		// If there is no minimum move recording, then create one, otherwise find the minimum. (8) || WORKS EVEN IF QUIT
-		if (candyEngine.starsEarned>=1) {
+		if (candyEngine.starsEarned>=STARS1) {
 			if (levelArray[MIN_TIME_MILLIS]==0) {
 				levelArray[MIN_TIME_MILLIS]=(int)candyEngine.totalTime;
 			} else {
@@ -309,7 +311,7 @@ public class CandyUtils {
 		levelArray[TOTAL_DEATHS]+=candyEngine.deathCounter; // 9 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_BURNS]+=candyEngine.candyBurnedCounter; // 10 || WORKS EVEN IF QUIT
 
-		if (candyEngine.starsEarned>=1) {
+		if (candyEngine.starsEarned>=STARS1) {
 			levelArray[TOTAL_WINS]++; // 5 || WORKS EVEN IF QUIT
 		} else {
 			levelArray[TOTAL_QUITS]++; // 7 || WORKS EVEN IF QUIT
@@ -318,12 +320,12 @@ public class CandyUtils {
 
 
 		// Reset the WORLD line in the file to zero. || WORKS EVEN IF QUIT
-		for (int i=0;i<11;i++) {
+		for (int i=0;i<SAVE_SIZE;i++) {
 			masterArray[20][i]=0;
 		}
 		// Make it the sum of the other stats.
 		for (int i=0;i<20;i++) {
-			for (int j=0;j<11;j++) {
+			for (int j=0;j<SAVE_SIZE;j++) {
 				if (j==STATUS) {
 					// In the case of the stars, only accept unlocked level star counts.
 					masterArray[20][j]+=(masterArray[i][j]>0)?masterArray[i][j]:0;
@@ -365,7 +367,7 @@ public class CandyUtils {
 				}
 			}
 		}
-		return new int[21][11];
+		return new int[21][SAVE_SIZE];
 	}
 
 	public static void writeLines(final String filename, final int[][] lines, final Context context) {
@@ -383,11 +385,11 @@ public class CandyUtils {
 	private static String writeLinesHelper(final int[][] lines) {
 		final StringBuilder sb = new StringBuilder();
 		for (int[] line : lines) {
-			for (int i = 0; i <= 9; i++) {
+			for (int i = 0; i < SAVE_SIZE-1; i++) {
 				sb.append(line[i]);
 				sb.append(',');
 			}
-			sb.append(line[10]);
+			sb.append(line[SAVE_SIZE-1]);
 			sb.append('\n');
 		}
 		return sb.toString();

@@ -126,7 +126,6 @@ public class CandyEngine {
 	 */
 	int moves = 0;
 	int restarts = 0;
-//	private long startTime;
 	int enemiesDefeated = 0;
 	int starsEarned = 0;
 	long totalTime = 0;
@@ -198,7 +197,6 @@ public class CandyEngine {
 				death = true; deathCounter++;
 			case SQUARE_EMPTY:
 				botMoved = true;
-//				maybeStartTimer();
 				move(rowDirection, columnDirection, botIndex);
 				break;
 			case SQUARE_LASER_OCCUPIED:
@@ -212,7 +210,6 @@ public class CandyEngine {
 					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.INERTIA_WALL)) {
 						if (shouldDie) {death = true; deathCounter++;}
 						botMoved = true;
-//						maybeStartTimer();
 						move(rowDirection, columnDirection, botIndex, situationArray[OBJECT]);
 					}
 					break;
@@ -226,7 +223,6 @@ public class CandyEngine {
 						death = true; deathCounter++;
 					case SQUARE_EMPTY:
 						botMoved = true;
-//						maybeStartTimer();
 						teleport(candyLevel.teleporter2row + ROW_DOWN, candyLevel.teleporter2column, botIndex);
 						break;
 					}
@@ -236,7 +232,6 @@ public class CandyEngine {
 						death = true; deathCounter++;
 					case SQUARE_EMPTY:
 						botMoved = true;
-//						maybeStartTimer();
 						teleport(candyLevel.teleporter1row + ROW_UP, candyLevel.teleporter1column, botIndex);
 						break;
 					}
@@ -245,12 +240,6 @@ public class CandyEngine {
 			}
 			settle();
 		}
-
-//		private void maybeStartTimer() {
-//			if (moves == 0) {
-//				CandyEngine.this.startTime = System.currentTimeMillis();
-//			}
-//		}
 	}
 
 	private synchronized void move(final int rowDirection, final int columnDirection, final Integer... spriteIndexes) {
