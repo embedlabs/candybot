@@ -5,10 +5,7 @@ import org.anddev.andengine.opengl.texture.atlas.bitmap.source.AssetBitmapTextur
 import org.anddev.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSource;
 import org.anddev.andengine.ui.activity.BaseSplashActivity;
 
-import com.swarmconnect.Swarm;
-
 import android.app.Activity;
-import android.os.Bundle;
 
 public class SplashScreenActivity extends BaseSplashActivity {
 	// ================================================
@@ -21,25 +18,7 @@ public class SplashScreenActivity extends BaseSplashActivity {
 	// ================================================
 	// Methods from Super Classes/Interfaces
 	// ================================================
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    Swarm.setActive(this);
-	}
 
-	@Override
-	public void onResume() {
-	    super.onResume();
-	    Swarm.setActive(this);
-	}
-
-	@Override
-	public void onPause() {
-	    super.onPause();
-	    Swarm.setInactive(this);
-	}
-	
 	@Override
 	protected Class<? extends Activity> getFollowUpActivity() {
 		return nextActivity;

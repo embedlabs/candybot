@@ -15,6 +15,7 @@ public class StatisticsActivity extends ListActivity {
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setWindowAnimations(android.R.style.Animation);
 		setContentView(R.layout.stats);
 		((TextView) findViewById(R.id.stats_title)).setTypeface(CandyUtils.mainFont);
 		setListAdapter(new StatisticsAdapter(this, fetchStats()));

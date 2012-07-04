@@ -456,6 +456,11 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		super.onPause();
 		Swarm.setInactive(this);
 		totalTime += (System.currentTimeMillis() - referenceTime);
+		if (isFinishing()) {
+			candyEngine.totalTime = totalTime;
+			candyEngine.eliminateToasts.set(true);
+			CandyUtils.saveSettings(candyEngine);
+		}
 	}
 
 	@Override
@@ -490,15 +495,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public void onDestroy() {
 		super.onDestroy();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
-	}
-
-	@Override
-	public void finish() {
-		totalTime += (System.currentTimeMillis() - referenceTime);
-		candyEngine.totalTime = totalTime;
-		candyEngine.eliminateToasts.set(true);
-		CandyUtils.saveSettings(candyEngine);
-		super.finish();
 	}
 
 	@Override

@@ -9,9 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -35,9 +33,6 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.swarmconnect.SwarmAchievement;
-import com.swarmconnect.SwarmAchievement.GotAchievementsMapCB;
-
 
 public class CandyUtils {
 	public static final String TAG = "Candybot";
@@ -50,7 +45,7 @@ public class CandyUtils {
 	 * h: tutorial text
 	 * m: move requirement
 	 */
-	 
+
 	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel) {
 		try {
 			// Load the XML into a DOM.
@@ -145,14 +140,14 @@ public class CandyUtils {
 	}
 
 	//Set all achievements here. Id is the id in the spreadsheet I assigned. All backend is done.
-	public static void setAchievements(Context cont) {
-		if (CandyUtils.readLines("world1.cls", cont)[1-1][CandyUtils.STATUS] > 0) { 
+	public static void setAchievements(final Context cont) {
+		if (CandyUtils.readLines("world1.cls", cont)[1-1][CandyUtils.STATUS] > 0) {
 			if (MainMenuActivity.achievements != null) {
 				MainMenuActivity.achievements.get(2403).unlock();
 			}
 		}
 	}
-	
+
 	public static void setMainFont(final Typeface typeface, final TextView... views) { // changes font
 		mainFont = typeface;
 		for (TextView tv : views) {
@@ -284,10 +279,14 @@ public class CandyUtils {
 		 * WE WANT TO SEND THE FOLLOWING INFORMATION TO AFTERLEVELACTIVITY:
 		 * Stars
 		 * Moves
-		 * Times
+		 * Time
 		 * and if each of the above were improved or not.
 		 *
 		 */
+		final boolean starsImproved;
+		boolean movesImproved = false;
+		boolean timeImproved = false;
+
 		final String filename = "world" + candyEngine.candyLevel.world + ".cls"; // CandyLevelSave
 		final int[][] masterArray = readLines(filename,candyEngine.candyLevel);
 
@@ -299,6 +298,11 @@ public class CandyUtils {
 		int[] levelArray = masterArray[candyEngine.candyLevel.level-1];
 
 		// The new number of stars is the maximum between these two numbers (0) || WORKS EVEN IF QUIT
+		if (levelArray[STATUS]>=STARS1&&candyEngine.starsEarned>levelArray[STATUS]) {
+			starsImproved=true;
+		} else {
+			starsImproved=false;
+		}
 		levelArray[STATUS] = Math.max(levelArray[STATUS],candyEngine.starsEarned);
 
 		// Unlock the next level if there is one to unlock. || WORKS EVEN IF QUIT
@@ -313,6 +317,11 @@ public class CandyUtils {
 			if (levelArray[MIN_MOVES]==0) {
 				levelArray[MIN_MOVES]=candyEngine.moves;
 			} else {
+				if (candyEngine.moves<levelArray[MIN_MOVES]) {
+					movesImproved=true;
+				} else {
+					movesImproved=false;
+				}
 				levelArray[MIN_MOVES]=Math.min(levelArray[MIN_MOVES], candyEngine.moves);
 			}
 		}
@@ -322,6 +331,11 @@ public class CandyUtils {
 			if (levelArray[MIN_TIME_MILLIS]==0) {
 				levelArray[MIN_TIME_MILLIS]=(int)candyEngine.totalTime;
 			} else {
+				if (candyEngine.totalTime<levelArray[MIN_TIME_MILLIS]) {
+					timeImproved=true;
+				} else {
+					timeImproved=false;
+				}
 				levelArray[MIN_TIME_MILLIS]=(int)Math.min(levelArray[MIN_TIME_MILLIS], candyEngine.totalTime);
 			}
 		}
@@ -359,6 +373,16 @@ public class CandyUtils {
 
 		// Write the file back.
 		writeLines(filename,masterArray,candyEngine.candyLevel);
+
+		if (candyEngine.starsEarned>=STARS1) {
+			candyEngine.candyLevel.startActivity(new Intent(candyEngine.candyLevel,AfterLevelActivity.class)
+			.putExtra("com.embed.candy.stars", candyEngine.starsEarned)
+			.putExtra("com.embed.candy.starsImproved", starsImproved)
+			.putExtra("com.embed.candy.moves", candyEngine.moves)
+			.putExtra("com.embed.candy.movesImproved", movesImproved)
+			.putExtra("com.embed.candy.time", candyEngine.totalTime)
+			.putExtra("com.embed.candy.timeImproved", timeImproved));
+		}
 	}
 
 	public static int[][] readLines(final String filename,final Context context) {
