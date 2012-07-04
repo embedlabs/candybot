@@ -27,7 +27,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	TextView mainmenu_tv;
 	Button button_play, button_achieve;
 	ImageView iv_facebook, iv_twitter, my_swarm_button;
-
+	private boolean initSwarmBol; 
+	
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 
@@ -49,10 +50,11 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			CandyUtils.startTwitterActivity(this);
 			break;
 		case R.id.my_swarm_button:
-			Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
+			getPreferencesSwarm();
 			Swarm.showDashboard();
 			break;
 		case R.id.button_achieve:
+			getPreferencesSwarm();
 			Swarm.showAchievements();
 			break;
 		}
@@ -104,6 +106,16 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		}
 
 	};
+	
+	private void getPreferencesSwarm() {
+		final SharedPreferences sps = PreferenceManager.getDefaultSharedPreferences(this);
+		initSwarmBol = sps.getBoolean("pref_swarm", false);
+		if (initSwarmBol) {
+            if (! Swarm.isInitialized() ) {
+            	Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
+            }
+        }
+	}
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -123,6 +135,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
 		CandyUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
+		getPreferencesSwarm();
 
 	}
 
