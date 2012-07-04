@@ -66,8 +66,10 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 				final int stars = CandyUtils.readLines("world" + (position) + ".cls", this)[20][CandyUtils.STATUS];
 				if (stars<30) {
 					final Vibrator vib = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-					textToast((30-stars)+" more stars in World \""+getString(WorldAdapter.worldNameIDs[position-1])+"\" needed!");
+					textToast((30-stars)+" more stars in World \""+getString(WorldAdapter.worldNameIDs[position-1])+"\" needed! --- Temporarily unlocked by Shrav");
 					vib.vibrate(100);
+					startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
+					// This is to temp unlock
 				} else {
 					startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
 				}

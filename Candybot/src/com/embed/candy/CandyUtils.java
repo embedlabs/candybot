@@ -141,9 +141,54 @@ public class CandyUtils {
 
 	//Set all achievements here. Id is the id in the spreadsheet I assigned. All backend is done.
 	public static void setAchievements(final Context cont) {
-		if (CandyUtils.readLines("world1.cls", cont)[1-1][CandyUtils.STATUS] > 0) {
+		if (CandyUtils.readLines("world1.cls", cont)[0][CandyUtils.STATUS] > 0) {
 			if (MainMenuActivity.achievements != null) {
 				MainMenuActivity.achievements.get(2403).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world1.cls", cont)[5][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2405).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world1.cls", cont)[10][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2407).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world1.cls", cont)[15][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2409).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world2.cls", cont)[0][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2411).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world2.cls", cont)[5][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2413).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world2.cls", cont)[10][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2415).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world2.cls", cont)[14][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2417).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world3.cls", cont)[0][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2419).unlock();
+			}
+		}
+		if (CandyUtils.readLines("world3.cls", cont)[5][CandyUtils.STATUS] > 0) {
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2421).unlock();
 			}
 		}
 	}
