@@ -54,8 +54,7 @@ import android.widget.Toast;
 import com.swarmconnect.Swarm;
 
 @SuppressLint("NewApi")
-public class CandyLevelActivity extends LayoutGameActivity implements
-		ITMXTilePropertiesListener {
+public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePropertiesListener {
 	/**
 	 * Some important phone/game dimensions.
 	 */

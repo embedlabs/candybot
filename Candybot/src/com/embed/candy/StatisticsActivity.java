@@ -8,6 +8,8 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.swarmconnect.Swarm;
+
 public class StatisticsActivity extends ListActivity {
 
 	@Override
@@ -16,6 +18,7 @@ public class StatisticsActivity extends ListActivity {
 		setContentView(R.layout.stats);
 		((TextView) findViewById(R.id.stats_title)).setTypeface(CandyUtils.mainFont);
 		setListAdapter(new StatisticsAdapter(this, fetchStats()));
+		Swarm.setActive(this);
 	}
 
 	public String[] fetchStats() {
@@ -96,5 +99,17 @@ public class StatisticsActivity extends ListActivity {
 			temp += world[20][index];
 		}
 		return temp;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		Swarm.setActive(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		Swarm.setInactive(this);
 	}
 }
