@@ -279,6 +279,15 @@ public class CandyUtils {
 		 * 6: total time
 		 * 7: total quits
 		 */
+
+		/**
+		 * WE WANT TO SEND THE FOLLOWING INFORMATION TO AFTERLEVELACTIVITY:
+		 * Stars
+		 * Moves
+		 * Times
+		 * and if each of the above were improved or not.
+		 *
+		 */
 		final String filename = "world" + candyEngine.candyLevel.world + ".cls"; // CandyLevelSave
 		final int[][] masterArray = readLines(filename,candyEngine.candyLevel);
 
