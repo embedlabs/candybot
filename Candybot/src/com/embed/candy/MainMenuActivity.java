@@ -1,5 +1,8 @@
 package com.embed.candy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 
 import android.content.Context;
@@ -19,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.swarmconnect.Swarm;
+import com.swarmconnect.SwarmAchievement;
+import com.swarmconnect.SwarmAchievement.GotAchievementsMapCB;
 import com.swarmconnect.SwarmActiveUser;
 import com.swarmconnect.delegates.SwarmLoginListener;
 
@@ -31,6 +36,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
+	public static Map<Integer, SwarmAchievement> achievements = new HashMap<Integer, SwarmAchievement>();
 
 	private String theme;
 
@@ -59,6 +65,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			break;
 		}
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
@@ -78,34 +86,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		case R.id.menu_main_item_stats:
 			startActivity(new Intent(this, StatisticsActivity.class));
 			break;
-		}
-		return true;
+		} return true;
 	}
-
-	private SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
-
-		// This method is called when the login process has started
-		// (when a login dialog is displayed to the user).
-		@Override
-		public void loginStarted() {
-		}
-
-		// This method is called if the user cancels the login process.
-		@Override
-		public void loginCanceled() {
-		}
-
-		// This method is called when the user has successfully logged in.
-		@Override
-		public void userLoggedIn(final SwarmActiveUser user) {
-		}
-
-		// This method is called when the user logs out.
-		@Override
-		public void userLoggedOut() {
-		}
-
-	};
 	
 	private void getPreferencesSwarm() {
 		final SharedPreferences sps = PreferenceManager.getDefaultSharedPreferences(this);
@@ -136,7 +118,6 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
 		CandyUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
 		getPreferencesSwarm();
-
 	}
 
 	@Override
@@ -155,5 +136,20 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "MainMenu onDestroy()");
 	}
+	
+// Simplified Code that doesn't need changing
+	private SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
+		public void loginStarted() {}
+		public void loginCanceled() {}
+		public void userLoggedIn(final SwarmActiveUser user) {
+			 SwarmAchievement.getAchievementsMap(new GotAchievementsMapCB() {
+			        public void gotMap(Map<Integer, SwarmAchievement> achievementsMap) {
 
+			            // Store the map of achievements to be used later.
+			            achievements = achievementsMap;
+			        }
+			    });
+			}
+		public void userLoggedOut() {}
+	};
 }

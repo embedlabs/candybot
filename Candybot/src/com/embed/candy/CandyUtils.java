@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -33,12 +35,14 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.swarmconnect.SwarmAchievement;
+import com.swarmconnect.SwarmAchievement.GotAchievementsMapCB;
+
 
 public class CandyUtils {
 	public static final String TAG = "Candybot";
 	public static Typeface mainFont;
 	public static final boolean DEBUG = true;
-
 	/**
 	 * w: world
 	 * l: level
@@ -46,7 +50,7 @@ public class CandyUtils {
 	 * h: tutorial text
 	 * m: move requirement
 	 */
-
+	 
 	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel) {
 		try {
 			// Load the XML into a DOM.
@@ -140,6 +144,15 @@ public class CandyUtils {
 		}
 	}
 
+	//Set all achievements here. Id is the id in the spreadsheet I assigned. All backend is done.
+	public static void setAchievements(Context cont) {
+		if (CandyUtils.readLines("world1.cls", cont)[1-1][CandyUtils.STATUS] > 0) { 
+			if (MainMenuActivity.achievements != null) {
+				MainMenuActivity.achievements.get(2403).unlock();
+			}
+		}
+	}
+	
 	public static void setMainFont(final Typeface typeface, final TextView... views) { // changes font
 		mainFont = typeface;
 		for (TextView tv : views) {
