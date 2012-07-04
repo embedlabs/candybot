@@ -46,9 +46,7 @@ public class CandyAchievements {
 	public static void unlockHelper(final int achievementInt) {
 		final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
 		if (achievement != null) {
-			if (!achievement.unlocked) {
 				achievement.unlock();
-			}
 		}
 	}
 }
