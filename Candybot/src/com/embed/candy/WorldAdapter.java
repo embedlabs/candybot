@@ -2,9 +2,6 @@ package com.embed.candy;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,16 +58,8 @@ public class WorldAdapter extends BaseAdapter {
 		iv.setBackgroundResource(imageIDs[position]);
 		if (position!=0) {
 			if (CandyUtils.readLines("world" + (position) + ".cls", context)[20][CandyUtils.STATUS]<30) { // 30 stars to unlock next world
-				iv.setBackgroundDrawable(convertToGrayscale(iv.getBackground()));
+				iv.setBackgroundDrawable(CandyUtils.convertToGrayscale(iv.getBackground()));
 			}
 		}
-	}
-
-	public Drawable convertToGrayscale(final Drawable d) {
-		ColorMatrix matrix = new ColorMatrix();
-	    matrix.setSaturation(0);
-	    ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-	    d.setColorFilter(filter);
-	    return d;
 	}
 }

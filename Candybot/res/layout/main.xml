@@ -47,7 +47,7 @@
 		<Button
 			android:id="@+id/button_achieve"
 			style="@style/menuButton"
-			android:layout_width="wrap_content"
+			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="7dip"
 			android:focusable="true"

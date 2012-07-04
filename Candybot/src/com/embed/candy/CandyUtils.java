@@ -25,7 +25,10 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -136,60 +139,6 @@ public class CandyUtils {
 		} catch (Exception e) {
 			if (CandyUtils.DEBUG) Log.e(TAG, "Failed to load TMX, loading default.", e);
 			return new ByteArrayInputStream("H4sIAAAAAAAAA2NkYGBgpDGmFRg1f9R8aptPzXQ9HMNn1PxR80k1n5qYCYiZkfgAkQjLUsAGAAA=".getBytes());
-		}
-	}
-
-	//Set all achievements here. Id is the id in the spreadsheet I assigned. All backend is done.
-	public static void setAchievements(final Context cont) {
-		if (CandyUtils.readLines("world1.cls", cont)[0][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2403).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world1.cls", cont)[5][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2405).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world1.cls", cont)[10][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2407).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world1.cls", cont)[15][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2409).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world2.cls", cont)[0][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2411).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world2.cls", cont)[5][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2413).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world2.cls", cont)[10][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2415).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world2.cls", cont)[14][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2417).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world3.cls", cont)[0][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2419).unlock();
-			}
-		}
-		if (CandyUtils.readLines("world3.cls", cont)[5][CandyUtils.STATUS] > 0) {
-			if (MainMenuActivity.achievements != null) {
-				MainMenuActivity.achievements.get(2421).unlock();
-			}
 		}
 	}
 
@@ -348,7 +297,9 @@ public class CandyUtils {
 		} else {
 			starsImproved=false;
 		}
-		levelArray[STATUS] = Math.max(levelArray[STATUS],candyEngine.starsEarned);
+		if (candyEngine.starsEarned>=STARS1) {
+			levelArray[STATUS] = Math.max(levelArray[STATUS],candyEngine.starsEarned);
+		}
 
 		// Unlock the next level if there is one to unlock. || WORKS EVEN IF QUIT
 		if (candyEngine.candyLevel.level!=20 && candyEngine.starsEarned>=1) {
@@ -426,7 +377,10 @@ public class CandyUtils {
 			.putExtra("com.embed.candy.moves", candyEngine.moves)
 			.putExtra("com.embed.candy.movesImproved", movesImproved)
 			.putExtra("com.embed.candy.time", candyEngine.totalTime)
-			.putExtra("com.embed.candy.timeImproved", timeImproved));
+			.putExtra("com.embed.candy.timeImproved", timeImproved)
+			.putExtra("com.embed.candy.world", candyEngine.candyLevel.world)
+			.putExtra("com.embed.candy.level", candyEngine.candyLevel.level)
+			.putExtra("com.embed.candy.theme", candyEngine.candyLevel.theme));
 		}
 	}
 
@@ -484,5 +438,13 @@ public class CandyUtils {
 			sb.append('\n');
 		}
 		return sb.toString();
+	}
+
+	public static Drawable convertToGrayscale(final Drawable d) {
+		ColorMatrix matrix = new ColorMatrix();
+	    matrix.setSaturation(0);
+	    ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+	    d.setColorFilter(filter);
+	    return d;
 	}
 }
