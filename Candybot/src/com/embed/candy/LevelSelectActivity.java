@@ -54,7 +54,8 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 				if (CandyUtils.DEBUG) Log.w(CandyUtils.TAG,"Code should not reach here, CSV should have taken care of this maybe after a while or something.");
 				startLevel(position);
 			} else {
-				textToast("Level not unlocked!");
+				textToast("Level not unlocked! -- Temporarily unlocked for coding - Shrav :)");
+				startLevel(position); // Comment this out to relock
 				vib.vibrate(100);
 			}
 			break;
