@@ -541,6 +541,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	@Override
 	public void onDestroy() {
+		backgroundMusic.stop();
 		super.onDestroy();
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
