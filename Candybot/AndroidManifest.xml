@@ -58,13 +58,13 @@
 			android:configChanges="keyboard|keyboardHidden|orientation"
 			android:label="@string/app_name"
 			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+			android:theme="@style/Theme.NoBackground" />
 		<activity
 			android:name="com.embed.candy.LevelSelectActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"
 			android:label="@string/app_name"
 			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+			android:theme="@style/Theme.NoBackground" />
 		<activity
 			android:name="com.embed.candy.CandyPreferenceActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"
@@ -76,7 +76,7 @@
 			android:configChanges="keyboard|keyboardHidden|orientation"
 			android:label="@string/app_name"
 			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+			android:theme="@style/Theme.NoBackground" />
 		<activity
 			android:name="com.embed.candy.AfterLevelActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"
