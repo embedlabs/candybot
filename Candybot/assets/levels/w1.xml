@@ -4,7 +4,7 @@
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRg1f9R8aptPzXQ9HMNn1PxR80k1n5qYCYiZkfgAkQjLUsAGAAA=</c>
 		<o n="1" r="7" c="8" />
 		<o n="2" r="7" c="7" />
-		<t>Help the Candybot push the candy&#10;into the pipe! Drag the&#10;screen in the direction&#10;you wish to move.</t>
+		<t>Help the Candybot push the candy into the pipe! Drag the screen in the direction you wish to move.</t>
 		<m a="23" b="27" /> <!-- None for a, four for b -->
 	</l>
 	<l id="2">
@@ -12,21 +12,21 @@
 		<o n="1" r="2" c="12" />
 		<o n="2" r="2" c="11" />
 		<m a="91" b="95" /> <!-- Two for a, six for b -->
-		<t>Try and complete each level in the&#10;least amount of moves.&#10;The lesser moves you make,&#10;the more stars you will receive&#10;on each level.</t>
+		<t>Try and complete each level in the least amount of moves. The lesser moves you make, the more stars you will receive on each level.</t>
 	</l>
 	<l id="3">
 	    <c>H4sIAAAAAAAAA8VTQQ7AIAjD+f8/b5clhpRS2NyaEIwppSoOMxsfhLl8rxUwDbS/Zs/1daz2L//IW6Tb7VFFR5v1U/ioR8f7qq9qV87F3gHN21OwWc78qZwdvpEH1bv6XzP9N9GZmWidzVLHT4Wv3mmkE+VKHFfMYs0JPJqpmsAGAAA=</c>
 		<o n="1" r="1" c="11" />
 		<o n="2" r="1" c="12" />
 		<m a="58" b="62" /> <!-- Two for a, six for b -->
-		<t>You may wish to change various&#10;preferences including sensitivity&#10;and zooming options. These&#10;may be accessed by going into the&#10;options menu on the home screen.</t>
+		<t>You may wish to change various preferences including sensitivity and zooming options. These may be accessed by going into the options menu on the home screen.</t>
 	</l>
 	<l id="4">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+bj8RIr/B1P4kGI3PrWkmEEOICa80MVICV96hz8udxErTsjvlLoVmxg9zCcmjSHnI2xm4gs/Ut1JbP4gNh6JsRNdPzbzyQWUpB9K7KdW/YGMmYCYGYkPADZ6hBDABgAA</c>
 		<o n="1" r="2" c="12" />
 		<o n="2" r="2" c="11" />
 		<m a="90" b="96" /> <!-- Two for a, eight for b -->
-		<t>Every few levels will introduce&#10;a new object. This help text will&#10;explain it to you. Good luck,&#10;and have fun!</t>
+		<t>Every few levels will introduce a new object. This help text will explain it to you. Good luck, and have fun!</t>
 	</l>
 	<l id="5">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRhI86kRBvR2P7nxgksfIXOItYPY8CE1vAdT+ONzCy4xauUvcv2Iz73ofsMmTq752NSRA3CFP640hU2MUPomxf2k+oPYtEtOHsFlPjXzAzl1BSHMBMTMSHwAq0EXYcAGAAA=</c>
@@ -43,7 +43,7 @@
 		<o n="3" r="1" c="15" />
 		<o n="3" r="7" c="15" />
 		<m a="94" b="98" /> // <!-- Four for a, eight for b -->
-		<t>A box can be used to fill in gaps&#10;to allow the Candybot to push&#10;the candy into the pipe. Make sure&#10;it doesn't get stuck somewhere! </t>
+		<t>A box can be used to fill in gaps to allow the Candybot to push the candy into the pipe. Make sure it doesn't get stuck somewhere! </t>
 	</l>
 	<l id="7">
 	    <c>H4sIAAAAAAAAA91SWwqAMAxrlQnC7n9e9a8E08fEBwbCClnSdkxFRG+mB6ZnvQo19m3E24zGvFgvhph/1tdqq+Fovsi38733j/Kj92fI5DM8Of9xdsNqPs79x/w3/g/mVr0VjnjQG82avZ/d8QrYLtPO2dEr3AAU4SjvwAYAAA==</c>
@@ -108,7 +108,7 @@
 		<o n="4" r="2" c="20" />
 		<o n="4" r="5" c="5" />
 		<m a="154" b="160" /> <!-- Six for a, twelve for b || pretty sure about this one, did it hella efficiently -->
-		<t>Bombs can clear walls and objects to&#10;create a path for the candy.&#10;To activate a bomb, push it onto&#10;a block, and it will take out&#10;the block directly underneath it.&#10; Blocks will not destroy moveable objects.</t>
+		<t>Bombs can clear walls and objects to create a path for the candy. To activate a bomb, push it onto a block, and it will take out the block directly underneath it.  Blocks will not destroy moveable objects.</t>
 	</l>
 	<l id="12">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+aT6dTiGD7H+xCVOjv9JdT8jGk2MelxuRhdDN59QGKCrI9Y9uNyCz/3UTkuU5nVapX9K4hefPK54ptR8fPYRcgcxaikF9Cp/qI2ZgJgZygYAnp8u2sAGAAA=</c>
@@ -150,7 +150,7 @@
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<m a="76" b="78" /> <!-- Two for a, four for b || straightforward -->
-		<t>These lasers will allow any and all items&#10;including candy to pass through.&#10;However, the Candybot may not&#10;pass through. Sudden death will occur&#10;if done so.</t>
+		<t>These lasers will allow any and all items including candy to pass through. However, the Candybot may not pass through. Sudden death will occur if done so.</t>
 	</l>
 	<l id="17">
 	    <c>H4sIAAAAAAAAC8VSAQqAIBDTMv//ZBM8kKFuZ0UHg+DutrYzhhDix2BVZ5I4i3tsp/Zz489OjZ5/puXl/zMfVdf0EtlZZcL+S6kn/KpPxMhzn8cMI82V/kU8KKXwK+9Nve+Ix+vD+/6R37OLt8AezpiegdXOfWPrYa4qP/Nv3Hh/lZ/53snnbRw3zvZdALfrs+bABgAA</c>
@@ -203,6 +203,6 @@
 		<o n="4" r="3" c="9" />
 		<o n="4" r="4" c="4" />
 		<!-- Author (Anshul) needs to show correct least moves way -->
-		<t>Achievements are given throughout the game&#10;on a variety of levels. See if&#10;you can get all of them!</t>
+		<t>Achievements are given throughout the game on a variety of levels. See if you can get all of them!</t>
 	</l>
 </w>

@@ -7,7 +7,7 @@
 		<o n="5" r="9" c="20" />
 		<o n="5" r="13" c="13" />
 		<o n="2" r="8" c="11" />
-		<t>An enemy will move in your direction&#10;every time you take a move.&#10;Try to trap the enemy, because if&#10;they occupy the same space as you,&#10;you will have to restart the level.</t>
+		<t>An enemy will move in your direction every time you take a move. Try to trap the enemy, because if they occupy the same space as you, you will have to restart the level.</t>
 	</l>
 	<l id="2">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+bTyC6VmEnIXuhyp/iFGnp7upzYgJzwIuRedJsX96PopMR+bOLHhjct8aufvwRa/5JpPjDpqm09uGiPVfEoAreoTJiBmhrIBDYoj+MAGAAA=</c>
@@ -21,7 +21,7 @@
 		<o n="1" r="2" c="3" />
 		<o n="5" r="7" c="22" />
 		<o n="2" r="2" c="2" />
-		<t>Not all objects in every level can be&#10;or should be used. Only use&#10;the objects that are absolutely&#10;necessary to reduce your total moves&#10;on each level.</t>
+		<t>Not all objects in every level can be or should be used. Only use the objects that are absolutely necessary to reduce your total moves on each level.</t>
 	</l>
 	<l id="4">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaC3+dQOD2x8arh5IM2nNN4H2v3ocqTaSS3341JLjvmk5MvBEv60Mp9czATEzDQ0n5jygdqAXubTEgMAiO267cAGAAA=</c>
@@ -57,7 +57,7 @@
 		<o n="6" r="6" c="16" />
 		<o n="6" r="6" c="21" />
 		<o n="6" r="7" c="19" />
-		<t>A moveable wall acts just like a box,&#10;but is not subject to gravity!&#10;Use it to your advantage.</t>
+		<t>A moveable wall acts just like a box, but is not subject to gravity! Use it to your advantage.</t>
 	</l>
 	<l id="7">
 	    <c>H4sIAAAAAAAAC82UUQrAIAxD6wbe/8jbwA8JaZtuIhMCFvWl1Gozs7ZB88AY1x71IXYe9yp85KI8jsKPuMynwq+w0YPxWczq4MUVPstd4XdgZ/xq/f/GV2tRrQ96ZG9UuV8znx95qP2DfObx9n15frgW9SI7Ux3R37iC/yWPrEcyRfxVOm6dY34BPpo9ncAGAAA=</c>
@@ -77,7 +77,7 @@
 	    <c>H4sIAAAAAAAAC7WV3QqAIAyFZ+WF7//CGiSNw3GbigdGy+hzf2ISkXTYmN710uwBK+obPpm/ys+DfdCP5MLk8b34PY3qxOLX/1imhazZ+ke0Mz8olgubAdbbSD1mhPWJ5FEGPlOWf76SerdiQb6VJ/J3+9zVGcifjU/zWIy78+nVn+2J58xiRWcM+Su9jPJP6NR9cjW7P78CXM6jKsAGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
-		<t>Ice walls cause objects and candy to&#10;slip all the way until they reach&#10;a non-ice block. Make sure you&#10;know where the candy or object&#10;will end up before pushing it onto&#10;one of these walls.</t>
+		<t>Ice walls cause objects and candy to slip all the way until they reach a non-ice block. Make sure you know where the candy or object will end up before pushing it onto one of these walls.</t>
 	</l>
 	<l id="12">
 	    <c>H4sIAAAAAAAAC7WUgQqAMAhEtdpg///DFShcYubWJojDxvkmJhMRL/YV1pL6eIdNLmJc8SYWbqI8/6hFrE38gLM6v+SI+vhRi6WWRq2tuZLkt/ULxPtbdfTrD/4KUd32rCT4sReov5p/dv/tfBR69iI7Pxij+fe4MvdQO+q/x/MV7Tsy+yejHfF7zL3m/Ucz98/IDh317fJdzieBwUh2wAYAAA==</c>
@@ -117,7 +117,7 @@
 	    <c>H4sIAAAAAAAAC61U0Q6AIAiEstX/f3E92MbYAYfFxjI5z1NAFRH96BeBOSS2Y3oHb7Fjfiv8IPEWo2bO/iM84vX3gGIdi/CRro6eP/grUzfO7pfhR7XW0cLk169Z4Y9i0Zmz/Kye912fGerFaH+W3875XmT1szXre7Gbz06P+vph9Hb0rNZn9Q4hftaY9xnt6f0s4plvj+9zfAOam7VhwAYAAA==</c>
 		<o n="1" r="2" c="4" />
 		<o n="2" r="2" c="3" />
-		<t>Use teleporters by simply placing an&#10;object on top of the "In" teleporter&#10;and it will come out of the "Out"&#10;teleporter. Moveable walls and inertia&#10;walls can't be teleported.</t>
+		<t>Use teleporters by simply placing an object on top of the "In" teleporter and it will come out of the "Out" teleporter. Moveable walls and inertia walls can't be teleported.</t>
 	</l>
 	<l id="17">
 	    <c>H4sIAAAAAAAAC82U3QqAMAiFXUH1/k+8goIh5/izeZEga02/eWTYRKQt+uWcR+yJOwaP5M3wxzXKj+hi9Vt9yNTvsaz4CtYMX4zzv/OzHMRDexH8dtB/zUF5FXxmTA+rw9KOYqv6zyxzj46L5Ol46249G/Te6yHr+7fq2YZmnfd+mL5M/Sj/BBpXfLt9f787Zy5WYMAGAAA=</c>
