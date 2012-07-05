@@ -51,14 +51,10 @@ public class CandyAchievements {
 		// STARS EARNED
 		final int stars = statisticObtainer(worlds, CandyUtils.STATUS);
 
-		// ACHIEVEMENTS AWARDED
-		// TODO
 
 		// NUMBER OF DEATHS
 		final int deaths = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS);
 
-		// CANDIES BURNED
-		final int burned = statisticObtainer(worlds, CandyUtils.TOTAL_BURNS);
 
 		// ENEMIES DEFEATED
 		final int enemies = statisticObtainer(worlds, CandyUtils.TOTAL_DEFEATED);
@@ -66,7 +62,7 @@ public class CandyAchievements {
 		return stats.toArray(new String[stats.size()]);
 	}
 	
-	public int statisticObtainer(final List<int[][]> worlds, final int index) {
+	public static int statisticObtainer(final List<int[][]> worlds, final int index) {
 		int temp = 0;
 		for (int[][] world : worlds) {
 			temp += world[20][index];
@@ -139,6 +135,16 @@ public class CandyAchievements {
 				}
 			}
 			
+			// 16-18 (level restarts)
+			
+			// laser kills/candy melts/enemy kills
+			final int burned = statisticObtainer(worlds, CandyUtils.TOTAL_BURNS);
+			if (burned > 0) {
+				unlockHelper(2599);
+			}
+			if (burned >= 5) {
+				unlockHelper(2601);
+			}
 			
 		}
 			

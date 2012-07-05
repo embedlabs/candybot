@@ -343,7 +343,7 @@ public class CandyUtils {
 		levelArray[TOTAL_DEFEATED]+=candyEngine.enemiesDefeated; // 4 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_DEATHS]+=candyEngine.deathCounter; // 9 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_BURNS]+=candyEngine.candyBurnedCounter; // 10 || WORKS EVEN IF QUIT
-
+		
 		if (candyEngine.starsEarned>=STARS1) {
 			levelArray[TOTAL_WINS]++; // 5 || WORKS EVEN IF QUIT
 		} else {
