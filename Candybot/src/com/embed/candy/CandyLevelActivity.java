@@ -118,11 +118,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public boolean gameStarted = false;
 	private boolean resumeHasRun = false;
 	public boolean resetDragDistance = false;
-<<<<<<< HEAD
-=======
+
 	public boolean initMusic = false;
 	private CandyLevelActivity candyLevel = this;
->>>>>>> Added Music YIPPIE!
 
 	private ChangeableText playChangeableText;
 	private Text resetLevelText;
@@ -165,12 +163,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		world = getIntent().getIntExtra("com.embed.candy.world", 0);
 		level = getIntent().getIntExtra("com.embed.candy.level", 0);
 		theme = getIntent().getStringExtra("com.embed.candy.theme");
-<<<<<<< HEAD
 
-
-=======
-		
->>>>>>> Added Music YIPPIE!
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality", "2"));
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", false);
@@ -181,13 +174,11 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
 
-<<<<<<< HEAD
-=======
+
 	public CandyLevelActivity getCandyLevel() {
 		return candyLevel;
 	}
 
->>>>>>> Added Music YIPPIE!
 	@SuppressWarnings("deprecation")
 	@Override
 	public Engine onLoadEngine() {
