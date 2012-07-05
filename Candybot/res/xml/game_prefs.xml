@@ -10,6 +10,10 @@
             android:key="com.embed.candy.general_zoom"
             android:title="@string/pref_general_zoom"
             android:summary="@string/pref_general_zoom_summary" />
+        <CheckBoxPreference android:defaultValue="true"
+            android:key="com.embed.candy.general_toasts"
+            android:title="@string/pref_general_toasts"
+            android:summary="@string/pref_general_toasts_summary" />
         <com.embed.candy.CandySliderPreference
             android:key="com.embed.candy.general_sensitivity"
             android:defaultValue="50"

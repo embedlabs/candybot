@@ -134,6 +134,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public SharedPreferences sp;
 	public int qualityInt;
 	public boolean zoomBoolean;
+	public boolean toastBoolean;
 
 	private long totalTime = 0;
 	private long referenceTime;
@@ -158,6 +159,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality", "2"));
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", false);
+		toastBoolean = sp.getBoolean("com.embed.candy.general_toasts", true);
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
@@ -449,7 +451,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			} else {
 				gameStarted = true;
 			}
-			if (helpToastText!=null) {
+			if (helpToastText!=null && toastBoolean) {
 				final LayoutInflater li = getLayoutInflater();
 				TextView tv = (TextView)li.inflate(R.layout.game_toast, (ViewGroup)findViewById(R.id.tv_game_toast));
 				tv.setText(helpToastText);

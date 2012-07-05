@@ -29,6 +29,8 @@
     <string name="pref_swarm_summary">Use swarm\'s social features, earn achievements, and save your scores.</string>
     <string name="pref_general_zoom">Zoom</string>
     <string name="pref_general_zoom_summary">Zoom in at the beginning of each level.</string>
+    <string name="pref_general_toasts">In-Game Help</string>
+    <string name="pref_general_toasts_summary">Show game hint toasts at the start of each level.</string>
     <string name="pref_general_sensitivity">Sensitivity</string>
     <string name="pref_general_sensitivity_summary">How sensitive the finger controls are.</string>
     <string name="pref_general_sensitivity_dialog">The higher the sensitivity, the less you will have to drag your finger to move the Candybot.</string>
