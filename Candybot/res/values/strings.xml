@@ -25,16 +25,18 @@
     <string name="font_location">fonts/UbuntuTitling-Bold.ttf</string>
     
     <string name="pref_category_general">General</string>
+    <string name="pref_category_audio">Audio</string>
+    <string name="pref_category_controls">Controls</string>
     <string name="pref_swarm">Swarm</string>
     <string name="pref_swarm_summary">Use swarm\'s social features, earn achievements, and save your scores.</string>
     <string name="pref_music">Music</string>
-    <string name="pref_music_summary">Play music in the game. Disable to play your own music.</string>
+    <string name="pref_music_summary">Play music in the game. Disables playing your own music.</string>
     <string name="pref_mfx">Sound Effects</string>
     <string name="pref_mfx_summary">Play sound effects in the game.</string>
     <string name="pref_general_zoom">Zoom</string>
     <string name="pref_general_zoom_summary">Zoom in at the beginning of each level.</string>
     <string name="pref_general_toasts">In-Game Help</string>
-    <string name="pref_general_toasts_summary">Show game hint toasts at the start of each level.</string>
+    <string name="pref_general_toasts_summary">Show game tips and tutorials at the start of each level.</string>
     <string name="pref_general_sensitivity">Sensitivity</string>
     <string name="pref_general_sensitivity_summary">How sensitive the finger controls are.</string>
     <string name="pref_general_sensitivity_dialog">The higher the sensitivity, the less you will have to drag your finger to move the Candybot.</string>
@@ -65,6 +67,7 @@
     <string name="dialog_about_title">About Embed Labs</string>
     <string name="dialog_about_button">Return</string>
 	<string name="dialog_about_message">Candybot by Embed Labs is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.\n\nwww.embedlabs.com\nMade by Prem Qu Nair, Shrav Mehta, Anshul Ramachandran, Ameya Khare, and Tej Qu Nair. \n\nMade with the help of AndEngine for Android. http://www.andengine.org/\n\nhttp://www.fontsquirrel.com/license/Ubuntu-Title\n</string>
+	<!-- TODO add picture licenses, music licenses, sound effect licenses -->
     <string name="dialog_restoring">Restoring&#8230;</string>
 	
 	<string name="world1">Cheesecake</string>
