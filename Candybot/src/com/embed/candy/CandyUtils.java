@@ -49,6 +49,7 @@ public class CandyUtils {
 	 * o: object
 	 * h: tutorial text
 	 * m: move requirement
+	 * t: more tutorial text except in Toast form
 	 */
 
 	public static void parseLevelObjectsFromXml(final CandyLevelActivity candyLevel) {
@@ -237,8 +238,6 @@ public class CandyUtils {
 		aboutBuilder.show();
 	}
 
-	// CandyEngine.moves + "\n Restarts: " + CandyEngine.restarts
-
 	public static final int STATUS = 0;
 	public static final int MIN_MOVES = 1;
 	public static final int TOTAL_MOVES = 2;
@@ -386,10 +385,10 @@ public class CandyUtils {
 		}
 	}
 
-	public static int[][] readLines(final String filename,final Context context) {
+	public static int[][] readLines(final InputStream is) {
 		BufferedReader bufferedReader = null;
 		try {
-			bufferedReader = new BufferedReader(new InputStreamReader(context.getApplicationContext().openFileInput(filename)));
+			bufferedReader = new BufferedReader(new InputStreamReader(is));
 			final List<int[]> lines = new ArrayList<int[]>();
 			String line = null;
 			while ((line = bufferedReader.readLine()) != null) {
@@ -401,8 +400,6 @@ public class CandyUtils {
 				lines.add(intArray);
 			}
 			return lines.toArray(new int[lines.size()][]);
-		} catch (FileNotFoundException e) {
-			if (CandyUtils.DEBUG) Log.w(TAG, "Unable to find level completion info file!");
 		} catch (IOException e) {
 			if (CandyUtils.DEBUG) Log.e(TAG, "Error opening level completion info file!");
 		} finally {
@@ -417,6 +414,18 @@ public class CandyUtils {
 		return new int[21][SAVE_SIZE];
 	}
 
+	public static int[][] readLines(final String filename,final Context context) {
+		try {
+			return readLines(context.getApplicationContext().openFileInput(filename));
+		} catch (FileNotFoundException e) {
+			return new int[21][SAVE_SIZE];
+		}
+	}
+
+	public static int[][] readLines(final String data) {
+		return readLines(new ByteArrayInputStream(data.getBytes()));
+	}
+
 	public static void writeLines(final String filename, final int[][] lines, final Context context) {
 		try {
 			final String contents = writeLinesHelper(lines);
@@ -427,7 +436,7 @@ public class CandyUtils {
 			bw.close();
 
 			if (Swarm.isLoggedIn()) {
-			    Swarm.user.saveCloudData(filename, contents);
+			    Swarm.user.getCloudData(filename, new BackupCB(filename,lines));
 			}
 
 			if (CandyUtils.DEBUG) Log.i(TAG,"Output to "+filename+":\n"+writeLinesHelper(lines));
@@ -436,7 +445,7 @@ public class CandyUtils {
 		}
 	}
 
-	private static String writeLinesHelper(final int[][] lines) {
+	public static String writeLinesHelper(final int[][] lines) {
 		final StringBuilder sb = new StringBuilder();
 		for (int[] line : lines) {
 			for (int i = 0; i < SAVE_SIZE-1; i++) {

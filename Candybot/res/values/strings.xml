@@ -20,6 +20,7 @@
     <string name="menu_main_preferences">Preferences</string>
     <string name="menu_main_about">About</string>
     <string name="menu_main_stats">Statistics</string>
+    <string name="menu_main_restore">Restore Progress from Swarm</string>
     
     <string name="font_location">fonts/UbuntuTitling-Bold.ttf</string>
     
@@ -58,6 +59,7 @@
     <string name="dialog_about_title">About Embed Labs</string>
     <string name="dialog_about_button">Return</string>
 	<string name="dialog_about_message">Candybot by Embed Labs is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.\n\nwww.embedlabs.com\nMade by Prem Qu Nair, Shrav Mehta, Anshul Ramachandran, Ameya Khare, and Tej Qu Nair. \n\nMade with the help of AndEngine for Android. http://www.andengine.org/\n\nhttp://www.fontsquirrel.com/license/Ubuntu-Title\n</string>
+    <string name="dialog_restoring">Restoring...</string>
 	
 	<string name="world1">Cheesecake</string>
 	<string name="world2">Apple Pie</string>
@@ -83,4 +85,8 @@
     <string name="button_next_level">Next Level</string>
     <string name="button_return_al">Return to World</string>
     <string name="improved">(Improved!)</string>
+    
+    <string name="incomplete">Restore incomplete. Not all data received.</string>
+    <string name="login">You are not currently logged into Swarm.</string>
+    <string name="swarm_disabled">Swarm is currently disabled.</string>
 </resources>

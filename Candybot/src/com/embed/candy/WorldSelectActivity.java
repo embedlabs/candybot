@@ -28,6 +28,8 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 
 	Toast mToast;
 
+	int selectedIndex = 0;
+
 	@SuppressLint("ShowToast")
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -90,6 +92,13 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 		super.onResume();
 		wa = new WorldAdapter(this);
 		world_g.setAdapter(wa);
+		world_g.setSelection(selectedIndex, false);
+	}
+
+	@Override
+	public void onPause() {
+		selectedIndex = world_g.getSelectedItemPosition();
+		super.onPause();
 	}
 
 	@Override

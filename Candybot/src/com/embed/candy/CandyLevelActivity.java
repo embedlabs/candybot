@@ -446,8 +446,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			} else {
 				gameStarted = true;
 			}
-			final Toast t = Toast.makeText(getApplicationContext(), helpToastText, Toast.LENGTH_SHORT);
-			ExtendedToast.showUntilDone(t, candyEngine.eliminateToasts);
+			if (helpToastText!=null) {
+				final Toast t = Toast.makeText(getApplicationContext(), helpToastText, Toast.LENGTH_SHORT);
+				ExtendedToast.showUntilDone(t, candyEngine.eliminateToasts);
+			}
 		}
 	    referenceTime = System.currentTimeMillis();
 	}

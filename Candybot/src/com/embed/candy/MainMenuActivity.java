@@ -5,12 +5,15 @@ import java.util.Map;
 
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,11 +23,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.swarmconnect.Swarm;
 import com.swarmconnect.SwarmAchievement;
 import com.swarmconnect.SwarmAchievement.GotAchievementsMapCB;
 import com.swarmconnect.SwarmActiveUser;
+import com.swarmconnect.SwarmActiveUser.GotCloudDataCB;
 import com.swarmconnect.delegates.SwarmLoginListener;
 
 public class MainMenuActivity extends BetterSwarmActivity implements View.OnClickListener {
@@ -32,13 +37,20 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	TextView mainmenu_tv;
 	Button button_play, button_achieve;
 	ImageView iv_facebook, iv_twitter, my_swarm_button;
-	private boolean initSwarmBol; 
-	
+	private boolean initSwarmBool;
+
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
+
+	@SuppressLint("UseSparseArrays")
 	public static Map<Integer, SwarmAchievement> achievements = new HashMap<Integer, SwarmAchievement>();
 
 	private String theme;
+
+	ProgressDialog pd;
+
+	volatile int count = 0;
+	boolean incomplete = false;
 
 	@Override
 	public void onClick(final View view) {
@@ -57,16 +69,22 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			break;
 		case R.id.my_swarm_button:
 			getPreferencesSwarm();
-			Swarm.showDashboard();
+			if (initSwarmBool) {
+				Swarm.showDashboard();
+			} else {
+				Toast.makeText(this,R.string.swarm_disabled,Toast.LENGTH_SHORT).show();
+			}
 			break;
 		case R.id.button_achieve:
 			getPreferencesSwarm();
-			Swarm.showAchievements();
+			if (initSwarmBool) {
+				Swarm.showAchievements();
+			} else {
+				Toast.makeText(this,R.string.swarm_disabled,Toast.LENGTH_SHORT).show();
+			}
 			break;
 		}
 	}
-	
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu menu) {
@@ -86,13 +104,67 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		case R.id.menu_main_item_stats:
 			startActivity(new Intent(this, StatisticsActivity.class));
 			break;
-		} return true;
+		case R.id.menu_main_item_restore:
+			if (Swarm.isLoggedIn()) {
+				restoreData();
+			} else {
+				Toast.makeText(this, R.string.login, Toast.LENGTH_SHORT).show();
+			}
+		}
+		return true;
 	}
-	
+
+	public void restoreData() {
+		pd = ProgressDialog.show(this, null, getString(R.string.dialog_restoring), true, false);
+		final Handler h = new Handler();
+		new Thread() {
+			@Override
+			public void run() {
+				for (int i = 0; i <= 5; i++) {
+					final String filename = "world" + i + ".cls";
+					Swarm.user.getCloudData(filename, new GotCloudDataCB() {
+						@Override
+						public void gotData(final String data) {
+							if (data == null) {
+								count++;
+								incomplete=true;
+								return;
+							}
+							if (data.length() == 0) {
+								count++;
+								return;
+							}
+							CandyUtils.writeLines(filename, BackupCB.merge(CandyUtils.readLines(filename, MainMenuActivity.this), CandyUtils.readLines(data)), MainMenuActivity.this);
+							count++;
+						}
+					});
+				}
+				while (count < 5) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {}
+				}
+				h.post(new Runnable() {
+					@Override
+					public void run() {
+						count = 0;
+						if (pd != null) {
+							pd.dismiss();
+						}
+						if (incomplete) {
+							incomplete = false;
+							Toast.makeText(MainMenuActivity.this, R.string.incomplete, Toast.LENGTH_SHORT).show();
+						}
+					}
+				});
+			}
+		}.start();
+	}
+
 	private void getPreferencesSwarm() {
 		final SharedPreferences sps = PreferenceManager.getDefaultSharedPreferences(this);
-		initSwarmBol = sps.getBoolean("pref_swarm", false);
-		if (initSwarmBol) {
+		initSwarmBool = sps.getBoolean("pref_swarm", true);
+		if (initSwarmBool) {
             if (! Swarm.isInitialized() ) {
             	Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
             }
@@ -136,20 +208,25 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "MainMenu onDestroy()");
 	}
-	
+
 // Simplified Code that doesn't need changing
 	private SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
+		@Override
 		public void loginStarted() {}
+		@Override
 		public void loginCanceled() {}
+		@Override
 		public void userLoggedIn(final SwarmActiveUser user) {
 			 SwarmAchievement.getAchievementsMap(new GotAchievementsMapCB() {
-			        public void gotMap(Map<Integer, SwarmAchievement> achievementsMap) {
+			        @Override
+					public void gotMap(final Map<Integer, SwarmAchievement> achievementsMap) {
 
 			            // Store the map of achievements to be used later.
 			            achievements = achievementsMap;
 			        }
 			    });
 			}
+		@Override
 		public void userLoggedOut() {}
 	};
 }

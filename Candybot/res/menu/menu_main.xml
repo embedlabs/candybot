@@ -9,6 +9,10 @@
 		android:icon="@android:drawable/ic_menu_sort_by_size"
 		android:title="@string/menu_main_stats"/>
 	<item
+		android:id="@+id/menu_main_item_restore"
+		android:icon="@android:drawable/ic_menu_set_as"
+		android:title="@string/menu_main_restore"/>
+	<item
 		android:id="@+id/menu_main_item_about"
 		android:icon="@android:drawable/ic_menu_info_details"
 		android:title="@string/menu_main_about"/>
