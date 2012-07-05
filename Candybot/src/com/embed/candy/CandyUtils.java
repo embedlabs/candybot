@@ -36,6 +36,8 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.swarmconnect.Swarm;
+
 
 public class CandyUtils {
 	public static final String TAG = "Candybot";
@@ -249,7 +251,7 @@ public class CandyUtils {
 	public static final int TOTAL_DEATHS = 9;
 	public static final int TOTAL_BURNS = 10;
 
-	public static final int SAVE_SIZE = 25; // add extra spots in case we want to modify in the future, must be at least 11 now
+	public static final int SAVE_SIZE = 11; // add extra spots in case we want to modify in the future, must be at least 11 now
 
 	public static final int UNLOCKED = -1;
 	public static final int LOCKED = 0;
@@ -417,10 +419,17 @@ public class CandyUtils {
 
 	public static void writeLines(final String filename, final int[][] lines, final Context context) {
 		try {
+			final String contents = writeLinesHelper(lines);
+
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(context.getApplicationContext().openFileOutput(filename, Context.MODE_PRIVATE)));
-			bw.write(writeLinesHelper(lines));
+			bw.write(contents);
 			bw.flush();
 			bw.close();
+
+			if (Swarm.isLoggedIn()) {
+			    Swarm.user.saveCloudData(filename, contents);
+			}
+
 			if (CandyUtils.DEBUG) Log.i(TAG,"Output to "+filename+":\n"+writeLinesHelper(lines));
 		} catch (IOException e) {
 			if (CandyUtils.DEBUG) Log.e(TAG, "Unable to create level file.");
