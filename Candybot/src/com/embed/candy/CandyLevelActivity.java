@@ -1,9 +1,12 @@
 package com.embed.candy;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL11;
 
+import org.anddev.andengine.audio.music.Music;
+import org.anddev.andengine.audio.music.MusicFactory;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
@@ -39,6 +42,7 @@ import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
@@ -94,6 +98,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private TMXTiledMap mTMXTiledMap;
 	public CandyCamera mCandyCamera;
 	private HUD hud;
+	private Music backgroundMusic;
 
 	private BitmapTextureAtlas mObjectTexture;
 	private TiledTextureRegion candyTTR, botTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
@@ -113,6 +118,11 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public boolean gameStarted = false;
 	private boolean resumeHasRun = false;
 	public boolean resetDragDistance = false;
+<<<<<<< HEAD
+=======
+	public boolean initMusic = false;
+	private CandyLevelActivity candyLevel = this;
+>>>>>>> Added Music YIPPIE!
 
 	private ChangeableText playChangeableText;
 	private Text resetLevelText;
@@ -155,16 +165,29 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		world = getIntent().getIntExtra("com.embed.candy.world", 0);
 		level = getIntent().getIntExtra("com.embed.candy.level", 0);
 		theme = getIntent().getStringExtra("com.embed.candy.theme");
+<<<<<<< HEAD
 
 
+=======
+		
+>>>>>>> Added Music YIPPIE!
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality", "2"));
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", false);
 		toastBoolean = sp.getBoolean("com.embed.candy.general_toasts", true);
+		initMusic = sp.getBoolean("com.embed.candy.music", false);
+
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
 
+<<<<<<< HEAD
+=======
+	public CandyLevelActivity getCandyLevel() {
+		return candyLevel;
+	}
+
+>>>>>>> Added Music YIPPIE!
 	@SuppressWarnings("deprecation")
 	@Override
 	public Engine onLoadEngine() {
@@ -188,7 +211,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mCandyCamera.setBounds(0, WIDTH, 0, HEIGHT);
 		mCandyCamera.setBoundsEnabled(true);
 
-		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mCandyCamera);
+		final EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE, new RatioResolutionPolicy(PHONE_WIDTH, PHONE_HEIGHT), mCandyCamera).setNeedsMusic(true).setNeedsSound(true);
 		final Engine engine = new Engine(engineOptions);
 
 		try {
@@ -218,6 +241,17 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			if (CandyUtils.DEBUG) Log.i(TAG, "Low quality, using NEAREST.");
 		}
 
+		MusicFactory.setAssetBasePath("mfx/");
+		try {
+		    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine
+		        .getMusicManager(), this, "title_music.ogg");
+		    backgroundMusic.setLooping(true);
+		} catch (IllegalStateException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
 		/**
 		 * OBJECT TEXTURE
 		 */
@@ -254,7 +288,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		boxRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		movableWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		inertiaWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
-
+		
 		boxRVB.update(64, 64);
 		movableWallRVB.update(64, 64);
 		inertiaWallRVB.update(64, 64);
@@ -326,6 +360,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		playChangeableText = new ChangeableText(PHONE_WIDTH, 10, andengineMainFont, playMode ? play : pan, Math.max(play.length(), pan.length())) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				
 				if (pSceneTouchEvent.getAction() == MotionEvent.ACTION_DOWN & gameStarted) {
 					if (!playMode) {
 						setText(play);
@@ -364,14 +399,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		mCandyCamera.setHUD(hud);
 
-		// hud.registerUpdateHandler(new TimerHandler(0.2f,true,new
-		// ITimerCallback(){
-		// @Override
-		// public void onTimePassed(final TimerHandler pTimerHandler) {
-		// fpsText.setText("FPS: " + fpsCounter.getFPS());
-		// }
-		// }));
-
+		if (initMusic){
+			backgroundMusic.play(); 
+		}
+		
 		return mScene;
 	}
 
@@ -419,8 +450,19 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	@Override
 	public void onLoadComplete() {
 		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadComplete()");
+
 	}
 
+	public void pauseMusic() {
+	    if (backgroundMusic.isPlaying())
+	        backgroundMusic.pause();
+	}
+
+	public void resumeMusic() {
+	    if (!backgroundMusic.isPlaying())
+	        backgroundMusic.resume();
+	}
+	
 	@SuppressLint("ShowToast")
 	@Override
 	public void onResumeGame() {
@@ -428,7 +470,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		super.onResumeGame();
 	    Swarm.setActive(this);
-
+	    resumeMusic();
+	    
 		if (!resumeHasRun) {
 			resumeHasRun = true;
 
@@ -463,11 +506,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		}
 	    referenceTime = System.currentTimeMillis();
 	}
-
+	
 	@Override
 	public void onPause() {
 		super.onPause();
 		Swarm.setInactive(this);
+        pauseMusic();
 		totalTime += (System.currentTimeMillis() - referenceTime);
 		if (isFinishing()) {
 			candyEngine.totalTime = totalTime;
