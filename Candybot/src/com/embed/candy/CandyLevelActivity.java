@@ -42,7 +42,6 @@ import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
@@ -170,7 +169,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		toastBoolean = sp.getBoolean("com.embed.candy.general_toasts", true);
 		initMusic = sp.getBoolean("com.embed.candy.music", false);
 
-
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
 
@@ -242,7 +240,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
-		
+
 		/**
 		 * OBJECT TEXTURE
 		 */
@@ -279,7 +277,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		boxRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		movableWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
 		inertiaWallRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
-		
+
 		boxRVB.update(64, 64);
 		movableWallRVB.update(64, 64);
 		inertiaWallRVB.update(64, 64);
@@ -351,7 +349,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		playChangeableText = new ChangeableText(PHONE_WIDTH, 10, andengineMainFont, playMode ? play : pan, Math.max(play.length(), pan.length())) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-				
+
 				if (pSceneTouchEvent.getAction() == MotionEvent.ACTION_DOWN & gameStarted) {
 					if (!playMode) {
 						setText(play);
@@ -391,9 +389,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mCandyCamera.setHUD(hud);
 
 		if (initMusic){
-			backgroundMusic.play(); 
+			backgroundMusic.play();
 		}
-		
+
 		return mScene;
 	}
 
@@ -453,7 +451,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	    if (!backgroundMusic.isPlaying())
 	        backgroundMusic.resume();
 	}
-	
+
 	@SuppressLint("ShowToast")
 	@Override
 	public void onResumeGame() {
@@ -462,7 +460,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		super.onResumeGame();
 	    Swarm.setActive(this);
 	    resumeMusic();
-	    
+
 		if (!resumeHasRun) {
 			resumeHasRun = true;
 
@@ -497,7 +495,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		}
 	    referenceTime = System.currentTimeMillis();
 	}
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();

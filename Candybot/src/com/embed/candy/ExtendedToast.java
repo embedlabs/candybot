@@ -18,7 +18,7 @@ public class ExtendedToast {
 				try {
 					while (!eliminateToasts.get()) {
 						toast.show();
-						sleep(1750);
+						sleep(200);
 					}
 				} catch (InterruptedException e) {
 					if (CandyUtils.DEBUG) Log.e(CandyUtils.TAG, e.toString());
