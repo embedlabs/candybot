@@ -10,11 +10,6 @@
         android:targetSdkVersion="8" />
 
     <uses-feature
-        android:name="android.hardware.sensor.accelerometer"
-        android:required="false" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="true" />
     <uses-feature
@@ -26,6 +21,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:hardwareAccelerated="false"
@@ -40,14 +37,7 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
         <activity
@@ -93,14 +83,17 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <activity
-            android:name="com.swarmconnect.SwarmMainActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="stateHidden" />
-
+        	android:name="com.swarmconnect.SwarmMainActivity"
+        	android:configChanges="orientation|keyboardHidden|keyboard"
+        	android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        	android:windowSoftInputMode="stateHidden" />
         <service
-            android:name="com.swarmconnect.NotificationService"
-            android:process=":swarm" />
+        	android:name="com.swarmconnect.NotificationService"
+        	android:process=":swarm" />
+        <receiver android:name="com.swarmconnect.SwarmIOBroadcastReceiver" >
+        	<intent-filter>
+        		<action android:name="android.intent.action.BOOT_COMPLETED" />
+        	</intent-filter>
+        </receiver>
     </application>
-
 </manifest>

@@ -20,7 +20,6 @@
 #}
 
 -allowaccessmodification
--libraryjars libs/Swarm.jar
 
 # Note to self: Change both AndEngine DEBUG and Candybot DEBUG to false for release.
 -assumenosideeffects class android.util.Log {
@@ -30,4 +29,17 @@
     public static *** e(...);
     public static *** w(...);
     public static *** wtf(...);
+}
+
+-keep class com.swarmconnect.**{*;}
+
+-keepattributes Signature
+
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
 }
