@@ -249,8 +249,10 @@ public class CandyUtils {
 	public static final int MIN_TIME_MILLIS = 8;
 	public static final int TOTAL_DEATHS = 9;
 	public static final int TOTAL_BURNS = 10;
+	public static final int TOTAL_DEATHS_BY_ENEMY = 11;
+	public static final int TOTAL_DEATHS_BY_LASER = 12;
 
-	public static final int SAVE_SIZE = 11; // add extra spots in case we want to modify in the future, must be at least 11 now
+	public static final int SAVE_SIZE = 13; // add extra spots in case we want to modify in the future, must be at least 13 now
 
 	public static final int UNLOCKED = -1;
 	public static final int LOCKED = 0;
@@ -342,8 +344,10 @@ public class CandyUtils {
 		levelArray[TOTAL_RESTARTS]+=candyEngine.restarts; // 3 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_DEFEATED]+=candyEngine.enemiesDefeated; // 4 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_DEATHS]+=candyEngine.deathCounter; // 9 || WORKS EVEN IF QUIT
+		levelArray[TOTAL_DEATHS_BY_ENEMY]+=candyEngine.enemyDeathCounter; // 11 || WORKS EVEN IF QUIT
+		levelArray[TOTAL_DEATHS_BY_LASER]+=candyEngine.laserDeathCounter; // 12 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_BURNS]+=candyEngine.candyBurnedCounter; // 10 || WORKS EVEN IF QUIT
-		
+
 		if (candyEngine.starsEarned>=STARS1) {
 			levelArray[TOTAL_WINS]++; // 5 || WORKS EVEN IF QUIT
 		} else {
@@ -399,7 +403,7 @@ public class CandyUtils {
 				}
 				lines.add(intArray);
 			}
-			return lines.toArray(new int[lines.size()][]);
+			return arrayPad(lines.toArray(new int[lines.size()][]));
 		} catch (IOException e) {
 			if (CandyUtils.DEBUG) Log.e(TAG, "Error opening level completion info file!");
 		} finally {
@@ -412,6 +416,21 @@ public class CandyUtils {
 			}
 		}
 		return new int[21][SAVE_SIZE];
+	}
+
+	public static int[][] arrayPad(final int[][] tempData) {
+		final int len = tempData[0].length;
+		if (len == SAVE_SIZE) {
+			return tempData;
+		}
+
+		final int[][] newArray = new int[21][SAVE_SIZE];
+		for (int i=0;i<21;i++) {
+			for (int j=0;j<len;j++) {
+				newArray[i][j]=tempData[i][j];
+			}
+		}
+		return newArray;
 	}
 
 	public static int[][] readLines(final String filename,final Context context) {

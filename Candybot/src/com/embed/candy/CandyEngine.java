@@ -130,6 +130,8 @@ public class CandyEngine {
 	int starsEarned = 0;
 	long totalTime = 0;
 	int deathCounter = 0;
+	int enemyDeathCounter = 0;
+	int laserDeathCounter = 0;
 	int candyBurnedCounter = 0;
 
 	final AtomicBoolean eliminateToasts = new AtomicBoolean();
@@ -194,7 +196,7 @@ public class CandyEngine {
 			switch (s) {
 			case SQUARE_ENEMY:
 			case SQUARE_LASER:
-				death = true; deathCounter++;
+				death = true; deathCounter++; laserDeathCounter++;
 			case SQUARE_EMPTY:
 				botMoved = true;
 				move(rowDirection, columnDirection, botIndex);
@@ -208,7 +210,7 @@ public class CandyEngine {
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
 					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.INERTIA_WALL)) {
-						if (shouldDie) {death = true; deathCounter++;}
+						if (shouldDie) {death = true; deathCounter++; laserDeathCounter++;}
 						botMoved = true;
 						move(rowDirection, columnDirection, botIndex, situationArray[OBJECT]);
 					}
@@ -220,7 +222,7 @@ public class CandyEngine {
 				if (rowDirection == 1) {
 					switch (situation(candyLevel.teleporter2row, candyLevel.teleporter2column, rowDirection, columnDirection)[SITUATION]) {
 					case SQUARE_LASER:
-						death = true; deathCounter++;
+						death = true; deathCounter++; laserDeathCounter++;
 					case SQUARE_EMPTY:
 						botMoved = true;
 						teleport(candyLevel.teleporter2row + ROW_DOWN, candyLevel.teleporter2column, botIndex);
@@ -229,7 +231,7 @@ public class CandyEngine {
 				} else if (rowDirection == -1) {
 					switch (situation(candyLevel.teleporter1row, candyLevel.teleporter1column, rowDirection, columnDirection)[SITUATION]) {
 					case SQUARE_LASER:
-						death = true; deathCounter++;
+						death = true; deathCounter++; laserDeathCounter++;
 					case SQUARE_EMPTY:
 						botMoved = true;
 						teleport(candyLevel.teleporter1row + ROW_UP, candyLevel.teleporter1column, botIndex);
@@ -417,7 +419,7 @@ public class CandyEngine {
 			shouldDie = true;
 		case SQUARE_OCCUPIED:
 			if (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.BOT) {
-				death = true; deathCounter++;
+				death = true; deathCounter++; enemyDeathCounter++;
 				move(rowDirection, columnDirection, enemySprite.index);
 			} else {
 				final int[] situationArray2 = situation(situationArray[OBJECT], rowDirection, columnDirection);
@@ -467,11 +469,11 @@ public class CandyEngine {
 		candy.showCandyAnim();
 		pause(5, candyIndex);
 
-		if (CandyUtils.DEBUG) Log.i(TAG, "Level Completion Info:");
-		if (CandyUtils.DEBUG) Log.i(TAG, "Moves: " + moves);
-		if (CandyUtils.DEBUG) Log.i(TAG, "Restarts: " + restarts);
-		if (CandyUtils.DEBUG) Log.i(TAG, "Enemies defeated: " + enemiesDefeated);
-		if (CandyUtils.DEBUG) Log.i(TAG, "World:" + candyLevel.world + "  Level:" + candyLevel.level);
+//		if (CandyUtils.DEBUG) Log.i(TAG, "Level Completion Info:");
+//		if (CandyUtils.DEBUG) Log.i(TAG, "Moves: " + moves);
+//		if (CandyUtils.DEBUG) Log.i(TAG, "Restarts: " + restarts);
+//		if (CandyUtils.DEBUG) Log.i(TAG, "Enemies defeated: " + enemiesDefeated);
+//		if (CandyUtils.DEBUG) Log.i(TAG, "World:" + candyLevel.world + "  Level:" + candyLevel.level);
 
 		if (moves <= candyLevel.advancedMovesFor3Stars) {starsEarned = 3;}
 		else if (moves <= candyLevel.basicMovesFor2Stars) {starsEarned = 2;}

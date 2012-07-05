@@ -10,7 +10,8 @@ public class BackupCB extends GotCloudDataCB {
 	public static final int[] minNonZeros = new int[]{CandyUtils.MIN_MOVES,CandyUtils.MIN_TIME_MILLIS};
 	public static final int[] maxes = new int[] {
 		CandyUtils.TOTAL_BURNS,CandyUtils.TOTAL_DEATHS,CandyUtils.TOTAL_DEFEATED,CandyUtils.TOTAL_MOVES,
-		CandyUtils.TOTAL_QUITS,CandyUtils.TOTAL_RESTARTS,CandyUtils.TOTAL_TIME_MILLIS,CandyUtils.TOTAL_WINS
+		CandyUtils.TOTAL_QUITS,CandyUtils.TOTAL_RESTARTS,CandyUtils.TOTAL_TIME_MILLIS,CandyUtils.TOTAL_WINS,
+		CandyUtils.TOTAL_DEATHS_BY_ENEMY,CandyUtils.TOTAL_DEATHS_BY_LASER
 	};
 
 	public BackupCB(final String filename, final int[][] data) {
