@@ -14,7 +14,7 @@
             android:key="com.embed.candy.mfx"
             android:title="@string/pref_mfx"
             android:summary="@string/pref_mfx_summary" />
-        <CheckBoxPreference android:defaultValue="true"
+        <CheckBoxPreference android:defaultValue="false"
             android:key="com.embed.candy.general_zoom"
             android:title="@string/pref_general_zoom"
             android:summary="@string/pref_general_zoom_summary" />

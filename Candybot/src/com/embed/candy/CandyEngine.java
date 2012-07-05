@@ -84,7 +84,7 @@ public class CandyEngine {
 	private final int[][] originalBackgroundArray;
 
 	/**
-	 * GAME VIEW REFERENCEt
+	 * GAME VIEW REFERENCE
 	 */
 
 	final CandyLevelActivity candyLevel;

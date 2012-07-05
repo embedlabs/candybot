@@ -14,7 +14,6 @@ public class AfterLevelActivity extends BetterSwarmActivity implements View.OnCl
 
 	int stars, moves, seconds;
 	boolean starsImproved, movesImproved, timeImproved;
-	private CandyLevelActivity candyLevel;
 
 	TextView al_title, text_moves, text_time;
 	ImageView al_star3, al_star2;

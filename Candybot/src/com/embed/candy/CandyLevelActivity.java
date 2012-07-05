@@ -113,7 +113,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public boolean gameStarted = false;
 	private boolean resumeHasRun = false;
 	public boolean resetDragDistance = false;
-	private CandyLevelActivity candyLevel = this;
 
 	private ChangeableText playChangeableText;
 	private Text resetLevelText;
@@ -157,19 +156,13 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		level = getIntent().getIntExtra("com.embed.candy.level", 0);
 		theme = getIntent().getStringExtra("com.embed.candy.theme");
 
-		
+
 		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality", "2"));
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", false);
 		toastBoolean = sp.getBoolean("com.embed.candy.general_toasts", true);
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
-	}
-
-
-
-	public CandyLevelActivity getCandyLevel() {
-		return candyLevel;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -229,13 +222,13 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * OBJECT TEXTURE
 		 */
 		mObjectTexture = new BitmapTextureAtlas(256, 1024, quality);
-		candyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, getCandyLevel(), "candy.png", 0, 0, 4, 3);
-		botTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, getCandyLevel(), "bot.png", 0, 193, 4, 2);
-		boxTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, getCandyLevel(), "box.png", 0, 580, 1, 1);
-		bombTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, getCandyLevel(), "bomb.png", 0, 322, 4, 2);
-		enemyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, getCandyLevel(), "enemy.png", 0, 451, 4, 2);
-		movableWallTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, getCandyLevel(), "movable_wall.png", 65, 580, 1, 1);
-		inertiaWallTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, getCandyLevel(), "inertia_wall.png", 130, 580, 1, 1);
+		candyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png", 0, 0, 4, 3);
+		botTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bot.png", 0, 193, 4, 2);
+		boxTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "box.png", 0, 580, 1, 1);
+		bombTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bomb.png", 0, 322, 4, 2);
+		enemyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "enemy.png", 0, 451, 4, 2);
+		movableWallTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "movable_wall.png", 65, 580, 1, 1);
+		inertiaWallTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "inertia_wall.png", 130, 580, 1, 1);
 
 		/**
 		 * FONT
@@ -252,7 +245,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		/**
 		 * XML PARSING
 		 */
-		CandyUtils.parseLevelObjectsFromXml(getCandyLevel());
+		CandyUtils.parseLevelObjectsFromXml(this);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
 
 		/**

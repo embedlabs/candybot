@@ -1,6 +1,5 @@
 package com.embed.candy;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,56 +11,51 @@ import com.swarmconnect.SwarmAchievement;
 public class CandyAchievements {
 	final List<String> stats = new ArrayList<String>();
 	final static List<int[][]> worlds = new ArrayList<int[][]>();
-	private Context candyLevel;
-	
-	// Get proper context
-	public void setCandyLevel(CandyLevelActivity candyLevel) {
-		this.candyLevel = candyLevel;
-	}
-	
-	public String[] fetchStats() {
-			for (int i = 1; i <= 5; i++) {
-			worlds.add(CandyUtils.readLines("world" + i + ".cls", candyLevel));
-		}
-		final DecimalFormat f = new DecimalFormat("#,###");
+//	private Context candyLevel;
 
-		// TIME PLAYED
-		int seconds = statisticObtainer(worlds, CandyUtils.TOTAL_TIME_MILLIS) / 1000;
-		final int hours = seconds / 3600; // number of hours floored
-		seconds -= (3600 * hours); // subtract to get remaining seconds
-		final int minutes = seconds / 60; // number of minutes remaining
-		seconds -= minutes * 60; // subtract to get seconds
+//	public String[] fetchStats() {
+//			for (int i = 1; i <= 5; i++) {
+//			worlds.add(CandyUtils.readLines("world" + i + ".cls", candyLevel));
+//		}
+//		final DecimalFormat f = new DecimalFormat("#,###");
+//
+//		// TIME PLAYED
+//		int seconds = statisticObtainer(worlds, CandyUtils.TOTAL_TIME_MILLIS) / 1000;
+//		final int hours = seconds / 3600; // number of hours floored
+//		seconds -= (3600 * hours); // subtract to get remaining seconds
+//		final int minutes = seconds / 60; // number of minutes remaining
+//		seconds -= minutes * 60; // subtract to get seconds
+//
+//		// MOVES TAKEN
+//		final int moves = statisticObtainer(worlds, CandyUtils.TOTAL_MOVES);
+//
+//		// NUMBER OF RESTARTS
+//		final int restarts = statisticObtainer(worlds, CandyUtils.TOTAL_RESTARTS);
+//
+//		// LEVELS COMPLETED
+//		int levelsCompleted = 0;
+//		for (int[][] world:worlds) {
+//			for (int i=0;i<20;i++) {
+//				if (world[i][CandyUtils.STATUS]>0) {
+//					levelsCompleted++;
+//				}
+//			}
+//		}
+//
+//		// STARS EARNED
+//		final int stars = statisticObtainer(worlds, CandyUtils.STATUS);
+//
+//
+//		// NUMBER OF DEATHS
+//		final int deaths = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS);
+//
+//
+//		// ENEMIES DEFEATED
+//		final int enemies = statisticObtainer(worlds, CandyUtils.TOTAL_DEFEATED);
+//
+//		return stats.toArray(new String[stats.size()]);
+//	}
 
-		// MOVES TAKEN
-		final int moves = statisticObtainer(worlds, CandyUtils.TOTAL_MOVES);
-
-		// NUMBER OF RESTARTS
-		final int restarts = statisticObtainer(worlds, CandyUtils.TOTAL_RESTARTS);
-
-		// LEVELS COMPLETED
-		int levelsCompleted = 0;
-		for (int[][] world:worlds) {
-			for (int i=0;i<20;i++) {
-				if (world[i][CandyUtils.STATUS]>0) {
-					levelsCompleted++;
-				}
-			}
-		}		
-
-		// STARS EARNED
-		final int stars = statisticObtainer(worlds, CandyUtils.STATUS);
-
-
-		// NUMBER OF DEATHS
-		final int deaths = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS);
-
-
-		// ENEMIES DEFEATED
-		final int enemies = statisticObtainer(worlds, CandyUtils.TOTAL_DEFEATED);
-
-		return stats.toArray(new String[stats.size()]);
-	}
-	
 	public static int statisticObtainer(final List<int[][]> worlds, final int index) {
 		int temp = 0;
 		for (int[][] world : worlds) {
@@ -69,7 +63,7 @@ public class CandyAchievements {
 		}
 		return temp;
 	}
-	
+
 	// Set all achievements here. Id is the id in the spreadsheet I assigned. All backend is done.
 	public static void setAchievements(final Context cont) {
 		if (MainMenuActivity.achievements != null) {
@@ -134,9 +128,9 @@ public class CandyAchievements {
 					}
 				}
 			}
-			
+
 			// 16-18 (level restarts)
-			
+
 			// laser kills/candy melts/enemy kills
 			final int burned = statisticObtainer(worlds, CandyUtils.TOTAL_BURNS);
 			if (burned > 0) {
@@ -145,10 +139,10 @@ public class CandyAchievements {
 			if (burned >= 5) {
 				unlockHelper(2601);
 			}
-			
+
 		}
-			
-		
+
+
 	}
 
 	public static void unlockHelper(final int achievementInt) {
