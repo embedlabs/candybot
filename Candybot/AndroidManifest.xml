@@ -82,7 +82,7 @@
 			android:configChanges="keyboard|keyboardHidden|orientation"
 			android:label="@string/app_name"
 			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+			android:theme="@style/myDialog"/>
 		<activity
 			android:name="com.swarmconnect.SwarmMainActivity"
 			android:configChanges="orientation|keyboardHidden|keyboard"
