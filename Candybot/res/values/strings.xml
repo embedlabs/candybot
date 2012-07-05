@@ -27,6 +27,10 @@
     <string name="pref_category_general">General</string>
     <string name="pref_swarm">Swarm</string>
     <string name="pref_swarm_summary">Use swarm\'s social features, earn achievements, and save your scores.</string>
+    <string name="pref_music">Music</string>
+    <string name="pref_music_summary">Play music in the game. Disable to play your own music.</string>
+    <string name="pref_mfx">Sound Effects</string>
+    <string name="pref_mfx_summary">Play sound effects in the game.</string>
     <string name="pref_general_zoom">Zoom</string>
     <string name="pref_general_zoom_summary">Zoom in at the beginning of each level.</string>
     <string name="pref_general_toasts">In-Game Help</string>

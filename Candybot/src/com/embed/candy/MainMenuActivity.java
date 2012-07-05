@@ -163,7 +163,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 	private void getPreferencesSwarm() {
 		final SharedPreferences sps = PreferenceManager.getDefaultSharedPreferences(this);
-		initSwarmBool = sps.getBoolean("pref_swarm", true);
+		initSwarmBool = sps.getBoolean("com.embed.candy.swarm", true);
 		if (initSwarmBool) {
             if (! Swarm.isInitialized() ) {
             	Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
@@ -211,22 +211,15 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 // Simplified Code that doesn't need changing
 	private SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
-		@Override
 		public void loginStarted() {}
-		@Override
 		public void loginCanceled() {}
-		@Override
 		public void userLoggedIn(final SwarmActiveUser user) {
 			 SwarmAchievement.getAchievementsMap(new GotAchievementsMapCB() {
-			        @Override
 					public void gotMap(final Map<Integer, SwarmAchievement> achievementsMap) {
-
-			            // Store the map of achievements to be used later.
 			            achievements = achievementsMap;
 			        }
 			    });
 			}
-		@Override
 		public void userLoggedOut() {}
 	};
 }
