@@ -49,7 +49,10 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.swarmconnect.Swarm;
@@ -447,7 +450,13 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				gameStarted = true;
 			}
 			if (helpToastText!=null) {
-				final Toast t = Toast.makeText(getApplicationContext(), helpToastText, Toast.LENGTH_SHORT);
+				final LayoutInflater li = getLayoutInflater();
+				TextView tv = (TextView)li.inflate(R.layout.game_toast, (ViewGroup)findViewById(R.id.tv_game_toast));
+				tv.setText(helpToastText);
+				tv.setTypeface(CandyUtils.mainFont);
+				final Toast t = new Toast(getApplicationContext());
+				t.setView(tv);
+				t.setDuration(Toast.LENGTH_SHORT);
 				ExtendedToast.showUntilDone(t, candyEngine.eliminateToasts);
 			}
 		}

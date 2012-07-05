@@ -17,4 +17,6 @@
 	
 	<color name="grid_pressed_start">#CC7722</color>
 	<color name="grid_pressed_end">#CC1111</color>
+	
+	<color name="bg_game_toast">#5000</color>
 </resources>
