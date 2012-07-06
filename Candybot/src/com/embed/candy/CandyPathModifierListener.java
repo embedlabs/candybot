@@ -10,14 +10,13 @@ public class CandyPathModifierListener implements IPathModifierListener {
 	final CandyAnimatedSprite cas;
 	final boolean rotate;
 
-	public CandyPathModifierListener(final CandyAnimatedSprite cas,
-			final boolean rotate) {
+	public CandyPathModifierListener(final CandyAnimatedSprite cas, final boolean rotate) {
 		this.cas = cas;
 		this.rotate = rotate;
 	}
 
 	@Override
-	public void onPathStarted(PathModifier pPathModifier, IEntity pEntity) {
+	public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
 		if (cas.type == CandyLevelActivity.CANDY && rotate) {
 			if (cas.candyLastMove == -1) {
 				cas.animate(CandyAnimatedSprite.frameArray,
@@ -34,17 +33,17 @@ public class CandyPathModifierListener implements IPathModifierListener {
 	}
 
 	@Override
-	public void onPathWaypointStarted(PathModifier pPathModifier,
-			IEntity pEntity, int pWaypointIndex) {
+	public void onPathWaypointStarted(final PathModifier pPathModifier,
+			final IEntity pEntity, final int pWaypointIndex) {
 	}
 
 	@Override
-	public void onPathWaypointFinished(PathModifier pPathModifier,
-			IEntity pEntity, int pWaypointIndex) {
+	public void onPathWaypointFinished(final PathModifier pPathModifier,
+			final IEntity pEntity, final int pWaypointIndex) {
 	}
 
 	@Override
-	public void onPathFinished(PathModifier pPathModifier, IEntity pEntity) {
+	public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
 		if (cas.type == CandyLevelActivity.CANDY && rotate) {
 			if (cas.candyLastMove == -1) {
 				cas.candyRotationState = (cas.candyRotationState + 1) % 3;

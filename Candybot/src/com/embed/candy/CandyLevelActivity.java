@@ -21,6 +21,14 @@ import org.anddev.andengine.entity.layer.tiled.tmx.TMXTile;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXTileProperty;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap;
 import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadException;
+import org.anddev.andengine.entity.particle.ParticleSystem;
+import org.anddev.andengine.entity.particle.emitter.PointParticleEmitter;
+import org.anddev.andengine.entity.particle.initializer.AlphaInitializer;
+import org.anddev.andengine.entity.particle.initializer.ColorInitializer;
+import org.anddev.andengine.entity.particle.initializer.VelocityInitializer;
+import org.anddev.andengine.entity.particle.modifier.AlphaModifier;
+import org.anddev.andengine.entity.particle.modifier.ExpireModifier;
+import org.anddev.andengine.entity.particle.modifier.ScaleModifier;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.text.ChangeableText;
@@ -105,6 +113,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	private BitmapTextureAtlas mFontTexture;
 	private Font andengineMainFont;
+
+	private BitmapTextureAtlas mParticleTexture;
+	private TextureRegion mParticleTextureRegion;
 
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
@@ -260,9 +271,16 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		andengineMainFont = new Font(mFontTexture, mainFont, 64, true, 0x80444444);
 
 		/**
+		 * PARTICLES
+		 */
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+		mParticleTexture = new BitmapTextureAtlas(32,32,quality);
+		mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle.png", 0, 0);
+
+		/**
 		 * ENGINE LOADING
 		 */
-		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture);
+		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture, mParticleTexture);
 		mEngine.getFontManager().loadFont(andengineMainFont);
 
 		/**
@@ -403,8 +421,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		}
 	}
 
-	private void createSprite(final int type, final int row, final int column,
-			final int index) {
+	private void createSprite(final int type, final int row, final int column, final int index) {
 		final CandyAnimatedSprite face;
 
 		switch (type) {
@@ -434,6 +451,24 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		spriteList.add(face);
 		mScene.attachChild(face);
+
+		if (type==CANDY || type==BOMB || type==BOX) {
+			final PointParticleEmitter ppe = new PointParticleEmitter(64 * column + 16,64 * row + 16);
+			final ParticleSystem tempPS = new ParticleSystem(ppe, 60, 60, 60, mParticleTextureRegion);
+			tempPS.addParticleInitializer(new ColorInitializer(1, 0, 0));
+			tempPS.addParticleInitializer(new AlphaInitializer(0.5f));
+			// tempPS.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
+			tempPS.addParticleInitializer(new VelocityInitializer(-5, 5, -70, -60));
+			// tempPS.addParticleInitializer(new RotationInitializer(0.0f, 360.0f));
+			tempPS.addParticleModifier(new ScaleModifier(1.0f, 0.5f, 0, 2));
+			tempPS.addParticleModifier(new org.anddev.andengine.entity.particle.modifier.ColorModifier(1, 1, 0, 0.5f, 0, 0, 0, 3));
+			tempPS.addParticleModifier(new AlphaModifier(0.5f, 0, 0, 2));
+			tempPS.addParticleModifier(new ExpireModifier(0, 2));
+			tempPS.setParticlesSpawnEnabled(false);
+			face.ppe = ppe;
+			face.ps = tempPS;
+			mScene.attachChild(tempPS);
+		}
 	}
 
 	@Override
@@ -443,13 +478,19 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	}
 
 	public void pauseMusic() {
-	    if (backgroundMusic.isPlaying())
-	        backgroundMusic.pause();
+		if (initMusic) {
+		    if (backgroundMusic.isPlaying()) {
+		        backgroundMusic.pause();
+		    }
+		}
 	}
 
 	public void resumeMusic() {
-	    if (!backgroundMusic.isPlaying())
-	        backgroundMusic.resume();
+		if (initMusic) {
+		    if (backgroundMusic.isPlaying()) {
+		        backgroundMusic.resume();
+		    }
+		}
 	}
 
 	@SuppressLint("ShowToast")
