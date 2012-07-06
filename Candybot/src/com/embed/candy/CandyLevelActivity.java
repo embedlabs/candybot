@@ -488,7 +488,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 */
 		if (type==CANDY || type==BOMB || type==BOX) {
 			final PointParticleEmitter ppe = new PointParticleEmitter(64 * column + 16,64 * row + 16);
-			final ParticleSystem tempPS = new ParticleSystem(ppe, 50, 70, 60, mParticleTextureRegion);
+			final ParticleSystem tempPS = new ParticleSystem(ppe, 50, 70, 360, mParticleTextureRegion);
 			tempPS.addParticleInitializer(new AlphaInitializer(0.5f));
 			tempPS.addParticleInitializer(new VelocityInitializer(-10, 10, -64-10, -64+10));
 			tempPS.addParticleInitializer(new RotationInitializer(0.0f, 360.0f));

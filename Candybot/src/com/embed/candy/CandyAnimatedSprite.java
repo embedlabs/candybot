@@ -195,6 +195,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			ppe.setCenter(initialColumn * 64 + 16, initialRow * 64 + 16);
 		}
 		if (ps!=null) {
+			ps.reset();
 			ps.setParticlesSpawnEnabled(false);
 		}
 		objectArray[index][CandyEngine.ROW] = initialRow;
