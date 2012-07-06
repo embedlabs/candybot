@@ -24,9 +24,10 @@ import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadExcepti
 import org.anddev.andengine.entity.particle.ParticleSystem;
 import org.anddev.andengine.entity.particle.emitter.PointParticleEmitter;
 import org.anddev.andengine.entity.particle.initializer.AlphaInitializer;
-import org.anddev.andengine.entity.particle.initializer.ColorInitializer;
+import org.anddev.andengine.entity.particle.initializer.RotationInitializer;
 import org.anddev.andengine.entity.particle.initializer.VelocityInitializer;
 import org.anddev.andengine.entity.particle.modifier.AlphaModifier;
+import org.anddev.andengine.entity.particle.modifier.ColorModifier;
 import org.anddev.andengine.entity.particle.modifier.ExpireModifier;
 import org.anddev.andengine.entity.particle.modifier.ScaleModifier;
 import org.anddev.andengine.entity.scene.Scene;
@@ -452,18 +453,19 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		spriteList.add(face);
 		mScene.attachChild(face);
 
+		/**
+		 * MAIN PARTICLE EMITTER FOR FALLING
+		 */
 		if (type==CANDY || type==BOMB || type==BOX) {
 			final PointParticleEmitter ppe = new PointParticleEmitter(64 * column + 16,64 * row + 16);
-			final ParticleSystem tempPS = new ParticleSystem(ppe, 60, 60, 60, mParticleTextureRegion);
-			tempPS.addParticleInitializer(new ColorInitializer(1, 0, 0));
+			final ParticleSystem tempPS = new ParticleSystem(ppe, 50, 70, 60, mParticleTextureRegion);
 			tempPS.addParticleInitializer(new AlphaInitializer(0.5f));
-			// tempPS.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
-			tempPS.addParticleInitializer(new VelocityInitializer(-5, 5, -70, -60));
-			// tempPS.addParticleInitializer(new RotationInitializer(0.0f, 360.0f));
-			tempPS.addParticleModifier(new ScaleModifier(1.0f, 0.5f, 0, 2));
-			tempPS.addParticleModifier(new org.anddev.andengine.entity.particle.modifier.ColorModifier(1, 1, 0, 0.5f, 0, 0, 0, 3));
+			tempPS.addParticleInitializer(new VelocityInitializer(-10, 10, -64-10, -64+10));
+			tempPS.addParticleInitializer(new RotationInitializer(0.0f, 360.0f));
+			tempPS.addParticleModifier(new ScaleModifier(1, 0, 0, 2));
+			tempPS.addParticleModifier(new ColorModifier(1, 0, 0, 1, 0, 0, 0, 2));
 			tempPS.addParticleModifier(new AlphaModifier(0.5f, 0, 0, 2));
-			tempPS.addParticleModifier(new ExpireModifier(0, 2));
+			tempPS.addParticleModifier(new ExpireModifier(1.5f, 2));
 			tempPS.setParticlesSpawnEnabled(false);
 			face.ppe = ppe;
 			face.ps = tempPS;
