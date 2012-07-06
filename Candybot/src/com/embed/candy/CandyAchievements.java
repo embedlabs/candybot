@@ -8,14 +8,13 @@ import android.content.Context;
 
 import com.swarmconnect.SwarmAchievement;
 
-
 public class CandyAchievements {
 	final List<String> stats = new ArrayList<String>();
 	final static List<int[][]> worlds = new ArrayList<int[][]>();
 	private Context candyLevel;
 
 	public String[] fetchStats() {
-			for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= 5; i++) {
 			worlds.add(CandyUtils.readLines("world" + i + ".cls", candyLevel));
 		}
 		final DecimalFormat f = new DecimalFormat("#,###");
@@ -31,13 +30,14 @@ public class CandyAchievements {
 		final int moves = statisticObtainer(worlds, CandyUtils.TOTAL_MOVES);
 
 		// NUMBER OF RESTARTS
-		final int restarts = statisticObtainer(worlds, CandyUtils.TOTAL_RESTARTS);
+		final int restarts = statisticObtainer(worlds,
+				CandyUtils.TOTAL_RESTARTS);
 
 		// LEVELS COMPLETED
 		int levelsCompleted = 0;
-		for (int[][] world:worlds) {
-			for (int i=0;i<20;i++) {
-				if (world[i][CandyUtils.STATUS]>0) {
+		for (int[][] world : worlds) {
+			for (int i = 0; i < 20; i++) {
+				if (world[i][CandyUtils.STATUS] > 0) {
 					levelsCompleted++;
 				}
 			}
@@ -46,10 +46,8 @@ public class CandyAchievements {
 		// STARS EARNED
 		final int stars = statisticObtainer(worlds, CandyUtils.STATUS);
 
-
 		// NUMBER OF DEATHS
 		final int deaths = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS);
-
 
 		// ENEMIES DEFEATED
 		final int enemies = statisticObtainer(worlds, CandyUtils.TOTAL_DEFEATED);
@@ -57,7 +55,8 @@ public class CandyAchievements {
 		return stats.toArray(new String[stats.size()]);
 	}
 
-	public static int statisticObtainer(final List<int[][]> worlds, final int index) {
+	public static int statisticObtainer(final List<int[][]> worlds,
+			final int index) {
 		int temp = 0;
 		for (int[][] world : worlds) {
 			temp += world[20][index];
@@ -65,7 +64,8 @@ public class CandyAchievements {
 		return temp;
 	}
 
-	// Set all achievements here. Id is the id in the spreadsheet I assigned. All backend is done.
+	// Set all achievements here. Id is the id in the spreadsheet I assigned.
+	// All backend is done.
 	public static void setAchievements(final Context cont) {
 		if (MainMenuActivity.achievements != null) {
 			// Achievement #1-10 (Levels)
@@ -99,16 +99,16 @@ public class CandyAchievements {
 			if (CandyUtils.readLines("world3.cls", cont)[5][CandyUtils.STATUS] > 0) {
 				unlockHelper(2421);
 			}
-			//Achivements #11-15 (worlds)
+			// Achivements #11-15 (worlds)
 			int worldsCompleted = 0;
-			for (int[][] world:worlds) {
+			for (int[][] world : worlds) {
 				int temp = 0;
-				for (int i=0;i<20;i++) {
-					if (world[i][CandyUtils.STATUS]>0) {
+				for (int i = 0; i < 20; i++) {
+					if (world[i][CandyUtils.STATUS] > 0) {
 						temp++;
 					}
 				}
-				if (temp==20) {
+				if (temp == 20) {
 					worldsCompleted++;
 					switch (worldsCompleted) {
 					case 1:
@@ -143,11 +143,11 @@ public class CandyAchievements {
 
 		}
 
-
 	}
 
 	public static void unlockHelper(final int achievementInt) {
-		final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
+		final SwarmAchievement achievement = MainMenuActivity.achievements
+				.get(achievementInt);
 		if (achievement != null) {
 			achievement.unlock();
 		}
