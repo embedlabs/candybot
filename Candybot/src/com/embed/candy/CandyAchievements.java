@@ -30,8 +30,7 @@ public class CandyAchievements {
 		final int moves = statisticObtainer(worlds, CandyUtils.TOTAL_MOVES);
 
 		// NUMBER OF RESTARTS
-		final int restarts = statisticObtainer(worlds,
-				CandyUtils.TOTAL_RESTARTS);
+		final int restarts = statisticObtainer(worlds, CandyUtils.TOTAL_RESTARTS);
 
 		// LEVELS COMPLETED
 		int levelsCompleted = 0;
@@ -55,8 +54,7 @@ public class CandyAchievements {
 		return stats.toArray(new String[stats.size()]);
 	}
 
-	public static int statisticObtainer(final List<int[][]> worlds,
-			final int index) {
+	public static int statisticObtainer(final List<int[][]> worlds, final int index) {
 		int temp = 0;
 		for (int[][] world : worlds) {
 			temp += world[20][index];
@@ -146,8 +144,7 @@ public class CandyAchievements {
 	}
 
 	public static void unlockHelper(final int achievementInt) {
-		final SwarmAchievement achievement = MainMenuActivity.achievements
-				.get(achievementInt);
+		final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
 		if (achievement != null) {
 			achievement.unlock();
 		}

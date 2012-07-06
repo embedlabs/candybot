@@ -108,10 +108,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private TMXTiledMap mTMXTiledMap;
 	public CandyCamera mCandyCamera;
 	private HUD hud;
-	
+
 	private Music backgroundMusic;
 	private Sound mSound = null;
-	
+
 	private BitmapTextureAtlas mObjectTexture;
 	private TiledTextureRegion candyTTR, botTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
 	private RectangleVertexBuffer boxRVB, /* no bombRVB or enemyRVB */ movableWallRVB, inertiaWallRVB;
@@ -183,7 +183,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		qualityInt = Integer.valueOf(sp.getString("com.embed.candy.graphics_quality", "2"));
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", false);
 		toastBoolean = sp.getBoolean("com.embed.candy.general_toasts", true);
-		initMusic = sp.getBoolean("com.embed.candy.music", false);
+		initMusic = sp.getBoolean("com.embed.candy.music", true);
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
@@ -305,9 +305,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		movableWallRVB.update(64, 64);
 		inertiaWallRVB.update(64, 64);
 	}
-	
+
 // Music doesn't need a method, since it needs to play right away and only one track.
-	public void setSound (int fx) {
+	public void setSound (final int fx) {
 		SoundFactory.setAssetBasePath("mfx/");
 		try {
 			switch (fx) {
@@ -331,7 +331,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		}
         mSound.play();
 	}
-	
+
 	@Override
 	public Scene onLoadScene() {
 		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadScene()");
