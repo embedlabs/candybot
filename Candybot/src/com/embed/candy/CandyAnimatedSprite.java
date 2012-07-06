@@ -190,6 +190,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		lastDirectionalMove = 0;
 		stopAnimation();
 		setPosition(initialColumn * 64, initialRow * 64);
+		ppe.reset();
+		ppe.setCenter(initialColumn * 64 + 16, initialRow * 64 + 16);
+		ps.setParticlesSpawnEnabled(false);
 		objectArray[index][CandyEngine.ROW] = initialRow;
 		objectArray[index][CandyEngine.COLUMN] = initialColumn;
 		setCurrentTileIndex(0);
