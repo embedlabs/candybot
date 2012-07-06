@@ -7,6 +7,8 @@ import javax.microedition.khronos.opengles.GL11;
 
 import org.anddev.andengine.audio.music.Music;
 import org.anddev.andengine.audio.music.MusicFactory;
+import org.anddev.andengine.audio.sound.Sound;
+import org.anddev.andengine.audio.sound.SoundFactory;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
@@ -106,8 +108,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private TMXTiledMap mTMXTiledMap;
 	public CandyCamera mCandyCamera;
 	private HUD hud;
+	
 	private Music backgroundMusic;
-
+	private Sound mSound = null;
+	
 	private BitmapTextureAtlas mObjectTexture;
 	private TiledTextureRegion candyTTR, botTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
 	private RectangleVertexBuffer boxRVB, /* no bombRVB or enemyRVB */ movableWallRVB, inertiaWallRVB;
@@ -245,7 +249,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		MusicFactory.setAssetBasePath("mfx/");
 		try {
 		    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine
-		        .getMusicManager(), this, "title_music.ogg");
+		        .getMusicManager(), this, "gameplay.ogg");
 		    backgroundMusic.setLooping(true);
 		} catch (IllegalStateException e) {
 		    e.printStackTrace();
@@ -301,7 +305,33 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		movableWallRVB.update(64, 64);
 		inertiaWallRVB.update(64, 64);
 	}
-
+	
+// Music doesn't need a method, since it needs to play right away and only one track.
+	public void setSound (int fx) {
+		SoundFactory.setAssetBasePath("mfx/");
+		try {
+			switch (fx) {
+			case 0:
+			  	mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "box_drop.ogg");
+			    break;
+			case 1:
+				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "candy_burn.ogg");
+				break;
+			case 2:
+				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "ghost_death.ogg");
+				break;
+			case 3:
+				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "laser_death.ogg");
+				break;
+			}
+		} catch (IllegalStateException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+        mSound.play();
+	}
+	
 	@Override
 	public Scene onLoadScene() {
 		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadScene()");
@@ -583,6 +613,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	@Override
 	public void onDestroy() {
 		backgroundMusic.stop();
+        mSound.stop();
 		super.onDestroy();
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
