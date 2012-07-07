@@ -7,6 +7,7 @@ import org.anddev.andengine.entity.layer.tiled.tmx.TMXLayer;
 import org.anddev.andengine.entity.modifier.ColorModifier;
 import org.anddev.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;
 import org.anddev.andengine.entity.particle.ParticleSystem;
+import org.anddev.andengine.entity.particle.emitter.CircleOutlineParticleEmitter;
 import org.anddev.andengine.entity.particle.emitter.PointParticleEmitter;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
@@ -44,6 +45,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 
 	public PointParticleEmitter ppe = null;
 	public ParticleSystem ps = null;
+	public boolean inertiaPS = false;
+	public CircleOutlineParticleEmitter enemyCPE = null;
+	public ParticleSystem enemyPS = null;
 
 	public CandyAnimatedSprite(final int row, final int column, final TiledTextureRegion pTiledTextureRegion, final RectangleVertexBuffer RVB, final int index, final int type, final TMXLayer tmxLayer, final int[][] objectArray, final int[][] backgroundArray) {
 		super(column * 64, row * 64, pTiledTextureRegion, RVB);
@@ -89,7 +93,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			objectArray[index][CandyEngine.COLUMN] += columnDelta;
 
 			final float duration = 1 / (float) SPEED * ((rowDelta != 0) ? Math.abs(rowDelta) : 1) * ((columnDelta != 0) ? Math.abs(columnDelta) : 1);
-			registerEntityModifier(new CandyMoveByModifier(ppe, duration, columnDelta * 64, rowDelta * 64, new CandyAnimatedSpriteMoveByModifierListener(this, rotate,rowDelta>1)));
+			registerEntityModifier(new CandyMoveByModifier(ppe, duration, columnDelta * 64, rowDelta * 64, new CandyAnimatedSpriteMoveByModifierListener(this, rotate,(rowDelta>1)||(inertiaPS&&(Math.abs(rowDelta+columnDelta)>1))),enemyCPE));
 
 			if (CandyUtils.DEBUG) Log.d(TAG, "Item " + index + " to: " + objectArray[index][CandyEngine.ROW] + ", " + objectArray[index][CandyEngine.COLUMN]);
 			return true;
@@ -167,7 +171,11 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		registerEntityModifier(new ColorModifier(deathSpeed, 1, 1, 1, 0.5f, 1, 0.5f, new IEntityModifierListener() {
 
 			@Override
-			public void onModifierStarted(final IModifier<IEntity> pModifier, final IEntity pItem) {}
+			public void onModifierStarted(final IModifier<IEntity> pModifier, final IEntity pItem) {
+				if (enemyPS!=null) {
+					enemyPS.setParticlesSpawnEnabled(false);
+				}
+			}
 
 			@Override
 			public void onModifierFinished(final IModifier<IEntity> pModifier, final IEntity pItem) {
@@ -190,6 +198,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		lastDirectionalMove = 0;
 		stopAnimation();
 		setPosition(initialColumn * 64, initialRow * 64);
+
 		if (ppe!=null) {
 			ppe.reset();
 			ppe.setCenter(initialColumn * 64 + 16, initialRow * 64 + 16);
@@ -198,6 +207,15 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			ps.reset();
 			ps.setParticlesSpawnEnabled(false);
 		}
+		if (enemyCPE!=null) {
+			enemyCPE.reset();
+			enemyCPE.setCenter(initialColumn * 64 + 24, initialRow * 64 + 24);
+		}
+		if (enemyPS!=null) {
+			enemyPS.reset();
+			enemyPS.setParticlesSpawnEnabled(true);
+		}
+
 		objectArray[index][CandyEngine.ROW] = initialRow;
 		objectArray[index][CandyEngine.COLUMN] = initialColumn;
 		setCurrentTileIndex(0);

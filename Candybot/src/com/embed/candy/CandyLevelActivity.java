@@ -24,9 +24,10 @@ import org.anddev.andengine.entity.layer.tiled.tmx.TMXTileProperty;
 import org.anddev.andengine.entity.layer.tiled.tmx.TMXTiledMap;
 import org.anddev.andengine.entity.layer.tiled.tmx.util.exception.TMXLoadException;
 import org.anddev.andengine.entity.particle.ParticleSystem;
+import org.anddev.andengine.entity.particle.emitter.CircleOutlineParticleEmitter;
 import org.anddev.andengine.entity.particle.emitter.PointParticleEmitter;
+import org.anddev.andengine.entity.particle.initializer.AccelerationInitializer;
 import org.anddev.andengine.entity.particle.initializer.AlphaInitializer;
-import org.anddev.andengine.entity.particle.initializer.RotationInitializer;
 import org.anddev.andengine.entity.particle.initializer.VelocityInitializer;
 import org.anddev.andengine.entity.particle.modifier.AlphaModifier;
 import org.anddev.andengine.entity.particle.modifier.ColorModifier;
@@ -121,6 +122,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	private BitmapTextureAtlas mParticleTexture;
 	private TextureRegion mParticleTextureRegion;
+	private TextureRegion mEnemyParticleTextureRegion;
 
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
@@ -279,8 +281,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * PARTICLES
 		 */
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		mParticleTexture = new BitmapTextureAtlas(32,32,quality);
+		mParticleTexture = new BitmapTextureAtlas(64,32,quality);
 		mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle.png", 0, 0);
+		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 40, 8);
 
 		/**
 		 * ENGINE LOADING
@@ -484,22 +487,53 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mScene.attachChild(face);
 
 		/**
-		 * MAIN PARTICLE EMITTER FOR FALLING
+		 * MAIN PARTICLE EMITTER FOR FALLING/INERTIA WALL
 		 */
-		if (type==CANDY || type==BOMB || type==BOX) {
-			final PointParticleEmitter ppe = new PointParticleEmitter(64 * column + 16,64 * row + 16);
-			final ParticleSystem tempPS = new ParticleSystem(ppe, 50, 70, 360, mParticleTextureRegion);
-			tempPS.addParticleInitializer(new AlphaInitializer(0.5f));
-			tempPS.addParticleInitializer(new VelocityInitializer(-10, 10, -64-10, -64+10));
-			tempPS.addParticleInitializer(new RotationInitializer(0.0f, 360.0f));
-			tempPS.addParticleModifier(new ScaleModifier(1, 0, 0, 2));
-			tempPS.addParticleModifier(new ColorModifier(1, 0, 0, 1, 0, 0, 0, 2));
-			tempPS.addParticleModifier(new AlphaModifier(0.5f, 0, 0, 2));
-			tempPS.addParticleModifier(new ExpireModifier(1.5f, 2));
-			tempPS.setParticlesSpawnEnabled(false);
-			face.ppe = ppe;
-			face.ps = tempPS;
-			mScene.attachChild(tempPS);
+		if (qualityInt==2) {
+			if (type==CANDY || type==BOMB || type==BOX) {
+				final PointParticleEmitter ppe = new PointParticleEmitter(64 * column + 16,64 * row + 16);
+				final ParticleSystem tempPS = new ParticleSystem(ppe, 50, 70, 360, mParticleTextureRegion);
+				tempPS.addParticleInitializer(new AlphaInitializer(0.5f));
+				tempPS.addParticleInitializer(new VelocityInitializer(-10, 10, -64-10, -64+10));
+				tempPS.addParticleModifier(new ScaleModifier(1, 0, 0, 2));
+				tempPS.addParticleModifier(new ColorModifier(1, 0, 0, 1, 0, 0, 0, 2));
+				tempPS.addParticleModifier(new AlphaModifier(0.5f, 0, 0, 2));
+				tempPS.addParticleModifier(new ExpireModifier(1.5f, 2));
+				tempPS.setParticlesSpawnEnabled(false);
+				face.ppe = ppe;
+				face.ps = tempPS;
+				mScene.attachChild(tempPS);
+			} else if (type==INERTIA_WALL) {
+				face.inertiaPS = true;
+				final PointParticleEmitter ppe = new PointParticleEmitter(64 * column + 16,64 * row + 16);
+				final ParticleSystem tempPS = new ParticleSystem(ppe, 50, 70, 360, mParticleTextureRegion);
+				tempPS.addParticleInitializer(new AlphaInitializer(0.5f));
+				tempPS.addParticleInitializer(new VelocityInitializer(-20, 20, -20, 20));
+				tempPS.addParticleInitializer(new AccelerationInitializer(-10, 10, -10, 10));
+				tempPS.addParticleModifier(new ScaleModifier(1.5f, 0.25f, 0, 0.15f));
+				tempPS.addParticleModifier(new ScaleModifier(0.25f, 0.75f, 0.15f, 0.35f));
+				tempPS.addParticleModifier(new ScaleModifier(0.75f, 0, 0.35f, 0.5f));
+				tempPS.addParticleModifier(new ColorModifier(0, 0.1f, 0.2f, 0.5f, 1, 0.5f, 0, 0.5f));
+				tempPS.addParticleModifier(new AlphaModifier(0.5f, 0, 0, 0.5f));
+				tempPS.addParticleModifier(new ExpireModifier(0.4f, 0.5f));
+				tempPS.setParticlesSpawnEnabled(false);
+				face.ppe = ppe;
+				face.ps = tempPS;
+				mScene.attachChild(tempPS);
+			} else if (type == ENEMY) {
+				final CircleOutlineParticleEmitter enemyCPE = new CircleOutlineParticleEmitter(64 * column + 24, 64 * row + 24, 32);
+				final ParticleSystem tempEnemyPS = new ParticleSystem(enemyCPE, 20, 30, 60, mEnemyParticleTextureRegion);
+				tempEnemyPS.addParticleInitializer(new AlphaInitializer(0.5f));
+				tempEnemyPS.addParticleInitializer(new VelocityInitializer(-10, 10, -10, 30));
+				tempEnemyPS.addParticleInitializer(new AccelerationInitializer(-10, 10, -10, 10));
+				tempEnemyPS.addParticleModifier(new ScaleModifier(1, 0.5f, 0, 1));
+				tempEnemyPS.addParticleModifier(new ColorModifier(0.2f, 0.5f, 0.2f, 0.2f, 0.2f, 0.2f, 0, 0.6f));
+				tempEnemyPS.addParticleModifier(new AlphaModifier(0.5f, 0, 0, 1));
+				tempEnemyPS.addParticleModifier(new ExpireModifier(0.8f, 1));
+				face.enemyCPE = enemyCPE;
+				face.enemyPS = tempEnemyPS;
+				mScene.attachChild(tempEnemyPS);
+			}
 		}
 	}
 
@@ -616,6 +650,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		super.onDestroy();
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
+		System.gc();
 	}
 
 	@Override
