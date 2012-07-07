@@ -6,16 +6,21 @@ import java.util.Map;
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,13 +37,13 @@ import com.swarmconnect.SwarmActiveUser;
 import com.swarmconnect.SwarmActiveUser.GotCloudDataCB;
 import com.swarmconnect.delegates.SwarmLoginListener;
 
-public class MainMenuActivity extends BetterSwarmActivity implements View.OnClickListener {
+public class MainMenuActivity extends BetterSwarmActivity implements View.OnClickListener, OnSharedPreferenceChangeListener {
 
 	TextView mainmenu_tv;
 	Button button_play, button_achieve;
 	ImageView iv_facebook, iv_twitter, my_swarm_button;
 	private boolean initSwarmBool;
-
+	private boolean initMusic;
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 
@@ -162,13 +167,47 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	}
 
 	private void getPreferencesSwarm() {
-		final SharedPreferences sps = PreferenceManager.getDefaultSharedPreferences(this);
-		initSwarmBool = sps.getBoolean("com.embed.candy.swarm", true);
+		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		initSwarmBool = sp.getBoolean("com.embed.candy.swarm", true);
 		if (initSwarmBool) {
             if (! Swarm.isInitialized() ) {
             	Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
             }
         }
+	}
+	
+	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+	    prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		initMusic = prefs.getBoolean("com.embed.candy.music", true);
+		Intent svc = new Intent(this, MusicService.class);
+		if ("com.embed.candy.music".equals(key)){
+			if (initMusic) {
+				startService(svc);
+			} else {
+				stopService(svc);
+			}
+		}
+
+	}
+	
+	@Override
+	public void onBackPressed() {
+	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    builder.setMessage("Are you sure you want to quit?")
+	           .setCancelable(false)
+	           .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int id) {
+	                    MainMenuActivity.this.finish();
+	               }
+	           })
+	           .setNegativeButton("No", new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int id) {
+	                    dialog.cancel();
+	               }
+	           });
+	    AlertDialog alert = builder.create();
+	    alert.show();
+
 	}
 
 	@Override
@@ -186,7 +225,15 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		iv_facebook = (ImageView) findViewById(R.id.button_facebook);
 		iv_twitter = (ImageView) findViewById(R.id.button_twitter);
 		my_swarm_button = (ImageView)findViewById(R.id.my_swarm_button);
-
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		prefs.registerOnSharedPreferenceChangeListener(this);
+		initMusic = prefs.getBoolean("bgmusic", true);
+		Intent svc = new Intent(this, MusicService.class);
+		if (initMusic) {
+			startService(svc);
+		}
+				
 		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
 		CandyUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
 		getPreferencesSwarm();
@@ -201,10 +248,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-
-		/**
-		 * DESTROY SINGLETONS
-		 */
+		Intent svc = new Intent(this, MusicService.class);
+        stopService(svc);
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "MainMenu onDestroy()");
 	}

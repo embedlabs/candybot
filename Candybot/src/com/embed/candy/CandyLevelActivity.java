@@ -136,7 +136,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private boolean resumeHasRun = false;
 	public boolean resetDragDistance = false;
 
-	public boolean initMusic = false;
+	public boolean initMusic = true;
 	private CandyLevelActivity candyLevel = this;
 
 	private ChangeableText playChangeableText;
@@ -248,6 +248,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			if (CandyUtils.DEBUG) Log.i(TAG, "Low quality, using NEAREST.");
 		}
 
+		MusicService.onPause();
 		MusicFactory.setAssetBasePath("mfx/");
 		try {
 		    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine
@@ -388,15 +389,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * HUD
 		 */
 		hud = new HUD();
-
-		// final FPSCounter fpsCounter = new FPSCounter();
-		// mEngine.registerUpdateHandler(fpsCounter);
-		// final ChangeableText fpsText = new
-		// ChangeableText(PHONE_WIDTH,PHONE_HEIGHT, andengineMainFont,
-		// "FPS: 00.00", "FPS: XXXXX".length());
-		// fpsText.setPosition(PHONE_WIDTH - fpsText.getWidth()-10,
-		// PHONE_HEIGHT-fpsText.getHeight()-10);
-		// hud.attachChild(fpsText);
 
 		playChangeableText = new ChangeableText(PHONE_WIDTH, 10, andengineMainFont, playMode ? play : pan, Math.max(play.length(), pan.length())) {
 			@Override
@@ -647,6 +639,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	@Override
 	public void onDestroy() {
 		backgroundMusic.stop();
+		MusicService.onResume();
 		super.onDestroy();
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
