@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <w id="4">
     <l id="1">
-	    <c>H4sIAAAAAAAAA2NkYGBgpDGmJgCZx0FD89HtYkRik0Ij66dm+JCifrCaj83/2MKDGu7HFi/UNJ+QWmqYj8sMSs0npJea7qdF+idkxkDELzFhSqn5+MKPlLAlRQ07FvWE9NOiLmECYmYkPgDURqTMwAYAAA==</c>
+	    <c>H4sIAAAAAAAAA2NkYGBgpDLmQOPTCtDTfFJpZP2EMKluIkXtYDQfm/+xhQc13I8tXqhpPiG11DAflxmUmk9ILzXdT4v0T8iMgYhfYsKUUvPxhR8pYUuKGnYs6gnpp3a9AsJMQMyMxAcANi/tMsAGAAA=</c>
 		<o n="1" r="14" c="6" />
 		<o n="2" r="9" c="10" />
 		<o n="3" r="2" c="2" />
@@ -9,20 +9,22 @@
 		<o n="6" r="6" c="8" />
 	</l>
 	<l id="2">
-	    <c>H4sIAAAAAAAAA7WUgQ6DIAxEiwPd/3/xZjKTers7YLomDcaW47ViS0SUP/vd1j5r1t/X2nGWq94d6xFvA/Vkrln+Fud9iifvV7UofcaQjeWyZ6efWbGHTnNU3xmenXsyy8/uDe5n5//Cj7q9WlEfa+5xu1zFf5Ub7yzqu39y5htlU/yqptH+I38l8ZH5o+Yl9n/3zXA7zmd895bpl9Dcbp6u5EynP+vL2x8m/gKN99mxwAYAAA==</c>
+	    <c>H4sIAAAAAAAAA+NkYGDgpDGmFaCX+eRidixi2MznIMMfxIQvNcKHlUg30CKtDJf0M9zMxxVvtCofONFoSt1PLQAzn4VGmNblMLXDB1f+pSbmAmJuJD4AS/3G+MAGAAA=</c>
 		<o n="1" r="2" c="2" />
+		<o n="2" r="5" c="21" />
 		<o n="6" r="8" c="12" />
 		<o n="7" r="8" c="15" />
 		<o n="7" r="8" c="9" />
 	</l>
-	<l id="3"> <!-- EVERY LEVEL BELOW THIS IS REPEAT, THEY ARE FILLERS -->
-	    <c>H4sIAAAAAAAAA8VTQQ7AIAjD+f8/b5clhpRS2NyaEIwppSoOMxsfhLl8rxUwDbS/Zs/1daz2L//IW6Tb7VFFR5v1U/ioR8f7qq9qV87F3gHN21OwWc78qZwdvpEH1bv6XzP9N9GZmWidzVLHT4Wv3mmkE+VKHFfMYs0JPJqpmsAGAAA=</c>
-		<o n="1" r="1" c="11" />
-		<o n="2" r="1" c="12" />
-		<m a="58" b="62" /> <!-- Two for a, six for b -->
-		<t>You may wish to change various preferences including sensitivity and zooming options. These may be accessed by going into the options menu on the home screen.</t>
+	<l id="3">
+	    <c>H4sIAAAAAAAAA+NkYGDgpDHGB0DyHESow6WXHH3DyXxs4c0FxNxUMp8Y+2gFRs0n3nxy7CIUh5SYycBAWC8u88nxEy5zqOE3fO4kxq3kxhGx5Sc2PcTEATXjHr1MYMciRgsMAOXX9G/ABgAA</c>
+		<o n="1" r="9" c="3" />
+		<o n="2" r="9" c="2" />
+		<o n="3" r="9" c="15" />
+		<o n="6" r="9" c="11" />
+		<o n="6" r="9" c="12" />
 	</l>
-	<l id="4">
+	<l id="4"> <!-- UNDER THIS IS A FILLER -->
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+bj8RIr/B1P4kGI3PrWkmEEOICa80MVICV96hz8udxErTsjvlLoVmxg9zCcmjSHnI2xm4gs/Ut1JbP4gNh6JsRNdPzbzyQWUpB9K7KdW/YGMmYCYGYkPADZ6hBDABgAA</c>
 		<o n="1" r="2" c="12" />
 		<o n="2" r="2" c="11" />
