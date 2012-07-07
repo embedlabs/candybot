@@ -88,10 +88,13 @@
 	<string name="stats_worlds_completed">Worlds completed</string>
 	
 	
-	<string name="level_complete">Level Complete!</string>
+	<string name="level_complete1">Level</string>
+	<string name="level_complete2">-</string>
+	<string name="level_complete3">Complete!</string>
 	<string name="al_moves">Moves:</string>
 	<string name="al_time">Time:</string>
     <string name="button_next_level">Next Level</string>
+    <string name="button_retry_level">Retry</string>
     <string name="button_return_al">Return to World</string>
     <string name="improved">(Improved!)</string>
     

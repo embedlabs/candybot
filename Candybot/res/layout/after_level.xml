@@ -17,7 +17,6 @@
 		android:shadowDx="0"
 		android:shadowDy="0"
 		android:shadowRadius="5"
-		android:text="@string/level_complete"
 		android:textColor="@android:color/white"
 		android:textSize="30dip" />
 	<LinearLayout
@@ -89,28 +88,56 @@
 			android:textSize="20dip" />
 	</LinearLayout>
 	<LinearLayout
-		android:id="@+id/ll_al_buttons"
+		android:id="@+id/ll_al_buttons1"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/ll_moves_time"
 		android:layout_centerHorizontal="true"
-		android:layout_margin="10dip"
-		android:orientation="vertical" >
+		android:layout_marginTop="10dip"
+		android:orientation="horizontal" >
 		<Button
 			android:id="@+id/button_next_level"
 			style="@style/menuButton"
-			android:layout_width="fill_parent"
+			android:layout_width="200dip"
 			android:layout_height="wrap_content"
 			android:layout_margin="5dip"
 			android:focusable="true"
-			android:text="@string/button_next_level" />
+			android:text="@string/button_next_level"
+			android:textSize="20dip" />
 		<Button
 			android:id="@+id/button_return_al"
 			style="@style/menuButton"
-			android:layout_width="fill_parent"
+			android:layout_width="200dip"
 			android:layout_height="wrap_content"
 			android:layout_margin="5dip"
 			android:focusable="true"
-			android:text="@string/button_return_al" />
+			android:text="@string/button_return_al"
+			android:textSize="20dip" />
+	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/ll_al_buttons2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/ll_al_buttons1"
+		android:layout_centerHorizontal="true"
+		android:orientation="horizontal" >
+		<Button
+			android:id="@+id/button_retry_level"
+			style="@style/menuButton"
+			android:layout_width="200dip"
+			android:layout_height="wrap_content"
+			android:layout_margin="5dip"
+			android:focusable="true"
+			android:text="@string/button_retry_level"
+			android:textSize="20dip" />
+		<Button
+			android:id="@+id/button_preferences"
+			style="@style/menuButton"
+			android:layout_width="200dip"
+			android:layout_height="wrap_content"
+			android:layout_margin="5dip"
+			android:focusable="true"
+			android:text="@string/menu_main_preferences"
+			android:textSize="20dip" />
 	</LinearLayout>
 </RelativeLayout>
