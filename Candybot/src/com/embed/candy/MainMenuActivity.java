@@ -228,7 +228,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		prefs.registerOnSharedPreferenceChangeListener(this);
-		initMusic = prefs.getBoolean("bgmusic", true);
+		
+		initMusic = prefs.getBoolean("com.embed.candy.music", true);
 		Intent svc = new Intent(this, MusicService.class);
 		if (initMusic) {
 			startService(svc);
