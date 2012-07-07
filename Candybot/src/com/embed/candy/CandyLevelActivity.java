@@ -545,7 +545,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	public void resumeMusic() {
 		if (initMusic) {
-		    if (backgroundMusic.isPlaying()) {
+		    if (!backgroundMusic.isPlaying()) {
 		        backgroundMusic.resume();
 		    }
 		}
