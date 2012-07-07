@@ -248,7 +248,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			if (CandyUtils.DEBUG) Log.i(TAG, "Low quality, using NEAREST.");
 		}
 
-		MusicService.onPause();
 		MusicFactory.setAssetBasePath("mfx/");
 		try {
 		    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine
@@ -334,6 +333,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		    e.printStackTrace();
 		}
         mSound.play();
+
 	}
 
 	@Override
@@ -433,6 +433,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mCandyCamera.setHUD(hud);
 
 		if (initMusic){
+			MusicService.onPause();
 			backgroundMusic.play();
 		}
 
@@ -639,7 +640,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	@Override
 	public void onDestroy() {
 		backgroundMusic.stop();
-		MusicService.onResume();
+		if (initMusic){
+			MusicService.onResume();
+		}
 		super.onDestroy();
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
