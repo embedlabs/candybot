@@ -115,6 +115,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			if (ppe != null) {
 				ppe.setCenter(64 * newColumn + 16, 64 * newRow + 16);
 			}
+			if (enemyCPE != null) {
+				enemyCPE.setCenter(64 * newColumn + 24, 64 * newRow + 24);
+			}
 			hasModifier = false;
 			if (CandyUtils.DEBUG) Log.d(TAG, "Item " + index + " to: " + objectArray[index][CandyEngine.ROW] + ", " + objectArray[index][CandyEngine.COLUMN]);
 			return true;
