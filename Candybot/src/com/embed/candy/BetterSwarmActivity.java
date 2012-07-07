@@ -1,5 +1,8 @@
 package com.embed.candy;
 
+import android.content.Intent;
+import android.telephony.TelephonyManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +12,22 @@ import android.widget.ImageView;
 import com.swarmconnect.SwarmActivity;
 
 public abstract class BetterSwarmActivity extends SwarmActivity {
+
+	private boolean isHome = true;
+
 	@Override
 	protected void onResume() {
 		System.gc();
 		super.onResume();
+		MusicService.onResume();
+		isHome = true;
 	}
 
 	@Override
 	protected void onPause() {
+		if (((TelephonyManager)this.getSystemService(TELEPHONY_SERVICE)).getCallState()==TelephonyManager.CALL_STATE_RINGING) {
+			MusicService.onPause();
+		}
 		super.onPause();
 		System.gc();
 	}
@@ -74,4 +85,29 @@ public abstract class BetterSwarmActivity extends SwarmActivity {
 	}
 
 	private ViewGroup m_contentView = null;
+
+	@Override
+	public boolean onKeyDown (final int keyCode, final KeyEvent ke) {
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_BACK:
+			isHome = false;
+		default:
+			return super.onKeyDown(keyCode, ke);
+		}
+	}
+
+	@Override
+	public void startActivity(final Intent i) {
+		isHome = false;
+		super.startActivity(i);
+	}
+
+	@Override
+	protected void onUserLeaveHint() {
+		if (isHome) {
+			MusicService.onPause();
+		}
+		super.onUserLeaveHint();
+	}
+
 }

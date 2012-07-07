@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,7 +41,6 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	Button button_play, button_achieve;
 	ImageView iv_facebook, iv_twitter, my_swarm_button;
 	private boolean initSwarmBool;
-	static boolean initMusic;
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 
@@ -55,9 +53,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 	volatile int count = 0;
 	boolean incomplete = false;
-	private static Intent svc = null;
-	static boolean musicStarted = false;
-	static MainMenuActivity mma = null;
+	public static Intent svc = null;
+//	static MainMenuActivity mma = null;
 
 	@Override
 	public void onClick(final View view) {
@@ -106,7 +103,6 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			CandyUtils.aboutDialog(this);
 			break;
 		case R.id.menu_main_item_preferences:
-			stopMusic();
 			startActivity(new Intent(this, CandyPreferenceActivity.class));
 			break;
 		case R.id.menu_main_item_stats:
@@ -182,26 +178,15 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences prefs, final String key) {
 	    prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		initMusic = prefs.getBoolean("com.embed.candy.music", true);
+		boolean initMusic = prefs.getBoolean("com.embed.candy.music", true);
 		if ("com.embed.candy.music".equals(key)){
 			if (initMusic) {
-				startMusic();
+				MusicService.onResume();
 			} else {
-				stopMusic();
+				MusicService.onPause();
 			}
 		}
 
-	}
-
-
-	@Override
-	public boolean onKeyDown (final int keyCode, final KeyEvent ke) {
-		switch (keyCode) {
-		case KeyEvent.KEYCODE_HOME:
-			stopMusic();
-		default:
-			return super.onKeyDown(keyCode, ke);
-		}
 	}
 
 	@Override
@@ -244,11 +229,11 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		prefs.registerOnSharedPreferenceChangeListener(this);
 
-		mma=this;
-
-		initMusic = prefs.getBoolean("com.embed.candy.music", true);
+		boolean initMusic = prefs.getBoolean("com.embed.candy.music", true);
+		svc = new Intent(this,MusicService.class);
+		startService(svc);
 		if (initMusic) {
-			startMusic();
+			MusicService.onResume();
 		}
 
 		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
@@ -264,23 +249,14 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 	@Override
 	public void onDestroy() {
-		stopMusic();
+		MusicService.onStop();
 		if (svc!=null) {
 	        stopService(svc);
 		}
 		svc = null;
-		mma = null;
-		super.onDestroy();
 		BufferObjectManager.getActiveInstance().clear();
+		super.onDestroy();
 		if (CandyUtils.DEBUG) Log.i(TAG, "MainMenu onDestroy()");
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		if (initMusic) {
-			startMusic();
-		}
 	}
 
 // Simplified Code that doesn't need changing
@@ -302,22 +278,22 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		public void userLoggedOut() {}
 	};
 
-	public static void startMusic() {
-		if (!musicStarted&&mma.initMusic) {
-			if (svc==null) {
-				svc = new Intent(mma,MusicService.class);
-			}
-			mma.startService(svc);
-			musicStarted = true;
-		}
-	}
-
-	public static void stopMusic() {
-		if (musicStarted) {
-			if (svc != null) {
-				mma.stopService(svc);
-			}
-			musicStarted = false;
-		}
-	}
+//	public static void startMusic() {
+//		if (!musicStarted&&mma.initMusic) {
+//			if (svc==null) {
+//				svc = new Intent(mma,MusicService.class);
+//			}
+//			mma.startService(svc);
+//			musicStarted = true;
+//		}
+//	}
+//
+//	public static void stopMusic() {
+//		if (musicStarted) {
+//			if (svc != null) {
+//				mma.stopService(svc);
+//			}
+//			musicStarted = false;
+//		}
+//	}
 }

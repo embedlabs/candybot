@@ -6,47 +6,57 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 
 public class MusicService extends Service {
-	static MediaPlayer mPlayer;
+	static CarefulMediaPlayer mPlayer = null;
 
-	public IBinder onBind(Intent arg0) {
+	@Override
+	public IBinder onBind(final Intent arg0) {
 		return null;
 	}
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		mPlayer = MediaPlayer.create(this, R.raw.title_music);
-		mPlayer.setLooping(true); 
+		final MediaPlayer mp = MediaPlayer.create(this, R.raw.title_music);
+		mp.setLooping(true);
+		mPlayer = new CarefulMediaPlayer(mp,this);
 	}
 
-	public int onStartCommand(Intent intent, int flags, int startId) {
+	@Override
+	public int onStartCommand(final Intent intent, final int flags, final int startId) {
 		mPlayer.start();
 		return 1;
 	}
 
-	public void onStart(Intent intent, int startId) {
-		
+	@Override
+	public void onStart(final Intent intent, final int startId) {
+
 	}
 
-	public IBinder onUnBind(Intent arg0) {
+	public IBinder onUnBind(final Intent arg0) {
 		return null;
 	}
 
-	public void onStop() {
+	public static void onStop() {
 		mPlayer.stop();
 	}
 
 	public static void onPause() {
-		mPlayer.pause();
+		if (mPlayer!=null) {
+			mPlayer.pause();
+		}
 	}
 
 	public static void onResume() {
-		mPlayer.start();
+		if (mPlayer!=null) {
+			mPlayer.start();
+		}
 	}
 
+	@Override
 	public void onDestroy() {
 		mPlayer.stop();
 		mPlayer.release();
+		mPlayer = null;
 	}
 
 	@Override
