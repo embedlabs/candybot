@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.swarmconnect.SwarmAchievement;
 
@@ -173,6 +174,7 @@ public class CandyAchievements {
 		final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
 		if (achievement != null) {
 			achievement.unlock();
+			if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,"Unlocked: "+achievementInt);
 		}
 	}
 }
