@@ -64,16 +64,16 @@ public class CandyAchievements {
 
 
 	private static final int[][] FIRST10 = new int[][]{
-		{1, 1,2403},
-		{1, 6,2405},
-		{1,11,2407},
-		{1,16,2409},
-		{2, 1,2411},
-		{2, 6,2413},
-		{2,11,2415},
-		{2,15,2417},
-		{3, 1,2419},
-		{3, 6,2577}
+		{1, 1,2403}, // first level
+		{1, 6,2405}, // box
+		{1,11,2407}, // bomb
+		{1,16,2409}, // lasers
+		{2, 1,2411}, // enemy
+		{2, 6,2413}, // movable wall
+		{2,11,2415}, // icy wall
+		{2,15,2417}, // teleporter
+		{3, 1,2419}, // inertia wall
+		{3, 6,2577}  // lava wall
 	};
 
 	public static final int WORLD = 0;
@@ -89,74 +89,67 @@ public class CandyAchievements {
 			for (int i=1;i<=5;i++) {
 				allWorlds.add(CandyUtils.readLines("world"+i+".cls", cont));
 			}
-
 			final int[][][] worlds = allWorlds.toArray(new int[5][][]);
 
+			/**
+			 * ACHIEVEMENTS 1-10: FIRST LEVELS
+			 */
 			for (int[] achievement:FIRST10) {
 				if (worlds[achievement[WORLD]-1][achievement[LEVEL]-1][CandyUtils.STATUS]>=CandyUtils.STARS1) {
 					unlockHelper(achievement[ACHIEVEMENT_ID]);
 				}
 			}
-			// Achievement #1-10 (Levels)
-//			if (world1[0][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2403);
-//			}
-//			if (CandyUtils.readLines("world1.cls", cont)[5][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2405);
-//			}
-//			if (CandyUtils.readLines("world1.cls", cont)[10][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2407);
-//			}
-//			if (CandyUtils.readLines("world1.cls", cont)[15][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2409);
-//			}
-//			if (CandyUtils.readLines("world2.cls", cont)[0][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2411);
-//			}
-//			if (CandyUtils.readLines("world2.cls", cont)[5][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2413);
-//			}
-//			if (CandyUtils.readLines("world2.cls", cont)[10][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2415);
-//			}
-//			if (CandyUtils.readLines("world2.cls", cont)[14][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2417);
-//			}
-//			if (CandyUtils.readLines("world3.cls", cont)[0][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2419);
-//			}
-//			if (CandyUtils.readLines("world3.cls", cont)[5][CandyUtils.STATUS] > 0) {
-//				unlockHelper(2421);
-//			}
 
-			// Achivements #11-15 (worlds)
-			int worldsCompleted = 0;
-			for (int[][] world : worlds) {
+			/**
+			 * ACHIEVEMENTS 11-15: WORLD COMPLETION
+			 */
+			for (int world_index = 1;world_index<=5;world_index++) {
 				int temp = 0;
 				for (int i = 0; i < 20; i++) {
-					if (world[i][CandyUtils.STATUS] >= CandyUtils.STARS1) {
+					if (worlds[world_index-1][i][CandyUtils.STATUS] >= CandyUtils.STARS1) {
 						temp++;
 					}
 				}
 				if (temp == 20) {
-					worldsCompleted++;
+					switch (world_index) {
+					case 1:
+						unlockHelper(2579);
+						break;
+					case 2:
+						unlockHelper(2581);
+						break;
+					case 3:
+						unlockHelper(2583);
+						break;
+					case 4:
+						unlockHelper(2585);
+						break;
+					case 5:
+						unlockHelper(2587);
+						break;
+					}
 				}
 			}
-			switch (worldsCompleted) {
-			case 5:
-				unlockHelper(2587);
-			case 4:
-				unlockHelper(2585);
-			case 3:
-				unlockHelper(2583);
-			case 2:
-				unlockHelper(2581);
-			case 1:
-				unlockHelper(2579);
-				break;
-			}
 
-			// 16-18 (level restarts)
+			/**
+			 * ACHIEVEMENTS 16-18
+			 */
+//			boolean found2 = false;
+//			boolean found5 = false;
+//			boolean found10 = false;
+//
+//
+//			for (int [][] world:worlds) {
+//				for (int i=0;i<20;i++) {
+//					if (world[i][CandyUtils.TOTAL_RESTARTS]>=10) {
+//						found10 = true;
+//						found5 = true;
+//						found2 = true;
+//					}
+//					if (found2&&found5&&found10);
+//				}
+//			}
+
 			// laser kills/candy melts/enemy kills
 			final int burned = statisticObtainer(worlds, CandyUtils.TOTAL_BURNS);
 			if (burned > 0) {
