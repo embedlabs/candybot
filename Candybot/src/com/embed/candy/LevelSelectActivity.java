@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -79,5 +80,18 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 		super.onResume();
 		la = new LevelAdapter(this);
 		level_gv.setAdapter(la);
+		if (MainMenuActivity.initMusic) {
+			MainMenuActivity.startMusic();
+		}
+	}
+
+	@Override
+	public boolean onKeyDown (final int keyCode, final KeyEvent ke) {
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_HOME:
+			MainMenuActivity.stopMusic();
+		default:
+			return super.onKeyDown(keyCode, ke);
+		}
 	}
 }

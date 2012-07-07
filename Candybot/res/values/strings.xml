@@ -106,4 +106,7 @@
     <string name="quit_message"></string>
     <string name="quit_button_yes"></string>
     <string name="quit_button_no"></string>
+    <string name="quit_dialog_message">Are you sure you want to quit?</string>
+    <string name="quit_dialog_positive">Yes</string>
+    <string name="quit_dialog_negative">No</string>
 </resources>

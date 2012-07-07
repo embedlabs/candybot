@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
@@ -93,12 +94,25 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 		wa = new WorldAdapter(this);
 		world_g.setAdapter(wa);
 		world_g.setSelection(selectedIndex, false);
+		if (MainMenuActivity.initMusic) {
+			MainMenuActivity.startMusic();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		selectedIndex = world_g.getSelectedItemPosition();
 		super.onPause();
+	}
+
+	@Override
+	public boolean onKeyDown (final int keyCode, final KeyEvent ke) {
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_HOME:
+			MainMenuActivity.stopMusic();
+		default:
+			return super.onKeyDown(keyCode, ke);
+		}
 	}
 
 	@Override
