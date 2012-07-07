@@ -1,4 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <w id="4">
-    
+    <l id="1">
+	    <c>H4sIAAAAAAAAA2NkYGBgpDGmJgCZx0FD89HtYkRik0Ij66dm+JCifrCaj83/2MKDGu7HFi/UNJ+QWmqYj8sMSs0npJea7qdF+idkxkDELzFhSqn5+MKPlLAlRQ07FvWE9NOiLmECYmYkPgDURqTMwAYAAA==</c>
+		<o n="1" r="14" c="6" />
+		<o n="2" r="9" c="10" />
+		<o n="3" r="2" c="2" />
+		<o n="6" r="6" c="4" />
+		<o n="6" r="6" c="8" />
+	</l>
+	<l id="2">
+	    <c>H4sIAAAAAAAAA7WUgQ6DIAxEiwPd/3/xZjKTers7YLomDcaW47ViS0SUP/vd1j5r1t/X2nGWq94d6xFvA/Vkrln+Fud9iifvV7UofcaQjeWyZ6efWbGHTnNU3xmenXsyy8/uDe5n5//Cj7q9WlEfa+5xu1zFf5Ub7yzqu39y5htlU/yqptH+I38l8ZH5o+Yl9n/3zXA7zmd895bpl9Dcbp6u5EynP+vL2x8m/gKN99mxwAYAAA==</c>
+		<o n="1" r="2" c="2" />
+		<o n="6" r="8" c="12" />
+		<o n="7" r="8" c="15" />
+		<o n="7" r="8" c="9" />
+	</l>
+	<l id="3"> <!-- EVERY LEVEL BELOW THIS IS REPEAT, THEY ARE FILLERS -->
+	    <c>H4sIAAAAAAAAA8VTQQ7AIAjD+f8/b5clhpRS2NyaEIwppSoOMxsfhLl8rxUwDbS/Zs/1daz2L//IW6Tb7VFFR5v1U/ioR8f7qq9qV87F3gHN21OwWc78qZwdvpEH1bv6XzP9N9GZmWidzVLHT4Wv3mmkE+VKHFfMYs0JPJqpmsAGAAA=</c>
+		<o n="1" r="1" c="11" />
+		<o n="2" r="1" c="12" />
+		<m a="58" b="62" /> <!-- Two for a, six for b -->
+		<t>You may wish to change various preferences including sensitivity and zooming options. These may be accessed by going into the options menu on the home screen.</t>
+	</l>
+	<l id="4">
+	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+bj8RIr/B1P4kGI3PrWkmEEOICa80MVICV96hz8udxErTsjvlLoVmxg9zCcmjSHnI2xm4gs/Ut1JbP4gNh6JsRNdPzbzyQWUpB9K7KdW/YGMmYCYGYkPADZ6hBDABgAA</c>
+		<o n="1" r="2" c="12" />
+		<o n="2" r="2" c="11" />
+		<m a="90" b="96" /> <!-- Two for a, eight for b -->
+		<t>Every few levels will introduce a new object. This help text will explain it to you. Good luck, and have fun!</t>
+	</l>
+	<l id="5">
+	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRhI86kRBvR2P7nxgksfIXOItYPY8CE1vAdT+ONzCy4xauUvcv2Iz73ofsMmTq752NSRA3CFP640hU2MUPomxf2k+oPYtEtOHsFlPjXzAzl1BSHMBMTMSHwAq0EXYcAGAAA=</c>
+		<o n="1" r="1" c="12" />
+		<o n="2" r="2" c="12" />
+		<m a="91" b="95" /> <!-- Four for a, eight for b -->
+	</l>
+	<l id="6">
+	    <c>H4sIAAAAAAAAA82U3Q6AIAhGsd7/nfWii+a+H7Uo2dhQ8CgDLBFRkjVL7nx0n7NZPPL3eYzEorO9rfiMucqffSOqH+NnyJ981r8of1dDxmd7Iz28K1/NIItXPjWfynb8N+QrPvpP1drFOP5TzeYfTc/Lrum0u+7ABgAA</c>
+		<o n="1" r="14" c="3" />
+		<o n="2" r="14" c="2" />
+		<o n="3" r="1" c="2" />
+		<o n="3" r="1" c="10" />
+		<o n="3" r="1" c="15" />
+		<o n="3" r="7" c="15" />
+		<m a="94" b="98" /> // <!-- Four for a, eight for b -->
+		<t>A box can be used to fill in gaps to allow the Candybot to push the candy into the pipe. Make sure it doesn't get stuck somewhere! </t>
+	</l>
+	<l id="7">
+	    <c>H4sIAAAAAAAAA91SWwqAMAxrlQnC7n9e9a8E08fEBwbCClnSdkxFRG+mB6ZnvQo19m3E24zGvFgvhph/1tdqq+Fovsi38733j/Kj92fI5DM8Of9xdsNqPs79x/w3/g/mVr0VjnjQG82avZ/d8QrYLtPO2dEr3AAU4SjvwAYAAA==</c>
+		<o n="1" r="4" c="11" />
+		<o n="3" r="5" c="11" />
+		<o n="3" r="6" c="11" />
+		<o n="3" r="7" c="11" />
+		<o n="3" r="8" c="11" />
+		<o n="3" r="9" c="11" />
+		<o n="3" r="10" c="11" />
+		<o n="3" r="11" c="11" />
+		<o n="3" r="12" c="11" />
+		<o n="3" r="13" c="11" />
+		<o n="3" r="14" c="11" />
+		<o n="3" r="15" c="11" />
+		<o n="5" r="10" c="19" />
+		<o n="2" r="16" c="11" />
+		<m a="120" b="128" /> <!-- Two for a, ten for b || and yes, it's possible -->
+	</l>
+	<l id="8">
+	    <c>H4sIAAAAAAAAC7VUQQ7AIAgr8/9/3g47mSpFqgnRILYFDAEgLptjBdkVfBa38604urmc6p/1rd7s9KsYVQ0unAofwGvY0cH8ii/TUMWv5jDXxPFHK/1VuE7qk92pMbdmkcrPNAC8Z9lMYniZnm79XPFuez4b//kF6azLJcAGAAA=</c>
+		<o n="1" r="2" c="3" />
+		<o n="2" r="2" c="2" />
+		<o n="3" r="1" c="10" />
+		<o n="3" r="1" c="13" />
+		<o n="3" r="1" c="19" />
+		<o n="3" r="1" c="21" />
+		<o n="3" r="2" c="20" />
+		<o n="3" r="2" c="22" />
+		<o n="3" r="3" c="19" />
+		<o n="3" r="3" c="21" />
+		<o n="3" r="4" c="20" />
+		<o n="3" r="4" c="22" />
+		<m a="102" b="108" /> <!-- Four for a, ten for b || and yes, it's possible -->
+	</l>
+	<l id="9">
+	    <c>H4sIAAAAAAAAA8WU0QpAIQhDrf7/n+uhx91tSd4CIcjNg0otIlpxVB3HH7G4zH/znzKqfiP+m3PJ+ihd5f64PWZ6dFe1VF5Wx+aL9lnVznB8aZ0cd98Zj/JwOVAv1fvr/83xUP4nNdguMf+b0VeMfZ9IRrfnwAYAAA==</c>
+		<o n="1" r="1" c="8" />
+		<o n="2" r="1" c="12" />
+		<o n="3" r="1" c="16" />
+		<o n="3" r="5" c="13" />
+		<o n="3" r="10" c="14" />
+		<m a="173" b="179" /> <!-- Four for a, ten for b || not sure moves, one box is unnecessary as a trick, though -->
+	</l>
+	<l id="10">
+	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFUA2nxY0vdxPaz/QCoyGP2F6NPxxA0LmY4sfdHdSYj6yOnQzR82nnvmkYCYgZiZBPQC2Gm9HwAYAAA==</c>
+		<o n="1" r="1" c="2" />
+		<o n="2" r="1" c="1" />
+		<o n="3" r="1" c="10" />
+		<o n="3" r="1" c="16" />
+		<o n="3" r="5" c="4" />
+		<o n="3" r="9" c="6" />
+		<o n="3" r="5" c="10" />
+		<o n="3" r="7" c="15" />
+		<m a="199" b="207" /> <!-- Six for a, fourteen for b || because there are so many ways!, not sure moves -->
+	</l>
 </w>
