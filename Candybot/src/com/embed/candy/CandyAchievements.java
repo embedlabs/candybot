@@ -73,7 +73,7 @@ public class CandyAchievements {
 		{2,11,2415},
 		{2,15,2417},
 		{3, 1,2419},
-		{3, 6,2421}
+		{3, 6,2577}
 	};
 
 	public static final int WORLD = 0;

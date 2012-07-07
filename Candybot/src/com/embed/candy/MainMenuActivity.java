@@ -259,6 +259,12 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		if (CandyUtils.DEBUG) Log.i(TAG, "MainMenu onDestroy()");
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		CandyAchievements.setAchievements(this);
+	}
+
 // Simplified Code that doesn't need changing
 	private SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
 		@Override
@@ -277,23 +283,4 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		@Override
 		public void userLoggedOut() {}
 	};
-
-//	public static void startMusic() {
-//		if (!musicStarted&&mma.initMusic) {
-//			if (svc==null) {
-//				svc = new Intent(mma,MusicService.class);
-//			}
-//			mma.startService(svc);
-//			musicStarted = true;
-//		}
-//	}
-//
-//	public static void stopMusic() {
-//		if (musicStarted) {
-//			if (svc != null) {
-//				mma.stopService(svc);
-//			}
-//			musicStarted = false;
-//		}
-//	}
 }

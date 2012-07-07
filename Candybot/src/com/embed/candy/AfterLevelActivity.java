@@ -29,6 +29,8 @@ public class AfterLevelActivity extends BetterSwarmActivity implements View.OnCl
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 		setContentView(R.layout.after_level);
 
+		CandyAchievements.setAchievements(this);
+
 		final Intent i = getIntent();
 		stars = i.getIntExtra("com.embed.candy.stars", 0);
 		moves = i.getIntExtra("com.embed.candy.moves", 0);

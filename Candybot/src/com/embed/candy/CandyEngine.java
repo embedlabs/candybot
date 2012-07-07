@@ -479,7 +479,7 @@ public class CandyEngine {
 		else if (moves <= candyLevel.basicMovesFor2Stars) {starsEarned = 2;}
 		else {starsEarned = 1;}
 
-		CandyAchievements.setAchievements(candyLevel);
+//		CandyAchievements.setAchievements(candyLevel);
 		candyLevel.finish(); // TODO change this, add the pop up menu thingy
 	}
 
