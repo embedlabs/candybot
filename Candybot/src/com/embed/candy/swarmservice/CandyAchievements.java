@@ -1,4 +1,11 @@
-package com.embed.candy;
+package com.embed.candy.swarmservice;
+
+import static com.embed.candy.constants.SaveDataConstants.STARS1;
+import static com.embed.candy.constants.SaveDataConstants.STATUS;
+import static com.embed.candy.constants.SaveDataConstants.TOTAL_BURNS;
+import static com.embed.candy.constants.SaveDataConstants.TOTAL_DEATHS_BY_ENEMY;
+import static com.embed.candy.constants.SaveDataConstants.TOTAL_DEATHS_BY_LASER;
+import static com.embed.candy.constants.SaveDataConstants.TOTAL_RESTARTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,53 +14,12 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.embed.candy.MainMenuActivity;
+import com.embed.candy.save.SaveIO;
+import com.embed.candy.util.CandyUtils;
 import com.swarmconnect.SwarmAchievement;
 
 public class CandyAchievements {
-//	final List<String> stats = new ArrayList<String>();
-//	final static List<int[][]> worlds = new ArrayList<int[][]>();
-//	private Context candyLevel;
-//
-//	public String[] fetchStats() {
-//		for (int i = 1; i <= 5; i++) {
-//			worlds.add(CandyUtils.readLines("world" + i + ".cls", candyLevel));
-//		}
-//		final DecimalFormat f = new DecimalFormat("#,###");
-//
-//		// TIME PLAYED
-//		int seconds = statisticObtainer(worlds, CandyUtils.TOTAL_TIME_MILLIS) / 1000;
-//		final int hours = seconds / 3600; // number of hours floored
-//		seconds -= (3600 * hours); // subtract to get remaining seconds
-//		final int minutes = seconds / 60; // number of minutes remaining
-//		seconds -= minutes * 60; // subtract to get seconds
-//
-//		// MOVES TAKEN
-//		final int moves = statisticObtainer(worlds, CandyUtils.TOTAL_MOVES);
-//
-//		// NUMBER OF RESTARTS
-//		final int restarts = statisticObtainer(worlds, CandyUtils.TOTAL_RESTARTS);
-//
-//		// LEVELS COMPLETED
-//		int levelsCompleted = 0;
-//		for (int[][] world : worlds) {
-//			for (int i = 0; i < 20; i++) {
-//				if (world[i][CandyUtils.STATUS] > 0) {
-//					levelsCompleted++;
-//				}
-//			}
-//		}
-//
-//		// STARS EARNED
-//		final int stars = statisticObtainer(worlds, CandyUtils.STATUS);
-//
-//		// NUMBER OF DEATHS
-//		final int deaths = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS);
-//
-//		// ENEMIES DEFEATED
-//		final int enemies = statisticObtainer(worlds, CandyUtils.TOTAL_DEFEATED);
-//
-//		return stats.toArray(new String[stats.size()]);
-//	}
 
 	public static int statisticObtainer(final int[][][] worlds, final int index) {
 		int temp = 0;
@@ -87,7 +53,7 @@ public class CandyAchievements {
 
 			final List<int[][]> allWorlds = new ArrayList<int[][]>();
 			for (int i=1;i<=5;i++) {
-				allWorlds.add(CandyUtils.readLines("world"+i+".cls", cont));
+				allWorlds.add(SaveIO.readLines("world"+i+".cls", cont));
 			}
 			final int[][][] worlds = allWorlds.toArray(new int[5][][]);
 
@@ -95,7 +61,7 @@ public class CandyAchievements {
 			 * ACHIEVEMENTS 1-10: FIRST LEVELS
 			 */
 			for (int[] achievement:FIRST10) {
-				if (worlds[achievement[WORLD]-1][achievement[LEVEL]-1][CandyUtils.STATUS]>=CandyUtils.STARS1) {
+				if (worlds[achievement[WORLD]-1][achievement[LEVEL]-1][STATUS]>=STARS1) {
 					unlockHelper(achievement[ACHIEVEMENT_ID]);
 				}
 			}
@@ -106,7 +72,7 @@ public class CandyAchievements {
 			for (int world_index = 1;world_index<=5;world_index++) {
 				int temp = 0;
 				for (int i = 0; i < 20; i++) {
-					if (worlds[world_index-1][i][CandyUtils.STATUS] >= CandyUtils.STARS1) {
+					if (worlds[world_index-1][i][STATUS] >= STARS1) {
 						temp++;
 					}
 				}
@@ -140,11 +106,11 @@ public class CandyAchievements {
 			outer:
 			for (int [][] world:worlds) {
 				for (int i=0;i<20;i++) {
-					if (world[i][CandyUtils.TOTAL_RESTARTS]>=2) {
+					if (world[i][TOTAL_RESTARTS]>=2) {
 						found2 = true;
-						if (world[i][CandyUtils.TOTAL_RESTARTS]>=5) {
+						if (world[i][TOTAL_RESTARTS]>=5) {
 							found5 = true;
-							if (world[i][CandyUtils.TOTAL_RESTARTS]>=10) {
+							if (world[i][TOTAL_RESTARTS]>=10) {
 								found10 = true;
 								break outer;
 							}
@@ -165,7 +131,7 @@ public class CandyAchievements {
 			/**
 			 * ACHIEVEMENTS 19-20
 			 */
-			final int lasers = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS_BY_LASER);
+			final int lasers = statisticObtainer(worlds, TOTAL_DEATHS_BY_LASER);
 			if (lasers > 0) {
 				unlockHelper(2595);
 				if (lasers >= 5) {
@@ -176,7 +142,7 @@ public class CandyAchievements {
 			/**
 			 * ACHIEVEMENTS 21-22
 			 */
-			final int burned = statisticObtainer(worlds, CandyUtils.TOTAL_BURNS);
+			final int burned = statisticObtainer(worlds, TOTAL_BURNS);
 			if (burned > 0) {
 				unlockHelper(2599);
 				if (burned >= 5) {
@@ -187,7 +153,7 @@ public class CandyAchievements {
 			/**
 			 * ACHIEVEMENTS 23-24
 			 */
-			final int enemies = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS_BY_ENEMY);
+			final int enemies = statisticObtainer(worlds, TOTAL_DEATHS_BY_ENEMY);
 			if (enemies > 0) {
 				unlockHelper(2603);
 				if (enemies >= 5) {

@@ -1,4 +1,4 @@
-package com.embed.candy;
+package com.embed.candy.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.embed.candy.R;
+import com.embed.candy.util.ViewUtils;
 
 public class StatisticsAdapter extends ArrayAdapter<String> {
 
@@ -22,7 +25,7 @@ public class StatisticsAdapter extends ArrayAdapter<String> {
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final TextView tv = (TextView) inflater.inflate(R.layout.stats_list_item, parent, false);
-		CandyUtils.setMainFont(tv);
+		ViewUtils.setMainFont(tv);
 		tv.setText(values[position]);
 		return tv;
 	}

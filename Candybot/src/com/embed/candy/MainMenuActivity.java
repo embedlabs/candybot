@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -28,10 +29,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.embed.candy.save.DataMerger;
+import com.embed.candy.save.SaveIO;
+import com.embed.candy.service.MusicService;
+import com.embed.candy.swarmservice.CandyAchievements;
+import com.embed.candy.swarmservice.CandySwarmListener;
+import com.embed.candy.util.CandyUtils;
+import com.embed.candy.util.SocialMedia;
+import com.embed.candy.util.ViewUtils;
 import com.swarmconnect.Swarm;
 import com.swarmconnect.SwarmAchievement;
-import com.swarmconnect.SwarmAchievement.GotAchievementsMapCB;
-import com.swarmconnect.SwarmActiveUser;
 import com.swarmconnect.SwarmActiveUser.GotCloudDataCB;
 import com.swarmconnect.delegates.SwarmLoginListener;
 
@@ -66,10 +73,10 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			startActivity(new Intent(this, WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
 			break;
 		case R.id.button_facebook:
-			startActivity(CandyUtils.facebookIntent(this));
+			startActivity(SocialMedia.facebookIntent(this));
 			break;
 		case R.id.button_twitter:
-			CandyUtils.startTwitterActivity(this);
+			SocialMedia.startTwitterActivity(this);
 			break;
 		case R.id.my_swarm_button:
 			getPreferencesSwarm();
@@ -100,7 +107,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_main_item_about:
-			CandyUtils.aboutDialog(this);
+			ViewUtils.aboutDialog(this);
 			break;
 		case R.id.menu_main_item_preferences:
 			startActivity(new Intent(this, CandyPreferenceActivity.class));
@@ -138,7 +145,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 								count++;
 								return;
 							}
-							CandyUtils.writeLines(filename, BackupCB.merge(CandyUtils.readLines(filename, MainMenuActivity.this), CandyUtils.readLines(data)), MainMenuActivity.this);
+							SaveIO.writeLines(filename, DataMerger.merge(SaveIO.readLines(filename, MainMenuActivity.this), SaveIO.readLines(data)), MainMenuActivity.this);
 							count++;
 						}
 					});
@@ -236,8 +243,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			MusicService.onResume();
 		}
 
-		CandyUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
-		CandyUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
+		ViewUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
+		ViewUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
 		getPreferencesSwarm();
 	}
 
@@ -265,22 +272,5 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		CandyAchievements.setAchievements(this);
 	}
 
-// Simplified Code that doesn't need changing
-	private SwarmLoginListener mySwarmLoginListener = new SwarmLoginListener() {
-		@Override
-		public void loginStarted() {}
-		@Override
-		public void loginCanceled() {}
-		@Override
-		public void userLoggedIn(final SwarmActiveUser user) {
-			 SwarmAchievement.getAchievementsMap(new GotAchievementsMapCB() {
-					@Override
-					public void gotMap(final Map<Integer, SwarmAchievement> achievementsMap) {
-			            achievements = achievementsMap;
-			        }
-			    });
-			}
-		@Override
-		public void userLoggedOut() {}
-	};
+	private SwarmLoginListener mySwarmLoginListener = new CandySwarmListener();
 }

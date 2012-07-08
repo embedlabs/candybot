@@ -1,4 +1,4 @@
-package com.embed.candy;
+package com.embed.candy.sprite.modifier;
 
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.modifier.MoveByModifier;

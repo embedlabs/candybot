@@ -1,9 +1,11 @@
-package com.embed.candy;
+package com.embed.candy.service;
 
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+
+import com.embed.candy.R;
 
 public class MusicService extends Service {
 	static CarefulMediaPlayer mPlayer = null;

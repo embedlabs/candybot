@@ -1,4 +1,4 @@
-package com.embed.candy;
+package com.embed.candy.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+
+import com.embed.candy.R;
+import com.embed.candy.constants.SaveDataConstants;
+import com.embed.candy.save.SaveIO;
+import com.embed.candy.util.ViewUtils;
 
 public class WorldAdapter extends BaseAdapter {
 	private static int position;
@@ -57,8 +62,8 @@ public class WorldAdapter extends BaseAdapter {
 		final ImageView iv = (ImageView)v.findViewById(R.id.world_image);
 		iv.setBackgroundResource(imageIDs[position]);
 		if (position!=0) {
-			if (CandyUtils.readLines("world" + (position) + ".cls", context)[20][CandyUtils.STATUS]<30) { // 30 stars to unlock next world
-				iv.setBackgroundDrawable(CandyUtils.convertToGrayscale(iv.getBackground()));
+			if (SaveIO.readLines("world" + (position) + ".cls", context)[20][SaveDataConstants.STATUS]<30) { // 30 stars to unlock next world
+				iv.setBackgroundDrawable(ViewUtils.convertToGrayscale(iv.getBackground()));
 			}
 		}
 	}

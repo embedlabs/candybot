@@ -1,6 +1,8 @@
-package com.embed.candy;
+package com.embed.candy.view;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.embed.candy.util.CandyUtils;
 
 import android.util.Log;
 import android.view.Gravity;

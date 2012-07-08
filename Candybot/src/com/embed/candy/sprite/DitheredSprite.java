@@ -1,4 +1,4 @@
-package com.embed.candy;
+package com.embed.candy.sprite;
 
 import javax.microedition.khronos.opengles.GL10;
 

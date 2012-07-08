@@ -1,5 +1,9 @@
 package com.embed.candy;
 
+
+import com.embed.candy.swarmservice.CandyAchievements;
+import com.embed.candy.util.ViewUtils;
+
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -46,16 +50,16 @@ public class AfterLevelActivity extends BetterSwarmActivity implements View.OnCl
 		return_al = (Button) findViewById(R.id.button_return_al);
 		retry_level = (Button) findViewById(R.id.button_retry_level);
 		prefs = (Button) findViewById(R.id.button_preferences);
-		CandyUtils.setMainFont(al_title, text_moves, text_time, next_level, return_al, retry_level, prefs);
-		CandyUtils.setClick(this, next_level, return_al, retry_level, prefs);
+		ViewUtils.setMainFont(al_title, text_moves, text_time, next_level, return_al, retry_level, prefs);
+		ViewUtils.setClick(this, next_level, return_al, retry_level, prefs);
 
 		switch (stars) {
 		case 1:
 			al_star2 = (ImageView) findViewById(R.id.al_star2);
-			al_star2.setImageDrawable(CandyUtils.convertToGrayscale(al_star2.getDrawable().mutate()));
+			al_star2.setImageDrawable(ViewUtils.convertToGrayscale(al_star2.getDrawable().mutate()));
 		case 2:
 			al_star3 = (ImageView) findViewById(R.id.al_star3);
-			al_star3.setImageDrawable(CandyUtils.convertToGrayscale(al_star3.getDrawable().mutate()));
+			al_star3.setImageDrawable(ViewUtils.convertToGrayscale(al_star3.getDrawable().mutate()));
 			break;
 		}
 		if (!starsImproved) {
@@ -78,7 +82,7 @@ public class AfterLevelActivity extends BetterSwarmActivity implements View.OnCl
 
 		if (getIntent().getIntExtra("com.embed.candy.level", 1) == 20) {
 			next_level.setEnabled(false);
-			next_level.setBackgroundDrawable(CandyUtils.convertToGrayscale(next_level.getBackground().mutate()));
+			next_level.setBackgroundDrawable(ViewUtils.convertToGrayscale(next_level.getBackground().mutate()));
 		}
 
 		world = getIntent().getIntExtra("com.embed.candy.world", 1);

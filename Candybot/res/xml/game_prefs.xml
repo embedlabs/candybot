@@ -22,7 +22,7 @@
 	<PreferenceCategory
 		android:key="com.embed.candy.category_controls"
 		android:title="@string/pref_category_controls" >
-		<com.embed.candy.CandySliderPreference
+		<com.embed.candy.view.CandySliderPreference
 			android:defaultValue="50"
 			android:dialogMessage="@string/pref_general_sensitivity_dialog"
 			android:key="com.embed.candy.general_sensitivity"

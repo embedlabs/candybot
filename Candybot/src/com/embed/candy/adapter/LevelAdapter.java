@@ -1,4 +1,4 @@
-package com.embed.candy;
+package com.embed.candy.adapter;
 
 import android.app.Activity;
 import android.util.Log;
@@ -9,9 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.embed.candy.R;
+import com.embed.candy.constants.SaveDataConstants;
+import com.embed.candy.save.SaveIO;
+import com.embed.candy.util.CandyUtils;
+import com.embed.candy.util.ViewUtils;
+
 public class LevelAdapter extends BaseAdapter {
 	private final LayoutInflater li;
-	int[][] entireWorldData;
+	public int[][] entireWorldData;
 	private final int worldNum;
 	int world,level;
 
@@ -23,7 +29,7 @@ public class LevelAdapter extends BaseAdapter {
 		worldNum = (WorldAdapter.getPos()) + 1;
 		if (CandyUtils.DEBUG) Log.d(TAG, "Current world: " + worldNum);
 
-		entireWorldData=CandyUtils.readLines("world" + worldNum + ".cls", a);
+		entireWorldData=SaveIO.readLines("world" + worldNum + ".cls", a);
 	}
 
 	@Override
@@ -49,7 +55,7 @@ public class LevelAdapter extends BaseAdapter {
 			 * -1: unlocked
 			 * 1-3: stars
 			 */
-			switch (entireWorldData[position][CandyUtils.STATUS]) {
+			switch (entireWorldData[position][SaveDataConstants.STATUS]) {
 			case -1:
 				v = li.inflate(R.layout.grid_item_star, null);
 				final RelativeLayout rl0 = (RelativeLayout)v;
@@ -84,7 +90,7 @@ public class LevelAdapter extends BaseAdapter {
 					rl_default.removeView(v.findViewById(R.id.star2));
 					rl_default.removeView(v.findViewById(R.id.star1));
 					changeFont(v,position);
-				} else if (entireWorldData[position][CandyUtils.STATUS]!=0) {
+				} else if (entireWorldData[position][SaveDataConstants.STATUS]!=0) {
 					v = li.inflate(R.layout.grid_item_star, null);
 					final RelativeLayout rl_default2 = (RelativeLayout)v;
 					rl_default2.removeView(v.findViewById(R.id.star3));
@@ -106,6 +112,6 @@ public class LevelAdapter extends BaseAdapter {
 	public void changeFont(final View v, final int position) {
 		final TextView tv = (TextView) v.findViewById(R.id.grid_text);
 		tv.setText(String.valueOf(position + 1));
-		CandyUtils.setMainFont(tv);
+		ViewUtils.setMainFont(tv);
 	}
 }

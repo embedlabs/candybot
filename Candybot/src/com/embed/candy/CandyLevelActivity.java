@@ -1,5 +1,18 @@
 package com.embed.candy;
 
+import static com.embed.candy.constants.CommandQueueConstants.COLUMN;
+import static com.embed.candy.constants.CommandQueueConstants.ROW;
+import static com.embed.candy.constants.CommandQueueConstants.TYPE;
+import static com.embed.candy.constants.EngineConstants.TELEPORTER_IN;
+import static com.embed.candy.constants.EngineConstants.TELEPORTER_OUT;
+import static com.embed.candy.constants.ObjectIndices.BOMB;
+import static com.embed.candy.constants.ObjectIndices.BOT;
+import static com.embed.candy.constants.ObjectIndices.BOX;
+import static com.embed.candy.constants.ObjectIndices.CANDY;
+import static com.embed.candy.constants.ObjectIndices.ENEMY;
+import static com.embed.candy.constants.ObjectIndices.INERTIA_WALL;
+import static com.embed.candy.constants.ObjectIndices.MOVABLE_WALL;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,6 +26,8 @@ import org.anddev.andengine.audio.sound.SoundFactory;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
+import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl;
+import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl.IOnScreenControlListener;
 import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
@@ -46,23 +61,14 @@ import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 import org.anddev.andengine.opengl.font.Font;
-import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
-import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl;
-import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl.IOnScreenControlListener;
-import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -82,6 +88,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.embed.candy.controls.CandyTouchSystem;
+import com.embed.candy.engine.CandyEngine;
+import com.embed.candy.save.SaveIO;
+import com.embed.candy.service.MusicService;
+import com.embed.candy.sprite.CandyAnimatedSprite;
+import com.embed.candy.util.CandyTMX;
+import com.embed.candy.util.CandyUtils;
+import com.embed.candy.util.ViewUtils;
+import com.embed.candy.view.ExtendedToast;
 import com.swarmconnect.Swarm;
 
 @SuppressLint("NewApi")
@@ -95,28 +110,19 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public float PHONE_HEIGHT;
 
 	public int level, world;
-	String theme;
+	public String theme;
 
-	static final int CANDY = 1;
-	static final int BOT = 2;
-	static final int BOX = 3;
-	static final int BOMB = 4;
-	static final int ENEMY = 5;
-	static final int MOVABLE_WALL = 6;
-	static final int INERTIA_WALL = 7;
-	
 	private BitmapTextureAtlas mOnScreenControlTexture;
 	private TextureRegion mOnScreenControlBaseTextureRegion;
 	private TextureRegion mOnScreenControlKnobTextureRegion;
 
 	private DigitalOnScreenControl mDigitalOnScreenControl;
 
-
 	/**
 	 * Gotta keep track of all your variables and objects and stuff...
 	 */
-	final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
-	final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list of all tutorial text
+	public final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
+	public final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list of all tutorial text
 	final ArrayList<Text> textReferences = new ArrayList<Text>();
 	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
 	private int[][] backgroundArray = new int[18][24]; // holds tmx array
@@ -304,13 +310,13 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mParticleTexture = new BitmapTextureAtlas(64,32,quality);
 		mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle.png", 0, 0);
 		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 40, 8);
-		
+
 		// On Screen controllers, no shit...
 		this.mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
 		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_knob.png", 128, 0);
 
-		
+
 		/**
 		 * ENGINE LOADING
 		 */
@@ -320,7 +326,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		/**
 		 * XML PARSING
 		 */
-		CandyUtils.parseLevelObjectsFromXml(this);
+		CandyTMX.parseLevelObjectsFromXml(this);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
 
 		/**
@@ -377,7 +383,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 */
 		final CandyTMXLoader tmxLoader = new CandyTMXLoader((theme == null) ? "normal" : theme, this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA, this);
 		try {
-			mTMXTiledMap = tmxLoader.load(CandyUtils.tmxFromXML(this, world, level));
+			mTMXTiledMap = tmxLoader.load(CandyTMX.tmxFromXML(this, world, level));
 		} catch (final TMXLoadException tmxle) {
 			Toast.makeText(getApplicationContext(), "Failed to load level.", Toast.LENGTH_LONG).show();
 			Debug.e(tmxle);
@@ -402,7 +408,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * SPRITES
 		 */
 		for (int i = 0; i < objectArray.length; i++) {
-			createSprite(objectArray[i][CandyEngine.TYPE], objectArray[i][CandyEngine.ROW], objectArray[i][CandyEngine.COLUMN], i);
+			createSprite(objectArray[i][TYPE], objectArray[i][ROW], objectArray[i][COLUMN], i);
 		}
 
 		/**
@@ -449,7 +455,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				return true;
 			}
 		};
-		
+
 		this.mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCandyCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
 			@Override
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
@@ -465,7 +471,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		mScene.setChildScene(this.mDigitalOnScreenControl);
 
-		
+
 		hud.attachChild(resetLevelText);
 		hud.registerTouchArea(resetLevelText);
 
@@ -483,7 +489,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	public void addTutorialText(final ArrayList<String[]> inputTutorialList) {
 		for (String[] tutorialTextArray : inputTutorialList) {
-			final Text text = new Text(Float.parseFloat(tutorialTextArray[CandyEngine.COLUMN]) * 64, Float.parseFloat(tutorialTextArray[CandyEngine.ROW]) * 64, andengineMainFont, tutorialTextArray[0].replace("\\n", "\n"));
+			final Text text = new Text(Float.parseFloat(tutorialTextArray[COLUMN]) * 64, Float.parseFloat(tutorialTextArray[ROW]) * 64, andengineMainFont, tutorialTextArray[0].replace("\\n", "\n"));
 			textReferences.add(text);
 			mScene.attachChild(text);
 		}
@@ -627,7 +633,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				final LayoutInflater li = getLayoutInflater();
 				TextView tv = (TextView)li.inflate(R.layout.game_toast, (ViewGroup)findViewById(R.id.tv_game_toast));
 				tv.setText(helpToastText);
-				tv.setTypeface(CandyUtils.mainFont);
+				tv.setTypeface(ViewUtils.mainFont);
 				final Toast t = new Toast(getApplicationContext());
 				t.setView(tv);
 				t.setDuration(Toast.LENGTH_SHORT);
@@ -658,7 +664,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 					}
 				}
 			}
-			CandyUtils.saveSettings(candyEngine);
+			SaveIO.saveSettings(candyEngine);
 		}
 	}
 
@@ -669,10 +675,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		backgroundArray[row][column] = pTMXTile.getGlobalTileID();
 		// keeps track of the background tiles
 
-		if (backgroundArray[row][column] == CandyEngine.TELEPORTER_IN) {
+		if (backgroundArray[row][column] == TELEPORTER_IN) {
 			teleporter1column = column;
 			teleporter1row = row;
-		} else if (backgroundArray[row][column] == CandyEngine.TELEPORTER_OUT) {
+		} else if (backgroundArray[row][column] == TELEPORTER_OUT) {
 			teleporter2column = column;
 			teleporter2row = row;
 		}

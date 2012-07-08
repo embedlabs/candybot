@@ -18,6 +18,12 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.embed.candy.adapter.WorldAdapter;
+import com.embed.candy.constants.SaveDataConstants;
+import com.embed.candy.save.SaveIO;
+import com.embed.candy.util.CandyUtils;
+import com.embed.candy.util.ViewUtils;
+
 public class WorldSelectActivity extends BetterSwarmActivity implements OnItemClickListener, OnItemSelectedListener {
 
 	Gallery world_g;
@@ -50,7 +56,7 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 		wn_2=(TextView)findViewById(R.id.wn_2);
 		sc_1=(TextView)findViewById(R.id.sc_1);
 		sc_2=(TextView)findViewById(R.id.sc_2);
-		CandyUtils.setMainFont(wn_1,wn_2,sc_1,sc_2);
+		ViewUtils.setMainFont(wn_1,wn_2,sc_1,sc_2);
 
 		world_g = (Gallery)findViewById(R.id.gallery_world);
 		world_g.setOnItemClickListener(this);
@@ -65,7 +71,7 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 		if (av.getSelectedItemPosition() == position) {
 			WorldAdapter.setPos(position);
 			if (position!=0) {
-				final int stars = CandyUtils.readLines("world" + (position) + ".cls", this)[20][CandyUtils.STATUS];
+				final int stars = SaveIO.readLines("world" + (position) + ".cls", this)[20][SaveDataConstants.STATUS];
 				if (stars<30) {
 					final Vibrator vib = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 					textToast((30-stars)+" more stars in World \""+getString(WorldAdapter.worldNameIDs[position-1])+"\" needed! --- Temporarily unlocked by Shrav");
@@ -108,7 +114,7 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 			if (CandyUtils.DEBUG) Log.wtf(CandyUtils.TAG,"WTF!");
 		}
 		world_name.setText(getString(WorldAdapter.worldNameIDs[position]));
-		star_count.setText(CandyUtils.readLines("world" + (position+1) + ".cls", this)[20][CandyUtils.STATUS] + "/60");
+		star_count.setText(SaveIO.readLines("world" + (position+1) + ".cls", this)[20][SaveDataConstants.STATUS] + "/60");
 	}
 
 	@Override

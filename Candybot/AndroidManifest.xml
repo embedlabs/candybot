@@ -97,6 +97,6 @@
 			</intent-filter>
 		</receiver>
 		<service android:enabled="true"
-		    android:name="com.embed.candy.MusicService" />
+		    android:name="com.embed.candy.service.MusicService" />
 	</application>
 </manifest>

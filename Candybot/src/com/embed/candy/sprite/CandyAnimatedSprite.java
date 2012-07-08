@@ -1,4 +1,14 @@
-package com.embed.candy;
+package com.embed.candy.sprite;
+
+import static com.embed.candy.constants.CommandQueueConstants.COLUMN;
+import static com.embed.candy.constants.CommandQueueConstants.COMMAND;
+import static com.embed.candy.constants.CommandQueueConstants.FALL;
+import static com.embed.candy.constants.CommandQueueConstants.ROW;
+import static com.embed.candy.constants.CommandQueueConstants.SLIDE_ICE;
+import static com.embed.candy.constants.CommandQueueConstants.TELEPORT;
+import static com.embed.candy.constants.ObjectIndices.BOT;
+import static com.embed.candy.constants.ObjectIndices.CANDY;
+import static com.embed.candy.constants.ObjectIndices.ENEMY;
 
 import javax.microedition.khronos.opengles.GL11;
 
@@ -16,6 +26,12 @@ import org.anddev.andengine.util.modifier.IModifier;
 import org.anddev.andengine.util.modifier.ease.EaseQuadIn;
 
 import android.util.Log;
+
+import com.embed.candy.constants.EngineConstants;
+import com.embed.candy.sprite.modifier.CandyAnimatedSpriteMoveByModifierListener;
+import com.embed.candy.sprite.modifier.CandyMoveByModifier;
+import com.embed.candy.util.CandyUtils;
+//import com.embed.candy.constants.EngineConstants;
 
 public class CandyAnimatedSprite extends AnimatedSprite {
 	public final int index, type;
@@ -61,9 +77,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		initialRow = row;
 		initialColumn = column;
 
-		if (this.type == CandyLevelActivity.BOT) {
+		if (this.type == BOT) {
 			animate(botDurations, botFrames, -1);
-		} else if (this.type == CandyLevelActivity.ENEMY) {
+		} else if (this.type == ENEMY) {
 			animate(enemyDurations, enemyFrames, -1);
 		}
 	}
@@ -89,13 +105,13 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			if (columnDelta != 0) {
 				lastDirectionalMove = columnDelta;
 			}
-			objectArray[index][CandyEngine.ROW] += rowDelta;
-			objectArray[index][CandyEngine.COLUMN] += columnDelta;
+			objectArray[index][ROW] += rowDelta;
+			objectArray[index][COLUMN] += columnDelta;
 
 			final float duration = 1 / (float) SPEED * ((rowDelta != 0) ? Math.abs(rowDelta) : 1) * ((columnDelta != 0) ? Math.abs(columnDelta) : 1);
 			registerEntityModifier(new CandyMoveByModifier(ppe, duration, columnDelta * 64, rowDelta * 64, new CandyAnimatedSpriteMoveByModifierListener(this, rotate,(rowDelta>1)||(inertiaPS&&(Math.abs(rowDelta+columnDelta)>1))),enemyCPE));
 
-			if (CandyUtils.DEBUG) Log.d(TAG, "Item " + index + " to: " + objectArray[index][CandyEngine.ROW] + ", " + objectArray[index][CandyEngine.COLUMN]);
+			if (CandyUtils.DEBUG) Log.d(TAG, "Item " + index + " to: " + objectArray[index][ROW] + ", " + objectArray[index][COLUMN]);
 			return true;
 		} else {
 			return false;
@@ -109,8 +125,8 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	public synchronized boolean teleport(final int newRow, final int newColumn) {
 		if (!hasModifier) {
 			hasModifier = true;
-			objectArray[index][CandyEngine.ROW] = newRow;
-			objectArray[index][CandyEngine.COLUMN] = newColumn;
+			objectArray[index][ROW] = newRow;
+			objectArray[index][COLUMN] = newColumn;
 			setPosition(64 * newColumn, 64 * newRow);
 			if (ppe != null) {
 				ppe.setCenter(64 * newColumn + 16, 64 * newRow + 16);
@@ -119,7 +135,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 				enemyCPE.setCenter(64 * newColumn + 24, 64 * newRow + 24);
 			}
 			hasModifier = false;
-			if (CandyUtils.DEBUG) Log.d(TAG, "Item " + index + " to: " + objectArray[index][CandyEngine.ROW] + ", " + objectArray[index][CandyEngine.COLUMN]);
+			if (CandyUtils.DEBUG) Log.d(TAG, "Item " + index + " to: " + objectArray[index][ROW] + ", " + objectArray[index][COLUMN]);
 			return true;
 		} else {
 			return false;
@@ -135,7 +151,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	}
 
 	public synchronized void showCandyAnim() {
-		if (type == CandyLevelActivity.CANDY) {
+		if (type == CANDY) {
 			hasModifier = true;
 			if (CandyUtils.DEBUG) Log.i(TAG, "Candy winning animation started.");
 			// TODO
@@ -148,9 +164,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			@Override
 			public void onAnimationEnd(final AnimatedSprite pAnimatedSprite) {
 				setVisible(false);
-				tmxLayer.getTMXTile(objectArray[index][CandyEngine.COLUMN], objectArray[index][CandyEngine.ROW] + 1).setTextureRegion(null);
-				backgroundArray[objectArray[index][CandyEngine.ROW] + 1][objectArray[index][CandyEngine.COLUMN]] = CandyEngine.EMPTY_TILE;
-				objectArray[index][CandyEngine.ROW] = -1;
+				tmxLayer.getTMXTile(objectArray[index][COLUMN], objectArray[index][ROW] + 1).setTextureRegion(null);
+				backgroundArray[objectArray[index][ROW] + 1][objectArray[index][COLUMN]] = EngineConstants.EMPTY_TILE;
+				objectArray[index][ROW] = -1;
 
 				hasModifier = false;
 				if (CandyUtils.DEBUG) Log.i(TAG, "Bomb explosion ended.");
@@ -161,11 +177,11 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 
 	public synchronized void showDeadSprite() {
 		hasModifier = true;
-		objectArray[index][CandyEngine.ROW] = -1;
+		objectArray[index][ROW] = -1;
 		enemyDead = true;
 
 		final float deathSpeed;
-		if (type == CandyLevelActivity.BOT) {
+		if (type == BOT) {
 			deathSpeed = 1;
 		} else {
 			deathSpeed = 0.3f;
@@ -219,26 +235,26 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			enemyPS.setParticlesSpawnEnabled(true);
 		}
 
-		objectArray[index][CandyEngine.ROW] = initialRow;
-		objectArray[index][CandyEngine.COLUMN] = initialColumn;
+		objectArray[index][ROW] = initialRow;
+		objectArray[index][COLUMN] = initialColumn;
 		setCurrentTileIndex(0);
 		setVisible(true);
 
-		if (type == CandyLevelActivity.BOT) {
+		if (type == BOT) {
 			animate(botDurations, botFrames, -1);
-		} else if (type == CandyLevelActivity.ENEMY) {
+		} else if (type == ENEMY) {
 			animate(enemyDurations, enemyFrames, -1);
 		}
 	}
 
 	public synchronized boolean doQueue(final int[] command) {
-		switch (command[CandyEngine.COMMAND]) {
-		case CandyEngine.TELEPORT:
-			return teleport(command[CandyEngine.ROW], command[CandyEngine.COLUMN]);
-		case CandyEngine.SLIDE_ICE:
-			return move(command[CandyEngine.ROW], command[CandyEngine.COLUMN], false);
-		case CandyEngine.FALL:
-			return fall(command[CandyEngine.ROW]);
+		switch (command[COMMAND]) {
+		case TELEPORT:
+			return teleport(command[ROW], command[COLUMN]);
+		case SLIDE_ICE:
+			return move(command[ROW], command[COLUMN], false);
+		case FALL:
+			return fall(command[ROW]);
 		default:
 			return false;
 		}

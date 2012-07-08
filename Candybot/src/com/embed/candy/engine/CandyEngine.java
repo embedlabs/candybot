@@ -1,4 +1,41 @@
-package com.embed.candy;
+package com.embed.candy.engine;
+
+import static com.embed.candy.constants.CommandQueueConstants.COLUMN;
+import static com.embed.candy.constants.CommandQueueConstants.FALL;
+import static com.embed.candy.constants.CommandQueueConstants.ROW;
+import static com.embed.candy.constants.CommandQueueConstants.SLIDE_ICE;
+import static com.embed.candy.constants.CommandQueueConstants.TELEPORT;
+import static com.embed.candy.constants.CommandQueueConstants.TYPE;
+import static com.embed.candy.constants.DirectionalConstants.COLUMN_LEFT;
+import static com.embed.candy.constants.DirectionalConstants.COLUMN_RIGHT;
+import static com.embed.candy.constants.DirectionalConstants.ROW_DOWN;
+import static com.embed.candy.constants.DirectionalConstants.ROW_UP;
+import static com.embed.candy.constants.EngineConstants.EDGE;
+import static com.embed.candy.constants.EngineConstants.EMPTY_TILE;
+import static com.embed.candy.constants.EngineConstants.NO_OBJECT;
+import static com.embed.candy.constants.EngineConstants.SQUARE_EDGE;
+import static com.embed.candy.constants.EngineConstants.SQUARE_EMPTY;
+import static com.embed.candy.constants.EngineConstants.SQUARE_ENEMY;
+import static com.embed.candy.constants.EngineConstants.SQUARE_LASER;
+import static com.embed.candy.constants.EngineConstants.SQUARE_LASER_OCCUPIED;
+import static com.embed.candy.constants.EngineConstants.SQUARE_OCCUPIED;
+import static com.embed.candy.constants.EngineConstants.SQUARE_PIPE;
+import static com.embed.candy.constants.EngineConstants.SQUARE_TELEPORTER;
+import static com.embed.candy.constants.EngineConstants.SQUARE_WALL;
+import static com.embed.candy.constants.EngineConstants.TELEPORTER_IN;
+import static com.embed.candy.constants.EngineConstants.TELEPORTER_OUT;
+import static com.embed.candy.constants.EngineConstants.WALL_ICE;
+import static com.embed.candy.constants.EngineConstants.WALL_LAVA;
+import static com.embed.candy.constants.ObjectIndices.BOMB;
+import static com.embed.candy.constants.ObjectIndices.BOT;
+import static com.embed.candy.constants.ObjectIndices.BOX;
+import static com.embed.candy.constants.ObjectIndices.CANDY;
+import static com.embed.candy.constants.ObjectIndices.ENEMY;
+import static com.embed.candy.constants.ObjectIndices.INERTIA_WALL;
+import static com.embed.candy.constants.ObjectIndices.MOVABLE_WALL;
+import static com.embed.candy.constants.SituationConstants.BACKGROUND;
+import static com.embed.candy.constants.SituationConstants.OBJECT;
+import static com.embed.candy.constants.SituationConstants.SITUATION;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,61 +47,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import android.util.FloatMath;
 import android.util.Log;
 
+import com.embed.candy.CandyLevelActivity;
+import com.embed.candy.sprite.CandyAnimatedSprite;
+import com.embed.candy.util.CandyUtils;
+
 public class CandyEngine {
-
-	/**
-	 * INTEGER CODES
-	 */
-
-	public static final int EDGE = -2;
-	public static final int NO_OBJECT = -1;
-
-	public static final int EMPTY_TILE = 0;
-
-	public static final int WALL = 1;
-	public static final int PIPE_LEFT = 2;
-	public static final int PIPE_RIGHT = 3;
-	public static final int LASER_HORIZONTAL = 4;
-	public static final int LASER_VERTICAL = 5;
-	public static final int LASER_CROSS = 6;
-	public static final int TELEPORTER_IN = 7;
-	public static final int TELEPORTER_OUT = 8;
-	public static final int WALL_ICE = 9;
-	public static final int PIPE_LEFT_ICE = 10;
-	public static final int PIPE_RIGHT_ICE = 11;
-	public static final int WALL_LAVA = 12;
-
-	public static final int SQUARE_EMPTY = 20;
-	public static final int SQUARE_OCCUPIED = 21;
-	public static final int SQUARE_LASER = 22;
-	public static final int SQUARE_LASER_OCCUPIED = 23;
-	public static final int SQUARE_EDGE = 24;
-	public static final int SQUARE_PIPE = 25;
-	public static final int SQUARE_TELEPORTER = 26;
-	public static final int SQUARE_WALL = 27;
-	public static final int SQUARE_ENEMY = 28;
-
-	public static final int TELEPORT = 40;
-	public static final int SLIDE_ICE = 41;
-	public static final int FALL = 42;
-
-	public static final int ROW_UP = -1;
-	public static final int ROW_DOWN = 1;
-	public static final int COLUMN_LEFT = -1;
-	public static final int COLUMN_RIGHT = 1;
-
-	/**
-	 * FOR ARRAY ACCESS
-	 */
-
-	public static final int COMMAND = 0;
-	public static final int TYPE = 0;
-	public static final int ROW = 1;
-	public static final int COLUMN = 2;
-
-	public static final int SITUATION = 0;
-	public static final int OBJECT = 1;
-	public static final int BACKGROUND = 2;
 
 	/**
 	 * OBJECT REFERENCE TRACKERS
@@ -87,13 +74,14 @@ public class CandyEngine {
 	 * GAME VIEW REFERENCE
 	 */
 
-	final CandyLevelActivity candyLevel;
+	public final CandyLevelActivity candyLevel;
 
 	/**
 	 * EASE OF ACCESS
 	 */
 
-	CandyAnimatedSprite bot, candy;
+	public CandyAnimatedSprite bot;
+	CandyAnimatedSprite candy;
 	int botIndex = -1;
 	int candyIndex = -1;
 
@@ -124,17 +112,17 @@ public class CandyEngine {
 	/**
 	 * GAME STATISTICS
 	 */
-	int moves = 0;
-	int restarts = 0;
-	int enemiesDefeated = 0;
-	int starsEarned = 0;
-	long totalTime = 0;
-	int deathCounter = 0;
-	int enemyDeathCounter = 0;
-	int laserDeathCounter = 0;
-	int candyBurnedCounter = 0;
+	public int moves = 0;
+	public int restarts = 0;
+	public int enemiesDefeated = 0;
+	public int starsEarned = 0;
+	public long totalTime = 0;
+	public int deathCounter = 0;
+	public int enemyDeathCounter = 0;
+	public int laserDeathCounter = 0;
+	public int candyBurnedCounter = 0;
 
-	final AtomicBoolean eliminateToasts = new AtomicBoolean();
+	public final AtomicBoolean eliminateToasts = new AtomicBoolean();
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevelActivity candyLevel) {
 		this.spriteList = spriteList;
@@ -151,20 +139,20 @@ public class CandyEngine {
 
 		for (int i = 0; i < objectArray.length; i++) {
 			switch (objectArray[i][TYPE]) {
-			case CandyLevelActivity.ENEMY:
+			case ENEMY:
 				enemyList.add(spriteList.get(i));
 				break;
-			case CandyLevelActivity.BOT:
+			case BOT:
 				botIndex = i;
 				bot = spriteList.get(i);
 				if (CandyUtils.DEBUG) Log.i(TAG, "Cat located at row " + objectArray[i][ROW] + ", column " + objectArray[i][COLUMN]);
 				break;
-			case CandyLevelActivity.CANDY:
+			case CANDY:
 				candyIndex = i;
 				candy = spriteList.get(i);
 				if (CandyUtils.DEBUG) Log.i(TAG, "Candy located at row " + objectArray[i][ROW] + ", column " + objectArray[i][COLUMN]);
-			case CandyLevelActivity.BOX:
-			case CandyLevelActivity.BOMB:
+			case BOX:
+			case BOMB:
 				spriteQueue.add(new LinkedList<int[]>());
 				gravityList.add(spriteList.get(i));
 				break;
@@ -209,7 +197,7 @@ public class CandyEngine {
 				switch (s2) {
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
-					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.INERTIA_WALL)) {
+					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == INERTIA_WALL)) {
 						if (shouldDie) {death = true; deathCounter++; laserDeathCounter++;}
 						botMoved = true;
 						move(rowDirection, columnDirection, botIndex, situationArray[OBJECT]);
@@ -246,7 +234,7 @@ public class CandyEngine {
 
 	private synchronized void move(final int rowDirection, final int columnDirection, final Integer... spriteIndexes) {
 		for (int spriteIndex : spriteIndexes) {
-			if (objectArray[spriteIndex][TYPE] != CandyLevelActivity.INERTIA_WALL) {
+			if (objectArray[spriteIndex][TYPE] != INERTIA_WALL) {
 				spriteList.get(spriteIndex).move(rowDirection, columnDirection);
 			} else {
 				final int glideDistance = glideDistance(spriteIndex, rowDirection, columnDirection);
@@ -418,7 +406,7 @@ public class CandyEngine {
 		case SQUARE_LASER_OCCUPIED:
 			shouldDie = true;
 		case SQUARE_OCCUPIED:
-			if (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.BOT) {
+			if (objectArray[situationArray[OBJECT]][TYPE] == BOT) {
 				death = true; deathCounter++; enemyDeathCounter++;
 				move(rowDirection, columnDirection, enemySprite.index);
 			} else {
@@ -427,7 +415,7 @@ public class CandyEngine {
 				switch (s2) {
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
-					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == CandyLevelActivity.INERTIA_WALL)) {
+					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == INERTIA_WALL)) {
 						if (shouldDie) {
 							enemySprite.enemyDead = true;
 							enemiesDefeated++;
@@ -542,7 +530,7 @@ public class CandyEngine {
 						} else {
 							gravityList.get(i).lastDirectionalMove = 0;
 							final int index = gravityList.get(i).index;
-							if (CandyUtils.DEBUG) Log.i(TAG, "Item " + i + "(index " + index + "): " + objectArray[index][CandyEngine.ROW] + " " + objectArray[index][CandyEngine.COLUMN]);
+							if (CandyUtils.DEBUG) Log.i(TAG, "Item " + i + "(index " + index + "): " + objectArray[index][ROW] + " " + objectArray[index][COLUMN]);
 							if (i == gravityList.size() - 1 && queueAllEmpty()) { // otherwise if it's the last one and everything is empty
 								return;
 							}
@@ -656,7 +644,7 @@ public class CandyEngine {
 		} else {
 			if (Conditionals.isLaser(b)) {
 				s = SQUARE_LASER_OCCUPIED;
-			} else if (objectArray[o][TYPE] == CandyLevelActivity.ENEMY) {
+			} else if (objectArray[o][TYPE] == ENEMY) {
 				s = SQUARE_ENEMY;
 			} else {
 				s = SQUARE_OCCUPIED;
@@ -734,7 +722,7 @@ public class CandyEngine {
 				}
 				break outer;
 			case SQUARE_WALL:
-				if (objectArray[index][TYPE] == CandyLevelActivity.BOMB && fallDistance >= 1) {
+				if (objectArray[index][TYPE] == BOMB && fallDistance >= 1) {
 					spriteList.get(index).blowUp = true;
 				} else if (situationArray[BACKGROUND] == WALL_LAVA && index == candyIndex) {
 					candyBurned = true;
@@ -802,50 +790,6 @@ public class CandyEngine {
 
 	private synchronized int getBackground(final int row, final int column, final int rowDirection, final int columnDirection) {
 		return Conditionals.condition(row, column, rowDirection, columnDirection) ? EDGE : backgroundArray[row + rowDirection][column + columnDirection];
-	}
-
-	private static class Conditionals {
-
-		private static boolean isLaser(final int type) {
-			switch (type) {
-			case LASER_HORIZONTAL:
-			case LASER_VERTICAL:
-			case LASER_CROSS:
-				return true;
-			default:
-				return false;
-			}
-		}
-
-		private static boolean isPipe(final int type) {
-			switch (type) {
-			case PIPE_LEFT:
-			case PIPE_RIGHT:
-			case PIPE_LEFT_ICE:
-			case PIPE_RIGHT_ICE:
-				return true;
-			default:
-				return false;
-			}
-		}
-
-		/**
-		 * A master conditional statement.
-		 */
-
-		private static boolean condition(final int row, final int column, final int rowDirection, final int columnDirection) {
-			final boolean condition;
-			if (rowDirection == -1) {
-				condition = (row == 0);
-			} else if (rowDirection == 1) {
-				condition = (row == 17);
-			} else if (columnDirection == -1) {
-				condition = (column == 0);
-			} else {
-				condition = (column == 23);
-			}
-			return condition;
-		}
 	}
 
 	private class GravityComparator implements Comparator<CandyAnimatedSprite> {

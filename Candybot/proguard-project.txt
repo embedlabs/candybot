@@ -19,6 +19,7 @@
 #   public *;
 #}
 
+-repackageclasses 'com.embed.candy'
 -allowaccessmodification
 
 # Note to self: Change both AndEngine DEBUG and Candybot DEBUG to false for release.

@@ -1,4 +1,5 @@
-package com.embed.candy;
+package com.embed.candy.service;
+
 
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
