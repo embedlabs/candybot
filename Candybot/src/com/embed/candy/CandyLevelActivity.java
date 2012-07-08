@@ -3,6 +3,7 @@ package com.embed.candy;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
 import org.anddev.andengine.audio.music.Music;
@@ -12,6 +13,7 @@ import org.anddev.andengine.audio.sound.SoundFactory;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
+import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -44,14 +46,23 @@ import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 import org.anddev.andengine.opengl.font.Font;
+import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
+import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
+import org.anddev.andengine.opengl.texture.Texture;
+import org.anddev.andengine.opengl.texture.TextureOptions;
+import org.anddev.andengine.opengl.texture.region.TextureRegion;
+import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl;
+import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl.IOnScreenControlListener;
+import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -92,6 +103,13 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	static final int ENEMY = 5;
 	static final int MOVABLE_WALL = 6;
 	static final int INERTIA_WALL = 7;
+	
+	private BitmapTextureAtlas mOnScreenControlTexture;
+	private TextureRegion mOnScreenControlBaseTextureRegion;
+	private TextureRegion mOnScreenControlKnobTextureRegion;
+
+	private DigitalOnScreenControl mDigitalOnScreenControl;
+
 
 	/**
 	 * Gotta keep track of all your variables and objects and stuff...
@@ -285,11 +303,17 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mParticleTexture = new BitmapTextureAtlas(64,32,quality);
 		mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle.png", 0, 0);
 		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 40, 8);
+		
+		// On Screen controllers, no shit...
+		this.mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
+		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_knob.png", 128, 0);
 
+		
 		/**
 		 * ENGINE LOADING
 		 */
-		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture, mParticleTexture);
+		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture, mParticleTexture, mOnScreenControlTexture);
 		mEngine.getFontManager().loadFont(andengineMainFont);
 
 		/**
@@ -424,6 +448,23 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				return true;
 			}
 		};
+		
+		this.mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCandyCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
+			@Override
+			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
+				Log.i(TAG, "Base Screen Control test");
+			}
+		});
+		this.mDigitalOnScreenControl.getControlBase().setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+		this.mDigitalOnScreenControl.getControlBase().setAlpha(0.5f);
+		this.mDigitalOnScreenControl.getControlBase().setScaleCenter(0, 128);
+		this.mDigitalOnScreenControl.getControlBase().setScale(1.25f);
+		this.mDigitalOnScreenControl.getControlKnob().setScale(1.25f);
+		this.mDigitalOnScreenControl.refreshControlKnobPosition();
+
+		mScene.setChildScene(this.mDigitalOnScreenControl);
+
+		
 		hud.attachChild(resetLevelText);
 		hud.registerTouchArea(resetLevelText);
 
