@@ -66,6 +66,7 @@ import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -645,6 +646,18 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		if (isFinishing()) {
 			candyEngine.totalTime = totalTime;
 			candyEngine.eliminateToasts.set(true);
+			if (candyEngine.moves>=300) {
+				final Editor e = sp.edit();
+				if (candyEngine.moves>=400) {
+					e.putInt("com.embed.candy.achievement.movecount", 2);
+					e.apply();
+				} else {
+					if (sp.getInt("com.embed.candy.achievement.movecount", 0)<2) {
+						e.putInt("com.embed.candy.achievement.movecount", 1);
+						e.apply();
+					}
+				}
+			}
 			CandyUtils.saveSettings(candyEngine);
 		}
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.swarmconnect.SwarmAchievement;
@@ -61,7 +62,6 @@ public class CandyAchievements {
 		}
 		return temp;
 	}
-
 
 	private static final int[][] FIRST10 = new int[][]{
 		{1, 1,2403}, // first level
@@ -134,29 +134,77 @@ public class CandyAchievements {
 			/**
 			 * ACHIEVEMENTS 16-18
 			 */
-//			boolean found2 = false;
-//			boolean found5 = false;
-//			boolean found10 = false;
-//
-//
-//			for (int [][] world:worlds) {
-//				for (int i=0;i<20;i++) {
-//					if (world[i][CandyUtils.TOTAL_RESTARTS]>=10) {
-//						found10 = true;
-//						found5 = true;
-//						found2 = true;
-//					}
-//					if (found2&&found5&&found10);
-//				}
-//			}
+			boolean found2 = false;
+			boolean found5 = false;
+			boolean found10 = false;
+			outer:
+			for (int [][] world:worlds) {
+				for (int i=0;i<20;i++) {
+					if (world[i][CandyUtils.TOTAL_RESTARTS]>=2) {
+						found2 = true;
+						if (world[i][CandyUtils.TOTAL_RESTARTS]>=5) {
+							found5 = true;
+							if (world[i][CandyUtils.TOTAL_RESTARTS]>=10) {
+								found10 = true;
+								break outer;
+							}
+						}
+					}
+				}
+			}
+			if (found2) {
+				unlockHelper(2589);
+				if (found5) {
+					unlockHelper(2591);
+					if (found10) {
+						unlockHelper(2593);
+					}
+				}
+			}
 
-			// laser kills/candy melts/enemy kills
+			/**
+			 * ACHIEVEMENTS 19-20
+			 */
+			final int lasers = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS_BY_LASER);
+			if (lasers > 0) {
+				unlockHelper(2595);
+				if (lasers >= 5) {
+					unlockHelper(2597);
+				}
+			}
+
+			/**
+			 * ACHIEVEMENTS 21-22
+			 */
 			final int burned = statisticObtainer(worlds, CandyUtils.TOTAL_BURNS);
 			if (burned > 0) {
 				unlockHelper(2599);
+				if (burned >= 5) {
+					unlockHelper(2601);
+				}
 			}
-			if (burned >= 5) {
-				unlockHelper(2601);
+
+			/**
+			 * ACHIEVEMENTS 23-24
+			 */
+			final int enemies = statisticObtainer(worlds, CandyUtils.TOTAL_DEATHS_BY_ENEMY);
+			if (enemies > 0) {
+				unlockHelper(2603);
+				if (enemies >= 5) {
+					unlockHelper(2605);
+				}
+			}
+
+			/**
+			 * ACHIEVEMENTS 25-26
+			 */
+			final int moves = PreferenceManager.getDefaultSharedPreferences(cont).getInt("com.embed.candy.achievement.movecount", 0);
+			switch (moves) {
+			case 2:
+				unlockHelper(2609);
+			case 1:
+				unlockHelper(2607);
+				break;
 			}
 
 			// TODO program the rest of the achievements
