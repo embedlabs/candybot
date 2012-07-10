@@ -48,10 +48,27 @@
 		<o n="7" r="13" c="2" />
 		<o n="7" r="14" c="18" />
 	</l>
-	<l id="5">
+	<l id="5"> <!-- Ameya's todo -->
 	    	
 	</l>
 	<l id="6">
+	    <c>H4sIAAAAAAAAC82T0QrAIAgAdVsPgf//vXOwBxHLNZVNOEyoQ8oQAJA5kkFBY3oyzfCT2kOCPsikztGifyW/8f+tf+/+Z/2O1k/7r5qf6vmvCu3HYPb82fGFP1pbfv3WkVq/54X8VxCsPX8Uy5/Nxuz3+gQznejmwAYAAA==</c>
+		<o n="1" r="13" c="3" />
+		<o n="2" r="13" c="2" />
+        <o n="3" r="9" c="3" />
+		<o n="3" r="9" c="7" />
+        <o n="3" r="9" c="11" />
+		<o n="3" r="9" c="15" />
+        <o n="4" r="9" c="5" />
+		<o n="4" r="9" c="9" />
+        <o n="4" r="9" c="13" />
+        <o n="4" r="9" c="17" />
+		<o n="6" r="9" c="20" />
+        <o n="6" r="10" c="20" />
+        <o n="6" r="11" c="20" />
+        <o n="6" r="12" c="20" />	
+	</l>
+	<l id="7">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFRgu5qOHFTVpeoUPOs2DRuOSxydOz/DH5yZc8oT8OBjDn9j44GEYuPCnxM3o4gMV/rjcREp+GI7lGzUwExAzQ9kAVSWbCcAGAAA=</c>
 		<o n="1" r="3" c="3" />
 		<o n="2" r="3" c="2" />
@@ -65,9 +82,6 @@
 		<o n="6" r="9" c="18" />
 		<o n="6" r="9" c="20" />
 		<t>This lava wall will immediately incinerate candy that lands upon it. Try covering it up with boxes or anything that will keep it from burning the candy.</t>
-	</l>
-	<l id="7">
-	    	
 	</l>
 	<l id="8">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFaCX+fj8RYl/6Rk+2NzJg0Mcl3p095LjfmR7SXE/LQA284mNS3LCi1w34govapmPT46Y8CE3/6PLE5suiAWkxiG1zacUUFLeEhMX5LqfUJhS6n5CmAmImaFsAON6rhHABgAA</c>
