@@ -120,16 +120,4 @@
 		<o n="3" r="7" c="16" />
 		<o n="5" r="4" c="7" />
 	</l>
-	<l id="10"> <!-- UNDER THIS IS A FILLER -->
-	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFUA2nxY0vdxPaz/QCoyGP2F6NPxxA0LmY4sfdHdSYj6yOnQzR82nnvmkYCYgZiZBPQC2Gm9HwAYAAA==</c>
-		<o n="1" r="1" c="2" />
-		<o n="2" r="1" c="1" />
-		<o n="3" r="1" c="10" />
-		<o n="3" r="1" c="16" />
-		<o n="3" r="5" c="4" />
-		<o n="3" r="9" c="6" />
-		<o n="3" r="5" c="10" />
-		<o n="3" r="7" c="15" />
-		<m a="199" b="207" /> <!-- Six for a, fourteen for b || because there are so many ways!, not sure moves -->
-	</l>
 </w>
