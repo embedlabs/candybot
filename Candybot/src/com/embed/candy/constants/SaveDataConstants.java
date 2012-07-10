@@ -22,4 +22,6 @@ public class SaveDataConstants {
 	public static final int STARS1 = 1;
 	public static final int STARS2 = 2;
 	public static final int STARS3 = 3;
+
+	public static final int MILLIS_PER_HALF_HOUR = 30*60*1000;
 }

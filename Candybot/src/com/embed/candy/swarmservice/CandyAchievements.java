@@ -1,11 +1,13 @@
 package com.embed.candy.swarmservice;
 
+import static com.embed.candy.constants.SaveDataConstants.MILLIS_PER_HALF_HOUR;
 import static com.embed.candy.constants.SaveDataConstants.STARS1;
 import static com.embed.candy.constants.SaveDataConstants.STATUS;
 import static com.embed.candy.constants.SaveDataConstants.TOTAL_BURNS;
 import static com.embed.candy.constants.SaveDataConstants.TOTAL_DEATHS_BY_ENEMY;
 import static com.embed.candy.constants.SaveDataConstants.TOTAL_DEATHS_BY_LASER;
 import static com.embed.candy.constants.SaveDataConstants.TOTAL_RESTARTS;
+import static com.embed.candy.constants.SaveDataConstants.TOTAL_TIME_MILLIS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,18 @@ public class CandyAchievements {
 	public static final int WORLD = 0;
 	public static final int LEVEL = 1;
 	public static final int ACHIEVEMENT_ID = 2;
+
+	private static final int[][]ACHIEVEMENTS34_39 = new int[][]{
+		{1,2623},
+		{2,2625},
+		{3,2627},
+		{4,2629},
+		{6,2631},
+		{8,2633}
+	};
+
+	public static final int NUMBER_OF_HALF_HOURS = 0;
+	public static final int TIME_ACHIEVEMENT_ID = 1;
 
 	// TODO: make sure Ameya arranges the levels properly and then we fix FIRST10 accordinly
 	// TODO: Shrav change the achievement names to be more accurate, like "Finish the *first* bomb level" to avoid unlocking issues
@@ -171,6 +185,46 @@ public class CandyAchievements {
 			case 1:
 				unlockHelper(2607);
 				break;
+			}
+
+			/**
+			 * ACHIEVEMENTS 31-33
+			 */
+			int counter1 = 0;
+			int counter2 = 0;
+
+			for (int[][] world:worlds) {
+				for (int i=0;i<20;i++) {
+					final int tempStatus = world[i][STATUS];
+					if (tempStatus>=1) {
+						counter1++;
+						if (tempStatus>=2) {
+							counter2++;
+						}
+					}
+				}
+			}
+
+			if (counter1==100) {
+				unlockHelper(2619);
+				if (counter2==100) {
+					unlockHelper(2635);
+				}
+			}
+
+			if (statisticObtainer(worlds,STATUS)==300) {
+				unlockHelper(2621);
+			}
+
+			/**
+			 * ACHIEVEMENTS 34-39
+			 */
+			final int totalMillis = statisticObtainer(worlds,TOTAL_TIME_MILLIS);
+
+			for (int [] achievement:ACHIEVEMENTS34_39) {
+				if (totalMillis>=achievement[NUMBER_OF_HALF_HOURS]*MILLIS_PER_HALF_HOUR) {
+					unlockHelper(achievement[TIME_ACHIEVEMENT_ID]);
+				}
 			}
 
 			// TODO program the rest of the achievements
