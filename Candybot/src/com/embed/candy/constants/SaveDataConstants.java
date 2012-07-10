@@ -1,6 +1,6 @@
 package com.embed.candy.constants;
 
-public class SaveDataConstants {
+public final class SaveDataConstants {
 	public static final int STATUS = 0;
 	public static final int MIN_MOVES = 1;
 	public static final int TOTAL_MOVES = 2;

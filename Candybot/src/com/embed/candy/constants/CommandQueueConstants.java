@@ -1,6 +1,6 @@
 package com.embed.candy.constants;
 
-public class CommandQueueConstants {
+public final class CommandQueueConstants {
 	public static final int COMMAND = 0;
 	public static final int TYPE = 0;
 	public static final int ROW = 1;

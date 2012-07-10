@@ -1,6 +1,6 @@
 package com.embed.candy.constants;
 
-public class EngineConstants {
+public final class EngineConstants {
 	public static final int EDGE = -2;
 	public static final int NO_OBJECT = -1;
 
