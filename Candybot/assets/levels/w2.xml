@@ -133,12 +133,19 @@
 		<o n="6" r="5" c="2" />
 	</l>
 	<l id="16">
+	    <c>H4sIAAAAAAAAA7VU0QqAMAjUgmqw///egl7k8HZukSBtHjtPm3Mz85+92WvZ141b5awL3CzPETGWY6QfOZ2sRzmYftYTF1hFP+pknBmWcTnsv1rMEfUz3UynwhvBVuwidczwH2TNDOcL6zsh1sEznhhT/7da1+gOqfs5a+p+xjj2I/Ykw6rzxXJgDxR39X1T/KvvG2pg81U9W/Ht8X3yzA1zlQg8wAYAAA==</c>
+	    <o n="1" r="4" c="8" />
+		<o n="2" r="4" c="15" />
+		<o n="6" r="9" c="10" />
+		<o n="6" r="9" c="13" />
+	</l>
+	<l id="17">
 	    <c>H4sIAAAAAAAAC61U0Q6AIAiEstX/f3E92MbYAYfFxjI5z1NAFRH96BeBOSS2Y3oHb7Fjfiv8IPEWo2bO/iM84vX3gGIdi/CRro6eP/grUzfO7pfhR7XW0cLk169Z4Y9i0Zmz/Kye912fGerFaH+W3875XmT1szXre7Gbz06P+vph9Hb0rNZn9Q4hftaY9xnt6f0s4plvj+9zfAOam7VhwAYAAA==</c>
 		<o n="1" r="2" c="4" />
 		<o n="2" r="2" c="3" />
 		<t>Use teleporters by simply placing an object on top of the "In" teleporter and it will come out of the "Out" teleporter. Moveable walls and inertia walls can't be teleported.</t>
 	</l>
-	<l id="17">
+	<l id="18">
 	    <c>H4sIAAAAAAAAC82U3QqAMAiFXUH1/k+8goIh5/izeZEga02/eWTYRKQt+uWcR+yJOwaP5M3wxzXKj+hi9Vt9yNTvsaz4CtYMX4zzv/OzHMRDexH8dtB/zUF5FXxmTA+rw9KOYqv6zyxzj46L5Ol46249G/Te6yHr+7fq2YZmnfd+mL5M/Sj/BBpXfLt9f787Zy5WYMAGAAA=</c>
 		<o n="1" r="2" c="4" />
 		<o n="3" r="15" c="8" />
@@ -147,7 +154,7 @@
 		<o n="5" r="12" c="18" />
 		<o n="2" r="2" c="3" />
 	</l>
-	<l id="18">
+	<l id="19">
 	    <c>eJylleEOwiAMhLuJU9D3f17DjyaXy1FObdIM2Ppd1w7WI6KbfoC7MdPTzvBsxrwK3lPwd9rMP8w8Os3VmGN2TMV/m5wd/07sfH5Q/D98rvk3pt6/wfgS/La4Zh9VX5J1ibHSVxq4XvHRV/1d1aC6xxqKjf3lHp80V9pcc15zcuXYVc2Q7fBvEINaTeTMbOarvaz0+fvanS/ufeSzDbGmcq6M94FjyX9Enf/0PI9/4bvu/l8G5PMBKSgHUA==</c>
 		<o n="1" c="5" r="1" />
 		<o n="2" c="4" r="1" />
@@ -162,18 +169,11 @@
 		<o n="6" c="17" r="14" />
 		<o n="7" c="2" r="4" />
 	</l>
-	<l id="19">
+	<l id="20">
 	    <c>H4sIAAAAAAAAC71UWwrAIAxrN8f0/hfehAl+1Na+FggtCDGNDwQATOaMC+Iw6/faAlkW/iORmfk99YUgCuscufMd6BnWr1rQBH0vdjKkZtXcd86/lJ9mhgho5rHkQfn8631l63v/REnf6i1Tf2evoX+8PMGX14oPRbJQ0cAGAAA=</c>
 		<o n="1" r="7" c="4" />
 		<o n="2" r="7" c="2" />
 		<o n="3" r="1" c="2" />
 		<o n="6" r="10" c="2" />
-	</l>
-	<l id="20">
-	    <c>H4sIAAAAAAAAA7WUiwrAIAhFdUu2///iLdhAxHxUClJkHe0mIQBgse+0zrsL+TJX5Z0kq89pE7uKj2zU+JZeUQ3l/vY5nzexDiwefZ/Vt/R6I8KX8Uw90fot3bXzXMcZfVCMmXqyOUZGi3zPRvxo31txTx9Szmn5NYv0Z+aP+BmXUcvx+gn+PWf8AYaeqtfABgAA</c>
-		<o n="1" r="2" c="4" />
-		<o n="2" r="2" c="2" />
-		<o n="3" r="15" c="17" />
-		<o n="6" r="2" c="21" />
 	</l>
 </w>
