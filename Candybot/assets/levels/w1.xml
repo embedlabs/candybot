@@ -108,7 +108,7 @@
 		<o n="4" r="2" c="20" />
 		<o n="4" r="5" c="5" />
 		<m a="154" b="160" /> <!-- Six for a, twelve for b || pretty sure about this one, did it hella efficiently -->
-		<t>Bombs can clear walls and objects to create a path for the candy. To activate a bomb, push it onto a block, and it will take out the block directly underneath it.  Blocks will not destroy moveable objects.</t>
+		<t>Bombs can clear walls and objects to create a path for the candy. To activate a bomb, push it onto a block, and it will take out the block directly underneath it.  Blocks will not destroy moveable objects. It must fall a minimum of two bloacks to activate.</t>
 	</l>
 	<l id="12">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+aT6dTiGD7H+xCVOjv9JdT8jGk2MelxuRhdDN59QGKCrI9Y9uNyCz/3UTkuU5nVapX9K4hefPK54ptR8fPYRcgcxaikF9Cp/qI2ZgJgZygYAnp8u2sAGAAA=</c>
