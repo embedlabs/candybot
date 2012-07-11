@@ -266,8 +266,20 @@ public class CandyAchievements {
 			}
 
 			/**
-			 * ACHIEVEMENTS 27-30 TODO
+			 * ACHIEVEMENTS 27-30
 			 */
+			if (achievementCount()>=10) {
+				unlockHelper(2611);
+			}
+			if (achievementCount()>=25) {
+				unlockHelper(2613);
+			}
+			if (achievementCount()>=40) {
+				unlockHelper(2615);
+			}
+			if (achievementCount()>=45) {
+				unlockHelper(2617);
+			}
 		}
 	}
 
@@ -282,5 +294,20 @@ public class CandyAchievements {
 	public static boolean isUnlocked(final int achievementInt) {
 		final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
 		return (achievement==null?false:achievement.unlocked);
+	}
+
+	public static int achievementCount() {
+		int counter = 0;
+		for (int i=2403;i<=2419;i+=2) {
+			if (isUnlocked(i)) {
+				counter++;
+			}
+		}
+		for (int i=2577;i<=2649;i+=2) {
+			if (isUnlocked(i)) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 }
