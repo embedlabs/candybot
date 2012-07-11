@@ -42,25 +42,6 @@ public class SaveIO {
 	public static final String TAG = CandyUtils.TAG;
 
 	public static void saveSettings(final CandyEngine candyEngine) {
-		/**
-		 * 0: stars/locking status: -1 for unlocked, 0 for locked, 1 for 1 star, 2 for 2 stars, 3 for 3 stars, -2 for world line
-		 * 1: minimum moves
-		 * 2: moves total on this level, sum of the other ones in the world line
-		 * 3: restarts total, sum of the other ones in the world line
-		 * 4: enemies defeated total, sum of the other ones in the world line
-		 * 5: total wins
-		 * 6: total time
-		 * 7: total quits
-		 */
-
-		/**
-		 * WE WANT TO SEND THE FOLLOWING INFORMATION TO AFTERLEVELACTIVITY:
-		 * Stars
-		 * Moves
-		 * Time
-		 * and if each of the above were improved or not.
-		 *
-		 */
 		final boolean starsImproved;
 		boolean movesImproved = false;
 		boolean timeImproved = false;

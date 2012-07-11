@@ -1,6 +1,7 @@
 package com.embed.candy.swarmservice;
 
 import static com.embed.candy.constants.SaveDataConstants.MILLIS_PER_HALF_HOUR;
+import static com.embed.candy.constants.SaveDataConstants.MIN_TIME_MILLIS;
 import static com.embed.candy.constants.SaveDataConstants.STARS1;
 import static com.embed.candy.constants.SaveDataConstants.STATUS;
 import static com.embed.candy.constants.SaveDataConstants.TOTAL_BURNS;
@@ -60,8 +61,7 @@ public class CandyAchievements {
 	public static final int NUMBER_OF_HALF_HOURS = 0;
 	public static final int TIME_ACHIEVEMENT_ID = 1;
 
-	// TODO: make sure Ameya arranges the levels properly and then we fix FIRST10 accordinly
-	// TODO: Shrav change the achievement names to be more accurate, like "Finish the *first* bomb level" to avoid unlocking issues
+	// TODO: make sure Ameya arranges the levels properly and then we fix FIRST10 accordingly
 	public static void setAchievements(final Context cont) {
 		if (MainMenuActivity.achievements != null) {
 
@@ -227,7 +227,47 @@ public class CandyAchievements {
 				}
 			}
 
-			// TODO program the rest of the achievements
+			/**
+			 * ACHIEVEMENTS 40-42
+			 */
+			final int totalMinMillis = statisticObtainer(worlds,MIN_TIME_MILLIS);
+			if (isUnlocked(2619)) {
+				if (totalMinMillis<=16*MILLIS_PER_HALF_HOUR) {
+					unlockHelper(2637);
+					if (totalMinMillis<=12*MILLIS_PER_HALF_HOUR) {
+						unlockHelper(2639);
+						if (totalMinMillis<=10*MILLIS_PER_HALF_HOUR) {
+							unlockHelper(2641);
+						}
+					}
+				}
+			}
+
+			/**
+			 * ACHIEVEMENTS 43-45
+			 */
+			if (isUnlocked(2635)) {
+				if (totalMinMillis<=16*MILLIS_PER_HALF_HOUR) {
+					unlockHelper(2643);
+					if (totalMinMillis<=12*MILLIS_PER_HALF_HOUR) {
+						unlockHelper(2645);
+						if (totalMinMillis<=10*MILLIS_PER_HALF_HOUR) {
+							unlockHelper(2647);
+						}
+					}
+				}
+			}
+
+			/**
+			 * ACHIEVEMENT 46
+			 */
+			if (isUnlocked(2621)&&totalMinMillis<=10*MILLIS_PER_HALF_HOUR) {
+				unlockHelper(2649);
+			}
+
+			/**
+			 * ACHIEVEMENTS 27-30 TODO
+			 */
 		}
 	}
 
@@ -237,5 +277,10 @@ public class CandyAchievements {
 			achievement.unlock();
 			if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,"Unlocked: "+achievementInt);
 		}
+	}
+
+	public static boolean isUnlocked(final int achievementInt) {
+		final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
+		return (achievement==null?false:achievement.unlocked);
 	}
 }

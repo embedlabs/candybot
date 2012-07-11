@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -60,6 +59,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 	volatile int count = 0;
 	boolean incomplete = false;
+	private SharedPreferences prefs;
 	public static Intent svc = null;
 //	static MainMenuActivity mma = null;
 
@@ -67,8 +67,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	public void onClick(final View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
-			final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-			theme = sp.getString("com.embed.candy.graphics_theme", "normal");
+			theme = prefs.getString("com.embed.candy.graphics_theme", "normal");
 			if (CandyUtils.DEBUG) Log.i(TAG, "THEME: " + theme);
 			startActivity(new Intent(this, WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
 			break;
@@ -233,8 +232,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		iv_twitter = (ImageView) findViewById(R.id.button_twitter);
 		my_swarm_button = (ImageView)findViewById(R.id.my_swarm_button);
 
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		prefs.registerOnSharedPreferenceChangeListener(this);
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
 		boolean initMusic = prefs.getBoolean("com.embed.candy.music", true);
 		svc = new Intent(this,MusicService.class);
@@ -270,6 +268,13 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	public void onResume() {
 		super.onResume();
 		CandyAchievements.setAchievements(this);
+		prefs.registerOnSharedPreferenceChangeListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		prefs.unregisterOnSharedPreferenceChangeListener(this);
+		super.onPause();
 	}
 
 	private SwarmLoginListener mySwarmLoginListener = new CandySwarmListener();
