@@ -62,7 +62,17 @@ public class CandyAchievements {
 	public static final int TIME_ACHIEVEMENT_ID = 1;
 
 	// TODO: make sure Ameya arranges the levels properly and then we fix FIRST10 accordingly
-	public static void setAchievements(final Context cont) {
+
+	public static void startAchievementsRunnable(final Context cont) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				setAchievements(cont);
+			}
+		}).start();
+	}
+
+	private static void setAchievements(final Context cont) {
 		if (MainMenuActivity.achievements != null) {
 
 			final List<int[][]> allWorlds = new ArrayList<int[][]>();

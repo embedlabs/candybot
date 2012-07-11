@@ -267,7 +267,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	@Override
 	public void onResume() {
 		super.onResume();
-		CandyAchievements.setAchievements(this);
+		CandyAchievements.startAchievementsRunnable(this);
 		prefs.registerOnSharedPreferenceChangeListener(this);
 	}
 

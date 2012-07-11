@@ -1,9 +1,6 @@
 package com.embed.candy;
 
 
-import com.embed.candy.swarmservice.CandyAchievements;
-import com.embed.candy.util.ViewUtils;
-
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -12,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.embed.candy.swarmservice.CandyAchievements;
+import com.embed.candy.util.ViewUtils;
 
 public class AfterLevelActivity extends BetterSwarmActivity implements View.OnClickListener {
 
@@ -33,7 +33,7 @@ public class AfterLevelActivity extends BetterSwarmActivity implements View.OnCl
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 		setContentView(R.layout.after_level);
 
-		CandyAchievements.setAchievements(this);
+		CandyAchievements.startAchievementsRunnable(this);
 
 		final Intent i = getIntent();
 		stars = i.getIntExtra("com.embed.candy.stars", 0);
