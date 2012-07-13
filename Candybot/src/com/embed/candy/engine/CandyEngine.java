@@ -113,6 +113,8 @@ public class CandyEngine {
 	 * GAME STATISTICS
 	 */
 	public int moves = 0;
+	public int cumulativeMoves = 0;
+
 	public int restarts = 0;
 	public int enemiesDefeated = 0;
 	public int starsEarned = 0;
@@ -269,7 +271,7 @@ public class CandyEngine {
 					}
 				}
 			}
-			moves++;
+			moves++; cumulativeMoves++;
 
 			if (moves==5) {
 //				for (final Text text:candyLevel.textReferences) {

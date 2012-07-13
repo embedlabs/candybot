@@ -102,7 +102,7 @@ public class SaveIO {
 		}
 
 		// Update the other stats (2, 3, 4, 5)
-		levelArray[TOTAL_MOVES]+=candyEngine.moves; // 2 || WORKS EVEN IF QUIT
+		levelArray[TOTAL_MOVES]+=candyEngine.cumulativeMoves; // 2 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_RESTARTS]+=candyEngine.restarts; // 3 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_DEFEATED]+=candyEngine.enemiesDefeated; // 4 || WORKS EVEN IF QUIT
 		levelArray[TOTAL_DEATHS]+=candyEngine.deathCounter; // 9 || WORKS EVEN IF QUIT

@@ -652,15 +652,15 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		if (isFinishing()) {
 			candyEngine.totalTime = totalTime;
 			candyEngine.eliminateToasts.set(true);
-			if (candyEngine.moves>=300) {
+			if (candyEngine.cumulativeMoves>=300) {
 				final Editor e = sp.edit();
-				if (candyEngine.moves>=400) {
+				if (candyEngine.cumulativeMoves>=400) {
 					e.putInt("com.embed.candy.achievement.movecount", 2);
-					e.apply();
+					e.commit();
 				} else {
 					if (sp.getInt("com.embed.candy.achievement.movecount", 0)<2) {
 						e.putInt("com.embed.candy.achievement.movecount", 1);
-						e.apply();
+						e.commit();
 					}
 				}
 			}
