@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -40,7 +39,7 @@ import com.swarmconnect.SwarmAchievement;
 import com.swarmconnect.SwarmActiveUser.GotCloudDataCB;
 import com.swarmconnect.delegates.SwarmLoginListener;
 
-public class MainMenuActivity extends BetterSwarmActivity implements View.OnClickListener, OnSharedPreferenceChangeListener {
+public class MainMenuActivity extends BetterSwarmActivity implements View.OnClickListener {
 
 	TextView mainmenu_tv;
 	Button button_play, button_achieve;
@@ -58,14 +57,13 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 	volatile int count = 0;
 	boolean incomplete = false;
-	private SharedPreferences prefs;
 	public static Intent svc = null;
 
 	@Override
 	public void onClick(final View view) {
 		switch (view.getId()) {
 		case R.id.button_play:
-			theme = prefs.getString("com.embed.candy.graphics_theme", "normal");
+			theme = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("com.embed.candy.graphics_theme", "normal");
 			if (CandyUtils.DEBUG) Log.i(TAG, "THEME: " + theme);
 			startActivity(new Intent(this, WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
 			break;
@@ -238,21 +236,12 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	public void onResume() {
 		super.onResume();
 		CandyAchievements.startAchievementsRunnable(this);
-		prefs.registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
 	public void onPause() {
-		prefs.unregisterOnSharedPreferenceChangeListener(this);
 		super.onPause();
 	}
 
 	private SwarmLoginListener mySwarmLoginListener = new CandySwarmListener();
-
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key) {
-		// TODO Auto-generated method stub
-		
-	}
 }
