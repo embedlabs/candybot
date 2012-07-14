@@ -86,7 +86,7 @@
 		<o n="1" r="2" c="5" />
 		<o n="2" r="2" c="3" />
 		<o n="6" r="2" c="10" />
-		<m a="150" b="154" /> <!-- 4 for a, 8 for b --> <!-- fixed for realz, find moves -->
+		<m a="200" b="208" /> <!-- 4 for a, 12 for b -->
 	</l>
 	<l id="10">
 	    <c>H4sIAAAAAAAAC8VViwqAQAjzevz/L3dBwSHO2+quBoLkcDqLipmVyTELX/VHO0W5yvnbH3aOiPdmF0Uzqz9BdBuvmWl7D6I648lZ25roeYx0VOwgR/3R+2zgudrfa3kOM1fEZ2/IQvl+lX1ueK/Y+/bmyWZB/BEY+Q9pY6mxXvkBujQK3cAGAAA=</c>
