@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
-import com.embed.candy.service.MusicService;
 import com.swarmconnect.SwarmActivity;
 
 public abstract class BetterSwarmActivity extends SwarmActivity {
@@ -22,7 +21,6 @@ public abstract class BetterSwarmActivity extends SwarmActivity {
 		System.gc();
 		super.onResume();
 		// TODO check for lock screen
-		MusicService.onResume();
 		isHome = true;
 	}
 
@@ -30,7 +28,6 @@ public abstract class BetterSwarmActivity extends SwarmActivity {
 	protected void onPause() {
 		if (((TelephonyManager)getSystemService(TELEPHONY_SERVICE)).getCallState()==TelephonyManager.CALL_STATE_RINGING
 				|| !((PowerManager)getSystemService(POWER_SERVICE)).isScreenOn()) {
-			MusicService.onPause();
 		}
 		super.onPause();
 		System.gc();
@@ -109,7 +106,6 @@ public abstract class BetterSwarmActivity extends SwarmActivity {
 	@Override
 	protected void onUserLeaveHint() {
 		if (isHome) {
-			MusicService.onPause();
 		}
 		super.onUserLeaveHint();
 	}

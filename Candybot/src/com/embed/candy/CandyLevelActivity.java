@@ -89,7 +89,6 @@ import android.widget.Toast;
 import com.embed.candy.controls.CandyTouchSystem;
 import com.embed.candy.engine.CandyEngine;
 import com.embed.candy.save.SaveIO;
-import com.embed.candy.service.MusicService;
 import com.embed.candy.sprite.CandyAnimatedSprite;
 import com.embed.candy.util.CandyTMX;
 import com.embed.candy.util.CandyUtils;
@@ -266,7 +265,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			if (CandyUtils.DEBUG) Log.i(TAG, "Low quality, using NEAREST.");
 		}
 
-		MusicService.onPause();
 		MusicFactory.setAssetBasePath("mfx/");
 		try {
 		    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine
@@ -692,7 +690,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	@Override
 	public void onDestroy() {
 		backgroundMusic.stop();
-		MusicService.onResume();
 		super.onDestroy();
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
