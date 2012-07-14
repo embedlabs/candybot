@@ -23,7 +23,7 @@
 		<o n="1" r="2" c="3" />
 		<o n="5" r="7" c="22" />
 		<o n="2" r="2" c="2" />
-		<m a="90" b="96" /> <!-- 6 for a, 12 for b -->
+		<m a="88" b="92" /> <!-- 4 for a, 8 for b -->
 		<t>Not all objects in every level can be or should be used. Only use the objects that are absolutely necessary to reduce your total moves on each level.</t>
 	</l>
 	<l id="4">
@@ -82,11 +82,11 @@
 		<m a="136" b="142" /> <!-- 4 for a, 10 for b -->
 	</l>
 	<l id="9">
-	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFUA3nxVKs2FRy0mB+bj8RKo8Lj3Y7GXAIYdLHpcYPcMfXY6a5pMavtjk0d1LzfAn5H5aAGLCAp8cKekWm73kyGFzF60Avc2nVjlBbPgQU8YSo59WAJ+/ycVMQMyMxAcAdBxcucAGAAA=</c>
+	    <c>H4sIAAAAAAAAA8VUQQoAIAjT+v+f6xjhUsPVwEMOnY5QRUTJwcKr/minLI9qLF0BHOJR7pf/FbpZL72afd5K/735GYh4ceIy/9bSveGsuVh43b/qTkT9idzYSD0Lp71vo83oy3sAycQxCcAGAAA=</c>
 		<o n="1" r="2" c="5" />
 		<o n="2" r="2" c="3" />
 		<o n="6" r="2" c="10" />
-		<m a="150" b="154" /> <!-- 4 for a, 8 for b --> <!-- fixed level, find moves -->
+		<m a="150" b="154" /> <!-- 4 for a, 8 for b --> <!-- fixed for realz, find moves -->
 	</l>
 	<l id="10">
 	    <c>H4sIAAAAAAAAC8VViwqAQAjzevz/L3dBwSHO2+quBoLkcDqLipmVyTELX/VHO0W5yvnbH3aOiPdmF0Uzqz9BdBuvmWl7D6I648lZ25roeYx0VOwgR/3R+2zgudrfa3kOM1fEZ2/IQvl+lX1ueK/Y+/bmyWZB/BEY+Q9pY6mxXvkBujQK3cAGAAA=</c>
@@ -100,7 +100,7 @@
 	    <c>H4sIAAAAAAAAC7WV3QqAIAyFZ+WF7//CGiSNw3GbigdG0/Bzf1ESkXTYmN790uwBK+odPpm/ys+De9CP5MLk8b34PY3qxOLXZyzTQtZs/SPamR+UzqOfYTPAehupx4ywPpE8ysBnyvLPV1JrKxbkW3kif7fPXZ2BfIwDe2LxWIy78+nVn92J35nFis4Y8ld6GeWf0Kn/ydXs/vwKH/sEeMAGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
-		<m a="150" b="154" /> <!-- 4 for a, 8 for b --> <!-- not done, find moves -->
+		<m a="66" b="70" /> <!-- 4 for a, 8 for b -->
 		<t>Ice walls cause objects and candy to slip all the way until they reach a non-ice block. Make sure you know where the candy or object will end up before pushing it onto one of these walls.</t>
 	</l>
 	<l id="12">
@@ -153,8 +153,8 @@
 		<o n="2" r="4" c="15" />
 		<o n="6" r="9" c="10" />
 		<o n="6" r="9" c="13" />
-		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- fixed level, find moves -->
-		<t>Use teleporters by simply placing an object on top of the "In" teleporter and it will come out of the "Out" teleporter. Moveable walls and inertia walls can't be teleported. You may also move through the teleporter.</t>
+		<m a="163" b="171" /> <!-- 4 for a, 12 for b -->
+		<t>Use teleporters by simply placing an object on top of the "In" teleporter and it will come out of the "Out" teleporter. Moveable walls can't be teleported. You may also move through the teleporter.</t>
 	</l>
 	<l id="17">
 	    <c>H4sIAAAAAAAAC71UWwrAIAxrN8f0/hfehAl+1Na+FggtCDGNDwQATOaMC+Iw6/faAlkW/iORmfk99YUgCuscufMd6BnWr1rQBH0vdjKkZtXcd86/lJ9mhgho5rHkQfn8631l63v/REnf6i1Tf2evoX+8PMGX14oPRbJQ0cAGAAA=</c>
@@ -178,7 +178,7 @@
 		<o n="5" r="13" c="9" />
 		<o n="5" r="12" c="18" />
 		<o n="2" r="2" c="3" />
-		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- not done, find moves -->
+		<m a="170" b="190" /> <!-- 0 for a, 20 for b -->
 	</l>
 	<l id="20">
 	    <c>eJyVVQEKwCAIbBDb3P7/3y0okOPSMzi0RXeZ5qy1ZiIOB3XPQHWYsww3zHtRe8WinMNgznx29ohzx6/wqPy7OzCwVX6mURks/k58to525ZHlZdhzAn2mzzT894jfQ8lvdGe4P+NW+KO6XRpMN8svqyXMIVv38aj15rU6OTNye36sL+wXyMHWo/6GtYI6yK+OyvvCd1Dhv1ocX9YzMn4V6v/l+fFO/wMbFQb8</c>
@@ -194,6 +194,6 @@
 		<o n="6" c="3" r="10" />
 		<o n="6" c="17" r="14" />
 		<o n="7" c="2" r="4" />
-		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- not done, find moves -->
+		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- WILL NOT OPEN UP -->
 	</l>
 </w>
