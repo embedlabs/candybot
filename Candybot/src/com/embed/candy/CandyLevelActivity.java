@@ -183,6 +183,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	private long totalTime = 0;
 	private long referenceTime;
+	private BitmapTextureAtlas mFontTexture2;
+	private Font andengineMainFont2;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -291,7 +293,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * FONT
 		 */
 		mFontTexture = new BitmapTextureAtlas(512, 512, quality);
-		andengineMainFont = new Font(mFontTexture, mainFont, 32, true, 0x80444444);
+		mFontTexture2 = new BitmapTextureAtlas(512, 512, quality);
+		andengineMainFont = new Font(mFontTexture, mainFont, 64, true, 0x80444444);
+		andengineMainFont2 = new Font(mFontTexture2, mainFont, 15, true, 0x80CCCCCC);
 
 		/**
 		 * PARTICLES
@@ -310,8 +314,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		/**
 		 * ENGINE LOADING
 		 */
-		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture, mParticleTexture, mOnScreenControlTexture);
-		mEngine.getFontManager().loadFont(andengineMainFont);
+		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture, mFontTexture2, mParticleTexture, mOnScreenControlTexture);
+		mEngine.getFontManager().loadFonts(andengineMainFont,andengineMainFont2);
 
 		/**
 		 * XML PARSING
@@ -432,7 +436,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				return true;
 			}
 		};
-		playChangeableText.setPosition(PHONE_WIDTH - playChangeableText.getWidth() - 10,10);
+		playChangeableText.setPosition(PHONE_WIDTH - playChangeableText.getWidth() - 10,PHONE_HEIGHT - playChangeableText.getHeight() - 10);
 		hud.attachChild(playChangeableText);
 		hud.registerTouchArea(playChangeableText);
 
@@ -449,7 +453,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 
 		if (helpTextString!=null && toastBoolean) { // TODO
-			helpText = new Text(10,10,andengineMainFont,helpTextString);
+			helpText = new Text(64,64,andengineMainFont2,CandyUtils.wrap(helpTextString, 60));
+			helpText.setColor(0.2f, 0.2f, 0.2f, 0.5f);
 			hud.attachChild(helpText);
 		}
 
