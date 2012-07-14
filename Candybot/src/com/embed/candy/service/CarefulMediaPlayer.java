@@ -4,6 +4,9 @@ package com.embed.candy.service;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
+import com.embed.candy.util.CandyUtils;
 
 public class CarefulMediaPlayer {
 	final SharedPreferences sp;
@@ -31,7 +34,11 @@ public class CarefulMediaPlayer {
 
 	public void stop() {
 		isPlaying = false;
-		mp.stop();
-		mp.release();
+		try {
+			mp.stop();
+			mp.release();
+		} catch (final Exception e) {
+			if (CandyUtils.DEBUG) Log.e(CandyUtils.TAG,"Oops!",e);
+		}
 	}
 }

@@ -530,10 +530,14 @@ public class CandyEngine {
 				for (int i = 0; i < gravityList.size(); i++) { // For every gravityList object,
 					if (!gravityList.get(i).hasModifier) { // if it is not currently moving,
 						if (CandyUtils.DEBUG) Log.v(TAG, "gravityList item #" + i + ": " + spriteQueue.get(i).size() + " remaining in spriteQueue");
-						if (spriteQueue.get(i).size() > 0 && !gravityList.get(i).blowUp) { // if there is still stuff to do,
+						if (spriteQueue.get(i).size() > 0) { // if there is still stuff to do,
 							gravityList.get(i).doQueue(spriteQueue.get(i).remove()); // do it;
 							break;
 						} else {
+							if (gravityList.get(i).blowUp && !gravityList.get(i).doneBlowingUp) {
+								gravityList.get(i).showBombAnim();
+								break;
+							}
 							gravityList.get(i).lastDirectionalMove = 0;
 							final int index = gravityList.get(i).index;
 							if (CandyUtils.DEBUG) Log.i(TAG, "Item " + i + "(index " + index + "): " + objectArray[index][ROW] + " " + objectArray[index][COLUMN]);

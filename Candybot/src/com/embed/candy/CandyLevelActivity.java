@@ -454,7 +454,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		resetLevelText.setPosition(PHONE_WIDTH - resetLevelText.getWidth()-10,10);
 
 
-		if (helpTextString!=null && toastBoolean) { // TODO
+		if (helpTextString!=null && toastBoolean) {
 			helpText = new Text(64,64,andengineMainFont2,CandyUtils.wrap(helpTextString, 60));
 			helpText.setColor(0.2f, 0.2f, 0.2f, 0.5f);
 			hud.attachChild(helpText);
@@ -463,7 +463,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		this.mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCandyCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
 			@Override
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
-				Log.i(TAG, "Base Screen Control test");
+//				Log.i(TAG, "Base Screen Control test");
 			}
 		});
 		this.mDigitalOnScreenControl.getControlBase().setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
@@ -473,8 +473,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		this.mDigitalOnScreenControl.getControlKnob().setScale(1.25f);
 		this.mDigitalOnScreenControl.refreshControlKnobPosition();
 
-		mScene.setChildScene(this.mDigitalOnScreenControl);
-
+		hud.attachChild(this.mDigitalOnScreenControl);
 
 		hud.attachChild(resetLevelText);
 		hud.registerTouchArea(resetLevelText);

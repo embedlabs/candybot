@@ -1,6 +1,5 @@
 package com.embed.candy.sprite.modifier;
 
-import static com.embed.candy.constants.ObjectIndices.BOMB;
 import static com.embed.candy.constants.ObjectIndices.CANDY;
 import static com.embed.candy.constants.ObjectIndices.ENEMY;
 
@@ -51,9 +50,10 @@ public class CandyAnimatedSpriteMoveByModifierListener implements IEntityModifie
 			}
 			cas.setCurrentTileIndex(cas.candyRotationState * 4);
 		}
-		if (cas.blowUp && cas.type == BOMB) {
-			cas.showBombAnim();
-		} else if (cas.enemyDead && cas.type == ENEMY) {
+//		if (cas.blowUp && cas.type == BOMB) {
+//			cas.showBombAnim();
+//		} else
+		if (cas.enemyDead && cas.type == ENEMY) {
 			cas.showDeadSprite();
 		} else {
 			cas.hasModifier = false;

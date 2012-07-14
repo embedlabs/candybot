@@ -44,6 +44,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	public boolean hasModifier = false;
 
 	public boolean blowUp = false;
+	public boolean doneBlowingUp = false;
 
 	public boolean enemyDead = false;
 
@@ -160,6 +161,8 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	}
 
 	public synchronized void showBombAnim() {
+		hasModifier = true;
+		doneBlowingUp = true;
 		animate(50, false, new IAnimationListener() {
 			@Override
 			public void onAnimationEnd(final AnimatedSprite pAnimatedSprite) {
@@ -211,6 +214,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		clearEntityModifiers();
 		hasModifier = false;
 		blowUp = false;
+		doneBlowingUp = false;
 		enemyDead = false;
 		candyLastMove = 0;
 		candyRotationState = 0;
