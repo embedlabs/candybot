@@ -91,7 +91,7 @@ public class CandyTMX {
 
 					final NodeList toastNodeList = currentLevelElement.getElementsByTagName("t"); // t toast
 					if (toastNodeList.getLength()==1) {
-						candyLevel.helpToastText = ((Element)toastNodeList.item(0)).getTextContent();
+						candyLevel.helpTextString = ((Element)toastNodeList.item(0)).getTextContent();
 					}
 
 					final NodeList moveNodeList = currentLevelElement.getElementsByTagName("m");

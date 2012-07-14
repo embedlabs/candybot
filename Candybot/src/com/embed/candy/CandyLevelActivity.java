@@ -82,10 +82,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.embed.candy.controls.CandyTouchSystem;
@@ -95,8 +92,6 @@ import com.embed.candy.service.MusicService;
 import com.embed.candy.sprite.CandyAnimatedSprite;
 import com.embed.candy.util.CandyTMX;
 import com.embed.candy.util.CandyUtils;
-import com.embed.candy.util.ViewUtils;
-import com.embed.candy.view.ExtendedToast;
 import com.swarmconnect.Swarm;
 
 @SuppressLint("NewApi")
@@ -128,12 +123,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private int[][] backgroundArray = new int[18][24]; // holds tmx array
 	public TextureRegion[][] trArray = new TextureRegion[18][24];
 	private int[][] objectArray; // stores locations and types of all objects, correlates to spriteList
-	public String helpToastText = null;
+	public String helpTextString = null;
 
 	private Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
 	public CandyCamera mCandyCamera;
-	private HUD hud;
+	public HUD hud;
 
 	private Music backgroundMusic;
 	private Sound mSound = null;
@@ -162,10 +157,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public boolean resetDragDistance = false;
 
 	public boolean initMusic = true;
-	private CandyLevelActivity candyLevel = this;
 
 	private ChangeableText playChangeableText;
 	private Text resetLevelText;
+	public Text helpText = null;
 
 	public static final int CAMERA_SPEED = 200;
 
@@ -213,11 +208,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		initMusic = sp.getBoolean("com.embed.candy.music", true);
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
-	}
-
-
-	public CandyLevelActivity getCandyLevel() {
-		return candyLevel;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -301,7 +291,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * FONT
 		 */
 		mFontTexture = new BitmapTextureAtlas(512, 512, quality);
-		andengineMainFont = new Font(mFontTexture, mainFont, 64, true, 0x80444444);
+		andengineMainFont = new Font(mFontTexture, mainFont, 32, true, 0x80444444);
 
 		/**
 		 * PARTICLES
@@ -421,7 +411,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 */
 		hud = new HUD();
 
-		playChangeableText = new ChangeableText(PHONE_WIDTH, 10, andengineMainFont, playMode ? play : pan, Math.max(play.length(), pan.length())) {
+		playChangeableText = new ChangeableText(PHONE_WIDTH, PHONE_HEIGHT, andengineMainFont, playMode ? play : pan, Math.max(play.length(), pan.length())) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
 
@@ -442,11 +432,11 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				return true;
 			}
 		};
-		playChangeableText.setPosition(PHONE_WIDTH - playChangeableText.getWidth() - 10, 10);
+		playChangeableText.setPosition(PHONE_WIDTH - playChangeableText.getWidth() - 10,10);
 		hud.attachChild(playChangeableText);
 		hud.registerTouchArea(playChangeableText);
 
-		resetLevelText = new Text(10, 10, andengineMainFont, getString(R.string.reset)) {
+		resetLevelText = new Text(PHONE_WIDTH, PHONE_HEIGHT, andengineMainFont, getString(R.string.reset)) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
 				if (pSceneTouchEvent.getAction() == MotionEvent.ACTION_DOWN && gameStarted) {
@@ -455,6 +445,13 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				return true;
 			}
 		};
+		resetLevelText.setPosition(PHONE_WIDTH - resetLevelText.getWidth()-10,10);
+
+
+		if (helpTextString!=null && toastBoolean) { // TODO
+			helpText = new Text(10,10,andengineMainFont,helpTextString);
+			hud.attachChild(helpText);
+		}
 
 		this.mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCandyCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
 			@Override
@@ -629,16 +626,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			} else {
 				gameStarted = true;
 			}
-			if (helpToastText!=null && toastBoolean) {
-				final LayoutInflater li = getLayoutInflater();
-				TextView tv = (TextView)li.inflate(R.layout.game_toast, (ViewGroup)findViewById(R.id.tv_game_toast));
-				tv.setText(helpToastText);
-				tv.setTypeface(ViewUtils.mainFont);
-				final Toast t = new Toast(getApplicationContext());
-				t.setView(tv);
-				t.setDuration(Toast.LENGTH_SHORT);
-				ExtendedToast.showUntilDone(t, candyEngine.eliminateToasts);
-			}
 		}
 	    referenceTime = System.currentTimeMillis();
 	}
@@ -649,9 +636,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		Swarm.setInactive(this);
         pauseMusic();
 		totalTime += (System.currentTimeMillis() - referenceTime);
+
 		if (isFinishing()) {
 			candyEngine.totalTime = totalTime;
-			candyEngine.eliminateToasts.set(true);
 			if (candyEngine.cumulativeMoves>=300) {
 				final Editor e = sp.edit();
 				if (candyEngine.cumulativeMoves>=400) {

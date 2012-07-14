@@ -221,7 +221,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		super.onCreate(savedInstanceState);
 		setContentView(((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.main, null));
 
-		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
 		mainFont = Typeface.createFromAsset(getAssets(),getString(R.string.font_location)); // load font
 

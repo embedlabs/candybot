@@ -42,7 +42,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.util.FloatMath;
 import android.util.Log;
@@ -124,7 +123,7 @@ public class CandyEngine {
 	public int laserDeathCounter = 0;
 	public int candyBurnedCounter = 0;
 
-	public final AtomicBoolean eliminateToasts = new AtomicBoolean();
+//	public final AtomicBoolean eliminateHelpText = new AtomicBoolean();
 
 	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevelActivity candyLevel) {
 		this.spriteList = spriteList;
@@ -261,7 +260,6 @@ public class CandyEngine {
 		/**
 		 * ENEMIES MOVE
 		 */
-
 		if (botMoved) {
 			if (enemyList.size() != 0 && !death && enemyList.size() > 0) {
 				Collections.sort(enemyList, new EnemyComparator());
@@ -273,11 +271,17 @@ public class CandyEngine {
 			}
 			moves++; cumulativeMoves++;
 
-			if (moves==5) {
+			if (moves==5&&candyLevel.toastBoolean&&candyLevel.helpTextString!=null) {
 //				for (final Text text:candyLevel.textReferences) {
 //					text.registerEntityModifier(new AlphaModifier(1,1,0));
 //				}
-				eliminateToasts.set(true);
+				candyLevel.runOnUpdateThread(new Runnable() {
+					@Override
+					public void run() {
+//						candyLevel.hud.detachChild(candyLevel.helpText);
+						candyLevel.helpText.setVisible(false);
+					}
+				});
 			}
 
 			botMoved = false;
@@ -608,6 +612,10 @@ public class CandyEngine {
 
 		candyLevel.resetDragDistance = true;
 		candyLevel.gameStarted = true;
+		if (candyLevel.helpText!=null) {
+			candyLevel.helpText.setVisible(true);
+		}
+
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyEngine finished resetting.");
 	}
 
