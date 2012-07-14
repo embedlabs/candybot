@@ -30,12 +30,8 @@ public class CarefulMediaPlayer {
 	}
 
 	public void stop() {
-		mp.stop();
 		isPlaying = false;
-	}
-
-	public void release() {
+		mp.stop();
 		mp.release();
 	}
-
 }

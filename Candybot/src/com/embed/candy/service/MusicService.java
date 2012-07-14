@@ -57,7 +57,6 @@ public class MusicService extends Service {
 	@Override
 	public void onDestroy() {
 		mPlayer.stop();
-		mPlayer.release();
 		mPlayer = null;
 	}
 

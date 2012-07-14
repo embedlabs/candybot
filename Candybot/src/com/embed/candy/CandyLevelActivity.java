@@ -61,6 +61,7 @@ import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 import org.anddev.andengine.opengl.font.Font;
+import org.anddev.andengine.opengl.font.StrokeFont;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
@@ -295,7 +296,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mFontTexture = new BitmapTextureAtlas(512, 512, quality);
 		mFontTexture2 = new BitmapTextureAtlas(512, 512, quality);
 		andengineMainFont = new Font(mFontTexture, mainFont, 64, true, 0x80444444);
-		andengineMainFont2 = new Font(mFontTexture2, mainFont, 15, true, 0x80CCCCCC);
+//		andengineMainFont2 = new Font(mFontTexture2, mainFont, 15, true, 0x80CCCCCC);
+		andengineMainFont2 = new StrokeFont(mFontTexture2,mainFont,15,true,0x80FFFFFF,1,0x80000000);
 
 		/**
 		 * PARTICLES
