@@ -7,6 +7,7 @@
 		<o n="5" r="9" c="20" />
 		<o n="5" r="13" c="13" />
 		<o n="2" r="8" c="11" />
+		<m a="40" b="44" /> <!-- 2 for a, 6 for b -->
 		<t>An enemy will move in your direction every time you take a move. Try to trap the enemy, because if they occupy the same space as you, you will have to restart the level.</t>
 	</l>
 	<l id="2">
@@ -15,12 +16,14 @@
 		<o n="4" r="9" c="12" />
 		<o n="5" r="2" c="18" />
 		<o n="2" r="2" c="2" />
+		<m a="150" b="154" /> <!-- 4 for a, 8 for b -->
 	</l>
 	<l id="3">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+bQKj+ESPuj8wZx+kM2klfnodtHKPwORfqjpp5GU/qlhPrUBrfMfrcoDJiBmhrIBHtWBqMAGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="5" r="7" c="22" />
 		<o n="2" r="2" c="2" />
+		<m a="90" b="96" /> <!-- 6 for a, 12 for b -->
 		<t>Not all objects in every level can be or should be used. Only use the objects that are absolutely necessary to reduce your total moves on each level.</t>
 	</l>
 	<l id="4">
@@ -28,6 +31,7 @@
 		<o n="1" r="5" c="6" />
 		<o n="5" r="5" c="5" />
 		<o n="2" r="2" c="3" />
+		<m a="86" b="92" /> <!-- 8 for a, 14 for b -->
 	</l>
 	<l id="5">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFSDFfHLcgW4+sp9YGCgPD2x8St1OyHxsbsFnLz61xLqfFECK+eSkvYF2P6l5A5uf8ZlPyCx8biLVfHLyODXDn5L4JZRGqJ1+yCmniEk/xGD0sgqX+dQG5LqXEGYCYmYoGwDsf+Y3wAYAAA==</c>
@@ -43,6 +47,7 @@
 		<o n="5" r="12" c="17" />
 		<o n="5" r="13" c="18" />
 		<o n="2" r="2" c="9" />
+		<m a="335" b="343" /> <!-- 16 for a, 24 for b -->
 	</l>
 	<l id="6">
 	    <c>H4sIAAAAAAAAC8WVgQrAIAhEdatB///D26BADq9sFDuQTOJ5SWMqIro5mt48dcKejQj5ox46OOOx0H9EOVj3/KM/rz/j4Mztvjd37OXx2RzVOT9Sltgs0f/MPdAnMpPw+c/K+rpqMP7O76vxS83tWpw9CmuMj2y2sp4t/8K3XlmvVf6RvcI/u49X++P9rNSu/8nxxFnzG9EFJeDABgAA</c>
@@ -57,6 +62,7 @@
 		<o n="6" r="6" c="16" />
 		<o n="6" r="6" c="21" />
 		<o n="6" r="7" c="19" />
+		<m a="117" b="123" /> <!-- 4 for a, 10 for b -->
 		<t>A moveable wall acts just like a box, but is not subject to gravity! Use it to your advantage.</t>
 	</l>
 	<l id="7">
@@ -66,18 +72,21 @@
 		<o n="6" r="3" c="2" />
 		<o n="6" r="3" c="3" />
 		<o n="6" r="3" c="4" />
+		<m a="127" b="131" /> <!-- 4 for a, 8 for b -->
 	</l>
 	<l id="8">
 	    <c>H4sIAAAAAAAAC71UQQ6AIAwr6v/frCaeGlu6RSFpQsbWlTE2AIyfcRBuW3UpnhX8b8DkvOLb1ZbEsZ/Spvid1lR/d3VqxfGKC/CcKm9Fz6r6sE35qnh3P9c/Sd6ZprQ+XU3pe3VnRtoDXGP2cbPHcbl8s/+tdH3Vs+l8rGK7sD/7EyBocnHABgAA</c>
 		<o n="1" r="2" c="11" />
 		<o n="2" r="2" c="12" />
 		<o n="6" r="15" c="2" />
+		<m a="136" b="142" /> <!-- 4 for a, 10 for b -->
 	</l>
 	<l id="9">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFUA3nxVKs2FRy0mB+bj8RKo8Lj3Y7GXAIYdLHpcYPcMfXY6a5pMavtjk0d1LzfAn5H5aAGLCAp8cKekWm73kyGFzF60Avc2nVjlBbPgQU8YSo59WAJ+/ycVMQMyMxAcAdBxcucAGAAA=</c>
 		<o n="1" r="2" c="5" />
 		<o n="2" r="2" c="3" />
 		<o n="6" r="2" c="10" />
+		<m a="150" b="154" /> <!-- 4 for a, 8 for b --> <!-- fixed level, find moves -->
 	</l>
 	<l id="10">
 	    <c>H4sIAAAAAAAAC8VViwqAQAjzevz/L3dBwSHO2+quBoLkcDqLipmVyTELX/VHO0W5yvnbH3aOiPdmF0Uzqz9BdBuvmWl7D6I648lZ25roeYx0VOwgR/3R+2zgudrfa3kOM1fEZ2/IQvl+lX1ueK/Y+/bmyWZB/BEY+Q9pY6mxXvkBujQK3cAGAAA=</c>
@@ -85,11 +94,13 @@
 		<o n="2" r="2" c="12" />
 		<o n="3" r="5" c="3" />
 		<o n="6" r="2" c="11" />
+		<m a="190" b="196" /> <!-- 6 for a, 12 for b -->
 	</l>
 	<l id="11">
-	    <c>H4sIAAAAAAAAC7WV3QqAIAyFZ+WF7//CGiSNw3GbigdGy+hzf2ISkXTYmN710uwBK+obPpm/ys+DfdCP5MLk8b34PY3qxOLX/1imhazZ+ke0Mz8olgubAdbbSD1mhPWJ5FEGPlOWf76SerdiQb6VJ/J3+9zVGcifjU/zWIy78+nVn+2J58xiRWcM+Su9jPJP6NR9cjW7P78CXM6jKsAGAAA=</c>
+	    <c>H4sIAAAAAAAAC7WV3QqAIAyFZ+WF7//CGiSNw3GbigdG0/Bzf1ESkXTYmN790uwBK+odPpm/ys+De9CP5MLk8b34PY3qxOLXZyzTQtZs/SPamR+UzqOfYTPAehupx4ywPpE8ysBnyvLPV1JrKxbkW3kif7fPXZ2BfIwDe2LxWIy78+nVn92J35nFis4Y8ld6GeWf0Kn/ydXs/vwKH/sEeMAGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
+		<m a="150" b="154" /> <!-- 4 for a, 8 for b --> <!-- not done, find moves -->
 		<t>Ice walls cause objects and candy to slip all the way until they reach a non-ice block. Make sure you know where the candy or object will end up before pushing it onto one of these walls.</t>
 	</l>
 	<l id="12">
@@ -104,12 +115,14 @@
 		<o n="4" r="1" c="13" />
 		<o n="4" r="4" c="19" />
 		<o n="4" r="8" c="19" />
+		<m a="134" b="140" /> <!-- 6 for a, 12 for b -->
 	</l>
 	<l id="13">
 	    <c>H4sIAAAAAAAAA+NkYGDgpDGmFRhs5jNCMa3MJxUQMh9fPBETj+ji1PYPOeaRku7wqSM2HeNTR+/4pdS9hMwnxjxSACXhw4lGE2M+Ib+TmhcGKv/icw8+eWLNx6WWVECLuoQLiLmR+AB2VPa/wAYAAA==</c>
 		<o n="1" r="2" c="12" />
 		<o n="2" r="2" c="11" />
 		<o n="6" r="3" c="4" />
+		<m a="103" b="107" /> <!-- 4 for a, 8 for b -->
 	</l>
 	<l id="14">
 	    <c>H4sIAAAAAAAAC8VT0QrAIAi0rT34/z+8BvUiZ+rIEg5COTuvLERUkrEyvn5PAyf2536Hdx5U1zgn9MtggEj/0/o1HvLa4z/yQ3qjvftMx1/91h+SnKwY/SsAmtNTG/Wd+mWOAnmLI3PaTs12Tatp+msgb3F2+L8aV8Pdzy9LEXDywAYAAA==</c>
@@ -121,6 +134,7 @@
 		<o n="5" r="10" c="14" />
 		<o n="5" r="10" c="19" />
 		<o n="2" r="2" c="3" />
+		<m a="225" b="231" /> <!-- 0 for a, 6 for b -->
 	</l>
 	<l id="15">
 	    <c>H4sIAAAAAAAAC62UwQ6AMAhDQQ+6//9hPXggpLSgLiEhc3utsM3NzJtxDtbG+DIWiT/4Hf9Rs+Nzqp05iI20MifXvKrPKnI2cu0ZH3G9yONc13+lob53/KM9jF31AfHRHuZPeeie/06P0ZrIn9ZBnWN0f9V/T3qj3p/sd6Lphv1X7GX6/Md55r9iKw3EYfVB7KyhRr7TB5h7E9sd+5Nf6GLC98AGAAA=</c>
@@ -131,21 +145,32 @@
 		<o n="4" r="5" c="10" />
 		<o n="4" r="5" c="13" />
 		<o n="6" r="5" c="2" />
+		<m a="281" b="291" /> <!-- 8 for a, 18 for b -->
 	</l>
 	<l id="16">
-	    <c>H4sIAAAAAAAAA7VU0QqAMAjUgmqw///egl7k8HZukSBtHjtPm3Mz85+92WvZ141b5awL3CzPETGWY6QfOZ2sRzmYftYTF1hFP+pknBmWcTnsv1rMEfUz3UynwhvBVuwidczwH2TNDOcL6zsh1sEznhhT/7da1+gOqfs5a+p+xjj2I/Ykw6rzxXJgDxR39X1T/KvvG2pg81U9W/Ht8X3yzA1zlQg8wAYAAA==</c>
+	    <c>H4sIAAAAAAAAA7VUQQ6AMAgDPeiS/f+9mnghDV3ZVBKi0qwUhLmZ+c/e7LHs6catctYFbpbniBjLMdKPnE7eRzmYftYTF1hFP+pknBmWcTl8v7WYI+pnuplOhTeCrdhJ6viKPzPcL6zvgFgHz3hiTP3fal2jGVLzOWtqPmMc+xF7kmHV/WI5sAeKu3q/Kf7V+w01sP2qnq34dvs+eeYC31p/VcAGAAA=</c>
 	    <o n="1" r="4" c="8" />
 		<o n="2" r="4" c="15" />
 		<o n="6" r="9" c="10" />
 		<o n="6" r="9" c="13" />
+		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- fixed level, find moves -->
+		<t>Use teleporters by simply placing an object on top of the "In" teleporter and it will come out of the "Out" teleporter. Moveable walls and inertia walls can't be teleported. You may also move through the teleporter.</t>
 	</l>
 	<l id="17">
+	    <c>H4sIAAAAAAAAC71UWwrAIAxrN8f0/hfehAl+1Na+FggtCDGNDwQATOaMC+Iw6/faAlkW/iORmfk99YUgCuscufMd6BnWr1rQBH0vdjKkZtXcd86/lJ9mhgho5rHkQfn8631l63v/REnf6i1Tf2evoX+8PMGX14oPRbJQ0cAGAAA=</c>
+		<o n="1" r="7" c="4" />
+		<o n="2" r="7" c="2" />
+		<o n="3" r="1" c="2" />
+		<o n="6" r="10" c="2" />
+		<m a="214" b="218" /> <!-- 4 for a, 8 for b -->
+	</l>
+	<l id="18">
 	    <c>H4sIAAAAAAAAC61U0Q6AIAiEstX/f3E92MbYAYfFxjI5z1NAFRH96BeBOSS2Y3oHb7Fjfiv8IPEWo2bO/iM84vX3gGIdi/CRro6eP/grUzfO7pfhR7XW0cLk169Z4Y9i0Zmz/Kye912fGerFaH+W3875XmT1szXre7Gbz06P+vph9Hb0rNZn9Q4hftaY9xnt6f0s4plvj+9zfAOam7VhwAYAAA==</c>
 		<o n="1" r="2" c="4" />
 		<o n="2" r="2" c="3" />
-		<t>Use teleporters by simply placing an object on top of the "In" teleporter and it will come out of the "Out" teleporter. Moveable walls and inertia walls can't be teleported.</t>
+		<m a="88" b="92" /> <!-- 4 for a, 8 for b -->
 	</l>
-	<l id="18">
+	<l id="19">
 	    <c>H4sIAAAAAAAAC82U3QqAMAiFXUH1/k+8goIh5/izeZEga02/eWTYRKQt+uWcR+yJOwaP5M3wxzXKj+hi9Vt9yNTvsaz4CtYMX4zzv/OzHMRDexH8dtB/zUF5FXxmTA+rw9KOYqv6zyxzj46L5Ol46249G/Te6yHr+7fq2YZmnfd+mL5M/Sj/BBpXfLt9f787Zy5WYMAGAAA=</c>
 		<o n="1" r="2" c="4" />
 		<o n="3" r="15" c="8" />
@@ -153,9 +178,10 @@
 		<o n="5" r="13" c="9" />
 		<o n="5" r="12" c="18" />
 		<o n="2" r="2" c="3" />
+		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- not done, find moves -->
 	</l>
-	<l id="19">
-	    <c>eJylleEOwiAMhLuJU9D3f17DjyaXy1FObdIM2Ppd1w7WI6KbfoC7MdPTzvBsxrwK3lPwd9rMP8w8Os3VmGN2TMV/m5wd/07sfH5Q/D98rvk3pt6/wfgS/La4Zh9VX5J1ibHSVxq4XvHRV/1d1aC6xxqKjf3lHp80V9pcc15zcuXYVc2Q7fBvEINaTeTMbOarvaz0+fvanS/ufeSzDbGmcq6M94FjyX9Enf/0PI9/4bvu/l8G5PMBKSgHUA==</c>
+	<l id="20">
+	    <c>eJyVVQEKwCAIbBDb3P7/3y0okOPSMzi0RXeZ5qy1ZiIOB3XPQHWYsww3zHtRe8WinMNgznx29ohzx6/wqPy7OzCwVX6mURks/k58to525ZHlZdhzAn2mzzT894jfQ8lvdGe4P+NW+KO6XRpMN8svqyXMIVv38aj15rU6OTNye36sL+wXyMHWo/6GtYI6yK+OyvvCd1Dhv1ocX9YzMn4V6v/l+fFO/wMbFQb8</c>
 		<o n="1" c="5" r="1" />
 		<o n="2" c="4" r="1" />
 		<o n="3" c="3" r="1" />
@@ -168,12 +194,6 @@
 		<o n="6" c="3" r="10" />
 		<o n="6" c="17" r="14" />
 		<o n="7" c="2" r="4" />
-	</l>
-	<l id="20">
-	    <c>H4sIAAAAAAAAC71UWwrAIAxrN8f0/hfehAl+1Na+FggtCDGNDwQATOaMC+Iw6/faAlkW/iORmfk99YUgCuscufMd6BnWr1rQBH0vdjKkZtXcd86/lJ9mhgho5rHkQfn8631l63v/REnf6i1Tf2evoX+8PMGX14oPRbJQ0cAGAAA=</c>
-		<o n="1" r="7" c="4" />
-		<o n="2" r="7" c="2" />
-		<o n="3" r="1" c="2" />
-		<o n="6" r="10" c="2" />
+		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- not done, find moves -->
 	</l>
 </w>
