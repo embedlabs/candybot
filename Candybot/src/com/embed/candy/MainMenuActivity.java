@@ -229,19 +229,35 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		//intent = new Intent(this, MusicService.class);
 		//startService(intent);
 		
-		SharedPreferences prefs = getSharedPreferences("Share", Context.MODE_PRIVATE );
+		SharedPreferences prefs = getSharedPreferences("Value", Context.MODE_PRIVATE );
 		
 		 openCount = prefs.getInt("Value", 0);
 		 Editor editor = prefs.edit();
-		 editor.putInt("counter", openCount + 1);
+		 editor.putInt("Value", openCount + 1);
 		 editor.commit();
 		
 		if (openCount == 5) {
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			  intent.setData(Uri.parse("market://details?id=com.embed.candy"));
-			  startActivity(intent);
+			
+			 AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			    builder.setMessage("Would you like to rate our app? It would help us greatly!")
+			           .setCancelable(false)
+			           .setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
+			               @Override
+						public void onClick(final DialogInterface dialog, final int id) {
+			            	   Intent intent = new Intent(Intent.ACTION_VIEW);
+			     			  intent.setData(Uri.parse("market://details?id=com.embed.candy"));
+			     			  startActivity(intent);
+			               }
+			           })
+			           .setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {
+			               @Override
+						public void onClick(final DialogInterface dialog, final int id) {
+			                    dialog.cancel();
+			               }
+			           });
+			    AlertDialog alert = builder.create();
+			    alert.show();
 		}
-
 
 		ViewUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
 		ViewUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
