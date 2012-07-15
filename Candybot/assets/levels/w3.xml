@@ -22,7 +22,7 @@
 		<o n="2" r="15" c="1" />
 		<o n="7" r="4" c="3" />
 		<o n="7" r="4" c="21" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- needs a fix -->
+		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- fix level, find moves -->
 	</l>
 	<l id="3">
 	    <c>H4sIAAAAAAAAC71UQQoAIQjU7dT/P9xeFkRsdJZsQEhLndRSEdFm6cKt+P4uCvaRD9I7+Uf2WcyNeCL+ulkziGo5E37M/N2sP+Jl74bsnivLH/WK7S8LFD+bMVuX3VyhujLcvnyV91HtY8XP+0fn/iL7vzLfE3lPyfPKMPoCkzRDwMAGAAA=</c>
@@ -50,7 +50,7 @@
 		<o n="4" r="7" c="15" />
 		<o n="7" r="13" c="2" />
 		<o n="7" r="14" c="18" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- failed, find moves -->
+		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- find moves -->
 	</l>
 	<l id="5">
 	    <c>H4sIAAAAAAAAA72UCwqAMAxDM3Wo97+wCgqz9D+2QMDPW1pqsQAoE0zFPZMkndfye6XlZ+pxGZ+rwHnqSHxFfD4ZVuLb9zuTb32/I9jPo4r/LC3RfjwMd82daZnR+6kxnhyrxijReW6GS4DL9N+zP4C9J+drjaF5M+bv+edkmBFebq/N/QV22pDQwAYAAA==</c>
@@ -63,7 +63,7 @@
 		<o n="7" c="9" r="13" />
 		<o n="6" c="14" r="7" />
 		<o n="6" c="14" r="16" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- this levels sux, so im going to make a new one ---Ameya  -->
+		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- COMPLETE THIS  -->
 	</l>
 	<l id="6">
 	    <c>H4sIAAAAAAAAC82T0QrAIAgAdVsPgf//vXOwBxHLNZVNOEyoQ8oQAJA5kkFBY3oyzfCT2kOCPsikztGifyW/8f+tf+/+Z/2O1k/7r5qf6vmvCu3HYPb82fGFP1pbfv3WkVq/54X8VxCsPX8Uy5/Nxuz3+gQznejmwAYAAA==</c>
@@ -81,7 +81,7 @@
         <o n="6" r="10" c="20" />
         <o n="6" r="11" c="20" />
         <o n="6" r="12" c="20" />
-        <m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- fixed, find moves -->
+        <m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- find moves -->
 	</l>
 	<l id="7">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFRgu5qOHFTVpeoUPOs2DRuOSxydOz/DH5yZc8oT8OBjDn9j44GEYuPCnxM3o4gMV/rjcREp+GI7lGzUwExAzQ9kAVSWbCcAGAAA=</c>
