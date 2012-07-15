@@ -16,4 +16,8 @@
 		android:id="@+id/menu_main_item_about"
 		android:icon="@android:drawable/ic_menu_info_details"
 		android:title="@string/menu_main_about"/>
+	<item
+		android:id="@+id/menu_main_item_star"
+		android:title="Rate Us"
+		android:icon="@drawable/ic_menu_star" />
 </menu>

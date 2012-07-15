@@ -12,8 +12,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -49,6 +51,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
 	public static Intent intent;
+	private int openCount;
 
 
 	@SuppressLint("UseSparseArrays")
@@ -119,6 +122,11 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			} else {
 				Toast.makeText(this, R.string.login, Toast.LENGTH_SHORT).show();
 			}
+		case R.id.menu_main_item_star:
+			  Intent intent = new Intent(Intent.ACTION_VIEW);
+			  intent.setData(Uri.parse("market://details?id=com.embed.candy"));
+			  startActivity(intent);
+			break;
 		}
 		return true;
 	}
@@ -188,7 +196,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	           .setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
 	               @Override
 				public void onClick(final DialogInterface dialog, final int id) {
-	            	   stopService(intent);
+	            	   //stopService(intent);
 	                   MainMenuActivity.this.finish();
 	               }
 	           })
@@ -218,9 +226,23 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		iv_twitter = (ImageView) findViewById(R.id.button_twitter);
 		my_swarm_button = (ImageView)findViewById(R.id.my_swarm_button);
 
-		intent = new Intent(this, MusicService.class);
-		startService(intent);
+		//intent = new Intent(this, MusicService.class);
+		//startService(intent);
 		
+		SharedPreferences prefs = getSharedPreferences("Share", Context.MODE_PRIVATE );
+		
+		 openCount = prefs.getInt("Value", 0);
+		 Editor editor = prefs.edit();
+		 editor.putInt("counter", openCount + 1);
+		 editor.commit();
+		
+		if (openCount == 5) {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			  intent.setData(Uri.parse("market://details?id=com.embed.candy"));
+			  startActivity(intent);
+		}
+
+
 		ViewUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
 		ViewUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
 		getPreferencesSwarm();
