@@ -302,10 +302,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * PARTICLES
 		 */
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		mParticleTexture = new BitmapTextureAtlas(64,32,quality);
+		mParticleTexture = new BitmapTextureAtlas(64,64,quality);
 		mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle.png", 0, 0);
 		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 33, 0);
-		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 50, 0);
+		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 33, 0);
 
 		this.mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
@@ -575,7 +575,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				face.enemyPS = enemyPS;
 				mScene.attachChild(enemyPS);
 			} else if (type == BOT) {
-				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 28, 64 * row + 60);
+				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 24, 64 * row + 60);
 				final ParticleSystem botPS = new ParticleSystem(botPPE, 5, 10, 20, mBotParticleTextureRegion);
 				botPS.addParticleInitializer(new VelocityInitializer(-20, 20, 0, 30));
 				botPS.addParticleModifier(new ScaleModifier(1, 0, 0, 0.5f));

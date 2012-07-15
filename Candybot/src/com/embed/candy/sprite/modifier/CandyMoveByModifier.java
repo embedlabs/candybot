@@ -52,7 +52,7 @@ public class CandyMoveByModifier extends MoveByModifier {
 			enemyCPE.setCenter(finalX + 24, finalY + 24);
 		}
 		if (bot_ppe_exists) {
-			botPPE.setCenter(finalX + 28, finalY + 60);
+			botPPE.setCenter(finalX + 24, finalY + 60);
 		}
 	}
 

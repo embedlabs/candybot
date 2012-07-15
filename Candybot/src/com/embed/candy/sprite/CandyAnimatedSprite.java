@@ -249,7 +249,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		}
 		if (botPPE!=null) {
 			botPPE.reset();
-			botPPE.setCenter(initialColumn * 64 + 28, initialRow * 64 + 60);
+			botPPE.setCenter(initialColumn * 64 + 24, initialRow * 64 + 60);
 		}
 		if (botPS!=null) {
 			botPS.reset();
