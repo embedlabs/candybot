@@ -111,4 +111,7 @@
     <string name="quit_dialog_message">Are you sure you want to quit?</string>
     <string name="quit_dialog_positive">Yes</string>
     <string name="quit_dialog_negative">No</string>
+    
+    <string name="rate_us_question">Would you like to rate our app? We're literally 16 year old kids, and it would mean the world to us.</string>
+    <string name="market_link">market://details?id=com.embed.candy</string>
 </resources>

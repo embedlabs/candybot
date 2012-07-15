@@ -124,7 +124,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			}
 		case R.id.menu_main_item_star:
 			  Intent intent = new Intent(Intent.ACTION_VIEW);
-			  intent.setData(Uri.parse("market://details?id=com.embed.candy"));
+			  intent.setData(Uri.parse(getString(R.string.market_link)));
 			  startActivity(intent);
 			break;
 		}
@@ -239,13 +239,13 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		if (openCount == 5) {
 			
 			 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			    builder.setMessage("Would you like to rate our app? It would help us greatly!")
+			    builder.setMessage(R.string.rate_us_question)
 			           .setCancelable(false)
 			           .setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
 			               @Override
 						public void onClick(final DialogInterface dialog, final int id) {
 			            	   Intent intent = new Intent(Intent.ACTION_VIEW);
-			     			  intent.setData(Uri.parse("market://details?id=com.embed.candy"));
+			     			  intent.setData(Uri.parse(getString(R.string.market_link)));
 			     			  startActivity(intent);
 			               }
 			           })
