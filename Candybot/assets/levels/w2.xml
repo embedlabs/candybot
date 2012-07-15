@@ -194,6 +194,6 @@
 		<o n="6" c="3" r="10" />
 		<o n="6" c="17" r="14" />
 		<o n="7" c="2" r="4" />
-		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- ERROR, FIX PREM DOUQ -->
+		<m a="134" b="140" /> <!-- 6 for a, 12 for b --> <!-- FIND MOVES -->
 	</l>
 </w>

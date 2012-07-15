@@ -7,7 +7,7 @@
 		<o n="6" c="5" r="3" />
 		<o n="6" c="18" r="3" />
 		<o n="7" c="8" r="5" />
-		<m a="107" b="111" /> <!-- 6 for a, 10 for b -->
+		<m a="111" b="121" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="2">
 	    <c>H4sIAAAAAAAAC9VU7Q6AIAiEso8fvf/z1o9azjg91Nq6jc05OOFAVES0wVbC5y18xc/Uw9T7F30UnBF//A6qMUSW8iMtWvJn4lK/3r1g+dl52AxfS8tesPo3y91DPXMK8uyvNQ+IP8ZUkVvJJxdjzS8Lj941/x3ldele2kcefi9a9t0C7ofDxkycZTtN6WehwAYAAA==</c>
@@ -15,13 +15,13 @@
 		<o n="2" c="11" r="1" />
 		<o n="3" c="4" r="2" />
 		<o n="3" c="19" r="2" />
-		<m a="235" b="241" /> <!-- 8 for a, 14 for b -->
+		<m a="237" b="247" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="3">
 	    <c>H4sIAAAAAAAAC81TQQ6AIAzrjtP9/716kGRih0YH2GQJNKN0DSgA7Vy98Cf9N/PO9i+kp3CSoP8VkX7hjXBKuGiW0f5beWt15m42pp+N6C8zP4Zr1qxPwDV7ILqbZSvV/sk7Gp0/cM7P+yn5G+F8r+dmvJ+MWvZaj/UGCMWb08AGAAA=</c>
 		<o n="1" c="11" r="2" />
 		<o n="2" c="11" r="1" />
-		<m a="47" b="51" /> <!-- 4 for a, 8 for b -->
+		<m a="53" b="63" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="4">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDEmBZCinl7mk+JHdPZICB985hDrf2zmEDIfGXMQaQ+x5qP7gxx5apuPHlbY0h66eYTcgCvtEmserrBmAmJmAu4jJ32SAgjlUWLtxqUePf1iix9cZhEyAxsfXZxQPOBTj898agFSyk9SMTuUBgCD8MHtwAYAAA==</c>
@@ -37,9 +37,10 @@
 		<o n="3" c="21" r="2" />
 		<o n="3" c="10" r="14" />
 		<o n="3" c="14" r="14" />
+		<m a="532" b="542" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="5">
-	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaC3+YM5fLCZAzOfBYopsR+f+fjUYDMDl1m0NB+bGYTMRw8jQnxizcdmDyG3kmM+vdxPrDw29YTcTw3zkdM/NvNIMYuU/ENp3h5K5Q8+91MbMwExM5QNAL/qSiTABgAA</c>
+	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFaC3+YM5fLCZAzOfBYopsR+f+bjUsOIwA5dZtDQfmxmEzEcOI/TwQ5cnxXxs9hByKznm43MvNv+Q635C8ujxRIr7qWE+cvrHZh4hQG7+pTRvD6XyB5/7qY2ZgJgZygYAj8lYKsAGAAA=</c>
 		<o n="1" c="21" r="1" />
 		<o n="2" c="21" r="2" />
 		<o n="5" c="22" r="1" />
@@ -50,6 +51,7 @@
 		<o n="5" c="9" r="13" />
 		<o n="5" c="15" r="12" />
 		<o n="5" c="16" r="13" />
+		<m a="95" b="105" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="6">
 	    <c>H4sIAAAAAAAAC7WVSwrAIAxEx9ZNwfufVxcKQxhiUnEgaDV5SeunBUC5bEuNLCsVa/lKhVpVlxcf8Yvm92qKcDLK8tfcN6zO1otRfJgxldfyo6yoFN8T89uMY4MYqwG/tUez9WfFfFvTSf28/lz/7n1Ovr+aA+L7Rz17+9/6Kb7ysYw/59e7E7i/OxNqfTL5Fb8hd097/rf+J8+wd/Y7lFd0gsAGAAA=</c>
@@ -60,6 +62,7 @@
 		<o n="7" c="18" r="5" />
 		<o n="7" c="3" r="14" />
 		<o n="7" c="20" r="15" />
+		<m a="255" b="265" /> <!-- 10 for a, 20 for b -->
 	</l>	
 	<l id="7">
 	    <c>H4sIAAAAAAAAC7WTUQrAMAhD7bbe/8rrRz+KaIy6CcIY+hpTO0Rk/JyVmERNh8/0aX5mrmoNMzerx/rvaar4ePIjX7r8yBd9T8/OSJPma09PjnXWDHpY/d4sqK/K985CfGuPmLfA7qfH0HNl9ijLR3fO8NEORG/RqkO+MeHtrKW/G4j/dV4r7/39AsWxKA7ABgAA</c>
@@ -91,6 +94,7 @@
 		<o n="5" c="11" r="10" />
 		<o n="5" c="14" r="11" />
 		<o n="5" c="13" r="15" />
+		<m a="126" b="136" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="8">
 	    <c>H4sIAAAAAAAAC7WU4QqAIAyEtfrj+79wBgXjuHOb2sFA1D5vc1lLKfXnQD1zl1hjUvsVf5csn+WUrcGINaOW8I/z9vsGgXzl0fPv8ZWwTmw9wmL+2f2p8y0Hc1F85KgY1YTxs/+X9erxlaL1QSGX9T/y8Y4+DubAxiv9Ge3JGf7M25jhr4r5WH3jd7C8OHqc7/gGleW9d8AGAAA=</c>
@@ -100,6 +104,7 @@
 		<o n="3" c="21" r="10" />
 		<o n="4" c="21" r="2" />
 		<o n="6" c="11" r="10" />
+		<m a="405" b="419" /> <!-- 10 for a, 24 for b -->
 	</l>
 	<l id ="9">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFUA2H5/dhNjE6KMFGCjzcfkTnzgx5hOjHp856PL43EWq+bjMQ3c/ujmksHG5f9R80sxHV4MNEKOWmLRLbF7AZwatAL3Mx5UXiJVDNxOfGdTATEDMDGUDAE2r1s/ABgAA</c>
@@ -113,14 +118,16 @@
 		<o n="3" c="9" r="4" />
 		<o n="3" c="13" r="4" />
 		<o n="6" c="15" r="4" />
+		<m a="309" b="319" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="10">
-	    <c>H4sIAAAAAAAAC7WU2wrAIAxDdXvd/3/v9mBBStMmUwMBrfRYr7211g/7OeSI74Xi85jKz5isWD5bf5TH7E+U59kq/+9+7eCjtah8Rmgek/GzfOSsDovP/Oq8UN3ZvAqfeX8qP+NU61LqZ+Neu/m+X92fVWV/Nhpn4gx/xdfne7RfGywK1MAGAAA=</c>
+	    <c>H4sIAAAAAAAAA7WU2wrAIAxD6/a6//9e96BQalNTL4HArHiMl1lEpFz2d8ke3wrVdV+WHzFZaX6Umc3vjdN8hiMyslb4q/t1go/WkuUzQvN0ofPV45GjHL3u5Wf2HZ2xnTfDZ/6/LD/izNaVyc/WrU7zbXt2f3YVvdmon6kz/B0/v9/2XQHVKumMwAYAAA==</c>
 		<o n="1" c="2" r="15" />
 		<o n="2" c="1" r="15" />
 		<o n="7" c="10" r="3" />
 		<o n="7" c="12" r="3" />
 		<o n="7" c="14" r="3" />
+		<m a="357" b="367" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="11">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+SxomAcqzwmlieEj64e5eaDcj+5ORiRxZPch+2MwuR/d3bjCmxGNP1jcD3MnOo3uD04G1HgZLO5HDn9s7sYmP5jcj8udnGj8wZ7+B0v5g8sMatYhTEDMjEUcAEm6J9vABgAA</c>
@@ -129,6 +136,7 @@
 		<o n="6" c="21" r="12" />
 		<o n="6" c="21" r="14" />
 		<o n="7" c="21" r="10" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="12">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaC3+ZxYMCXiA+V+bG7jIeBmHix6h3L4YzOf2oAW4Y+MB1v4E6NmMLgfl3vQ4wJbmh8I97NAMTXSPwyz0NH91MZMQMwMZQMAnGlnZ8AGAAA=</c>
@@ -136,12 +144,14 @@
 		<o n="2" c="1" r="1" />
 		<o n="6" c="2" r="4" />
 		<o n="6" c="5" r="2" />
+		<m a="175" b="185" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="13">
 	    <c>H4sIAAAAAAAAC8VViwqAIAycJVSw///eFBRk7HUSNBjVdt5tC7UQUQH8BvHdLeu5pzkbeR55iyPi9zQi7pU/6kVqeNzIfDQNStQttWTMMg4wGpcVy/blrdnhWZ9Z3UgLqS3LKdcgcaSG+V1FXVXBRD0i/8Izaz7a7LS9wk5uZ/4Tu7u//jwfvjjfUO6sBnpPXEnc0fwc7y/yOVhjwAYAAA==</c>
 		<o n="1" c="3" r="2" />
 		<o n="2" c="2" r="2" />
 		<o n="6" c="20" r="2" />
+		<m a="248" b="258" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="14">
 	    <c>H4sIAAAAAAAAC7WUgQ7DIAhEz035/09el5TsckOwbSQhgtQHhdYGoG3WFemHWrK202ad8f2MK4p6VvgaMzrHnC757vK/++NctQ/sr/JV7vAjBu97Xo/xDJ7wDf/zM8R8k+dB75nxufaK7zImfcj4nqPic38qfiTKB57xtf5IBn49AdlV/5Wvs8xyrvL5++kX/Ow/unK/VbKbP8sZ3YuaM/PV3qGvQ9+T2Acq2FUlwAYAAA==</c>
@@ -157,23 +167,25 @@
 		<o n="7" c="20" r="10" />
 		<o n="7" c="20" r="12" />
 		<o n="7" c="20" r="14" />
-		<o n="7" c="21" r="6" />
 		<o n="7" c="21" r="8" />
 		<o n="7" c="21" r="10" />
 		<o n="7" c="21" r="12" />
 		<o n="7" c="21" r="14" />
+		<m a="563" b="573" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="15">
 	    <c>H4sIAAAAAAAAC7VUAQqAMAjUCmqw/7+3BRPG4ZUNdyBFeXdpThURXRwenudHIBQ4tUUJ6M+CeWR6mUeG5vXi4elbbdKvlfAjeag/cgweN5o36nscjxvNQ33kYN/KzzzUzwb+X1azwHuba09DhX//6v4zbsb8MI+s+bezPOIkugivV7hzzD9jlnCfMo+Z/fxVR1ZsLfZ+fwNCZWSxwAYAAA==</c>
 		<o n="1" c="3" r="2" />
 		<o n="2" c="2" r="2" />
 		<o n="6" c="11" r="14" />
+		<m a="312" b="322" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="16">
 	    <c>H4sIAAAAAAAAC72VSw6AIAxEQWXh/S+sLkzIZGbaINiki0p5/VCwllLqYl0lf/NPosxf1Y57GR/9ke9slQ/6P34H2KPxWf+jPF+7ifUMP+pzz1d1ZeankW+ZOVB5YjzGj8TxopnDXDNxkMds1WtXf6b/0aw4u+dn60COuivI/3pX2bm8/BlvjeM7GX1fZ/07tlt3s34B48FbdMAGAAA=</c>
 		<o n="1" c="13" r="2" />
 		<o n="2" c="14" r="2" />
 		<o n="6" c="20" r="15" />
+		<m a="183" b="193" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="17">
 	    <c>H4sIAAAAAAAAC7WU4QqAMAiEXTHq/Z+4gv0QOfVkJgibuc9TpCEio9lvc//LqvyqFtQbkxPpYvOszZU7yXxdy6vP8COtOpb1UdGvmei8w68w0bvqvqGZWR7ShOIsvyPu8T3r2M9o13b3M7Mu/V4O+y/x+EwvzHc0b5aX3b16n18Sz6Lix+vnOj9HVGJpwAYAAA==</c>
@@ -187,22 +199,25 @@
 		<o n="5" c="17" r="9" />
 		<o n="5" c="2" r="14" />
 		<o n="5" c="20" r="14" />
+		<m a="290" b="300" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="18">
-	    <c>H4sIAAAAAAAAC72V0Q6AIAhFsXTl//9wPeR2uwPF1NiYQnUgwAoiEhSNht9z30n2KvmLHwwbJdNqcTwsfC6CZrJb797iJ4rB+zSBjzFwLdd6+LjPwEjyrif6uR/M03qDMWp98/Taqs/X/LVYlsyuP/oL3zM/Vo4tvnf+e/gj57fmn/Ud0ubTysFz/tm2+CsEZ/oge+T/st26P/sLeJJrIcAGAAA=</c>
+	    <c>H4sIAAAAAAAAA72V0Q6AIAhFsXTl//9wPeR2uwOktNicQHowwEoikpSRDX9k3U72V/IXPxk2SqXZ4kRYuC/DqGT33r3HLxSD9TKBjzFwbs+e8FGvwChyzyf6uR7M02qDMby6RWpt5aft9c6P6zSJ9L+X/55E+F7/vOVjriP9b8XS+CP31/PP+g5p/WmdIVIbti3+F4I9vZE98n9ZzrFe+gG059hzwAYAAA==</c>
 		<o n="1" c="4" r="2" />
 		<o n="2" c="18" r="2" />
 		<o n="6" c="11" r="15" />
+		<m a="330" b="340" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="19">
-	    <c>H4sIAAAAAAAAC7WV4Q6AIAiEsdrK93/h+uNG7g4p4DaWCvskpthEpBWbFlpjWsV6/F6h2Jlv8bq8/7kX8K05kofP8kV8xFvVePij+XdgbH22Q40vNZ75HnnjUP5/+OweZfGR0P0dNTslVn9tVee/qW+UH+0/un5Wf0A5sv75VdbZYbyMfbLej+2xnfhuI5+PjsAGAAA=</c>
+	    <c>H4sIAAAAAAAAA7WV4Q6AIAiEodrK93/h+tNG7g4x4TaWKfuim6KKiBaHFZpjGuVG1qNCuT3f4zX5/nMr4HvvSNl8xBt5zPyYrb+BYPN9HGZ8mXHPjyiah+r/w2fnKIuPhM7v69kpa/7bqNr/ap6r/NX+Y/3z+gOqkfXPWXl7h/EyvpN1f2xP7GTtBowDBi/ABgAA</c>
 		<o n="1" c="12" r="2" />
 		<o n="2" c="12" r="1" />
 		<o n="6" c="2" r="2" />
 		<o n="7" c="21" r="2" />
+		<m a="346" b="356" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="20">
-	    <c>H4sIAAAAAAAAC7VV0QqAIAycRZTg/39vPRSMY3eutIMx9NxtzKHFzBpYEWaCe+IP0DHnR8Fq8vyo/nLZSvRVHe3mWA9Z3KzesBoRlZxv4N/q+zXL0dNT+ogaGO6rHFH9Chv4J1dvRhQ8P9r/SPMrMrOJXK9+vI+Z7wO764yumh82Rxn9ArHR/OD5rH60n50ffIv+Av4Lmf9lF1ykcwKrcFNJwAYAAA==</c>
+	    <c>H4sIAAAAAAAAA7VV0QqAIAzciijB///eekiQYzuvrIMxc9vN9FA3swrmxIzEWv0BPNb5WTiMkXe2T/bPSl69Y9ketrrlslXoMYuMuyT5FfxT/v476zHiY/yIEhjOsx7R+hk28K3XSCMMfXx2/yPOt1C0ibHR+vE8vrwfsrNWeJl+Mh0p/A61kX4wX+WP5lX94D3+F/BdUN6XncQinhM1HWmjwAYAAA==</c>
 		<o n="1" c="10" r="2" />
 		<o n="2" c="12" r="0" />
 		<o n="4" c="14" r="2" />
@@ -211,5 +226,6 @@
 		<o n="7" c="12" r="10" />
 		<o n="7" c="12" r="12" />
 		<o n="7" c="12" r="14" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- FIND MOVES -->
 	</l>
 </w>

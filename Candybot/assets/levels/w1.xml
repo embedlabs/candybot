@@ -61,7 +61,7 @@
 		<o n="3" r="15" c="11" />
 		<o n="5" r="10" c="19" />
 		<o n="2" r="16" c="11" />
-		<m a="120" b="128" /> <!-- 2 for a, 10 for b || and yes, it's possible -->
+		<m a="120" b="128" /> <!-- 2 for a, 10 for b -->
 	</l>
 	<l id="8">
 	    <c>H4sIAAAAAAAAC7VUQQ7AIAgr8/9/3g47mSpFqgnRILYFDAEgLptjBdkVfBa38604urmc6p/1rd7s9KsYVQ0unAofwGvY0cH8ii/TUMWv5jDXxPFHK/1VuE7qk92pMbdmkcrPNAC8Z9lMYniZnm79XPFuez4b//kF6azLJcAGAAA=</c>
@@ -77,7 +77,7 @@
 		<o n="3" r="3" c="21" />
 		<o n="3" r="4" c="20" />
 		<o n="3" r="4" c="22" />
-		<m a="102" b="108" /> <!-- 4 for a, 10 for b || and yes, it's possible -->
+		<m a="102" b="108" /> <!-- 4 for a, 10 for b -->
 	</l>
 	<l id="9">
 	    <c>H4sIAAAAAAAAA8WU0QpAIQhDrf7/n+uhx91tSd4CIcjNg0otIlpxVB3HH7G4zH/znzKqfiP+m3PJ+ihd5f64PWZ6dFe1VF5Wx+aL9lnVznB8aZ0cd98Zj/JwOVAv1fvr/83xUP4nNdguMf+b0VeMfZ9IRrfnwAYAAA==</c>
@@ -86,7 +86,7 @@
 		<o n="3" r="1" c="16" />
 		<o n="3" r="5" c="13" />
 		<o n="3" r="10" c="14" />
-		<m a="173" b="179" /> <!-- 4 for a, 10 for b || not sure moves, one box is unnecessary as a trick, though -->
+		<m a="173" b="179" /> <!-- 4 for a, 10 for b -->
 	</l>
 	<l id="10">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFUA2nxY0vdxPaz/QCoyGP2F6NPxxA0LmY4sfdHdSYj6yOnQzR82nnvmkYCYgZiZBPQC2Gm9HwAYAAA==</c>
@@ -98,7 +98,7 @@
 		<o n="3" r="9" c="6" />
 		<o n="3" r="5" c="10" />
 		<o n="3" r="7" c="15" />
-		<m a="199" b="207" /> <!-- 6 for a, 14 for b || because there are so many ways!, not sure moves -->
+		<m a="199" b="207" /> <!-- 6 for a, 14 for b -->
 	</l>
 	<l id="11">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+ZT6fSiHDyMaTch8Uv1HTFiR6lZS1JNqPrHxS6z5lMQPqeFL7/RJyAxizackPQzG/EVquUErQOvymxrlJzpmAmJmJD4AMxVbGMAGAAA=</c>
@@ -107,7 +107,7 @@
 		<o n="3" r="5" c="20" />
 		<o n="4" r="2" c="20" />
 		<o n="4" r="5" c="5" />
-		<m a="154" b="160" /> <!-- 6 for a, 12 for b || pretty sure about this one, did it hella efficiently -->
+		<m a="154" b="160" /> <!-- 6 for a, 12 for b -->
 		<t>Bombs can clear walls and objects to create a path for the candy. To activate a bomb, push it onto a block, and it will take out the block directly underneath it.  Blocks will not destroy moveable objects. It must fall a minimum of two bloacks to activate.</t>
 	</l>
 	<l id="12">
@@ -115,7 +115,7 @@
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="4" r="10" c="19" />
-		<m a="100" b="104" /> <!-- 2 for a, 6 for b || really straightforward -->
+		<m a="100" b="104" /> <!-- 2 for a, 6 for b -->
 	</l>
 	<l id="13">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCW+bjMINY/hMRw6SfW/eSGJzb1lMYRLeKXUPgTUofLPEJhTYn7sdmBTQ2h8McmRmwYk2oGqXFHzfxL6/ICVx6kVvok1nxq54uhUH4SMp/amAmImaFsAAV+u/DABgAA</c>
@@ -134,7 +134,7 @@
 		<o n="2" r="4" c="12" />
 		<o n="3" r="2" c="4" />
 		<o n="4" r="10" c="17" />
-		<m a="136" b="142" /> <!-- 4 for a, 10 for b || there are hella ways to do this -->
+		<m a="136" b="142" /> <!-- 4 for a, 10 for b -->
 	</l>
 	<l id="15">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaC1e+nlfnQ+tfxAb/fjkic2XZDqN1Lcic98dHWkugmXfmLMJxbgcxs2t2ITo2b+pUbaGgz5i5rmUxtQmr8GS/lATcwExMxIfAAeKlKTwAYAAA==</c>
@@ -149,7 +149,7 @@
 	    <c>H4sIAAAAAAAAC8VV0Q6AIAjUsv7/k6utB3Y75NRYbExSOE9Aq6WUmqye9NYUifAP8Hu0id8Yx/ay+MjrhHlmj/BHfIz9Gt/DxDilviy/dmS2gr8qf+BjPzWi9vxs3fp5PZnF39Ye785oLpX3YuU8CieLH9VFyb/3lrA9I26z/anWQ/WZlaz/yXbr/toXN5DhQ8AGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
-		<m a="76" b="78" /> <!-- 2 for a, 4 for b || straightforward -->
+		<m a="76" b="78" /> <!-- 2 for a, 4 for b -->
 		<t>These lasers will allow any and all items including candy to pass through. However, the Candybot may not pass through. Sudden death will occur if done so.</t>
 	</l>
 	<l id="17">

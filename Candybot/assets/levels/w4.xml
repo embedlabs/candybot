@@ -16,7 +16,7 @@
 		<o n="6" r="8" c="12" />
 		<o n="7" r="8" c="15" />
 		<o n="7" r="8" c="9" />
-		<m a="173" b="179" /> <!-- 6 for a, 12 for b -->
+		<m a="177" b="187" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="3">
 	    <c>H4sIAAAAAAAAA+NkYGDgpDHGB0DyHESow6WXHH3DyXxs4c0FxNxUMp8Y+2gFRs0n3nxy7CIUh5SYycBAWC8u88nxEy5zqOE3fO4kxq3kxhGx5Sc2PcTEATXjHr1MYMciRgsMAOXX9G/ABgAA</c>
@@ -25,7 +25,7 @@
 		<o n="3" r="9" c="15" />
 		<o n="6" r="9" c="11" />
 		<o n="6" r="9" c="12" />
-		<m a="345" b="355" /> <!-- 8 for a, 18 for b -->
+		<m a="347" b="357" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="4">
 	    <c>H4sIAAAAAAAAA8WUzQrAMAiD42GH/bz/8247FERiN23dAqGkwqcgKACk2GuRNf+YbMafNXePf2eoFyoL+beK8lmfXs7y3/bL8peP+d4+/uZbWb5XH+ELmV/XRvhNHt8qw9fzs54RfvRutbxd3h/4lfet8j5X+gQIN2TVwAYAAA==</c>
@@ -49,7 +49,7 @@
 		<o n="6" r="10" c="5" />
 		<o n="7" r="5" c="9" />
 		<o n="7" r="10" c="13" />
-		<m a="93" b="97" /> <!-- 4 for a, 8 for b -->
+		<m a="99" b="109" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="5">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFSDFfHLcRKpaVigeNX/4mI+cZpDNJ0UvITXkyJFiPgyzQDE13U8JwFZWcCJhYuzGpocJiJkZCLufEYnGVW6h6yelfCPW/fjkSIlfUsvegYhfamMAdt6i6sAGAAA=</c>
@@ -69,7 +69,7 @@
 		<o n="3" r="8" c="12" />
 		<o n="5" r="9" c="11" />
 		<o n="6" r="9" c="12" />
-		<m a="189" b="193" /> <!-- 4 for a, 8 for b -->
+		<m a="195" b="205" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="6">
 	    <c>H4sIAAAAAAAAA+NkYGDgAWJOGtEgTCvACcXIbE7cykkGuNzPSQQmBlDiXmLspWf408JcarkfVziRE1ekxDcp7icnHEl1P6lgqKYfGCDG/cTkZVzxjMv91Eq7tAx/dH9xATE3FnFyMLr7aVW3gGgA6HyTgMAGAAA=</c>
@@ -79,7 +79,7 @@
 		<o n="7" r="9" c="2" />
 		<o n="7" r="10" c="3" />
 		<o n="7" r="14" c="2" />
-		<m a="150" b="160" /> <!-- -22 for a, -12 for b -->
+		<m a="150" b="160" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="7">
 	    <c>H4sIAAAAAAAAA7WUjQ6AIAiEsXL1/k9cbrnRxZ3aDxuzBZ4fZCQzSz/715bP1euXdWl4lMve1bXGc0c9nmuUP9t1H+Px+1ktTD9i8BblRs9K37NiD5Vmr74yPNv3ZJQ/uje4Pzr/CT/qtmpFfay5xa1yGf9bbryzqK/+yZFv5I3xs5p6+x/xY7xn/rB5if0vvgpuxbnZvbeRfjLO3ZqneKbSH/Xp8FnEdwCD56DABgAA</c>
@@ -88,7 +88,7 @@
 		<o n="5" r="16" c="16" />
 		<o n="5" r="16" c="17" />
 		<o n="5" r="16" c="18" />
-		<m a="106" b="110" /> <!-- 2 for a, 6 for b -->
+		<m a="114" b="124" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="8">
 	    <c>H4sIAAAAAAAAA+NhYGDgoTGmFaC3+YwEMKnqRsNnaIUPuvtGzR81f7iaz0mCObjU8kDlqIm5gJgbiQ8AJtqUp8AGAAA=</c>
@@ -118,7 +118,7 @@
 		<o n="7" r="10" c="13" />
 		<o n="7" r="12" c="13" />
 		<o n="7" r="14" c="13" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- This and below not done! -->
+		<m a="450" b="460" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="9">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFaC3+dQOD2x8ariZkPm43ESsmwmZj81NxMYVIfMpDSNqhj8nEh5M8TtQ5nPiwbQOH5BeDhqbj24GNvNZGFD9CsLsWMTIKR9wuYvcfEGv8pOamAmImZH4ADAngCnABgAA</c>
@@ -127,7 +127,7 @@
 		<o n="3" r="4" c="8" />
 		<o n="3" r="7" c="16" />
 		<o n="5" r="4" c="7" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="229" b="239" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="10">
 	    <c>H4sIAAAAAAAAA7WUiwrAIAhFdUu2///iLdhAxHxUClJkHe0mIQBgse+0zrsL+TJX5Z0kq89pE7uKj2zU+JZeUQ3l/vY5nzexDiwefZ/Vt/R6I8KX8Uw90fot3bXzXMcZfVCMmXqyOUZGi3zPRvxo31txTx9Szmn5NYv0Z+aP+BmXUcvx+gn+PWf8AYaeqtfABgAA</c>
@@ -135,7 +135,7 @@
 		<o n="2" r="2" c="2" />
 		<o n="3" r="15" c="17" />
 		<o n="6" r="2" c="21" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- fix this level, find moves -->
 	</l>
 	<l id="11">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDHmBGIeLDRIjhAgpJ8RhxwnCebj0z/q/pHtfhjGZi6x+gm5H5f51HA/MeaPun/ouZ+YtI9sFynuJ8VsfHbgqxOYgJgZTT+2/AZTh8scACGWjwrABgAA</c>
@@ -153,7 +153,7 @@
 		<o n="6" r="6" c="11" />
 		<o n="6" r="6" c="13" />
 		<o n="6" r="6" c="15" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="171" b="181" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="12">
 	    <c>H4sIAAAAAAAAA71Vyw7AIAjDedr///B2NA3lIWKTHkyglmLiEJHRzC7c1H+BUWDf2mv5z9zB4OXDfEVnrOZjZYP6Wm8VkffDPOL9Wk1UfxdePkxbm0mrRX1WG919Zr+7YPmzmS16qPrP5n8ap/VRq+MveX7O5fwBQ33UrMAGAAA=</c>
@@ -161,6 +161,7 @@
 		<o n="2" r="2" c="9" />
 		<o n="6" r="2" c="11" />
 		<o n="4" r="2" c="3" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- fix/find out if needs fix, find moves -->
 	</l>
 	<l id="13">
 	    <c>H4sIAAAAAAAAA8VRQQ6AMAgrepgH//9e5YaGzW1l2IQQQldYEQCyOBQH4iAmS4sYMGflrMz9gedfGM2avuIktL1ZtV0jvMv23+vjg+Pxe/UVzD1G/Jnx8m//Pb7NXo/RV4zcg/Gn522W/0yUV73dsZv6Auk/sqvABgAA</c>
@@ -170,6 +171,7 @@
 		<o n="7" r="15" c="19" />
 		<o n="7" r="15" c="20" />
 		<o n="7" r="15" c="21" />
+		<m a="268" b="278" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="14">
 	    <c>H4sIAAAAAAAAA2NkYGBgJBNzEKmOVmCgzMfmPxDNAsXEhgcp7kfXR6w6csKHFDdhs49Q/JNrPiG1hMwhN33yMOAOf2rZy4qDjQ8Qcj+yHC3MRwbo5uPyLzHpE5s+Qu7Hl7+I8QM1wweXW7CxiTWfFuUcPcpPHgKYnQg1yJgJiJmR+ABMfyy/wAYAAA==</c>
@@ -185,6 +187,7 @@
 		<o n="7" r="8" c="12" />
 		<o n="7" r="10" c="12" />
 		<o n="7" r="12" c="12" />
+		<m a="265" b="275" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="15">
 	    <c>H4sIAAAAAAAAA9VTWwrAMAjT7WPr/S+8fUwQMRL3KEwI1aIxfagioh9jXBDnj2RfpWeRP+vhYw11KK74PWfsherRue7qZw3pR0D8MSd7X5+braYHcTP6UQ/zZ9wPgw3s72Q9MytRT+fMzF97g7+alb/oZ/9Dh9+smpWn+lEP82ffT4XlxNrI9zgAVjnZ2sAGAAA=</c>
@@ -193,6 +196,7 @@
 		<o n="3" r="1" c="15" />
 		<o n="3" r="1" c="18" />
 		<o n="5" r="1" c="14" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- fix this level completely, find moves -->
 	</l>
 	<l id="16">
 	    <c>H4sIAAAAAAAAC2NkYGBgpBBzEJCnBHDikSPHfHzmoatBNp8TjaYGoEb4DBXzyQk3arkfl92DKXxGzacu4CTDfFLTKC7ziTWHUBk52MOfWPfDMDsWMXIwExAzQ9kAmsynIMAGAAA=</c>
@@ -202,6 +206,7 @@
 		<o n="3" r="1" c="4" />
 		<o n="4" r="2" c="2" />
 		<o n="7" r="2" c="5" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- this and below -->
 	</l>
 	<l id="17">
 	    <c>H4sIAAAAAAAAA+NkYGDgpCFmQKKpCdDNpKYd2Myih/mcOORIMZcYM8ixg1Q9pKgn18/E6KM03vDpp0aaQI4zFiimRlqAmU0NNZTqo2XaIVUPpfmLVmYTMoOW5Q9yeuMCYm4kNcSW78j60OVoiQG38o/1wAYAAA==</c>
@@ -211,6 +216,7 @@
 		<o n="5" r="15" c="11" />
 		<o n="6" r="7" c="11" />
 		<o n="6" r="7" c="12" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="18">
 	    <c>H4sIAAAAAAAAA6VUQQrAMAhrt2v//97tMEFCopEFhFZn6tLQtTQORJefIPcekmNndXwd9hd/gDNnblwz3TpeBeRXvI5O1exVruKsasG1YT3lYvVqzqrGfDbpj3q+6ykyv7pDNoMze9bdnWEC5ZnOS65Onbaokeub0GXyFrBv1XmOr5XXul7HC1VN/YfrFRdxH1nr2F9v3GnvBvYF7wNI3D58wAYAAA==</c>
@@ -218,6 +224,7 @@
 		<o n="2" r="5" c="12" />
 		<o n="6" r="12" c="11" />
 		<o n="6" r="13" c="12" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="19">
 	    <c>H4sIAAAAAAAAC72TUQrAIAxD6/axCbv/ebefQQkNNrOuEFDQtL7aZmZtsVaF9+8/+FfnQD7VOSL+HVTtXxlf/JU3vf6XIOTH5P1PsZ7sTLH/w3qrslT5Z89i/Vgz6yHei3jgecZHCfYuxmdmrhqsq+YrYhTxH/3nbBwW92lW26Pd7W/2DEgAwAYAAA==</c>
@@ -227,6 +234,7 @@
 		<o n="6" r="5" c="8" />
 		<o n="6" r="5" c="9" />
 		<o n="7" r="11" c="13" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="20">
 	    <c>H4sIAAAAAAAAA8VUiwqAMAg0CMq2///eNkgQUXOvEg4T2XndZAgAuQAn5pPVFasCH6yKL/VvgcwROUP690WQ/qOA/EftvrQzFJ7/Gk9r/LU/0hOZPU8sHquvfWscb/5HvGr10uO0dLXMGN1/Pr9n/0d3K/r+WHN5nZ3+jNB4SH/tHUJHb74KEqtvbT1n4MAGAAA=</c>
@@ -241,5 +249,6 @@
 		<o n="4" r="3" c="17" />
 		<o n="4" r="3" c="19" />
 		<o n="4" r="3" c="21" />
+		<m a="278" b="288" /> <!-- 10 for a, 20 for b -->
 	</l>
 </w>
