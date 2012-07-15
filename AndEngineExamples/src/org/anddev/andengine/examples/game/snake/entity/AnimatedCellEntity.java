@@ -34,18 +34,22 @@ public abstract class AnimatedCellEntity extends AnimatedSprite implements Snake
 	// Getter & Setter
 	// ===========================================================
 
+	@Override
 	public int getCellX() {
 		return this.mCellX;
 	}
 
+	@Override
 	public int getCellY() {
 		return this.mCellY;
 	}
 
+	@Override
 	public void setCell(final ICellEntity pCellEntity) {
 		this.setCell(pCellEntity.getCellX(), pCellEntity.getCellY());
 	}
 
+	@Override
 	public void setCell(final int pCellX, final int pCellY) {
 		this.mCellX = pCellX;
 		this.mCellY = pCellY;

@@ -29,6 +29,7 @@ import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl;
 import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl.IOnScreenControlListener;
 import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
+import org.anddev.andengine.engine.handler.physics.PhysicsHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -103,6 +104,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public final float HEIGHT = 64 * 18;
 	public float PHONE_WIDTH;
 	public float PHONE_HEIGHT;
+    private static final int DIALOG_ALLOWDIAGONAL_ID = 0;
+
 
 	public int level, world;
 	public String theme;
@@ -308,8 +311,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 33, 0);
 
 		this.mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
-		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_knob.png", 128, 0);
+		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "control.png", 0, 0);
+		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "trans.png", 128, 0);
 
 		/**
 		 * ENGINE LOADING
@@ -461,18 +464,18 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		this.mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCandyCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
 			@Override
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
-//				Log.i(TAG, "Base Screen Control test");
+				// Fill in Move Function. CandyEngine.move((int)pValueX, (int)pValueY, 1);
 			}
 		});
 		this.mDigitalOnScreenControl.getControlBase().setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-		this.mDigitalOnScreenControl.getControlBase().setAlpha(0.5f);
+		this.mDigitalOnScreenControl.getControlBase().setAlpha(1f);
 		this.mDigitalOnScreenControl.getControlBase().setScaleCenter(0, 128);
-		this.mDigitalOnScreenControl.getControlBase().setScale(1.25f);
-		this.mDigitalOnScreenControl.getControlKnob().setScale(1.25f);
+		this.mDigitalOnScreenControl.getControlBase().setScale(2f);
+		this.mDigitalOnScreenControl.getControlKnob().setAlpha(0f);
+		this.mDigitalOnScreenControl.getControlKnob().setScale(2f);
 		this.mDigitalOnScreenControl.refreshControlKnobPosition();
 
 		hud.attachChild(this.mDigitalOnScreenControl);
-
 		hud.attachChild(resetLevelText);
 		hud.registerTouchArea(resetLevelText);
 
