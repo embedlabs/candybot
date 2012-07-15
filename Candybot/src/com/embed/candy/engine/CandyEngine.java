@@ -305,7 +305,7 @@ public class CandyEngine {
 					if (teleportationRequired) {
 						teleportationRequired = false;
 
-//						if (!gSprite.blowUp) {
+						if (!gSprite.blowUp) {
 							tempRow = candyLevel.teleporter2row + ROW_DOWN;
 							tempColumn = candyLevel.teleporter2column;
 							if (CandyUtils.DEBUG) Log.d(TAG, "Adding to queue...");
@@ -317,7 +317,7 @@ public class CandyEngine {
 							if (CandyUtils.DEBUG) Log.d(TAG, "Adding to queue...");
 							spriteQueue.get(gIndex).add(new int[] {FALL, fallDistance2, 0});
 							if (CandyUtils.DEBUG) Log.d(TAG, "Queue added to. " + spriteQueue.get(gIndex).size());
-//						}
+						}
 						continue;
 					} else if (slidingOnIceRequired) {
 						slidingOnIceRequired = false;
