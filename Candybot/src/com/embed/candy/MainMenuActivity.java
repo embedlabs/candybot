@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.embed.candy.save.DataMerger;
 import com.embed.candy.save.SaveIO;
+import com.embed.candy.service.MusicService;
 import com.embed.candy.swarmservice.CandyAchievements;
 import com.embed.candy.swarmservice.CandySwarmListener;
 import com.embed.candy.util.CandyUtils;
@@ -47,6 +48,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	private boolean initSwarmBool;
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
+	public static Intent intent;
+
 
 	@SuppressLint("UseSparseArrays")
 	public static Map<Integer, SwarmAchievement> achievements = new HashMap<Integer, SwarmAchievement>();
@@ -185,7 +188,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	           .setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
 	               @Override
 				public void onClick(final DialogInterface dialog, final int id) {
-	                    MainMenuActivity.this.finish();
+	            	   stopService(intent);
+	                   MainMenuActivity.this.finish();
 	               }
 	           })
 	           .setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {
@@ -214,6 +218,9 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		iv_twitter = (ImageView) findViewById(R.id.button_twitter);
 		my_swarm_button = (ImageView)findViewById(R.id.my_swarm_button);
 
+		intent = new Intent(this, MusicService.class);
+		startService(intent);
+		
 		ViewUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font
 		ViewUtils.setClick(this,button_achieve, button_play, iv_facebook, iv_twitter, my_swarm_button);
 		getPreferencesSwarm();
@@ -229,17 +236,19 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	public void onDestroy() {
 		BufferObjectManager.getActiveInstance().clear();
 		super.onDestroy();
-		if (CandyUtils.DEBUG) Log.i(TAG, "MainMenu onDestroy()");
 	}
+	
 
 	@Override
 	public void onResume() {
+		MusicService.onResume();
 		super.onResume();
 		CandyAchievements.startAchievementsRunnable(this);
 	}
 
 	@Override
 	public void onPause() {
+		MusicService.onPause();
 		super.onPause();
 	}
 

@@ -91,6 +91,9 @@
 		<service
 			android:name="com.swarmconnect.NotificationService"
 			android:process=":swarm" />
+		<service
+		    android:name="com.embed.candy.service.MusicService"
+		    android:process=":my_process" />
 		<receiver android:name="com.swarmconnect.SwarmIOBroadcastReceiver" >
 			<intent-filter>
 				<action android:name="android.intent.action.BOOT_COMPLETED" />
