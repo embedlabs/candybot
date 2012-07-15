@@ -217,7 +217,7 @@
 		<m a="346" b="356" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id ="20">
-	    <c>H4sIAAAAAAAAA7VV0QqAIAzciijB///eekiQYzuvrIMxc9vN9FA3swrmxIzEWv0BPNb5WTiMkXe2T/bPSl69Y9ketrrlslXoMYuMuyT5FfxT/v476zHiY/yIEhjOsx7R+hk28K3XSCMMfXx2/yPOt1C0ibHR+vE8vrwfsrNWeJl+Mh0p/A61kX4wX+WP5lX94D3+F/BdUN6XncQinhM1HWmjwAYAAA==</c>
+	    <c>H4sIAAAAAAAAA7WV0QqAIAxFZxEl+P/fWy9CHLbrSBsMxbUzmxctZtbgRbiJWM+/wLHXOGsFc3Jn64z4jPH/zeIeRnmretP52+O7YNcgt2HM1Ir6FdUY8RSfVh3nuqrh7V/ZgbHXGmlE2Ts+23+P+dUy2mRstH+ex8r7ITrrDFfpJ9JRhl+Q6+mH32f53npWP7yL/jK+C5n35RQxj3MDk6jwx8AGAAA=</c>
 		<o n="1" c="10" r="2" />
 		<o n="2" c="12" r="0" />
 		<o n="4" c="14" r="2" />
@@ -226,6 +226,6 @@
 		<o n="7" c="12" r="10" />
 		<o n="7" c="12" r="12" />
 		<o n="7" c="12" r="14" />
-		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- FIND MOVES -->
+		<m a="391" b="401" /> <!-- 10 for a, 20 for b -->
 	</l>
 </w>
