@@ -17,12 +17,12 @@ import org.anddev.andengine.input.touch.detector.ScrollDetector;
 import org.anddev.andengine.input.touch.detector.ScrollDetector.IScrollDetectorListener;
 import org.anddev.andengine.input.touch.detector.SurfaceScrollDetector;
 
+import android.view.MotionEvent;
+
 import com.embed.candy.CandyLevelActivity;
 import com.embed.candy.engine.CandyEngine;
 
-import android.view.MotionEvent;
-
-public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
+public final class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDetectorListener, IOnSceneTouchListener {
 
 	private final CandyLevelActivity candyLevel;
 	private final SurfaceScrollDetector mScrollDetector;
@@ -93,10 +93,12 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 	}
 
 	@Override
-	public synchronized boolean onSceneTouchEvent(final Scene pScene,
-			final TouchEvent pSceneTouchEvent) {
+	public synchronized boolean onSceneTouchEvent(final Scene pScene, final TouchEvent pSceneTouchEvent) {
 		if (candyLevel.gameStarted) {
-			if (!candyLevel.playMode) {
+			if (!candyLevel.playMode || !candyLevel.touchControlsBoolean) {
+				mCandyCamera.setMaxZoomFactorChange(2);
+				mCandyCamera.setMaxVelocity(1000, 1000);
+				mCandyCamera.setChaseEntity(null);
 				if (pSceneTouchEvent.getMotionEvent().getAction() == MotionEvent.ACTION_DOWN) {
 					if (System.currentTimeMillis() - time <= DOUBLE_TAP_THRESHOLD && Math.abs(pSceneTouchEvent.getMotionEvent().getX() - dragX) <= DOUBLE_TAP_LOCATION_THRESHOLD && Math.abs(pSceneTouchEvent.getMotionEvent().getY() - dragY) <= DOUBLE_TAP_LOCATION_THRESHOLD) {
 						if (2 * mCandyCamera.getZoomFactor() >= 1 + candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT) {
@@ -104,7 +106,7 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 							mCandyCamera.setZoomFactor(candyLevel.PHONE_HEIGHT / candyLevel.HEIGHT);
 						} else {
 							mCandyCamera.convertCameraSceneToSceneTouchEvent(pSceneTouchEvent);
-							mCandyCamera.setCenterDirect(pSceneTouchEvent.getX(),pSceneTouchEvent.getY());
+							mCandyCamera.setCenterDirect(pSceneTouchEvent.getX(), pSceneTouchEvent.getY());
 							mCandyCamera.setZoomFactor(1);
 							return true;
 						}
@@ -172,21 +174,13 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 
 				case MotionEvent.ACTION_UP:
 					if (tapOptionEnabled && System.currentTimeMillis() - time <= TAP_THRESHOLD) {
-						if (motionX <= candyLevel.PHONE_WIDTH / 3
-								&& motionY >= candyLevel.PHONE_HEIGHT / 6
-								&& motionY <= candyLevel.PHONE_HEIGHT * 5 / 6) {
+						if (motionX <= candyLevel.PHONE_WIDTH / 3 && motionY >= candyLevel.PHONE_HEIGHT / 6 && motionY <= candyLevel.PHONE_HEIGHT * 5 / 6) {
 							candyEngine.move(0, COLUMN_LEFT);
-						} else if (motionX >= candyLevel.PHONE_WIDTH * 2 / 3
-								&& motionY >= candyLevel.PHONE_HEIGHT / 6
-								&& motionY <= candyLevel.PHONE_HEIGHT * 5 / 6) {
+						} else if (motionX >= candyLevel.PHONE_WIDTH * 2 / 3 && motionY >= candyLevel.PHONE_HEIGHT / 6 && motionY <= candyLevel.PHONE_HEIGHT * 5 / 6) {
 							candyEngine.move(0, COLUMN_RIGHT);
-						} else if (motionY <= candyLevel.PHONE_HEIGHT / 3
-								&& motionX >= candyLevel.PHONE_WIDTH / 6
-								&& motionX <= candyLevel.PHONE_WIDTH * 5 / 6) {
+						} else if (motionY <= candyLevel.PHONE_HEIGHT / 3 && motionX >= candyLevel.PHONE_WIDTH / 6 && motionX <= candyLevel.PHONE_WIDTH * 5 / 6) {
 							candyEngine.move(ROW_UP, 0);
-						} else if (motionY >= candyLevel.PHONE_HEIGHT * 2 / 3
-								&& motionX >= candyLevel.PHONE_WIDTH / 6
-								&& motionX <= candyLevel.PHONE_WIDTH * 5 / 6) {
+						} else if (motionY >= candyLevel.PHONE_HEIGHT * 2 / 3 && motionX >= candyLevel.PHONE_WIDTH / 6 && motionX <= candyLevel.PHONE_WIDTH * 5 / 6) {
 							candyEngine.move(ROW_DOWN, 0);
 						}
 					}
@@ -196,4 +190,4 @@ public class CandyTouchSystem implements IPinchZoomDetectorListener, IScrollDete
 		}
 		return true;
 	}
-} // TODO FUCK YOU SHRAV I HAD TO REFORMAT ALL MY SHIT AFTER YOU TRIED TO FIX THE CONFLICT
+}

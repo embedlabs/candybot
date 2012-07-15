@@ -27,6 +27,10 @@
     <string name="pref_category_general">General</string>
     <string name="pref_category_audio">Audio</string>
     <string name="pref_category_controls">Controls</string>
+    <string name="pref_controls_use_touch">Use touch controls</string>
+    <string name="pref_controls_use_touch_summary">Drag your finger or tap near the screen edges to move instead of the D-pad.</string>
+    <string name="pref_controls_left">Move D-Pad to left</string>
+    <string name="pref_controls_left_summary">Move the D-Pad to the left when playing. Useful if you want to switch hands.</string>
     <string name="pref_swarm">Swarm</string>
     <string name="pref_swarm_summary">Use swarm\'s social features, earn achievements, and save your scores.</string>
     <string name="pref_music">Music</string>
@@ -38,7 +42,7 @@
     <string name="pref_general_toasts">In-Game Help</string>
     <string name="pref_general_toasts_summary">Show game tips and tutorials at the start of each level.</string>
     <string name="pref_general_sensitivity">Sensitivity</string>
-    <string name="pref_general_sensitivity_summary">How sensitive the finger controls are.</string>
+    <string name="pref_general_sensitivity_summary">How sensitive the controls are.</string>
     <string name="pref_general_sensitivity_dialog">The higher the sensitivity, the less you will have to drag your finger to move the Candybot.</string>
     <string name="pref_category_graphics">Graphics</string>
     <string name="pref_graphics_quality">Quality</string>

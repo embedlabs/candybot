@@ -26,10 +26,7 @@ import org.anddev.andengine.audio.sound.SoundFactory;
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
-import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl;
-import org.anddev.andengine.engine.camera.hud.controls.BaseOnScreenControl.IOnScreenControlListener;
 import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
-import org.anddev.andengine.engine.handler.physics.PhysicsHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -87,6 +84,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import com.embed.candy.controls.CandyDigitalScreenControlListener;
 import com.embed.candy.controls.CandyTouchSystem;
 import com.embed.candy.engine.CandyEngine;
 import com.embed.candy.save.SaveIO;
@@ -104,8 +102,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public final float HEIGHT = 64 * 18;
 	public float PHONE_WIDTH;
 	public float PHONE_HEIGHT;
-    private static final int DIALOG_ALLOWDIAGONAL_ID = 0;
-
 
 	public int level, world;
 	public String theme;
@@ -184,6 +180,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public int qualityInt;
 	public boolean zoomBoolean;
 	public boolean toastBoolean;
+	public boolean touchControlsBoolean;
+	public boolean moveControlsLeft;
 
 	private long totalTime = 0;
 	private long referenceTime;
@@ -212,6 +210,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", false);
 		toastBoolean = sp.getBoolean("com.embed.candy.general_toasts", true);
 		initMusic = sp.getBoolean("com.embed.candy.music", true);
+		touchControlsBoolean = sp.getBoolean("com.embed.candy.controls_use_touch", false);
+		moveControlsLeft = sp.getBoolean("com.embed.candy.controls_left", false);
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
@@ -271,14 +271,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		MusicFactory.setAssetBasePath("mfx/");
 		try {
-		    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine
-		        .getMusicManager(), this, "gameplay.ogg");
+		    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine.getMusicManager(), this, "gameplay.ogg");
 		    backgroundMusic.setLooping(true);
-		} catch (IllegalStateException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
+		} catch (IllegalStateException e) {} catch (IOException e) {}
 
 		/**
 		 * OBJECT TEXTURE
@@ -298,8 +293,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mFontTexture = new BitmapTextureAtlas(512, 512, quality);
 		mFontTexture2 = new BitmapTextureAtlas(512, 512, quality);
 		andengineMainFont = new Font(mFontTexture, mainFont, 64, true, 0x80444444);
-//		andengineMainFont2 = new Font(mFontTexture2, mainFont, 15, true, 0x80CCCCCC);
-		andengineMainFont2 = new StrokeFont(mFontTexture2,mainFont,15,true,0x80FFFFFF,1,0x80000000);
+		andengineMainFont2 = new StrokeFont(mFontTexture2,mainFont,15,true,0xCCFFFFFF,1,0xCC000000);
 
 		/**
 		 * PARTICLES
@@ -310,9 +304,11 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 33, 0);
 		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 33, 0);
 
-		this.mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "control.png", 0, 0);
-		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "trans.png", 128, 0);
+		mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		if (!touchControlsBoolean) {
+			mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "control.png", 0, 0);
+			mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "trans.png", 128, 0);
+		}
 
 		/**
 		 * ENGINE LOADING
@@ -418,31 +414,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 */
 		hud = new HUD();
 
-		playChangeableText = new ChangeableText(PHONE_WIDTH, PHONE_HEIGHT, andengineMainFont, playMode ? play : pan, Math.max(play.length(), pan.length())) {
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
-
-				if (pSceneTouchEvent.getAction() == MotionEvent.ACTION_DOWN & gameStarted) {
-					if (!playMode) {
-						setText(play);
-						mCandyCamera.setChaseEntity(candyEngine.bot);
-						playMode = true;
-					} else {
-						setText(pan);
-						mCandyCamera.setMaxZoomFactorChange(2);
-						mCandyCamera.setMaxVelocity(1000, 1000);
-						mCandyCamera.setChaseEntity(null);
-						playMode = false;
-						resetDragDistance = true;
-					}
-				}
-				return true;
-			}
-		};
-		playChangeableText.setPosition(PHONE_WIDTH - playChangeableText.getWidth() - 10,PHONE_HEIGHT - playChangeableText.getHeight() - 10);
-		hud.attachChild(playChangeableText);
-		hud.registerTouchArea(playChangeableText);
-
 		resetLevelText = new Text(PHONE_WIDTH, PHONE_HEIGHT, andengineMainFont, getString(R.string.reset)) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
@@ -453,31 +424,59 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			}
 		};
 		resetLevelText.setPosition(PHONE_WIDTH - resetLevelText.getWidth()-10,10);
-
+		hud.attachChild(resetLevelText);
+		hud.registerTouchArea(resetLevelText);
 
 		if (helpTextString!=null && toastBoolean) {
-			helpText = new Text(64,64,andengineMainFont2,CandyUtils.wrap(helpTextString, 60));
+			helpText = new Text(0,0,andengineMainFont2,CandyUtils.wrap(helpTextString, 60));
 			helpText.setColor(0.2f, 0.2f, 0.2f, 0.5f);
+			helpText.setPosition(PHONE_WIDTH/2-helpText.getWidth()/2, PHONE_HEIGHT/2-helpText.getHeight()/2);
 			hud.attachChild(helpText);
 		}
 
-		this.mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCandyCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, new IOnScreenControlListener() {
-			@Override
-			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
-				// Fill in Move Function. CandyEngine.move((int)pValueX, (int)pValueY, 1);
+		if (!touchControlsBoolean) {
+			if (moveControlsLeft) {
+				mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight(), this.mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
+				mDigitalOnScreenControl.getControlBase().setScaleCenter(0, 128);
+			} else {
+				mDigitalOnScreenControl = new DigitalOnScreenControl(PHONE_WIDTH - mOnScreenControlBaseTextureRegion.getWidth(), PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight(), mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
+				mDigitalOnScreenControl.getControlBase().setScaleCenter(128, 128);
 			}
-		});
-		this.mDigitalOnScreenControl.getControlBase().setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-		this.mDigitalOnScreenControl.getControlBase().setAlpha(1f);
-		this.mDigitalOnScreenControl.getControlBase().setScaleCenter(0, 128);
-		this.mDigitalOnScreenControl.getControlBase().setScale(2f);
-		this.mDigitalOnScreenControl.getControlKnob().setAlpha(0f);
-		this.mDigitalOnScreenControl.getControlKnob().setScale(2f);
-		this.mDigitalOnScreenControl.refreshControlKnobPosition();
 
-		hud.attachChild(this.mDigitalOnScreenControl);
-		hud.attachChild(resetLevelText);
-		hud.registerTouchArea(resetLevelText);
+			mDigitalOnScreenControl.getControlBase().setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+			mDigitalOnScreenControl.getControlBase().setAlpha(0.5f);
+			mDigitalOnScreenControl.getControlBase().setScale(2);
+			mDigitalOnScreenControl.getControlKnob().setAlpha(0);
+			mDigitalOnScreenControl.getControlKnob().setScale(2);
+			mDigitalOnScreenControl.refreshControlKnobPosition();
+			mDigitalOnScreenControl.setAllowDiagonal(false);
+
+			hud.setChildScene(mDigitalOnScreenControl);
+		} else {
+			playChangeableText = new ChangeableText(10,10, andengineMainFont, playMode ? play : pan, Math.max(play.length(), pan.length())) {
+				@Override
+				public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+
+					if (pSceneTouchEvent.getAction() == MotionEvent.ACTION_DOWN & gameStarted) {
+						if (!playMode) {
+							setText(play);
+							mCandyCamera.setChaseEntity(candyEngine.bot);
+							playMode = true;
+						} else {
+							setText(pan);
+							mCandyCamera.setMaxZoomFactorChange(2);
+							mCandyCamera.setMaxVelocity(1000, 1000);
+							mCandyCamera.setChaseEntity(null);
+							playMode = false;
+							resetDragDistance = true;
+						}
+					}
+					return true;
+				}
+			};
+			hud.attachChild(playChangeableText);
+			hud.registerTouchArea(playChangeableText);
+		}
 
 		hud.setTouchAreaBindingEnabled(true);
 		hud.setOnSceneTouchListener(new CandyTouchSystem(this));

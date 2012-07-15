@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
-import com.embed.candy.service.MusicService;
 import com.swarmconnect.SwarmActivity;
 
 public abstract class BetterSwarmActivity extends SwarmActivity {
