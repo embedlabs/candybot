@@ -50,9 +50,7 @@ public class CandyAnimatedSpriteMoveByModifierListener implements IEntityModifie
 			}
 			cas.setCurrentTileIndex(cas.candyRotationState * 4);
 		}
-//		if (cas.blowUp && cas.type == BOMB) {
-//			cas.showBombAnim();
-//		} else
+
 		if (cas.enemyDead && cas.type == ENEMY) {
 			cas.showDeadSprite();
 		} else {

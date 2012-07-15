@@ -143,6 +143,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private BitmapTextureAtlas mParticleTexture;
 	private TextureRegion mParticleTextureRegion;
 	private TextureRegion mEnemyParticleTextureRegion;
+	private TextureRegion mBotParticleTextureRegion;
 
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
@@ -303,13 +304,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		mParticleTexture = new BitmapTextureAtlas(64,32,quality);
 		mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle.png", 0, 0);
-		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 40, 8);
+		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 33, 0);
+		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 50, 0);
 
-		// On Screen controllers, no shit...
 		this.mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_base.png", 0, 0);
 		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "onscreen_control_knob.png", 128, 0);
-
 
 		/**
 		 * ENGINE LOADING
@@ -347,17 +347,17 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "candy_burn.ogg");
 				break;
 			case 2:
-				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "ghost_death.ogg");
+				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "enemy_death.ogg");
 				break;
 			case 3:
 				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "laser_death.ogg");
 				break;
+			case 4:
+				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "bomb_explode.ogg");
+				break;
 			}
-		} catch (IllegalStateException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
+		} catch (final IllegalStateException e) {
+		} catch (final IOException e) {}
         mSound.play();
 	}
 
@@ -563,17 +563,27 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				mScene.attachChild(tempPS);
 			} else if (type == ENEMY) {
 				final CircleOutlineParticleEmitter enemyCPE = new CircleOutlineParticleEmitter(64 * column + 24, 64 * row + 24, 32);
-				final ParticleSystem tempEnemyPS = new ParticleSystem(enemyCPE, 20, 30, 60, mEnemyParticleTextureRegion);
-				tempEnemyPS.addParticleInitializer(new AlphaInitializer(0.5f));
-				tempEnemyPS.addParticleInitializer(new VelocityInitializer(-10, 10, -10, 30));
-				tempEnemyPS.addParticleInitializer(new AccelerationInitializer(-10, 10, -10, 10));
-				tempEnemyPS.addParticleModifier(new ScaleModifier(1, 0.5f, 0, 1));
-				tempEnemyPS.addParticleModifier(new ColorModifier(0.2f, 0.5f, 0.2f, 0.2f, 0.2f, 0.2f, 0, 0.6f));
-				tempEnemyPS.addParticleModifier(new AlphaModifier(0.5f, 0, 0, 1));
-				tempEnemyPS.addParticleModifier(new ExpireModifier(0.8f, 1));
+				final ParticleSystem enemyPS = new ParticleSystem(enemyCPE, 20, 30, 60, mEnemyParticleTextureRegion);
+				enemyPS.addParticleInitializer(new AlphaInitializer(0.5f));
+				enemyPS.addParticleInitializer(new VelocityInitializer(-10, 10, -10, 30));
+				enemyPS.addParticleInitializer(new AccelerationInitializer(-10, 10, -10, 10));
+				enemyPS.addParticleModifier(new ScaleModifier(1, 0.5f, 0, 1));
+				enemyPS.addParticleModifier(new ColorModifier(0.2f, 0.5f, 0.2f, 0.2f, 0.2f, 0.2f, 0, 0.6f));
+				enemyPS.addParticleModifier(new AlphaModifier(0.5f, 0, 0, 1));
+				enemyPS.addParticleModifier(new ExpireModifier(0.8f, 1));
 				face.enemyCPE = enemyCPE;
-				face.enemyPS = tempEnemyPS;
-				mScene.attachChild(tempEnemyPS);
+				face.enemyPS = enemyPS;
+				mScene.attachChild(enemyPS);
+			} else if (type == BOT) {
+				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 28, 64 * row + 60);
+				final ParticleSystem botPS = new ParticleSystem(botPPE, 5, 10, 20, mBotParticleTextureRegion);
+				botPS.addParticleInitializer(new VelocityInitializer(-20, 20, 0, 30));
+				botPS.addParticleModifier(new ScaleModifier(1, 0, 0, 0.5f));
+				botPS.addParticleModifier(new ColorModifier(0, 0.1f, 0.1f, 0.2f, 1, 0.5f, 0, 0.5f));
+				botPS.addParticleModifier(new ExpireModifier(0.4f, 0.5f));
+				face.botPPE = botPPE;
+				face.botPS = botPS;
+				mScene.attachChild(botPS);
 			}
 		}
 	}

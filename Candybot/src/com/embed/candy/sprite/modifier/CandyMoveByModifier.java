@@ -12,19 +12,31 @@ public class CandyMoveByModifier extends MoveByModifier {
 	private final CircleOutlineParticleEmitter enemyCPE;
 	private final boolean cpe_exists;
 
-	public CandyMoveByModifier(final PointParticleEmitter ppe, final float pDuration, final float pX, final float pY, final IEntityModifierListener pEntityModifierListener, final CircleOutlineParticleEmitter enemyCPE) {
+	private final PointParticleEmitter botPPE;
+	private final boolean bot_ppe_exists;
+
+	public CandyMoveByModifier(final PointParticleEmitter ppe, final float pDuration, final float pX, final float pY, final IEntityModifierListener pEntityModifierListener, final CircleOutlineParticleEmitter enemyCPE, final PointParticleEmitter botPPE) {
 		super(pDuration, pX, pY, pEntityModifierListener);
 		this.ppe = ppe;
 		this.enemyCPE = enemyCPE;
+		this.botPPE = botPPE;
+
 		if (ppe != null) {
 			ppe_exists = true;
 		} else {
 			ppe_exists = false;
 		}
+
 		if (enemyCPE != null) {
 			cpe_exists = true;
 		} else {
 			cpe_exists = false;
+		}
+
+		if (botPPE != null) {
+			bot_ppe_exists = true;
+		} else {
+			bot_ppe_exists = false;
 		}
 	}
 
@@ -38,6 +50,9 @@ public class CandyMoveByModifier extends MoveByModifier {
 		}
 		if (cpe_exists) {
 			enemyCPE.setCenter(finalX + 24, finalY + 24);
+		}
+		if (bot_ppe_exists) {
+			botPPE.setCenter(finalX + 28, finalY + 60);
 		}
 	}
 

@@ -31,7 +31,6 @@ import com.embed.candy.constants.EngineConstants;
 import com.embed.candy.sprite.modifier.CandyAnimatedSpriteMoveByModifierListener;
 import com.embed.candy.sprite.modifier.CandyMoveByModifier;
 import com.embed.candy.util.CandyUtils;
-//import com.embed.candy.constants.EngineConstants;
 
 public class CandyAnimatedSprite extends AnimatedSprite {
 	public final int index, type;
@@ -63,8 +62,12 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	public PointParticleEmitter ppe = null;
 	public ParticleSystem ps = null;
 	public boolean inertiaPS = false;
+
 	public CircleOutlineParticleEmitter enemyCPE = null;
 	public ParticleSystem enemyPS = null;
+
+	public PointParticleEmitter botPPE = null;
+	public ParticleSystem botPS = null;
 
 	public CandyAnimatedSprite(final int row, final int column, final TiledTextureRegion pTiledTextureRegion, final RectangleVertexBuffer RVB, final int index, final int type, final TMXLayer tmxLayer, final int[][] objectArray, final int[][] backgroundArray) {
 		super(column * 64, row * 64, pTiledTextureRegion, RVB);
@@ -110,7 +113,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			objectArray[index][COLUMN] += columnDelta;
 
 			final float duration = 1 / (float) SPEED * ((rowDelta != 0) ? Math.abs(rowDelta) : 1) * ((columnDelta != 0) ? Math.abs(columnDelta) : 1);
-			registerEntityModifier(new CandyMoveByModifier(ppe, duration, columnDelta * 64, rowDelta * 64, new CandyAnimatedSpriteMoveByModifierListener(this, rotate,(rowDelta>1)||(inertiaPS&&(Math.abs(rowDelta+columnDelta)>1))),enemyCPE));
+			registerEntityModifier(new CandyMoveByModifier(ppe, duration, columnDelta * 64, rowDelta * 64, new CandyAnimatedSpriteMoveByModifierListener(this, rotate,(rowDelta>1)||(inertiaPS&&(Math.abs(rowDelta+columnDelta)>1))),enemyCPE,botPPE));
 
 			if (CandyUtils.DEBUG) Log.d(TAG, "Item " + index + " to: " + objectArray[index][ROW] + ", " + objectArray[index][COLUMN]);
 			return true;
@@ -134,6 +137,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			}
 			if (enemyCPE != null) {
 				enemyCPE.setCenter(64 * newColumn + 24, 64 * newRow + 24);
+			}
+			if (botPPE != null) {
+				botPPE.setCenter(64 * newColumn + 28, 64 * newRow + 60);
 			}
 			hasModifier = false;
 			if (CandyUtils.DEBUG) Log.d(TAG, "Item " + index + " to: " + objectArray[index][ROW] + ", " + objectArray[index][COLUMN]);
@@ -197,6 +203,9 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 				if (enemyPS!=null) {
 					enemyPS.setParticlesSpawnEnabled(false);
 				}
+				if (botPS!=null) {
+					botPS.setParticlesSpawnEnabled(false);
+				}
 			}
 
 			@Override
@@ -237,6 +246,14 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		if (enemyPS!=null) {
 			enemyPS.reset();
 			enemyPS.setParticlesSpawnEnabled(true);
+		}
+		if (botPPE!=null) {
+			botPPE.reset();
+			botPPE.setCenter(initialColumn * 64 + 28, initialRow * 64 + 60);
+		}
+		if (botPS!=null) {
+			botPS.reset();
+			botPS.setParticlesSpawnEnabled(true);
 		}
 
 		objectArray[index][ROW] = initialRow;
