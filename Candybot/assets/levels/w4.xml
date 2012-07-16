@@ -130,12 +130,12 @@
 		<m a="229" b="239" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="10">
-	    <c>H4sIAAAAAAAAA7WUiwrAIAhFdUu2///iLdhAxHxUClJkHe0mIQBgse+0zrsL+TJX5Z0kq89pE7uKj2zU+JZeUQ3l/vY5nzexDiwefZ/Vt/R6I8KX8Uw90fot3bXzXMcZfVCMmXqyOUZGi3zPRvxo31txTx9Szmn5NYv0Z+aP+BmXUcvx+gn+PWf8AYaeqtfABgAA</c>
+	    <c>H4sIAAAAAAAAA7WU3QrAIAiFdZts7//EWxeDOJg/lYIUWZ92kpiIuNh3WuM9hXzMVXknZLW5bGJX8bkbNb6lV1RD3N+vX4ozxKPvs/qWXm9E+BjP1BOt39JdO9/rOKMPw5ipJ5tjZLLI92zEj/a9Fff0EeWcll+zSH9m/oifcRu1HJ+f5N9zxl8XkMI9wAYAAA==</c>
 		<o n="1" r="2" c="4" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="15" c="17" />
 		<o n="6" r="2" c="21" />
-		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- fix this level, find moves -->
+		<m a="406" b="426" /> <!-- 10 for a, 30 for b -->
 	</l>
 	<l id="11">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDHmBGIeLDRIjhAgpJ8RhxwnCebj0z/q/pHtfhjGZi6x+gm5H5f51HA/MeaPun/ouZ+YtI9sFynuJ8VsfHbgqxOYgJgZTT+2/AZTh8scACGWjwrABgAA</c>
@@ -156,12 +156,12 @@
 		<m a="171" b="181" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="12">
-	    <c>H4sIAAAAAAAAA71Vyw7AIAjDedr///B2NA3lIWKTHkyglmLiEJHRzC7c1H+BUWDf2mv5z9zB4OXDfEVnrOZjZYP6Wm8VkffDPOL9Wk1UfxdePkxbm0mrRX1WG919Zr+7YPmzmS16qPrP5n8ap/VRq+MveX7O5fwBQ33UrMAGAAA=</c>
+	    <c>H4sIAAAAAAAAA71VQQ7AIAjD7bT/f3g7moZCnUKTXgzUUkwcZjaKWYVO/QeoAvvm3sj/yh0MWT7Mlzrjbj5RNqhfAUWfeUSvXo2q/xfZ+2Ha3kxeLeqzWnX3Hftl+bOZI2bY9b+a/2l06Z/8R66P93T2Am+ZlzbABgAA</c>
 	    <o n="1" r="16" c="18" />
 		<o n="2" r="2" c="9" />
 		<o n="6" r="2" c="11" />
-		<o n="4" r="2" c="3" />
-		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- fix/find out if needs fix, find moves -->
+		<o n="3" r="2" c="3" />
+		<m a="170" b="180" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="13">
 	    <c>H4sIAAAAAAAAA8VRQQ6AMAgrepgH//9e5YaGzW1l2IQQQldYEQCyOBQH4iAmS4sYMGflrMz9gedfGM2avuIktL1ZtV0jvMv23+vjg+Pxe/UVzD1G/Jnx8m//Pb7NXo/RV4zcg/Gn522W/0yUV73dsZv6Auk/sqvABgAA</c>
@@ -190,13 +190,13 @@
 		<m a="265" b="275" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="15">
-	    <c>H4sIAAAAAAAAA9VTWwrAMAjT7WPr/S+8fUwQMRL3KEwI1aIxfagioh9jXBDnj2RfpWeRP+vhYw11KK74PWfsherRue7qZw3pR0D8MSd7X5+braYHcTP6UQ/zZ9wPgw3s72Q9MytRT+fMzF97g7+alb/oZ/9Dh9+smpWn+lEP82ffT4XlxNrI9zgAVjnZ2sAGAAA=</c>
-	    <o n="1" r="1" c="13" />
-		<o n="2" r="10" c="5" />
-		<o n="3" r="1" c="15" />
-		<o n="3" r="1" c="18" />
-		<o n="5" r="1" c="14" />
-		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- fix this level completely, find moves -->
+	    <c>H4sIAAAAAAAAA71TAQqAMAi8VVD+/8MVJIxjOq014VBBz0O0ACgJZEx7pAM8fgQ/nNziF4o1t/QD7Vk9/UL5SP3M7em3wPwWb4u/7ml5rc8Y67dmaPzXfdb7ubFTfxRHsC7yK0I9WxC8T+/23vy9dc/MPYJ/hv7IPWT51bxf+arfmqHx7P0sF9YgfwYnOyp5WcAGAAA=</c>
+	    <o n="1" r="7" c="15" />
+		<o n="2" r="11" c="11" />
+		<o n="3" r="1" c="20" />
+		<o n="4" r="1" c="17" />
+		<o n="5" r="1" c="21" />
+		<m a="13" b="14" /> <!-- 0 for a, 1 for b -->
 	</l>
 	<l id="16">
 	    <c>H4sIAAAAAAAAA2NkYGBgpBBzEJCnBHDikSPHfHzmoavBZj4x+okFyOZT01xs5tMCkGI+Of6jlvtx2T2YwmfUfOoCTjLMJzWN4jKfWHMIlZGDPfyJdT8Ms2MRIwczATEzlA0ASWjuFsAGAAA=</c>
@@ -210,14 +210,16 @@
 		<m a="165" b="175" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="17">
-	    <c>H4sIAAAAAAAAA+NkYGDgpCFmQKKpCdDNpKYd2Myih/mcOORIMZcYM8ixg1Q9pKgn18/E6KM03vDpp0aaQI4zFiimRlqAmU0NNZTqo2XaIVUPpfmLVmYTMoOW5Q9yeuMCYm4kNcSW78j60OVoiQG38o/1wAYAAA==</c>
+	    <c>H4sIAAAAAAAAA7VUQQrAMAizMNjc/v/f9bCCSLfFaIXQgyapVaoiogsh5qwMr1npsQN+mZhp+TdjdRENxiPKidSzPSO87Ny++BU7MebVOrYHTfK7MLT/4ijSVjDHaFdy3upm/1bUA90VZqci3tF72r7PjsvUoP+75fncStx95Zv2wAYAAA==</c>
 	    <o n="1" r="3" c="4" />
 		<o n="2" r="6" c="12" />
 		<o n="3" r="3" c="19" />
-		<o n="5" r="15" c="11" />
+		<o n="4" r="10" c="10" />
+		<o n="4" r="10" c="13" />
+		<o n="5" r="15" c="12" />
 		<o n="6" r="7" c="11" />
 		<o n="6" r="7" c="12" />
-		<m a="278" b="288" /> <!-- 10 for a, 20 for b --> <!-- fix level, find moves -->
+		<m a="166" b="176" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="18">
 	    <c>H4sIAAAAAAAAA6VUQQ6AMAjb9Lr/v1cPkpCGQhubkGwgHXbVtTgOxJR3kHtPkavOmvgm7C/+AGfO3LiudJt4GZCf8So6dbN3uY6zqwXXhrXLVdW7Obta5TOnP+r5rl1kfnaH1QzK7Fl3dQYHzDOTl1SdJm1RI9U3oYvzL6ieZecpvmZem3rd7xRr7D1Ur6iI+8hax/564057NbAveB+x45iEwAYAAA==</c>
