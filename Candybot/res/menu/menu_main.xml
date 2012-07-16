@@ -19,5 +19,5 @@
 	<item
 		android:id="@+id/menu_main_item_star"
 		android:title="Rate Us"
-		android:icon="@drawable/ic_menu_star" />
+		android:icon="@android:drawable/btn_star_big_on" />
 </menu>
