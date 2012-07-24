@@ -110,14 +110,14 @@
 		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- find moves -->
 	</l>
 	<l id="9">
-	    <c>H4sIAAAAAAAAA71TWwrAIAyroOzl/c87PyaUklgt2wqBrpq+zJKIpI8xMu/c4/6V386UQX32zfocxZFfHlj+vpifGeof+fb+ao1oPzpeSb5I/yiO/Krqan6Wd/ZvrRBf5155g96/5UT1ac+7PhEvuh/2P9l9MO7K+9oa3p48fY50wWrO9I9m97SODM3Z9bGBmNZPNP8szoar4QDQ926115mgwAYAAA==</c>
+	    <c>H4sIAAAAAAAAA71UiwrAIAg0WOzV/3/vGiwQOTVlmyA4y/NsV4WIysdumbfu1f6FL2daQH/tW+Np5VFcH5f1WxBfM8QfxXJ/tEeWD883BS/DH+VR3FhfXr/QO+cvrSoxx478g8Ff1mT1KdeHPmf5RO8v5y3PI4Jv6cJ6w7z7zvP3OVu60HrO8Eeze1pHhuYc+lhBjusniz/rR/ez+w6c77sAKvf0lcAGAAA=</c>
 		<o n="1" r="2" c="5" />
 		<o n="2" r="2" c="3" />
 		<o n="4" r="6" c="15" />
 		<o n="6" r="4" c="10" />
 		<o n="6" r="5" c="9" />
 		<o n="7" r="6" c="3" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- this and below not done yet -->
+		<m a="224" b="234" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="10">
 	    <c>H4sIAAAAAAAAC8VU2QqAMAzbPNDB/v979aFCCW3WemAgOEqWZoerpZT6MaOI6ndDH+m5Ct/Ow/zZnlh5da0F/Bme5G8kH+bEWoPa3TxZfQbZO2rpcY+8s4zi7vl6PbA+8h/dTTZvke8of/Z/0MD8TVF7dOLP+vzxPqCPN7b0uC6Wf/TWdCEDai16/hc3Z06G08lZxgfXKstbwAYAAA==</c>
@@ -126,7 +126,7 @@
 		<o n="3" r="11" c="5" />
 		<o n="4" r="4" c="20" />
 		<o n="7" r="10" c="17" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="364" b="374" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="11">
 	    <c>H4sIAAAAAAAAA7VUWwrAMAize3wUev/zboUJIpo+poFAoW0iGixEVJKZBakv/arzbqa+YvzTqIIdN6gR3Y36o32i9S0fj6y3o78LT3/Hsy3oRwDl66JxJmfyivKLcuFB//H0I/ZB5n7gWXv9ivKdzeff+aId1bEya/l2VD/v0lVa9UfyeHl+5weMxqnGwAYAAA==</c>
@@ -135,7 +135,7 @@
 		<o n="3" r="1" c="20" />
 		<o n="6" r="15" c="2" />
 		<o n="7" r="15" c="3" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="317" b="327" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="12">
 	    <c>H4sIAAAAAAAAC71U7QrDMAi0a7s2kPd/3i0QQeQ0Zwc7uB9Gc3612URk+5H3ws+AjfN3/qGvbGQsupv52VqYM1TTQJO8F0Y/6oHBiDsmm6P635Osvu/JniOck9GOVvtdIdJHQP1bH8pfnY+/j3I3FxPt184oqk9xFmp6Un9VP/q2e0IFmhPSR/+ZrbtLHdl8uolB+kw+Rp+1M/3By9nZ7JXo7Xx9uRv7A34fdE7ABgAA</c>
@@ -146,7 +146,7 @@
 		<o n="6" r="14" c="12" />
 		<o n="6" r="15" c="12" />
 		<o n="2" r="2" c="1" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- find moves -->
 	</l>
 	<l id="13">
 	    <c>H4sIAAAAAAAAC7VVWw6AIAwr+sX9L6wfkiy13SBoE4Ly6Eo3tAFoP7ee9A7VPo7hOGDWZrHHfNQ/xjq9Z/ozOE2Rv9KvPAHeHu3qV/mqvFc8ESv+qzk+i4ur6k3Vz8xZWEPkyvyfAa9rYnzWf97TxbqqBpT+FZ+cfnV/Kw7Fx16MXsVQfKD5TI/LdbxfnP8Kqm5cDEaM6eC+ryv+7+KLf4fiOu52Ps8XAdkxdsAGAAA=</c>
@@ -156,7 +156,7 @@
 		<o n="4" r="3" c="9" />
         <o n="6" r="3" c="16" />
 		<o n="6" r="3" c="18" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="362" b="372" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="14">
 	    <c>H4sIAAAAAAAAA8WT4QqAMAiEtdb7v3L9CSRO5+WsA2HD3YdzU0VEm8PquWeEWFm+kmc8/kox/Ez9LL87X9XffO8fR/878s88s9wIWNZ3BDV5uj3onnY95N2boDpRXyt81BM0N5X+WI7H76x/5Ux8NV/Z2K7YSc8JjsGYKMAGAAA=</c>
@@ -168,13 +168,13 @@
 		<o n="5" r="11" c="19" />
 		<o n="7" r="13" c="19" />
 		<o n="7" r="3" c="11" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="84" b="94" /> <!-- 5 for a, 15 for b --> <!-- this is a really nice level -->
 	</l>
 	<l id="15">
 	    <c>H4sIAAAAAAAAA82V2wrAIAxD3e2h0P//3m3goIRW45zbCkGRmB6KoKaUdLBG1R/yp4p683uqlM/w1Xxf8CNPxMf43uSXvD/XNUvNXho9Hv8G/YVgRI/NwPyLDWdmua0iT5SP/T0+lj3Kxxl6vMiKd0r5HgdT3p3o/eOcW8TwP1X2D5gPLXB2R5izA18/ZwHABgAA</c>
 	    <o n="1" r="2" c="11" />
 		<o n="2" r="2" c="12" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="61" b="71" /> <!-- 5 for a, 15 for b -->
 	</l>
 	<l id="16">
 	    	
