@@ -17,12 +17,12 @@
 		<t>An inertia wall can be used as a moveable platform, but will continue to move in the direction pushed until it hits another object. They will not travel through teleporters. Make sure you know where it will end up before pushing it in the desired direction!</t>
 	</l>
 	<l id="2">
-	    <c>H4sIAAAAAAAAC7WSVwrAMAxD7S7I/S/cfrSgCnmEUoPIwH4eiZuZ/6zj0gZyOg+Q0zmKOwo+2rB3PZgHLeLvwg9X5Ck++9vNjPhs2XwiQ74S17UJKT8l7pvn/9wxW/lxrxnfKfbJwWz0VyyVk03NQvl06+e34DzcV8aq5j9bf1Zr5y/x2omPrMPPYtUfyfJm96rnTv3RnKr4Dv+Ldd+3qj+a6yy/q+XSeu9PNMUZk8AGAAA=</c>
+	    <c>H4sIAAAAAAAAA7WUUQ+EMAiDh+eL//8P68OZ4JdS8JJrQqYLlNIti7VW/Dl2BPeOFIF/V+f4M4711JP7ZFT8RGDNfIqf+ZlH8RPOHwd3JtRFD/ciTwXnrubsvOVsHX+g9u5B7pyvuFRPQnmhcqb6eRbsw7kcV+f/W/1O6+QucZ3UV5jwu1p1R1xft69mnuivfOrqp+/Dr5ieb6e/8vUt/zS2Kz7f7xPDoeoewAYAAA==</c>
 		<o n="1" r="15" c="2" />
 		<o n="2" r="15" c="1" />
 		<o n="7" r="4" c="3" />
 		<o n="7" r="4" c="21" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- fix level, find moves -->
+		<m a="195" b="205" /> <!-- 10 for a, 20 for b --> <!-- find moves -->
 	</l>
 	<l id="3">
 	    <c>H4sIAAAAAAAAC71UQQoAIQjU7dT/P9xeFkRsdJZsQEhLndRSEdFm6cKt+P4uCvaRD9I7+Uf2WcyNeCL+ulkziGo5E37M/N2sP+Jl74bsnivLH/WK7S8LFD+bMVuX3VyhujLcvnyV91HtY8XP+0fn/iL7vzLfE3lPyfPKMPoCkzRDwMAGAAA=</c>
@@ -53,17 +53,16 @@
 		<m a="408" b="418" /> <!-- 4 for a, 8 for b -->
 	</l>
 	<l id="5">
-	    <c>H4sIAAAAAAAAA72UCwqAMAxDM3Wo97+wCgqz9D+2QMDPW1pqsQAoE0zFPZMkndfye6XlZ+pxGZ+rwHnqSHxFfD4ZVuLb9zuTb32/I9jPo4r/LC3RfjwMd82daZnR+6kxnhyrxijReW6GS4DL9N+zP4C9J+drjaF5M+bv+edkmBFebq/N/QV22pDQwAYAAA==</c>
-	    <o n="1" c="2" r="5" />
-		<o n="2" c="2" r="6" />
-		<o n="3" c="3" r="7" />
-		<o n="7" c="3" r="10" />
-		<o n="7" c="3" r="13" />
-		<o n="7" c="9" r="10" />
-		<o n="7" c="9" r="13" />
-		<o n="6" c="14" r="7" />
-		<o n="6" c="14" r="16" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- fix level, find moves -->
+	    <c>H4sIAAAAAAAAA71TWw6AMAgDlaj3v7CaaEIWHutEm/TDpRbYChMR/8BqWP5va1lekWdWr+ffiwJ3mkMIfwNU1zvfavhHHhvYzwMh7C5bf6uely+vN8+vcgdG816lH5nF89GzLAkZ0EX9V8HKjz5v873fjDRZHith7V+0z6jmC04nZ/V9AGMF99zABgAA</c>
+	    <o n="1" r="7" c="3" />
+		<o n="2" r="7" c="20" />
+		<o n="3" r="5" c="6" />
+		<o n="7" r="2" c="5" />
+		<o n="7" r="2" c="18" />
+		<o n="7" r="2" c="10" />
+		<o n="7" r="2" c="13" />
+		<o n="4" r="2" c="8" />
+		<m a="245" b="255" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="6">
 	    <c>H4sIAAAAAAAAC82T0QrAIAgAdVsPgf//vXOwBxHLNZVNOEyoQ8oQAJA5kkFBY3oyzfCT2kOCPsikztGifyW/8f+tf+/+Z/2O1k/7r5qf6vmvCu3HYPb82fGFP1pbfv3WkVq/54X8VxCsPX8Uy5/Nxuz3+gQznejmwAYAAA==</c>
