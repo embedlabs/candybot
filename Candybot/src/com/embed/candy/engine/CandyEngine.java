@@ -125,10 +125,10 @@ public class CandyEngine {
 
 //	public final AtomicBoolean eliminateHelpText = new AtomicBoolean();
 
-	public CandyEngine(final ArrayList<CandyAnimatedSprite> spriteList, final int[][] objectArray, final int[][] backgroundArray, final CandyLevelActivity candyLevel) {
-		this.spriteList = spriteList;
-		this.objectArray = objectArray;
-		this.backgroundArray = backgroundArray;
+	public CandyEngine(final CandyLevelActivity candyLevel) {
+		this.spriteList = candyLevel.spriteList;
+		this.objectArray = candyLevel.objectArray;
+		this.backgroundArray = candyLevel.backgroundArray;
 		this.candyLevel = candyLevel;
 
 		originalBackgroundArray = new int[18][24];

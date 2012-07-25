@@ -118,10 +118,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public final ArrayList<int[]> objectList = new ArrayList<int[]>(); // temporary placeholder for objects
 	public final ArrayList<String[]> tutorialList = new ArrayList<String[]>(); // list of all tutorial text
 	final ArrayList<Text> textReferences = new ArrayList<Text>();
-	private final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
-	private int[][] backgroundArray = new int[18][24]; // holds tmx array
+	public final ArrayList<CandyAnimatedSprite> spriteList = new ArrayList<CandyAnimatedSprite>(); // holds references to all sprites
+	public int[][] backgroundArray = new int[18][24]; // holds tmx array
 	public TextureRegion[][] trArray = new TextureRegion[18][24];
-	private int[][] objectArray; // stores locations and types of all objects, correlates to spriteList
+	public int[][] objectArray; // stores locations and types of all objects, correlates to spriteList
 	public String helpTextString = null;
 
 	private Scene mScene;
@@ -407,7 +407,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		/**
 		 * LOGIC ENGINE
 		 */
-		candyEngine = new CandyEngine(spriteList, objectArray, backgroundArray, this);
+		candyEngine = new CandyEngine(this);
 
 		/**
 		 * HUD
