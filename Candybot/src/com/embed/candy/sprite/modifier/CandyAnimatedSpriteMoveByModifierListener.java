@@ -1,7 +1,7 @@
 package com.embed.candy.sprite.modifier;
 
-import static com.embed.candy.constants.ObjectIndices.CANDY;
-import static com.embed.candy.constants.ObjectIndices.ENEMY;
+import static com.embed.candy.constants.ObjectIndexConstants.CANDY;
+import static com.embed.candy.constants.ObjectIndexConstants.ENEMY;
 
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;

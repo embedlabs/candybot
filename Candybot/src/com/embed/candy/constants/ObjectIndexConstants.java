@@ -1,6 +1,6 @@
 package com.embed.candy.constants;
 
-public final class ObjectIndices {
+public final class ObjectIndexConstants {
 	public static final int CANDY = 1;
 	public static final int BOT = 2;
 	public static final int BOX = 3;

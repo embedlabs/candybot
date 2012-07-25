@@ -6,9 +6,9 @@ import static com.embed.candy.constants.CommandQueueConstants.FALL;
 import static com.embed.candy.constants.CommandQueueConstants.ROW;
 import static com.embed.candy.constants.CommandQueueConstants.SLIDE_ICE;
 import static com.embed.candy.constants.CommandQueueConstants.TELEPORT;
-import static com.embed.candy.constants.ObjectIndices.BOT;
-import static com.embed.candy.constants.ObjectIndices.CANDY;
-import static com.embed.candy.constants.ObjectIndices.ENEMY;
+import static com.embed.candy.constants.ObjectIndexConstants.BOT;
+import static com.embed.candy.constants.ObjectIndexConstants.CANDY;
+import static com.embed.candy.constants.ObjectIndexConstants.ENEMY;
 
 import javax.microedition.khronos.opengles.GL11;
 
