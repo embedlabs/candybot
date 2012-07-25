@@ -163,7 +163,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public Text helpText = null;
 
 	public static final int CAMERA_SPEED = 200;
-	private static final float DIGITAL_OFFSET_CONSTANT = 30;
 
 	public int teleporter1column = -1;
 	public int teleporter1row = -1;
@@ -183,6 +182,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public boolean toastBoolean;
 	public boolean touchControlsBoolean;
 	public boolean moveControlsLeft;
+	private float digitalOffset;
 
 	private long totalTime = 0;
 	private long referenceTime;
@@ -213,6 +213,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		initMusic = sp.getBoolean("com.embed.candy.music", true);
 		touchControlsBoolean = sp.getBoolean("com.embed.candy.controls_use_touch", false);
 		moveControlsLeft = sp.getBoolean("com.embed.candy.controls_left", false);
+		digitalOffset = sp.getInt("com.embed.candy.controls_offset", 30);
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
@@ -437,10 +438,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		if (!touchControlsBoolean) {
 			if (moveControlsLeft) {
-				mDigitalOnScreenControl = new DigitalOnScreenControl(DIGITAL_OFFSET_CONSTANT, PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight() - DIGITAL_OFFSET_CONSTANT, this.mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
+				mDigitalOnScreenControl = new DigitalOnScreenControl(digitalOffset, PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight() - digitalOffset, this.mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
 				mDigitalOnScreenControl.getControlBase().setScaleCenter(0, 128);
 			} else {
-				mDigitalOnScreenControl = new DigitalOnScreenControl(PHONE_WIDTH - mOnScreenControlBaseTextureRegion.getWidth() - DIGITAL_OFFSET_CONSTANT, PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight() - DIGITAL_OFFSET_CONSTANT, mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
+				mDigitalOnScreenControl = new DigitalOnScreenControl(PHONE_WIDTH - mOnScreenControlBaseTextureRegion.getWidth() - digitalOffset, PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight() - digitalOffset, mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
 				mDigitalOnScreenControl.getControlBase().setScaleCenter(128, 128);
 			}
 

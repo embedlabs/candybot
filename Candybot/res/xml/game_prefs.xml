@@ -39,6 +39,13 @@
 			android:key="com.embed.candy.controls_left"
 			android:summary="@string/pref_controls_left_summary"
 			android:title="@string/pref_controls_left" />
+		<com.embed.candy.view.CandySliderPreference
+			android:defaultValue="30"
+			android:dialogMessage="@string/pref_controls_offset_dialog"
+			android:key="com.embed.candy.controls_offset"
+			android:max="100"
+			android:summary="@string/pref_controls_offset_summary"
+			android:title="@string/pref_controls_offset" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:key="com.embed.candy.category_graphics"

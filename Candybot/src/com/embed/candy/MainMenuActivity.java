@@ -40,7 +40,6 @@ import com.embed.candy.util.ViewUtils;
 import com.swarmconnect.Swarm;
 import com.swarmconnect.SwarmAchievement;
 import com.swarmconnect.SwarmActiveUser.GotCloudDataCB;
-import com.swarmconnect.delegates.SwarmLoginListener;
 
 public class MainMenuActivity extends BetterSwarmActivity implements View.OnClickListener {
 
@@ -183,7 +182,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		initSwarmBool = sp.getBoolean("com.embed.candy.swarm", true);
 		if (initSwarmBool) {
             if (! Swarm.isInitialized() ) {
-            	Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", mySwarmLoginListener);
+            	Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", new CandySwarmListener());
             }
         }
 	}
@@ -228,16 +227,16 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 		//intent = new Intent(this, MusicService.class);
 		//startService(intent);
-		
+
 		SharedPreferences prefs = getSharedPreferences("Value", Context.MODE_PRIVATE );
-		
+
 		 openCount = prefs.getInt("Value", 0);
 		 Editor editor = prefs.edit();
 		 editor.putInt("Value", openCount + 1);
 		 editor.commit();
-		
+
 		if (openCount == 5) {
-			
+
 			 AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			    builder.setMessage(R.string.rate_us_question)
 			           .setCancelable(false)
@@ -275,7 +274,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		BufferObjectManager.getActiveInstance().clear();
 		super.onDestroy();
 	}
-	
+
 
 	@Override
 	public void onResume() {
@@ -289,6 +288,4 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		MusicService.onPause();
 		super.onPause();
 	}
-
-	private SwarmLoginListener mySwarmLoginListener = new CandySwarmListener();
 }
