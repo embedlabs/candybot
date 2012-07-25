@@ -163,6 +163,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public Text helpText = null;
 
 	public static final int CAMERA_SPEED = 200;
+	private static final float DIGITAL_OFFSET_CONSTANT = 30;
 
 	public int teleporter1column = -1;
 	public int teleporter1row = -1;
@@ -436,10 +437,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		if (!touchControlsBoolean) {
 			if (moveControlsLeft) {
-				mDigitalOnScreenControl = new DigitalOnScreenControl(0, PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight(), this.mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
+				mDigitalOnScreenControl = new DigitalOnScreenControl(DIGITAL_OFFSET_CONSTANT, PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight() - DIGITAL_OFFSET_CONSTANT, this.mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
 				mDigitalOnScreenControl.getControlBase().setScaleCenter(0, 128);
 			} else {
-				mDigitalOnScreenControl = new DigitalOnScreenControl(PHONE_WIDTH - mOnScreenControlBaseTextureRegion.getWidth(), PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight(), mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
+				mDigitalOnScreenControl = new DigitalOnScreenControl(PHONE_WIDTH - mOnScreenControlBaseTextureRegion.getWidth() - DIGITAL_OFFSET_CONSTANT, PHONE_HEIGHT - mOnScreenControlBaseTextureRegion.getHeight() - DIGITAL_OFFSET_CONSTANT, mCandyCamera, mOnScreenControlBaseTextureRegion, mOnScreenControlKnobTextureRegion, 0.1f, new CandyDigitalScreenControlListener(this));
 				mDigitalOnScreenControl.getControlBase().setScaleCenter(128, 128);
 			}
 
