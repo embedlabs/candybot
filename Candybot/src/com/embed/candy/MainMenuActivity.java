@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import com.embed.candy.save.DataMerger;
 import com.embed.candy.save.SaveIO;
-import com.embed.candy.service.MusicService;
 import com.embed.candy.swarmservice.CandyAchievements;
 import com.embed.candy.swarmservice.CandySwarmListener;
 import com.embed.candy.util.CandyUtils;
