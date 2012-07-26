@@ -119,7 +119,7 @@
     <string name="quit_dialog_positive">Yes</string>
     <string name="quit_dialog_negative">No</string>
     <string name="quit_dialog_positive_rate">Yes, I\'d love to!</string>
-    <string name="quit_dialog_negative_rate">No, I have no heart.</string>
+    <string name="quit_dialog_negative_rate">Nah, maybe later.</string>
     
     <string name="rate_us_question">Would you like to rate our app? We\'re 16 year old kids, and it would mean the world to us.</string>
     <string name="market_link">market://details?id=com.embed.candy</string>
