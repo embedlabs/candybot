@@ -253,6 +253,20 @@
 		<m a="75" b="80" /> <!-- 5 for a, 10 for b --> <!-- find moves -->
 	</l>
 	<l id="20">
-	    
+	    <c>H4sIAAAAAAAAA+NkYGDgpDHGBlhxiBOjFmQmBw7zOdFoYgC6HmQam/ksZJiPrIeQ+QxYxAmZj03PcDEfW3qiNH4JpVNK0yc2zI7GZyESk5O/qAFGzR+55pOTv3CZT03MBcTcSHwAIfuc98AGAAA=</c>
+	    <o n="1" r="15" c="6" />
+		<o n="2" r="11" c="5" />
+		<o n="5" r="4" c="5" />
+		<o n="5" r="5" c="5" />
+		<o n="5" r="6" c="5" />
+		<o n="5" r="7" c="5" />
+		<o n="5" r="8" c="5" />
+		<o n="5" r="4" c="18" />
+		<o n="5" r="5" c="18" />
+		<o n="5" r="6" c="18" />
+		<o n="5" r="7" c="18" />
+		<o n="5" r="8" c="18" />
+		<o n="5" r="8" c="4" />
+		<m a="75" b="80" /> <!-- 5 for a, 10 for b --> <!-- find moves -->
 	</l>
 </w>
