@@ -446,7 +446,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			}
 
 			mDigitalOnScreenControl.getControlBase().setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-			mDigitalOnScreenControl.getControlBase().setAlpha(0.5f);
+			mDigitalOnScreenControl.getControlBase().setAlpha(0.8f);
 			mDigitalOnScreenControl.getControlBase().setScale(2);
 			mDigitalOnScreenControl.getControlKnob().setAlpha(0);
 			mDigitalOnScreenControl.getControlKnob().setScale(2);
