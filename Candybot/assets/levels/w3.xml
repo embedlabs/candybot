@@ -246,9 +246,13 @@
 		<m a="75" b="80" /> <!-- 5 for a, 10 for b -->
 	</l>
 	<l id="19">
-	    	
+	    <l id="18">
+	    <c>H4sIAAAAAAAAA7WVWQrAMAhEtdv9j5wW+iEyM7GLASERO30aa93MvNm6FtO/fNttcV/1edBB+nsDP3p/9DNmpIn0IzPbK04Uz/RV/VG+B4ln+k8XyzfXH/Gz2rN7qNbn7aroW4qp9D5iU/3JehBxKLYKvzpHNhSb7/fLTMqMlfkw42dzJ/c/e0b14yzXP+az+i47/iXLaWs4Dyo6Q8jABgAA</c>
+	    <o n="1" r="16" c="18" />
+		<o n="2" r="16" c="2" />
+		<m a="75" b="80" /> <!-- 5 for a, 10 for b --> <!-- find moves -->
 	</l>
 	<l id="20">
-	    	
+	    
 	</l>
 </w>
