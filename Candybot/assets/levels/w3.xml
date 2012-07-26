@@ -106,7 +106,7 @@
 		<o n="3" r="4" c="2" />
 		<o n="3" r="7" c="4" />
 		<o n="3" r="7" c="7" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- find moves -->
+		<m a="372" b="382" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="9">
 	    <c>H4sIAAAAAAAAA71UiwrAIAg0WOzV/3/vGiwQOTVlmyA4y/NsV4WIysdumbfu1f6FL2daQH/tW+Np5VFcH5f1WxBfM8QfxXJ/tEeWD883BS/DH+VR3FhfXr/QO+cvrSoxx478g8Ff1mT1KdeHPmf5RO8v5y3PI4Jv6cJ6w7z7zvP3OVu60HrO8Eeze1pHhuYc+lhBjusniz/rR/ez+w6c77sAKvf0lcAGAAA=</c>
@@ -137,14 +137,14 @@
 		<m a="317" b="327" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="12">
-	    <c>H4sIAAAAAAAAC71U7QrDMAi0a7s2kPd/3i0QQeQ0Zwc7uB9Gc3612URk+5H3ws+AjfN3/qGvbGQsupv52VqYM1TTQJO8F0Y/6oHBiDsmm6P635Osvu/JniOck9GOVvtdIdJHQP1bH8pfnY+/j3I3FxPt184oqk9xFmp6Un9VP/q2e0IFmhPSR/+ZrbtLHdl8uolB+kw+Rp+1M/3By9nZ7JXo7Xx9uRv7A34fdE7ABgAA</c>
+	    <c>H4sIAAAAAAAAA71UiwrAIAi0vYP+/3u3oEDktItBBwcz9XxESyKSfvIZ+BmwcTZnhX5nJmNRbuRne2HOUE8VWeJZGH1vBgY17mjMht1/NbL6diZ9jnA2enc0ut8RPH0ENL/2ofqz+7H5qHY2Md796h15/aHvUU+r3i/ylYAdaE9IH70z3XeReUT7KSoG6TP1GH3WjvQrb2NHu+9E/87t467sF5Yuh2nABgAA</c>
 		<o n="1" r="2" c="2" />
-		<o n="2" r="1" c="1" />
-		<o n="3" r="8" c="2" />
-		<o n="5" r="9" c="14" />
-		<o n="6" r="14" c="12" />
-		<o n="6" r="15" c="12" />
-		<o n="2" r="2" c="1" />
+		<o n="2" r="15" c="21" />
+		<o n="5" r="8" c="15" />
+		<o n="5" r="8" c="16" />
+		<o n="6" r="2" c="8" />
+		<o n="6" r="13" c="5" />
+		<o n="6" r="15" c="3" />
 		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- find moves -->
 	</l>
 	<l id="13">
