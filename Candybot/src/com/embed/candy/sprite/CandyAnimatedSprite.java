@@ -27,6 +27,7 @@ import org.anddev.andengine.util.modifier.ease.EaseQuadIn;
 
 import android.util.Log;
 
+import com.embed.candy.CandyLevelActivity;
 import com.embed.candy.constants.EngineConstants;
 import com.embed.candy.sprite.modifier.CandyAnimatedSpriteMoveByModifierListener;
 import com.embed.candy.sprite.modifier.CandyMoveByModifier;
@@ -157,12 +158,20 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		}
 	}
 
-	public synchronized void showCandyAnim() {
+	public synchronized void showCandyAnim(final CandyLevelActivity candyLevel) {
 		if (type == CANDY) {
 			hasModifier = true;
-			if (CandyUtils.DEBUG) Log.i(TAG, "Candy winning animation started.");
+			new Thread(new Runnable(){
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {} finally {
+						hasModifier = false;
+					}
+				}
+			}).start();
 			// TODO
-			hasModifier = false;
 		}
 	}
 

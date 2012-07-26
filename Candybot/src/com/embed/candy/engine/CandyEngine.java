@@ -460,7 +460,7 @@ public class CandyEngine {
 	private synchronized void win() {
 		winning=true;
 
-		candy.showCandyAnim();
+		candy.showCandyAnim(candyLevel);
 		pause(5, candyIndex);
 
 //		if (CandyUtils.DEBUG) Log.i(TAG, "Level Completion Info:");
