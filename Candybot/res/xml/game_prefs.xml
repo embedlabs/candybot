@@ -50,7 +50,7 @@
 			android:title="@string/pref_controls_offset"
 			android:dependency="com.embed.candy.controls_use_touch" />
 		<com.embed.candy.view.CandySliderPreference
-			android:defaultValue="80"
+			android:defaultValue="50"
 			android:dialogMessage="@string/pref_controls_alpha_dialog"
 			android:key="com.embed.candy.controls_alpha"
 			android:max="100"

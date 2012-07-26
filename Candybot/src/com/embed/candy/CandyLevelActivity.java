@@ -215,7 +215,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		touchControlsBoolean = sp.getBoolean("com.embed.candy.controls_use_touch", false);
 		moveControlsLeft = sp.getBoolean("com.embed.candy.controls_left", false);
 		digitalOffset = sp.getInt("com.embed.candy.controls_offset", 30);
-		digitalAlpha = sp.getInt("com.embed.candy.controls_alpha", 80)/100f;
+		digitalAlpha = sp.getInt("com.embed.candy.controls_alpha", 50)/100f;
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
