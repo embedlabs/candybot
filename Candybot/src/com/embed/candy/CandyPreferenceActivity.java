@@ -7,7 +7,6 @@ import com.swarmconnect.Swarm;
 
 public class CandyPreferenceActivity extends PreferenceActivity {
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

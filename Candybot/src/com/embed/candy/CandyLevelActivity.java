@@ -218,7 +218,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public Engine onLoadEngine() {
 		if (CandyUtils.DEBUG) Log.v(TAG, "CandyLevelActivity onLoadEngine()");
