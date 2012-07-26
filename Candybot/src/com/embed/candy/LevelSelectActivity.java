@@ -76,6 +76,7 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 		.putExtra("com.embed.candy.world",getIntent().getIntExtra("com.embed.candy.world", 1))
 		.putExtra("com.embed.candy.level", position + 1)
 		.putExtra("com.embed.candy.theme",getIntent().getStringExtra("com.embed.candy.theme")));
+	    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 
 	public void textToast(final String textToDisplay) {

@@ -71,6 +71,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			theme = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("com.embed.candy.graphics_theme", "normal");
 			if (CandyUtils.DEBUG) Log.i(TAG, "THEME: " + theme);
 			startActivity(new Intent(this, WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
+		    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 			break;
 		case R.id.button_facebook:
 			startActivity(SocialMedia.facebookIntent(this));
@@ -278,14 +279,12 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 	@Override
 	public void onResume() {
-		MusicService.onResume();
 		super.onResume();
 		CandyAchievements.startAchievementsRunnable(this);
 	}
 
 	@Override
 	public void onPause() {
-		MusicService.onPause();
 		super.onPause();
 	}
 }

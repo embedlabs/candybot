@@ -47,11 +47,6 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 		world_name=(TextSwitcher)findViewById(R.id.world_name);
 		star_count=(TextSwitcher)findViewById(R.id.star_count);
 
-		world_name.setInAnimation(this,R.anim.fadein);
-		star_count.setInAnimation(this,R.anim.fadein);
-		world_name.setOutAnimation(this,R.anim.fadeout);
-		star_count.setOutAnimation(this,R.anim.fadeout);
-
 		wn_1=(TextView)findViewById(R.id.wn_1);
 		wn_2=(TextView)findViewById(R.id.wn_2);
 		sc_1=(TextView)findViewById(R.id.sc_1);
@@ -77,12 +72,15 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 					textToast((30-stars)+" more stars in World \""+getString(WorldAdapter.worldNameIDs[position-1])+"\" needed! --- Temporarily unlocked by Shrav");
 					vib.vibrate(100);
 					startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
+				    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 					// This is to temp unlock
 				} else {
 					startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
+				    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 				}
 			} else {
 				startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
+			    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 			}
 		}
 	}
