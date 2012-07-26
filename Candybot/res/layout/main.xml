@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.adwhirl"
 	android:id="@+id/enclosing_rl"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
@@ -53,6 +54,10 @@
 			android:focusable="true"
 			android:text="@string/button_achieve" />
 	</LinearLayout>
+	<com.adwhirl.AdWhirlLayout
+        android:id="@+id/adwhirl_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 	<ImageView
 		android:id="@+id/button_facebook"
 		android:layout_width="wrap_content"
@@ -86,5 +91,6 @@
 		android:background="@drawable/s_button"
 		android:contentDescription="@string/swarmstring"
 		android:scaleType="center" />
+	
 	<!-- </RelativeLayout> -->
 </RelativeLayout>
