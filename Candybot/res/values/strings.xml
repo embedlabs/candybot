@@ -47,6 +47,9 @@
     <string name="pref_controls_offset">D-Pad Offset</string>
     <string name="pref_controls_offset_summary">How far away the D-Pad is from the edge of the screen.</string>
     <string name="pref_controls_offset_dialog">The higher the offset, the farther the D-Pad is from the edge of the screen.</string>
+    <string name="pref_controls_alpha">D-Pad Alpha</string>
+    <string name="pref_controls_alpha_summary">How transparent the D-Pad is.</string>
+    <string name="pref_controls_alpha_dialog">Select a transparency from 0 to 100%.</string>
     <string name="pref_category_graphics">Graphics</string>
     <string name="pref_graphics_quality">Quality</string>
     <string name="pref_graphics_quality_summary">How accurately and quickly graphics are rendered.</string>
@@ -115,7 +118,9 @@
     <string name="quit_dialog_message">Are you sure you want to quit?</string>
     <string name="quit_dialog_positive">Yes</string>
     <string name="quit_dialog_negative">No</string>
+    <string name="quit_dialog_positive_rate">Yes, I\'d love to!</string>
+    <string name="quit_dialog_negative_rate">No, I have no heart.</string>
     
-    <string name="rate_us_question">Would you like to rate our app? It would mean the world to us.</string>
+    <string name="rate_us_question">Would you like to rate our app? We\'re 16 year old kids, and it would mean the world to us.</string>
     <string name="market_link">market://details?id=com.embed.candy</string>
 </resources>

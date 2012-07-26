@@ -70,7 +70,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			theme = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("com.embed.candy.graphics_theme", "normal");
 			if (CandyUtils.DEBUG) Log.i(TAG, "THEME: " + theme);
 			startActivity(new Intent(this, WorldSelectActivity.class).putExtra("com.embed.candy.theme", theme));
-		    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+			overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 			break;
 		case R.id.button_facebook:
 			startActivity(SocialMedia.facebookIntent(this));
@@ -122,9 +122,9 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 				Toast.makeText(this, R.string.login, Toast.LENGTH_SHORT).show();
 			}
 		case R.id.menu_main_item_star:
-			  Intent intent = new Intent(Intent.ACTION_VIEW);
-			  intent.setData(Uri.parse(getString(R.string.market_link)));
-			  startActivity(intent);
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse(getString(R.string.market_link)));
+			startActivity(intent);
 			break;
 		}
 		return true;
@@ -181,32 +181,32 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		initSwarmBool = sp.getBoolean("com.embed.candy.swarm", true);
 		if (initSwarmBool) {
-            if (! Swarm.isInitialized() ) {
-            	Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", new CandySwarmListener());
-            }
-        }
+			if (! Swarm.isInitialized() ) {
+				Swarm.init(this, 965, "dd91fa2eb5dbaf8eba7ec62c14040be3", new CandySwarmListener());
+			}
+		}
 	}
 
 	@Override
 	public void onBackPressed() {
-	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setMessage(R.string.quit_dialog_message)
-	           .setCancelable(false)
-	           .setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
-	               @Override
-				public void onClick(final DialogInterface dialog, final int id) {
-	            	   //stopService(intent);
-	                   MainMenuActivity.this.finish();
-	               }
-	           })
-	           .setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {
-	               @Override
-				public void onClick(final DialogInterface dialog, final int id) {
-	                    dialog.cancel();
-	               }
-	           });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.quit_dialog_message)
+		.setCancelable(false)
+		.setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int id) {
+				//stopService(intent);
+				MainMenuActivity.this.finish();
+			}
+		})
+		.setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int id) {
+				dialog.cancel();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 	@Override
@@ -214,7 +214,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		super.onCreate(savedInstanceState);
 		setContentView(((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.main, null));
 
-//		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+		//		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
 		mainFont = Typeface.createFromAsset(getAssets(),getString(R.string.font_location)); // load font
 
@@ -230,32 +230,32 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 
 		SharedPreferences prefs = getSharedPreferences("Value", Context.MODE_PRIVATE );
 
-		 openCount = prefs.getInt("Value", 0);
-		 Editor editor = prefs.edit();
-		 editor.putInt("Value", openCount + 1);
-		 editor.commit();
+		openCount = prefs.getInt("Value", 0);
+		Editor editor = prefs.edit();
+		editor.putInt("Value", openCount + 1);
+		editor.commit();
 
 		if (openCount == 5) {
 
-			 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			    builder.setMessage(R.string.rate_us_question)
-			           .setCancelable(false)
-			           .setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
-			               @Override
-						public void onClick(final DialogInterface dialog, final int id) {
-			            	   Intent intent = new Intent(Intent.ACTION_VIEW);
-			     			  intent.setData(Uri.parse(getString(R.string.market_link)));
-			     			  startActivity(intent);
-			               }
-			           })
-			           .setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {
-			               @Override
-						public void onClick(final DialogInterface dialog, final int id) {
-			                    dialog.cancel();
-			               }
-			           });
-			    AlertDialog alert = builder.create();
-			    alert.show();
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.rate_us_question)
+			.setCancelable(false)
+			.setPositiveButton(R.string.quit_dialog_positive_rate, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(getString(R.string.market_link)));
+					startActivity(intent);
+				}
+			})
+			.setNegativeButton(R.string.quit_dialog_negative_rate, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
 		}
 
 		ViewUtils.setMainFont(mainFont, mainmenu_tv, button_play, button_achieve); // changes font

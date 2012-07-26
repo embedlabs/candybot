@@ -49,6 +49,14 @@
 			android:summary="@string/pref_controls_offset_summary"
 			android:title="@string/pref_controls_offset"
 			android:dependency="com.embed.candy.controls_use_touch" />
+		<com.embed.candy.view.CandySliderPreference
+			android:defaultValue="80"
+			android:dialogMessage="@string/pref_controls_alpha_dialog"
+			android:key="com.embed.candy.controls_alpha"
+			android:max="100"
+			android:summary="@string/pref_controls_alpha_summary"
+			android:title="@string/pref_controls_alpha"
+			android:dependency="com.embed.candy.controls_use_touch" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:key="com.embed.candy.category_graphics"

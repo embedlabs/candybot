@@ -182,7 +182,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public boolean toastBoolean;
 	public boolean touchControlsBoolean;
 	public boolean moveControlsLeft;
-	private float digitalOffset;
+	private int digitalOffset;
+	private float digitalAlpha;
 
 	private long totalTime = 0;
 	private long referenceTime;
@@ -214,6 +215,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		touchControlsBoolean = sp.getBoolean("com.embed.candy.controls_use_touch", false);
 		moveControlsLeft = sp.getBoolean("com.embed.candy.controls_left", false);
 		digitalOffset = sp.getInt("com.embed.candy.controls_offset", 30);
+		digitalAlpha = sp.getInt("com.embed.candy.controls_alpha", 80)/100f;
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "Level " + world + "_" + level);
 	}
@@ -445,7 +447,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			}
 
 			mDigitalOnScreenControl.getControlBase().setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-			mDigitalOnScreenControl.getControlBase().setAlpha(0.8f);
+			mDigitalOnScreenControl.getControlBase().setAlpha(digitalAlpha);
 			mDigitalOnScreenControl.getControlBase().setScale(2);
 			mDigitalOnScreenControl.getControlKnob().setAlpha(0);
 			mDigitalOnScreenControl.getControlKnob().setScale(2);

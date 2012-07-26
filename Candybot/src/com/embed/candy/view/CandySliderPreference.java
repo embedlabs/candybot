@@ -30,7 +30,6 @@ public class CandySliderPreference extends DialogPreference implements SeekBar.O
 		mMax = attrs.getAttributeIntValue(androidns, "max", 100);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected View onCreateDialogView() {
 		LinearLayout.LayoutParams params;
