@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="candyButton" parent="android:Widget.Button">
-        <item name="android:background">@drawable/button</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/button</item>
     </style>
     <style name="menuButton" parent="@style/candyButton">
-        <item name="android:paddingBottom">10dip</item>
-        <item name="android:paddingLeft">15dip</item>
-        <item name="android:paddingRight">15dip</item>
-        <item name="android:paddingTop">10dip</item>
-        <item name="android:textSize">20dip</item>
+        <item name="android:paddingBottom">1dip</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:paddingTop">1dip</item>
+        <item name="android:textSize">30dip</item>
     </style>
     <style name="Theme.NoBackground" parent="android:Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@null</item>

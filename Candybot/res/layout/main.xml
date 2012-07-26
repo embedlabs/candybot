@@ -11,25 +11,24 @@
 		android:layout_centerInParent="true"
 		android:scaleType="centerCrop"
 		android:src="@drawable/background_dither" />
-	<!-- <RelativeLayout android:id="@+id/mainmenu_rl" -->
-	<!-- android:layout_width="fill_parent" -->
-	<!-- android:layout_height="fill_parent"> -->
+		<com.adwhirl.AdWhirlLayout
+	    android:id="@+id/adwhirl_layout"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="right" />
 	<TextView
 		android:id="@+id/mainmenu_tv"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentTop="true"
 		android:layout_centerHorizontal="true"
-		android:layout_marginBottom="10dip"
-		android:layout_marginTop="15dip"
-		android:padding="5dip"
-		android:shadowColor="@android:color/black"
-		android:shadowDx="0"
-		android:shadowDy="0"
-		android:shadowRadius="5"
+		android:layout_marginBottom="2dip"
+		android:layout_marginTop="40dip"
+		android:paddingTop="5dip"
+		android:paddingBottom="1dip"
 		android:text="@string/app_name"
 		android:textColor="@android:color/white"
-		android:textSize="100dip" />
+		android:textSize="50dip" />
 	<LinearLayout
 		android:id="@+id/mainmenu_ll"
 		android:layout_width="wrap_content"
@@ -54,10 +53,6 @@
 			android:focusable="true"
 			android:text="@string/button_achieve" />
 	</LinearLayout>
-	<com.adwhirl.AdWhirlLayout
-        android:id="@+id/adwhirl_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
 	<ImageView
 		android:id="@+id/button_facebook"
 		android:layout_width="wrap_content"
@@ -91,6 +86,4 @@
 		android:background="@drawable/s_button"
 		android:contentDescription="@string/swarmstring"
 		android:scaleType="center" />
-	
-	<!-- </RelativeLayout> -->
 </RelativeLayout>

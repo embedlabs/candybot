@@ -6,7 +6,7 @@
 		android:layout_height="fill_parent"
 		android:layout_centerInParent="true"
 		android:scaleType="centerCrop"
-		android:src="@drawable/background_dither" />
+		android:src="@drawable/background2_dither" />
 	<GridView android:id="@+id/gridview_level"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
