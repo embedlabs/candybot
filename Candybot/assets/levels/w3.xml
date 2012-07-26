@@ -213,10 +213,37 @@
 		<o n="5" r="6" c="18" />
 		<o n="5" r="7" c="19" />
 		<o n="5" r="8" c="18" />
-		<m a="59" b="64" /> <!-- 5 for a, 10 for b -->
+		<m a="59" b="64" /> <!-- 5 for a, 10 for b --> <!-- technically, 50 is the least moves, but I know no one will think like that -->
 	</l>
 	<l id="18">
-	    	
+	    <c>H4sIAAAAAAAAA+NhYGDgoTGmFcBnPkichUzMg2QGjM0IxdQArES4fyibz4mEaWE+pWAkmU+O/YPJ/TBAijsGo/thgBj11HI/IxpNTfN5GBBlIjpGN5/amAmImaFsAID4yIzABgAA</c>
+	    <o n="1" r="2" c="2" />
+		<o n="2" r="8" c="14" />
+		<o n="5" r="1" c="8" />
+		<o n="5" r="1" c="10" />
+		<o n="5" r="1" c="12" />
+		<o n="5" r="1" c="14" />
+		<o n="5" r="1" c="16" />
+		<o n="5" r="1" c="18" />
+		<o n="5" r="1" c="19" />
+		<o n="5" r="3" c="22" />
+		<o n="5" r="9" c="22" />
+		<o n="5" r="11" c="22" />
+		<o n="5" r="13" c="22" />
+		<o n="5" r="15" c="22" />
+		<o n="7" r="2" c="8" />
+		<o n="7" r="2" c="10" />
+		<o n="7" r="2" c="12" />
+		<o n="7" r="2" c="14" />
+		<o n="7" r="2" c="16" />
+		<o n="7" r="2" c="18" />
+		<o n="7" r="2" c="19" />
+		<o n="7" r="3" c="21" />
+		<o n="7" r="9" c="21" />
+		<o n="7" r="11" c="21" />
+		<o n="7" r="13" c="21" />
+		<o n="7" r="15" c="21" />
+		<m a="75" b="80" /> <!-- 5 for a, 10 for b -->
 	</l>
 	<l id="19">
 	    	
