@@ -69,6 +69,8 @@ import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -311,12 +313,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mEngine.getFontManager().loadFont(andengineMainFont);
 
 		/**
-		 * XML PARSING
-		 */
-		CandyXML.parseLevelObjectsFromXml(this);
-		objectArray = objectList.toArray(new int[objectList.size()][]);
-
-		/**
 		 * RECTANGE VERTEX BUFFERS
 		 */
 		boxRVB = new RectangleVertexBuffer(GL11.GL_STATIC_DRAW, true);
@@ -327,9 +323,19 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		movableWallRVB.update(64, 64);
 		inertiaWallRVB.update(64, 64);
 
-		if (helpTextString!=null && toastBoolean) {
+		/**
+		 * XML PARSING
+		 */
+		CandyXML.parseLevelObjectsFromXml(this);
+		objectArray = objectList.toArray(new int[objectList.size()][]);
+
+		final String hintPrefString = "com.embed.candy.hint"+world+"_"+level;
+
+		if (helpTextString!=null && toastBoolean && !sp.getBoolean(hintPrefString, false)) {
+		    referenceTime = System.currentTimeMillis();
 			startActivity(new Intent(this,HelpTextActivity.class).putExtra("com.embed.candy.helptext", helpTextString));
 		}
+		sp.edit().putBoolean(hintPrefString, true).commit();
 	}
 
 // Music doesn't need a method, since it needs to play right away and only one track.
@@ -660,6 +666,28 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			}
 			SaveIO.saveSettings(candyEngine);
 		}
+	}
+
+
+	@Override
+	public void onBackPressed() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.quit_dialog_message2)
+		.setCancelable(false)
+		.setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int id) {
+				finish();
+			}
+		})
+		.setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int id) {
+				dialog.cancel();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 	@Override

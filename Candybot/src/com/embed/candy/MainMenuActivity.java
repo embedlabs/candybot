@@ -196,7 +196,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			@Override
 			public void onClick(final DialogInterface dialog, final int id) {
 				//stopService(intent);
-				MainMenuActivity.this.finish();
+				finish();
 			}
 		})
 		.setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {

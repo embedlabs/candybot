@@ -2,12 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:background="@drawable/background_radial" >
+	android:background="@drawable/background_radial"
+	android:id="@+id/help_rv"
+	android:onClick="onClick" >
+	<TextView
+		android:id="@+id/tap_tv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:padding="10dip"
+		android:shadowColor="@android:color/black"
+		android:shadowDx="0"
+		android:shadowDy="0"
+		android:shadowRadius="2"
+		android:text="@string/tap_to_continue"
+		android:textColor="@android:color/white" />
 	<TextView
 		android:id="@+id/help_tv"
-		android:layout_width="500dip"
+		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:layout_centerInParent="true"
-		android:textSize="30dip"
-		android:gravity="center_vertical" />
+		android:layout_above="@id/tap_tv"
+		android:layout_centerHorizontal="true"
+		android:gravity="center_vertical"
+		android:padding="30dip"
+		android:shadowColor="@android:color/black"
+		android:shadowDx="0"
+		android:shadowDy="0"
+		android:shadowRadius="2"
+		android:textColor="@android:color/white"
+		android:textSize="20dip" />
 </RelativeLayout>

@@ -294,16 +294,25 @@ public class CandyAchievements {
 	}
 
 	public static void unlockHelper(final int achievementInt) {
-		final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
-		if (achievement != null) {
-			achievement.unlock();
-			if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,"Unlocked: "+achievementInt);
+		try {
+			final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
+			if (achievement != null) {
+				achievement.unlock();
+				if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,"Unlocked: "+achievementInt);
+			}
+		} catch (Exception e) {
+			if (CandyUtils.DEBUG) Log.e(CandyUtils.TAG,"Help!",e);
 		}
 	}
 
 	public static boolean isUnlocked(final int achievementInt) {
-		final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
-		return (achievement==null?false:achievement.unlocked);
+		try {
+			final SwarmAchievement achievement = MainMenuActivity.achievements.get(achievementInt);
+			return (achievement==null?false:achievement.unlocked);
+		} catch (Exception e) {
+			if (CandyUtils.DEBUG) Log.e(CandyUtils.TAG,"Help!",e);
+			return false;
+		}
 	}
 
 	public static int achievementCount() {
