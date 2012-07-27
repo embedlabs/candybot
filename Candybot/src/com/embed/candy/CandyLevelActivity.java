@@ -124,7 +124,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public int[][] objectArray; // stores locations and types of all objects, correlates to spriteList
 	public String helpTextString = null;
 
-	private Scene mScene;
+	public Scene mScene;
 	private TMXTiledMap mTMXTiledMap;
 	public CandyCamera mCandyCamera;
 	public HUD hud;
@@ -140,9 +140,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private Font andengineMainFont;
 
 	private BitmapTextureAtlas mParticleTexture;
-	private TextureRegion mParticleTextureRegion;
-	private TextureRegion mEnemyParticleTextureRegion;
-	private TextureRegion mBotParticleTextureRegion;
+	private TextureRegion mParticleTextureRegion, mEnemyParticleTextureRegion, mBotParticleTextureRegion;
+	public TextureRegion mWinParticleTextureRegion;
 
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
@@ -170,23 +169,20 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public int teleporter2column = -1;
 	public int teleporter2row = -1;
 
-	public int advancedMovesFor3Stars;
-	public int basicMovesFor2Stars;
+	public int advancedMovesFor3Stars, basicMovesFor2Stars;
 
 	/**
 	 * Preferences
 	 */
 	public SharedPreferences sp;
 	public int qualityInt;
-	public boolean zoomBoolean;
-	public boolean toastBoolean;
-	public boolean touchControlsBoolean;
-	public boolean moveControlsLeft;
+	public boolean zoomBoolean, toastBoolean, touchControlsBoolean, moveControlsLeft;
 	private int digitalOffset;
 	private float digitalAlpha;
 
 	private long totalTime = 0;
 	private long referenceTime;
+
 	private BitmapTextureAtlas mFontTexture2;
 	private Font andengineMainFont2;
 
@@ -302,10 +298,11 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * PARTICLES
 		 */
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		mParticleTexture = new BitmapTextureAtlas(64,64,quality);
+		mParticleTexture = new BitmapTextureAtlas(128,32,quality);
 		mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle.png", 0, 0);
 		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 33, 0);
-		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 33, 0);
+		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 33,16);
+		mWinParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_star.png", 66,0);
 
 		mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		if (!touchControlsBoolean) {

@@ -19,6 +19,13 @@ import org.anddev.andengine.entity.modifier.IEntityModifier.IEntityModifierListe
 import org.anddev.andengine.entity.particle.ParticleSystem;
 import org.anddev.andengine.entity.particle.emitter.CircleOutlineParticleEmitter;
 import org.anddev.andengine.entity.particle.emitter.PointParticleEmitter;
+import org.anddev.andengine.entity.particle.initializer.AccelerationInitializer;
+import org.anddev.andengine.entity.particle.initializer.AlphaInitializer;
+import org.anddev.andengine.entity.particle.initializer.ColorInitializer;
+import org.anddev.andengine.entity.particle.initializer.RotationInitializer;
+import org.anddev.andengine.entity.particle.initializer.VelocityInitializer;
+import org.anddev.andengine.entity.particle.modifier.AlphaModifier;
+import org.anddev.andengine.entity.particle.modifier.ExpireModifier;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
@@ -161,12 +168,33 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	public synchronized void showCandyAnim(final CandyLevelActivity candyLevel) {
 		if (type == CANDY) {
 			hasModifier = true;
+			setVisible(false);
+			final PointParticleEmitter ppe = new PointParticleEmitter(64 * objectArray[index][COLUMN] + 16,64 * objectArray[index][ROW] + 16);
+			final ParticleSystem tempPS = new ParticleSystem(ppe, 100, 100, 360, candyLevel.mWinParticleTextureRegion);
+
+			tempPS.addParticleInitializer(new AlphaInitializer(0.75f));
+			tempPS.addParticleInitializer(new VelocityInitializer(-200, 200, -300, 0));
+			tempPS.addParticleInitializer(new AccelerationInitializer(0,0,120,180));
+			tempPS.addParticleInitializer(new ColorInitializer(0,0.5f,0));
+			tempPS.addParticleInitializer(new RotationInitializer(0,360));
+
+			tempPS.addParticleModifier(new AlphaModifier(0.75f, 0, 0, 0.66f));
+			tempPS.addParticleModifier(new AlphaModifier(0, 0.75f, 0.67f, 1.33f));
+			tempPS.addParticleModifier(new AlphaModifier(0.75f, 0, 1.34f, 2));
+
+			tempPS.addParticleModifier(new org.anddev.andengine.entity.particle.modifier.ColorModifier(0,0.75f,0.5f,0,0,0,0.4f,0.5f));
+			tempPS.addParticleModifier(new org.anddev.andengine.entity.particle.modifier.ColorModifier(0.75f,0.2f,0,0.2f,0,0.75f,0.9f,1));
+
+			tempPS.addParticleModifier(new ExpireModifier(1.5f, 2));
+			candyLevel.mScene.attachChild(tempPS);
+
 			new Thread(new Runnable(){
 				@Override
 				public void run() {
 					try {
 						Thread.sleep(2000);
 					} catch (InterruptedException e) {} finally {
+						tempPS.setParticlesSpawnEnabled(false);
 						hasModifier = false;
 					}
 				}
