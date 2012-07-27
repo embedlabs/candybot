@@ -27,6 +27,7 @@ import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.CandyCamera;
 import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.engine.camera.hud.controls.DigitalOnScreenControl;
+import org.anddev.andengine.engine.handler.runnable.RunnableHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -142,8 +143,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private Font andengineMainFont;
 
 	private BitmapTextureAtlas mParticleTexture;
-	private TextureRegion mParticleTextureRegion, mEnemyParticleTextureRegion, mBotParticleTextureRegion;
-	public TextureRegion mWinParticleTextureRegion;
+	private TextureRegion  mEnemyParticleTextureRegion, mBotParticleTextureRegion;
+	public TextureRegion mWinParticleTextureRegion, mParticleTextureRegion;
 
 	public Typeface mainFont;
 	public static final String TAG = CandyUtils.TAG;
@@ -183,6 +184,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	private long totalTime = 0;
 	private long referenceTime;
+
+	public RunnableHandler rh;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -483,6 +486,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		if (initMusic){
 			backgroundMusic.play();
 		}
+
+		rh = new RunnableHandler();
+
+		mScene.registerUpdateHandler(rh);
 
 		return mScene;
 	}

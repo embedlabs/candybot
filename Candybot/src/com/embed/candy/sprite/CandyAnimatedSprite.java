@@ -41,6 +41,36 @@ import com.embed.candy.sprite.modifier.CandyMoveByModifier;
 import com.embed.candy.util.CandyUtils;
 
 public class CandyAnimatedSprite extends AnimatedSprite {
+
+	public final class ExplodeRunnable implements Runnable {
+		private final CandyLevelActivity candyLevel;
+		public boolean shouldContinue = true;
+
+		public ExplodeRunnable(final CandyLevelActivity candyLevel) {
+			this.candyLevel = candyLevel;
+		}
+
+		@Override
+		public void run() {
+			try {
+				for (int i=0;i<100;i++) {
+					Thread.sleep(5);
+					if (!shouldContinue) {
+						break;
+					}
+				}
+			} catch (InterruptedException ie) {} finally {
+				explodePS.setParticlesSpawnEnabled(false);
+				candyLevel.rh.postRunnable(new Runnable() {
+					@Override
+					public void run() {
+						candyLevel.mScene.detachChild(explodePS);
+					}
+				});
+			}
+		}
+	}
+
 	public final int index, type;
 	private final TMXLayer tmxLayer;
 	private final int[][] objectArray, backgroundArray;
@@ -76,6 +106,10 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 
 	public PointParticleEmitter botPPE = null;
 	public ParticleSystem botPS = null;
+
+	public ParticleSystem explodePS = null;
+	public ExplodeRunnable explodeRunnable = null;
+	private Thread explodeThread = null;
 
 	public CandyAnimatedSprite(final int row, final int column, final TiledTextureRegion pTiledTextureRegion, final RectangleVertexBuffer RVB, final int index, final int type, final TMXLayer tmxLayer, final int[][] objectArray, final int[][] backgroundArray) {
 		super(column * 64, row * 64, pTiledTextureRegion, RVB);
@@ -169,8 +203,8 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		if (type == CANDY) {
 			hasModifier = true;
 			setVisible(false);
-			final PointParticleEmitter ppe = new PointParticleEmitter(64 * objectArray[index][COLUMN] + 16,64 * objectArray[index][ROW] + 16);
-			final ParticleSystem tempPS = new ParticleSystem(ppe, 100, 100, 360, candyLevel.mWinParticleTextureRegion);
+			final PointParticleEmitter winPPE = new PointParticleEmitter(64 * objectArray[index][COLUMN] + 16,64 * objectArray[index][ROW] + 16);
+			final ParticleSystem tempPS = new ParticleSystem(winPPE, 100, 100, 360, candyLevel.mWinParticleTextureRegion);
 
 			tempPS.addParticleInitializer(new AlphaInitializer(0.75f));
 			tempPS.addParticleInitializer(new VelocityInitializer(-200, 200, -300, 0));
@@ -199,20 +233,38 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 					}
 				}
 			}).start();
-			// TODO
 		}
 	}
 
-	public synchronized void showBombAnim() {
+	public synchronized void showBombAnim(final CandyLevelActivity candyLevel) {
 		hasModifier = true;
 		doneBlowingUp = true;
 		animate(50, false, new IAnimationListener() {
 			@Override
 			public void onAnimationEnd(final AnimatedSprite pAnimatedSprite) {
 				setVisible(false);
+
+				final PointParticleEmitter explodePPE = new PointParticleEmitter(64 * objectArray[index][COLUMN] + 16,64 * objectArray[index][ROW] + 16);
+				explodePS = new ParticleSystem(explodePPE, 100, 100, 360, candyLevel.mParticleTextureRegion);
+
+				explodePS.addParticleInitializer(new AlphaInitializer(0.75f));
+				explodePS.addParticleInitializer(new VelocityInitializer(-200, 200, -300, 0));
+				explodePS.addParticleInitializer(new AccelerationInitializer(0,0,240,300));
+				explodePS.addParticleInitializer(new ColorInitializer(1,0,0));
+				explodePS.addParticleInitializer(new RotationInitializer(0,360));
+
+				explodePS.addParticleModifier(new AlphaModifier(0.75f, 0, 0, 0.5f));
+				explodePS.addParticleModifier(new ExpireModifier(0.45f,0.5f));
+
+				candyLevel.mScene.attachChild(explodePS);
+
 				tmxLayer.getTMXTile(objectArray[index][COLUMN], objectArray[index][ROW] + 1).setTextureRegion(null);
 				backgroundArray[objectArray[index][ROW] + 1][objectArray[index][COLUMN]] = EngineConstants.EMPTY_TILE;
 				objectArray[index][ROW] = -1;
+
+				explodeRunnable = new ExplodeRunnable(candyLevel);
+				explodeThread = new Thread(explodeRunnable);
+				explodeThread.start();
 
 				hasModifier = false;
 				if (CandyUtils.DEBUG) Log.i(TAG, "Bomb explosion ended.");
@@ -267,6 +319,16 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		lastDirectionalMove = 0;
 		stopAnimation();
 		setPosition(initialColumn * 64, initialRow * 64);
+
+		if (explodeThread != null) {
+			explodeRunnable.shouldContinue = false;
+			try {
+				explodeThread.join();
+			} catch (InterruptedException e) {}
+			explodePS = null;
+			explodeRunnable = null;
+			explodeThread = null;
+		}
 
 		if (ppe!=null) {
 			ppe.reset();

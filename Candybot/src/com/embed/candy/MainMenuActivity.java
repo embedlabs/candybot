@@ -304,6 +304,8 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 	public void onDestroy() {
 		ViewUtils.mainFont = null;
 		BufferObjectManager.getActiveInstance().clear();
+		achievements = null;
+		intent = null;
 		super.onDestroy();
 	}
 

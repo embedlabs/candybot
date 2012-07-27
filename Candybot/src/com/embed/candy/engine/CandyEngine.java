@@ -450,18 +450,11 @@ public class CandyEngine {
 		candy.showCandyAnim(candyLevel);
 		pause(5, candyIndex);
 
-//		if (CandyUtils.DEBUG) Log.i(TAG, "Level Completion Info:");
-//		if (CandyUtils.DEBUG) Log.i(TAG, "Moves: " + moves);
-//		if (CandyUtils.DEBUG) Log.i(TAG, "Restarts: " + restarts);
-//		if (CandyUtils.DEBUG) Log.i(TAG, "Enemies defeated: " + enemiesDefeated);
-//		if (CandyUtils.DEBUG) Log.i(TAG, "World:" + candyLevel.world + "  Level:" + candyLevel.level);
-
 		if (moves <= candyLevel.advancedMovesFor3Stars) {starsEarned = 3;}
 		else if (moves <= candyLevel.basicMovesFor2Stars) {starsEarned = 2;}
 		else {starsEarned = 1;}
 
-//		CandyAchievements.setAchievements(candyLevel);
-		candyLevel.finish(); // TODO change this, add the pop up menu thingy
+		candyLevel.finish();
 	}
 
 	private synchronized void logArray(final String message) {
@@ -522,7 +515,7 @@ public class CandyEngine {
 							break;
 						} else {
 							if (gravityList.get(i).blowUp && !gravityList.get(i).doneBlowingUp) {
-								gravityList.get(i).showBombAnim();
+								gravityList.get(i).showBombAnim(candyLevel);
 								break;
 							}
 							gravityList.get(i).lastDirectionalMove = 0;
