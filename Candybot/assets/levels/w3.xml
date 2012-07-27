@@ -137,15 +137,14 @@
 		<m a="317" b="327" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="12">
-	    <c>H4sIAAAAAAAAA71UiwrAIAi0vYP+/3u3oEDktItBBwcz9XxESyKSfvIZ+BmwcTZnhX5nJmNRbuRne2HOUE8VWeJZGH1vBgY17mjMht1/NbL6diZ9jnA2enc0ut8RPH0ENL/2ofqz+7H5qHY2Md796h15/aHvUU+r3i/ylYAdaE9IH70z3XeReUT7KSoG6TP1GH3WjvQrb2NHu+9E/87t467sF5Yuh2nABgAA</c>
+	    <c>H4sIAAAAAAAAA71UCQrAMAizuwv9/3u3QgsiUTMGCwRm1XiUrohI+cgr8TNg42zOH/qTlYxFuZGf7YU5Qz11VIlnYfS9GRj0uG2wGk7/Mcjq25n0OcI+6N1Rdr8ZPH0ENL/2ofpv92PzUe1qYrz7zXZUnO+sp7/eL/K1gBNoT0gfvTPdd5P3iPbTVAzSZ+ox+qwd6Xeexo52P4n+ncvDVdk3jPQrFcAGAAA=</c>
 		<o n="1" r="2" c="2" />
 		<o n="2" r="15" c="21" />
 		<o n="5" r="8" c="15" />
 		<o n="5" r="8" c="16" />
-		<o n="6" r="2" c="8" />
 		<o n="6" r="5" c="17" />
 		<o n="6" r="15" c="3" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b --> <!-- find moves -->
+		<m a="229" b="239" /> <!-- 10 for a, 20 for b -->
 	</l>
 	<l id="13">
 	    <c>H4sIAAAAAAAAC7VVWw6AIAwr+sX9L6wfkiy13SBoE4Ly6Eo3tAFoP7ee9A7VPo7hOGDWZrHHfNQ/xjq9Z/ozOE2Rv9KvPAHeHu3qV/mqvFc8ESv+qzk+i4ur6k3Vz8xZWEPkyvyfAa9rYnzWf97TxbqqBpT+FZ+cfnV/Kw7Fx16MXsVQfKD5TI/LdbxfnP8Kqm5cDEaM6eC+ryv+7+KLf4fiOu52Ps8XAdkxdsAGAAA=</c>
@@ -167,7 +166,7 @@
 		<o n="5" r="11" c="19" />
 		<o n="7" r="13" c="19" />
 		<o n="7" r="3" c="11" />
-		<m a="84" b="94" /> <!-- 5 for a, 15 for b --> <!-- this is a really nice level -->
+		<m a="84" b="94" /> <!-- 5 for a, 15 for b --> <!-- nicely made level :D -->
 	</l>
 	<l id="15">
 	    <c>H4sIAAAAAAAAA82V2wrAIAxD3e2h0P//3m3goIRW45zbCkGRmB6KoKaUdLBG1R/yp4p683uqlM/w1Xxf8CNPxMf43uSXvD/XNUvNXho9Hv8G/YVgRI/NwPyLDWdmua0iT5SP/T0+lj3Kxxl6vMiKd0r5HgdT3p3o/eOcW8TwP1X2D5gPLXB2R5izA18/ZwHABgAA</c>
