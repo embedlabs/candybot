@@ -90,10 +90,11 @@ public class StatisticsActivity extends ListActivity {
 		final int stars = CandyAchievements.statisticObtainer(worlds, STATUS);
 		stats.add(getString(R.string.stats_stars_earned) + ": " + stars);
 
-		// ACHIEVEMENTS AWARDED
-		final int achievements = CandyAchievements.achievementCount();
-		stats.add(getString(R.string.stats_achievements_awarded)+": "+achievements);
-
+		if (MainMenuActivity.achievements!=null) {
+			// ACHIEVEMENTS AWARDED
+			final int achievements = CandyAchievements.achievementCount();
+			stats.add(getString(R.string.stats_achievements_awarded)+": "+achievements);
+		}
 		// NUMBER OF DEATHS
 		final int deaths = CandyAchievements.statisticObtainer(worlds, TOTAL_DEATHS);
 		stats.add(getString(R.string.stats_number_of_candybot_deaths) + ": " + f.format(deaths));
