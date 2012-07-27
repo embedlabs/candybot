@@ -271,19 +271,6 @@ public class CandyEngine {
 			}
 			moves++; cumulativeMoves++;
 
-			if (moves==5&&candyLevel.toastBoolean&&candyLevel.helpTextString!=null) {
-//				for (final Text text:candyLevel.textReferences) {
-//					text.registerEntityModifier(new AlphaModifier(1,1,0));
-//				}
-				candyLevel.runOnUpdateThread(new Runnable() {
-					@Override
-					public void run() {
-//						candyLevel.hud.detachChild(candyLevel.helpText);
-						candyLevel.helpText.setVisible(false);
-					}
-				});
-			}
-
 			botMoved = false;
 		}
 
@@ -615,9 +602,6 @@ public class CandyEngine {
 
 		candyLevel.resetDragDistance = true;
 		candyLevel.gameStarted = true;
-		if (candyLevel.helpText!=null) {
-			candyLevel.helpText.setVisible(true);
-		}
 
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyEngine finished resetting.");
 	}

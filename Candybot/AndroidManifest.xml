@@ -89,6 +89,12 @@
 			android:screenOrientation="landscape"
 			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
 		<activity
+			android:name="com.embed.candy.HelpTextActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation"
+			android:label="@string/app_name"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+		<activity
 			android:name="com.swarmconnect.SwarmMainActivity"
 			android:configChanges="orientation|keyboardHidden|keyboard"
 			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"

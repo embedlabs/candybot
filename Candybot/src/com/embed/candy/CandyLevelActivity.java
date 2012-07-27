@@ -59,7 +59,6 @@ import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.buffer.BufferObjectManager;
 import org.anddev.andengine.opengl.font.Font;
-import org.anddev.andengine.opengl.font.StrokeFont;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
@@ -70,6 +69,7 @@ import org.anddev.andengine.ui.activity.LayoutGameActivity;
 import org.anddev.andengine.util.Debug;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.PixelFormat;
@@ -89,8 +89,8 @@ import com.embed.candy.controls.CandyTouchSystem;
 import com.embed.candy.engine.CandyEngine;
 import com.embed.candy.save.SaveIO;
 import com.embed.candy.sprite.CandyAnimatedSprite;
-import com.embed.candy.util.CandyTMX;
 import com.embed.candy.util.CandyUtils;
+import com.embed.candy.util.CandyXML;
 import com.swarmconnect.Swarm;
 
 @SuppressLint("NewApi")
@@ -159,7 +159,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	private ChangeableText playChangeableText;
 	private Text resetLevelText;
-	public Text helpText = null;
 
 	public static final int CAMERA_SPEED = 200;
 
@@ -182,9 +181,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	private long totalTime = 0;
 	private long referenceTime;
-
-	private BitmapTextureAtlas mFontTexture2;
-	private Font andengineMainFont2;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -290,9 +286,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 * FONT
 		 */
 		mFontTexture = new BitmapTextureAtlas(512, 512, quality);
-		mFontTexture2 = new BitmapTextureAtlas(512, 512, quality);
 		andengineMainFont = new Font(mFontTexture, mainFont, 64, true, 0x80444444);
-		andengineMainFont2 = new StrokeFont(mFontTexture2,mainFont,15,true,0xCCFFFFFF,1,0xCC000000);
 
 		/**
 		 * PARTICLES
@@ -313,13 +307,13 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		/**
 		 * ENGINE LOADING
 		 */
-		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture, mFontTexture2, mParticleTexture, mOnScreenControlTexture);
-		mEngine.getFontManager().loadFonts(andengineMainFont,andengineMainFont2);
+		mEngine.getTextureManager().loadTextures(mObjectTexture, mFontTexture, mParticleTexture, mOnScreenControlTexture);
+		mEngine.getFontManager().loadFont(andengineMainFont);
 
 		/**
 		 * XML PARSING
 		 */
-		CandyTMX.parseLevelObjectsFromXml(this);
+		CandyXML.parseLevelObjectsFromXml(this);
 		objectArray = objectList.toArray(new int[objectList.size()][]);
 
 		/**
@@ -332,6 +326,10 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		boxRVB.update(64, 64);
 		movableWallRVB.update(64, 64);
 		inertiaWallRVB.update(64, 64);
+
+		if (helpTextString!=null && toastBoolean) {
+			startActivity(new Intent(this,HelpTextActivity.class).putExtra("com.embed.candy.helptext", helpTextString));
+		}
 	}
 
 // Music doesn't need a method, since it needs to play right away and only one track.
@@ -376,7 +374,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 */
 		final CandyTMXLoader tmxLoader = new CandyTMXLoader((theme == null) ? "normal" : theme, this, mEngine.getTextureManager(), TextureOptions.BILINEAR_PREMULTIPLYALPHA, this);
 		try {
-			mTMXTiledMap = tmxLoader.load(CandyTMX.tmxFromXML(this, world, level));
+			mTMXTiledMap = tmxLoader.load(CandyXML.tmxFromXML(this, world, level));
 		} catch (final TMXLoadException tmxle) {
 			Toast.makeText(getApplicationContext(), "Failed to load level.", Toast.LENGTH_LONG).show();
 			Debug.e(tmxle);
@@ -426,13 +424,6 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		resetLevelText.setPosition(PHONE_WIDTH - resetLevelText.getWidth()-10,10);
 		hud.attachChild(resetLevelText);
 		hud.registerTouchArea(resetLevelText);
-
-		if (helpTextString!=null && toastBoolean) {
-			helpText = new Text(0,0,andengineMainFont2,CandyUtils.wrap(helpTextString, 60));
-			helpText.setColor(0.2f, 0.2f, 0.2f, 0.5f);
-			helpText.setPosition(PHONE_WIDTH/2-helpText.getWidth()/2, PHONE_HEIGHT/2-helpText.getHeight()/2);
-			hud.attachChild(helpText);
-		}
 
 		if (!touchControlsBoolean) {
 			if (moveControlsLeft) {

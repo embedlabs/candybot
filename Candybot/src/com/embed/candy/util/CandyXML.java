@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.embed.candy.CandyLevelActivity;
 
-public class CandyTMX {
+public class CandyXML {
 	public static final String TAG = CandyUtils.TAG;
 
 	public static InputStream tmxFromXML(final CandyLevelActivity candyLevel, final int world, final int level) {
