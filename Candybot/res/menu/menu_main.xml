@@ -17,7 +17,11 @@
 		android:icon="@android:drawable/ic_menu_info_details"
 		android:title="@string/menu_main_about"/>
 	<item
+		android:id="@+id/menu_main_item_bug"
+		android:icon="@android:drawable/ic_menu_close_clear_cancel"
+		android:title="@string/menu_main_bug"/>
+	<item
 		android:id="@+id/menu_main_item_star"
-		android:title="Rate Us"
-		android:icon="@android:drawable/btn_star_big_on" />
+		android:icon="@android:drawable/btn_star_big_on"
+		android:title="@string/menu_main_rate"/>
 </menu>

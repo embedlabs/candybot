@@ -1,5 +1,7 @@
 package com.embed.candy;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +15,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -103,6 +108,15 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 		return true;
 	}
 
+	private String getVersion() {
+	    String version = "";
+	    try {
+	        PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+	        version = pInfo.versionName;
+	    } catch (NameNotFoundException e1) {}
+	    return version;
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
@@ -122,10 +136,27 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 				Toast.makeText(this, R.string.login, Toast.LENGTH_SHORT).show();
 			}
 		case R.id.menu_main_item_star:
-			Intent intent = new Intent(Intent.ACTION_VIEW);
+			final Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(getString(R.string.market_link)));
 			startActivity(intent);
 			break;
+		case R.id.menu_main_item_bug:
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+			final String content = new StringBuilder()
+			.append(getVersion())
+			.append("\n")
+			.append(sdf.format(new Date()))
+			.append("\n\n")
+			.append(getString(R.string.bug_report_template)).toString();
+
+			final Intent bug = Intent.createChooser(new Intent(Intent.ACTION_SEND)
+			.setType("plain/text")
+			.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{getString(R.string.email)})
+			.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.bug_report))
+			.putExtra(android.content.Intent.EXTRA_TEXT, content),
+			getString(R.string.pick_email));
+			startActivity(bug);
+		    break;
 		}
 		return true;
 	}

@@ -1,82 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">Candybot</string>
-    <string name="button_play">Play</string>
-    <string name="button_achieve">Achievements</string>
-    
-    <string name="facebook_link">https://m.facebook.com/candybot?v=feed</string>
-    <string name="facebook_protocol">fb://profile/236289176391475</string>
-    <string name="twitter_name">EmbedLabs</string>
-    <string name="twitterstring">Twitter Button that links to our Twitter.</string>
-    <string name="facebookstring">Facebook Button that links to our Facebook.</string>
-    <string name="twitterUID">338692068</string>
-    
-    <string name="swarmstring">Swarm Button that opens Swarm.</string>
-    
-    <string name="pan">PAN/ZOOM</string>
-    <string name="play">PLAY MODE</string>
-    <string name="reset">RESET</string>
-    
-    <string name="menu_main_preferences">Preferences</string>
-    <string name="menu_main_about">About</string>
-    <string name="menu_main_stats">Statistics</string>
-    <string name="menu_main_restore">Restore Progress from Swarm</string>
-    
-    <string name="font_location">fonts/UbuntuTitling-Bold.ttf</string>
-    
-    <string name="pref_category_general">General</string>
-    <string name="pref_category_audio">Audio</string>
-    <string name="pref_category_controls">Controls</string>
-    <string name="pref_controls_use_touch">Use touch controls</string>
-    <string name="pref_controls_use_touch_summary">Drag your finger or tap near the screen edges to move instead of the D-pad.</string>
-    <string name="pref_controls_left">Move D-Pad to left</string>
-    <string name="pref_controls_left_summary">Move the D-Pad to the left when playing. Useful if you want to switch hands.</string>
-    <string name="pref_swarm">Swarm</string>
-    <string name="pref_swarm_summary">Use swarm\'s social features, earn achievements, and save your scores.</string>
-    <string name="pref_music">Music</string>
-    <string name="pref_music_summary">Play game music. You can still play your own music.</string>
-    <string name="pref_mfx">Sound Effects</string>
-    <string name="pref_mfx_summary">Play sound effects in the game.</string>
-    <string name="pref_general_zoom">Zoom</string>
-    <string name="pref_general_zoom_summary">Zoom in at the beginning of each level.</string>
-    <string name="pref_general_toasts">In-Game Help</string>
-    <string name="pref_general_toasts_summary">Show game tips and tutorials at the start of each level.</string>
-    <string name="pref_general_sensitivity">Sensitivity</string>
-    <string name="pref_general_sensitivity_summary">How sensitive the controls are.</string>
-    <string name="pref_general_sensitivity_dialog">The higher the sensitivity, the less you will have to drag your finger to move the Candybot.</string>
-    <string name="pref_controls_offset">D-Pad Offset</string>
-    <string name="pref_controls_offset_summary">How far away the D-Pad is from the edge of the screen.</string>
-    <string name="pref_controls_offset_dialog">The higher the offset, the farther the D-Pad is from the edge of the screen.</string>
-    <string name="pref_controls_alpha">D-Pad Alpha</string>
-    <string name="pref_controls_alpha_summary">How transparent the D-Pad is.</string>
-    <string name="pref_controls_alpha_dialog">Select a transparency from 0 to 100%.</string>
-    <string name="pref_category_graphics">Graphics</string>
-    <string name="pref_graphics_quality">Quality</string>
-    <string name="pref_graphics_quality_summary">How accurately and quickly graphics are rendered.</string>
-    <string-array name="quality">
-        <item>Low (No particles, rougher visuals)</item>
-        <item>Medium (No particles, smooth visuals)</item>
-        <item>High (Particles and smooth visuals)</item>
-    </string-array>
-    <string-array name="quality_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-    <string name="pref_graphics_theme">Theme</string>
-    <string name="pref_graphics_theme_summary">The game\'s visual style.</string>
-    <string-array name="theme">
-        <item>Normal (more coming soon!)</item>
-    </string-array>
-    <string-array name="theme_values">
-        <item>normal</item>
-    </string-array>
-    
-    <string name="dialog_about_title">About Embed Labs</string>
-    <string name="dialog_about_button">Return</string>
+	<string name="app_name">Candybot</string>
+	<string name="button_play">Play</string>
+	<string name="button_achieve">Achievements</string>
+	
+	<string name="facebook_link">https://m.facebook.com/candybot?v=feed</string>
+	<string name="facebook_protocol">fb://profile/236289176391475</string>
+	<string name="twitter_name">EmbedLabs</string>
+	<string name="twitterstring">Twitter Button that links to our Twitter.</string>
+	<string name="facebookstring">Facebook Button that links to our Facebook.</string>
+	<string name="twitterUID">338692068</string>
+	
+	<string name="swarmstring">Swarm Button that opens Swarm.</string>
+	
+	<string name="pan">PAN/ZOOM</string>
+	<string name="play">PLAY MODE</string>
+	<string name="reset">RESET</string>
+	
+	<string name="menu_main_preferences">Preferences</string>
+	<string name="menu_main_about">About</string>
+	<string name="menu_main_stats">Statistics</string>
+	<string name="menu_main_restore">Restore Progress from Swarm</string>
+	<string name="menu_main_rate">Rate Us</string>
+	<string name="menu_main_bug">Bug Report</string>
+	<string name="pick_email">Pick an email client</string>
+	
+	<string name="font_location">fonts/UbuntuTitling-Bold.ttf</string>
+	
+	<string name="pref_category_general">General</string>
+	<string name="pref_category_audio">Audio</string>
+	<string name="pref_category_controls">Controls</string>
+	<string name="pref_controls_use_touch">Use touch controls</string>
+	<string name="pref_controls_use_touch_summary">Drag your finger or tap near the screen edges to move instead of the D-pad.</string>
+	<string name="pref_controls_left">Move D-Pad to left</string>
+	<string name="pref_controls_left_summary">Move the D-Pad to the left when playing. Useful if you want to switch hands.</string>
+	<string name="pref_swarm">Swarm</string>
+	<string name="pref_swarm_summary">Use swarm\'s social features, earn achievements, and save your scores.</string>
+	<string name="pref_music">Music</string>
+	<string name="pref_music_summary">Play game music. You can still play your own music.</string>
+	<string name="pref_mfx">Sound Effects</string>
+	<string name="pref_mfx_summary">Play sound effects in the game.</string>
+	<string name="pref_general_zoom">Zoom</string>
+	<string name="pref_general_zoom_summary">Zoom in at the beginning of each level.</string>
+	<string name="pref_general_toasts">In-Game Help</string>
+	<string name="pref_general_toasts_summary">Show game tips and tutorials at the start of each level.</string>
+	<string name="pref_general_sensitivity">Sensitivity</string>
+	<string name="pref_general_sensitivity_summary">How sensitive the controls are.</string>
+	<string name="pref_general_sensitivity_dialog">The higher the sensitivity, the less you will have to drag your finger to move the Candybot.</string>
+	<string name="pref_controls_offset">D-Pad Offset</string>
+	<string name="pref_controls_offset_summary">How far away the D-Pad is from the edge of the screen.</string>
+	<string name="pref_controls_offset_dialog">The higher the offset, the farther the D-Pad is from the edge of the screen.</string>
+	<string name="pref_controls_alpha">D-Pad Alpha</string>
+	<string name="pref_controls_alpha_summary">How transparent the D-Pad is.</string>
+	<string name="pref_controls_alpha_dialog">Select a transparency from 0 to 100%.</string>
+	<string name="pref_category_graphics">Graphics</string>
+	<string name="pref_graphics_quality">Quality</string>
+	<string name="pref_graphics_quality_summary">How accurately and quickly graphics are rendered.</string>
+	<string-array name="quality">
+		<item>Low (No particles, rougher visuals)</item>
+		<item>Medium (No particles, smooth visuals)</item>
+		<item>High (Particles and smooth visuals)</item>
+	</string-array>
+	<string-array name="quality_values">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
+	<string name="pref_graphics_theme">Theme</string>
+	<string name="pref_graphics_theme_summary">The game\'s visual style.</string>
+	<string-array name="theme">
+		<item>Normal (more coming soon!)</item>
+	</string-array>
+	<string-array name="theme_values">
+		<item>normal</item>
+	</string-array>
+	
+	<string name="dialog_about_title">About Embed Labs</string>
+	<string name="dialog_about_button">Return</string>
 	<string name="dialog_about_message">Candybot by Embed Labs is licensed under a Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.\n\nwww.embedlabs.com\nMade by Prem Qu Nair, Shrav Mehta, Anshul Ramachandran, Ameya Khare, and Tej Qu Nair. \n\nMade with the help of AndEngine for Android. http://www.andengine.org/\n\nhttp://www.fontsquirrel.com/license/Ubuntu-Title\n</string>
 	<!-- TODO music licenses, sound effect licenses, AndEngine GNU GPL, Font license -->
-    <string name="dialog_restoring">Restoring&#8230;</string>
+	<string name="dialog_restoring">Restoring&#8230;</string>
 	
 	<string name="world1">Cheesecake</string>
 	<string name="world2">Apple Pie</string>
@@ -102,29 +105,33 @@
 	<string name="level_complete3">Complete!</string>
 	<string name="al_moves">Moves:</string>
 	<string name="al_time">Time:</string>
-    <string name="button_next_level">Next Level</string>
-    <string name="button_next_level2">End of World</string>
-    <string name="button_retry_level">Retry</string>
-    <string name="button_return_al">Return to World</string>
-    <string name="improved">(Improved!)</string>
-    
-    <string name="incomplete">Restore incomplete. Not all data received.</string>
-    <string name="login">You are not currently logged into Swarm.</string>
-    <string name="swarm_disabled">Swarm is currently disabled.</string>
-    
-    <string name="quit_title"></string>
-    <string name="quit_message"></string>
-    <string name="quit_button_yes"></string>
-    <string name="quit_button_no"></string>
-    <string name="quit_dialog_message">Are you sure you want to quit?</string>
-    <string name="quit_dialog_message2">Are you sure you want to exit the level?</string>
-    <string name="quit_dialog_positive">Yes</string>
-    <string name="quit_dialog_negative">No</string>
-    <string name="quit_dialog_positive_rate">Yes, I\'d love to!</string>
-    <string name="quit_dialog_negative_rate">Nah, maybe later.</string>
-    
-    <string name="rate_us_question">Would you like to rate our app? We\'re 16 year old kids, and it would mean the world to us.</string>
-    <string name="market_link">market://details?id=com.embed.candy</string>
-    
-    <string name="tap_to_continue">(Double tap to continue)</string>
+	<string name="button_next_level">Next Level</string>
+	<string name="button_next_level2">End of World</string>
+	<string name="button_retry_level">Retry</string>
+	<string name="button_return_al">Return to World</string>
+	<string name="improved">(Improved!)</string>
+	
+	<string name="incomplete">Restore incomplete. Not all data received.</string>
+	<string name="login">You are not currently logged into Swarm.</string>
+	<string name="swarm_disabled">Swarm is currently disabled.</string>
+	
+	<string name="quit_title"></string>
+	<string name="quit_message"></string>
+	<string name="quit_button_yes"></string>
+	<string name="quit_button_no"></string>
+	<string name="quit_dialog_message">Are you sure you want to quit?</string>
+	<string name="quit_dialog_message2">Are you sure you want to exit the level?</string>
+	<string name="quit_dialog_positive">Yes</string>
+	<string name="quit_dialog_negative">No</string>
+	<string name="quit_dialog_positive_rate">Yes, I\'d love to!</string>
+	<string name="quit_dialog_negative_rate">Nah, maybe later.</string>
+	
+	<string name="rate_us_question">Would you like to rate our app? We\'re 16 year old kids, and it would mean the world to us.</string>
+	<string name="market_link">market://details?id=com.embed.candy</string>
+	
+	<string name="tap_to_continue">(Double tap to continue)</string>
+	
+	<string name="email">embedlabs@gmail.com</string>
+	<string name="bug_report">Bug Report - Candybot</string>
+	<string name="bug_report_template">When this happened:\n\nWhat was the problem:\n\n</string>
 </resources>
