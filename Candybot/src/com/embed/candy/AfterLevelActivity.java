@@ -83,6 +83,7 @@ public class AfterLevelActivity extends BetterSwarmActivity implements View.OnCl
 		if (getIntent().getIntExtra("com.embed.candy.level", 1) == 20) {
 			next_level.setEnabled(false);
 			next_level.setBackgroundDrawable(ViewUtils.convertToGrayscale(next_level.getBackground().mutate()));
+			next_level.setText(R.string.button_next_level2);
 		}
 
 		world = getIntent().getIntExtra("com.embed.candy.world", 1);

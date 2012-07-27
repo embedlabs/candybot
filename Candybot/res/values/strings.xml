@@ -103,6 +103,7 @@
 	<string name="al_moves">Moves:</string>
 	<string name="al_time">Time:</string>
     <string name="button_next_level">Next Level</string>
+    <string name="button_next_level2">End of World</string>
     <string name="button_retry_level">Retry</string>
     <string name="button_return_al">Return to World</string>
     <string name="improved">(Improved!)</string>
