@@ -483,9 +483,9 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		mCandyCamera.setHUD(hud);
 
-		if (initMusic){
-			backgroundMusic.play();
-		}
+//		if (initMusic){
+//			backgroundMusic.play();
+//		}
 
 		rh = new RunnableHandler();
 
