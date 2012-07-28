@@ -44,3 +44,24 @@
     java.lang.Object writeReplace();
     java.lang.Object readResolve();
 }
+
+-dontwarn com.adwhirl.adapters.*
+
+-keep class com.adwhirl.** { *;}
+-keep public class com.adwhirl.adapters.AdMobAdapter {*;}
+-keep public class com.adwhirl.adapters.ZestAdzAdapter {*;}
+-keep public class com.adwhirl.adapters.MillennialAdapter {*;}
+-keep public class com.admob.android.ads.** {*;}
+-keep public class com.millennialmedia.android.** {*;}
+-keep public class com.zestadz.android.** {*;}
+
+-keep public class * extends Android.view.View {
+public (android.content.Context);
+public (android.content.Context, android.util.AttributeSet);
+public (android.content.Context, android.util.AttributeSet, int);
+public void set*(...);
+}
+
+-keepclassmembers class *{
+public void *(android.view.View);
+}
