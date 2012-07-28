@@ -135,6 +135,7 @@ public class MainMenuActivity extends BetterSwarmActivity implements View.OnClic
 			} else {
 				Toast.makeText(this, R.string.login, Toast.LENGTH_SHORT).show();
 			}
+			break;
 		case R.id.menu_main_item_star:
 			final Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(getString(R.string.market_link)));
