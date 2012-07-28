@@ -41,7 +41,7 @@
 			android:id="@+id/button_play"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_margin="7dip"
+			android:layout_margin="3dip"
 			android:background="@android:color/transparent"
 			android:focusable="true"
 			android:text="@string/button_play"
@@ -51,12 +51,18 @@
 			android:id="@+id/button_achieve"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:layout_margin="7dip"
+			android:layout_margin="3dip"
 			android:background="@android:color/transparent"
 			android:focusable="true"
 			android:text="@string/button_achieve"
 			android:textColor="@android:color/white"
 			android:textSize="25dip" />
+		<ImageView
+		android:id="@+id/chalkboard"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@drawable/chalkboard_menu"
+		android:scaleType="center" />
 	</LinearLayout>
 	<ImageView
 		android:id="@+id/button_facebook"
