@@ -5,34 +5,34 @@
 		<o n="1" r="7" c="8" />
 		<o n="2" r="7" c="7" />
 		<t>Help the Candybot push the candy into the pipe! Drag the screen in the direction you wish to move.</t>
-		<m a="23" b="27" /> <!-- 0 for a, 4 for b -->
+		<m a="33" b="43" /> <!-- 10 for a, 20 for b for all unless noted -->
 	</l>
 	<l id="2">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRgM5lPid3q7nxR3EqOWVPcPVvXUSLPUMIsW6vHFFznpkxT/EZt+iPUzNeMXX5rHpZdc95CTJgiFFzlpbKDKZ2pjJiBmhrIBxL8siMAGAAA=</c>
 		<o n="1" r="2" c="12" />
 		<o n="2" r="2" c="11" />
-		<m a="91" b="95" /> <!-- 2 for a, 6 for b -->
+		<m a="99" b="109" />
 		<t>Try and complete each level in the least amount of moves. The less moves you make, the more stars you will receive on each level.</t>
 	</l>
 	<l id="3">
 	    <c>H4sIAAAAAAAAA8VTQQ7AIAjD+f8/b5clhpRS2NyaEIwppSoOMxsfhLl8rxUwDbS/Zs/1daz2L//IW6Tb7VFFR5v1U/ioR8f7qq9qV87F3gHN21OwWc78qZwdvpEH1bv6XzP9N9GZmWidzVLHT4Wv3mmkE+VKHFfMYs0JPJqpmsAGAAA=</c>
 		<o n="1" r="1" c="11" />
 		<o n="2" r="1" c="12" />
-		<m a="58" b="62" /> <!-- 2 for a, 6 for b -->
+		<m a="76" b="86" />
 		<t>You may wish to change various preferences including sensitivity and zooming options. These may be accessed by going into the options menu on the home screen.</t>
 	</l>
 	<l id="4">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+bj8RIr/B1P4kGI3PrWkmEEOICa80MVICV96hz8udxErTsjvlLoVmxg9zCcmjSHnI2xm4gs/Ut1JbP4gNh6JsRNdPzbzyQWUpB9K7KdW/YGMmYCYGYkPADZ6hBDABgAA</c>
 		<o n="1" r="2" c="12" />
 		<o n="2" r="2" c="11" />
-		<m a="90" b="96" /> <!-- 2 for a, 8 for b -->
+		<m a="98" b="108" />
 		<t>Every few levels will introduce a new object. This help text will explain it to you. Good luck, and have fun!</t>
 	</l>
 	<l id="5">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFRhI86kRBvR2P7nxgksfIXOItYPY8CE1vAdT+ONzCy4xauUvcv2Iz73ofsMmTq752NSRA3CFP640hU2MUPomxf2k+oPYtEtOHsFlPjXzAzl1BSHMBMTMSHwAq0EXYcAGAAA=</c>
 		<o n="1" r="1" c="12" />
 		<o n="2" r="2" c="12" />
-		<m a="91" b="95" /> <!-- 4 for a, 8 for b -->
+		<m a="97" b="107" />
 	</l>
 	<l id="6">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFUA2H5t9hNi41GOTR/cHMWqx6UVn4zMfl5nkmk+qG7HFHy7zaQEG0nxc6YmYMCXWfHQ9xMQnKeYTSrOUmo9LPz4zSTGfUPgTsmu4pE9s5Sk+PiE1hMynFNPafCYgZoayAT+A/ivABgAA</c>
@@ -42,7 +42,7 @@
 		<o n="3" r="1" c="10" />
 		<o n="3" r="1" c="15" />
 		<o n="3" r="7" c="15" />
-		<m a="94" b="98" /> // <!-- 4 for a, 8 for b -->
+		<m a="100" b="110" />
 		<t>A box can be used to fill in gaps to allow the Candybot to push the candy into the pipe. Make sure it doesn't get stuck somewhere! </t>
 	</l>
 	<l id="7">
@@ -61,7 +61,7 @@
 		<o n="3" r="15" c="11" />
 		<o n="5" r="10" c="19" />
 		<o n="2" r="16" c="11" />
-		<m a="120" b="128" /> <!-- 2 for a, 10 for b -->
+		<m a="128" b="138" />
 	</l>
 	<l id="8">
 	    <c>H4sIAAAAAAAAC7VUQQ7AIAgr8/9/3g47mSpFqgnRILYFDAEgLptjBdkVfBa38604urmc6p/1rd7s9KsYVQ0unAofwGvY0cH8ii/TUMWv5jDXxPFHK/1VuE7qk92pMbdmkcrPNAC8Z9lMYniZnm79XPFuez4b//kF6azLJcAGAAA=</c>
@@ -77,7 +77,7 @@
 		<o n="3" r="3" c="21" />
 		<o n="3" r="4" c="20" />
 		<o n="3" r="4" c="22" />
-		<m a="102" b="108" /> <!-- 4 for a, 10 for b -->
+		<m a="108" b="118" />
 	</l>
 	<l id="9">
 	    <c>H4sIAAAAAAAAA8WU0QpAIQhDrf7/n+uhx91tSd4CIcjNg0otIlpxVB3HH7G4zH/znzKqfiP+m3PJ+ihd5f64PWZ6dFe1VF5Wx+aL9lnVznB8aZ0cd98Zj/JwOVAv1fvr/83xUP4nNdguMf+b0VeMfZ9IRrfnwAYAAA==</c>
@@ -86,7 +86,7 @@
 		<o n="3" r="1" c="16" />
 		<o n="3" r="5" c="13" />
 		<o n="3" r="10" c="14" />
-		<m a="173" b="179" /> <!-- 4 for a, 10 for b -->
+		<m a="179" b="189" />
 	</l>
 	<l id="10">
 	    <c>H4sIAAAAAAAAA2NkYGBgpDGmFUA2nxY0vdxPaz/QCoyGP2F6NPxxA0LmY4sfdHdSYj6yOnQzR82nnvmkYCYgZiZBPQC2Gm9HwAYAAA==</c>
@@ -98,7 +98,7 @@
 		<o n="3" r="9" c="6" />
 		<o n="3" r="5" c="10" />
 		<o n="3" r="7" c="15" />
-		<m a="199" b="207" /> <!-- 6 for a, 14 for b -->
+		<m a="205" b="215" />
 	</l>
 	<l id="11">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCX+ZT6fSiHDyMaTch8Uv1HTFiR6lZS1JNqPrHxS6z5lMQPqeFL7/RJyAxizackPQzG/EVquUErQOvymxrlJzpmAmJmJD4AMxVbGMAGAAA=</c>
@@ -107,7 +107,7 @@
 		<o n="3" r="5" c="20" />
 		<o n="4" r="2" c="20" />
 		<o n="4" r="5" c="5" />
-		<m a="154" b="160" /> <!-- 6 for a, 12 for b -->
+		<m a="158" b="168" />
 		<t>Bombs can clear walls and objects to create a path for the candy. To activate a bomb, push it onto a block, and it will take out the block directly underneath it.  Blocks will not destroy moveable objects. It must fall a minimum of two bloacks to activate.</t>
 	</l>
 	<l id="12">
@@ -115,7 +115,7 @@
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="4" r="10" c="19" />
-		<m a="100" b="104" /> <!-- 2 for a, 6 for b -->
+		<m a="108" b="118" />
 	</l>
 	<l id="13">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaCW+bjMINY/hMRw6SfW/eSGJzb1lMYRLeKXUPgTUofLPEJhTYn7sdmBTQ2h8McmRmwYk2oGqXFHzfxL6/ICVx6kVvok1nxq54uhUH4SMp/amAmImaFsAAV+u/DABgAA</c>
@@ -126,7 +126,7 @@
 		<o n="3" r="2" c="19" />
 		<o n="4" r="6" c="13" />
 		<o n="4" r="6" c="15" />
-		<m a="140" b="146" /> <!-- 4 for a, 10 for b -->
+		<m a="146" b="156" />
 	</l>
 	<l id="14">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGGAUYCNAOJatHNpzbA5n5ksaHofmRxbG4j5O7B4n50Gle6o7X78eknxv3E5p+BDH9y8jkhfzBg0Uese8hVT4zbSVFLz/RPbJgyoIkR0jeY0g+xmAmImaFsAIoNdezABgAA</c>
@@ -134,7 +134,7 @@
 		<o n="2" r="4" c="12" />
 		<o n="3" r="2" c="4" />
 		<o n="4" r="10" c="17" />
-		<m a="136" b="142" /> <!-- 4 for a, 10 for b -->
+		<m a="142" b="152" />
 	</l>
 	<l id="15">
 	    <c>H4sIAAAAAAAAC2NkYGBgpDGmFaC1e+nlfnQ+tfxAb/fjkic2XZDqN1Lcic98dHWkugmXfmLMJxbgcxs2t2ITo2b+pUbaGgz5i5rmUxtQmr8GS/lATcwExMxIfAAeKlKTwAYAAA==</c>
@@ -143,13 +143,13 @@
 		<o n="3" r="5" c="8" />
 		<o n="4" r="5" c="21" />
 		<o n="4" r="9" c="21" />
-		<m a="157" b="161" /> <!-- 4 for a, 8 for b -->
+		<m a="163" b="173" />
 	</l>
 	<l id="16">
 	    <c>H4sIAAAAAAAAC8VV0Q6AIAjUsv7/k6utB3Y75NRYbExSOE9Aq6WUmqye9NYUifAP8Hu0id8Yx/ay+MjrhHlmj/BHfIz9Gt/DxDilviy/dmS2gr8qf+BjPzWi9vxs3fp5PZnF39Ye785oLpX3YuU8CieLH9VFyb/3lrA9I26z/anWQ/WZlaz/yXbr/toXN5DhQ8AGAAA=</c>
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
-		<m a="76" b="78" /> <!-- 2 for a, 4 for b -->
+		<m a="84" b="94" />
 		<t>These lasers will allow any and all items including candy to pass through. However, the Candybot may not pass through. Sudden death will occur if done so.</t>
 	</l>
 	<l id="17">
@@ -157,7 +157,7 @@
 		<o n="1" r="2" c="3" />
 		<o n="2" r="2" c="2" />
 		<o n="3" r="2" c="21" />
-		<m a="142" b="150" /> <!-- 6 for a, 14 for b -->
+		<m a="146" b="156" />
 		
 	</l>
 	<l id="18">
@@ -166,7 +166,7 @@
 		<o n="2" r="2" c="2" />
 		<o n="3" r="2" c="18" />
 		<o n="4" r="2" c="16" />
-		<m a="164" b="170" /> <!-- 6 for a, 12 for b -->
+		<m a="168" b="178" />
 	</l>
 	<l id="19">
 	    <c>H4sIAAAAAAAAC72U4QqAMAiEtVrv/8j1w8GQu81kJhyNmd/0iqmIaLGqgvF147Nylh1MX69uzfKRc9HcyJPLlPULvds+MhDTszJ8lmeeID7zJLLP+hj5bTFDJPp3RP0iPuttNl/n3ybEZzXof0OK9r8j/uJn79tofuYn8nesX+UrdLw6bf0AlvvSxsAGAAA=</c>
