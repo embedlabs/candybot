@@ -19,6 +19,7 @@
 #   public *;
 #}
 
+
 -repackageclasses 'com.embed.candy'
 -allowaccessmodification
 
@@ -55,12 +56,6 @@
 -keep public class com.millennialmedia.android.** {*;}
 -keep public class com.zestadz.android.** {*;}
 
--keep public class * extends Android.view.View {
-public (android.content.Context);
-public (android.content.Context, android.util.AttributeSet);
-public (android.content.Context, android.util.AttributeSet, int);
-public void set*(...);
-}
 
 -keepclassmembers class *{
 public void *(android.view.View);
@@ -73,3 +68,4 @@ public void *(android.view.View);
 -keep public class com.google.gson.** {
     public protected *;
 }
+

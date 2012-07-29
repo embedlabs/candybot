@@ -17,17 +17,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
-import android.widget.TextSwitcher;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.embed.candy.adapter.LevelAdapter;
-import com.embed.candy.constants.SaveDataConstants;
-import com.embed.candy.save.SaveIO;
 import com.embed.candy.util.CandyUtils;
-import com.embed.candy.util.ViewUtils;
 
 public class LevelSelectActivity extends BetterSwarmActivity implements OnItemClickListener {
 
