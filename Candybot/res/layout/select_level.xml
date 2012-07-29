@@ -2,17 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent" >
-	<ImageView android:layout_width="fill_parent"
+	<ImageView
+		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_centerInParent="true"
 		android:scaleType="centerCrop"
 		android:src="@drawable/background2_dither" />
-	<com.adwhirl.AdWhirlLayout
-        android:id="@+id/adwhirl_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_alignParentBottom="true" />
 	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -20,7 +15,7 @@
 		android:layout_centerHorizontal="true"
 		android:layout_marginTop="30dip"
 		android:orientation="horizontal" >
-	<TextSwitcher
+		<TextSwitcher
 			android:id="@+id/star_count"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -49,8 +44,9 @@
 			android:layout_gravity="center_vertical"
 			android:scaleType="fitXY"
 			android:src="@drawable/star" />
-		</LinearLayout>
-	<GridView android:id="@+id/gridview_level"
+	</LinearLayout>
+	<GridView
+		android:id="@+id/gridview_level"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_centerInParent="true"
