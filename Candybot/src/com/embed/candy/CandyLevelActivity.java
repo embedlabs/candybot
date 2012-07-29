@@ -581,15 +581,14 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				face.enemyPS = enemyPS;
 				mScene.attachChild(enemyPS);
 			} else if (type == BOT) {
-//				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 24, 64 * row + 60);
-//				final ParticleSystem botPS = new ParticleSystem(botPPE, 5, 10, 20, mBotParticleTextureRegion);
-//				botPS.addParticleInitializer(new VelocityInitializer(-3, 3, 0, 30));
-//				botPS.addParticleModifier(new ScaleModifier(1, 0, 0, 0.5f));
-//				botPS.addParticleModifier(new ColorModifier(0, 0.1f, 0.1f, 0.2f, 1, 0.5f, 0, 0.5f));
-//				botPS.addParticleModifier(new ExpireModifier(0.4f, 0.5f));
-//				face.botPPE = botPPE;
-//				face.botPS = botPS;
-//				mScene.attachChild(botPS);
+				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 24, 64 * row + 60);
+				final ParticleSystem botPS = new ParticleSystem(botPPE, 5, 10, 20, mBotParticleTextureRegion);
+				botPS.addParticleModifier(new ScaleModifier(0.5f, 1, 0, 0.5f));
+				botPS.addParticleModifier(new ColorModifier(0, 0.1f, 0.1f, 0.2f, 1, 0.5f, 0, 0.5f));
+				botPS.addParticleModifier(new ExpireModifier(0.4f, 0.5f));
+				face.botPPE = botPPE;
+				face.botPS = botPS;
+				mScene.attachChild(botPS);
 			}
 		}
 	}

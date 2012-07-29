@@ -3,7 +3,7 @@
 	android:id="@+id/grid_item"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
-	android:background="@drawable/button_grid" >
+	android:background="@drawable/button_grid_locked" >
 	<RelativeLayout
 		android:layout_width="60px"
 		android:layout_height="90px"

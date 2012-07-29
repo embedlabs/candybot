@@ -85,8 +85,8 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 
 	public boolean enemyDead = false;
 
-	public static final long[] botDurations = new long[] { 3000, 100, 1000, 100, 5000, 100, 1000, 100, 5000, 100, 100, 100, 5000, 500 };
-	public static final int[] botFrames = new int[] { 0, 1, 2, 1, 0, 3, 4, 3, 0, 5, 6, 5, 0, 7 };
+	public static final long[] botDurations = new long[] {5000,500,2000,100,100,3000,100,100};
+	public static final int[] botFrames = new int[] {0,1,0,1,2,3,2,1};
 
 	public static final long[] enemyDurations = new long[] { 3000, 100, 2000, 100, 2000, 100, 1000, 100, 2000, 300, 2000, 100, 2000, 100 };
 	public static final int[] enemyFrames = new int[] { 0, 1, 2, 1, 0, 3, 4, 3, 0, 5, 0, 6, 7, 6 };
@@ -150,6 +150,13 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			candyLastMove = columnDelta;
 			if (columnDelta != 0) {
 				lastDirectionalMove = columnDelta;
+				if (type == BOT) {
+					if (columnDelta == 1) {
+						setFlippedHorizontal(false);
+					} else if (columnDelta == -1) {
+						setFlippedHorizontal(true);
+					}
+				}
 			}
 			objectArray[index][ROW] += rowDelta;
 			objectArray[index][COLUMN] += columnDelta;
