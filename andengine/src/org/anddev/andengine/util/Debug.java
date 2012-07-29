@@ -12,7 +12,7 @@ import android.util.Log;
  * @since 13:29:16 - 08.03.2010
  */
 public class Debug implements Constants {
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 	// ===========================================================
 	// Constants
 	// ===========================================================

@@ -2,7 +2,7 @@ package com.embed.candy.util;
 
 public class CandyUtils {
 	public static final String TAG = "Candybot";
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	public static String wrap(String in, final int len) {
 		in = in.trim();
