@@ -251,27 +251,29 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			public void onAnimationEnd(final AnimatedSprite pAnimatedSprite) {
 				setVisible(false);
 
-				final PointParticleEmitter explodePPE = new PointParticleEmitter(64 * objectArray[index][COLUMN] + 16,64 * objectArray[index][ROW] + 16);
-				explodePS = new ParticleSystem(explodePPE, 100, 100, 360, candyLevel.mParticleTextureRegion);
+				if (candyLevel.qualityInt==2) {
+					final PointParticleEmitter explodePPE = new PointParticleEmitter(64 * objectArray[index][COLUMN] + 16,64 * objectArray[index][ROW] + 16);
+					explodePS = new ParticleSystem(explodePPE, 100, 100, 360, candyLevel.mParticleTextureRegion);
 
-				explodePS.addParticleInitializer(new AlphaInitializer(0.75f));
-				explodePS.addParticleInitializer(new VelocityInitializer(-200, 200, -300, 0));
-				explodePS.addParticleInitializer(new AccelerationInitializer(0,0,240,300));
-				explodePS.addParticleInitializer(new ColorInitializer(1,0,0));
-				explodePS.addParticleInitializer(new RotationInitializer(0,360));
+					explodePS.addParticleInitializer(new AlphaInitializer(0.75f));
+					explodePS.addParticleInitializer(new VelocityInitializer(-200, 200, -300, 0));
+					explodePS.addParticleInitializer(new AccelerationInitializer(0,0,240,300));
+					explodePS.addParticleInitializer(new ColorInitializer(1,0,0));
+					explodePS.addParticleInitializer(new RotationInitializer(0,360));
 
-				explodePS.addParticleModifier(new AlphaModifier(0.75f, 0, 0, 0.5f));
-				explodePS.addParticleModifier(new ExpireModifier(0.45f,0.5f));
+					explodePS.addParticleModifier(new AlphaModifier(0.75f, 0, 0, 0.5f));
+					explodePS.addParticleModifier(new ExpireModifier(0.45f,0.5f));
 
-				candyLevel.mScene.attachChild(explodePS);
+					candyLevel.mScene.attachChild(explodePS);
 
-				tmxLayer.getTMXTile(objectArray[index][COLUMN], objectArray[index][ROW] + 1).setTextureRegion(null);
-				backgroundArray[objectArray[index][ROW] + 1][objectArray[index][COLUMN]] = EngineConstants.EMPTY_TILE;
-				objectArray[index][ROW] = -1;
+					tmxLayer.getTMXTile(objectArray[index][COLUMN], objectArray[index][ROW] + 1).setTextureRegion(null);
+					backgroundArray[objectArray[index][ROW] + 1][objectArray[index][COLUMN]] = EngineConstants.EMPTY_TILE;
+					objectArray[index][ROW] = -1;
 
-				explodeRunnable = new ExplodeRunnable(candyLevel);
-				explodeThread = new Thread(explodeRunnable);
-				explodeThread.start();
+					explodeRunnable = new ExplodeRunnable(candyLevel);
+					explodeThread = new Thread(explodeRunnable);
+					explodeThread.start();
+				}
 
 				hasModifier = false;
 				if (CandyUtils.DEBUG) Log.i(TAG, "Bomb explosion ended.");

@@ -143,7 +143,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private Font andengineMainFont;
 
 	private BitmapTextureAtlas mParticleTexture;
-	private TextureRegion  mEnemyParticleTextureRegion, mBotParticleTextureRegion;
+	private TextureRegion  mEnemyParticleTextureRegion /*, mBotParticleTextureRegion */;
 	public TextureRegion mWinParticleTextureRegion, mParticleTextureRegion;
 
 	public Typeface mainFont;
@@ -300,7 +300,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		mParticleTexture = new BitmapTextureAtlas(128,32,quality);
 		mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle.png", 0, 0);
 		mEnemyParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_enemy.png", 33, 0);
-		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 33,16);
+//		mBotParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_bot.png", 33,16);
 		mWinParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mParticleTexture, this, "particle_star.png", 66,0);
 
 		mOnScreenControlTexture = new BitmapTextureAtlas(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
@@ -580,15 +580,15 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				face.enemyCPE = enemyCPE;
 				face.enemyPS = enemyPS;
 				mScene.attachChild(enemyPS);
-			} else if (type == BOT) {
-				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 24, 64 * row + 60);
-				final ParticleSystem botPS = new ParticleSystem(botPPE, 5, 10, 20, mBotParticleTextureRegion);
-				botPS.addParticleModifier(new ScaleModifier(0.5f, 1, 0, 0.5f));
-				botPS.addParticleModifier(new ColorModifier(0, 0.1f, 0.1f, 0.2f, 1, 0.5f, 0, 0.5f));
-				botPS.addParticleModifier(new ExpireModifier(0.4f, 0.5f));
-				face.botPPE = botPPE;
-				face.botPS = botPS;
-				mScene.attachChild(botPS);
+//			} else if (type == BOT) {
+//				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 24, 64 * row + 60);
+//				final ParticleSystem botPS = new ParticleSystem(botPPE, 5, 10, 20, mBotParticleTextureRegion);
+//				botPS.addParticleModifier(new ScaleModifier(0.5f, 1, 0, 0.5f));
+//				botPS.addParticleModifier(new ColorModifier(0, 0.1f, 0.1f, 0.2f, 1, 0.5f, 0, 0.5f));
+//				botPS.addParticleModifier(new ExpireModifier(0.4f, 0.5f));
+//				face.botPPE = botPPE;
+//				face.botPS = botPS;
+//				mScene.attachChild(botPS);
 			}
 		}
 	}
