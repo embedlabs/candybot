@@ -26,16 +26,15 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-	
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<application
 		android:hardwareAccelerated="false"
 		android:icon="@drawable/icon"
 		android:label="@string/app_name" >
 		<meta-data
-                android:name="ADWHIRL_KEY"
-                android:value="2b14224cf67e48dbb991b5aa8ca9c72b" />
+			android:name="ADWHIRL_KEY"
+			android:value="2b14224cf67e48dbb991b5aa8ca9c72b" />
 		<activity
 			android:name=".SplashScreenActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"
@@ -47,8 +46,9 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		 <activity android:name="com.google.ads.AdActivity"
-              android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+		<activity
+			android:name="com.google.ads.AdActivity"
+			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 		<activity
 			android:name=".MainMenuActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"
@@ -90,13 +90,13 @@
 			android:configChanges="keyboard|keyboardHidden|orientation"
 			android:label="@string/app_name"
 			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
 		<activity
 			android:name="com.embed.candy.HelpTextActivity"
 			android:configChanges="keyboard|keyboardHidden|orientation"
 			android:label="@string/app_name"
 			android:screenOrientation="landscape"
-			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
 		<activity
 			android:name="com.swarmconnect.SwarmMainActivity"
 			android:configChanges="orientation|keyboardHidden|keyboard"

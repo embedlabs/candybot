@@ -12,6 +12,11 @@ import static com.embed.candy.constants.ObjectIndexConstants.CANDY;
 import static com.embed.candy.constants.ObjectIndexConstants.ENEMY;
 import static com.embed.candy.constants.ObjectIndexConstants.INERTIA_WALL;
 import static com.embed.candy.constants.ObjectIndexConstants.MOVABLE_WALL;
+import static com.embed.candy.constants.SoundConstants.SOUND_BOMB_EXPLODE;
+import static com.embed.candy.constants.SoundConstants.SOUND_BOX_DROP;
+import static com.embed.candy.constants.SoundConstants.SOUND_CANDY_BURN;
+import static com.embed.candy.constants.SoundConstants.SOUND_ENEMY_DEATH;
+import static com.embed.candy.constants.SoundConstants.SOUND_LASER_DEATH;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -158,12 +163,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	private boolean resumeHasRun = false;
 	public boolean resetDragDistance = false;
 
-	public boolean initMusic = true;
+	public boolean initMusic, initSound;
 
 	private ChangeableText playChangeableText;
 	private Text resetLevelText;
 
-	public static final int CAMERA_SPEED = 200;
+	public static final int CAMERA_SPEED = 150;
 
 	public int teleporter1column = -1;
 	public int teleporter1row = -1;
@@ -187,6 +192,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	public RunnableHandler rh;
 
+	private boolean hintDelay = false;
+
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -209,6 +216,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		zoomBoolean = sp.getBoolean("com.embed.candy.general_zoom", false);
 		toastBoolean = sp.getBoolean("com.embed.candy.general_toasts", true);
 		initMusic = sp.getBoolean("com.embed.candy.music", true);
+		initSound = sp.getBoolean("com.embed.candy.mfx", true);
 		touchControlsBoolean = sp.getBoolean("com.embed.candy.controls_use_touch", false);
 		moveControlsLeft = sp.getBoolean("com.embed.candy.controls_left", false);
 		digitalOffset = sp.getInt("com.embed.candy.controls_offset", 30);
@@ -336,35 +344,36 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		if (helpTextString!=null && toastBoolean && !sp.getBoolean(hintPrefString, false)) {
 		    referenceTime = System.currentTimeMillis();
+		    hintDelay = true;
 			startActivity(new Intent(this,HelpTextActivity.class).putExtra("com.embed.candy.helptext", helpTextString));
 		}
 		sp.edit().putBoolean(hintPrefString, true).commit();
 	}
 
-// Music doesn't need a method, since it needs to play right away and only one track.
-	public void setSound (final int fx) {
-		SoundFactory.setAssetBasePath("mfx/");
-		try {
-			switch (fx) {
-			case 0:
-			  	mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "box_drop.ogg");
-			    break;
-			case 1:
-				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "candy_burn.ogg");
-				break;
-			case 2:
-				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "enemy_death.ogg");
-				break;
-			case 3:
-				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "laser_death.ogg");
-				break;
-			case 4:
-				mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "bomb_explode.ogg");
-				break;
-			}
-		} catch (final IllegalStateException e) {
-		} catch (final IOException e) {}
-        mSound.play();
+	public void setSound(final int fx) {
+		if (initSound) {
+			SoundFactory.setAssetBasePath("mfx/");
+			try {
+				switch (fx) {
+				case SOUND_BOX_DROP: // TODO
+					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "box_drop.ogg");
+					break;
+				case SOUND_CANDY_BURN:
+					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "candy_burn.ogg");
+					break;
+				case SOUND_ENEMY_DEATH:
+					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "enemy_death.ogg");
+					break;
+				case SOUND_LASER_DEATH:
+					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "laser_death.ogg");
+					break;
+				case SOUND_BOMB_EXPLODE:
+					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "bomb_explode.ogg");
+					break;
+				}
+				mSound.play();
+			} catch (final Exception e) {}
+		}
 	}
 
 	@Override
@@ -622,30 +631,35 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 		super.onResumeGame();
 	    Swarm.setActive(this);
-	    resumeMusic();
+	    if (hintDelay) {
+	    	hintDelay = false;
+	    } else {
+		    resumeMusic();
 
-		if (!resumeHasRun) {
-			resumeHasRun = true;
+			if (!resumeHasRun) {
+				resumeHasRun = true;
 
-			mCandyCamera.setMaxZoomFactorChange((1 - PHONE_HEIGHT / HEIGHT));
-			mCandyCamera.setChaseEntity(candyEngine.bot);
-			if (zoomBoolean) {
-				new Handler().post(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							if (CandyUtils.DEBUG) Log.e(TAG, "Level start delay FAIL!", e);
+				mCandyCamera.setMaxZoomFactorChange((1 - PHONE_HEIGHT / HEIGHT));
+				mCandyCamera.setChaseEntity(candyEngine.bot);
+				if (zoomBoolean) {
+					new Handler().post(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								if (CandyUtils.DEBUG) Log.e(TAG, "Level start delay FAIL!", e);
+							}
+							mCandyCamera.setZoomFactor(1);
+							gameStarted = true;
 						}
-						mCandyCamera.setZoomFactor(1);
-						gameStarted = true;
-					}
-				});
-			} else {
-				gameStarted = true;
+					});
+				} else {
+					gameStarted = true;
+				}
 			}
-		}
+	    }
+
 	    referenceTime = System.currentTimeMillis();
 	}
 

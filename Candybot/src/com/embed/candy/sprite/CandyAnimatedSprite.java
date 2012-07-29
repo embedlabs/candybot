@@ -9,6 +9,7 @@ import static com.embed.candy.constants.CommandQueueConstants.TELEPORT;
 import static com.embed.candy.constants.ObjectIndexConstants.BOT;
 import static com.embed.candy.constants.ObjectIndexConstants.CANDY;
 import static com.embed.candy.constants.ObjectIndexConstants.ENEMY;
+import static com.embed.candy.constants.SoundConstants.SOUND_BOMB_EXPLODE;
 
 import javax.microedition.khronos.opengles.GL11;
 
@@ -250,6 +251,8 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 			@Override
 			public void onAnimationEnd(final AnimatedSprite pAnimatedSprite) {
 				setVisible(false);
+
+				candyLevel.setSound(SOUND_BOMB_EXPLODE);
 
 				if (candyLevel.qualityInt==2) {
 					final PointParticleEmitter explodePPE = new PointParticleEmitter(64 * objectArray[index][COLUMN] + 16,64 * objectArray[index][ROW] + 16);

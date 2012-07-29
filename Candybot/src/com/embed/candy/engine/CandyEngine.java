@@ -36,6 +36,9 @@ import static com.embed.candy.constants.ObjectIndexConstants.MOVABLE_WALL;
 import static com.embed.candy.constants.SituationConstants.BACKGROUND;
 import static com.embed.candy.constants.SituationConstants.OBJECT;
 import static com.embed.candy.constants.SituationConstants.SITUATION;
+import static com.embed.candy.constants.SoundConstants.SOUND_CANDY_BURN;
+import static com.embed.candy.constants.SoundConstants.SOUND_ENEMY_DEATH;
+import static com.embed.candy.constants.SoundConstants.SOUND_LASER_DEATH;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,6 +99,8 @@ public class CandyEngine {
 
 	public boolean win = false;
 	public boolean death = false;
+	public boolean deathLaser = false;
+	public boolean deathEnemy = false;
 	public boolean botMoved = false;
 	public boolean candyBurned = false;
 	public boolean winning = false; // means actually winning and now cleaning up and finishing
@@ -185,7 +190,7 @@ public class CandyEngine {
 			switch (s) {
 			case SQUARE_ENEMY:
 			case SQUARE_LASER:
-				death = true; deathCounter++; laserDeathCounter++;
+				death = true; deathCounter++; deathLaser = true; laserDeathCounter++;
 			case SQUARE_EMPTY:
 				botMoved = true;
 				move(rowDirection, columnDirection, botIndex);
@@ -199,7 +204,7 @@ public class CandyEngine {
 				case SQUARE_LASER:
 				case SQUARE_EMPTY:
 					if (rowDirection != ROW_UP || (objectArray[situationArray[OBJECT]][TYPE] == MOVABLE_WALL || objectArray[situationArray[OBJECT]][TYPE] == INERTIA_WALL)) {
-						if (shouldDie) {death = true; deathCounter++; laserDeathCounter++;}
+						if (shouldDie) {death = true; deathCounter++; deathLaser = true; laserDeathCounter++;}
 						botMoved = true;
 						move(rowDirection, columnDirection, botIndex, situationArray[OBJECT]);
 					}
@@ -211,7 +216,7 @@ public class CandyEngine {
 				if (rowDirection == 1) {
 					switch (situation(candyLevel.teleporter2row, candyLevel.teleporter2column, rowDirection, columnDirection)[SITUATION]) {
 					case SQUARE_LASER:
-						death = true; deathCounter++; laserDeathCounter++;
+						death = true; deathCounter++; deathLaser = true; laserDeathCounter++;
 					case SQUARE_EMPTY:
 						botMoved = true;
 						teleport(candyLevel.teleporter2row + ROW_DOWN, candyLevel.teleporter2column, botIndex);
@@ -220,7 +225,7 @@ public class CandyEngine {
 				} else if (rowDirection == -1) {
 					switch (situation(candyLevel.teleporter1row, candyLevel.teleporter1column, rowDirection, columnDirection)[SITUATION]) {
 					case SQUARE_LASER:
-						death = true; deathCounter++; laserDeathCounter++;
+						death = true; deathCounter++; deathLaser = true; laserDeathCounter++;
 					case SQUARE_EMPTY:
 						botMoved = true;
 						teleport(candyLevel.teleporter1row + ROW_UP, candyLevel.teleporter1column, botIndex);
@@ -343,17 +348,29 @@ public class CandyEngine {
 			win();
 		} else if (death && !candyBurned) {
 			bot.showDeadSprite();
+			if (deathEnemy) {
+				candyLevel.setSound(SOUND_ENEMY_DEATH);
+			} else if (deathLaser) {
+				candyLevel.setSound(SOUND_LASER_DEATH);
+			}
 			pause(5, botIndex);
 			pause(1500);
 			resetLevel(false);
 		} else if (candyBurned && !death) {
 			candy.showDeadSprite();
+			candyLevel.setSound(SOUND_CANDY_BURN);
 			pause(5, candyIndex);
 			pause(1500);
 			resetLevel(false);
 		} else if (death && candyBurned) {
 			bot.showDeadSprite();
+			if (deathEnemy) {
+				candyLevel.setSound(SOUND_ENEMY_DEATH);
+			} else if (deathLaser) {
+				candyLevel.setSound(SOUND_LASER_DEATH);
+			}
 			candy.showDeadSprite();
+			candyLevel.setSound(SOUND_CANDY_BURN);
 			pause(5, botIndex, candyIndex);
 			pause(1500);
 			resetLevel(false);
@@ -400,7 +417,7 @@ public class CandyEngine {
 			shouldDie = true;
 		case SQUARE_OCCUPIED:
 			if (objectArray[situationArray[OBJECT]][TYPE] == BOT) {
-				death = true; deathCounter++; enemyDeathCounter++;
+				death = true; deathCounter++; deathEnemy = true; enemyDeathCounter++;
 				move(rowDirection, columnDirection, enemySprite.index);
 			} else {
 				final int[] situationArray2 = situation(situationArray[OBJECT], rowDirection, columnDirection);
@@ -590,6 +607,8 @@ public class CandyEngine {
 		 */
 		win = false;
 		death = false;
+		deathLaser = false;
+		deathEnemy = false;
 		candyBurned = false;
 		botMoved = false; // this variable should be false anyway if this method is being called, just in case
 
