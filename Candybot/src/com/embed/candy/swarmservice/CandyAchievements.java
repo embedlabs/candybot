@@ -61,8 +61,6 @@ public class CandyAchievements {
 	public static final int NUMBER_OF_HALF_HOURS = 0;
 	public static final int TIME_ACHIEVEMENT_ID = 1;
 
-	// TODO: make sure Ameya arranges the levels properly and then we fix FIRST10 accordingly
-
 	public static void startAchievementsRunnable(final Context cont) {
 		new Thread(new Runnable() {
 			@Override

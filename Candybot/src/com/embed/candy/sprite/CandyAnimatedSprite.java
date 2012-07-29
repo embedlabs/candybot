@@ -321,7 +321,11 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 	@Override
 	public synchronized void reset() {
 		super.reset();
+		if (type == BOT) {
+			setFlippedHorizontal(false);
+		}
 		clearEntityModifiers();
+
 		hasModifier = false;
 		blowUp = false;
 		doneBlowingUp = false;
@@ -329,6 +333,7 @@ public class CandyAnimatedSprite extends AnimatedSprite {
 		candyLastMove = 0;
 		candyRotationState = 0;
 		lastDirectionalMove = 0;
+
 		stopAnimation();
 		setPosition(initialColumn * 64, initialRow * 64);
 

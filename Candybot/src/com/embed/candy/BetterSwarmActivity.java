@@ -16,7 +16,7 @@ public abstract class BetterSwarmActivity extends SwarmActivity {
 	protected void onResume() {
 		System.gc();
 		super.onResume();
-		// TODO check for lock screen
+		// TO DO check for lock screen
 //		isHome = true;
 	}
 

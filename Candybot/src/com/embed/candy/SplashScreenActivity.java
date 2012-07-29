@@ -28,7 +28,6 @@ public class SplashScreenActivity extends BaseSplashActivity {
 
 	@Override
 	protected IBitmapTextureAtlasSource onGetSplashTextureAtlasSource() {
-		// TODO Auto-generated method stub
 		return new AssetBitmapTextureAtlasSource(this, backgroundImage);
 	}
 }

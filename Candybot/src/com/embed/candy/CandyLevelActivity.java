@@ -12,13 +12,7 @@ import static com.embed.candy.constants.ObjectIndexConstants.CANDY;
 import static com.embed.candy.constants.ObjectIndexConstants.ENEMY;
 import static com.embed.candy.constants.ObjectIndexConstants.INERTIA_WALL;
 import static com.embed.candy.constants.ObjectIndexConstants.MOVABLE_WALL;
-import static com.embed.candy.constants.SoundConstants.SOUND_BOMB_EXPLODE;
-import static com.embed.candy.constants.SoundConstants.SOUND_BOX_DROP;
-import static com.embed.candy.constants.SoundConstants.SOUND_CANDY_BURN;
-import static com.embed.candy.constants.SoundConstants.SOUND_ENEMY_DEATH;
-import static com.embed.candy.constants.SoundConstants.SOUND_LASER_DEATH;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -88,7 +82,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -138,7 +131,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 	public HUD hud;
 
 	private Music backgroundMusic;
-	private Sound mSound = null;
+	private Sound[] sounds;
+//	private Sound mSound = null;
 
 	private BitmapTextureAtlas mObjectTexture;
 	private TiledTextureRegion candyTTR, botTTR, boxTTR, bombTTR, enemyTTR, movableWallTTR, inertiaWallTTR;
@@ -277,11 +271,29 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			if (CandyUtils.DEBUG) Log.i(TAG, "Low quality, using NEAREST.");
 		}
 
-		MusicFactory.setAssetBasePath("mfx/");
-		try {
-		    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine.getMusicManager(), this, "gameplay.ogg");
-		    backgroundMusic.setLooping(true);
-		} catch (IllegalStateException e) {} catch (IOException e) {}
+		/**
+		 * MUSIC AND SOUND
+		 */
+		if (initMusic) {
+			MusicFactory.setAssetBasePath("mfx/");
+			try {
+			    backgroundMusic = MusicFactory.createMusicFromAsset(mEngine.getMusicManager(), this, "gameplay.ogg");
+			    backgroundMusic.setLooping(true);
+			} catch (final Exception e) {}
+		}
+
+		if (initSound) {
+			SoundFactory.setAssetBasePath("mfx/");
+			try {
+				sounds = new Sound[]{
+						SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "box_drop.ogg"), // TODO
+						SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "candy_burn.ogg"),
+						SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "enemy_death.ogg"),
+						SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "laser_death.ogg"),
+						SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "bomb_explode.ogg")
+				};
+			} catch (final Exception e) {}
+		}
 
 		/**
 		 * OBJECT TEXTURE
@@ -352,27 +364,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	public void setSound(final int fx) {
 		if (initSound) {
-			SoundFactory.setAssetBasePath("mfx/");
-			try {
-				switch (fx) {
-				case SOUND_BOX_DROP: // TODO
-					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "box_drop.ogg");
-					break;
-				case SOUND_CANDY_BURN:
-					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "candy_burn.ogg");
-					break;
-				case SOUND_ENEMY_DEATH:
-					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "enemy_death.ogg");
-					break;
-				case SOUND_LASER_DEATH:
-					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "laser_death.ogg");
-					break;
-				case SOUND_BOMB_EXPLODE:
-					mSound = SoundFactory.createSoundFromAsset(mEngine.getSoundManager(), this, "bomb_explode.ogg");
-					break;
-				}
-				mSound.play();
-			} catch (final Exception e) {}
+			sounds[fx].play();
 		}
 	}
 
@@ -691,23 +683,25 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	@Override
 	public void onBackPressed() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(R.string.quit_dialog_message2)
-		.setCancelable(false)
-		.setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int id) {
-				finish();
-			}
-		})
-		.setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int id) {
-				dialog.cancel();
-			}
-		});
-		AlertDialog alert = builder.create();
-		alert.show();
+		if (!candyEngine.winning) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.quit_dialog_message2)
+			.setCancelable(false)
+			.setPositiveButton(R.string.quit_dialog_positive, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					finish();
+				}
+			})
+			.setNegativeButton(R.string.quit_dialog_negative, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int id) {
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
 	}
 
 	@Override
@@ -740,22 +734,12 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 
 	@Override
 	public void onDestroy() {
-		backgroundMusic.stop();
+		if (initMusic) {
+			backgroundMusic.stop();
+		}
 		super.onDestroy();
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
 		System.gc();
-	}
-
-	@Override
-	public boolean onKeyDown(final int keyCode, final KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (candyEngine.winning) {
-				return true;
-			} else {
-				// TODO menu to quit code goes here.
-			}
-		}
-		return super.onKeyDown(keyCode, event);
 	}
 }
