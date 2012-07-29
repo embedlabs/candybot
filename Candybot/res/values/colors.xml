@@ -2,7 +2,6 @@
 <resources>
 	<color name="bg_start">#0B154F</color>
 	<color name="bg_center">#1A5BB3</color>
-	<color name="transparent">#00000000</color>
 	<color name="button_normal_start">#EEE000</color>
 	<color name="button_normal_center">#CC4400</color>
 	<color name="button_normal_end">#992222</color>
@@ -10,7 +9,6 @@
 	<color name="button_pressed_start">#CC4400</color>
 	<color name="button_pressed_center">#EEE000</color>
 	<color name="button_pressed_end">#AAA022</color>
-	<color name="button_pressed_stroke">#FF6633</color>
 	
 	
 	<color name="grid_normal_start">#FF1111</color>

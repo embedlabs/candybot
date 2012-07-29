@@ -65,3 +65,11 @@ public void set*(...);
 -keepclassmembers class *{
 public void *(android.view.View);
 }
+
+-keep public class com.google.ads.** {
+    public protected *;
+}
+
+-keep public class com.google.gson.** {
+    public protected *;
+}
