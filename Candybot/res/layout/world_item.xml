@@ -1,14 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="wrap_content"
-	android:layout_height="fill_parent" >
-	<ImageView
-		android:id="@+id/world_image"
-		android:layout_width="150dip"
-		android:layout_height="150dip"
-		android:layout_centerInParent="true"
-		android:layout_marginBottom="50dip"
-		android:layout_marginTop="50dip"
-		android:paddingTop="50dip"
-		android:paddingBottom="50dip"
-		android:scaleType="centerInside" />
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/world_image"
+        android:layout_width="150dip"
+        android:layout_height="150dip"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="50dip"
+        android:layout_marginTop="50dip"
+        android:paddingBottom="50dip"
+        android:paddingTop="50dip"
+        android:scaleType="centerInside" />
+
 </RelativeLayout>

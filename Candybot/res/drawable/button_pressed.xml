@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-	android:shape="rectangle">
-	<gradient android:startColor="@color/button_pressed_start"
-		android:centerColor="@color/button_pressed_center"
-		android:endColor="@color/button_pressed_end"
-		android:angle="270"
-		android:type="linear"
-		android:shape="rectangle" />
-	<corners android:radius="5dip" />
-	<stroke android:width="3dip"
-		android:color="@android:color/white"/>
+    android:shape="rectangle" >
+
+    <gradient
+        android:angle="270"
+        android:centerColor="@color/button_pressed_center"
+        android:endColor="@color/button_pressed_end"
+        android:shape="rectangle"
+        android:startColor="@color/button_pressed_start"
+        android:type="linear" />
+
+    <corners android:radius="5dip" />
+
+    <stroke
+        android:width="3dip"
+        android:color="@android:color/white" />
+
 </shape>

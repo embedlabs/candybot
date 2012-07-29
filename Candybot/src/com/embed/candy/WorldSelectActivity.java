@@ -9,7 +9,6 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -28,7 +27,6 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 
 	Gallery world_g;
 	private WorldAdapter wa;
-	Animation in,out;
 	TextSwitcher world_name,star_count;
 	TextView wn_1,wn_2,sc_1,sc_2;
 
@@ -69,11 +67,8 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 				final int stars = SaveIO.readLines("world" + (position) + ".cls", this)[20][SaveDataConstants.STATUS];
 				if (stars<30) {
 					final Vibrator vib = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-					textToast((30-stars)+" more stars in World \""+getString(WorldAdapter.worldNameIDs[position-1])+"\" needed! --- Temporarily unlocked by Shrav");
+					textToast((30-stars)+" more stars in World "+getString(WorldAdapter.worldNameIDs[position-1])+" needed!");
 					vib.vibrate(100);
-					startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
-				    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-					// This is to temp unlock
 				} else {
 					startActivity(new Intent(this, LevelSelectActivity.class).putExtra("com.embed.candy.world", position + 1).putExtra("com.embed.candy.theme", getIntent().getStringExtra("com.embed.candy.theme")));
 				    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -107,9 +102,9 @@ public class WorldSelectActivity extends BetterSwarmActivity implements OnItemCl
 
 	@Override
 	public void onItemSelected(final AdapterView<?> av, final View v, final int position, final long id) {
-		if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,""+position);
+		if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,"read"+position);
 		if (world_name==null||star_count==null) {
-			if (CandyUtils.DEBUG) Log.wtf(CandyUtils.TAG,"WTF!");
+			if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,"data failed");
 		}
 		world_name.setText(getString(WorldAdapter.worldNameIDs[position]));
 		star_count.setText(SaveIO.readLines("world" + (position+1) + ".cls", this)[20][SaveDataConstants.STATUS] + "/60");

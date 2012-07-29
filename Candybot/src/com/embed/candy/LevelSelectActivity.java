@@ -17,16 +17,24 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.GridView;
+import android.widget.TextSwitcher;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.embed.candy.adapter.LevelAdapter;
+import com.embed.candy.constants.SaveDataConstants;
+import com.embed.candy.save.SaveIO;
 import com.embed.candy.util.CandyUtils;
+import com.embed.candy.util.ViewUtils;
 
-public class LevelSelectActivity extends BetterSwarmActivity implements OnItemClickListener {
+public class LevelSelectActivity extends BetterSwarmActivity implements OnItemClickListener, OnItemSelectedListener {
 
 	GridView level_gv;
 	private LevelAdapter la;
+	TextSwitcher star_count;
+	TextView sc_1,sc_2;
 
 	Toast mToast;
 
@@ -38,8 +46,14 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 		setContentView(R.layout.select_level);
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 
+		star_count=(TextSwitcher)findViewById(R.id.star_count);
+		sc_1=(TextView)findViewById(R.id.sc_1);
+		sc_2=(TextView)findViewById(R.id.sc_2);
+		ViewUtils.setMainFont(sc_1,sc_2);
+		
 		level_gv = (GridView) findViewById(R.id.gridview_level);
 		level_gv.setOnItemClickListener(this);
+		level_gv.setOnItemSelectedListener(this);
 
 		mToast = Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT);
 		mToast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 30);
@@ -47,6 +61,7 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 
 	@Override
 	public void onItemClick(final AdapterView<?> av, final View v, final int position, final long arg3) {
+		
 		final Vibrator vib = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 		switch (la.entireWorldData[position][STATUS]) {
 		case UNLOCKED:
@@ -63,8 +78,7 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 				if (CandyUtils.DEBUG) Log.w(CandyUtils.TAG,"Code should not reach here, CSV should have taken care of this maybe after a while or something.");
 				startLevel(position);
 			} else {
-				textToast("Level not unlocked! -- Temporarily unlocked for coding - Shrav :)");
-				startLevel(position); // Comment this out to relock
+				textToast("Level not unlocked!");
 				vib.vibrate(100);
 			}
 			break;
@@ -83,11 +97,28 @@ public class LevelSelectActivity extends BetterSwarmActivity implements OnItemCl
 		mToast.setText(textToDisplay);
 		mToast.show();
 	}
-
+	
 	@Override
 	public void onResume() {
 		super.onResume();
 		la = new LevelAdapter(this);
 		level_gv.setAdapter(la);
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	public void onItemSelected(final AdapterView<?> av, final View v, final int position, final long id) {
+		star_count.setText(SaveIO.readLines("world" + (position+1) + ".cls", this)[20][SaveDataConstants.STATUS] + "/60");
+		if (CandyUtils.DEBUG) Log.i(CandyUtils.TAG,"star_count"+position);
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

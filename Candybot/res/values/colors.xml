@@ -12,11 +12,11 @@
 	<color name="button_pressed_end">#AAA022</color>
 	<color name="button_pressed_stroke">#FF6633</color>
 	
-	<color name="grid_normal_start">#FF1111</color>
-	<color name="grid_normal_end">#FF7722</color>
+	<color name="grid_normal_start">#708090</color>
+	<color name="grid_normal_end">#708090</color>
 	
-	<color name="grid_pressed_start">#CC7722</color>
-	<color name="grid_pressed_end">#CC1111</color>
+	<color name="grid_pressed_start">#A9B3BC</color>
+	<color name="grid_pressed_end">#A9B3BC</color>
 	
 	<color name="bg_game_toast">#5000</color>
 </resources>

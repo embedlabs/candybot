@@ -280,7 +280,7 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 		 */
 		mObjectTexture = new BitmapTextureAtlas(256, 1024, quality);
 		candyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "candy.png", 0, 0, 4, 3);
-		botTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bot.png", 0, 193, 4, 2);
+		botTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bot.png", 0, 192, 2, 2);
 		boxTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "box.png", 0, 580, 1, 1);
 		bombTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "bomb.png", 0, 322, 4, 2);
 		enemyTTR = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mObjectTexture, this, "enemy.png", 0, 451, 4, 2);
@@ -581,15 +581,15 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 				face.enemyPS = enemyPS;
 				mScene.attachChild(enemyPS);
 			} else if (type == BOT) {
-				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 24, 64 * row + 60);
-				final ParticleSystem botPS = new ParticleSystem(botPPE, 5, 10, 20, mBotParticleTextureRegion);
-				botPS.addParticleInitializer(new VelocityInitializer(-3, 3, 0, 30));
-				botPS.addParticleModifier(new ScaleModifier(1, 0, 0, 0.5f));
-				botPS.addParticleModifier(new ColorModifier(0, 0.1f, 0.1f, 0.2f, 1, 0.5f, 0, 0.5f));
-				botPS.addParticleModifier(new ExpireModifier(0.4f, 0.5f));
-				face.botPPE = botPPE;
-				face.botPS = botPS;
-				mScene.attachChild(botPS);
+//				final PointParticleEmitter botPPE = new PointParticleEmitter(64 * column + 24, 64 * row + 60);
+//				final ParticleSystem botPS = new ParticleSystem(botPPE, 5, 10, 20, mBotParticleTextureRegion);
+//				botPS.addParticleInitializer(new VelocityInitializer(-3, 3, 0, 30));
+//				botPS.addParticleModifier(new ScaleModifier(1, 0, 0, 0.5f));
+//				botPS.addParticleModifier(new ColorModifier(0, 0.1f, 0.1f, 0.2f, 1, 0.5f, 0, 0.5f));
+//				botPS.addParticleModifier(new ExpireModifier(0.4f, 0.5f));
+//				face.botPPE = botPPE;
+//				face.botPS = botPS;
+//				mScene.attachChild(botPS);
 			}
 		}
 	}
