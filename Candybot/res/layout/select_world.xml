@@ -1,103 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerInParent="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background2_dither" />
-
-    <com.adwhirl.AdWhirlLayout
-        android:id="@+id/adwhirl_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="right" />
-
-    <Gallery
-        android:id="@+id/gallery_world"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@android:color/transparent"
-        android:fadingEdgeLength="0dip"
-        android:spacing="75dip"
-        android:unselectedAlpha="1.0" />
-
-    <TextSwitcher
-        android:id="@+id/world_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dip"
-        android:animateFirstView="false" >
-
-        <TextView
-            android:id="@+id/wn_1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="5dip"
-            android:shadowColor="@android:color/black"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="2"
-            android:textColor="@android:color/white"
-            android:textSize="30dip" />
-
-        <TextView
-            android:id="@+id/wn_2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="5dip"
-            android:textColor="@android:color/white"
-            android:textSize="30dip" />
-    </TextSwitcher>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dip"
-        android:orientation="horizontal" >
-
-        <TextSwitcher
-            android:id="@+id/star_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:animateFirstView="false" >
-
-            <TextView
-                android:id="@+id/sc_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right|center_vertical"
-                android:padding="8px"
-                android:textColor="@android:color/white"
-                android:textSize="32px" />
-
-            <TextView
-                android:id="@+id/sc_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right|center_vertical"
-                android:padding="8px"
-                android:textColor="@android:color/white"
-                android:textSize="32px" />
-        </TextSwitcher>
-
-        <ImageView
-            android:layout_width="32px"
-            android:layout_height="32px"
-            android:layout_gravity="center_vertical"
-            android:scaleType="fitXY"
-            android:src="@drawable/star" />
-    </LinearLayout>
-
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent" >
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_centerInParent="true"
+		android:scaleType="centerCrop"
+		android:src="@drawable/background2_dither" />
+	<com.adwhirl.AdWhirlLayout
+		android:id="@+id/adwhirl_layout"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:gravity="right" />
+	<Gallery
+		android:id="@+id/gallery_world"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="@android:color/transparent"
+		android:fadingEdgeLength="0dip"
+		android:spacing="75dip"
+		android:unselectedAlpha="1.0" />
+	<TextSwitcher
+		android:id="@+id/world_name"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="30dip"
+		android:animateFirstView="false" >
+		<TextView
+			android:id="@+id/wn_1"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:padding="5dip"
+			android:shadowColor="@android:color/black"
+			android:shadowDx="0"
+			android:shadowDy="0"
+			android:shadowRadius="2"
+			android:textColor="@android:color/white"
+			android:textSize="30dip" />
+		<TextView
+			android:id="@+id/wn_2"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:padding="5dip"
+			android:shadowColor="@android:color/black"
+			android:shadowDx="0"
+			android:shadowDy="0"
+			android:shadowRadius="2"
+			android:textColor="@android:color/white"
+			android:textSize="30dip" />
+	</TextSwitcher>
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="50dip"
+		android:orientation="horizontal" >
+		<TextSwitcher
+			android:id="@+id/star_count"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:animateFirstView="false" >
+			<TextView
+				android:id="@+id/sc_1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="right|center_vertical"
+				android:padding="8px"
+				android:textColor="@android:color/white"
+				android:textSize="32px" />
+			<TextView
+				android:id="@+id/sc_2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="right|center_vertical"
+				android:padding="8px"
+				android:textColor="@android:color/white"
+				android:textSize="32px" />
+		</TextSwitcher>
+		<ImageView
+			android:layout_width="32px"
+			android:layout_height="32px"
+			android:layout_gravity="center_vertical"
+			android:scaleType="fitXY"
+			android:src="@drawable/star" />
+	</LinearLayout>
 </RelativeLayout>

@@ -1,9 +1,5 @@
 package com.embed.candy;
 
-import android.content.Intent;
-import android.os.PowerManager;
-import android.telephony.TelephonyManager;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +10,21 @@ import com.swarmconnect.SwarmActivity;
 
 public abstract class BetterSwarmActivity extends SwarmActivity {
 
-	private boolean isHome = true;
+//	private boolean isHome = true;
 
 	@Override
 	protected void onResume() {
 		System.gc();
 		super.onResume();
 		// TODO check for lock screen
-		isHome = true;
+//		isHome = true;
 	}
 
 	@Override
 	protected void onPause() {
-		if (((TelephonyManager)getSystemService(TELEPHONY_SERVICE)).getCallState()==TelephonyManager.CALL_STATE_RINGING
-				|| !((PowerManager)getSystemService(POWER_SERVICE)).isScreenOn()) {
-		}
+//		if (((TelephonyManager)getSystemService(TELEPHONY_SERVICE)).getCallState()==TelephonyManager.CALL_STATE_RINGING
+//				|| !((PowerManager)getSystemService(POWER_SERVICE)).isScreenOn()) {
+//		}
 		super.onPause();
 		System.gc();
 	}
@@ -87,27 +83,27 @@ public abstract class BetterSwarmActivity extends SwarmActivity {
 
 	private ViewGroup m_contentView = null;
 
-	@Override
-	public boolean onKeyDown (final int keyCode, final KeyEvent ke) {
-		switch (keyCode) {
-		case KeyEvent.KEYCODE_BACK:
-			isHome = false;
-		default:
-			return super.onKeyDown(keyCode, ke);
-		}
-	}
+//	@Override
+//	public boolean onKeyDown (final int keyCode, final KeyEvent ke) {
+//		switch (keyCode) {
+//		case KeyEvent.KEYCODE_BACK:
+//			isHome = false;
+//		default:
+//			return super.onKeyDown(keyCode, ke);
+//		}
+//	}
 
-	@Override
-	public void startActivity(final Intent i) {
-		isHome = false;
-		super.startActivity(i);
-	}
+//	@Override
+//	public void startActivity(final Intent i) {
+//		isHome = false;
+//		super.startActivity(i);
+//	}
 
-	@Override
-	protected void onUserLeaveHint() {
-		if (isHome) {
-		}
-		super.onUserLeaveHint();
-	}
+//	@Override
+//	protected void onUserLeaveHint() {
+//		if (isHome) {
+//		}
+//		super.onUserLeaveHint();
+//	}
 
 }

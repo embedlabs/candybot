@@ -1,102 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.adwhirl"
-    android:id="@+id/enclosing_rl"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fitsSystemWindows="false"
-    android:gravity="center" >
-
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerInParent="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background_dither" />
-<com.adwhirl.AdWhirlLayout
-        android:id="@+id/adwhirl_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right" />
-    <TextView
-        android:id="@+id/mainmenu_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="2dip"
-        android:layout_marginTop="40dip"
-        android:paddingBottom="15dip"
-        android:paddingTop="10dip"
-        android:text="@string/app_name"
-        android:textColor="@android:color/white"
-        android:textSize="50dip" />
-
-    <ImageView
-        android:id="@+id/button_facebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dip"
-        android:layout_marginRight="10dip"
-        android:background="@drawable/fb_button"
-        android:contentDescription="@string/facebookstring"
-        android:scaleType="center" />
-
-    <ImageView
-        android:id="@+id/button_twitter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dip"
-        android:layout_marginRight="6dip"
-        android:layout_toLeftOf="@id/button_facebook"
-        android:background="@drawable/t_button"
-        android:contentDescription="@string/twitterstring"
-        android:scaleType="center" />
-
-    <ImageView
-        android:id="@+id/my_swarm_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dip"
-        android:layout_marginRight="6dip"
-        android:layout_toLeftOf="@id/button_twitter"
-        android:background="@drawable/s_button"
-        android:contentDescription="@string/swarmstring"
-        android:scaleType="center" />
-
-    <ImageView
-        android:id="@+id/chalkboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mainmenu_tv"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/chalkboard_menu" />
-
-    <Button
-        android:id="@+id/button_play"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/chalkboard"
-        android:layout_marginTop="20dip"
-        android:layout_marginBottom="10dip"
-        android:background="@android:color/transparent"
-        android:text="@string/button_play"
-        android:textColor="@android:color/white"
-        android:textSize="30dip" />
-
-    <Button
-        android:id="@+id/button_achieve"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_play"
-        android:layout_marginBottom="5dip"
-        android:background="@android:color/transparent"
-        android:text="@string/button_achieve"
-        android:textColor="@android:color/white"
-        android:textSize="30dip" />
-
+	xmlns:app="http://schemas.android.com/apk/res/com.adwhirl"
+	android:id="@+id/enclosing_rl"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:fitsSystemWindows="false"
+	android:gravity="center" >
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_centerInParent="true"
+		android:scaleType="centerCrop"
+		android:src="@drawable/background_dither" />
+	<com.adwhirl.AdWhirlLayout
+		android:id="@+id/adwhirl_layout"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true" />
+	<ImageView
+		android:id="@+id/button_facebook"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginBottom="10dip"
+		android:layout_marginRight="10dip"
+		android:background="@drawable/fb_button"
+		android:contentDescription="@string/facebookstring"
+		android:scaleType="center" />
+	<ImageView
+		android:id="@+id/button_twitter"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="10dip"
+		android:layout_marginRight="6dip"
+		android:layout_toLeftOf="@id/button_facebook"
+		android:background="@drawable/t_button"
+		android:contentDescription="@string/twitterstring"
+		android:scaleType="center" />
+	<ImageView
+		android:id="@+id/my_swarm_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="10dip"
+		android:layout_marginRight="6dip"
+		android:layout_toLeftOf="@id/button_twitter"
+		android:background="@drawable/s_button"
+		android:contentDescription="@string/swarmstring"
+		android:scaleType="center" />
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:gravity="center"
+		android:orientation="vertical" >
+		<TextView
+			android:id="@+id/mainmenu_tv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:padding="15dip"
+			android:shadowColor="@android:color/black"
+			android:shadowDx="0"
+			android:shadowDy="0"
+			android:shadowRadius="5"
+			android:text="@string/app_name"
+			android:textColor="@android:color/white"
+			android:textSize="50dip" />
+		<LinearLayout
+			android:id="@+id/chalkboard"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/chalkboard"
+			android:gravity="center"
+			android:orientation="vertical"
+			android:padding="15dip" >
+			<Button
+				android:id="@+id/button_play"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@android:color/transparent"
+				android:text="@string/button_play"
+				android:textColor="@android:color/white"
+				android:textSize="25dip" />
+			<Button
+				android:id="@+id/button_achieve"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@android:color/transparent"
+				android:text="@string/button_achieve"
+				android:textColor="@android:color/white"
+				android:textSize="25dip" />
+		</LinearLayout>
+	</LinearLayout>
 </RelativeLayout>
