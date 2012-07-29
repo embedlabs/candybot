@@ -8,20 +8,12 @@ import org.anddev.andengine.ui.activity.BaseSplashActivity;
 import android.app.Activity;
 
 public class SplashScreenActivity extends BaseSplashActivity {
-	// ================================================
-	// Constants
-	// ================================================
-	private final int SPLASH_DURATION_SEC = 1;
-	private final Class<? extends Activity> nextActivity = MainMenuActivity.class;
-	private final String backgroundImage = "gfx/splash.png";
-
-	// ================================================
-	// Methods from Super Classes/Interfaces
-	// ================================================
+	private static final int SPLASH_DURATION_SEC = 2;
+	private static final String backgroundImage = "gfx/splash.png";
 
 	@Override
 	protected Class<? extends Activity> getFollowUpActivity() {
-		return nextActivity;
+		return MainMenuActivity.class;
 	}
 
 	@Override
