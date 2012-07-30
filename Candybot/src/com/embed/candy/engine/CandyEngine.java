@@ -76,7 +76,7 @@ public class CandyEngine {
 	 * GAME VIEW REFERENCE
 	 */
 
-	public final CandyLevelActivity candyLevel;
+	public CandyLevelActivity candyLevel;
 
 	/**
 	 * EASE OF ACCESS
@@ -829,5 +829,13 @@ public class CandyEngine {
 
 			return resultInt;
 		}
+	}
+
+	public synchronized void destroy() {
+		spriteQueue.clear();
+		spriteList.clear();
+		enemyList.clear();
+		gravityList.clear();
+		candyLevel = null;
 	}
 }

@@ -738,6 +738,8 @@ public class CandyLevelActivity extends LayoutGameActivity implements ITMXTilePr
 			backgroundMusic.stop();
 		}
 		super.onDestroy();
+		candyEngine.destroy();
+		candyEngine = null;
 		BufferObjectManager.getActiveInstance().clear();
 		if (CandyUtils.DEBUG) Log.i(TAG, "CandyLevelActivity onDestroy()");
 		System.gc();
