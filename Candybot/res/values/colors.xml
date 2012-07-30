@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="bg_start">#0B154F</color>
-	<color name="bg_center">#1A5BB3</color>
 	<color name="button_normal_start">#EEE000</color>
 	<color name="button_normal_center">#CC4400</color>
 	<color name="button_normal_end">#992222</color>
@@ -22,6 +20,4 @@
 	
 	<color name="grid_pressed_start_locked">#A9B3BC</color>
 	<color name="grid_pressed_end_locked">#A9B3BC</color>
-	
-	<color name="bg_game_toast">#5000</color>
 </resources>
