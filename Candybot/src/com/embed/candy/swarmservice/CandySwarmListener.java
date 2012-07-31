@@ -17,13 +17,13 @@ public final class CandySwarmListener implements SwarmLoginListener {
 
 	@Override
 	public void userLoggedIn(final SwarmActiveUser user) {
-		 SwarmAchievement.getAchievementsMap(new GotAchievementsMapCB() {
-				@Override
-				public void gotMap(final Map<Integer, SwarmAchievement> achievementsMap) {
-		            MainMenuActivity.achievements = achievementsMap;
-		        }
-		    });
-		}
+		SwarmAchievement.getAchievementsMap(new GotAchievementsMapCB() {
+			@Override
+			public void gotMap(final Map<Integer, SwarmAchievement> achievementsMap) {
+				MainMenuActivity.achievements = achievementsMap;
+			}
+		});
+	}
 
 	@Override
 	public void userLoggedOut() {}
