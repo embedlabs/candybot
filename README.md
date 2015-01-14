@@ -33,7 +33,7 @@ Contributions
 |-------------|-------------------------------|
 | Prem Nair   | https://github.com/pqn        |
 | Shrav Mehta | https://github.com/shravmehta |
-| Ameya Khare | https://github.com/akhare121  |
+| Ameya Khare | https://github.com/ameyakhare  |
 
 Installation
 ------------
